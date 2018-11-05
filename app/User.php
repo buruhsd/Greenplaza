@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'name', 'email', 'password',
     ];
 
     /**
@@ -27,4 +27,38 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * 
+    * 
+    **/
+    public function is_superadmin(){
+        return $this->hasRole('superadmin');
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function is_admin(){
+        return $this->hasRole('admin');
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function is_member(){
+        return $this->hasRole('member');
+    }
+
+    /**
+    * get wallet user
+    * @return joined one to one
+    **/
+    // public function user_detail()
+    // {
+    //     return $this->hasOne('App\Sys_user_detail', 'user_detail_user_id');
+    // }
+
 }
