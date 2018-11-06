@@ -13,7 +13,7 @@
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-4">
                     <div class="slider-active owl-carousel next-prev-btn">
                         <div class="slider-item black-opacity">
-                            <img src="assets/images/slider/1.jpg" alt="" class="slider">
+                            <img src="{{ asset('frontend/images/slider/1.jpg') }}" alt="" class="slider">
                             <div class="slider-content">
                                 <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>35% </span> Discount</h3>
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="slider-item black-opacity">
-                            <img src="assets/images/slider/2.jpg" alt="" class="slider">
+                            <img src="{{ asset('frontend/images/slider/2.jpg') }}" alt="" class="slider">
                             <div class="slider-content text-right">
                                 <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>25% </span> Discount</h3>
@@ -37,14 +37,14 @@
                         <div class="row">
                             <div class="col-sm-6 col-xs-15">
                                 <div class="info-items">
-                                    <img src="assets/images/icon/2.png" alt="">
+                                    <img src="{{ asset('frontend/images/icon/2.png') }}" alt="">
                                     <h4>MONEY BACK</h4>
                                     <p>30 Days Money Back Guarantee</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="info-items">
-                                    <img src="assets/images/icon/1.png" alt="">
+                                    <img src="{{ asset('frontend/images/icon/1.png') }}" alt="">
                                     <h4>SPECIAL SALE</h4>
                                     <p>Extra $5 off on all items</p>
                                 </div>
@@ -54,14 +54,14 @@
                 </div>
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
-                        <img src="assets/images/author.png" alt="">
+                        <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         <h4>Alex Smeet</h4>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Maxime</p>
                     </div>
                     <div class="banner-wrap">
                         <div class="banner-img">
                             <span class="discount">%20 Off</span>
-                            <img src="assets/images/banner/1.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/1.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 <div class="col-lg-3 col-md-4 d-none d-lg-block">
                     <div class="featured-wrap">
                         <div class="featured-img black-opacity">
-                            <img src="assets/images/featured/1.jpg" alt="">
+                            <img src="{{ asset('frontend/images/featured/1.jpg') }}" alt="">
                             <div class="featured-content">
                                 <h2>Minilam Chair</h2>
                                 <p>consectetur adipisicing elit to Tempora, similique!</p>
@@ -90,7 +90,7 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="featured-wrap">
                         <div class="featured-img black-opacity">
-                            <img src="assets/images/featured/2.jpg" alt="">
+                            <img src="{{ asset('frontend/images/featured/2.jpg') }}" alt="">
                             <div class="featured-content text-center">
                                 <h2>Dual Handle Cardio Ball</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p>
@@ -104,7 +104,7 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="featured-wrap">
                         <div class="featured-img  black-opacity">
-                            <img src="assets/images/featured/3.jpg" alt="">
+                            <img src="{{ asset('frontend/images/featured/3.jpg') }}" alt="">
                             <div class="featured-content text-right">
                                 <h2>Minilam Chair</h2>
                                 <p>consectetur adipisicing elit to Tempora, similique!</p>
@@ -130,7 +130,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/1.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/1.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/2.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/2.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/3.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/3.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/4.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -196,7 +196,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/5.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/5.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/4.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/7.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/7.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -244,7 +244,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/8.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/8.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -267,8 +267,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="discount">20% Off</span>
-                                    <img class="first" src="assets/images/product/9.jpg" alt="">
-                                    <img class="second" src="assets/images/product/10.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/9.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/10.jpg') }}" alt="">
                                     <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
                                     </div>
@@ -297,8 +297,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="discount">25% Off</span>
-                                    <img class="first" src="assets/images/product/10.jpg" alt="">
-                                    <img class="second" src="assets/images/product/9.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/10.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/9.jpg') }}" alt="">
                                     <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
                                     </div>
@@ -327,8 +327,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="discount">15% Off</span>
-                                    <img class="first" src="assets/images/product/11.jpg" alt="">
-                                    <img class="second" src="assets/images/product/10.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/11.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/10.jpg') }}" alt="">
                                     <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
                                     </div>
@@ -380,7 +380,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/24.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/24.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -396,7 +396,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/23.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/23.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -412,7 +412,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/22.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/22.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -428,7 +428,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/21.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/21.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -446,7 +446,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/20.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/20.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -462,7 +462,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/19.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/19.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -478,7 +478,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/18.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/18.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -494,7 +494,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/17.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/17.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -523,8 +523,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/1.jpg" alt="">
-                                    <img class="second" src="assets/images/product/2.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/1.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/2.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -550,8 +550,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/2.jpg" alt="">
-                                    <img class="second" src="assets/images/product/1.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/2.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/1.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -577,8 +577,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/3.jpg" alt="">
-                                    <img class="second" src="assets/images/product/4.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/3.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/4.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -604,8 +604,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/4.jpg" alt="">
-                                    <img class="second" src="assets/images/product/3.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/4.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/3.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -631,8 +631,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/5.jpg" alt="">
-                                    <img class="second" src="assets/images/product/6.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/6.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -658,8 +658,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/6.jpg" alt="">
-                                    <img class="second" src="assets/images/product/5.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/6.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -684,8 +684,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/7.jpg" alt="">
-                                    <img class="second" src="assets/images/product/8.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/7.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -711,8 +711,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/8.jpg" alt="">
-                                    <img class="second" src="assets/images/product/7.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/7.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -739,7 +739,7 @@
                     </div>
                     <div class="banner-wrap mb-30">
                         <div class="banner-img black-opacity">
-                            <img src="assets/images/banner/2.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/2.jpg') }}" alt="">
                             <div class="banner-content">
                                 <div class="banner-info">
                                     <h2>Sale <span>20%</span> off</h2>
@@ -770,8 +770,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/30.jpg" alt="">
-                                                <img class="second" src="assets/images/product/29.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/29.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -797,8 +797,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/29.jpg" alt="">
-                                                <img class="second" src="assets/images/product/30.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/29.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -826,8 +826,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/28.jpg" alt="">
-                                                <img class="second" src="assets/images/product/27.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/27.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -853,8 +853,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/27.jpg" alt="">
-                                                <img class="second" src="assets/images/product/28.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/27.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -882,8 +882,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/26.jpg" alt="">
-                                                <img class="second" src="assets/images/product/25.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/26.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -909,8 +909,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/25.jpg" alt="">
-                                                <img class="second" src="assets/images/product/26.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/26.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -938,8 +938,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/24.jpg" alt="">
-                                                <img class="second" src="assets/images/product/23.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/24.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/23.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -964,8 +964,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/22.jpg" alt="">
-                                                <img class="second" src="assets/images/product/23.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/22.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/23.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -997,8 +997,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/21.jpg" alt="">
-                                                <img class="second" src="assets/images/product/20.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/21.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/20.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1024,8 +1024,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/20.jpg" alt="">
-                                                <img class="second" src="assets/images/product/21.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/20.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/21.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1053,8 +1053,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/19.jpg" alt="">
-                                                <img class="second" src="assets/images/product/18.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1080,8 +1080,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/18.jpg" alt="">
-                                                <img class="second" src="assets/images/product/19.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1109,8 +1109,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/17.jpg" alt="">
-                                                <img class="second" src="assets/images/product/16.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1136,8 +1136,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/16.jpg" alt="">
-                                                <img class="second" src="assets/images/product/17.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1165,8 +1165,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/15.jpg" alt="">
-                                                <img class="second" src="assets/images/product/14.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1191,8 +1191,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/14.jpg" alt="">
-                                                <img class="second" src="assets/images/product/15.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1224,8 +1224,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/13.jpg" alt="">
-                                                <img class="second" src="assets/images/product/12.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/13.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/12.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1251,8 +1251,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/12.jpg" alt="">
-                                                <img class="second" src="assets/images/product/13.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/12.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/13.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1280,8 +1280,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/31.jpg" alt="">
-                                                <img class="second" src="assets/images/product/32.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/31.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/32.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1307,8 +1307,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/32.jpg" alt="">
-                                                <img class="second" src="assets/images/product/31.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/32.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/31.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1336,8 +1336,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/33.jpg" alt="">
-                                                <img class="second" src="assets/images/product/1.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/1.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1363,8 +1363,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/2.jpg" alt="">
-                                                <img class="second" src="assets/images/product/1.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/2.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/1.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1392,8 +1392,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/33.jpg" alt="">
-                                                <img class="second" src="assets/images/product/5.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1418,8 +1418,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/14.jpg" alt="">
-                                                <img class="second" src="assets/images/product/18.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1451,8 +1451,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/20.jpg" alt="">
-                                                <img class="second" src="assets/images/product/22.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/20.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/22.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1478,8 +1478,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/28.jpg" alt="">
-                                                <img class="second" src="assets/images/product/21.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/21.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1507,8 +1507,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/16.jpg" alt="">
-                                                <img class="second" src="assets/images/product/27.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/27.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1534,8 +1534,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/19.jpg" alt="">
-                                                <img class="second" src="assets/images/product/26.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/26.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1563,8 +1563,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/18.jpg" alt="">
-                                                <img class="second" src="assets/images/product/20.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/20.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1590,8 +1590,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/30.jpg" alt="">
-                                                <img class="second" src="assets/images/product/33.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1619,8 +1619,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/5.jpg" alt="">
-                                                <img class="second" src="assets/images/product/7.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/7.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1645,8 +1645,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/7.jpg" alt="">
-                                                <img class="second" src="assets/images/product/5.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/7.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1678,8 +1678,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/3.jpg" alt="">
-                                                <img class="second" src="assets/images/product/6.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/3.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/6.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1705,8 +1705,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/9.jpg" alt="">
-                                                <img class="second" src="assets/images/product/3.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/9.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/3.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1734,8 +1734,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/24.jpg" alt="">
-                                                <img class="second" src="assets/images/product/2.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/24.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/2.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1761,8 +1761,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/8.jpg" alt="">
-                                                <img class="second" src="assets/images/product/13.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/13.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1790,8 +1790,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/17.jpg" alt="">
-                                                <img class="second" src="assets/images/product/28.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1817,8 +1817,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/26.jpg" alt="">
-                                                <img class="second" src="assets/images/product/25.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/26.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1846,8 +1846,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/24.jpg" alt="">
-                                                <img class="second" src="assets/images/product/23.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/24.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/23.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1872,8 +1872,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/28.jpg" alt="">
-                                                <img class="second" src="assets/images/product/29.jpg" alt="">
+                                                <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
+                                                <img class="second" src="{{ asset('frontend/images/product/29.jpg') }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -1913,7 +1913,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="banner-wrap">
                         <div class="banner-img">
-                            <img src="assets/images/banner/5.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/5.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -1922,14 +1922,14 @@
                         <div class="col-md-6 sm-mb-30 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="assets/images/banner/3.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/banner/3.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="assets/images/banner/4.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/banner/4.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -1950,7 +1950,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/16.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -1966,7 +1966,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/15.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/15.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -1982,7 +1982,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/16.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -1998,7 +1998,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/13.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/13.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2016,7 +2016,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/12.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/12.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2032,7 +2032,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/11.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/11.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2048,7 +2048,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/10.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/10.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2064,7 +2064,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2093,8 +2093,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/25.jpg" alt="">
-                                    <img class="second" src="assets/images/product/14.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2120,8 +2120,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/18.jpg" alt="">
-                                    <img class="second" src="assets/images/product/19.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2147,8 +2147,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/28.jpg" alt="">
-                                    <img class="second" src="assets/images/product/33.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2174,8 +2174,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/33.jpg" alt="">
-                                    <img class="second" src="assets/images/product/30.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2201,8 +2201,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/15.jpg" alt="">
-                                    <img class="second" src="assets/images/product/16.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2228,8 +2228,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/16.jpg" alt="">
-                                    <img class="second" src="assets/images/product/25.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2254,8 +2254,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/17.jpg" alt="">
-                                    <img class="second" src="assets/images/product/8.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2281,8 +2281,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/16.jpg" alt="">
-                                    <img class="second" src="assets/images/product/5.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2319,7 +2319,7 @@
                 <div class="col-lg-3 col-md-4 col-12 sm-mb-30">
                     <div class="banner-wrap">
                         <div class="banner-img">
-                            <img src="assets/images/banner/6.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/6.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -2329,7 +2329,7 @@
                         <div class="test-active owl-carousel next-prev-style">
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="assets/images/test/1.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/test/1.jpg') }}" alt="">
                                 </div>
                                 <div class="test-content">
                                     <h3>Alex Anderson</h3>
@@ -2339,7 +2339,7 @@
                             </div>
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="assets/images/test/3.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/test/3.jpg') }}" alt="">
                                 </div>
                                 <div class="test-content">
                                     <h3>Alex Anderson</h3>
@@ -2349,7 +2349,7 @@
                             </div>
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="assets/images/test/2.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/test/2.jpg') }}" alt="">
                                 </div>
                                 <div class="test-content">
                                     <h3>Alex Anderson</h3>
@@ -2378,7 +2378,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/1.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2394,7 +2394,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/2.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2410,7 +2410,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/3.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2426,7 +2426,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/4.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2444,7 +2444,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/5.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/5.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2460,7 +2460,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/6.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/6.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2476,7 +2476,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/7.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/7.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2492,7 +2492,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/8.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/8.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2517,7 +2517,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2533,7 +2533,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/10.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/10.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2549,7 +2549,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/11.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/11.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2565,7 +2565,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/12.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/12.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2583,7 +2583,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/13.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/13.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2599,7 +2599,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/14.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/14.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2615,7 +2615,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/15.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/15.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2631,7 +2631,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/16.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2656,7 +2656,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/17.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2672,7 +2672,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/18.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/18.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2688,7 +2688,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/19.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/19.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2704,7 +2704,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/20.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/20.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2722,7 +2722,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/21.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/21.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2738,7 +2738,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/22.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/22.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2754,7 +2754,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/23.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/23.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2770,7 +2770,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/24.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/24.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2795,7 +2795,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2811,7 +2811,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/17.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2827,7 +2827,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/17.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2843,7 +2843,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/18.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/18.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2861,7 +2861,7 @@
                                         <div class="slidebar-product-wrap">
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2877,7 +2877,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/10.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/10.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2893,7 +2893,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/5.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/5.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2909,7 +2909,7 @@
                                             </div>
                                             <div class="product-sidebar-items fix mb-0">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/12.jpg" alt="">
+                                                    <img src="{{ asset('frontend/images/product/sidebar/12.jpg') }}" alt="">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2944,7 +2944,7 @@
                         <div class="blog-active owl-carousel next-prev-style">
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/1.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/1.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html">Dolorem eum fugiat voluptas nulla pariatur</a></h3>
@@ -2959,7 +2959,7 @@
                             </div>
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/2.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/2.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html">Standard blog post with photo woman</a></h3>
@@ -2974,7 +2974,7 @@
                             </div>
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/3.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/3.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html">Backpack Hero Fashion Contest 2018</a></h3>
@@ -2989,7 +2989,7 @@
                             </div>
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/4.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/4.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html">adipisicing elitcupiditate eius doloremque</a></h3>
@@ -3004,7 +3004,7 @@
                             </div>
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/5.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/5.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html"> commodi perspiciatis maiores asperiores enim sint</a></h3>
@@ -3019,7 +3019,7 @@
                             </div>
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/6.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/blog/6.jpg') }}" alt="">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="blog.html">atque vitae aliquam nemo Nostrum, exercitationem?</a></h3>
@@ -3047,37 +3047,37 @@
                     <div class="brand-active owl-carousel">
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/1.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/1.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/2.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/2.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/3.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/3.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/4.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/4.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/5.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/5.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/6.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/6.jpg') }}" alt="">
                             </a>
                         </div>
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/7.jpg" alt="">
+                                <img src="{{ asset('frontend/images/brand/7.jpg') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -3159,7 +3159,7 @@
                 <button type="button" class="modal-close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
                 <div class="d-flex">
                     <div class="modal-img d-none d-md-block black-opacity">
-                        <img src="assets/images/modal.jpg" alt="">
+                        <img src="{{ asset('frontend/images/modal.jpg') }}" alt="">
                     </div>
                     <div class="modal-subscribe flex-style">
                         <div class="subscribe-box">

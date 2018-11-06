@@ -1,10 +1,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Kinun - Home One</title>
+    <title>Greenplaza</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
     <!-- bootstrap v3.3.7 css -->
@@ -12,7 +12,7 @@
     <!-- owl.carousel.2.0.0-beta.2.4 css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <!-- font-awesome v4.6.3 css -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}">
     <!-- animate.css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <!-- metisMenu.min.css -->
