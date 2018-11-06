@@ -15,7 +15,6 @@ class CreateConfConfigsTable extends Migration
     {
         Schema::create('conf_configs', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('configs_id');
             $table->string('configs_name');
             $table->text('configs_value');
             $table->tinyInteger('configs_status');
