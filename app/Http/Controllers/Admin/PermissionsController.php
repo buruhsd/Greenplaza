@@ -131,16 +131,7 @@ class PermissionsController extends Controller
         switch ($method) {
             case 'index':
                 ?>
-                    <link href="<?php echo asset('xtreme/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') ?>" rel="stylesheet">
-                    <script src="<?php echo asset('xtreme/assets/extra-libs/DataTables/datatables.min.js') ?>"></script>
-                    <script type="text/javascript">
-                    /****************************************
-                     *     horizontal scroll Table    *
-                     ****************************************/
-                    if($('#scroll_hor').length){
-                        $('#scroll_hor').DataTable({});
-                    }
-                    </script>
+                    <script type="text/javascript"></script>
                 <?php
                 break;
             case 'create':
