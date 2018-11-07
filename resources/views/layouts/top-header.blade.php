@@ -1,14 +1,10 @@
-<!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    
-    <!-- header-area start -->
+<!-- header-area start -->
     <header class="header-area">
         <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-5 col-12">
-                        <p>Greenplaza</p>
+                        <p>Selamat datang di Green Plaza!</p>
                     </div>
                     <div class="col-md-8 col-sm-7 col-12">
                         <ul class="d-flex account-info">
@@ -22,9 +18,9 @@
                             </li>
                             <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
                                 <ul>
-                                    <li><a href="javascript:void(0);">English <img src="{{ asset('frontend/images/language/1.png') }}" alt=""></a></li>
-                                    <li><a href="javascript:void(0);">Bangla <img src="{{ asset('frontend/images/language/2.png') }}" alt=""></a></li>
-                                    <li><a href="javascript:void(0);">Hindi  <img src="{{ asset('frontend/images/language/3.png') }}" alt=""></a></li>
+                                    <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
+                                    <li><a href="javascript:void(0);">Bangla <img src="assets/images/language/2.png" alt=""></a></li>
+                                    <li><a href="javascript:void(0);">Hindi  <img src="assets/images/language/3.png" alt=""></a></li>
                                 </ul>
                             </li>
                             <li><a href="javascript:void(0);"><i class="fa fa-usd"></i> USD <i class="fa fa-angle-down"></i></a>
@@ -45,7 +41,8 @@
                     <div class="col-md-3 col-12">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
+                                <img class="dark-logo" src="assets/images/logo.png" alt="">
+                                <img class="light-logo" src="assets/images/logo2.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -75,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-bottom-area bg-1">
+        <div class="header-bottom-area bg-1 header-bottom-area-two">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
@@ -408,13 +405,13 @@
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="index.html">Home </a></li>
                             <li><a href="about.html">About</a></li>
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="shop.html">Shop Page</a></li>
                                     <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                                    <li><a href="Single-product.html">Product Details</a></li>
+                                    <li><a href="single-product.html">Product Details</a></li>
                                     <li><a href="cart.html">Shopping cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
@@ -423,7 +420,7 @@
                             <li class="sidemenu-items"><a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="about.html">About Page</a></li>
-                                    <li><a href="single-product.html">Product Details</a></li>
+                                    <li><a href="Single-product.html">Product Details</a></li>
                                     <li><a href="cart.html">Shopping cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
