@@ -57,6 +57,7 @@ class CreateProduk extends Migration
         // satuan unit
         Schema::create('sys_produk_grosir', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('produk_grosir_produk_id')->unsigned();
             $table->integer('produk_grosir_start');
             $table->integer('produk_grosir_end');
             $table->decimal('produk_grosir_price', 20, 8);
