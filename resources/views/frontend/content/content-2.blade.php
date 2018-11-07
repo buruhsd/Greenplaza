@@ -1,4 +1,4 @@
-<div class="col-lg-9 col-md-8 col-12">
+<div class="col-lg-12 col-md-8 col-12">
                     <div class="shop-area">
                         <div class="row">
                             <div class="col-12">
