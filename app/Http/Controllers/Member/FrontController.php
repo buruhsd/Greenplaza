@@ -35,6 +35,24 @@ class FrontController extends Controller
     public function category()
     {
 
-        return view('home');
+        return view('frontend.category');
+    }
+
+    public function detail()
+    {
+
+        return view('frontend.detail');
+    }
+
+    public function etalase()
+    {
+
+        return view('frontend.shop');
+    }
+
+    public function reg_seller()
+    {
+
+        return view('auth.register_green');
     }
 }
