@@ -25,7 +25,7 @@ class ModalController extends Controller
     public function modal($id)
     {
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('partial.modal', $data);
+        return view('localapi.modal', $data);
     }
 
     /**
