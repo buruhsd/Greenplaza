@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Http\Requests;
-use App\Models\Http\Controllers\Controller;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 use App\Models\Produk_grosir;
 use Illuminate\Http\Request;

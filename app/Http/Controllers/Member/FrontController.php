@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Produk;
+use App\Models\Category;
 
 class FrontController extends Controller
 {
@@ -34,8 +36,14 @@ class FrontController extends Controller
     */
     public function category()
     {
-
-        return view('frontend.category');
+        $data['category'] = Category::skip(0)->take(10)->get();
+        $data['produk'] = Produk::skip(0)->take(10)->get();
+        $data['bestseller'] = Produk::where('produk_is_best', 1)
+            ->skip(0)->take(10)->orderBy('id', 'DESC')->get();
+        $data['hotlist'] = Produk::where('produk_is_hot', 1)
+            ->skip(0)->take(10)->orderBy('id', 'DESC')->get();
+        $data['recomend'] = Produk::skip(0)->take(10)->orderBy('id', 'DESC')->get();
+        return view('frontend.category', $data);
     }
 
     public function detail()
