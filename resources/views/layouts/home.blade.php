@@ -5,7 +5,7 @@
 
 <body>
     
-    @include('frontend.plugin.top-header')
+    @include('layouts.top-header')
     @include('frontend.plugin.slider')
     @include('frontend.plugin.banner-1')
     <!-- .product-area start -->
@@ -41,6 +41,7 @@
     
     <!-- script -->
     @include('layouts.script')
+    {!! (isset($footer_script))? $footer_script:'' !!}
     <!-- script -->
 </body>
 

@@ -1,47 +1,12 @@
 <!-- header-area start -->
-    <header class="header-area">
-        <div class="header-tor-area bg-1">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-5 col-12">
-                        <p>Selamat datang di Green Plaza!</p>
-                    </div>
-                    <div class="col-md-8 col-sm-7 col-12">
-                        <ul class="d-flex account-info">
-                            <li><a href="javascript:void(0);"><i class="fa fa-user"></i> my Account <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="login.html">LogIn</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
-                                    <li><a href="javascript:void(0);">Bangla <img src="assets/images/language/2.png" alt=""></a></li>
-                                    <li><a href="javascript:void(0);">Hindi  <img src="assets/images/language/3.png" alt=""></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-usd"></i> USD <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="javascript:void(0);">EUR</a></li>
-                                    <li><a href="javascript:void(0);">USD </a></li>
-                                    <li><a href="javascript:void(0);">BDT </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <header class="header-area"> 
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-12">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="dark-logo" src="assets/images/logo.png" alt="">
+                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="400" height="100px">
                                 <img class="light-logo" src="assets/images/logo2.png" alt="">
                             </a>
                         </div>
