@@ -45,7 +45,7 @@
                     <div class="col-md-3 col-12">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
+                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="100px" height="200px">
                             </a>
                         </div>
                     </div>
