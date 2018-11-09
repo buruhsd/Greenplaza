@@ -615,3 +615,5 @@
     </div>
     <!-- .shop-page-area enc -->
 @endsection
+
+{!! (isset($footer_script))? $footer_script: !!}
