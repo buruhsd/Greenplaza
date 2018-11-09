@@ -13,6 +13,8 @@ class CreateProduk extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('sys_produk_grosir');
+        Schema::dropIfExists('sys_produk');
         Schema::create('sys_produk', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('produk_seller_id')->unsigned();
@@ -75,7 +77,7 @@ class CreateProduk extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sys_produk');
         Schema::dropIfExists('sys_produk_grosir');
+        Schema::dropIfExists('sys_produk');
     }
 }
