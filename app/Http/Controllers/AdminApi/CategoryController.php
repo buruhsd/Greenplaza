@@ -25,7 +25,6 @@ class CategoryController extends Controller
     {
         $status = 200;
         $message = 'Category added!';
-        $success = true;
         
         $requestData = $request->all();
         
@@ -37,9 +36,8 @@ class CategoryController extends Controller
         if(!$res){
             $status = 500;
             $message = 'Category Not added!';
-            $success = false;
         }
-        return response()->json(['success' => $success, 'message'=>$message, 'status'=>$status]);
+        return response()->json(['message'=>$message, 'status'=>$status]);
     }
     public function show($id)
     {
@@ -50,7 +48,6 @@ class CategoryController extends Controller
     {
         $status = 200;
         $message = 'Category updated!';
-        $success = true;
         
         $requestData = $request->all();
         
@@ -63,22 +60,19 @@ class CategoryController extends Controller
         if(!$res){
             $status = 500;
             $message = 'Category Not updated!';
-            $success = false;
         }
-        return response()->json(['success' => $success, 'message'=>$message, 'status'=>$status]);
+        return response()->json(['message'=>$message, 'status'=>$status]);
     }
     public function destroy($id)
     {
         $status = 200;
         $message = 'Category deleted!';
-        $success = true;
         $res = Category::destroy($id);
         if(!$res){
             $status = 500;
             $message = 'Category Not deleted!';
-            $success = false;
         }
-        return response()->json(['success' => $success, 'message'=>$message, 'status'=>$status]);
+        return response()->json(['message'=>$message, 'status'=>$status]);
     }
 
 }

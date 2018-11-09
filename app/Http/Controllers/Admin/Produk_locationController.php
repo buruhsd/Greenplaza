@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class Produk_locationController extends Controller
 {
     private $perPage = 25;
-    private $mainTable = 'sys_produk_location';
+    private $mainTable = 'conf_produk_location';
     /**
      * Display a listing of the resource.
      *
@@ -61,7 +61,10 @@ class Produk_locationController extends Controller
         
         $requestData = $request->all();
         
-        $res = Produk_location::create($requestData);
+        $res = new Produk_location;
+        $res->produk_location_name = $request->produk_location_name;
+        $res->produk_location_note = $request->produk_location_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Produk_location Not added!';
@@ -116,6 +119,9 @@ class Produk_locationController extends Controller
         $requestData = $request->all();
         
         $produk_location = Produk_location::findOrFail($id);
+        $produk_location->produk_location_name = $request->produk_location_name;
+        $produk_location->produk_location_note = $request->produk_location_note;
+        $produk_location->save();
         $res = $produk_location->update($requestData);
         if(!$res){
             $status = 500;

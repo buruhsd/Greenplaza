@@ -61,7 +61,10 @@ class Produk_unitController extends Controller
         
         $requestData = $request->all();
         
-        $res = Produk_unit::create($requestData);
+        $res = new Produk_unit;
+        $res->produk_unit_name = $request->produk_unit_name;
+        $res->produk_unit_note = $request->produk_unit_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Produk_unit Not added!';
@@ -116,6 +119,9 @@ class Produk_unitController extends Controller
         $requestData = $request->all();
         
         $produk_unit = Produk_unit::findOrFail($id);
+        $produk_unit->produk_unit_name = $request->produk_unit_name;
+        $produk_unit->produk_unit_note = $request->produk_unit_note;
+        $produk_unit->save();
         $res = $produk_unit->update($requestData);
         if(!$res){
             $status = 500;

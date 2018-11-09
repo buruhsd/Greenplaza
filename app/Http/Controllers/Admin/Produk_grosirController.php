@@ -61,7 +61,13 @@ class Produk_grosirController extends Controller
         
         $requestData = $request->all();
         
-        $res = Produk_grosir::create($requestData);
+        $res = new Produk_grosir;
+        $res->produk_grosir_produk_id = $request->produk_grosir_produk_id;
+        $res->produk_grosir_start = $request->produk_grosir_start;
+        $res->produk_grosir_end = $request->produk_grosir_end;
+        $res->produk_grosir_price = $request->produk_grosir_price;
+        $res->produk_grosir_note = $request->produk_grosir_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Produk_grosir Not added!';
@@ -116,6 +122,13 @@ class Produk_grosirController extends Controller
         $requestData = $request->all();
         
         $produk_grosir = Produk_grosir::findOrFail($id);
+        $produk_grosir = Produk_grosir::findOrFail($id);
+        $produk_grosir->produk_grosir_produk_id = $request->produk_grosir_produk_id;
+        $produk_grosir->produk_grosir_start = $request->produk_grosir_start;
+        $produk_grosir->produk_grosir_end = $request->produk_grosir_end;
+        $produk_grosir->produk_grosir_price = $request->produk_grosir_price;
+        $produk_grosir->produk_grosir_note = $request->produk_grosir_note;
+        $produk_grosir->save();
         $res = $produk_grosir->update($requestData);
         if(!$res){
             $status = 500;

@@ -61,7 +61,11 @@ class BankController extends Controller
         
         $requestData = $request->all();
         
-        $res = Bank::create($requestData);
+        $res = new Bank;
+        $res->bank_kode = $request->bank_kode;
+        $res->bank_name = $request->bank_name;
+        $res->bank_note = $request->bank_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Bank Not added!';
@@ -116,6 +120,10 @@ class BankController extends Controller
         $requestData = $request->all();
         
         $bank = Bank::findOrFail($id);
+        $bank->bank_kode = $request->bank_kode;
+        $bank->bank_name = $request->bank_name;
+        $bank->bank_note = $request->bank_note;
+        $bank->save();
         $res = $bank->update($requestData);
         if(!$res){
             $status = 500;

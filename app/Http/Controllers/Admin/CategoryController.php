@@ -61,7 +61,11 @@ class CategoryController extends Controller
         
         $requestData = $request->all();
         
-        $res = Category::create($requestData);
+        $res = new Category;
+        $res->category_parent_id = $request->category_parent_id;
+        $res->category_name = $request->category_name;
+        $res->category_note = $request->category_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Category Not added!';
@@ -116,6 +120,10 @@ class CategoryController extends Controller
         $requestData = $request->all();
         
         $category = Category::findOrFail($id);
+        $category->category_parent_id = $request->category_parent_id;
+        $category->category_name = $request->category_name;
+        $category->category_note = $request->category_note;
+        $category->save();
         $res = $category->update($requestData);
         if(!$res){
             $status = 500;
