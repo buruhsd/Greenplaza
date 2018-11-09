@@ -323,8 +323,9 @@ a#scrollUp:hover {
 }
 
 .header-middle-area {
-    padding: 30px 0px;
+    padding: 5px 0px;
     border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
 }
 
 .logo a {
@@ -333,6 +334,8 @@ a#scrollUp:hover {
     font-weight: 700;
     color: #eee;
     display: block;
+    padding: 10px;
+    padding-right:100px;
 }
 
 .logo a img.light-logo {
@@ -341,6 +344,7 @@ a#scrollUp:hover {
 
 .search-wrap form {
     position: relative;
+    padding-top: 10px;
 }
 
 .search-wrap input {
@@ -350,6 +354,7 @@ a#scrollUp:hover {
     border: 1px solid #eee;
     padding: 0px 45px 0px 150px;
     color: #fff;
+    padding-top: 10px;
 }
 
 .select-menu {
@@ -358,6 +363,7 @@ a#scrollUp:hover {
     top: 0;
     width: 130px;
     height: 45px;
+    padding-top: 10px;
 }
 
 .select-menu:before {
