@@ -32,7 +32,7 @@
     
     <!-- script -->
     @include('layouts.script')
-    {!! (isset($footer_script))? $footer_script: !!}
+    {!! (isset($footer_script))? $footer_script:'' !!}
     <!-- script -->
 </body>
 
