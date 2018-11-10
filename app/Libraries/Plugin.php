@@ -14,8 +14,8 @@ class Plugin
     * @param
     * @return
     */
-    public static function banner1(){
-        return view('frontend.plugin.banner-1');
+    public static function banner1($param=[]){
+        return view('frontend.plugin.banner-1', $data);
     }
 
     /**
