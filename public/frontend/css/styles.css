@@ -344,7 +344,7 @@ a#scrollUp:hover {
 
 .search-wrap form {
     position: relative;
-    padding-top: 10px;
+    
 }
 
 .search-wrap input {
@@ -354,7 +354,7 @@ a#scrollUp:hover {
     border: 1px solid #eee;
     padding: 0px 45px 0px 150px;
     color: #fff;
-    padding-top: 10px;
+    
 }
 
 .select-menu {
@@ -363,7 +363,7 @@ a#scrollUp:hover {
     top: 0;
     width: 130px;
     height: 45px;
-    padding-top: 10px;
+    
 }
 
 .select-menu:before {
@@ -429,12 +429,14 @@ a#scrollUp:hover {
     right: 0;
     top: 0;
     border-left: 1px solid #eee;
+    
 }
 
 .search-wrap button:hover {
     background: #4CAF50;
     color: #fff;
     border-color: #4CAF50;
+    padding-top:15px;
 }
 
 .cart-wishlist-wrap {
@@ -745,6 +747,8 @@ a#scrollUp:hover {
 
 .slider-item {
     position: relative;
+    width: 100%;
+    height: 50%;
 }
 
 .slider-content {
@@ -1999,6 +2003,8 @@ ul.rating li {
 
 .widget_search form {
     position: relative;
+    padding-top: 10px;
+
 }
 
 .widget_search input {
@@ -2008,6 +2014,7 @@ ul.rating li {
     padding: 0px 40px 0px 20px;
     background: transparent;
     color: #fff;
+    padding-top: 10px;
 }
 
 .widget_search button {
@@ -2019,11 +2026,13 @@ ul.rating li {
     background: #4CAF50;
     color: #fff;
     border: none;
+    padding-top: 10px;
 }
 
 .widget_search button:hover {
     background: #fff;
     color: #4CAF50;
+     padding-top: 10px;
 }
 
 .widget_categories ul li {
