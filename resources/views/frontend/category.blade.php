@@ -1,6 +1,8 @@
 @extends('layouts.index')
 @section('title', 'Page Title')
 @section('content')
+
+
 <!-- .shop-page-area start -->
     <div class="shop-page-area">
         <div class="container">
@@ -616,4 +618,4 @@
     <!-- .shop-page-area enc -->
 @endsection
 
-{!! (isset($footer_script))? $footer_script: !!}
+{!! (isset($footer_script))? $footer_script:'' !!}
