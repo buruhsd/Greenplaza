@@ -13,6 +13,7 @@ class ConfBank extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('conf_bank');
         Schema::create('conf_bank', function (Blueprint $table) {
             $table->increments('id');
             $table->string('bank_kode');
@@ -30,6 +31,6 @@ class ConfBank extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conf_bank');
+        Schema::drop('conf_bank');
     }
 }

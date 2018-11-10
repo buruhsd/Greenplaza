@@ -13,6 +13,7 @@ class CreateConfConfigsTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('conf_configs');
         Schema::create('conf_configs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('configs_name');
@@ -30,6 +31,6 @@ class CreateConfConfigsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conf_configs');
+        Schema::drop('conf_configs');
     }
 }

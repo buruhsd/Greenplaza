@@ -38,7 +38,7 @@ class SetupConfig extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conf_produk_unit');
-        Schema::dropIfExists('conf_produk_location');
+        Schema::drop('conf_produk_unit');
+        Schema::drop('conf_produk_location');
     }
 }

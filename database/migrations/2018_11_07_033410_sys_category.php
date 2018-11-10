@@ -13,6 +13,7 @@ class SysCategory extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('sys_category');
         Schema::create('sys_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_parent_id')->unsigned();
@@ -30,6 +31,6 @@ class SysCategory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sys_category');
+        Schema::drop('sys_category');
     }
 }

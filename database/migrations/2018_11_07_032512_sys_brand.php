@@ -13,6 +13,7 @@ class SysBrand extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('sys_brand');
         Schema::create('sys_brand', function (Blueprint $table) {
             $table->increments('id');
             $table->string('brand_name');
@@ -50,6 +51,6 @@ class SysBrand extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sys_brand');
+        Schema::drop('sys_brand');
     }
 }

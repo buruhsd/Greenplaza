@@ -77,7 +77,7 @@ class CreateProduk extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sys_produk_grosir');
-        Schema::dropIfExists('sys_produk');
+        Schema::drop('sys_produk_grosir');
+        Schema::drop('sys_produk');
     }
 }
