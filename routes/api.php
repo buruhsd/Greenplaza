@@ -67,3 +67,24 @@ Route::post('produk', 'AdminApi\ProdukController@store');
 Route::get('produkshow/{id}', 'AdminApi\ProdukController@show');
 Route::post('produkupdate/{id}', 'AdminApi\ProdukController@update');
 Route::get('produkdestroy/{id}', 'AdminApi\ProdukController@destroy');
+
+//User_address
+Route::get('user_address', 'AdminApi\User_addressController@index');
+Route::post('user_address', 'AdminApi\User_addressController@store');
+Route::get('user_addressshow/{id}', 'AdminApi\User_addressController@show');
+Route::post('user_addressupdate/{id}', 'AdminApi\User_addressController@update');
+Route::get('user_addressdestroy/{id}', 'AdminApi\User_addressController@destroy');
+
+//User_bank
+Route::get('user_bank', 'AdminApi\User_bankController@index');
+Route::post('user_bank', 'AdminApi\User_bankController@store');
+Route::get('user_bankshow/{id}', 'AdminApi\User_bankController@show');
+Route::post('user_bankupdate/{id}', 'AdminApi\User_bankController@update');
+Route::get('user_bankdestroy/{id}', 'AdminApi\User_bankController@destroy');
+
+//User_detail
+Route::get('user_detail', 'AdminApi\User_detailController@index');
+Route::post('user_detail', 'AdminApi\User_detailController@store');
+Route::get('user_detailshow/{id}', 'AdminApi\User_detailController@show');
+Route::post('user_detailupdate/{id}', 'AdminApi\User_detailController@update');
+Route::get('user_detaildestroy/{id}', 'AdminApi\User_detailController@destroy');

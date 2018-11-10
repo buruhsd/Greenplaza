@@ -61,7 +61,13 @@ class User_bankController extends Controller
         
         $requestData = $request->all();
         
-        $res = User_bank::create($requestData);
+        $res = new User_bank;
+        $res->user_bank_user_id = $response->user_bank_user_id;
+        $res->user_bank_name = $response->user_bank_name;
+        $res->user_bank_owner = $response->user_bank_owner;
+        $res->user_bank_no = $response->user_bank_no;
+        $res->user_bank_note = $response->user_bank_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'User_bank Not added!';
@@ -116,6 +122,12 @@ class User_bankController extends Controller
         $requestData = $request->all();
         
         $user_bank = User_bank::findOrFail($id);
+        $user_bank->user_bank_user_id = $response->user_bank_user_id;
+        $user_bank->user_bank_name = $response->user_bank_name;
+        $user_bank->user_bank_owner = $response->user_bank_owner;
+        $user_bank->user_bank_no = $response->user_bank_no;
+        $user_bank->user_bank_note = $response->user_bank_note;
+        $user_bank->save();
         $res = $user_bank->update($requestData);
         if(!$res){
             $status = 500;
