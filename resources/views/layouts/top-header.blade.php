@@ -6,8 +6,8 @@
                     <div class="col-md-3 col-3">
                         <div class="logo">
                             <a href="index.html">
-                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="400" height="100px">
-                                <img class="light-logo" src="assets/images/logo2.png" alt="">
+                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" >
+                                <img class="light-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
                             </a>
                         </div>
                     </div>
@@ -30,8 +30,9 @@
                     </div>
                     <div class="col-md-3 col-sm-5">
                         <ul class="cart-wishlist-wrap d-flex">
-                            <li><a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i> Cart<span>-$600</span></a></li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-heart"></i></a></li>
+                            <li><a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="javascript:void(0);">Login</a></li>
+                            <li><a href="javascript:void(0);">Register</a></li>
                         </ul>
                     </div>
                 </div>
