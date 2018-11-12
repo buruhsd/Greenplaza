@@ -327,4 +327,20 @@
 
 /* Large Mobile :480px. */
 
-@media only screen and (min-width: 480px) and (max-width: 575px) {}
+@media only screen and (min-width: 480px) and (max-width: 575px) {
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+        width: 100px;
+        height: 200px;
+    }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 750px) {
+    .logo {
+        text-align: center;
+        margin-bottom: 10px;
+         width: 120px;
+        height: 50px;
+    }
+}

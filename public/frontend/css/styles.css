@@ -328,7 +328,7 @@ a#scrollUp:hover {
     padding-bottom: 5px;
 }
 
-.logo a {
+/*.logo a {
     text-transform: uppercase;
     font-size: 30px;
     font-weight: 700;
@@ -336,10 +336,23 @@ a#scrollUp:hover {
     display: block;
     padding: 10px;
     padding-right:100px;
-}
+}*/
 
 .logo a img.light-logo {
     display: none;
+}
+
+.logo a img.dark-logo {
+
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    color: #eee;
+    display: block;
+    padding: 10px;
+    width: 150px;
+    height: 60px;
+    
 }
 
 .search-wrap form {
@@ -432,13 +445,14 @@ a#scrollUp:hover {
     right: 0;
     top: 0;
     border-left: 1px solid #eee;
+    margin-top: 5px;
     padding-top: 5px;
 }
 
 .search-wrap button:hover {
-    background: #4CAF50;
+    background: #FFD700;
     color: #fff;
-    border-color: #4CAF50;
+    border-color: #FFD700;
     padding-top:15px;
 
 }
@@ -447,10 +461,11 @@ a#scrollUp:hover {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     justify-content: flex-end;
+    padding-top: 10px;
 }
 
 .cart-wishlist-wrap li {
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .cart-wishlist-wrap li:last-child {
@@ -459,19 +474,19 @@ a#scrollUp:hover {
 
 .cart-wishlist-wrap li a {
     display: block;
-    height: 45px;
-    border: 1px solid #eee;
+    height: 35px;
+    border: 0px solid #eee;
     padding: 0px 15px;
-    line-height: 45px;
+    line-height: 35px;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 13px;
 }
 
 .cart-wishlist-wrap li a i.fa-shopping-cart {
-    padding: 16px 15px 15px 0px;
-    margin-right: 15px;
-    border-right: 1px solid #eee;
+    padding: 10px 15px 15px 0px;
+    margin-right: 10px;
+    border-right: 0px solid #eee;
 }
 
 .mainmenu {
