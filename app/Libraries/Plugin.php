@@ -22,7 +22,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function banner2($param){
+    public static function banner2($param=[]){
         return view('frontend.plugin.banner-2');
     }
 
@@ -30,7 +30,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function banner3($param){
+    public static function banner3($param=[]){
         return view('frontend.plugin.banner-3');
     }
 
@@ -38,7 +38,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function banner4($param){
+    public static function banner4($param=[]){
         return view('frontend.plugin.banner-4');
     }
 
@@ -46,7 +46,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function footer($param){
+    public static function footer($param=[]){
         return view('frontend.plugin.footer');
     }
 
@@ -54,7 +54,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function slider($param){
+    public static function slider($param=[]){
         return view('frontend.plugin.slider');
     }
 
@@ -62,7 +62,7 @@ class Plugin
     * @param
     * @return
     */
-    public static function top_header($param){
+    public static function top_header($param=[]){
         return view('frontend.plugin.top-header');
     }
 
