@@ -15,6 +15,7 @@ class Plugin
     * @return
     */
     public static function banner1($param=[]){
+        extract($param);
         return view('frontend.plugin.banner-1');
     }
 
@@ -23,6 +24,7 @@ class Plugin
     * @return
     */
     public static function banner2($param=[]){
+        extract($param);
         return view('frontend.plugin.banner-2');
     }
 
@@ -31,6 +33,7 @@ class Plugin
     * @return
     */
     public static function banner3($param=[]){
+        extract($param);
         return view('frontend.plugin.banner-3');
     }
 
@@ -39,6 +42,7 @@ class Plugin
     * @return
     */
     public static function banner4($param=[]){
+        extract($param);
         return view('frontend.plugin.banner-4');
     }
 
@@ -47,6 +51,7 @@ class Plugin
     * @return
     */
     public static function footer($param=[]){
+        extract($param);
         return view('frontend.plugin.footer');
     }
 
@@ -55,6 +60,7 @@ class Plugin
     * @return
     */
     public static function slider($param=[]){
+        extract($param);
         return view('frontend.plugin.slider');
     }
 
@@ -63,6 +69,10 @@ class Plugin
     * @return
     */
     public static function top_header($param=[]){
+        $pid = 0;
+        extract($param);
+        $where[] = ['category_parent_id', $pid];
+        $data['category'] = App\Category::skip(0)->take($perPage)->get();
         return view('frontend.plugin.top-header');
     }
 

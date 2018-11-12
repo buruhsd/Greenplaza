@@ -2,7 +2,6 @@
 @section('title', 'Page Title')
 @section('content')
 
-
 <!-- .shop-page-area start -->
     <div class="shop-page-area">
         <div class="container">
@@ -45,7 +44,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="grid">
                                 <div class="row">
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
+                                    <!-- <div class="col-lg-3  col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
@@ -73,12 +72,22 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                    </div> -->
+                                @if($produk->count() == 0)
+                                    <div class="col-lg-12 text-center col-md-12 col-sm-12 col-12">
+                                        <div class="product-wrap">
+                                            <div class="product-content no-border">
+                                                <h3>No Result Found.</h3>
+                                            </div>
+                                        </div>
                                     </div>
+                                @else
+                                @foreach($produk as $item)
                                     <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/3.jpg" alt="">
+                                                <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
                                                 <img class="second" src="assets/images/product/4.jpg" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
@@ -89,312 +98,30 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
+                                                <h3><a href="shop.html">{{$item->produk_name}}</a></h3>
+                                                @if($item->produk_discount > 0)
+                                                    <p>
+                                                        <span>{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
+                                                        <del>{{FunctionLib::number_to_text($item->produk_price)}}</del>
+                                                    </p>
+                                                @else
+                                                    <p><span>{{FunctionLib::number_to_text($item->produk_price)}}</span></p>
+                                                @endif
+                                                {{-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
-                                                </ul>
+                                                </ul> --}}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/5.jpg" alt="">
-                                                <img class="second" src="assets/images/product/6.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/7.jpg" alt="">
-                                                <img class="second" src="assets/images/product/8.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/9.jpg" alt="">
-                                                <img class="second" src="assets/images/product/10.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/11.jpg" alt="">
-                                                <img class="second" src="assets/images/product/12.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/13.jpg" alt="">
-                                                <img class="second" src="assets/images/product/14.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/15.jpg" alt="">
-                                                <img class="second" src="assets/images/product/16.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/17.jpg" alt="">
-                                                <img class="second" src="assets/images/product/18.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/19.jpg" alt="">
-                                                <img class="second" src="assets/images/product/20.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/21.jpg" alt="">
-                                                <img class="second" src="assets/images/product/22.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/23.jpg" alt="">
-                                                <img class="second" src="assets/images/product/24.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
+                                @endif
                                     <div class="col-12">
-                                        <div class="pagination-wrapper text-center">
+                                    {!! $produk->appends(['cat' => Request::get('cat')])->render() !!}
+                                        <!-- <div class="pagination-wrapper text-center">
                                             <ul class="page-numbers">
                                                 <li><a class="prev page-numbers" href="#"><i class="fa fa-angle-left"></i></a></li>
                                                 <li><a class="page-numbers" href="#">1</a></li>
@@ -402,7 +129,7 @@
                                                 <li><a class="page-numbers" href="#">3</a></li>
                                                 <li><a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a></li>
                                             </ul>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

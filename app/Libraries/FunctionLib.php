@@ -28,4 +28,40 @@ class FunctionLib
         return number_format($numb,$decimal,",",".");
     }
 
+    /**
+    * @param
+    * @return
+    **/
+    public static function category_by_parent($parent_cat= 0, $limit= 8, $where= 1){
+        $cat = Illuminate\Support\Facades\DB::select("SELECT GROUP_CONCAT(lv SEPARATOR ',') as lv FROM (
+            SELECT @pv:=(SELECT GROUP_CONCAT(id SEPARATOR ',') FROM sys_category WHERE
+            FIND_IN_SET(category_parent_id, @pv)) AS lv FROM sys_category
+            JOIN (SELECT @pv:=$parent_cat)tmp
+            WHERE category_parent_id IN (@pv)) a")[0];
+        $cat = $cat->lv.",".$parent_cat;
+        $return = App\Models\Category::whereIn("id", explode(",",$cat))
+            ->whereRaw($where);
+        return $return;
+
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function produk_by_category($parent_cat= 0, $limit= 8, $where= 1, $order= "RAND()"){
+        $cat = Illuminate\Support\Facades\DB::select("SELECT GROUP_CONCAT(lv SEPARATOR ',') as lv FROM (
+            SELECT @pv:=(SELECT GROUP_CONCAT(id SEPARATOR ',') FROM sys_category WHERE
+            FIND_IN_SET(category_parent_id, @pv)) AS lv FROM sys_category
+            JOIN (SELECT @pv:=$parent_cat)tmp
+            WHERE category_parent_id IN (@pv)) a")[0];
+        $cat = $cat->lv.",".$parent_cat;
+        $return = App\Models\Produk::whereIn("produk_category_id", explode(",",$cat))
+            ->whereRaw($where)
+            ->orderByRaw($order)
+            ->skip(0)
+            ->take($limit);
+        return $return;
+    }
+
 }
