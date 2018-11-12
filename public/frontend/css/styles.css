@@ -343,6 +343,7 @@ a#scrollUp:hover {
 }
 
 .search-wrap form {
+    padding-top: 5px;
     position: relative;
     
 }
@@ -363,6 +364,7 @@ a#scrollUp:hover {
     top: 0;
     width: 130px;
     height: 45px;
+    padding-top: 5px;
     
 }
 
@@ -417,6 +419,7 @@ a#scrollUp:hover {
     border-right: 1px solid #eee;
     padding-left: 10px;
     cursor: pointer;
+
 }
 
 .search-wrap button {
@@ -429,7 +432,7 @@ a#scrollUp:hover {
     right: 0;
     top: 0;
     border-left: 1px solid #eee;
-    
+    padding-top: 5px;
 }
 
 .search-wrap button:hover {
@@ -437,6 +440,7 @@ a#scrollUp:hover {
     color: #fff;
     border-color: #4CAF50;
     padding-top:15px;
+
 }
 
 .cart-wishlist-wrap {

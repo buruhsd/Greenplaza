@@ -3,7 +3,7 @@
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-12">
+                    <div class="col-md-3 col-3">
                         <div class="logo">
                             <a href="index.html">
                                 <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="400" height="100px">
@@ -34,6 +34,7 @@
                             <li><a href="javascript:void(0);"><i class="fa fa-heart"></i></a></li>
                         </ul>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
