@@ -24,6 +24,7 @@ Route::get('/detail', 'member\\FrontController@detail')->name('detail');
 Route::get('/etalase', 'member\\FrontController@etalase')->name('etalase');
 Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');
+Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
 
 
 Auth::routes();
