@@ -32,23 +32,29 @@ Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Admin\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Superadmin\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
+// auth superadmin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
 });
 
+// auth superadmin & admin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
 	});
 });
+
+// auth admin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
 	});
 });
 
+// auth admin & member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member'], function () {
 	});
 });
 
+// auth member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 	});
@@ -57,6 +63,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 	});
 });
+
+// without auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
 	});
