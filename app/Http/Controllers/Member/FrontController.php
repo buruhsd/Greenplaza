@@ -76,4 +76,11 @@ class FrontController extends Controller
 
         return view('auth.login_green');
     }
+
+    public function haloo()
+    {
+
+        return view('');
+    }
 }
+ 
