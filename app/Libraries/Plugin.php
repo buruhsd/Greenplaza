@@ -71,9 +71,9 @@ class Plugin
     public static function top_header($param=[]){
         $pid = 0;
         extract($param);
-        $where[] = ['category_parent_id', $pid];
-        $data['category'] = App\Category::skip(0)->take($perPage)->get();
-        return view('frontend.plugin.top-header');
+        // $where[] = ['category_parent_id', $pid];
+        $data['p_category'] = App\Models\Category::all();
+        return view('frontend.plugin.top-header', $data);
     }
 
 }
