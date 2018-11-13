@@ -70,7 +70,7 @@ class FunctionLib
     **/
     public static function add_chart($produk_id){
         $produk = App\Models\Produk::where("id", $produk_id)->first();
-        return $return;
+        return true;
 
     }
 
