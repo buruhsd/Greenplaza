@@ -73,7 +73,11 @@ class Plugin
         $pid = 0;
         extract($param);
         // $where[] = ['category_parent_id', $pid];
+<<<<<<< HEAD
         $data['p_category'] = App\Models\Category::where('category_parent_id', 0)->get();
+=======
+        $data['p_category'] = App\Models\Category::all();
+>>>>>>> origin/fahmi
         return view('frontend.plugin.top-header', $data);
     }
 
