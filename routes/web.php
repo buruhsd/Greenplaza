@@ -32,6 +32,38 @@ Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Admin\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Superadmin\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
+});
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
+	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
+	});
+});
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin']], function () {
+	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
+	});
+});
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']], function () {
+	Route::group(['prefix' => 'member', 'as' => 'member'], function () {
+	});
+});
+
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
+	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
+	});
+	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
+		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
+		});
+	});
+});
+Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
+	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
+	});
+	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
+	});
+});
+
 // Route::get('/member/home', function(){
 // 	return "member bos";
 // })->name('member.home')->middleware('auth');
