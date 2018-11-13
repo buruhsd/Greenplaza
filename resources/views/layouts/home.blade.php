@@ -25,14 +25,14 @@
     <div class="product-area">
         <div class="container">
             <div class="row">
-                @include('frontend.popular')
+                @include('frontend.plugin.popular')
             </div>
         </div>
     </div>
     <!-- .product-area end -->
     @include('frontend.plugin.hot-promo')
     @include('frontend.plugin.recommended-items')
-    @include('frontend.plugin.content.content-brand')
+    @include('frontend.content.content-brand')
 
     <!-- footer -->
     @include('frontend.plugin.footer')
