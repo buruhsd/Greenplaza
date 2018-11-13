@@ -27,6 +27,7 @@ class FrontController extends Controller
      */
     public function home()
     {
+        $perPage = 8;
         $data['bestseller'] = Produk::where('produk_is_best', 1)
             ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
         $data['hotlist'] = Produk::where('produk_is_hot', 1)

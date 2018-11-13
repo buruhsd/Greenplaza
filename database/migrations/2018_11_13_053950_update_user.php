@@ -15,8 +15,9 @@ class UpdateUser extends Migration
     {
         Schema::table('users', function($table) {
             $table->string('user_store')->nullable()->after('name');
-            $table->string('user_slogan')->nullable()->after('user_store');
-            $table->string('user_slug')->nullable()->after('user_store')->comment("store url");
+            $table->string('user_store_image')->nullable()->after('user_store')->comment("pic etalase");
+            $table->string('user_slogan')->nullable()->after('user_store_image');
+            $table->string('user_slug')->nullable()->after('user_slogan')->comment("store url");
         });
     }
 
@@ -29,6 +30,7 @@ class UpdateUser extends Migration
     {
         Schema::table('users', function($table) {
             $table->dropColumn('user_store');
+            $table->dropColumn('user_store_image');
             $table->dropColumn('user_slogan');
             $table->dropColumn('user_slug');
         });
