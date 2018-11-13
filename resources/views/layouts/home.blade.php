@@ -20,19 +20,18 @@
         </div>
     </div>
     <!-- .product-area end -->
-    @include('frontend.plugin.banner-2')
+    
     <!-- .product-area start -->
     <div class="product-area">
         <div class="container">
             <div class="row">
-                @include('frontend.content.content-2')
+                @include('frontend.popular')
             </div>
         </div>
     </div>
     <!-- .product-area end -->
-    @include('frontend.content.content-3')
-    @include('frontend.content.content-4')
-    @include('frontend.content.content-5')
+    @include('frontend.hot-promo')
+    @include('frontend.recommended-items')
     @include('frontend.content.content-brand')
 
     <!-- footer -->
