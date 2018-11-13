@@ -71,12 +71,9 @@ class FrontController extends Controller
         return view('auth.register_green');
     }
 
-    /**
-    *
-    *
-    */
-    public function shop(Request $request)
+    public function log_seller()
     {
-        return view('frontend.shop');
+
+        return view('auth.login_green');
     }
 }
