@@ -447,6 +447,7 @@ a#scrollUp:hover {
     border-left: 1px solid #eee;
     margin-top: 5px;
     padding-top: 5px;
+
 }
 
 .search-wrap button:hover {
@@ -481,6 +482,8 @@ a#scrollUp:hover {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 13px;
+
+
 }
 
 .cart-wishlist-wrap li a i.fa-shopping-cart {

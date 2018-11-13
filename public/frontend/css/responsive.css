@@ -42,9 +42,12 @@
 @media (min-width: 768px) and (max-width: 991.98px) {
     .cart-wishlist-wrap li a {
         padding: 0px 10px;
+        padding-right: 100px;
+        
     }
     .cart-wishlist-wrap li a span {
         display: none;
+        padding-right: 100px;
     }
     .metismenu li a {
         padding: 15px 10px;

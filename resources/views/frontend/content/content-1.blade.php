@@ -1,4 +1,6 @@
-<div class="shop-area">
+ <div class="product-area">
+        <div class="container">
+            <div class="shop-area">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
                                 <h2 class="section-title">New Arivel</h2>
@@ -922,3 +924,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

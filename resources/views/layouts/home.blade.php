@@ -9,16 +9,7 @@
     @include('frontend.plugin.slider')
     @include('frontend.plugin.banner-1')
     <!-- .product-area start -->
-    <div class="product-area">
-        <div class="container">
-                    @include('frontend.content.content-1')
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('frontend.content.content-1')
     <!-- .product-area end -->
     
     <!-- .product-area start -->
