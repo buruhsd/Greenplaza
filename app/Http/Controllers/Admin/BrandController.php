@@ -60,8 +60,20 @@ class BrandController extends Controller
         $message = 'Brand added!';
         
         $requestData = $request->all();
+        $this->validate($request, [
+            'brand_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'brand_name' => 'required',
+            'brand_slug' => 'required',
+            'brand_note' => 'required',
+        ]);
         
-        $res = Brand::create($requestData);
+        $res = new Brand;
+        $res->brand_name = $request->brand_name;
+        $res->brand_image = date("d-M-Y_H-i-s").'_'.$request->brand_image->getClientOriginalName();
+        $request->brand_image->move(public_path('img_brand'),$res->brand_image);
+        $res->brand_slug = $request->brand_slug;
+        $req->brand_note = $request->brand_note;
+        $req->save();
         if(!$res){
             $status = 500;
             $message = 'Brand Not added!';

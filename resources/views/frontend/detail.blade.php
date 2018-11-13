@@ -12,8 +12,9 @@
                                 <div class="product-single-img">
                                     <div class="product-single-active owl-carousel">
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/1.jpg') }}" alt="">
+                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
                                         </div>
+                                        <p>{{$detail->produk_image}}</p>
                                         <div class="item black-opacity">
                                             <img src="{{ asset('frontend/images/product/product-details/2.jpg') }}" alt="">
                                         </div>
@@ -54,9 +55,9 @@
                             </div>
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
-                                    <h3>Flower Vase</h3>
+                                    <h3><a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"> {{$detail->user->user_store}}</h3>
                                     <div class="rating-wrap fix">
-                                        <span class="pull-left">$219.56</span>
+                                        <span class="pull-left">{{$detail->produk_price}}</span>
                                         <ul class="rating pull-right">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -66,7 +67,7 @@
                                             <li>(05 Customar Review)</li>
                                         </ul>
                                     </div>
-                                    <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.</p>
+                                    <p>{{$detail->produk_note}}</p>
                                     <ul class="input-style">
                                         <li class="quantity cart-plus-minus">
                                             <input type="text" value="1" />

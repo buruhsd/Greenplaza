@@ -53,16 +53,16 @@ class FrontController extends Controller
         return view('frontend.category', $data);
     }
 
-    public function detail()
+    public function detail(Request $request, $id)
     {
-
-        return view('frontend.detail');
+        $detail = Produk::find($id);
+        return view('frontend.detail', compact('detail'));
     }
 
-    public function etalase()
+    public function etalase(Request $request, $id)
     {
-
-        return view('frontend.shop');
+        $produk = Produk::find($id);
+        return view('frontend.etalase', compact('produk'));
     }
 
     public function reg_seller()

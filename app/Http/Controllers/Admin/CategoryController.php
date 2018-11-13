@@ -60,10 +60,16 @@ class CategoryController extends Controller
         $message = 'Category added!';
         
         $requestData = $request->all();
+        $this->validate($request, [
+            'category_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_name' => 'required',
+        ]);
         
         $res = new Category;
         $res->category_parent_id = $request->category_parent_id;
         $res->category_name = $request->category_name;
+        $res->category_icon = date("d-M-Y_H-i-s").'_'.$request->category_icon->getClientOriginalName();
+        $request->category_icon->move(public_path('img_category_icon'),$res->category_icon);
         $res->category_note = $request->category_note;
         $res->save();
         if(!$res){

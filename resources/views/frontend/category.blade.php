@@ -99,7 +99,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="shop.html">{{$item->produk_name}}</a></h3>
+                                                <h3><a href="{{action('member\\FrontController@detail', $item->id)}}">{{$item->produk_name}}</a></h3>
                                                 @if($item->produk_discount > 0)
                                                     <p>
                                                         <span>{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>

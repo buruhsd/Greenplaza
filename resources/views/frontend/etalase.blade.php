@@ -1,5 +1,5 @@
-@extends('layouts.index')
-@section('title', 'Page Title')
+@extends('layouts.index', ['active' => 'etalase'])
+@section('title', 'Etalase')
 @section('content')
 <!-- breadcumb-area end -->
     <div class="about-area mb-30">
@@ -8,17 +8,10 @@
                 <div class="col-12">
                     <div class="p-10 bg-1">
                         <div class="row">
-                            <div class="col-lg-6 col-12 order-2">
-                                <div class="about-wrap">
-                                    <h2>Webcome Our <span>Kinun</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit voluptate quae exercitationem optio id architecto eius laborum adipisci laudantium libero beatae, officiis pariatur fugiat, quo veritatis quisquam totam iure quaerat. id architecto eius laborum adipisci laudantium libero beatae, officiis pariatur fugiat, quo veritatis quisquam totam iure quaerat.</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit voluptate quae exercitationem optio id architecto eius laborum adipisci laudantium libero beatae, officiis pariatur fugiat, quo veritatis quisquam totam iure quaerat.</p>
-                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit voluptate quae exercitationem optio id architecto eius laborum adipisci laudantium libero beatae, officiis pariatur fugiat, quo veritatis quisquam totam iure quaerat. laudantium libero beatae, officiis pariatur fugiat, quo veritatis quisquam totam iure quaerat.</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-12 order-0">
-                                <div class="about-img black-opacity">
-                                    <img src="{{ asset('frontend/images/about.jpg') }}" alt="">
+                            <div class="col-lg-12 col-12 order-2">
+                                <div class="about-img black-opacity" style="position: relative;">
+                                    <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
+                                    <img src="{{ asset('img_user_store_bg/sepatu.jpg') }}" alt="" style="height: 400px">
                                 </div>
                             </div>
                         </div>

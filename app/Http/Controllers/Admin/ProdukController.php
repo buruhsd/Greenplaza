@@ -62,7 +62,6 @@ class ProdukController extends Controller
         $requestData = $request->all();
         
         $this->validate($request, [
-            'produk_seller_id' => 'required',
             'produk_name' => 'required',
             'produk_slug' => 'required',
             'produk_unit' => 'required',
@@ -77,7 +76,7 @@ class ProdukController extends Controller
             'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $res = new Produk;
-        $res->produk_seller_id = $request->produk_seller_id;
+        $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
