@@ -162,6 +162,7 @@ return [
         // 
         App\Providers\HelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\RajaOngkirServiceProvider::class,
 
     ],
 
@@ -214,6 +215,7 @@ return [
         'Helpers' => App\Helpers\Helper::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'RajaOngkir' => App\Facades\RajaOngkirFacade::class,
 
     ],
 

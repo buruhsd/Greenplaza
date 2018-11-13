@@ -45,7 +45,7 @@ class LoginController extends Controller
      */
     public function showLoginForm(Request $request, $token = null)
     {
-        return view('auth.login')->with(
+        return view('auth.login_green')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
