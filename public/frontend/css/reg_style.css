@@ -59,7 +59,13 @@ hr {
 /* Add a blue text color to links */
 a {
     color: dodgerblue;
+    }
+
+a.gp{
+    padding-left: 200px;
 }
+
+
 
 /* Set a grey background color and center the text of the "sign in" section */
 .signin {
@@ -72,17 +78,23 @@ a {
         font-family: Arial, Helvetica, sans-serif;
         padding: 10px;
     
-    
     }
+    a {
+    color: dodgerblue;
+    padding-left: 10px;
+}
 }
 
 @media screen and (max-width: 720px) {
     body {
         font-family: Arial, Helvetica, sans-serif;
-        padding: 10px;
-    
-    
+
     }
+    a {
+    color: dodgerblue;
+    padding-left: 10px;
+    
+}
 }
 
 @media screen and (max-width: 1080px) {
@@ -90,6 +102,9 @@ a {
         font-family: Arial, Helvetica, sans-serif;
         padding: 10px;
     
-    
     }
+    a {
+    color: dodgerblue;
+    padding-left: 10px;
+}
 }
