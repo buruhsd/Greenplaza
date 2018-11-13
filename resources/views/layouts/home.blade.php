@@ -25,17 +25,18 @@
     <div class="product-area">
         <div class="container">
             <div class="row">
-                @include('frontend.plugin.popular')
+                {!! Plugin::populer()!!}
             </div>
         </div>
     </div>
     <!-- .product-area end -->
-    @include('frontend.plugin.hot-promo')
-    @include('frontend.plugin.recommended-items')
-    @include('frontend.content.content-brand')
+    {!! Plugin::hot_promo()!!}
+    {!! Plugin::recommended()!!}
+    {!! Plugin::content_brand()!!}
+    {{-- @include('frontend.content.content-brand') --}}
 
     <!-- footer -->
-    @include('frontend.plugin.footer')
+    {!! Plugin::footer()!!}
     <!-- footer -->
     
     <!-- script -->

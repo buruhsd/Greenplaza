@@ -52,7 +52,6 @@ class Plugin
     */
     public static function footer($param=[]){
         extract($param);
-        FunctionLib::get_config("address1");
         return view('frontend.plugin.footer');
     }
 
@@ -75,6 +74,53 @@ class Plugin
         // $where[] = ['category_parent_id', $pid];
         $data['p_category'] = App\Models\Category::all();
         return view('frontend.plugin.top-header', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function hot_promo($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['hot_promo'] = App\Models\Produk::where('produk_is_hot', !1)//1)
+            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+        return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function populer($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['populer'] = App\Models\Produk::where('produk_is_hot', !1)//1)
+            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+        return view('frontend.plugin.popular', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function recommended($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['recomend'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+        return view('frontend.plugin.recommended-items', $data);
+    }
+    
+    /**
+    * @param
+    * @return
+    */
+    public static function content_brand($param=[]){
+        extract($param);
+        return view('frontend.content.content-brand');
     }
 
 }
