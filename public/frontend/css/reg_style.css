@@ -62,7 +62,7 @@ a {
     }
 
 a.gp{
-    padding-left: 200px;
+    padding-left: 170px;
 }
 
 
@@ -79,9 +79,9 @@ a.gp{
         padding: 10px;
     
     }
-    a {
+    a.gp {
     color: dodgerblue;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 }
 
@@ -90,9 +90,9 @@ a.gp{
         font-family: Arial, Helvetica, sans-serif;
 
     }
-    a {
+    a.gp {
     color: dodgerblue;
-    padding-left: 10px;
+    padding-left: 30px;
     
 }
 }
@@ -103,8 +103,8 @@ a.gp{
         padding: 10px;
     
     }
-    a {
+    a.gp {
     color: dodgerblue;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 }

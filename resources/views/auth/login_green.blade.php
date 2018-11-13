@@ -13,9 +13,8 @@
 <form action="/action_page.php">
   <div class="container">
     <a class="gp" href="index.html" >
-        <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="100px" height="50px" >
+        <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="200px" height="50px" >
     </a>
-    <h2>Login</h3>
     <p>Belum Punya Akun ? <a href="#"> Daftar disini </a>.</p>
 
     <label for="email"><b>Email</b></label>
