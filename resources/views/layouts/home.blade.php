@@ -30,9 +30,9 @@
         </div>
     </div>
     <!-- .product-area end -->
-    @include('frontend.hot-promo')
-    @include('frontend.recommended-items')
-    @include('frontend.content.content-brand')
+    @include('frontend.plugin.hot-promo')
+    @include('frontend.plugin.recommended-items')
+    @include('frontend.plugin.content.content-brand')
 
     <!-- footer -->
     @include('frontend.plugin.footer')
