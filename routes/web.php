@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/category', 'member\\FrontController@category')->name('category');
 Route::get('/detail', 'member\\FrontController@detail')->name('detail');
 Route::get('/etalase', 'member\\FrontController@etalase')->name('etalase');
+Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');
 
 
