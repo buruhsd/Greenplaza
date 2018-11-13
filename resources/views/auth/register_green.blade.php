@@ -20,13 +20,13 @@
     <hr>
 
     <label for="email"><b>Sponsor</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Enter Sponsor" name="email" required>
 
     <label for="email"><b>Username</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Username" name="email" required>
 
     <label for="email"><b>Nama Lengkap</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Nama Lengkap" name="email" required>
 
     <label for="email"><b>Kelamin</b></label>
     <div class="container">
@@ -35,19 +35,19 @@
     </div><br>
     
     <label for="email"><b>No. HP</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="No HP" name="email" required>
 
     <label for="email"><b>Provinsi</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Provinsi" name="email" required>
 
     <label for="email"><b>Kota / Kab.</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Kota/ Kab." name="email" required>
 
     <label for="email"><b>Kecamatan</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Kecamatan" name="email" required>
 
     <label for="email"><b>Kode Pos</b></label>
-    <input type="text" placeholder="Enter Email" name="email" required>
+    <input type="text" placeholder="Kode Pos" name="email" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>
