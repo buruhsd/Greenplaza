@@ -56,9 +56,31 @@ class User extends Authenticatable
     * get wallet user
     * @return joined one to one
     **/
-    // public function user_detail()
-    // {
-    //     return $this->hasOne('App\Sys_user_detail', 'user_detail_user_id');
-    // }
+    public function user_detail()
+    {
+        return $this->hasOne('App\Sys_user_detail', 'user_detail_user_id');
+    }
+
+    /**
+    * get wallet user
+    * @return joined one to one
+    **/
+    public function user_bank()
+    {
+        return $this->hasMany('App\Sys_user_bank', 'user_bank_user_id');
+    }
+
+    /**
+    * get wallet user
+    * @return joined one to one
+    **/
+    public function user_address()
+    {
+        return $this->hasMany('App\Sys_user_address', 'user_address_user_id');
+    }
+
+    public function MailVerification(){
+        return true
+    }
 
 }

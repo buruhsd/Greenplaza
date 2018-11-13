@@ -3,12 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Role extends Model
 {
-    use LogsActivity;
-
     /**
      * The attributes that are mass assignable.
      *

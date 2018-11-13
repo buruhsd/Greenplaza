@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\User_detail;
+use App\Role;
+use App\Models\User_detail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,18 +50,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // return Validator::make($data, [
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'password' => 'required|string|min:6|confirmed',
-        //     'user_detail_jk' => 'required|string|max:255',
-        //     'user_detail_address' => 'required|string|max:255',
-        //     'user_detail_phone' => 'required|string|max:255',
-        //     'user_detail_province' => 'required|string|max:255',
-        //     'user_detail_city' => 'required|string|max:255',
-        //     'user_detail_subdist' => 'required|string|max:255',
-        //     'user_detail_pos' => 'required|string|max:255',
-        // ]);
+        return Validator::make($data, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'user_detail_jk' => 'required|string|max:255',
+            'user_detail_phone' => 'required|string|max:255',
+            'user_detail_province' => 'required|string|max:255',
+            'user_detail_city' => 'required|string|max:255',
+            'user_detail_subdist' => 'required|string|max:255',
+            'user_detail_pos' => 'required|string|max:255',
+        ]);
     }
 
     /**
@@ -77,21 +77,28 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $memberRole = Role::where('name', 'member')->first();
-        $user->attachRole($memberRole);
+
+        // update detail user
         if($user){
-            return User_detail::create([
+            $user_detail = User_detail::create([
+                'user_detail_user_id' => $user->id,
                 'user_detail_jk' => $data['user_detail_jk'],
-                'user_detail_address' => $data['user_detail_address'],
+                'user_detail_address' => "",//$data['user_detail_address'],
                 'user_detail_phone' => $data['user_detail_phone'],
-                'user_detail_province' => $data['user_detail_province'],
-                'user_detail_city' => $data['user_detail_city'],
-                'user_detail_subdist' => $data['user_detail_subdist'],
+                'user_detail_province' => 1,//$data['user_detail_province'],
+                'user_detail_city' => 1,//$data['user_detail_city'],
+                'user_detail_subdist' => 1,//$data['user_detail_subdist'],
                 'user_detail_pos' => $data['user_detail_pos'],
-                'user_detail_status' => $data['user_detail_status'],
+                'user_detail_token' => "",//$data['user_detail_status'],
+                'user_detail_status' => 0//$data['user_detail_status'],
             ]);
         }
-        $user->sendVerification();
+
+        // get role member
+        $memberRole = Role::where('name', 'member')->pluck('name');
+        $insert_role = $user->assignRole($memberRole);
+        $user->MailVerification();
+        return $user;
 
     }
 
