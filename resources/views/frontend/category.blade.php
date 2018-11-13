@@ -1,6 +1,7 @@
 @extends('layouts.index')
 @section('title', 'Page Title')
 @section('content')
+    {{FunctionLib::add_chart(4)}}
 
 <!-- .shop-page-area start -->
     <div class="shop-page-area">

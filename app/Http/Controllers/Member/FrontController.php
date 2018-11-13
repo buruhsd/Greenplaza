@@ -27,6 +27,11 @@ class FrontController extends Controller
      */
     public function home()
     {
+        $data['bestseller'] = Produk::where('produk_is_best', 1)
+            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+        $data['hotlist'] = Produk::where('produk_is_hot', 1)
+            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+        $data['recomend'] = Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
         return "Member Bos";exit;
         // return view('home');
     }
@@ -44,11 +49,6 @@ class FrontController extends Controller
         }else{
             $data['produk'] = Produk::orderByRaw("rand()")->paginate($perPage);
         }
-        $data['bestseller'] = Produk::where('produk_is_best', 1)
-            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
-        $data['hotlist'] = Produk::where('produk_is_hot', 1)
-            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
-        $data['recomend'] = Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
         return view('frontend.category', $data);
     }
 

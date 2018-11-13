@@ -52,6 +52,7 @@ class Plugin
     */
     public static function footer($param=[]){
         extract($param);
+        FunctionLib::get_config("address1");
         return view('frontend.plugin.footer');
     }
 
@@ -72,7 +73,7 @@ class Plugin
         $pid = 0;
         extract($param);
         // $where[] = ['category_parent_id', $pid];
-        $data['p_category'] = App\Models\Category::all();
+        $data['p_category'] = App\Models\Category::where('category_parent_id', 0)->get();
         return view('frontend.plugin.top-header', $data);
     }
 
