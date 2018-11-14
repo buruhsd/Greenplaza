@@ -74,6 +74,19 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});
+	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
+		Route::get('produk_newest', 'ContentController@buy')->name('.produk_newest');
+	});
+});
+
+// helper
+Route::group(['prefix' => 'helper', 'as' => 'helper'], function(){
+	Route::get('/{function}/{admin}', function($function, $admin) {
+    	return Helpers::$function($admin);
+	});
+	Route::get('/{function}', function($function) {
+    	return Helpers::$function();
+	});
 });
 
 // Route::get('/member/home', function(){

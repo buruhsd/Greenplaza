@@ -113,6 +113,18 @@ class Plugin
         $data['recomend'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
         return view('frontend.plugin.recommended-items', $data);
     }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function produk_newest($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['produk_newest'] = Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+        return view('frontend.content.content-1', $data);
+    }
     
     /**
     * @param

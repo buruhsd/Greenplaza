@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Member;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use FunctionLib;
+use App\Models\Produk;
 
 class HomeController extends Controller
 {
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,7 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return "Member Bos";exit;
-        return view('home');
+        $perPage = 8;
+        $data['produk_newest'] = Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+        return view('layouts.home', $data);
     }
 }

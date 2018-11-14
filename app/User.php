@@ -80,7 +80,7 @@ class User extends Authenticatable
     }
 
     public function MailVerification(){
-        return true
+        return true;
     }
 
 }
