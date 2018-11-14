@@ -22,8 +22,7 @@ Route::get('/', function () {
 //FrontController
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');
 Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
-
-
+Route::get('/dashboard', 'member\\FrontController@admin')->name('dashboard');
 
 Auth::routes();
 
