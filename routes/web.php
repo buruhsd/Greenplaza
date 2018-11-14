@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 
 // auth
 Route::group(['middleware' => ['auth']], function () {
-	Route::post('/member/addwishlist', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
+	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	Route::get('/category', 'member\\FrontController@category')->name('category');
 	Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');

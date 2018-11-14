@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-3 col-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{{url("/")}}">
                                 <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" >
                                 <img class="light-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
                             </a>

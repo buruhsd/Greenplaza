@@ -45,15 +45,16 @@ class WishlistController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function addWishlist($id)
+    public function addWishlist(Request $request, $id)
     {
+        // dd($request);
         $status = 200;
         $message = 'wishlist added!';
-        $id_produk = Produk::where('id', $id)->pluck('id');
         
         $res = new Wishlist;
-        $res->wishlist_produk_id = $id_produk;
+        $res->wishlist_produk_id = $id;
         $res->wishlist_user_id = Auth::id();
+        $res->wishlist_note = $request->input('note');
         $res->save();
         if(!$res){
             $status = 500;
