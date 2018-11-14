@@ -66,18 +66,18 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 
 // auth
 Route::group(['middleware' => ['auth']], function () {
-	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	Route::get('/category', 'member\\FrontController@category')->name('category');
 	Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
-//ChartController
+	//wishlishController
+	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');
+	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
+	Route::get('/member/wishlist/delete/{id}', 'member\\WishlistController@destroy')->name('member.wishlist.delete');
+	//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
-	Route::get('/wishlist', 'member\\ChartController@wishlist')->name('wishlist');
-	Route::get('/wishlist_add', 'member\\ChartController@wishlist_add')->name('wishlist_add');
-	Route::get('/delete_wishlist/{id}', 'member\\ChartController@delete_wishlist')->name('delete_wishlist');
 });
 
 // without auth

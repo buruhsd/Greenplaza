@@ -47,8 +47,14 @@
                                             </li>
                                         </div>
                                         <div class="col-md-12">
-                                            <center><li><a href="{{action('member\\ChartController@wishlist_add')}}">Add to Wishlist</a></li>
-                                            <li><a href="{{action('member\\ChartController@chart')}}">Add to Cart</a></li></center>
+                                            <center>
+                                                <li>
+                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}}>Add to Wishlist</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{action('member\\ChartController@chart')}}">Add to Cart</a>
+                                                </li>
+                                            </center>
                                         </div>
                                     </ul>
                                     <ul class="cetagory">
@@ -421,6 +427,7 @@
             </div>
         </div>
     </div>
+<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
     <!-- .shop-page-area enc -->
     <!-- The Modal -->
   <div class="modal" id="myModal">

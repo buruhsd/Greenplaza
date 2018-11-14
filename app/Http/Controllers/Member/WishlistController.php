@@ -29,13 +29,14 @@ class WishlistController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['wishlist'] = Wishlist::paginate($this->perPage);
+            $data['list'] = Wishlist::where('wishlist_user_id', Auth::id())->paginate($this->perPage);
         } else {
-            $data['wishlist'] = Wishlist::paginate($this->perPage);
+            $data['list'] = Wishlist::where('wishlist_user_id', Auth::id())->paginate($this->perPage);
         }
+        $data['produk'] = Produk::orderBy('id', 'DESC')->first();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
-        return view('member.wishlist.index', $data);
+        return view('frontend.wishlist', $data);
     }
 
     /**
@@ -54,7 +55,7 @@ class WishlistController extends Controller
         $res = new Wishlist;
         $res->wishlist_produk_id = $id;
         $res->wishlist_user_id = Auth::id();
-        $res->wishlist_note = $request->input('note');
+        $res->wishlist_note = $request->note;
         $res->save();
         if(!$res){
             $status = 500;
@@ -80,47 +81,6 @@ class WishlistController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $data['wishlist'] = Wishlist::findOrFail($id);
-
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('member.wishlist.edit', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function update(Request $request, $id)
-    {
-        $status = 200;
-        $message = 'wishlist added!';
-        
-        $requestData = $request->all();
-        
-        $brand = Wishlist::findOrFail($id);
-        $res = $brand->update($requestData);
-        if(!$res){
-            $status = 500;
-            $message = 'wishlist Not updated!';
-        }
-
-        return redirect('member/brand')
-            ->with(['flash_status' => $status,'flash_message' => $message]);
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -137,7 +97,7 @@ class WishlistController extends Controller
             $message = 'wishlist Not deleted!';
         }
 
-        return redirect('member/brand')
+        return redirect('member/wishlist')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

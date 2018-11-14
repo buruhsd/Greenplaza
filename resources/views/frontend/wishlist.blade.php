@@ -46,12 +46,12 @@
                                         <td class="product"><a href="single-product.html">{{$l->produk->produk_name}}</a></td>
                                         <td class="ptice">{{$l->produk->produk_price}}</td>
                                         @if ($l->produk->stock != 0)
-                                        <td class="stock">In Stock</td>
+                                            <td class="stock">In Stock</td>
                                         @else
-                                        <td class="stock">Out Stock</td>
+                                            <td class="stock">Out Stock</td>
                                         @endif
                                         <td class="addcart"><a href="cart.html">Add to Cart</a></td>
-                                        <td class="remove"><a href="{{action('member\\ChartController@delete_wishlist', $l->id)}}"><i class="fa fa-times"></i></a></td>
+                                        <td class="remove"><a href="{{route('member.wishlist.delete', $l->id)}}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
