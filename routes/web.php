@@ -20,10 +20,6 @@ Route::get('/', function () {
 });
 
 //FrontController
-Route::get('/category', 'member\\FrontController@category')->name('category');
-Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');
-Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
-Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');
 Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
 
@@ -33,8 +29,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
-Route::get('/admin/home', 'Admin\\HomeController@index')->name('admin.home')->middleware('auth');
-Route::get('/superadmin/home', 'Superadmin\\HomeController@index')->name('superadmin.home')->middleware('auth');
+Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
+Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
 // auth superadmin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
@@ -68,14 +64,28 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 	});
 });
 
+// auth
+Route::group(['middleware' => ['auth']], function () {
+	Route::post('/member/addwishlist', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
+	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
+	Route::get('/category', 'member\\FrontController@category')->name('category');
+	Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');
+	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
+	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
+});
+
 // without auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
+		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});
 	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
-		Route::get('produk_newest', 'ContentController@buy')->name('.produk_newest');
+		Route::get('produk_newest', 'ContentController@produk_newest')->name('.produk_newest');
+		Route::get('hot_promo', 'ContentController@hot_promo')->name('.hot_promo');
+		Route::get('populer', 'ContentController@populer')->name('.populer');
+		Route::get('recommended', 'ContentController@recommended')->name('.recommended');
 	});
 });
 

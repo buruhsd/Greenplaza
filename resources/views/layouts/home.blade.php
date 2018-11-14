@@ -9,7 +9,8 @@
     @include('frontend.plugin.slider')
     @include('frontend.plugin.banner-1')
     <!-- .product-area start -->
-    @include('frontend.content.content-1')
+    {{-- @include('frontend.content.content-1') --}}
+    {!! Plugin::produk_newest()!!}
     <!-- .product-area end -->
     
     <!-- .product-area start -->

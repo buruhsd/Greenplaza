@@ -122,7 +122,7 @@ class Plugin
         $pid = 0;
         $perPage = 8;
         extract($param);
-        $data['produk_newest'] = Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+        $data['produk_newest'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
         return view('frontend.content.content-1', $data);
     }
     
@@ -131,8 +131,11 @@ class Plugin
     * @return
     */
     public static function content_brand($param=[]){
+        $pid = 0;
+        $perPage = 8;
         extract($param);
-        return view('frontend.content.content-brand');
+        $data['brand'] = App\Models\Brand::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+        return view('frontend.content.content-brand', $data);
     }
 
 }

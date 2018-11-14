@@ -4,11 +4,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="brand-active owl-carousel">
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="{{ asset('frontend/images/brand/1.jpg') }}" alt="">
-                            </a>
-                        </div>
+                        @if($brand->count() == 0)
+                        @else
+                            @foreach($brand as $item)
+                                <div class="brand-items">
+                                    <a href="{{$item->brand_name}}">
+                                        <img src="{{ asset('frontend/images/brand/'.$item->brand_image) }}" alt="{{$item->brand_name}}">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
                         <div class="brand-items">
                             <a href="#">
                                 <img src="{{ asset('frontend/images/brand/2.jpg') }}" alt="">
