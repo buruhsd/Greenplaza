@@ -106,5 +106,10 @@ class FrontController extends Controller
         return view('frontend.detail', compact('detail'));
     }
 
+    public function admin(){
+        return view('admin.dashboard.dashboard');
+
+    }
+
 }
  
