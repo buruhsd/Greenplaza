@@ -372,7 +372,7 @@
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
-                            <li><a href="index.html">Home </a></li>
+                            <li><a href="{{route('home')}}">Home </a></li>
                             <li><a href="about.html">About</a></li>
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                 <ul>

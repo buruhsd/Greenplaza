@@ -21,3 +21,4 @@
     <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
