@@ -42,7 +42,7 @@
                                 <tbody>
                                     @foreach ($list as $l)
                                     <tr>
-                                        <td class="images"><img src="{{ asset('img_produk/'.$l->produk->produk_image) }}" alt=""></td>
+                                        <td class="images"><img src="{{ asset('assets/images/product/'.$l->produk->produk_image) }}" alt=""></td>
                                         <td class="product"><a href="single-product.html">{{$l->produk->produk_name}}</a></td>
                                         <td class="ptice">{{$l->produk->produk_price}}</td>
                                         @if ($l->produk->stock != 0)

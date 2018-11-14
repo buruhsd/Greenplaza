@@ -70,7 +70,7 @@ class BrandController extends Controller
         $res = new Brand;
         $res->brand_name = $request->brand_name;
         $res->brand_image = date("d-M-Y_H-i-s").'_'.$request->brand_image->getClientOriginalName();
-        $request->brand_image->move(public_path('img_brand'),$res->brand_image);
+        $request->brand_image->move(public_path('assets/images/brand'),$res->brand_image);
         $res->brand_slug = $request->brand_slug;
         $req->brand_note = $request->brand_note;
         $req->save();

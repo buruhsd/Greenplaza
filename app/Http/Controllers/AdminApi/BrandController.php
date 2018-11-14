@@ -38,7 +38,7 @@ class BrandController extends Controller
         $res = new Brand;
         $res->brand_name = $request->brand_name;
         $res->brand_image = date("d-M-Y_H-i-s").'_'.$request->brand_image->getClientOriginalName();
-        $request->brand_image->move(public_path('img_brand'),$res->brand_image);
+        $request->brand_image->move(public_path('assets/images/brand'),$res->brand_image);
         $res->brand_slug = $request->brand_slug;
         $res->brand_note = $request->brand_note;
         $res->save();
@@ -69,7 +69,7 @@ class BrandController extends Controller
         $brand = Brand::findOrFail($id);
         $brand->brand_name = $request->brand_name;
         $brand->brand_image = date("d-M-Y_H-i-s").'_'.$request->brand_image->getClientOriginalName();
-        $request->brand_image->move(public_path('img_brand'),$res->brand_image);
+        $request->brand_image->move(public_path('assets/images/brand'),$res->brand_image);
         $brand->brand_slug = $request->brand_slug;
         $brand->brand_note = $request->brand_note;
         $brand->save();

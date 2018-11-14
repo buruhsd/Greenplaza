@@ -11,7 +11,7 @@
                             <div class="col-lg-12 col-12 order-2">
                                 <div class="about-img black-opacity" style="position: relative;">
                                     <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
-                                    <img src="{{ asset('img_user_store_bg/sepatu.jpg') }}" alt="" style="height: 400px">
+                                    <img src="{{ asset('assets/images/bg_etalase/sepatu.jpg') }}" alt="" style="height: 400px">
                                 </div>
                             </div>
                         </div>

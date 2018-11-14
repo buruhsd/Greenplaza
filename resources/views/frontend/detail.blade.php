@@ -15,12 +15,12 @@
                                 <div class="product-single-img">
                                     <div class="product-single-active owl-carousel">
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
+                                            <img src="{{ asset('assets/images/product/'.$detail->produk_image) }}" alt="">
                                         </div>
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
+                                            <img src="{{ asset('assets/images/product/'.$detail->produk_image) }}" alt="">
                                         </div>
                                     </div>
                                 </div>

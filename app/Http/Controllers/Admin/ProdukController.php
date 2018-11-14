@@ -91,7 +91,7 @@ class ProdukController extends Controller
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
         $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('img_produk'),$res->produk_image);
+        $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
         $res->produk_note = $request->produk_note;
         $res->save();
         if(!$res){
@@ -178,7 +178,7 @@ class ProdukController extends Controller
         $produk->produk_weight = $request->produk_weight;
         $produk->produk_discount = $request->produk_discount;
         $produk->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('img_produk'),$produk->produk_image);
+        $request->produk_image->move(public_path('assets/images/product'),$produk->produk_image);
         $produk->produk_note = $request->produk_note;
         $produk->save();
         $res = $produk->update($requestData);
