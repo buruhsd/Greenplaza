@@ -40,8 +40,8 @@ class FrontController extends Controller
     }
 
     /**
-    *
-    *
+    * @param
+    * @return
     */
     public function category(Request $request)
     {
@@ -55,28 +55,54 @@ class FrontController extends Controller
         return view('frontend.category', $data);
     }
 
+    /**
+    * @param
+    * @return
+    */
     public function detail(Request $request, $id)
     {
         $detail = Produk::where('produk_seller_id', Auth::id())->first();
         return view('frontend.detail', compact('detail'));
     }
 
+    /**
+    * @param
+    * @return
+    */
     public function etalase(Request $request, $id)
     {
         $produk = Produk::find($id);
         return view('frontend.etalase', compact('produk'));
     }
 
+    /**
+    * @param
+    * @return
+    */
     public function reg_seller()
     {
 
         return view('auth.register_green');
     }
 
+    /**
+    * @param
+    * @return
+    */
     public function log_seller()
     {
 
         return view('auth.login_green');
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function brand($slug)
+    {
+        $detail = Produk::where('produk_seller_id', Auth::id())->first();
+        return view('frontend.detail', compact('detail'));
     }
 
 }
