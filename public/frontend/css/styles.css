@@ -148,14 +148,17 @@ div {
 .black-opacity {
     position: relative;
     z-index: 9;
+
 }
 
 .black-opacity:before {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    width: 300px;
+    height: 300px;
     background: #000;
     content: "";
     opacity: .30;
@@ -1150,11 +1153,15 @@ ul.rating li {
     position: relative;
     overflow: hidden;
     display: block;
+
 }
 
 .product-img.black-opacity:before {
     z-index: 9;
-    opacity: .2;
+    opacity: .1;
+    height: 300px;
+    width: 300px;
+
 }
 
 .product-wrap .product-img img.second {
@@ -1165,11 +1172,14 @@ ul.rating li {
 
 .product-wrap .product-img img {
     display: block;
-    height: 100%;
+    height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    
     transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
     -webkit-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
     -moz-transition: all 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-    width: 100%;
+    width: 300px;
 }
 
 .product-wrap:hover .product-img img.second,
