@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
-                                    <h3><a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"> {{$detail->user->user_store}}</h3>
+                                    <a href=""><h3> </h3></a>
                                     <div class="rating-wrap fix">
                                         <span class="pull-left">{{$detail->produk_price}}</span>
                                         <ul class="rating pull-right">
