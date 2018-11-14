@@ -27,9 +27,16 @@
                         
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="javascript:void(0)" id="collapsed-sidebar-toggle-button"><i class="fa fa-bars"></i></a></li>
                                     <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
-                                    <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
+                                    <li style="margin: 15px;"><form action="#" method="GET">
+                                            <div class="panel-heading clearfix" style="margin-bottom: 10px;">
+                                                <div class="input-group pull-left" style="width: 500px;">
+                                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                                    <input type="text" class="form-control" placeholder="Cari Nama Produk" name="search" value=""  id="search_table_currency">
+                                                </div>
+                                              </div> 
+                                        </form>
+                                        </li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>

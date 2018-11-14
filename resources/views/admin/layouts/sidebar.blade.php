@@ -2,7 +2,7 @@
             <!-- Page Sidebar -->
             <div class="page-sidebar">
                 <a class="logo-box" href="index.html">
-                    <span>Space</span>
+                    <span>Greenplaza</span>
                     <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
                     <i class="icon-close" id="sidebar-toggle-button-close"></i>
                 </a>
@@ -10,110 +10,107 @@
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
                             <li class="active-page">
-                                <a href="index.html">
+                                <a href="#">
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="email.html">
-                                    <i class="menu-icon icon-inbox"></i><span>Email</span>
+                                <a href="#">
+                                    <i class="menu-icon icon-voice_chat"></i><span>Live Chat</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon icon-inbox"></i><span>Email Sender</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="menu-icon icon-fire"></i><span>Hot Promo</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-flash_on"></i><span>UI Kits</span><i class="accordion-icon fa fa-angle-left"></i>
+                                    <i class="menu-icon icon-live_tv"></i><span>Monitoring</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="ui-alerts.html">Alerts</a></li>
-                                    <li><a href="ui-buttons.html">Buttons</a></li>
-                                    <li><a href="ui-icons.html">Icons</a></li>
-                                    <li><a href="ui-typography.html">Typography</a></li>
-                                    <li><a href="ui-notifications.html">Notifications</a></li>
-                                    <li><a href="ui-modals.html">Modals</a></li>
-                                    <li><a href="ui-progress.html">Progress Bars</a></li>
-                                    <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a></li>
-                                    <li><a href="ui-tree-view.html">Tree View</a></li>
-                                    <li><a href="ui-nestable.html">Nestable</a></li>
+                                    <li><a href="#">Laporan</a></li>
+                                    <li><a href="#">Profit</a></li>
+                                    <li><a href="#">Wallet</a></li>
+                                    <li><a href="#">Wallet Pin Code</a></li>
+                                    <li><a href="#">Wallet Saldo Iklan</a></li>
+                                    <li><a href="#">Log Aktivitas</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-layers"></i><span>Layouts</span><i class="accordion-icon fa fa-angle-left"></i>
+                                    <i class="menu-icon icon-layers"></i><span>Need Approval</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="layout-blank.html">Blank Page</a></li>
-                                    <li><a href="layout-boxed.html">Boxed Layout</a></li>
-                                    <li><a href="layout-collapsed-sidebar.html">Collapsed Sidebar</a></li>
-                                    <li><a href="layout-fixed-header.html">Fixed Header</a></li>
-                                    <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                                    <li><a href="layout-fixed-sidebar-header.html">Fixed Sidebar &amp; Header</a></li>
+                                    <li><a href="#">Transaksi Barang</a></li>
+                                    <li><a href="#">Transaksi Hot List</a></li>
+                                    <li><a href="#">Transaksi Pin Code</a></li>
+                                    <li><a href="#">Akun Member</a></li>
+                                    <li><a href="#">Brand</a></li>
+                                    <li><a href="#">Iklan Banner Khusus</a></li>
+                                    <li><a href="#">Iklan Banner Seller</a></li>
+                                    <li><a href="#">Iklan Baris Seller</a></li>
+                                    <li><a href="#">Iklan Banner Pembeli</a></li>
+                                    <li><a href="#">Iklan Baris Pembeli</a></li>
+                                    <li><a href="#">Produk</a></li>
+                                    <li><a href="#">Request Saldo Iklan</a></li>
+                                    <li><a href="#">Withdrawal Seller</a></li>
+                                    <li><a href="#">Withdrawal Member</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-code"></i><span>Forms</span><i class="accordion-icon fa fa-angle-left"></i>
+                                    <i class="menu-icon icon-cog"></i><span>Konfigurasi</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="form-elements.html">Elements</a></li>
-                                    <li><a href="form-wizard.html">Form Wizard</a></li>
-                                    <li><a href="form-file-upload.html">File Upload</a></li>
-                                    <li><a href="form-image-crop.html">Image Crop</a></li>
-                                    <li><a href="form-image-zoom.html">Image Zoom</a></li>
-                                    <li><a href="form-x-editable.html">X-editable</a></li>
+                                    <li><a href="#">Setting Produk</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Kategori Produk</a></li>
+                                            <li><a href="#">Sub 1 Kategori Produk</a></li>
+                                            <li><a href="#">Sub-sub Kategori Produk</a></li>
+                                        </ul></li>
+                                    <li><a href="#">Setting Harga</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Paket Reg Seller</a></li>
+                                            <li><a href="#">Harga Iklan (Iklan Greenplaza)</a></li>
+                                            <li><a href="#">Harga Beli Saldo Iklan</a></li>
+                                        </ul></li>
+                                    <li><a href="#">Setting Iklan</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Iklan Slider</a></li>
+                                            <li><a href="#">Iklan Banner Khusus</a></li>
+                                        </ul></li>
+                                    <li><a href="#">Setting Transaksi</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Jeda Waktu Transaksi</a></li>
+                                            <li><a href="#">Fee Transaksi</a></li>
+                                            <li><a href="#">Pajak</a></li>
+                                        </ul></li>
+                                    <li><a href="#">Profil Greenplaza</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Profil Greenplaza</a></li>
+                                            <li><a href="#">Official Email</a></li>
+                                            <li><a href="#">Bank</a></li>
+                                        </ul></li>
+                                    <li><a href="#">Setting Akun</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Tambah Akun Admin</a></li>
+                                            <li><a href="#">Grade Member</a></li>
+                                            <li><a href="#">Grade Seller</a></li>
+                                            <li><a href="#">Page List</a></li>
+                                            <li><a href="#">Update Password Admin</a></li>
+                                        </ul></li>
                                 </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-format_list_bulleted"></i><span>Tables</span><i class="accordion-icon fa fa-angle-left"></i>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li><a href="table-static.html">Static</a></li>
-                                    <li><a href="table-responsive.html">Responsive</a></li>
-                                    <li><a href="table-data.html">Data Tables</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="charts.html">
-                                    <i class="menu-icon icon-show_chart"></i><span>Charts</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-my_location"></i><span>Maps</span><i class="accordion-icon fa fa-angle-left"></i>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li><a href="maps-google.html">Google</a></li>
-                                    <li><a href="maps-vector.html">Vector</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-star"></i><span>Extra</span><i class="accordion-icon fa fa-angle-left"></i>
-                                </a>
-                                <ul class="sub-menu">
-                                    <li><a href="invoice.html">Invoice</a></li>
-                                    <li><a href="404.html">404 Page</a></li>
-                                    <li><a href="500.html">500 Page</a></li>
-                                    <li><a href="profile.html">Profile</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="lockscreen.html">Lockscreen</a></li>
-                                    <li><a href="todo.html">Todo</a></li>
-                                    <li><a href="gallery.html">Gallery</a></li>
-                                    <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                                    <li><a href="timeline.html">Timeline</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-divider"></li>
-                            <li>
-                                <a href="index.html">
-                                    <i class="menu-icon icon-help_outline"></i><span>Documentation</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="index.html">
-                                    <i class="menu-icon icon-public"></i><span>Changelog</span><span class="label label-danger">1.0</span>
-                                </a>
                             </li>
                         </ul>
                     </div>
