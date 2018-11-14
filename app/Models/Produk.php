@@ -76,4 +76,14 @@ class Produk extends Model
     {
         return $this->hasMany('App\Models\Produk_grosir', 'produk_grosir_produk_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function wishlist()
+    {
+        return $this->hasMany('App\Models\Wishlist', 'wishlist_produk_id');
+    }
 }
