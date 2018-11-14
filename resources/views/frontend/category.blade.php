@@ -92,7 +92,7 @@
                                                 <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a href="{{action('member\\FrontController@detail', $item->id)}}"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                     </ul>

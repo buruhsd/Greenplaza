@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Category;
+use App\User;
+use Auth;
 use FunctionLib;
 
 class FrontController extends Controller
@@ -55,7 +57,8 @@ class FrontController extends Controller
 
     public function detail(Request $request, $id)
     {
-        $detail = Produk::find($id);
+        $detail = Produk::where('produk_seller_id', Auth::id())->first();
+        dd($detail);
         return view('frontend.detail', compact('detail'));
     }
 

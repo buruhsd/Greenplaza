@@ -11,51 +11,24 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="product-single-img">
                                     <div class="product-single-active owl-carousel">
+                                        @foreach ($detail as $d)
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
+                                            <img src="{{ asset('img_produk/'.$d->produk_image) }}" alt="">
                                         </div>
-                                        <p>{{$detail->produk_image}}</p>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/2.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/3.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/4.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/5.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/6.jpg') }}" alt="">
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
+                                        @foreach ($detail as $d)
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/1.jpg') }}" alt="">
+                                            <img src="{{ asset('img_produk/'.$d->produk_image) }}" alt="">
                                         </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/2.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/3.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/4.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/5.jpg') }}" alt="">
-                                        </div>
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('frontend/images/product/product-details/6.jpg') }}" alt="">
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
-                                    <a href=""><h3> </h3></a>
+                                    <a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"><h3>{{$detail->user->user_store}}</h3></a>
                                     <div class="rating-wrap fix">
                                         <span class="pull-left">{{$detail->produk_price}}</span>
                                         <ul class="rating pull-right">
