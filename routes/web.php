@@ -72,6 +72,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
+
+	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
+	Route::get('/wishlist', 'member\\ChartController@wishlist')->name('wishlist');
 });
 
 // without auth

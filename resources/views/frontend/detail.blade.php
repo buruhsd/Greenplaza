@@ -1,6 +1,7 @@
-@extends('layouts.index')
-@section('title', 'Page Title')
+@extends('layouts.index', ['active' => 'detail'])
+@section('title', 'Detail')
 @section('content')
+
 <!-- .shop-page-area start -->
     <div class="shop-single-area">
         <div class="container">
@@ -11,18 +12,14 @@
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="product-single-img">
                                     <div class="product-single-active owl-carousel">
-                                        @foreach ($detail as $d)
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('img_produk/'.$d->produk_image) }}" alt="">
+                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
                                         </div>
-                                        @endforeach
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
-                                        @foreach ($detail as $d)
                                         <div class="item black-opacity">
-                                            <img src="{{ asset('img_produk/'.$d->produk_image) }}" alt="">
+                                            <img src="{{ asset('img_produk/'.$detail->produk_image) }}" alt="">
                                         </div>
-                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -42,10 +39,15 @@
                                     </div>
                                     <p>{{$detail->produk_note}}</p>
                                     <ul class="input-style">
-                                        <li class="quantity cart-plus-minus">
-                                            <input type="text" value="1" />
-                                        </li>
-                                        <li><a href="cart.html">Add to Cart</a></li>
+                                        <div class="col-md-12">
+                                            <li class="quantity cart-plus-minus" style="width: 100%; margin-bottom: 2%">
+                                                <input type="text" value="1" />
+                                            </li>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <center><li><a href="{{action('member\\ChartController@wishlist')}}">Add to Wishlist</a></li>
+                                            <li><a href="{{action('member\\ChartController@chart')}}">Add to Cart</a></li></center>
+                                        </div>
                                     </ul>
                                     <ul class="cetagory">
                                         <li>Categories:</li>
