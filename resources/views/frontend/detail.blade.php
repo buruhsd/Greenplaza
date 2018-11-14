@@ -2,10 +2,12 @@
 @section('title', 'Detail')
 @section('content')
 
+
 <!-- .shop-page-area start -->
     <div class="shop-single-area">
         <div class="container">
             <div class="row revarce-wrap">
+                @include('layouts._flash')
                 <div class="col-9 col-lg-9 col-12">
                     <div class="shop-area">
                         <div class="row mb-30">
@@ -45,7 +47,7 @@
                                             </li>
                                         </div>
                                         <div class="col-md-12">
-                                            <center><li><a href="{{action('member\\ChartController@wishlist')}}">Add to Wishlist</a></li>
+                                            <center><li><a href="{{action('member\\ChartController@wishlist_add')}}">Add to Wishlist</a></li>
                                             <li><a href="{{action('member\\ChartController@chart')}}">Add to Cart</a></li></center>
                                         </div>
                                     </ul>
@@ -420,6 +422,23 @@
         </div>
     </div>
     <!-- .shop-page-area enc -->
+    <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog" style="margin-top: 5%">
+      <div class="modal-content">
+        <!-- Modal body -->
+        <button type="button" class="close" data-dismiss="modal" style="color: green">&times;</button>
+        <div class="modal-body" style="margin-top: 5%; margin-bottom: 3%">
+            <center>Berhasil Menambahkan Produk ke Wishlist <i class="fa fa-heart"></i></center>
+        </div>
+      </div>
+    </div>
+  </div>
+@endsection
+@section('script')
+    <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js') }}"></script>
 @endsection
 
 {!! (isset($footer_script))? $footer_script:'' !!}

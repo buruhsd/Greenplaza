@@ -82,7 +82,7 @@
                                     <li><a href="single-product.html">Product Details</a></li>
                                     <li><a href="cart.html">Shopping cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="{{action('member\\ChartController@wishlist')}}">Wishlist</a></li>
                                 </ul>
                             </li>
                             <li class="sidemenu-items"><a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
@@ -91,7 +91,7 @@
                                     <li><a href="Single-product.html">Product Details</a></li>
                                     <li><a href="cart.html">Shopping cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="{{action('member\\ChartController@wishlist')}}">Wishlist</a></li>
                                 </ul>
                             </li>
                             <li class="sidemenu-items"><a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>

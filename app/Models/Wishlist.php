@@ -34,6 +34,6 @@ class Wishlist extends Model
     */
     public function produk()
     {
-        return $this->belongsTo('App\User', 'wishlist_produk_id');
+        return $this->belongsTo('App\Models\Produk', 'wishlist_produk_id');
     }
 }

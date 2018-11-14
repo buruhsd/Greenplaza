@@ -73,8 +73,11 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
+//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
 	Route::get('/wishlist', 'member\\ChartController@wishlist')->name('wishlist');
+	Route::get('/wishlist_add', 'member\\ChartController@wishlist_add')->name('wishlist_add');
+	Route::get('/delete_wishlist/{id}', 'member\\ChartController@delete_wishlist')->name('delete_wishlist');
 });
 
 // without auth

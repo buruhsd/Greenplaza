@@ -61,7 +61,7 @@ class FrontController extends Controller
     */
     public function detail(Request $request, $id)
     {
-        $detail = Produk::where('produk_seller_id', Auth::id())->first();
+        $detail = Produk::find($id);
         return view('frontend.detail', compact('detail'));
     }
 

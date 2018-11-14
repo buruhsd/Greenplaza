@@ -40,30 +40,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($list as $l)
                                     <tr>
-                                        <td class="images"><img src="assets/images/cart/2.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Modern and Wanderful chair</a></td>
-                                        <td class="ptice">$139.00</td>
+                                        <td class="images"><img src="{{ asset('img_produk/'.$l->produk->produk_image) }}" alt=""></td>
+                                        <td class="product"><a href="single-product.html">{{$l->produk->produk_name}}</a></td>
+                                        <td class="ptice">{{$l->produk->produk_price}}</td>
+                                        @if ($l->produk->stock != 0)
                                         <td class="stock">In Stock</td>
+                                        @else
+                                        <td class="stock">Out Stock</td>
+                                        @endif
                                         <td class="addcart"><a href="cart.html">Add to Cart</a></td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
+                                        <td class="remove"><a href="{{action('member\\ChartController@delete_wishlist', $l->id)}}"><i class="fa fa-times"></i></a></td>
                                     </tr>
-                                    <tr>
-                                        <td class="images"><img src="assets/images/cart/3.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Wooden Pot</a></td>
-                                        <td class="ptice">$684.47</td>
-                                        <td class="stock"><span>Out Stock</span></td>
-                                        <td class="addcart"><a href="cart.html">Add to Cart</a></td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="images"><img src="assets/images/cart/4.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Wonderful Light</a></td>
-                                        <td class="ptice">$145.80</td>
-                                        <td class="stock">In Stock</td>
-                                        <td class="addcart"><a href="cart.html">Add to Cart</a></td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </form>
