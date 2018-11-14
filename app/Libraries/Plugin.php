@@ -138,4 +138,16 @@ class Plugin
         return view('frontend.content.content-brand', $data);
     }
 
+    /**
+    * @param
+    * @return
+    */
+    public static function category($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['category'] = App\Models\Category::where('category_parent_id', 0)->get();
+        return view('frontend.plugin.category', $data);
+    }
+
 }
