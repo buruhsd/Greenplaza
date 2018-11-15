@@ -64,7 +64,6 @@ class RajaOngkir extends Controller
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_POSTFIELDS => json_encode($data),
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "key: ".$this->__api_key
@@ -99,7 +98,7 @@ class RajaOngkir extends Controller
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_POSTFIELDS => http_build_query($data),
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
                 "key: ".$this->__api_key
@@ -125,10 +124,9 @@ class RajaOngkir extends Controller
     public function cost($param= []){
         extract($param);
         $url = "http://pro.rajaongkir.com/api/cost";
-        if(isset($param['id'])){
-            $url = "http://pro.rajaongkir.com/api/cost?city=".$param['id'];
+        if(isset($id)){
+            $url = "http://pro.rajaongkir.com/api/cost?city=".$id;
         }
-        $data = $param['data'];
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
@@ -137,7 +135,7 @@ class RajaOngkir extends Controller
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_POSTFIELDS => http_build_query($data),
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_HTTPHEADER => array(
                 "key: ".$this->__api_key

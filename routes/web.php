@@ -77,12 +77,15 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/wishlist/delete/{id}', 'member\\WishlistController@destroy')->name('member.wishlist.delete');
 	//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
+	Route::get('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
 });
 
 // without auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
+	Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
+		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

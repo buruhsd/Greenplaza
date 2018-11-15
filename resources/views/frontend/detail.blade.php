@@ -29,7 +29,12 @@
                                 <div class="product-single-content">
                                     <a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"><h3>{{$detail->user->user_store}}</h3></a>
                                     <div class="rating-wrap fix">
-                                        <span class="pull-left">{{$detail->produk_price}}</span>
+                                        @if($detail->produk_discount > 0)
+                                            <span class="pull-left">{{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
+                                            <del class="text-danger">{{FunctionLib::number_to_text($detail->produk_price)}}</del>
+                                        @else
+                                            <span class="pull-left">{{FunctionLib::number_to_text($detail->produk_price)}}</span>
+                                        @endif
                                         <ul class="rating pull-right">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -46,13 +51,44 @@
                                                 <input type="text" value="1" />
                                             </li>
                                         </div>
+                                        {!! Form::open(['url' => '#', 'method' => 'POST', 'id' => 'form-shipment']) !!}
+                                        @csrf
+                                        <div class="col-md-12">
+                                            <center>
+                                                <li class="col-12">
+                                                    <select name="courier" class="form-control">
+                                                        @foreach($shipment_type as $item)
+                                                            <option value="{{ strtolower($item->shipment_name) }}">{{$item->shipment_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </li>
+                                            </center>
+                                        </div>
+                                        <div class="col-md-12" id="shipment-price" style="margin-bottom: 2%">
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                            <center>
+                                                <input type="text" name="origin" value="398" hidden/>
+                                                <input type="text" name="originType" value="subdistrict" hidden/>
+                                                <input type="text" name="destination" value="398" hidden/>
+                                                <input type="text" name="destinationType" value="subdistrict" hidden/>
+                                                <input type="text" name="weight" value="100" hidden/>
+                                                <input type="text" name="lenght" value="10" hidden/>
+                                                <input type="text" name="width" value="10" hidden/>
+                                                <input type="text" name="height" value="10" hidden/>
+                                                <li class="col-12">
+                                                    <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success col-12" value="Choose Shipment" />
+                                                </li>
+                                            </center>
+                                        </div>
+                                        {!! Form::close() !!}
                                         <div class="col-md-12">
                                             <center>
                                                 <li>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}}>Add to Wishlist</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{action('member\\ChartController@chart')}}">Add to Cart</a>
+                                                    <a href="{{route("addchart", $detail->id)}}">Add to Cart</a>
                                                 </li>
                                             </center>
                                         </div>
@@ -441,6 +477,25 @@
       </div>
     </div>
   </div>
+    <script type="text/javascript">
+        function get_ongkir(){
+            $.ajax({
+                type: "POST", // or post?
+                url: "{{route("localapi.choose_shipment", $detail->id)}}", // change as needed
+                data: $("#form-shipment").serialize(), // change as needed
+                success: function(data) {
+                    if (data) {
+                        $('#shipment-price').empty().append(data);
+                    } else {
+                        alert(data);
+                    }
+                },
+                error: function(xhr, textStatus) {
+                    alert(xhr.status+'\n'+textStatus);
+                }
+            });
+        }
+    </script>
 @endsection
 @section('script')
     <script src="{{ asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js') }}"></script>

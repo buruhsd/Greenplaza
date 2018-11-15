@@ -93,8 +93,8 @@
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="{{action('member\\FrontController@detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="{{route("detail", $item->id)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
