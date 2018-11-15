@@ -30,10 +30,10 @@
                                     <a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"><h3>{{$detail->user->user_store}}</h3></a>
                                     <div class="rating-wrap fix">
                                         @if($detail->produk_discount > 0)
-                                            <span class="pull-left">{{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
-                                            <del class="text-danger">{{FunctionLib::number_to_text($detail->produk_price)}}</del>
+                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
+                                            <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del>
                                         @else
-                                            <span class="pull-left">{{FunctionLib::number_to_text($detail->produk_price)}}</span>
+                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span>
                                         @endif
                                         <ul class="rating pull-right">
                                             <li><i class="fa fa-star"></i></li>
@@ -508,6 +508,9 @@
                     });
                 }
             });
+        }
+        function change_ongkir(service, ongkir){
+            console.log(service, ongkir);
         }
     </script>
 @endsection
