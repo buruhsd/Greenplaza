@@ -66,26 +66,22 @@ class WishlistController extends Controller
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
-    public function addChart ()
+    public function moveToChart ()
     {
         $status = 200;
         $message = 'moved to chart';
 
         $bank = Bank::where('user_bank_user_id', Auth::id())->first();
         $pay = Payment::where('payment_name', Auth::id()->name)->first();
+        $produk = Produk::where('produk_seller_id', Auth::id())->first();
 
         $trans->trans_code = FunctionLib::str_rand(6);
         $trans->trans_user_id = Auth::id()->id;
-        $trans->trans_user_bank_id = $bank->user_bank_user_id;
-        $trans->trans_payment_id = $pay->id;
         $trans->trans_paid_image = $request->trans_paid_image;
-        $trans->trans_paid_date = $request->trans_paid_date;
-        $trans->trans_paid_note = $request->trans_paid_note;
-        $trans->trans_amount = $
-        $trans->trans_amount_ship = 
-        $trans->trans_amount_total =
-        $trans->trans_note = 
+        $trans->
         $trans->save();
+
+        return redirect()->back();
     }
 
     /**

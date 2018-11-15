@@ -50,7 +50,7 @@
                                         @else
                                             <td class="stock">Out Stock</td>
                                         @endif
-                                        <td class="addcart"><a href="cart.html">Add to Cart</a></td>
+                                        <td class="addcart"><a href="{{route('member.wishlist.moveToChart', $l->id)}}">Add to Cart</a></td>
                                         <td class="remove"><a href="{{route('member.wishlist.delete', $l->id)}}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                     @endforeach

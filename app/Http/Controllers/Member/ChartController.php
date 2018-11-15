@@ -17,6 +17,11 @@ class ChartController extends Controller
         return view('frontend.chart');
     }
 
+    public function checkout()
+    {
+        return view('frontend.checkout');
+    }
+
     /**
     *
     *

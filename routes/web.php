@@ -74,9 +74,12 @@ Route::group(['middleware' => ['auth']], function () {
 	//wishlishController
 	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');
 	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
+	Route::get('/member/addToChart', 'member\\WishlistController@moveToChart')->name('member.wishlist.moveToChart');
 	Route::get('/member/wishlist/delete/{id}', 'member\\WishlistController@destroy')->name('member.wishlist.delete');
+
 	//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
+	Route::get('/checkout', 'member\\ChartController@checkout')->name('member.checkout');
 	Route::get('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
 });
 
