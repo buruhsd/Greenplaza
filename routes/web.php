@@ -24,12 +24,17 @@ Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('regi
 Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
 Route::get('/dashboard', 'member\\FrontController@admin')->name('dashboard');
 
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
+Route::get('email_sender', 'Admin\\FrontController@email_sender')->name('email_sender');
+Route::get('res_kom', 'Admin\\FrontController@res_kom')->name('resolusi_komplain');
+Route::get('hot_promo', 'Admin\\FrontController@hot_promo')->name('hot_promo');
+Route::get('live_chat', 'Admin\\FrontController@live_chat')->name('live_chat');
 
 // auth superadmin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
