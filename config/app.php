@@ -164,6 +164,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\RajaOngkirServiceProvider::class,
 
+        Unisharp\Ckeditor\ServiceProvider::class,
+
     ],
 
     /*
