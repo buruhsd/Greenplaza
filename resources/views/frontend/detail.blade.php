@@ -84,11 +84,11 @@
                                         {!! Form::close() !!}
                                         <div class="col-md-12">
                                             <center>
-                                                <li>
-                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}}>Add to Wishlist</a>
+                                                <li class="col-4">
+                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-success btn-sm" />
                                                 </li>
-                                                <li>
-                                                    <a href="{{route("addchart", $detail->id)}}">Add to Cart</a>
+                                                <li class="col-4">
+                                                    <input type="button" href="{{route("addchart", $detail->id)}}" value="Add to Cart" class="btn btn-success btn-sm">
                                                 </li>
                                             </center>
                                         </div>
@@ -487,11 +487,25 @@
                     if (data) {
                         $('#shipment-price').empty().append(data);
                     } else {
-                        alert(data);
+                        swal({   
+                            type: "error",
+                            title: "failed",   
+                            text: "Layanan Tidak Tersedia",   
+                            showConfirmButton: false ,
+                            showCloseButton: true,
+                            footer: ''
+                        });
                     }
                 },
                 error: function(xhr, textStatus) {
-                    alert(xhr.status+'\n'+textStatus);
+                    swal({
+                        type: "error",
+                        title: "failed",   
+                        text: "Layanan Tidak Tersedia",   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
                 }
             });
         }

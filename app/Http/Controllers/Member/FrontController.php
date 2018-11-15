@@ -62,7 +62,9 @@ class FrontController extends Controller
     */
     public function detail(Request $request, $id)
     {
-        $data['shipment_type'] = Shipment::all();
+        $data['shipment_type'] = Shipment::where('shipment_is_usable', 1)
+            ->where('shipment_parent_id', 0)
+            ->get();
         $data['detail'] = Produk::where('produk_seller_id', Auth::id())->first();
         return view('frontend.detail', $data);
     }
