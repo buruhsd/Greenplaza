@@ -37,4 +37,27 @@ class FrontController extends Controller
 
         return view('home');
     }
+
+     public function email_sender()
+    {
+
+        return view('admin.email-sender.email_sender');
+    }
+
+    public function res_kom()
+    {
+
+        return view('admin.resolusi_komplain.res_kom');
+    }
+
+    public function hot_promo()
+    {
+
+        return view('admin.hot_promo.hot_promo');
+    }
+
+    public function live_chat()
+    {
+        return view('admin.transaksi.laporan_transaksi');
+    }
 }
