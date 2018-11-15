@@ -96,7 +96,7 @@
                                 <div class="single-product-menu">
                                     <ul class="nav">
                                         <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
-                                        <li><a data-toggle="tab" href="#tag">Faq</a></li>
+                                        <li><a data-toggle="tab" href="#faq">Faq</a></li>
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
                                     </ul>
                                 </div>
@@ -105,11 +105,11 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="description">
                                         <div class="description-wrap">
-                                            <p>we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. </p>
-                                            <p>These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. </p>
+                                            <h4>Keterangan</h4>
+                                            {{$detail->produk_note}}
                                         </div>
                                     </div>
-                                    <div class="tab-pane" id="tag">
+                                    <div class="tab-pane" id="faq">
                                         <div class="faq-wrap" id="accordion">
                                             <div class="card">
                                                 <div class="card-header" id="headingOne">

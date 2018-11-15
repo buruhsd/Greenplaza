@@ -15,5 +15,13 @@ class ChartController extends Controller
     {
         return view('frontend.chart');
     }
+
+    /**
+    *
+    *
+    **/
+    public function addChart(){
+    	return true;
+    }
     
 }
