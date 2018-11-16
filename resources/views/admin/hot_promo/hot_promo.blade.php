@@ -30,7 +30,11 @@
                                                     
                                                       
                                                         <div class="panel-heading clearfix">
-                                                            <h4 class="panel-title">Hot Promo</h4>
+                                                            <h4>Hot Promo</h4> 
+                                                            <button type="button" class="btn btn-info">Approve<span class="label label-default pull-right">85%</span></button>
+                                                            <button type="button" class="btn btn-info">Belum Approve<span class="label label-default pull-right">85%</span></button>
+                                                            <button type="button" class="btn btn-info">Block<span class="label label-default pull-right">85%</span></button>
+
                                                         </div>
                                                         <div class="panel-body">
                                                             <div class="table-responsive">
