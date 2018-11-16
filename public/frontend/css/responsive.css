@@ -130,6 +130,10 @@
         transition: all .3s;
         -webkit-transition: all .3s;
         -moz-transition: all .3s;
+        overflow: scroll;
+        overflow-x: hidden;
+        height: 10em;
+        line-height: 3em;
     }
     .cetagory-wrap:hover ul {
         visibility: visible;
