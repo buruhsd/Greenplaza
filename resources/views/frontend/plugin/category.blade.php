@@ -20,11 +20,12 @@
 </div> -->
 <div class="col-lg-3 col-md-4 col-sm-6 col-10">
     <div class="cetagory-wrap">
-        <span>All cetagory</span>
+        <span>All Category</span>
         <ul class="cetagory-items">
         	@foreach($category as $item)
         	<li>
             	<a href="{{url('category?cat='.$item->category_slug)}}"><i class="{{$item->category_icon}}"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
+                
         	</li>
         	@endforeach
         </ul>
