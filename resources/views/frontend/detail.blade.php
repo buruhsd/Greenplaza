@@ -30,10 +30,10 @@
                                     <a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"><h3>{{$detail->user->user_store}}</h3></a>
                                     <div class="rating-wrap fix">
                                         @if($detail->produk_discount > 0)
-                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
+                                            <h3 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</h3>
                                             <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del>
                                         @else
-                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span>
+                                            <h3 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</h3>
                                         @endif
                                         <ul class="rating pull-right">
                                             <li><i class="fa fa-star"></i></li>
@@ -44,7 +44,9 @@
                                             <li>(05 Customar Review)</li>
                                         </ul>
                                     </div>
-                                    <p>{{$detail->produk_note}}</p>
+                                    <ul style="width: 100%; margin-bottom: 2%">
+                                        <li><h4>Stock : {{$detail->produk_stock}} </h4></li>
+                                    </ul>
                                     <ul class="input-style">
                                         <div class="col-md-12">
                                             <li class="quantity cart-plus-minus" style="width: 100%; margin-bottom: 2%">
@@ -77,7 +79,7 @@
                                                 <input type="text" name="width" value="10" hidden/>
                                                 <input type="text" name="height" value="10" hidden/>
                                                 <li class="col-12">
-                                                    <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success col-12" value="Choose Shipment" />
+                                                    <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success col-12" value="Choose Shipment" id="btn-choose-shipment" />
                                                 </li>
                                             </center>
                                         </div>
@@ -95,8 +97,7 @@
                                     </ul>
                                     <ul class="cetagory">
                                         <li>Categories:</li>
-                                        <li><a href="#">Chair,</a></li>
-                                        <li><a href="#">Sitting</a></li>
+                                        <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
                                     </ul>
                                     <div class="color-plate">
                                         <p>Color:</p>
@@ -479,6 +480,8 @@
   </div>
     <script type="text/javascript">
         function get_ongkir(){
+            var text = $("#btn-choose-shipment").val();
+            $("#btn-choose-shipment").val("Loading");
             $.ajax({
                 type: "POST", // or post?
                 url: "{{route("localapi.choose_shipment", $detail->id)}}", // change as needed
@@ -496,6 +499,7 @@
                             footer: ''
                         });
                     }
+                    $("#btn-choose-shipment").val(text);
                 },
                 error: function(xhr, textStatus) {
                     swal({
@@ -506,6 +510,7 @@
                         showCloseButton: true,
                         footer: ''
                     });
+                    $("#btn-choose-shipment").val(text);
                 }
             });
         }
