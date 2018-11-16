@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LocalApi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User_address;
 
 class ModalController extends Controller
 {
@@ -27,6 +28,29 @@ class ModalController extends Controller
         $data['id'] = $id;
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.wishlist-note', $data);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pickAddress()
+    {
+        $data['user_address'] = User_address::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.pick-address', $data);
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function addAddress()
+    {
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.address-form', $data);
     }
 
     /**

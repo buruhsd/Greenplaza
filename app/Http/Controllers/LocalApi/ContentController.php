@@ -91,6 +91,33 @@ class ContentController extends Controller
     }
 
     /**
+    * @param
+    * @return
+    */
+    public static function get_address(Request $request, $produk_id){
+        $status = 200;
+        $message = "Choose shipment success.";
+        $requestData = $request->all();
+        extract($requestData);
+        $req = [
+            'user_address_user_id' => Auth::id(),
+            'user_address_label' => $request->label,
+            'user_address_owner' => $request->owner,
+            'user_address_address' => $request->address,
+            'user_address_phone' => $request->phone,
+            'user_address_tlp' => $request->tlp,
+            'user_address_province' => $request->province,
+            'user_address_city' => $request->city,
+            'user_address_subdist' => $request->subdist,
+            'user_address_pos' => $request->pos,
+            'user_address_status' => $request->status,
+            'user_address_note' => $request->note,
+            'created_at' => $request->created_at,
+            'updated_at' => $request->updated_at
+        ];
+    }
+
+    /**
     * @param method $method
     * @return add main footer script / in spesific method
     */

@@ -94,6 +94,8 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
+		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
+		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

@@ -47,14 +47,25 @@
                                     <ul style="width: 100%; margin-bottom: 2%">
                                         <li><h4>Stock : {{$detail->produk_stock}} </h4></li>
                                     </ul>
+                                    {!! Form::open(['url' => '{{route("addchart", $detail->id)}}', 'method' => 'POST', 'id' => 'form-shipment']) !!}
+                                    @csrf
                                     <ul class="input-style">
                                         <div class="col-md-12">
                                             <li class="quantity cart-plus-minus" style="width: 100%; margin-bottom: 2%">
-                                                <input type="text" value="1" />
+                                                <input type="text" name="qty" value="1" />
                                             </li>
                                         </div>
-                                        {!! Form::open(['url' => '#', 'method' => 'POST', 'id' => 'form-shipment']) !!}
-                                        @csrf
+                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                            <center>
+                                                <input type="text" name="origin" value="398" hidden/>
+                                                <input type="text" name="originType" value="subdistrict" hidden/>
+                                                <input type="text" name="destination" value="398" hidden/>
+                                                <input type="text" name="destinationType" value="subdistrict" hidden/>
+                                                <li class="col-12">
+                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress")}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
+                                                </li>
+                                            </center>
+                                        </div>
                                         <div class="col-md-12">
                                             <center>
                                                 <li class="col-12">
@@ -79,22 +90,22 @@
                                                 <input type="text" name="width" value="10" hidden/>
                                                 <input type="text" name="height" value="10" hidden/>
                                                 <li class="col-12">
-                                                    <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success col-12" value="Choose Shipment" id="btn-choose-shipment" />
+                                                    <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Choose Shipment" id="btn-choose-shipment" />
                                                 </li>
                                             </center>
                                         </div>
-                                        {!! Form::close() !!}
                                         <div class="col-md-12">
                                             <center>
                                                 <li class="col-4">
-                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-success btn-sm" />
+                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-info btn-sm" />
                                                 </li>
                                                 <li class="col-4">
-                                                    <input type="button" href="{{route("addchart", $detail->id)}}" value="Add to Cart" class="btn btn-success btn-sm">
+                                                    <input type="button" onclick="$('#form-shipment').submit();" value="Add to Cart" class="btn btn-info btn-sm">
                                                 </li>
                                             </center>
                                         </div>
                                     </ul>
+                                    {!! Form::close() !!}
                                     <ul class="cetagory">
                                         <li>Categories:</li>
                                         <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
