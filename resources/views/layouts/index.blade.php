@@ -9,21 +9,11 @@
         <![endif]-->
     
     @include('layouts.top-header')
-    <div class="breadcumb-area">
-        <div class="container">
-            <div class="row">
-            <div class="col-12">
-                    <div class="breadcumb-wrap bg-1">
-                        
-                    </div>
-            </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- .shop-page-area start -->
     
-                        <!-- @include('layouts.content-1') -->
-                        @yield('content')
+    <!-- @include('layouts.content-1') -->
+    @yield('content')
                    
     <!-- .shop-page-area enc -->
     <!-- footer -->
