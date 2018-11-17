@@ -74,4 +74,49 @@ class FunctionLib
 
     }
 
+    /**
+    * @param
+    * @return
+    **/
+    public static function get_province($id = 0){
+        $data = [];
+        if($id != 0){
+            $data = ['id' => $id];
+        }
+        $province = RajaOngkir::province($data);
+        $province = json_decode($province, true);
+        $province = $province['rajaongkir']['results'];
+        return $province;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function get_city($id = 0){
+        $data = [];
+        if($id != 0){
+            $data = ['id' => $id];
+        }
+        $province = RajaOngkir::city($data);
+        $province = json_decode($province, true);
+        $province = $province['rajaongkir']['results'];
+        return $province;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function get_subdistrict($id = 0){
+        $data = [];
+        if($id != 0){
+            $data = ['id' => $id];
+        }
+        $province = RajaOngkir::subdistrict($data);
+        $province = json_decode($province, true);
+        $province = $province['rajaongkir']['results'];
+        return $province;
+    }
+
 }

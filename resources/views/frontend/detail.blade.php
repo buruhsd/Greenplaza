@@ -47,8 +47,15 @@
                                     <ul style="width: 100%; margin-bottom: 2%">
                                         <li><h4>Stock : {{$detail->produk_stock}} </h4></li>
                                     </ul>
-                                    {!! Form::open(['url' => '{{route("addchart", $detail->id)}}', 'method' => 'POST', 'id' => 'form-shipment']) !!}
+                                    {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
+                                    <input type="text" name="origin" id="origin" value="398" hidden/>
+                                    <input type="text" name="originType" id="originType" value="subdistrict" hidden/>
+                                    <input type="text" name="destination" id="destination" value="" hidden/>
+                                    <input type="text" name="destinationType" id="destinationType" value="subdistrict" hidden/>
+                                    <input type="text" name="weight" value="{{$detail->produk_weight}}" hidden/>
+                                    <input type="text" name="lenght" value="{{$detail->produk_length}}" hidden/>
+                                    <input type="text" name="width" value="{{$detail->produk_wide}}" hidden/>
                                     <ul class="input-style">
                                         <div class="col-md-12">
                                             <li class="quantity cart-plus-minus" style="width: 100%; margin-bottom: 2%">
@@ -57,10 +64,6 @@
                                         </div>
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
-                                                <input type="text" name="origin" value="398" hidden/>
-                                                <input type="text" name="originType" value="subdistrict" hidden/>
-                                                <input type="text" name="destination" value="398" hidden/>
-                                                <input type="text" name="destinationType" value="subdistrict" hidden/>
                                                 <li class="col-12">
                                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress")}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
                                                 </li>
@@ -79,16 +82,10 @@
                                         </div>
                                         <div class="col-md-12" id="shipment-price" style="margin-bottom: 2%">
                                         </div>
+                                        <div class="col-md-12" id="ship-cost" style="margin-bottom: 2%">
+                                        </div>
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
-                                                <input type="text" name="origin" value="398" hidden/>
-                                                <input type="text" name="originType" value="subdistrict" hidden/>
-                                                <input type="text" name="destination" value="398" hidden/>
-                                                <input type="text" name="destinationType" value="subdistrict" hidden/>
-                                                <input type="text" name="weight" value="100" hidden/>
-                                                <input type="text" name="lenght" value="10" hidden/>
-                                                <input type="text" name="width" value="10" hidden/>
-                                                <input type="text" name="height" value="10" hidden/>
                                                 <li class="col-12">
                                                     <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Choose Shipment" id="btn-choose-shipment" />
                                                 </li>
@@ -495,7 +492,7 @@
             $("#btn-choose-shipment").val("Loading");
             $.ajax({
                 type: "POST", // or post?
-                url: "{{route("localapi.choose_shipment", $detail->id)}}", // change as needed
+                url: "{{route("localapi.content.choose_shipment", $detail->id)}}", // change as needed
                 data: $("#form-shipment").serialize(), // change as needed
                 success: function(data) {
                     if (data) {
@@ -526,7 +523,16 @@
             });
         }
         function change_ongkir(service, ongkir){
+            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'>Shipping : "+service+"</div></ul>";
+            html += "<ul><div class='col-lg-6 col-sm-12 col-md-12'>Shipping Cost : "+ongkir+"</div></ul>";
+            $("#shipment-price").empty();
+            $("#ship-cost").empty().append(html);
             console.log(service, ongkir);
+        }
+        function use_address(city, subdistrict){
+            console.log(city, subdistrict);
+            $('#destinationType').attr('value', 'subdistrict');
+            $('#destination').attr('value', subdistrict);
         }
     </script>
 @endsection

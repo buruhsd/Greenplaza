@@ -21,7 +21,7 @@
                                             <ul>
                                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="{{route("detail", $item->id)}}"><i class="fa fa-eye"></i></a></li>
+                                                <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>

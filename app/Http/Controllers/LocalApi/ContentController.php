@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Plugin;
 use RajaOngkir;
+use FunctionLib;
 
 class ContentController extends Controller
 {
@@ -73,11 +74,18 @@ class ContentController extends Controller
                 'destinationType' => $destinationType,
                 'weight' => $weight,
                 'courier' => $courier,
-                'lenght' => $lenght,
-                'width' => $width,
-                'height' => $height
             ]
         ];
+        if(isset($lenght)){
+            $req['data']['lenght'] = $lenght;
+        }
+        if(isset($width)){
+            $req['data']['width'] = $width;
+        }
+        if(isset($height)){
+            $req['data']['height'] = $height;
+        }
+
         $shipment = RajaOngkir::cost($req);
         $shipment = json_decode($shipment, true);
         if($shipment['rajaongkir']['status']['code'] !== 200){
@@ -115,6 +123,33 @@ class ContentController extends Controller
             'created_at' => $request->created_at,
             'updated_at' => $request->updated_at
         ];
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_province($id = 0){
+        $data['province'] = FunctionLib::get_province($id);
+        return $data;
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_city($id = 0){
+        $data['city'] = FunctionLib::get_city($id);
+        return $data;
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_subdistrict($id = 0){
+        $data = FunctionLib::get_subdistrict($id);
+        return $data;
     }
 
     /**

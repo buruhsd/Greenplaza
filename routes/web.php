@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	Route::get('/category', 'member\\FrontController@category')->name('category');
-	Route::get('/detail/{id}', 'member\\FrontController@detail')->name('detail');
+	Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
@@ -85,12 +85,21 @@ Route::group(['middleware' => ['auth']], function () {
 	//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
 	Route::get('/checkout', 'member\\ChartController@checkout')->name('member.checkout');
-	Route::get('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
+	Route::post('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
+
+	//user_addressController
+	Route::get('/member/address', 'member\\User_addressController@chart')->name('chart');
+	Route::post('/member/address/store', 'member\\User_addressController@store')->name('member.address.store');
 });
 
 // without auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
-	Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
+	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
+		Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
+		Route::get('get_province/{id}', 'ContentController@get_province')->name('.get_province');
+		Route::get('get_city/{id}', 'ContentController@get_city')->name('.get_city');
+		Route::get('get_subdistrict/{id}', 'ContentController@get_subdistrict')->name('.get_subdistrict');
+	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');

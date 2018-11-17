@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -11,6 +11,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
 class User_addressController extends Controller
@@ -78,7 +79,7 @@ class User_addressController extends Controller
             $status = 500;
             $message = 'User_address Not added!';
         }
-        return redirect('admin/user_address')
+        return redirect()->back()//('admin/user_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
