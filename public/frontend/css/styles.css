@@ -652,6 +652,7 @@ a#scrollUp:hover {
 .cetagory-wrap {
     background: #FFF;
     position: relative;
+    
 }
 
 .cetagory-wrap span {
@@ -672,7 +673,7 @@ a#scrollUp:hover {
     top: 100%;
     background: #FFF;
     width: 100%;
-    border: 1px solid #FFF;
+    border: 3px solid #F8F8FF;
     overflow: scroll;
     overflow-x: hidden;
     height: 30em;
@@ -3210,6 +3211,22 @@ ol {
 
 .account-form {
     padding: 50px;
+}
+
+.cetagory-bottom{
+
+  border: 2px solid #ddd !important;
+  color: #FFD700;
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #fff;
+    text-align:center;
+
+    
+
+    
 }
 
 
