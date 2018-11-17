@@ -25,9 +25,12 @@
         	@foreach($category as $item)
         	<li>
             	<a href="{{url('category?cat='.$item->category_slug)}}"><i class="{{$item->category_icon}}"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
-                
-        	</li>
-        	@endforeach
+            </li>
+            @endforeach
+            
+            <div class="cetagory-bottom">
+                <a href="#">All Category</a>
+            </div>
         </ul>
     </div>
 </div>
