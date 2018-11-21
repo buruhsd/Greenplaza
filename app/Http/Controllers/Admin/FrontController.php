@@ -50,12 +50,6 @@ class FrontController extends Controller
         return view('admin.resolusi_komplain.res_kom');
     }
 
-    public function hot_promo()
-    {
-
-        return view('admin.hot_promo.hot_promo');
-    }
-
     public function live_chat()
     {
         return view('admin.transaksi.laporan_transaksi');

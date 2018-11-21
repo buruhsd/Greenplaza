@@ -17,6 +17,36 @@ class ProdukController extends Controller
 {
     private $perPage = 25;
     private $mainTable = 'sys_produk';
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function hot_promo(Request $request, $status = "")
+    {
+        $arr = [
+            "0" =>'wait',
+            "1" =>'active',
+            "2" =>'block',
+            "0,1,2" =>'',
+        ];
+        $status = array_search($status,$arr);
+        $where = $request->get('search');
+
+        if (!empty($keyword)) {
+            $data['produk'] = Produk::where("produk_is_hot", 1)
+                ->whereRaw($where)
+                ->whereIn("produk_status", explode(",",$status))
+                ->paginate($this->perPage);
+        } else {
+            $data['produk'] = Produk::where("produk_is_hot", 1)
+                ->whereIn("produk_status", explode(",",$status))
+                ->paginate($this->perPage);
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.hot_promo.hot_promo', $data);
+    }
     /**
      * Display a listing of the resource.
      *

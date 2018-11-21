@@ -22,7 +22,6 @@ Route::get('/', function () {
 //FrontController
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');
 Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
-Route::get('/dashboard', 'member\\FrontController@admin')->name('dashboard');
 
 
 Auth::routes();
@@ -31,10 +30,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
-Route::get('email_sender', 'Admin\\FrontController@email_sender')->name('email_sender');
-Route::get('res_kom', 'Admin\\FrontController@res_kom')->name('resolusi_komplain');
-Route::get('hot_promo', 'Admin\\FrontController@hot_promo')->name('hot_promo');
-Route::get('live_chat', 'Admin\\FrontController@live_chat')->name('live_chat');
 
 // auth superadmin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
@@ -43,6 +38,17 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], fun
 // auth superadmin & admin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::get('edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
+			Route::post('update/{id}', 'Admin\\ProdukController@update')->name('.update');
+			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
+			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
+		});
+		Route::get('email_sender', 'Admin\\FrontController@email_sender')->name('email_sender');
+		Route::get('res_kom', 'Admin\\FrontController@res_kom')->name('resolusi_komplain');
+		Route::get('hot_promo', 'Admin\\ProdukController@hot_promo')->name('hot_promo');
+		Route::get('live_chat', 'Admin\\FrontController@live_chat')->name('live_chat');
+		Route::get('/dashboard', 'member\\FrontController@admin')->name('dashboard');
 	});
 });
 
@@ -68,7 +74,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 	});
 });
 
-// auth
+// auth all
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	Route::get('/category', 'member\\FrontController@category')->name('category');
