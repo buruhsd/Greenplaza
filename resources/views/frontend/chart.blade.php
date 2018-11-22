@@ -34,48 +34,43 @@
                                         <th class="images">Image</th>
                                         <th class="product">Product</th>
                                         <th class="ptice">Price</th>
+                                        <th class="ptice">Shipment</th>
                                         <th class="quantity">Quantity</th>
                                         <th class="total">Total</th>
                                         <th class="remove">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="images"><img src="assets/images/cart/2.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Modern and Wanderful chair</a></td>
-                                        <td class="ptice">$139.00</td>
-                                        <td class="quantity ">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="total">$139.00</td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="images"><img src="assets/images/cart/3.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Wooden Pot</a></td>
-                                        <td class="ptice">$684.47</td>
-                                        <td class="quantity ">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="total">$684.47</td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="images"><img src="assets/images/cart/4.jpg" alt=""></td>
-                                        <td class="product"><a href="single-product.html">Wonderful Light</a></td>
-                                        <td class="ptice">$145.80</td>
-                                        <td class="quantity ">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1" />
-                                            </div>
-                                        </td>
-                                        <td class="total">$145.80</td>
-                                        <td class="remove"><i class="fa fa-times"></i></td>
-                                    </tr>
+                                    @foreach(Session::get('chart') as $key => $item)
+                                        <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
+                                        <tr>
+                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
+                                            <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
+                                            <td class="quantity ">{{$item['trans_detail_qty']}}</td>
+                                            {{-- <td class="quantity ">
+                                                <div class="cart-plus-minus">
+                                                    <input type="text" value="1" />
+                                                </div>
+                                            </td> --}}
+                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                            <td class="remove">
+                                                {!! Form::open([
+                                                    'method'=>'GET',
+                                                    'url' => '/chart/destroy/'.$key,
+                                                    'style' => 'display:inline'
+                                                ]) !!}
+                                                    {!! Form::button('<i class="fa fa-times"></i>', array(
+                                                            'class' => 'btn btn-danger btn-xs',
+                                                            'type' => 'submit',
+                                                            'title' => 'Delete blog',
+                                                            'onclick'=>'return confirm("Confirm delete?")'
+                                                    )) !!}
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             <div class="row mt-60">
@@ -99,8 +94,14 @@
                                     <div class="cart-total text-right">
                                         <h3>Cart Totals</h3>
                                         <ul>
-                                            <li><span class="pull-left">Subtotal </span>$380.00</li>
-                                            <li><span class="pull-left"> Total </span> $380.00</li>
+                                            <li>
+                                                <span class="pull-left">Subtotal </span>
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount'))}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left"> Total </span> 
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                                            </li>
                                         </ul>
                                         <a href="checkout.html">Proceed to Checkout</a>
                                     </div>

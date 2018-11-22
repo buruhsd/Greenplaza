@@ -58,22 +58,23 @@ class ChartController extends Controller
 		}
         Session::push('chart', $transaction);
         Session::save();
-        dd(Session::get('chart'));
 
-    	return true;
+    	return redirect()->back();
     }
 
     /**
     *
     *
     **/
-    public function destroy(){
-        Session::put('key', 'tes');
-        Session::save();
-        Session::forget('key');
+    public function destroy($id){
+        $array = Session::get('chart');
+        unset($array[$id]);
+        $data = $array;
+        Session::forget('chart');
+        Session::put('chart', $data);
         Session::save();
 
-    	return true;
+    	return redirect()->back();
     }
     
 }

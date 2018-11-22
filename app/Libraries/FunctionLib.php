@@ -142,4 +142,19 @@ class FunctionLib
         return $data;
     }
 
+    public static function array_sum_key( $arr, $index = null ){
+    if(!is_array( $arr ) || sizeof( $arr ) < 1){
+        return 0;
+    }
+    $ret = 0;
+    foreach( $arr as $id => $data ){
+        if( isset( $index )  ){
+            $ret += (isset( $data[$index] )) ? $data[$index] : 0;
+        }else{
+            $ret += $data;
+        }
+    }
+    return $ret;
+}
+
 }

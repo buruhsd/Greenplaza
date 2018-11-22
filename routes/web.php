@@ -143,6 +143,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
 	Route::get('/checkout', 'member\\ChartController@checkout')->name('member.checkout');
 	Route::post('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
+	Route::get('/chart/destroy/{id}', 'member\\ChartController@destroy')->name('chart.destroy');
 
 	//user_addressController
 	Route::get('/member/address', 'member\\User_addressController@chart')->name('chart');
