@@ -136,6 +136,21 @@ class FunctionLib
     * @param
     * @return
     **/
+    public static function count_produk_hot($status = ""){
+        $where = 1;
+        $where .= " AND produk_is_hot = 1";
+        if($status !== ""){
+            $where .= " AND produk_status = ".$status;
+        }
+        $total = App\Models\Produk::whereRaw($where)->count();
+        return $total;
+    }
+
+
+    /**
+    * @param
+    * @return
+    **/
     public static function data_user_by_id($id= 0){
         $where = "id = ".$id;
         $data = App\User::whereRaw($where)->first();
@@ -143,18 +158,31 @@ class FunctionLib
     }
 
     public static function array_sum_key( $arr, $index = null ){
-    if(!is_array( $arr ) || sizeof( $arr ) < 1){
-        return 0;
-    }
-    $ret = 0;
-    foreach( $arr as $id => $data ){
-        if( isset( $index )  ){
-            $ret += (isset( $data[$index] )) ? $data[$index] : 0;
-        }else{
-            $ret += $data;
+        if(!is_array( $arr ) || sizeof( $arr ) < 1){
+            return 0;
         }
+        $ret = 0;
+        foreach( $arr as $id => $data ){
+            if( isset( $index )  ){
+                $ret += (isset( $data[$index] )) ? $data[$index] : 0;
+            }else{
+                $ret += $data;
+            }
+        }
+        return $ret;
     }
-    return $ret;
-}
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_trans($status = ""){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND trans_detail_status = ".$status;
+        }
+        $total = App\Models\Trans_detail::whereRaw($where)->count();
+        return $total;
+    }
 
 }

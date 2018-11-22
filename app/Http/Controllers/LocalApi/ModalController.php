@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LocalApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User_address;
+use App\Models\Trans;
 use FunctionLib;
 
 class ModalController extends Controller
@@ -20,9 +21,9 @@ class ModalController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * 
+     * @param
+     * @return 
      */
     public function addWishlist($id)
     {
@@ -32,9 +33,9 @@ class ModalController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * 
+     * @param
+     * @return 
      */
     public function pickAddress()
     {
@@ -44,9 +45,9 @@ class ModalController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * 
+     * @param
+     * @return 
      */
     public function addAddress()
     {
@@ -55,9 +56,21 @@ class ModalController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * pemanggil admin transaksi
+     * @param
+     * @return 
+     */
+    public function transDetail($id)
+    {
+        $data['trans'] = Trans::whereId($id)->first();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.trans-detail', $data);
+    }
+
+    /**
+     * 
+     * @param
+     * @return 
      */
     public function modal($id)
     {

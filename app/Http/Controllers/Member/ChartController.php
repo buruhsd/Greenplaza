@@ -29,6 +29,9 @@ class ChartController extends Controller
     **/
     public function addChart(Request $request, $id){
     	$produk = Produk::where('id', $id)->first();
+        if($request->qty > $produk['produk_stock']){
+            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Stock is influence']);
+        }
     	// dd($request);
     	// random string
     	$trans_code = FunctionLib::str_rand(5);
@@ -66,13 +69,18 @@ class ChartController extends Controller
     *
     *
     **/
-    public function destroy($id){
-        $array = Session::get('chart');
-        unset($array[$id]);
-        $data = $array;
-        Session::forget('chart');
-        Session::put('chart', $data);
-        Session::save();
+    public function destroy($id="all"){
+        if($id != "all"){
+            $array = Session::get('chart');
+            unset($array[$id]);
+            $data = $array;
+            Session::forget('chart');
+            Session::put('chart', $data);
+            Session::save();
+        }else{
+            Session::forget('chart');
+            Session::save();
+        }
 
     	return redirect()->back();
     }

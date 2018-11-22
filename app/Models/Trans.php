@@ -16,4 +16,36 @@ class Trans extends Model
     protected $fillable = [
     	'trans_code', 'trans_user_id', 'trans_user_bank_id', 'trans_is_paid', 'trans_payment_id', 'trans_paid_image', 'trans_paid_date', 'trans_paid_note', 'trans_amount', 'trans_amount_ship', 'trans_amount_total', 'trans_note', 
 	];
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function trans_detail()
+    {
+        return $this->hasMany('App\Models\Trans_detail', 'trans_detail_trans_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function trans_detailCount()
+    {
+        return $this->hasOne('App\Models\Trans_detail', 'trans_detail_trans_id')
+        	->selectRaw('trans_detail_trans_id, count(*) as aggregate')
+    		->groupBy('trans_detail_trans_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function pembeli()
+    {
+        return $this->belongsTo('App\User', 'trans_user_id');
+    }
 }
