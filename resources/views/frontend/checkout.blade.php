@@ -25,153 +25,75 @@
     <div class="checkout-area mb-30">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
-                    <div class="checkout-form form-style p-10 bg-1">
+                <div class="col-lg-12">
+                    <div class="checkout-form p-10 border">
                         <h2 class="section-title">Billing Details</h2>
                         <form action="checkout">
                             <div class="row">
-                                <div class="col-sm-6 col-12">
-                                    <p>First Name *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Last Name *</p>
-                                    <input type="text">
-                                </div>
                                 <div class="col-12">
-                                    <p>Compani Name</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Email Address *</p>
-                                    <input type="email">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Phone No. *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <p>Country *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <p>Your Address *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Postcode/ZIP</p>
-                                    <input type="email">
-                                </div>
-                                <div class="col-sm-6 col-12">
-                                    <p>Town/City *</p>
-                                    <input type="text">
-                                </div>
-                                <div class="col-12">
-                                    <input id="toggle1" type="checkbox">
-                                    <label for="toggle1">Pure CSS Accordion</label>
-                                    <div class="create-account">
-                                        <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                                        <span>Account password</span>
-                                        <input type="password">
+                                    <div class="large-12 medium-12 small-12 columns">
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <input id="toggle2" type="checkbox">
-                                    <label class="fontsize" for="toggle2">Ship to a different address?</label>
-                                    <div class="row" id="open2">
-                                        <div class="col-12">
-                                            <p>Country</p>
-                                            <select id="s_country">
-                                                <option value="1">Select a country</option>
-                                                <option value="2">bangladesh</option>
-                                                <option value="3">Algeria</option>
-                                                <option value="4">Afghanistan</option>
-                                                <option value="5">Ghana</option>
-                                                <option value="6">Albania</option>
-                                                <option value="7">Bahrain</option>
-                                                <option value="8">Colombia</option>
-                                                <option value="9">Dominican Republic</option>
-                                            </select>
-                                        </div>
-                                        <div class=" col-12">
-                                            <p>First Name</p>
-                                            <input id="s_f_name" type="text" />
-                                        </div>
-                                        <div class=" col-12">
-                                            <p>Last Name</p>
-                                            <input id="s_l_name" type="text" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Company Name</p>
-                                            <input id="s_c_name" type="text" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Address</p>
-                                            <input type="text" placeholder="Street address" />
-                                        </div>
-                                        <div class="col-12">
-                                            <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Town / City </p>
-                                            <input id="s_city" type="text" placeholder="Town / City" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>State / County </p>
-                                            <input id="s_county" type="text" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Postcode / Zip </p>
-                                            <input id="s_zip" type="text" placeholder="Postcode / Zip" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Email Address </p>
-                                            <input id="s_email" type="email" />
-                                        </div>
-                                        <div class="col-12">
-                                            <p>Phone </p>
-                                            <input id="s_phone" type="text" placeholder="Phone Number" />
-                                        </div>
+                                    <div class="large-6 medium-6 small-12 columns">
+                                        <label>Kode Transaksi Anda</label>
+                                        <h2></h2>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <p>Order Notes </p>
-                                    <textarea name="massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                    <div class="large-6 medium-6 small-12 columns">
+                                        <?php 
+                                        echo '
+                                        Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount')).' <br>
+                                        Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>
+                                        Kode Unik :  <br>
+                                        <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transfer anda.</label>
+                                        <br>
+                                        <label>Jumlah yang harus ditransfer</label>
+                                        <h2 style="">Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')).'</h2>
+                                        ';
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h3>METODE PEMBAYARAN</h3>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <div class="large-12 columns text-center" id="box_pembayaran">
+                                                <input type="radio" name="payment_method" value="0" id="metode_pembayaran_transfer">
+                                                Transfer Bank<br>
+                                                <small>Verifikasi manual maksimal 2 x 24 jam</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="large-12 columns text-center" id="box_pembayaran">
+                                                <input type="radio" name="payment_method" value="0" id="metode_pembayaran_transfer">
+                                                Midtrans<br>
+                                                <small>Verifikasi manual maksimal 2 x 24 jam</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" hidden>
+                                            <div class="large-12 columns text-center" id="box_pembayaran">
+                                                <input type="radio" name="payment_method" value="1" id="metode_pembayaran_cw_trans">
+                                                Gunakan Saldo CW Transaksi<br>
+                                                <small>Verifikasi otomatis</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" hidden>
+                                            <div class="col-12 text-center" id="box_pembayaran">
+                                                <input type="radio" name="payment_method" value="2" id="metode_pembayaran_cw_bonus">
+                                                Gunakan Saldo CW Bonus<br>
+                                                <small>Verifikasi otomatis</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" />
                         </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="order-area bg-1 p-10">
-                        <h2 class="section-title">Your Order</h2>
-                        <ul class="total-cost">
-                            <li>Wonderful Chair <span class="pull-right">$139.00</span></li>
-                            <li>Your Product Name <span class="pull-right">$100.00</span></li>
-                            <li>Wonderful Chair <span class="pull-right">$141.00</span></li>
-                            <li>Subtotal <span class="pull-right"><strong>$380.00</strong></span></li>
-                            <li>Shipping <span class="pull-right">Free</span></li>
-                            <li>Total<span class="pull-right">$380.00</span></li>
-                        </ul>
-                        <ul class="payment-method">
-                            <li>
-                                <input id="bank" type="checkbox">
-                                <label for="bank">Direct Bank Transfer</label>
-                            </li>
-                            <li>
-                                <input id="paypal" type="checkbox">
-                                <label for="paypal">Paypal</label>
-                            </li>
-                            <li>
-                                <input id="card" type="checkbox">
-                                <label for="card">Credit Card</label>
-                            </li>
-                            <li>
-                                <input id="delivery" type="checkbox">
-                                <label for="delivery">Cash on Delivery</label>
-                            </li>
-                        </ul>
-                        <button>Place Order</button>
                     </div>
                 </div>
             </div>

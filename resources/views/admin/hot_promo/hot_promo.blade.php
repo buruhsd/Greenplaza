@@ -32,9 +32,9 @@
           
             <div class="panel-heading clearfix">
                 <h4>Hot Promo</h4> 
-                <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1)}}</span></button>
-                <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button>
-                <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2)}}</span></button>
+                <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk_hot(1)}}</span></button>
+                <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk_hot(0)}}</span></button>
+                <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk_hot(2)}}</span></button>
 
             </div>
             <div class="panel-body">
@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{$no = 1}}
+                            <?php $no = 1; ?>
                             @foreach($produk as $item)
                             <tr>
                                 <th scope="row">{{$no++}}</th>

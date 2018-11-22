@@ -34,7 +34,7 @@
                             <li><a href="{{route('login')}}">Login</a></li>
                             <li><a href="{{route('register')}}">Register</a></li>
                         @else
-                            <li><a href="javascript:void(0);"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
                             <li><a href="javascript:void(0);"><i class="fa fa-envelope"></i></a></li>
                             @if(!Auth::user()->is_superadmin())
                                 <li><a href="javascript:void(0);">Etalase</a></li>

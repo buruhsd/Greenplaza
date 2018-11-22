@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
-    private $perPage = 25;
+    private $perPage = 5;
     private $mainTable = 'sys_produk';
 
     /**
@@ -60,12 +60,30 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
+        $arr = [
+            "0" =>'wait',
+            "1" =>'active',
+            "2" =>'block',
+            "0,1,2" =>'',
+        ];
+        $where = "1";
+        if(!empty($request->get('name'))){
+            $name = $request->get('name');
+            $where .= ' AND produk_name LIKE "%'.$name.'%"';
+        }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND produk_status IN ('.$status.')';
+        }
 
-        if (!empty($keyword)) {
-            $data['produk'] = Produk::paginate($this->perPage);
+        if (!empty($where)) {
+            $data['produk'] = Produk::where("produk_is_hot", 0)
+                ->whereRaw($where)
+                ->paginate($this->perPage);
         } else {
-            $data['produk'] = Produk::paginate($this->perPage);
+            $data['produk'] = Produk::where("produk_is_hot", 0)
+                ->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 

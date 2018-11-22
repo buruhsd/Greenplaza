@@ -71,6 +71,12 @@
                                                 </li>
                                             </center>
                                         </div>
+                                        <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
+                                            @guest
+                                            @else
+                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>{{App\Models\User_address::where('user_address_user_id', Auth::id())->pluck('user_address_label')[0]}}</b></div></ul>
+                                            @endguest
+                                        </div>
                                         <div class="col-md-12">
                                             <center>
                                                 <li class="col-12">
@@ -362,7 +368,7 @@
                         </div>
                     </div>
                 </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
+                <div class="col-lg-3 col-sm-6 col-12">
                     <aside class="sidebar-area bg-1">
                         <div class="widget widget_search">
                             <h2 class="section-title">Search Product</h2>
@@ -525,18 +531,21 @@
             });
         }
         function change_ongkir(service, ongkir){
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'>Shipping : "+service+"</div></ul>";
-            html += "<ul><div class='col-lg-6 col-sm-12 col-md-12'>Shipping Cost : "+ongkir+"</div></ul>";
+            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
+            html += "<ul><div class='col-lg-6 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
             $("#shipment-price").empty();
             $("#ship-cost").empty().append(html);
             $('#ship_cost').attr('value', ongkir);
             console.log(service, ongkir);
         }
-        function use_address(id, city, subdistrict){
+        function use_address(id, address_name, city, subdistrict){
             console.log(city, subdistrict);
+            $('#address_id').attr('value', id);
             $('#address_id').attr('value', id);
             $('#destinationType').attr('value', 'subdistrict');
             $('#destination').attr('value', subdistrict);
+            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>Name : "+address_name+"</b></div></ul>";
+            $("#address-info").empty().append(html);
         }
     </script>
 @endsection

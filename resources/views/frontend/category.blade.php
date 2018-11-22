@@ -13,19 +13,8 @@
                             <div class="col-lg-3 col-sm-4 col-12">
                                 <select name="stor" class="select-style">
                                     <option disabled selected>Sort by Defalt</option>
-                                    <option>Australia</option>
-                                    <option>Brazil</option>
-                                    <option>Cambodia</option>
-                                    <option>Dominica</option>
-                                    <option>France</option>
-                                    <option>Guyana</option>
-                                    <option>Hong Kong</option>
-                                    <option>Ireland</option>
-                                    <option>Japan</option>
-                                    <option>Malaysia</option>
-                                    <option>Nepal</option>
-                                    <option>Oman</option>
-                                    <option>Peru</option>
+                                    <option value="produk_name">Name</option>
+                                    <option value="produk_price">Price</option>
                                 </select>
                             </div>
                             <div class=" col-lg-5 col-sm-5 col-12">
@@ -36,9 +25,9 @@
                                     <li>
                                         <a class="active" data-toggle="tab" href="#grid"><i class="fa fa-th"></i></a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a data-toggle="tab" href="#list"><i class="fa fa-list"></i></a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>

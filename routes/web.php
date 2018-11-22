@@ -97,6 +97,24 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::post('/update', 'Admin\\UserController@update')->name('.update');
 			Route::get('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
 		});
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::get('/', 'Admin\\ProdukController@index')->name('.index');
+			Route::get('/create', 'Admin\\ProdukController@create')->name('.create');
+			Route::post('/store', 'Admin\\ProdukController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\ProdukController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
+			Route::get('/', 'Admin\\TransactionController@index')->name('.index');
+			Route::get('/create', 'Admin\\TransactionController@create')->name('.create');
+			Route::post('/store', 'Admin\\TransactionController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\TransactionController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\TransactionController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\TransactionController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
+		});
 	});
 });
 
@@ -141,12 +159,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//ChartController
 	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
-	Route::get('/checkout', 'member\\ChartController@checkout')->name('member.checkout');
+	Route::get('/checkout', 'member\\ChartController@checkout')->name('checkout');
 	Route::post('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
 	Route::get('/chart/destroy/{id}', 'member\\ChartController@destroy')->name('chart.destroy');
 
 	//user_addressController
-	Route::get('/member/address', 'member\\User_addressController@chart')->name('chart');
+	Route::get('/member/address', 'member\\User_addressController@chart')->name('member.address');
 	Route::post('/member/address/store', 'member\\User_addressController@store')->name('member.address.store');
 });
 
@@ -163,6 +181,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
+		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

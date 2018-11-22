@@ -10,27 +10,27 @@
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
                             <li class="active-page">
-                                <a href="#">
+                                <a href="{{route('admin.dashboard')}}">
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.live_chat')}}">
                                     <i class="menu-icon icon-voice_chat"></i><span>Live Chat</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.email_sender')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Email Sender</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.resolusi_komplain')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('admin.hot_promo')}}">
                                     <i class="menu-icon icon-fire"></i><span>Hot Promo</span>
                                 </a>
                             </li>
@@ -56,13 +56,13 @@
                                     <li><a href="#">Transaksi Hot List</a></li>
                                     <li><a href="#">Transaksi Pin Code</a></li>
                                     <li><a href="#">Akun Member</a></li>
-                                    <li><a href="#">Brand</a></li>
+                                    <li><a href="{{route('admin.brand.index')}}">Brand</a></li>
                                     <li><a href="#">Iklan Banner Khusus</a></li>
                                     <li><a href="#">Iklan Banner Seller</a></li>
                                     <li><a href="#">Iklan Baris Seller</a></li>
                                     <li><a href="#">Iklan Banner Pembeli</a></li>
                                     <li><a href="#">Iklan Baris Pembeli</a></li>
-                                    <li><a href="#">Produk</a></li>
+                                    <li><a href="{{route('admin.produk.index')}}">Produk</a></li>
                                     <li><a href="#">Request Saldo Iklan</a></li>
                                     <li><a href="#">Withdrawal Seller</a></li>
                                     <li><a href="#">Withdrawal Member</a></li>
@@ -75,9 +75,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="#">Setting Produk</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Kategori Produk</a></li>
-                                            <li><a href="#">Sub 1 Kategori Produk</a></li>
-                                            <li><a href="#">Sub-sub Kategori Produk</a></li>
+                                            <li><a href="{{route('admin.category.index')}}">Kategori Produk</a></li>
                                         </ul></li>
                                     <li><a href="#">Setting Harga</a>
                                         <ul class="sub-menu">
@@ -100,7 +98,7 @@
                                         <ul class="sub-menu">
                                             <li><a href="#">Profil Greenplaza</a></li>
                                             <li><a href="#">Official Email</a></li>
-                                            <li><a href="#">Bank</a></li>
+                                            <li><a href="{{route('admin.bank.index')}}">Bank</a></li>
                                         </ul></li>
                                     <li><a href="#">Setting Akun</a>
                                         <ul class="sub-menu">

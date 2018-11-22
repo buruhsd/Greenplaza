@@ -33,7 +33,7 @@
                             <td>{{$item->user_address_pos}}</td>
                             <td>{{$item->user_address_address}}</td>
                             <td>
-                                <input type="button" data-dismiss="modal" data-toggle='modal' class="btn btn-success btn-sm" onclick="use_address({{$item->id}}, {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="Use {{$item->user_address_label}}">
+                                <input type="button" data-dismiss="modal" data-toggle='modal' class="btn btn-success btn-sm" onclick="use_address({{$item->id}}, '{{$item->user_address_label}}', {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="Use {{$item->user_address_label}}">
                             </td>
                         </tbody>
                     @endforeach

@@ -77,10 +77,10 @@
                                 <div class="col-lg-5 col-md-6 ">
                                     <div class="cartcupon-wrap">
                                         <ul class="d-flex">
-                                            <li>
+                                            {{-- <li>
                                                 <button>Update Cart</button>
-                                            </li>
-                                            <li><a href="shop.html">Continue Shopping</a></li>
+                                            </li> --}}
+                                            <li><a href="{{route('category')}}">Continue Shopping</a></li>
                                         </ul>
                                         <h3>Cupon</h3>
                                         <p>Enter Your Cupon Code if You Have One</p>
@@ -103,7 +103,7 @@
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
                                             </li>
                                         </ul>
-                                        <a href="checkout.html">Proceed to Checkout</a>
+                                        <a href="{{route('checkout')}}">Proceed to Checkout</a>
                                     </div>
                                 </div>
                             </div>
