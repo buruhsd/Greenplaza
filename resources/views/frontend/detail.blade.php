@@ -49,6 +49,8 @@
                                     </ul>
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
+                                    <input type="text" name="address_id" id="address_id" value="0" hidden/>
+                                    <input type="text" name="ship_cost" id="ship_cost" value="0" hidden/>
                                     <input type="text" name="origin" id="origin" value="398" hidden/>
                                     <input type="text" name="originType" id="originType" value="subdistrict" hidden/>
                                     <input type="text" name="destination" id="destination" value="" hidden/>
@@ -527,10 +529,12 @@
             html += "<ul><div class='col-lg-6 col-sm-12 col-md-12'>Shipping Cost : "+ongkir+"</div></ul>";
             $("#shipment-price").empty();
             $("#ship-cost").empty().append(html);
+            $('#ship_cost').attr('value', ongkir);
             console.log(service, ongkir);
         }
-        function use_address(city, subdistrict){
+        function use_address(id, city, subdistrict){
             console.log(city, subdistrict);
+            $('#address_id').attr('value', id);
             $('#destinationType').attr('value', 'subdistrict');
             $('#destination').attr('value', subdistrict);
         }

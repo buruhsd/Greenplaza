@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use App\Models\Produk;
+use App\Models\Shipment;
 use Session;
 use Auth;
 use FunctionLib;
@@ -28,24 +29,29 @@ class ChartController extends Controller
     **/
     public function addChart(Request $request, $id){
     	$produk = Produk::where('id', $id)->first();
-    	// dd($produk);
+    	// dd($request);
     	// random string
     	$trans_code = FunctionLib::str_rand(5);
 
+        $courier = 0;
+        print_r($request->courier);
+        if(!empty($request->courier)){
+            $courier = Shipment::where('shipment_name', '=', strtoupper($request->courier))->pluck('id')[0];
+        }
     	$transaction = [
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],
-			// 'trans_detail_shipment_id' => $produk->shipment_id,
-			// 'trans_detail_user_address_id' => $produk->user_address_id,
+			'trans_detail_shipment_id' => $courier,
+			'trans_detail_user_address_id' => intval($request->address_id),
 			'trans_detail_no_resi' => "",
-			// 'trans_detail_qty' => $request->qty,
-			// 'trans_detail_size' => $request->size,
-			// 'trans_detail_color' => $request->color,
+			'trans_detail_qty' => $request->qty,
+			'trans_detail_size' => $request->size,
+			'trans_detail_color' => $request->color,
 			'trans_detail_amount' => $produk['produk_price'],
-			// 'trans_detail_amount_ship' => $request->amount_ship,
-			// 'trans_detail_amount_total' => $produk->amount + $request->amount_ship,
+			'trans_detail_amount_ship' => $request->ship_cost,
+			'trans_detail_amount_total' => ($produk['produk_price'] + $request->ship_cost),
 			'trans_detail_status' => 0,
-			// 'trans_detail_note' => $request->note
+			'trans_detail_note' => $request->note
 		];
 		if(!Session::has('chart')){
         	Session::put('chart', []);

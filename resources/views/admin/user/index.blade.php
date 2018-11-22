@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Laporan Transaksi</h3>
+    <h3 class="breadcrumb-header">Configuration User</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -33,7 +33,7 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Laporan Transaksi</h4>
+                    <h4 class="panel-title">Configuration User</h4>
                     <a href="{{ url('admin/shipment/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
                 </div>
                 <div class="panel-body">
@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($shipment as $item)
+                                @foreach($user as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->shipment_parent_id }}</td>

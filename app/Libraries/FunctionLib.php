@@ -119,4 +119,27 @@ class FunctionLib
         return $province;
     }
 
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_produk($status = ""){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND produk_status = ".$status;
+        }
+        $total = App\Models\Produk::whereRaw($where)->count();
+        return $total;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function data_user_by_id($id= 0){
+        $where = "id = ".$id;
+        $data = App\User::whereRaw($where)->first();
+        return $data;
+    }
+
 }

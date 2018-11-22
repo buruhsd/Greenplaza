@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class ShipmentController extends Controller
 {
-    private $perPage = 25;
+    private $perPage = 5;
     private $mainTable = 'conf_shipment';
     /**
      * Display a listing of the resource.

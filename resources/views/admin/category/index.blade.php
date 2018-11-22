@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Laporan Transaksi</h3>
+    <h3 class="breadcrumb-header">Configuration Category</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -33,8 +33,8 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Laporan Transaksi</h4>
-                    <a href="{{ url('admin/shipment/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <h4 class="panel-title">Configuration Category</h4>
+                    <a href="{{ url('admin/category/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -51,32 +51,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($shipment as $item)
+                                @foreach($category as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->shipment_parent_id }}</td>
-                                        <td>{{ $item->shipment_name }}</td>
-                                        <td>{!! ($item->shipment_is_usable == 1)
+                                        <td>{{ $item->category_parent_id }}</td>
+                                        <td>{{ $item->category_name }}</td>
+                                        <td>{!! ($item->category_is_usable == 1)
                                             ?"<button class='btn btn-success btn-xs'>Use</button>"
                                             :"<button class='btn btn-danger btn-xs'>Not Use</button>" !!}</td>
-                                        <td>{!! ($item->shipment_status == 1)
+                                        <td>{!! ($item->category_status == 1)
                                             ?"<button class='btn btn-success btn-xs'>Active</button>"
                                             :"<button class='btn btn-danger btn-xs'>Not Active</button>" !!}</td>
-                                        <td>{{ $item->shipment_note }}</td>
+                                        <td>{{ $item->category_note }}</td>
                                         <td>
-                                            <a href="{{ url('/admin/shipment/show/' . $item->id) }}">
+                                            <a href="{{ url('/admin/category/show/' . $item->id) }}">
                                                 <button class="btn btn-info btn-xs">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>View
                                                 </button>
                                             </a>
-                                            <a href="{{ url('/admin/shipment/edit/' . $item->id) }}">
+                                            <a href="{{ url('/admin/category/edit/' . $item->id) }}">
                                                 <button class="btn btn-warning btn-xs">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>Edit
                                                 </button>
                                             </a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/admin/shipment', $item->id],
+                                                'url' => ['/admin/category', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
@@ -92,7 +92,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div> {!! $shipment->appends(['search' => Request::get('search')])->render() !!} </div>
+                    <div> {!! $category->appends(['search' => Request::get('search')])->render() !!} </div>
                 </div>
             </div>
         </div>

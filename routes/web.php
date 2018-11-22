@@ -44,11 +44,59 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
 			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
 		});
-		Route::get('email_sender', 'Admin\\FrontController@email_sender')->name('email_sender');
-		Route::get('res_kom', 'Admin\\FrontController@res_kom')->name('resolusi_komplain');
-		Route::get('hot_promo', 'Admin\\ProdukController@hot_promo')->name('hot_promo');
-		Route::get('live_chat', 'Admin\\FrontController@live_chat')->name('live_chat');
-		Route::get('/dashboard', 'member\\FrontController@admin')->name('dashboard');
+		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
+		Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
+		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
+		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
+		Route::get('/wishlist', function(){return;})->name('.wishlist');
+		Route::get('/dashboard', 'member\\FrontController@admin')->name('.dashboard');
+
+		// configurasi
+		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
+			Route::get('/', 'Admin\\ShipmentController@index')->name('.index');
+			Route::get('/create', 'Admin\\ShipmentController@create')->name('.create');
+			Route::post('/store', 'Admin\\ShipmentController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\ShipmentController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\ShipmentController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\ShipmentController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\ShipmentController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
+			Route::get('/', 'Admin\\BankController@index')->name('.index');
+			Route::get('/create', 'Admin\\BankController@create')->name('.create');
+			Route::post('/store', 'Admin\\BankController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\BankController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\BankController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\BankController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\BankController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
+			Route::get('/', 'Admin\\BrandController@index')->name('.index');
+			Route::get('/create', 'Admin\\BrandController@create')->name('.create');
+			Route::post('/store', 'Admin\\BrandController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\BrandController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\BrandController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\BrandController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\BrandController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'category', 'as' => '.category'], function () {
+			Route::get('/', 'Admin\\categoryController@index')->name('.index');
+			Route::get('/create', 'Admin\\categoryController@create')->name('.create');
+			Route::post('/store', 'Admin\\categoryController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\categoryController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\categoryController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\categoryController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\categoryController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+			Route::get('/', 'Admin\\UserController@index')->name('.index');
+			Route::get('/create', 'Admin\\UserController@create')->name('.create');
+			Route::post('/store', 'Admin\\UserController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\UserController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\UserController@edit')->name('.edit');
+			Route::post('/update', 'Admin\\UserController@update')->name('.update');
+			Route::get('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
+		});
 	});
 });
 
@@ -81,6 +129,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
+
+	Route::get('/profil', function(){return;})->name('profil');
+	Route::get('/member/dashboard', function(){return;})->name('member.dashboard');
 
 	//wishlishController
 	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');

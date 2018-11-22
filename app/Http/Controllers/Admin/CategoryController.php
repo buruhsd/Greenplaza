@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    private $perPage = 25;
+    private $perPage = 5;
     private $mainTable = 'sys_category';
     /**
      * Display a listing of the resource.

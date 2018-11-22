@@ -23,7 +23,7 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function hot_promo(Request $request, $status = "")
+    public function hot_promo(Request $request)
     {
         $arr = [
             "0" =>'wait',
@@ -31,17 +31,23 @@ class ProdukController extends Controller
             "2" =>'block',
             "0,1,2" =>'',
         ];
-        $status = array_search($status,$arr);
-        $where = $request->get('search');
+        $where = "1";
+        if(!empty($request->get('name'))){
+            $name = $request->get('name');
+            $where .= ' AND produk_name LIKE "%'.$name.'%"';
+        }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND produk_status IN ('.$status.')';
+        }
 
-        if (!empty($keyword)) {
+        if (!empty($where)) {
             $data['produk'] = Produk::where("produk_is_hot", 1)
                 ->whereRaw($where)
-                ->whereIn("produk_status", explode(",",$status))
                 ->paginate($this->perPage);
         } else {
             $data['produk'] = Produk::where("produk_is_hot", 1)
-                ->whereIn("produk_status", explode(",",$status))
                 ->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);

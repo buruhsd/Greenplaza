@@ -5,17 +5,17 @@
     <h3 class="breadcrumb-header">Hot Promo</h3>
 </div>
 <div class="panel-heading clearfix" style="margin-bottom: 10px;">
-    <form action="#" method="GET">
+    <form action="" method="GET" id="src">
         <div class="input-group pull-left" style="width: 225px;">
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search" name="search" value="" autocomplete="off" id="search_table_currency">
+            <input type="text" class="form-control" placeholder="Search" name="name" value="{!! (!empty($_GET['name']))?$_GET['name']:"" !!}" autocomplete="off" id="search_table_currency">
         </div>
         <div class="input-group pull-left" style="width: 225px;">
-            <select class="form-control" id="sel1">
-                <option>Coba heuheu</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+            <select class="form-control" id="status" name="status">
+                <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
+                <option value="wait" {!! (!empty($_GET['status']) && $_GET['status'] == "wait")?"selected":"" !!}>Wait</option>
+                <option value="active" {!! (!empty($_GET['status']) && $_GET['status'] == "active")?"selected":"" !!}>Active</option>
+                <option value="block" {!! (!empty($_GET['status']) && $_GET['status'] == "block")?"selected":"" !!}>Block</option>
             </select>
         </div>
             <input type="submit" class="btn btn-default" value="search">
@@ -32,9 +32,9 @@
           
             <div class="panel-heading clearfix">
                 <h4>Hot Promo</h4> 
-                <button type="button" class="btn btn-info">Approve<span class="label label-default pull-right">85%</span></button>
-                <button type="button" class="btn btn-info">Belum Approve<span class="label label-default pull-right">85%</span></button>
-                <button type="button" class="btn btn-info">Block<span class="label label-default pull-right">85%</span></button>
+                <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1)}}</span></button>
+                <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button>
+                <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2)}}</span></button>
 
             </div>
             <div class="panel-body">
@@ -94,4 +94,10 @@
     </div>
 </div><!-- Row -->
 @endsection
+<script type="text/javascript">
+    function search(val){
+        $('#status').val(val);
+        $('#src').submit();
+    }
+</script>
         
