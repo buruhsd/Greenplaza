@@ -26,21 +26,6 @@ class SysBrand extends Migration
             $table->string('brand_slug');
             $table->text('brand_note')->nullable();
             $table->timestamps();
-            $table->foreign('brand_seller_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
-            $table->foreign('brand_admin_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
-            $table->foreign('brand_superadmin_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
         });
     }
 

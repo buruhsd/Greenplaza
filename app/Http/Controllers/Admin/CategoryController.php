@@ -11,6 +11,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use FunctionLib;
 
 
 class CategoryController extends Controller
@@ -43,6 +44,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $data['category_par'] = Category::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.category.create', $data);
     }
@@ -62,14 +64,45 @@ class CategoryController extends Controller
         $requestData = $request->all();
         $this->validate($request, [
             'category_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_name' => 'required',
         ]);
         
         $res = new Category;
         $res->category_parent_id = $request->category_parent_id;
         $res->category_name = $request->category_name;
-        $res->category_icon = date("d-M-Y_H-i-s").'_'.$request->category_icon->getClientOriginalName();
-        $request->category_icon->move(public_path('img_category_icon'),$res->category_icon);
+        // upload
+        if ($request->hasFile('category_icon')){
+            $icon = $request->file('category_icon');
+            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+            $uploadPath = public_path('img_category_icon');
+            // $uploadPath2 = public_path('assets/images/brand/thumb');
+            $iconname = FunctionLib::str_rand(5).'.'.$icon->getClientOriginalExtension();
+            $iconsize = $icon->getClientSize();
+            $icontmp = $icon->getPathName();
+            if(file_exists($uploadPath . '/' . $iconname)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $iconname = FunctionLib::str_rand(6).'.'.$icon->getClientOriginalExtension();
+            }
+            $icon->move($uploadPath, $iconname);
+            // $imaget->save($uploadPath2.'/'.$imagename,80);
+            $res->category_icon = $iconname;
+        }
+        // upload
+        if ($request->hasFile('category_image')){
+            $image = $request->file('category_image');
+            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+            $uploadPath = public_path('assets/images/category_image');
+            // $uploadPath2 = public_path('assets/images/brand/thumb');
+            $imagename = FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+            $imagesize = $image->getClientSize();
+            $imagetmp = $image->getPathName();
+            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $imagename = FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+            }
+            $image->move($uploadPath, $imagename);
+            // $imaget->save($uploadPath2.'/'.$imagename,80);
+            $res->category_image = $imagename;
+        }
         $res->category_note = $request->category_note;
         $res->save();
         if(!$res){
@@ -104,6 +137,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $data['category_par'] = Category::all();
         $data['category'] = Category::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
@@ -149,12 +183,26 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $uploadPath = public_path('img_category_icon');
+        $icon = Category::where('id', '=', "$id")->pluck('category_icon')[0];
+        $uploadPath2 = public_path('assets/images/category_image');
+        $image = Category::where('id', '=', "$id")->pluck('category_image')[0];
+
         $status = 200;
         $message = 'Category deleted!';
         $res = Category::destroy($id);
         if(!$res){
             $status = 500;
             $message = 'Category Not deleted!';
+
+            $icon_path = $uploadPath . '/' . $icon;  // Value is not URL but directory file path
+            $image_path = $uploadPath2 . '/' . $image;  // Value is not URL but directory file path
+            if(File::exists($icon_path)) {
+                File::delete($icon_path);
+            }
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
         }
 
         return redirect('admin/category')

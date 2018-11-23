@@ -11,6 +11,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use FunctionLib;
 
 
 class BrandController extends Controller
@@ -64,16 +65,32 @@ class BrandController extends Controller
             'brand_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'brand_name' => 'required',
             'brand_slug' => 'required',
-            'brand_note' => 'required',
+            // 'brand_note' => 'required',
         ]);
         
         $res = new Brand;
         $res->brand_name = $request->brand_name;
-        $res->brand_image = date("d-M-Y_H-i-s").'_'.$request->brand_image->getClientOriginalName();
-        $request->brand_image->move(public_path('assets/images/brand'),$res->brand_image);
+        // upload
+        if ($request->hasFile('brand_image')){
+            $image = $request->file('brand_image');
+            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+            $uploadPath = public_path('assets/images/brand');
+            // $uploadPath2 = public_path('assets/images/brand/thumb');
+            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+            $imagesize = $image->getClientSize();
+            $imagetmp = $image->getPathName();
+            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+            }
+            $image->move($uploadPath, $imagename);
+            // $imaget->save($uploadPath2.'/'.$imagename,80);
+            $res->brand_image = $imagename;
+        }
+
         $res->brand_slug = $request->brand_slug;
-        $req->brand_note = $request->brand_note;
-        $req->save();
+        $res->brand_status = 0;
+        $res->brand_note = $request->brand_note;
+        $res->save();
         if(!$res){
             $status = 500;
             $message = 'Brand Not added!';
@@ -126,6 +143,30 @@ class BrandController extends Controller
         $message = 'Brand added!';
         
         $requestData = $request->all();
+        // upload
+        if ($request->hasFile('brand_image')){
+            $image = $request->file('brand_image');
+            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+            $uploadPath = public_path('assets/images/brand');
+            // $uploadPath2 = public_path('assets/images/brand/thumb');
+            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+            $imagesize = $image->getClientSize();
+            $imagetmp = $image->getPathName();
+            if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
+                File::delete($uploadPath . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
+            }
+            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+            }
+            // if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
+            //     File::delete($uploadPath2 . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
+            // }
+            $image->move($uploadPath, $imagename);
+            // $imaget->save($uploadPath2.'/'.$imagename,80);
+            $requestData['brand_image'] = $imagename;
+        }else{
+            $requestData['brand_image'] = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
+        }
         
         $brand = Brand::findOrFail($id);
         $res = $brand->update($requestData);
@@ -147,12 +188,18 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        $uploadPath = public_path('assets/images/brand');
+        $image = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
         $status = 200;
         $message = 'Brand deleted!';
         $res = Brand::destroy($id);
         if(!$res){
             $status = 500;
             $message = 'Brand Not deleted!';
+        }
+        $image_path = $uploadPath . '/' . $image;  // Value is not URL but directory file path
+        if(File::exists($image_path)) {
+            File::delete($image_path);
         }
 
         return redirect('admin/brand')

@@ -26,7 +26,7 @@ Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.s
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'Member\\HomeController@index')->name('home')->middleware('verified');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
@@ -58,8 +58,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\ShipmentController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\ShipmentController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ShipmentController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\ShipmentController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\ShipmentController@destroy')->name('.destroy');
+			Route::patch('/update/{id}', 'Admin\\ShipmentController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\ShipmentController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
 			Route::get('/', 'Admin\\BankController@index')->name('.index');
@@ -67,8 +67,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\BankController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\BankController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\BankController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\BankController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\BankController@destroy')->name('.destroy');
+			Route::patch('/update/{id}', 'Admin\\BankController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\BankController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
 			Route::get('/', 'Admin\\BrandController@index')->name('.index');
@@ -76,8 +76,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\BrandController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\BrandController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\BrandController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\BrandController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\BrandController@destroy')->name('.destroy');
+			Route::patch('/update/{id}', 'Admin\\BrandController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\BrandController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'category', 'as' => '.category'], function () {
 			Route::get('/', 'Admin\\categoryController@index')->name('.index');
@@ -85,8 +85,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\categoryController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\categoryController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\categoryController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\categoryController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\categoryController@destroy')->name('.destroy');
+			Route::patch('/update/{id}', 'Admin\\categoryController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\categoryController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
 			Route::get('/', 'Admin\\UserController@index')->name('.index');
@@ -94,8 +94,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\UserController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\UserController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\UserController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\UserController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
+			Route::patch('/update/{id}', 'Admin\\UserController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('/', 'Admin\\ProdukController@index')->name('.index');
@@ -103,8 +103,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\ProdukController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\ProdukController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
+			Route::patch('/update', 'Admin\\ProdukController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
 			Route::get('/', 'Admin\\TransactionController@index')->name('.index');
@@ -112,8 +112,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\TransactionController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\TransactionController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\TransactionController@edit')->name('.edit');
-			Route::post('/update', 'Admin\\TransactionController@update')->name('.update');
-			Route::get('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
+			Route::patch('/update', 'Admin\\TransactionController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
 		});
 	});
 });

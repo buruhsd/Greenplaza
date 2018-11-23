@@ -6,6 +6,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Produk;
+use App\Role;
+use App\User;
+use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -97,6 +101,10 @@ class ProdukController extends Controller
      */
     public function create()
     {
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['brand'] = Brand::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.produk.create', $data);
     }

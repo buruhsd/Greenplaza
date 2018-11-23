@@ -53,7 +53,7 @@
                                 @foreach($brand as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->brand_image }}</td>
+                                        <td><img src="{{asset("assets/images/brand/".$item->brand_image)}}" style="max-height: 100px;"></td>
                                         <td>{{ $item->brand_name }}</td>
                                         <td scope="row">
                                             <ul>
@@ -102,7 +102,7 @@
                                             </a>
                                             {!! Form::open([
                                                 'method'=>'DELETE',
-                                                'url' => ['/admin/brand', $item->id],
+                                                'url' => ['/admin/brand/destroy', $item->id],
                                                 'style' => 'display:inline'
                                             ]) !!}
                                                 {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(

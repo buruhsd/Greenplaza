@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Shipment</h3>
+    <h3 class="breadcrumb-header">Configuration Brand</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -11,20 +11,20 @@
             <section class="wrapper">
             <div class="panel panel-white">
                 <div class="panel-body">
-                <a href="{{ url('/admin/shipment') }}" title="Back">
+                <a href="{{ url('/admin/brand') }}" title="Back">
                 	<button class="btn btn-warning btn-xs">
                 		<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
                 	</button>
                 </a>
                 <br />
                 <br />
-                {!! Form::model($shipment, [
+                {!! Form::model($brand, [
                     'method' => 'PATCH',
-                    'url' => ['/admin/shipment/update', $shipment->id],
+                    'url' => ['/admin/brand/update', $brand->id],
                     'class' => 'form-horizontal',
                     'files' => true
                 ]) !!}
-                    @include ('admin.shipment.form')
+                    @include ('admin.brand.form')
                 {!! Form::close() !!}
                 </div>
             </div>

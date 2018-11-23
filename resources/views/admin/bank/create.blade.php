@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Shipment</h3>
+    <h3 class="breadcrumb-header">Configuration Bank</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -11,15 +11,15 @@
             <section class="wrapper">
             <div class="panel panel-white">
                 <div class="panel-body">
-                <a href="{{ url('/admin/shipment') }}" title="Back">
+                <a href="{{ url('/admin/bank') }}" title="Back">
                     <button class="btn btn-warning btn-xs">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
                     </button>
                 </a>
                 <br />
                 <br />
-                {!! Form::open(['url' => '/admin/shipment/store', 'class' => 'form-horizontal', 'files' => true]) !!}
-                    @include ('admin.shipment.form')
+                {!! Form::open(['url' => '/admin/bank/store', 'class' => 'form-horizontal', 'files' => true]) !!}
+                    @include ('admin.bank.form')
                 {!! Form::close() !!}
                 </div>
             </div>

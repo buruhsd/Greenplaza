@@ -43,6 +43,7 @@ class ShipmentController extends Controller
      */
     public function create()
     {
+        $data['shipment_par'] = Shipment::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.shipment.create', $data);
     }
@@ -94,6 +95,7 @@ class ShipmentController extends Controller
      */
     public function edit($id)
     {
+        $data['shipment_par'] = Shipment::all();
         $data['shipment'] = Shipment::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
