@@ -24,19 +24,19 @@ Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('regi
 Route::get('/login/seller', 'member\\FrontController@log_seller')->name('login.seller');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
 // auth superadmin
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
+Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin']], function () {
 });
 
 // auth superadmin & admin
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');

@@ -97,7 +97,6 @@ class RegisterController extends Controller
         // get role member
         $memberRole = Role::where('name', 'member')->pluck('name');
         $insert_role = $user->assignRole($memberRole);
-        $user->MailVerification();
         return $user;
 
     }
