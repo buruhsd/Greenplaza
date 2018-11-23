@@ -3215,7 +3215,8 @@ ol {
 
 .cetagory-bottom{
 
-  border: 2px solid #ddd !important;
+  border-top: 1px solid #ddd !important;
+  border-bottom: 1px solid #ddd !important;
   color: #FFD700;
     position: sticky;
     bottom: 0;
