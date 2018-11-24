@@ -20,7 +20,7 @@
 </div> -->
 <div class="col-lg-3 col-md-4 col-sm-6 col-10">
     <div class="cetagory-wrap">
-        <span>All Category</span>
+        <span><i class="fa fa-bars"></i> Category </span>
         <ul class="cetagory-items">
         	@foreach($category as $item)
         	<li>
