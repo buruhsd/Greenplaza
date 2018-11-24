@@ -135,14 +135,14 @@ class ProdukController extends Controller
             'produk_stock' => 'required',
             'produk_weight' => 'required',
             'produk_discount' => 'required',
-            'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
-        $res->produk_slug = $request->produk_slug;
+        $res->produk_slug = str_slug($request->produk_name);
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
         $res->produk_size = $request->produk_size;
@@ -188,6 +188,10 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['brand'] = Brand::all();
         $data['produk'] = Produk::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);

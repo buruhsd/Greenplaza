@@ -1,6 +1,26 @@
 <div class="panel panel-white col-md-6 no-border">
     <div class="panel-body">
         @if(str_contains(Request::url(), ['create']))
+        @elseif(str_contains(Request::url(), ['edit']))
+        <div class="form-group">
+            {!! Form::label('image', ' ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                <img class="h100" src="{{asset('assets/images/product/'.$produk->produk_image) }}" onerror="this.src='http://placehold.it/700x400'" alt="">
+            </div>
+        </div>
+        @endif
+        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_image') ? 'has-error' : ''}}">
+            {!! Form::label('produk_image', 'Image : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                {!! Form::file('produk_image', null, [
+                    'class' => 'form-control', 
+                    'placeholder' => 'Image', 
+                    'required'
+                ])!!}
+                {!! $errors->first('produk_image', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>
+        @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_user_status') ? 'has-error' : ''}}">
             {!! Form::label('produk_user_status', 'User Level : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
@@ -290,4 +310,8 @@
         </div>
     </div>
 </div>
-<button type="submit" class="btn btn-primary mb-2">Save</button>
+<div class="panel panel-white col-md-12 no-border">
+    <div class="panel-body">
+        <button type="submit" class="btn btn-primary mb-2">Save</button>
+    </div>
+</div>
