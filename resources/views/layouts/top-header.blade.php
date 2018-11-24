@@ -31,7 +31,7 @@
                     <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
                         @guest
-                            <li><a href="{{route('login')}}">Login</a></li>
+                            <li class="box-li"><a href="{{route('login')}}">Login</a></li>
                             <li><a href="{{route('register')}}">Register</a></li>
                         @else
                             <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
