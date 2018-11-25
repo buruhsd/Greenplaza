@@ -58,7 +58,7 @@
                                 @foreach($produk as $item)
                                     <tr>
                                         <th scope="row">{{$no++}}</th>
-                                        <td><img src="{{asset("assets/images/product/".$item->produk_image)}}" style="max-height: 100px;"></td>
+                                        <td><img class="h100" src="{{asset("assets/images/product/".$item->produk_image)}}"></td>
                                         <td scope="row">
                                             <ul>
                                                 <li>Name : {{$item->produk_name}}</li>

@@ -52,7 +52,7 @@
                                     <i class="menu-icon icon-layers"></i><span>Need Approval</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Transaksi Barang</a></li>
+                                    <li><a href="{{route('admin.transaction.index')}}">Transaksi Barang</a></li>
                                     <li><a href="#">Transaksi Hot List</a></li>
                                     <li><a href="#">Transaksi Pin Code</a></li>
                                     <li><a href="#">Akun Member</a></li>

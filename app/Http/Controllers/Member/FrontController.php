@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Shipment;
 use App\User;
 use Auth;
@@ -44,12 +45,34 @@ class FrontController extends Controller
     * @param
     * @return
     */
+    public function brand(Request $request)
+    {
+        $perPage = 8;
+        if($request->input("brand") != ""){
+            $id_brand = Brand::whereBrand_slug($request->input("brand"))->pluck('id')->first();
+            $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
+            if($id_brand != null){
+                $data['produk'] = FunctionLib::produk_by('brand', $id_brand)->paginate($perPage);
+            }
+        }else{
+            $data['produk'] = Produk::orderByRaw("rand()")->paginate($perPage);
+        }
+        return view('frontend.brand', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
     public function category(Request $request)
     {
         $perPage = 8;
         if($request->input("cat") != ""){
             $id_cat = Category::whereCategory_slug($request->input("cat"))->pluck('id')->first();
-            $data['produk'] = FunctionLib::produk_by_category($id_cat)->paginate($perPage);
+            $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
+            if($id_cat != null){
+                $data['produk'] = FunctionLib::produk_by('category', $id_cat)->paginate($perPage);
+            }
         }else{
             $data['produk'] = Produk::orderByRaw("rand()")->paginate($perPage);
         }
@@ -99,15 +122,15 @@ class FrontController extends Controller
         return view('auth.login_green');
     }
 
-    /**
-    * @param
-    * @return
-    */
-    public function brand($slug)
-    {
-        $detail = Produk::where('produk_seller_id', Auth::id())->first();
-        return view('frontend.detail', compact('detail'));
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public function brand($slug)
+    // {
+    //     $detail = Produk::where('produk_seller_id', Auth::id())->first();
+    //     return view('frontend.detail', compact('detail'));
+    // }
 
     public function admin(){
         return view('admin.dashboard.dashboard');

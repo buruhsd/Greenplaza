@@ -53,7 +53,7 @@
                                 @foreach($brand as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td><img src="{{asset("assets/images/brand/".$item->brand_image)}}" style="max-height: 100px;"></td>
+                                        <td><img class="h100" src="{{asset("assets/images/brand/".$item->brand_image)}}"></td>
                                         <td>{{ $item->brand_name }}</td>
                                         <td scope="row">
                                             <ul>

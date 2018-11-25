@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('/edit/{id}', 'Admin\\UserController@edit')->name('.edit');
 			Route::patch('/update/{id}', 'Admin\\UserController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
+			Route::get('disabled/{id}', 'Admin\\UserController@disabled')->name('.disabled');
 		});
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('/', 'Admin\\ProdukController@index')->name('.index');
@@ -144,6 +145,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	Route::get('/category', 'member\\FrontController@category')->name('category');
+	Route::get('/brand', 'member\\FrontController@brand')->name('brand');
 	Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
 	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');

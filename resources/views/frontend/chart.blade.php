@@ -41,36 +41,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(Session::get('chart') as $key => $item)
-                                        <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
-                                        <tr>
-                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
-                                            <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
-                                            <td class="quantity ">{{$item['trans_detail_qty']}}</td>
-                                            {{-- <td class="quantity ">
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1" />
-                                                </div>
-                                            </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
-                                            <td class="remove">
-                                                {!! Form::open([
-                                                    'method'=>'GET',
-                                                    'url' => '/chart/destroy/'.$key,
-                                                    'style' => 'display:inline'
-                                                ]) !!}
-                                                    {!! Form::button('<i class="fa fa-times"></i>', array(
-                                                            'class' => 'btn btn-danger btn-xs',
-                                                            'type' => 'submit',
-                                                            'title' => 'Delete blog',
-                                                            'onclick'=>'return confirm("Confirm delete?")'
-                                                    )) !!}
-                                                {!! Form::close() !!}
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    @if(Session::has('chart'))
+                                        @foreach(Session::get('chart') as $key => $item)
+                                            <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
+                                            <tr>
+                                                <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
+                                                <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
+                                                <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                                <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
+                                                <td class="quantity ">{{$item['trans_detail_qty']}}</td>
+                                                {{-- <td class="quantity ">
+                                                    <div class="cart-plus-minus">
+                                                        <input type="text" value="1" />
+                                                    </div>
+                                                </td> --}}
+                                                <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                                <td class="remove">
+                                                    {!! Form::open([
+                                                        'method'=>'GET',
+                                                        'url' => '/chart/destroy/'.$key,
+                                                        'style' => 'display:inline'
+                                                    ]) !!}
+                                                        {!! Form::button('<i class="fa fa-times"></i>', array(
+                                                                'class' => 'btn btn-danger btn-xs',
+                                                                'type' => 'submit',
+                                                                'title' => 'Delete blog',
+                                                                'onclick'=>'return confirm("Confirm delete?")'
+                                                        )) !!}
+                                                    {!! Form::close() !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <div class="row mt-60">

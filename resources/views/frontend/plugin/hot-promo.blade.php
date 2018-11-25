@@ -52,4 +52,3 @@
         </div>
     </div>
 </div>
-<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>

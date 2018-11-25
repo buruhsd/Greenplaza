@@ -26,6 +26,7 @@
     {!! Plugin::recommended()!!}
     {!! Plugin::content_brand()!!}
     {{-- @include('frontend.content.content-brand') --}}
+    <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 
     <!-- footer -->
     {!! Plugin::footer()!!}

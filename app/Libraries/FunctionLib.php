@@ -68,6 +68,40 @@ class FunctionLib
     * @param
     * @return
     **/
+    public static function produk_by($status, $val= 0, $limit= 8, $where= 1, $order= "RAND()"){
+        switch ($status) {
+            case 'category':
+                    $cat = Illuminate\Support\Facades\DB::select("SELECT GROUP_CONCAT(lv SEPARATOR ',') as lv FROM (
+                        SELECT @pv:=(SELECT GROUP_CONCAT(id SEPARATOR ',') FROM sys_category WHERE
+                        FIND_IN_SET(category_parent_id, @pv)) AS lv FROM sys_category
+                        JOIN (SELECT @pv:=$val)tmp
+                        WHERE category_parent_id IN (@pv)) a")[0];
+                    $cat = $cat->lv.",".$val;
+                    $return = App\Models\Produk::whereIn("produk_category_id", explode(",",$cat))
+                        ->whereRaw($where)
+                        ->orderByRaw($order)
+                        ->skip(0)
+                        ->take($limit);
+                break;
+            case 'brand':
+                    $return = App\Models\Produk::where("produk_brand_id", $val)
+                        ->whereRaw($where)
+                        ->orderByRaw($order)
+                        ->skip(0)
+                        ->take($limit);
+                break;
+            
+            default:
+                    $return = [];
+                break;
+        }
+        return $return;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
     public static function add_chart($produk_id){
         $produk = App\Models\Produk::where("id", $produk_id)->first();
         return true;
@@ -182,6 +216,27 @@ class FunctionLib
             $where .= " AND trans_detail_status = ".$status;
         }
         $total = App\Models\Trans_detail::whereRaw($where)->count();
+        return $total;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_user($status = ""){
+        $where = 1;
+        $arr = [
+            0 => ' AND (email_verified_at IS NULL OR email_verified_at = "")',
+            1 => ' AND (email_verified_at IS NOT NULL OR email_verified_at != "")',
+        ];
+        if($status == 2){
+        }else{
+            if($status !== ""){
+                $status_qry = $arr[$status];
+                $where .= $status_qry;
+            }
+        }
+        $total = App\User::whereRaw($where)->count();
         return $total;
     }
 
