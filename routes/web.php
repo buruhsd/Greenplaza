@@ -45,13 +45,22 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
 		});
 		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
-		Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
+		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
 		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'member\\FrontController@admin')->name('.dashboard');
 
 		// configurasi
+		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
+			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/create', 'Superadmin\\Conf_configController@create')->name('.create');
+			Route::post('/store', 'Superadmin\\Conf_configController@store')->name('.store');
+			Route::get('/show/{id}', 'Superadmin\\Conf_configController@show')->name('.show');
+			Route::get('/edit/{id}', 'Superadmin\\Conf_configController@edit')->name('.edit');
+			Route::post('/update/{id}', 'Superadmin\\Conf_configController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Superadmin\\Conf_configController@destroy')->name('.destroy');
+		});
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'Admin\\ShipmentController@index')->name('.index');
 			Route::get('/create', 'Admin\\ShipmentController@create')->name('.create');
@@ -116,6 +125,15 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::patch('/update', 'Admin\\TransactionController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
 		});
+		Route::group(['prefix' => 'res_kom', 'as' => '.res_kom'], function () {
+			Route::get('/', 'Admin\\KomplainController@res_kom')->name('.index');
+			Route::get('/create', 'Admin\\KomplainController@res_kom_create')->name('.create');
+			Route::post('/store', 'Admin\\KomplainController@res_kom_store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\KomplainController@res_kom_show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\KomplainController@res_kom_edit')->name('.edit');
+			Route::patch('/update', 'Admin\\KomplainController@res_kom_update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\KomplainController@res_kom_destroy')->name('.destroy');
+		});
 	});
 });
 
@@ -177,13 +195,16 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('get_province/{id}', 'ContentController@get_province')->name('.get_province');
 		Route::get('get_city/{id}', 'ContentController@get_city')->name('.get_city');
 		Route::get('get_subdistrict/{id}', 'ContentController@get_subdistrict')->name('.get_subdistrict');
+		Route::get('config_content', function(){return true;})->name('.config_content');
 	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
+		Route::get('form_config', 'ModalController@formConfig')->name('.form_config');
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
 		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
+		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

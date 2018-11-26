@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Superadmin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\conf_config;
+use App\Models\Conf_config;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use FunctionLib;
 
 
 class Conf_configController extends Controller
@@ -25,16 +26,18 @@ class Conf_configController extends Controller
      */
     public function index(Request $request)
     {
+        $arr = FunctionLib::config_arr('profil');
+        dd(Conf_config::whereIn('configs_name', $arr)->get());
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['conf_config'] = conf_config::where('configs_status', 'LIKE', "%$keyword%")
+            $data['config'] = Conf_config::where('configs_status', 'LIKE', "%$keyword%")
                 ->orWhere('configs_name', 'LIKE', "%$keyword%")
                 ->orWhere('configs_value', 'LIKE', "%$keyword%")
                 ->orWhere('configs_note', 'LIKE', "%$keyword%")
                 ->paginate($this->perPage);
         } else {
-            $data['conf_config'] = conf_config::paginate($this->perPage);
+            $data['config'] = Conf_config::paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
@@ -62,18 +65,20 @@ class Conf_configController extends Controller
     public function store(Request $request)
     {
         $status = 200;
-        $message = 'conf_config added!';
+        $message = 'Config added!';
         $this->validate($request, [
-			'configs_status' => 'required',
 			'configs_name' => 'required',
 			'configs_value' => 'required'
 		]);
         $requestData = $request->all();
         
-        $res = conf_config::create($requestData);
+        $res = Conf_config::create($requestData);
         if(!$res){
             $status = 500;
-            $message = 'conf_config Not added!';
+            $message = 'Config Not added!';
+        }
+        if($request->ajax()){
+            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
         }
         return redirect('superadmin/conf_config')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -88,7 +93,7 @@ class Conf_configController extends Controller
      */
     public function show($id)
     {
-        $data['conf_config'] = conf_config::findOrFail($id);
+        $data['conf_config'] = Conf_config::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('superadmin.config.show', $data);
@@ -103,7 +108,7 @@ class Conf_configController extends Controller
      */
     public function edit($id)
     {
-        $data['conf_config'] = conf_config::findOrFail($id);
+        $data['conf_config'] = Conf_config::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('superadmin.config.edit', $data);
@@ -120,21 +125,23 @@ class Conf_configController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'conf_config added!';
+        $message = 'Config Updated!';
         $this->validate($request, [
-			'configs_status' => 'required',
 			'configs_name' => 'required',
 			'configs_value' => 'required'
 		]);
         $requestData = $request->all();
         
-        $conf_config = conf_config::findOrFail($id);
+        $conf_config = Conf_config::findOrFail($id);
         $res = $conf_config->update($requestData);
         if(!$res){
             $status = 500;
-            $message = 'conf_config Not updated!';
+            $message = 'Config Not updated!';
         }
 
+        if($request->ajax()){
+            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
+        }
         return redirect('superadmin/config')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
@@ -150,7 +157,7 @@ class Conf_configController extends Controller
     {
         $status = 200;
         $message = 'conf_config deleted!';
-        $res = conf_config::destroy($id);
+        $res = Conf_config::destroy($id);
         if(!$res){
             $status = 500;
             $message = 'conf_config Not deleted!';

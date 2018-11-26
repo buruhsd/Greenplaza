@@ -1,6 +1,25 @@
 <?php
 class FunctionLib
 {
+    /**
+    * @param
+    * @return
+    **/
+    public static function config_arr($type="profil") {
+        switch ($type) {
+            case 'profil':
+                $arr = App\Models\Conf_config::where('configs_name', 'LIKE', 'profil_%')->pluck('configs_name');
+                break;
+            case 'transaksi':
+                $arr = App\Models\Conf_config::where('configs_name', 'LIKE', 'transaksi_%')->pluck('configs_name');
+                break;
+            default:
+                $arr = [];
+                break;
+        }
+        return $arr;
+    }
+
 	/**
 	* @param
 	* @return
@@ -14,7 +33,7 @@ class FunctionLib
     * @return
     **/
     public static function get_config($type, $status = 1){
-        $value = App\Conf_config::where('configs_status', '=', $status)
+        $value = App\Models\Conf_config::where('configs_status', '=', $status)
             ->where('configs_name', $type)
             ->pluck('configs_value')[0];
         return $value;
@@ -237,6 +256,19 @@ class FunctionLib
             }
         }
         $total = App\User::whereRaw($where)->count();
+        return $total;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_res_kom($status = ""){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND komplain_status = ".$status;
+        }
+        $total = App\Models\Komplain::whereRaw($where)->count();
         return $total;
     }
 

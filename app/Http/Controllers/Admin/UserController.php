@@ -30,9 +30,6 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $arr = [
-            "0" =>'wait',
-            "1" =>'active',
-            "2" =>'block',
             'wait' => ' AND (email_verified_at IS NULL OR email_verified_at = "")',
             'active' => ' AND (email_verified_at IS NOT NULL OR email_verified_at != "")',
             'block' =>'',

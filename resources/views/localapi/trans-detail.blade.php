@@ -19,7 +19,7 @@
                         <th class="text-center">Transaction Detail</th>
                         <th class="text-center">Actions</th>
                     </thead>
-                    @foreach($trans->trans_detail as $item)
+                    @foreach($trans_detail as $item)
                         <tbody>
                             <td><b>{{$item->trans_code}}</b></td>
                             <td>

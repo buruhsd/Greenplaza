@@ -54,7 +54,13 @@
                                 @foreach($category as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->category_parent_id }}</td>
+                                        <td>
+                                            {!! 
+                                                ($item->par['category_name'])
+                                                ?$item->par['category_name']
+                                                :"<button class='btn btn-danger btn-xs'>On Top</button>"
+                                            !!}
+                                        </td>
                                         <td>{{ $item->category_name }}</td>
                                         <td>{!! ($item->category_is_usable == 1)
                                             ?"<button class='btn btn-success btn-xs'>Use</button>"

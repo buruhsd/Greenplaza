@@ -9,11 +9,6 @@
                 <div class="page-sidebar-inner">
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
-                            <li>
-                                <a href="{{route('admin.config.index')}}">
-                                    <i class="menu-icon icon-fire"></i><span>Config</span>
-                                </a>
-                            </li>
                             <li class="active-page">
                                 <a href="{{route('admin.dashboard')}}">
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
@@ -30,7 +25,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.res_kom.index')}}">
+                                <a href="{{route('admin.resolusi_komplain')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
                                 </a>
                             </li>

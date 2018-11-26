@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User_address;
 use App\Models\Trans;
+use App\Models\Trans_detail;
 use FunctionLib;
 
 class ModalController extends Controller
@@ -18,6 +19,17 @@ class ModalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * pemanggil admin transaksi
+     * @param
+     * @return 
+     */
+    public function formConfig()
+    {
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.form-config', $data);
     }
 
     /**
@@ -62,7 +74,20 @@ class ModalController extends Controller
      */
     public function transDetail($id)
     {
-        $data['trans'] = Trans::whereId($id)->first();
+        $trans = Trans::whereId($id)->first();
+        $data['trans_detail'] = $trans->trans_detail;
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.trans-detail', $data);
+    }
+
+    /**
+     * pemanggil admin res kom
+     * @param
+     * @return 
+     */
+    public function res_kom_transDetail($id)
+    {
+        $data['trans_detail'] = Trans_detail::whereId($id)->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.trans-detail', $data);
     }
