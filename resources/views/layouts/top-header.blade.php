@@ -1,5 +1,26 @@
 <!-- header-area start -->
-    <header class="header-area"> 
+    <header class="header-area">
+        <div class="header-tor-area bg-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-3 col-12">
+                    </div>
+                    <div class="col-md-8 col-sm-7 col-12">
+                        <ul class="d-flex account-info">
+                        <li><a href="javascript:void(0);"><i class="fa fa-envelope"></i></a></li>
+                            <li><a href="javascript:void(0);"><i class="fa fa-user"></i> my Account <i class="fa fa-angle-down"></i></a>
+                                <ul>
+                                    <li><a href="login.html">LogIn</a></li>
+                                    <li><a href="register.html">Register</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
@@ -14,15 +35,6 @@
                     <div class="col-md-5 col-sm-9 col-12">
                         <div class="search-wrap">
                             <form action="search">
-                                <div class="select-menu" tabindex="1">
-                                    <span>Categories </span>
-                                    <ul class="dropdown">
-                                        <li><a href="javascript:void(0);">Man</a></li>
-                                        <li><a href="javascript:void(0);">Woman</a></li>
-                                        <li><a href="javascript:void(0);">Kids</a></li>
-                                        <li><a href="javascript:void(0);">Babys</a></li>
-                                    </ul>
-                                </div>
                                 <input type="text" placeholder="Search Here...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
@@ -35,7 +47,6 @@
                             <li><a href="{{route('register')}}">Register</a></li>
                         @else
                             <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-envelope"></i></a></li>
                             @if(!Auth::user()->is_superadmin())
                                 <li><a href="javascript:void(0);">Etalase</a></li>
                             @else
