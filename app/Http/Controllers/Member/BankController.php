@@ -1,68 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Superadmin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Conf_config;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use FunctionLib;
 
 
-class Conf_configController extends Controller
+class BankController extends Controller
 {
     private $perPage = 25;
-    private $mainTable = 'conf_configs';
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function profil(Request $request)
-    {
-        $keyword = $request->get('search');
-
-        $arr = FunctionLib::config_arr('profil');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-
-        return view('superadmin.config.index', $data);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function transaction(Request $request)
-    {
-        $keyword = $request->get('search');
-
-        $arr = FunctionLib::config_arr('transaksi');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-
-        return view('superadmin.config.index', $data);
-    }
-    
+    private $mainTable = 'conf_bank';
     /**
      * Display a listing of the resource.
      *
@@ -73,17 +27,13 @@ class Conf_configController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['config'] = Conf_config::where('configs_status', 'LIKE', "%$keyword%")
-                ->orWhere('configs_name', 'LIKE', "%$keyword%")
-                ->orWhere('configs_value', 'LIKE', "%$keyword%")
-                ->orWhere('configs_note', 'LIKE', "%$keyword%")
-                ->paginate($this->perPage);
+            $data['bank'] = Bank::paginate($this->perPage);
         } else {
-            $data['config'] = Conf_config::paginate($this->perPage);
+            $data['bank'] = Bank::paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
-        return view('superadmin.config.index', $data);
+        return view('member.bank.index', $data);
     }
 
     /**
@@ -94,7 +44,7 @@ class Conf_configController extends Controller
     public function create()
     {
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.create', $data);
+        return view('member.bank.create', $data);
     }
 
     /**
@@ -107,22 +57,20 @@ class Conf_configController extends Controller
     public function store(Request $request)
     {
         $status = 200;
-        $message = 'Config added!';
-        $this->validate($request, [
-			'configs_name' => 'required',
-			'configs_value' => 'required'
-		]);
+        $message = 'Bank added!';
+        
         $requestData = $request->all();
         
-        $res = Conf_config::create($requestData);
+        $res = new Bank;
+        $res->bank_kode = $request->bank_kode;
+        $res->bank_name = $request->bank_name;
+        $res->bank_note = $request->bank_note;
+        $res->save();
         if(!$res){
             $status = 500;
-            $message = 'Config Not added!';
+            $message = 'Bank Not added!';
         }
-        if($request->ajax()){
-            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
-        }
-        return redirect('superadmin/conf_config')
+        return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -135,10 +83,10 @@ class Conf_configController extends Controller
      */
     public function show($id)
     {
-        $data['conf_config'] = Conf_config::findOrFail($id);
+        $data['bank'] = Bank::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.show', $data);
+        return view('member.bank.show', $data);
     }
 
     /**
@@ -150,10 +98,10 @@ class Conf_configController extends Controller
      */
     public function edit($id)
     {
-        $data['conf_config'] = Conf_config::findOrFail($id);
+        $data['bank'] = Bank::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.edit', $data);
+        return view('member.bank.edit', $data);
     }
 
     /**
@@ -167,24 +115,22 @@ class Conf_configController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Config Updated!';
-        $this->validate($request, [
-			'configs_name' => 'required',
-			'configs_value' => 'required'
-		]);
+        $message = 'Bank added!';
+        
         $requestData = $request->all();
         
-        $conf_config = Conf_config::findOrFail($id);
-        $res = $conf_config->update($requestData);
+        $bank = Bank::findOrFail($id);
+        $bank->bank_kode = $request->bank_kode;
+        $bank->bank_name = $request->bank_name;
+        $bank->bank_note = $request->bank_note;
+        $bank->save();
+        $res = $bank->update($requestData);
         if(!$res){
             $status = 500;
-            $message = 'Config Not updated!';
+            $message = 'Bank Not updated!';
         }
 
-        if($request->ajax()){
-            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
-        }
-        return redirect('superadmin/config')
+        return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -198,14 +144,14 @@ class Conf_configController extends Controller
     public function destroy($id)
     {
         $status = 200;
-        $message = 'conf_config deleted!';
-        $res = Conf_config::destroy($id);
+        $message = 'Bank deleted!';
+        $res = Bank::destroy($id);
         if(!$res){
             $status = 500;
-            $message = 'conf_config Not deleted!';
+            $message = 'Bank Not deleted!';
         }
 
-        return redirect('superadmin/config')
+        return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -221,9 +167,9 @@ class Conf_configController extends Controller
             }
         }
         $qry .= ' WHERE '.$where.' Limit 1';
-        $conf_config = DB::query($qry);
+        $bank = DB::query($qry);
 
-        return $conf_config;
+        return $bank;
     }
 
     /**
@@ -238,6 +184,7 @@ class Conf_configController extends Controller
         switch ($method) {
             case 'index':
                 ?>
+                    <!-- <link href="<?php //echo asset('xtreme/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') ?>" rel="stylesheet"> -->
                     <script type="text/javascript"></script>
                 <?php
                 break;

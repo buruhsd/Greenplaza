@@ -54,6 +54,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
+			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');
 			Route::get('/create', 'Superadmin\\Conf_configController@create')->name('.create');
 			Route::post('/store', 'Superadmin\\Conf_configController@store')->name('.store');
 			Route::get('/show/{id}', 'Superadmin\\Conf_configController@show')->name('.show');
@@ -146,6 +148,52 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin']], function
 // auth admin & member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member'], function () {
+		Route::get('/profil', 'Member\\UserController@index')->name('.profil');
+		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
+			Route::get('/', 'Member\\ShipmentController@index')->name('.index');
+			Route::get('/create', 'Member\\ShipmentController@create')->name('.create');
+			Route::post('/store', 'Member\\ShipmentController@store')->name('.store');
+			Route::get('/show/{id}', 'Member\\ShipmentController@show')->name('.show');
+			Route::get('/edit/{id}', 'Member\\ShipmentController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'Member\\ShipmentController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\ShipmentController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
+			Route::get('/', 'Member\\BankController@index')->name('.index');
+			Route::get('/create', 'Member\\BankController@create')->name('.create');
+			Route::post('/store', 'Member\\BankController@store')->name('.store');
+			Route::get('/show/{id}', 'Member\\BankController@show')->name('.show');
+			Route::get('/edit/{id}', 'Member\\BankController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'Member\\BankController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\BankController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
+			Route::get('/', 'Member\\BrandController@index')->name('.index');
+			Route::get('/create', 'Member\\BrandController@create')->name('.create');
+			Route::post('/store', 'Member\\BrandController@store')->name('.store');
+			Route::get('/show/{id}', 'Member\\BrandController@show')->name('.show');
+			Route::get('/edit/{id}', 'Member\\BrandController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'Member\\BrandController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\BrandController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::get('/', 'Member\\ProdukController@index')->name('.index');
+			Route::get('/create', 'Member\\ProdukController@create')->name('.create');
+			Route::post('/store', 'Member\\ProdukController@store')->name('.store');
+			Route::get('/show/{id}', 'Member\\ProdukController@show')->name('.show');
+			Route::get('/edit/{id}', 'Member\\ProdukController@edit')->name('.edit');
+			Route::patch('/update', 'Member\\ProdukController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\ProdukController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
+			Route::get('/', 'Member\\TransactionController@index')->name('.index');
+			Route::get('/create', 'Member\\TransactionController@create')->name('.create');
+			Route::post('/store', 'Member\\TransactionController@store')->name('.store');
+			Route::get('/show/{id}', 'Member\\TransactionController@show')->name('.show');
+			Route::get('/edit/{id}', 'Member\\TransactionController@edit')->name('.edit');
+			Route::patch('/update', 'Member\\TransactionController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\TransactionController@destroy')->name('.destroy');
+		});
 	});
 });
 

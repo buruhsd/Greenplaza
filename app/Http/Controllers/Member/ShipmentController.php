@@ -1,68 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Superadmin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Conf_config;
+use App\Models\Shipment;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use FunctionLib;
 
 
-class Conf_configController extends Controller
+class ShipmentController extends Controller
 {
-    private $perPage = 25;
-    private $mainTable = 'conf_configs';
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function profil(Request $request)
-    {
-        $keyword = $request->get('search');
-
-        $arr = FunctionLib::config_arr('profil');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-
-        return view('superadmin.config.index', $data);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function transaction(Request $request)
-    {
-        $keyword = $request->get('search');
-
-        $arr = FunctionLib::config_arr('transaksi');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-
-        return view('superadmin.config.index', $data);
-    }
-    
+    private $perPage = 5;
+    private $mainTable = 'conf_shipment';
     /**
      * Display a listing of the resource.
      *
@@ -73,17 +27,13 @@ class Conf_configController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['config'] = Conf_config::where('configs_status', 'LIKE', "%$keyword%")
-                ->orWhere('configs_name', 'LIKE', "%$keyword%")
-                ->orWhere('configs_value', 'LIKE', "%$keyword%")
-                ->orWhere('configs_note', 'LIKE', "%$keyword%")
-                ->paginate($this->perPage);
+            $data['shipment'] = Shipment::paginate($this->perPage);
         } else {
-            $data['config'] = Conf_config::paginate($this->perPage);
+            $data['shipment'] = Shipment::paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
-        return view('superadmin.config.index', $data);
+        return view('member.shipment.index', $data);
     }
 
     /**
@@ -93,8 +43,9 @@ class Conf_configController extends Controller
      */
     public function create()
     {
+        $data['shipment_par'] = Shipment::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.create', $data);
+        return view('member.shipment.create', $data);
     }
 
     /**
@@ -107,22 +58,16 @@ class Conf_configController extends Controller
     public function store(Request $request)
     {
         $status = 200;
-        $message = 'Config added!';
-        $this->validate($request, [
-			'configs_name' => 'required',
-			'configs_value' => 'required'
-		]);
+        $message = 'Shipment added!';
+        
         $requestData = $request->all();
         
-        $res = Conf_config::create($requestData);
+        $res = Shipment::create($requestData);
         if(!$res){
             $status = 500;
-            $message = 'Config Not added!';
+            $message = 'Shipment Not added!';
         }
-        if($request->ajax()){
-            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
-        }
-        return redirect('superadmin/conf_config')
+        return redirect('member/shipment')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -135,10 +80,10 @@ class Conf_configController extends Controller
      */
     public function show($id)
     {
-        $data['conf_config'] = Conf_config::findOrFail($id);
+        $data['shipment'] = Shipment::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.show', $data);
+        return view('member.shipment.show', $data);
     }
 
     /**
@@ -150,10 +95,11 @@ class Conf_configController extends Controller
      */
     public function edit($id)
     {
-        $data['conf_config'] = Conf_config::findOrFail($id);
+        $data['shipment_par'] = Shipment::all();
+        $data['shipment'] = Shipment::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('superadmin.config.edit', $data);
+        return view('member.shipment.edit', $data);
     }
 
     /**
@@ -167,24 +113,18 @@ class Conf_configController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Config Updated!';
-        $this->validate($request, [
-			'configs_name' => 'required',
-			'configs_value' => 'required'
-		]);
+        $message = 'Shipment added!';
+        
         $requestData = $request->all();
         
-        $conf_config = Conf_config::findOrFail($id);
-        $res = $conf_config->update($requestData);
+        $brand = Shipment::findOrFail($id);
+        $res = $brand->update($requestData);
         if(!$res){
             $status = 500;
-            $message = 'Config Not updated!';
+            $message = 'Shipment Not updated!';
         }
 
-        if($request->ajax()){
-            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
-        }
-        return redirect('superadmin/config')
+        return redirect('member/shipment')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -198,14 +138,14 @@ class Conf_configController extends Controller
     public function destroy($id)
     {
         $status = 200;
-        $message = 'conf_config deleted!';
-        $res = Conf_config::destroy($id);
+        $message = 'Shipment deleted!';
+        $res = Shipment::destroy($id);
         if(!$res){
             $status = 500;
-            $message = 'conf_config Not deleted!';
+            $message = 'Shipment Not deleted!';
         }
 
-        return redirect('superadmin/config')
+        return redirect('member/shipment')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -221,9 +161,9 @@ class Conf_configController extends Controller
             }
         }
         $qry .= ' WHERE '.$where.' Limit 1';
-        $conf_config = DB::query($qry);
+        $brand = DB::query($qry);
 
-        return $conf_config;
+        return $brand;
     }
 
     /**

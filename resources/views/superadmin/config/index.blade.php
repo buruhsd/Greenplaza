@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                        {!! Form::label('produk_unit', 'Unit : ', ['class' => 'col-md-3 control-label']) !!}
+                                        {!! Form::label('produk_unit', ' ', ['class' => 'col-md-3 control-label']) !!}
                                         </div>
                                     </div>
                                 {!! Form::close() !!}

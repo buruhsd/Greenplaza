@@ -58,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail
     **/
     public function user_detail()
     {
-        return $this->hasOne('App\Sys_user_detail', 'user_detail_user_id');
+        return $this->hasOne('App\Models\User_detail', 'user_detail_user_id');
     }
 
     /**
@@ -67,7 +67,7 @@ class User extends Authenticatable implements MustVerifyEmail
     **/
     public function user_bank()
     {
-        return $this->hasMany('App\Sys_user_bank', 'user_bank_user_id');
+        return $this->hasMany('App\Models\User_bank', 'user_bank_user_id');
     }
 
     /**
@@ -76,7 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
     **/
     public function user_address()
     {
-        return $this->hasMany('App\Sys_user_address', 'user_address_user_id');
+        return $this->hasMany('App\Models\User_address', 'user_address_user_id');
     }
 
     public function MailVerification(){

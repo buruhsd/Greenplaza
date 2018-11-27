@@ -133,7 +133,7 @@ class FrontController extends Controller
     // }
 
     public function admin(){
-        return view('admin.dashboard.dashboard');
+        return view('member.dashboard.dashboard');
 
     }
 

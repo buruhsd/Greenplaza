@@ -13,6 +13,9 @@ class UserDetail extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('sys_user_bank');
+        Schema::dropIfExists('sys_user_address');
+        Schema::dropIfExists('sys_user_detail');
         // detail user
         Schema::create('sys_user_detail', function (Blueprint $table) {
             $table->increments('id');

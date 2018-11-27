@@ -78,41 +78,76 @@
                                     <i class="menu-icon icon-cog"></i><span>Konfigurasi</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Setting Produk</a>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Setting Produk</h4>
+                                        <li><a href="{{route('admin.category.index')}}">Kategori Produk</a></li>
+                                        {{-- <a href="#">Setting Produk</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{route('admin.category.index')}}">Kategori Produk</a></li>
-                                        </ul></li>
-                                    <li><a href="#">Setting Harga</a>
+                                        </ul> --}}
+                                    </li>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Setting Harga</h4>
+                                        <li><a href="#">Paket Reg Seller</a></li>
+                                        <li><a href="#">Harga Iklan (Iklan Greenplaza)</a></li>
+                                        <li><a href="#">Harga Beli Saldo Iklan</a></li>
+                                        {{-- <a href="#">Setting Harga</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Paket Reg Seller</a></li>
                                             <li><a href="#">Harga Iklan (Iklan Greenplaza)</a></li>
                                             <li><a href="#">Harga Beli Saldo Iklan</a></li>
-                                        </ul></li>
-                                    <li><a href="#">Setting Iklan</a>
+                                        </ul> --}}
+                                    </li>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Setting Iklan</h4>
+                                        <li><a href="#">Iklan Slider</a></li>
+                                        <li><a href="#">Iklan Banner Khusus</a></li>
+                                        {{-- <a href="#">Setting Iklan</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Iklan Slider</a></li>
                                             <li><a href="#">Iklan Banner Khusus</a></li>
-                                        </ul></li>
-                                    <li><a href="#">Setting Transaksi</a>
+                                        </ul> --}}
+                                    </li>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Setting Transaksi</h4>
+                                        <li><a href="{{route('admin.config.transaction')}}">Jeda Waktu Transaksi</a></li>
+                                        <li><a href="#">Fee Transaksi</a></li>
+                                        <li><a href="#">Pajak</a></li>
+                                        {{-- <a href="#">Setting Transaksi</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Jeda Waktu Transaksi</a></li>
+                                            <li><a href="{{route('admin.config.transaction')}}">Jeda Waktu Transaksi</a></li>
                                             <li><a href="#">Fee Transaksi</a></li>
                                             <li><a href="#">Pajak</a></li>
-                                        </ul></li>
-                                    <li><a href="#">Profil Greenplaza</a>
+                                        </ul> --}}
+                                    </li>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Profil Greenplaza</h4>
+                                        <li><a href="{{route('admin.config.profil')}}">Profil Greenplaza</a></li>
+                                        <li><a href="#">Official Email</a></li>
+                                        <li><a href="{{route('admin.bank.index')}}">Bank</a></li>
+                                        {{-- <a href="#">Profil Greenplaza</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Profil Greenplaza</a></li>
                                             <li><a href="#">Official Email</a></li>
                                             <li><a href="{{route('admin.bank.index')}}">Bank</a></li>
-                                        </ul></li>
-                                    <li><a href="#">Setting Akun</a>
+                                        </ul> --}}
+                                    </li>
+                                    <li>
+                                        <h4 class="m-l-sm text-danger">Setting Akun</h4>
+                                        <li><a href="#">Tambah Akun Admin</a></li>
+                                        <li><a href="#">Grade Member</a></li>
+                                        <li><a href="#">Grade Seller</a></li>
+                                        <li><a href="#">Page List</a></li>
+                                        <li><a href="#">Update Password Admin</a></li>
+                                        {{-- <a href="#">Setting Akun</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Tambah Akun Admin</a></li>
                                             <li><a href="#">Grade Member</a></li>
                                             <li><a href="#">Grade Seller</a></li>
                                             <li><a href="#">Page List</a></li>
                                             <li><a href="#">Update Password Admin</a></li>
-                                        </ul></li>
+                                        </ul> --}}
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

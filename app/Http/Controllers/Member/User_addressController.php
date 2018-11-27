@@ -34,7 +34,7 @@ class User_addressController extends Controller
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
-        return view('admin.user_address.index', $data);
+        return view('member.user_address.index', $data);
     }
 
     /**
@@ -45,7 +45,7 @@ class User_addressController extends Controller
     public function create()
     {
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('admin.user_address.create', $data);
+        return view('member.user_address.create', $data);
     }
 
     /**
@@ -79,7 +79,7 @@ class User_addressController extends Controller
             $status = 500;
             $message = 'User_address Not added!';
         }
-        return redirect()->back()//('admin/user_address')
+        return redirect()->back()//('member/user_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -95,7 +95,7 @@ class User_addressController extends Controller
         $data['user_address'] = User_address::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('admin.user_address.show', $data);
+        return view('member.user_address.show', $data);
     }
 
     /**
@@ -110,7 +110,7 @@ class User_addressController extends Controller
         $data['user_address'] = User_address::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('admin.user_address.edit', $data);
+        return view('member.user_address.edit', $data);
     }
 
     /**
@@ -147,7 +147,7 @@ class User_addressController extends Controller
             $message = 'User_address Not updated!';
         }
 
-        return redirect('admin/user_address')
+        return redirect('member/user_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -168,7 +168,7 @@ class User_addressController extends Controller
             $message = 'User_address Not deleted!';
         }
 
-        return redirect('admin/user_address')
+        return redirect('member/user_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
