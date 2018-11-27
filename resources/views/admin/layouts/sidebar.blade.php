@@ -14,7 +14,7 @@
                                     <i class="menu-icon icon-fire"></i><span>Config</span>
                                 </a>
                             </li>
-                            <li class="active-page">
+                            <li>{{--  class="active-page"> --}}
                                 <a href="{{route('admin.dashboard')}}">
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                                 </a>

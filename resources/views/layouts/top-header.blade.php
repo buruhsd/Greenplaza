@@ -7,14 +7,56 @@
                     </div>
                     <div class="col-md-8 col-sm-7 col-12">
                         <ul class="d-flex account-info">
-                        <li><a href="javascript:void(0);"><i class="fa fa-bell"></i></a></li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-user"></i> my Account <i class="fa fa-angle-down"></i></a>
+                        @guest
+                            <li class="box-li"><a href="{{route('login')}}">Login</a></li>
+                            <li><a href="{{route('register')}}">Register</a></li>
+                        @else
+                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
+                            @if(!Auth::user()->is_superadmin())
+                                <li><a href="javascript:void(0);">Etalase</a></li>
+                            @else
+                            @endif
+                        @endguest
+                        <li>
+                            <a href="javascript:void(0);"><i class="fa fa-bell"></i></a></li>
+                            <li>
+                                <a href="javascript:void(0);">
+                                    <i class="fa fa-user"></i>
+                                        @guest
+                                        @else
+                                            {{Auth::user()->name}}
+                                        @endguest
+                                    <i class="fa fa-angle-down"></i></a>
                                 <ul>
+                                    @guest
+                                        <li><a href="{{route('login')}}">Login</a></li>
+                                        <li><a href="{{route('register')}}">Register</a></li>
+                                    @else
+                                        <li><a href="{{route('profil')}}">Profil</a></li>
+                                        @if(Auth::user()->is_admin())
+                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
+                                        @elseif(Auth::user()->is_member())
+                                            <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
+                                            <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                        @endif
+                                        <li>
+                                            <a onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                                {{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    @endguest
+                                </ul>
+                                {{--<ul>
                                     <li><a href="login.html">LogIn</a></li>
                                     <li><a href="register.html">Register</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
-                                </ul>
+                                </ul>--}}
                             </li>
                         </ul>
                     </div>
@@ -42,41 +84,6 @@
                     </div>
                     <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
-                        @guest
-                            <li class="box-li"><a href="{{route('login')}}">Login</a></li>
-                            <li><a href="{{route('register')}}">Register</a></li>
-                        @else
-                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            @if(!Auth::user()->is_superadmin())
-                                <li><a href="javascript:void(0);">Etalase</a></li>
-                            @else
-                            @endif
-                            <li>
-                                <ul class="d-flex account-info">
-                                    <li><a href="javascript:void(0);"> {{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
-                                        <ul>
-                                            <li><a href="{{route('profil')}}">Profil</a></li>
-                                            @if(Auth::user()->is_admin())
-                                                <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                                <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
-                                            @elseif(Auth::user()->is_member())
-                                                <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
-                                                <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
-                                            @endif
-                                            <li>
-                                                <a onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                                    {{ __('Logout') }}
-                                                </a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    @csrf
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
                         </ul>
                     </div>
                 </div>
