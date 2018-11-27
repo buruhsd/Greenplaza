@@ -72,10 +72,10 @@
                                                         break;
                                                 }
                                                 ?>
-                                                <li>window : {{$users->user_store}}</li>
-                                                <li>Username : {{$users->username}}</li>
-                                                <li>Name : {{$users->name}}</li>
-                                                <li>Email : {{$users->email}}</li>
+                                                <li>window : {{$users['user_store']}}</li>
+                                                <li>Username : {{$users['username']}}</li>
+                                                <li>Name : {{$users['name']}}</li>
+                                                <li>Email : {{$users['email']}}</li>
                                             </ul>
                                         </td>
                                         <td>

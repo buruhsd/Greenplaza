@@ -62,7 +62,9 @@ class ChartController extends Controller
         Session::push('chart', $transaction);
         Session::save();
 
-    	return redirect()->back();
+        $status = 200;
+        $message = 'Add Chart Successfully';
+    	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);;
     }
 
     /**
