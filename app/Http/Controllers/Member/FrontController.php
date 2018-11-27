@@ -77,7 +77,7 @@ class FrontController extends Controller
         if($request->input("cat") != ""){
             $id_cat = Category::whereCategory_slug($request->input("cat"))->orderByRaw($order)->pluck('id')->first();
             $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
-            if($id_cat != null){
+            if($id_cat !== null){
                 $data['produk'] = FunctionLib::produk_by('category', $id_cat)->paginate($perPage);
             }
         }else{
