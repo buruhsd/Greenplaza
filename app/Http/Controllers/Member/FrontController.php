@@ -99,6 +99,8 @@ class FrontController extends Controller
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
+        $data['side_cat'] = FunctionLib::category_by_parent(0)->limit(6)->get();
+        $data['side_related'] = FunctionLib::produk_by('category', $data['detail']->category->id)->orderBy('created_at', 'DESC')->limit(5)->get();
         return view('frontend.detail', $data);
     }
 

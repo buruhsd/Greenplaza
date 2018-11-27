@@ -6,7 +6,7 @@
 <!-- .shop-page-area start -->
     <div class="shop-single-area">
         <div class="container">
-            <div class="row revarce-wrap">
+            <div class="row">
                 @include('layouts._flash')
                 <div class="col-9 col-lg-9 col-12">
                     <div class="shop-area">
@@ -28,6 +28,12 @@
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
                                     <a href="{{action('member\\FrontController@etalase', $detail->user->id)}}"><h3>{{$detail->user->user_store}}</h3></a>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3 class="pull-left">{{ucfirst(strtolower($detail->produk_name))}}</h5>
+                                        </div>
+                                    </div>
+                                    <hr/>
                                     <div class="rating-wrap fix">
                                         @if($detail->produk_discount > 0)
                                             <h3 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</h3>
@@ -347,112 +353,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6 col-12">
+                <div class="col-lg-3 col-sm-12 col-12">
                     <aside class="sidebar-area bg-1">
-                        <div class="widget widget_search">
-                            <h2 class="section-title">Search Product</h2>
-                            <form action="#" class="searchform">
-                                <input type="text" name="s" placeholder="Search Product...">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
                         <div class="widget widget_categories">
                             <h2 class="section-title">Categories</h2>
                             <ul>
-                                <li><a href="#">Furniture</a></li>
-                                <li><a href="#">Chair & Table</a></li>
-                                <li><a href="#">Comfortable Sofa</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">House Decoration</a></li>
-                                <li><a href="#">Kitchen</a></li>
+                                @foreach($side_cat as $item)
+                                    <li><a href="{{url('category?cat='.$item->category_slug)}}">{{ucfirst(strtolower($item->category_name))}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="product-sidebar">
                             <h2 class="section-title">Related Product</h2>
                             <div class="slidebar-product-wrap">
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/24.jpg" alt="">
+                                @foreach($side_related as $item)
+                                    <div class="product-sidebar-items fix">
+                                        <div class="product-sidebar-img black-opacity">
+                                            <img src="assets/images/product/sidebar/24.jpg" alt="">
+                                        </div>
+                                        <div class="product-sedebar-content fix">
+                                            <h4><a href="shop.html">{{$item->produk_name}}</a></h4>
+                                            <ul class="rating">
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                            <p>
+                                                @if($item->produk_discount > 0)
+                                                    Rp. {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}&nbsp;/&nbsp;
+                                                    <del class="text-danger">Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del>
+                                                @else
+                                                    Rp. {{FunctionLib::number_to_text($item->produk_price)}}
+                                                @endif
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/23.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/22.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/21.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
-                        <div class="tag-wrap">
-                            <h2 class="section-title">Propular Tags</h2>
-                            <ul>
-                                <li><a href="#">ecommerce</a></li>
-                                <li><a href="#">product</a></li>
-                                <li><a href="#">man</a></li>
-                                <li><a href="#">fan</a></li>
-                                <li><a href="#">woman</a></li>
-                                <li><a href="#">kids</a></li>
-                                <li><a href="#">babys</a></li>
-                                <li><a href="#">pant</a></li>
-                                <li><a href="#">kids</a></li>
-                                <li><a href="#">babys</a></li>
-                                <li><a href="#">pant</a></li>
-                                <li><a href="#">chair</a></li>
-                                <li><a href="#">table</a></li>
-                            </ul>
                         </div>
                     </aside>
                 </div>
