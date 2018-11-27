@@ -86,4 +86,14 @@ class Produk extends Model
     {
         return $this->hasMany('App\Models\Wishlist', 'wishlist_produk_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function produk_image()
+    {
+        return $this->hasMany('App\Models\Wishlist', 'wishlist_produk_id');
+    }
 }

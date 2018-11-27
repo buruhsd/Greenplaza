@@ -11,7 +11,7 @@
                             <div class="col-lg-12 col-12 order-2">
                                 <div class="about-img black-opacity" style="position: relative;">
                                     <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
-                                    <img src="{{ asset('assets/images/bg_etalase/'.$produk->user->user_store_image) }}" alt="" style="height: 400px">
+                                    <img src="{{ asset('assets/images/bg_etalase/'.$detail->produk_image) }}" alt="" style="height: 400px">
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('assets/images/bg_etalase/'.$produk->) }}" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                     <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
