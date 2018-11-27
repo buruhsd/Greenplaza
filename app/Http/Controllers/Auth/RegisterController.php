@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Session;
 use App\User;
 use App\Role;
 use App\Models\User_detail;
@@ -97,6 +98,10 @@ class RegisterController extends Controller
         // get role member
         $memberRole = Role::where('name', 'member')->pluck('name');
         $insert_role = $user->assignRole($memberRole);
+        Session::flash("flash_notification", [
+                "level"=>"success",
+                "message"=>"Periksa Email Anda Untuk Informasi Lebih Lanjut"
+            ]);
         return $user;
 
     }
