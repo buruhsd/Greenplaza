@@ -263,6 +263,12 @@ a#scrollUp:hover {
     margin-left: 5px;
 }
 
+.account-info li a i.fa-bell {
+    margin-right: 0;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
 .account-info li:first-child a {
     padding-left: 0;
     border-left: none;
@@ -438,7 +444,7 @@ a#scrollUp:hover {
 }
 
 .search-wrap button {
-    width: 35px;
+    width: 60px;
     height: 35px;
     border: none;
     background: transparent;
@@ -492,9 +498,36 @@ a#scrollUp:hover {
 }
 
 .cart-wishlist-wrap li a i.fa-shopping-cart {
-    padding: 10px 15px 15px 0px;
-    margin-right: 10px;
+    padding: 10px 10px 10px 0px;
+    margin-right: 20px;
     border-right: 0px solid #eee;
+    position: absolute;
+    font-size: 20px;
+}
+
+.badge {
+    position: absolute;
+      top: 10px;
+      right: -10px;
+      padding: 5px 10px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+}
+
+.badge-1 {
+    margin-top: 3px;
+    position: absolute;
+      top: -1px;
+      right: 13px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-right:  2px;
+      padding-left: 2px;
+      border-radius: 25%;
+      background-color: red;
+      color: white;
+      font-size: 12px;
 }
 
 .mainmenu {

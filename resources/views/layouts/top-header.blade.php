@@ -7,30 +7,20 @@
                     </div>
                     <div class="col-md-8 col-sm-7 col-12">
                         <ul class="d-flex account-info">
-                        @guest
-                            <li class="box-li"><a href="{{route('login')}}">Login</a></li>
-                            <li><a href="{{route('register')}}">Register</a></li>
-                        @else
-                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
-                            @if(!Auth::user()->is_superadmin())
-                                <li><a href="javascript:void(0);">Etalase</a></li>
-                            @else
-                            @endif
-                        @endguest
                         <li>
-                            <a href="javascript:void(0);"><i class="fa fa-bell"></i></a></li>
+                            <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
+                            <span class="badge-1">3</span></li>
                             <li>
-                                <a href="javascript:void(0);">
-                                    <i class="fa fa-user"></i>
+                                    
                                         @guest
                                         @else
                                             {{Auth::user()->name}}
                                         @endguest
-                                    <i class="fa fa-angle-down"></i></a>
-                                <ul>
+                                    
                                     @guest
                                         <li><a href="{{route('login')}}">Login</a></li>
                                         <li><a href="{{route('register')}}">Register</a></li>
+                                <ul>
                                     @else
                                         <li><a href="{{route('profil')}}">Profil</a></li>
                                         @if(Auth::user()->is_admin())
@@ -84,7 +74,10 @@
                     </div>
                     <div class="col-md-1 col-sm-10">
                         <ul class="cart-wishlist-wrap d-flex">
-                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{route('chart')}}">
+                                <i class="fa fa-shopping-cart"></i></a>
+                                <span class="badge">3</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
