@@ -58,13 +58,14 @@
                                 <div class="panel-body">
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
-                                            <li>Cart<span class="label label-default pull-right">85%</span></li>
-                                            <li>Order<span class="label label-success pull-right">Finished</span></li>
-                                            <li>Transfer<span class="label label-success pull-right">Finished</span></li>
-                                            <li>Seller Tunggu<span class="label label-danger pull-right">Rejected</span></li>
-                                            <li>Seller Batal<span class="label label-default pull-right">27%</span></li>
-                                            <li>Packing<span class="label label-default pull-right">48%</span></li>
-                                            <li>Shipping<span class="label label-default pull-right">Pending</span></li>
+                                            <li>Cart<span class="label label-default pull-right">{{FunctionLib::count_trans(0)}}</span></li>
+                                            <li>Order<span class="label label-success pull-right">{{FunctionLib::count_trans(1)}}</span></li>
+                                            <li>Transfer<span class="label label-success pull-right">{{FunctionLib::count_trans(2)}}</span></li>
+                                            <li>Seller Tunggu<span class="label label-danger pull-right">{{FunctionLib::count_trans(3)}}</span></li>
+                                            <li>Seller Batal<span class="label label-default pull-right">{{FunctionLib::count_trans(4)}}</span></li>
+                                            <li>Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(5)}}</span></li>
+                                            <li>Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(6)}}</span></li>
+                                            <li>Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(7)}}</span></li>
                                         </ul>
                                     </div>
                                     <a href="#"><span class="label label-danger pull-right" style="margin-top:65px">Read More</span></a>
