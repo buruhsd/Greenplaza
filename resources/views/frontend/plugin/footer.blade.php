@@ -13,7 +13,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <!-- <div class="col-lg-3 col-sm-6">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Customer Service</h2>
                             <ul>
@@ -39,16 +39,16 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
-                            <h2 class="section-title">FAQ</h2>
+                            <h2 class="section-title">Greenplaza</h2>
                             <ul>
-                                <li><a href="#">Shopping Guide</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="#">Company</a></li>
-                                <li><a href="#">Investor Relations</a></li>
+                                <li><a href="#">Tentang Greenplaza</a></li>
+                                <li><a href="blog.html">Cara Belanja</a></li>
+                                <li><a href="#">Ketentuan Member</a></li>
+                                <li><a href="#">Cara Pembayaran</a></li>
                                 <li><a href="contact.html">Contact Us</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
