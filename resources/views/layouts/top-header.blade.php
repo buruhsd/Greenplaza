@@ -7,7 +7,7 @@
                     </div>
                     <div class="col-md-8 col-sm-7 col-12">
                         <ul class="d-flex account-info">
-                        <li><a href="javascript:void(0);"><i class="fa fa-envelope"></i></a></li>
+                        <li><a href="javascript:void(0);"><i class="fa fa-bell"></i></a></li>
                             <li><a href="javascript:void(0);"><i class="fa fa-user"></i> my Account <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="login.html">LogIn</a></li>
@@ -35,7 +35,7 @@
                     <div class="col-md-5 col-sm-9 col-12">
                         <div class="search-wrap">
                             <form action="search">
-                                <input type="text" placeholder="Search Here...">
+                                <input type="text" placeholder="Cari Produk...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
                         </div>

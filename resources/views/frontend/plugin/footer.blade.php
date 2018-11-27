@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
-                            <h2 class="section-title">Why Choose us</h2>
+                            <h2 class="section-title">FAQ</h2>
                             <ul>
                                 <li><a href="#">Shopping Guide</a></li>
                                 <li><a href="blog.html">Blog</a></li>

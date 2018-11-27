@@ -815,7 +815,7 @@ a#scrollUp:hover {
 
 .slider-content h2 span,
 .slider-content h3 span {
-    color: #4CAF50;
+    color: #FFD700;
 }
 
 .slider-content h3 {
@@ -831,15 +831,15 @@ a#scrollUp:hover {
 .slider-content a {
     display: inline-block;
     text-transform: uppercase;
-    background: #4CAF50;
-    color: #fff;
+    background: #FFD700;
+    color: #000;
     width: 100px;
     height: 35px;
     line-height: 33px;
     text-align: center;
     border-radius: 3px;
     font-size: 13px;
-    border: 2px solid #4CAF50;
+    border: 2px solid #000;
 }
 
 .slider-content a:hover {
@@ -855,14 +855,14 @@ a#scrollUp:hover {
     -moz-transform: translateY(-50%);
     height: 30px;
     width: 30px;
-    background: #4CAF50;
+    background: #FFD700;
     line-height: 30px;
     text-align: center;
-    border: 1px solid #4CAF50;
+    border: 1px solid #fff;
 }
 
 .next-prev-btn .owl-nav div:hover {
-    background: transparent;
+    background: #FFD700;
 }
 
 .next-prev-btn:hover .owl-nav div {
@@ -1085,7 +1085,7 @@ span.discount {
     bottom: 0;
     width: 60px;
     height: 1px;
-    background: #4CAF50;
+    background: #FFD700;
     content: "";
 }
 
@@ -1122,7 +1122,7 @@ span.discount {
 ul.rating li {
     display: inline-block;
     font-size: 12px;
-    color: #4CAF50;
+    color: #FFD700;
     line-height: 20px;
 }
 
@@ -1208,7 +1208,7 @@ ul.rating li {
     display: block;
     font-size: 12px;
     font-weight: 500;
-    color: #fff;
+    color: #000;
 }
 
 .product-img span.new.sale {
@@ -1221,7 +1221,7 @@ ul.rating li {
     content: "";
     height: 60px;
     width: 70px;
-    background: #edfb2d;
+    background: #FFD700;
     left: -33px;
     top: -30px;
     z-index: -9;
@@ -1288,16 +1288,17 @@ ul.rating li {
 .shop-icon ul li a {
     height: 30px;
     width: 30px;
-    background: #4CAF50;
+    background: #fff;
     line-height: 30px;
     display: block;
-    color: #fff;
-    border: 1px solid #4CAF50;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 .shop-icon ul li a:hover {
-    background: #fff;
-    color: #4CAF50;
+    background: #FFD700;
+    color: #000;
 }
 
 .product-content {
@@ -1307,7 +1308,7 @@ ul.rating li {
 }
 
 .product-wrap:hover .product-content {
-    border-color: #4CAF50;
+    border-color: #fff;
 }
 
 .product-content h3 {
@@ -1453,9 +1454,10 @@ ul.rating li {
 .tab-menu li a:hover,
 .tab-menu li a.active,
 .tag-wrap ul li a:hover {
-    background: #4CAF50;
-    color: #fff;
-    border-color: #4CAF50;
+    background: #FFD700;
+    color: #000;
+    border-color: #fff;
+    border-radius: 5px;
 }
 
 .tag-wrap {
@@ -2209,7 +2211,7 @@ ul.rating li {
 }
 
 .rating-wrap ul li:last-child {
-    color: #eee;
+    color: #000;
 }
 
 .product-single-content p {
@@ -3348,6 +3350,11 @@ transition: background .55s ease;
    background-color: #fff;
 }
 
-
+.jabar {
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
 
 /*--------team-area end--------*/

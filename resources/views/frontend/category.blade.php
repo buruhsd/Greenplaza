@@ -9,6 +9,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shop-area">
+                        <ul class="tab-menu nav jabar">
+                            <li><a class="active" data-toggle="tab" href="#chair">Chair</a></li>
+                            <li><a data-toggle="tab" href="#table">Table</a></li>
+                            <li><a data-toggle="tab" href="#laptop">Laptop</a></li>
+                            <li><a data-toggle="tab" href="#dextop">Dextop</a></li>
+                        </ul>                                                   
                         <div class="row mb-30">
                             <div class="col-lg-3 col-sm-4 col-12">
                                 <select name="stor" class="select-style">
