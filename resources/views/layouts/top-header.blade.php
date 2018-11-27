@@ -66,7 +66,7 @@
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 col-3">
+                    <div class="col-md-2 col-2">
                         <div class="logo">
                             <a href="{{url("/")}}">
                                 <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" >
@@ -74,7 +74,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-5 col-sm-9 col-12">
+                    <div class="col-md-8 col-sm-9 col-12">
                         <div class="search-wrap">
                             <form action="search">
                                 <input type="text" placeholder="Cari Produk...">
@@ -82,8 +82,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-1 col-sm-10">
                         <ul class="cart-wishlist-wrap d-flex">
+                            <li><a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
     <div class="slider-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 offset-lg-0 col-md-0 offset-md-0">
+                <div class="col-lg-9 offset-lg-0 col-md-0 offset-md-0" style="margin-bottom: 25%;">
                     <div class="slider-active owl-carousel next-prev-btn">
                         <div class="slider-item black-opacity">
                             <img src="{{ asset('frontend/images/slider/1.jpg') }}" alt="" class="slider">

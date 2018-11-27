@@ -135,11 +135,11 @@
                                     </div>
                                     <ul class="socil-icon">
                                         <li>Share :</li>
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/images/icon/fb.png') }}"></i></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/images/icon/tw.png') }}"></i></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/images/icon/ig.png') }}"></i></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/images/icon/go.png') }}"></i></a></li>
+                                        <li><a href="#"><img src="{{ asset('frontend/images/icon/yt.png') }}"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

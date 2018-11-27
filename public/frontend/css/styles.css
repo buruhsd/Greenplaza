@@ -774,6 +774,7 @@ a#scrollUp:hover {
 
 .slider-area {
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .slider-active {
@@ -994,7 +995,7 @@ span.discount {
 /*----------featured-area start----------*/
 
 .featured-area {
-    margin-top: 30px;
+    margin-top: -35%;
 }
 
 .featured-wrap {
@@ -2069,16 +2070,19 @@ ul.rating li {
     top: 0;
     width: 40px;
     height: 40px;
-    background: #4CAF50;
-    color: #fff;
+    background: #FFD700;
+    color: #000;
     border: none;
-    padding-top: 10px;
+    padding-top: 3px;
+     margin-top: 10px;
+     border-radius: 5px;
 }
 
 .widget_search button:hover {
-    background: #fff;
-    color: #4CAF50;
-     padding-top: 10px;
+    background: #FFD700;
+    color: #000;
+     padding-top: 3px;
+    
 }
 
 .widget_categories ul li {
