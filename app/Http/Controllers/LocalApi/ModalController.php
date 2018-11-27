@@ -8,6 +8,7 @@ use App\Models\User_address;
 use App\Models\Trans;
 use App\Models\Trans_detail;
 use FunctionLib;
+use Auth;
 
 class ModalController extends Controller
 {
@@ -49,9 +50,12 @@ class ModalController extends Controller
      * @param
      * @return 
      */
-    public function pickAddress()
+    public function pickAddress(Request $request)
     {
         $data['user_address'] = User_address::all();
+        if(!empty($request->id) && $request->id !== 0){
+            $data['user_address'] = User_address::where('user_address_user_id', Auth::id())->get();
+        }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.pick-address', $data);
     }

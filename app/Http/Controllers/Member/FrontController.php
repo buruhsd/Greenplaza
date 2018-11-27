@@ -131,11 +131,5 @@ class FrontController extends Controller
     //     $detail = Produk::where('produk_seller_id', Auth::id())->first();
     //     return view('frontend.detail', compact('detail'));
     // }
-
-    public function admin(){
-        return view('member.dashboard.dashboard');
-
-    }
-
 }
  

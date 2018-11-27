@@ -67,14 +67,14 @@
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
                                                 <li class="col-12">
-                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress")}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
+                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
                                                 </li>
                                             </center>
                                         </div>
                                         <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
                                             @guest
                                             @else
-                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>{{App\Models\User_address::where('user_address_user_id', Auth::id())->pluck('user_address_label')[0]}}</b></div></ul>
+                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>{{Auth::user()->user_address()->first()['user_address_label']}}</b></div></ul>
                                             @endguest
                                         </div>
                                         <div class="col-md-12">
