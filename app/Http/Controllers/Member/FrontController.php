@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use App\Models\Review;
+use App\Models\Produk_discuss;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Shipment;
@@ -48,7 +50,7 @@ class FrontController extends Controller
     public function brand(Request $request)
     {
         $perPage = 8;
-        if($request->input("brand") != ""){
+        if($request->input("brand") !== ""){
             $id_brand = Brand::whereBrand_slug($request->input("brand"))->pluck('id')->first();
             $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
             if($id_brand != null){
@@ -67,8 +69,13 @@ class FrontController extends Controller
     public function category(Request $request)
     {
         $perPage = 8;
+        $order = 1;
+        $id_cat = 0;
+        if($request->input("order") !== ""){
+            $order .= $request->input("order").' ASC';
+        }
         if($request->input("cat") != ""){
-            $id_cat = Category::whereCategory_slug($request->input("cat"))->pluck('id')->first();
+            $id_cat = Category::whereCategory_slug($request->input("cat"))->orderByRaw($order)->pluck('id')->first();
             $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
             if($id_cat != null){
                 $data['produk'] = FunctionLib::produk_by('category', $id_cat)->paginate($perPage);
@@ -76,6 +83,7 @@ class FrontController extends Controller
         }else{
             $data['produk'] = Produk::orderByRaw("rand()")->paginate($perPage);
         }
+        $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->get();
         return view('frontend.category', $data);
     }
 
@@ -89,6 +97,8 @@ class FrontController extends Controller
             ->where('shipment_parent_id', 0)
             ->get();
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
+        $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
+        $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
         return view('frontend.detail', $data);
     }
 

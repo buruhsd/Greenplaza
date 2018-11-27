@@ -194,6 +194,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 			Route::patch('/update', 'Member\\TransactionController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Member\\TransactionController@destroy')->name('.destroy');
 		});
+		Route::group(['prefix' => 'review', 'as' => '.review'], function () {
+			Route::get('/', 'Member\\ReviewController@index')->name('.index');
+			Route::get('/create', 'Member\\ReviewController@create')->name('.create');
+			Route::post('/store', 'Member\\ReviewController@store')->name('.store');
+			Route::get('/edit/{id}', 'Member\\ReviewController@edit')->name('.edit');
+			Route::patch('/update', 'Member\\ReviewController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Member\\ReviewController@destroy')->name('.destroy');
+		});
 	});
 });
 

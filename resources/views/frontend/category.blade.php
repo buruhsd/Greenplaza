@@ -1,7 +1,6 @@
 @extends('layouts.index')
 @section('title', 'Page Title')
 @section('content')
-    {{FunctionLib::add_chart(4)}}
 
 <!-- .shop-page-area start -->
     <div class="shop-page-area">
@@ -9,15 +8,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shop-area">
+                        <hr/>
                         <ul class="tab-menu nav jabar">
-                            <li><a class="active" data-toggle="tab" href="#chair">Chair</a></li>
-                            <li><a data-toggle="tab" href="#table">Table</a></li>
-                            <li><a data-toggle="tab" href="#laptop">Laptop</a></li>
-                            <li><a data-toggle="tab" href="#dextop">Dextop</a></li>
+                            @foreach($sub_cat as $item)
+                                <li><a href="{{route('category', ['cat' => str_slug($item->category_name)])}}">{{$item->category_name}}</a></li>
+                            @endforeach
                         </ul>                                                   
+                        <hr/>
                         <div class="row mb-30">
                             <div class="col-lg-3 col-sm-4 col-12">
-                                <select name="stor" class="select-style">
+                                <select name="order" class="select-style">
                                     <option disabled selected>Sort by Defalt</option>
                                     <option value="produk_name">Name</option>
                                     <option value="produk_price">Price</option>

@@ -49,11 +49,11 @@
                                     </ul>
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
-                                    <input type="text" name="address_id" id="address_id" value="0" hidden/>
+                                    <input type="text" name="address_id" id="address_id" value="{{Auth::user()->user_address()->first()['id']}}" hidden/>
                                     <input type="text" name="ship_cost" id="ship_cost" value="0" hidden/>
-                                    <input type="text" name="origin" id="origin" value="398" hidden/>
+                                    <input type="text" name="origin" id="origin" value="{{$detail->user->user_address()->first()['user_address_subdist']}}" hidden/>
                                     <input type="text" name="originType" id="originType" value="subdistrict" hidden/>
-                                    <input type="text" name="destination" id="destination" value="" hidden/>
+                                    <input type="text" name="destination" id="destination" value="{{Auth::user()->user_address()->first()['user_address_subdist']}}" hidden/>
                                     <input type="text" name="destinationType" id="destinationType" value="subdistrict" hidden/>
                                     <input type="text" name="weight" value="{{$detail->produk_weight}}" hidden/>
                                     <input type="text" name="lenght" value="{{$detail->produk_length}}" hidden/>
@@ -74,7 +74,7 @@
                                         <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
                                             @guest
                                             @else
-                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>{{Auth::user()->user_address()->first()['user_address_label']}}</b></div></ul>
+                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>To Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b></div></ul>
                                             @endguest
                                         </div>
                                         <div class="col-md-12">
@@ -151,6 +151,7 @@
                                         <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
                                         <li><a data-toggle="tab" href="#faq">Faq</a></li>
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
+                                        <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -160,6 +161,131 @@
                                         <div class="description-wrap">
                                             <h4>Keterangan</h4>
                                             {{$detail->produk_note}}
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="review">
+                                        <div class="review-wrap">
+                                            <ul>
+                                                @foreach($review as $item)
+                                                <li class="review-items">
+                                                    <div class="review-img">
+                                                        <img src="assets/images/comment/1.png" alt="">
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <h3><a href="#">{{$item->user->name}}</a></h3>
+                                                        <span>{{$item->created_at}}</span>
+                                                        <p>{{$item->review_text}}</p>
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <div class="add-review">
+                                            <h4>Add A Review</h4>
+                                            <div class="ratting-wrap">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>task</th>
+                                                            <th>1 Star</th>
+                                                            <th>2 Star</th>
+                                                            <th>3 Star</th>
+                                                            <th>4 Star</th>
+                                                            <th>5 Star</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Stars</td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            @guest
+                                            @else
+                                                @if(!Auth::user()->is_superadmin())
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            {!! Form::open(['url' => route('member.review.store'), 'method' => 'POST', 'id' => 'form-review', 'class' => 'row']) !!}
+                                                                <input name="review_user_id" type="text" value="{{Auth::id()}}" placeholder="Your name here..." hidden />
+                                                                <input name="review_produk_id" type="text" value="{{$detail->id}}" placeholder="Your name here..." hidden />
+                                                                <div class="col-12">
+                                                                    <h4>Your Review:</h4>
+                                                                    <textarea name="review_text" class="form-control" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <button type="submit" class="btn-style">Submit</button>
+                                                                </div>
+                                                            {!! Form::close() !!}
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endguest
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="diskusi">
+                                        <div class="faq-wrap" id="accordion">
+                                            @foreach($discuss as $item)
+                                                <div class="card">
+                                                    <div class="card-header" id="headdiscuss{{$item->id}}">
+                                                        <h5><button data-toggle="collapse" data-target="#discuss{{$item->id}}" aria-expanded="true" aria-controls="collapseOne">{{$item->user['name']}}</button> </h5>
+                                                    </div>
+                                                    <div id="discuss{{$item->id}}" class="collapse show" aria-labelledby="headdiscuss{{$item->id}}" data-parent="#accordion">
+                                                        <br/>
+                                                        <ul class="ml-2">
+                                                            <li class="review-items">
+                                                                <div class="review-img">
+                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                </div>
+                                                                <div class="review-content">
+                                                                    <h3><a href="#">{{$item->user['name']}}</a></h3>
+                                                                    <span>{{$item->created_at}}</span>
+                                                                    <p>{{$item->produk_discuss_text}}</p>
+                                                                </div>
+                                                                <hr/>
+                                                                    @foreach($item->reply as $item)
+                                                                        <ul class="ml-5">
+                                                                            <li class="review-items">
+                                                                                <div class="review-img">
+                                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                                </div>
+                                                                                <div class="review-content">
+                                                                                    <h3><a href="#">{{$item->user['name']}}</a></h3>
+                                                                                    <span>{{$item->created_at}}</span>
+                                                                                    <p>{{$item->produk_discuss_reply_text}}</p>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    @endforeach
+                                                                <hr/>
+                                                            </li>
+                                                        </ul>
+                                                        <br/>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="faq">
@@ -212,153 +338,6 @@
                                                     <div class="card-body">
                                                         Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="review">
-                                        <div class="review-wrap">
-                                            <ul>
-                                                <li class="review-items">
-                                                    <div class="review-img">
-                                                        <img src="assets/images/comment/1.png" alt="">
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <h3><a href="#">GERALD BARNES</a></h3>
-                                                        <span>27 Jun, 2018 at 2:30pm</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li class="review-items review-items2">
-                                                    <div class="review-img">
-                                                        <img src="assets/images/comment/2.png" alt="">
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <h3><a href="#">Candle Stand</a></h3>
-                                                        <span>15 may, 2018 at 2:30pm</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star-half-o"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li class="review-items">
-                                                    <div class="review-img">
-                                                        <img src="assets/images/comment/3.png" alt="">
-                                                    </div>
-                                                    <div class="review-content">
-                                                        <h3><a href="#">Flower Vase</a></h3>
-                                                        <span>14 janu, 2018 at 2:30pm</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                                        <ul class="rating">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star-o"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="add-review">
-                                            <h4>Add A Review</h4>
-                                            <div class="ratting-wrap">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>task</th>
-                                                            <th>1 Star</th>
-                                                            <th>2 Star</th>
-                                                            <th>3 Star</th>
-                                                            <th>4 Star</th>
-                                                            <th>5 Star</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Price</td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Value</td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Quality</td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                            <td>
-                                                                <input type="radio" name="a" />
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <h4>Name:</h4>
-                                                    <input type="text" placeholder="Your name here..." />
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <h4>Email:</h4>
-                                                    <input type="email" placeholder="Your Email here..." />
-                                                </div>
-                                                <div class="col-12">
-                                                    <h4>Your Review:</h4>
-                                                    <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
-                                                </div>
-                                                <div class="col-12">
-                                                    <button class="btn-style">Submit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -531,8 +510,8 @@
             });
         }
         function change_ongkir(service, ongkir){
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
-            html += "<ul><div class='col-lg-6 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
+            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
+            html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
             $("#shipment-price").empty();
             $("#ship-cost").empty().append(html);
             $('#ship_cost').attr('value', ongkir);
@@ -544,7 +523,7 @@
             $('#address_id').attr('value', id);
             $('#destinationType').attr('value', 'subdistrict');
             $('#destination').attr('value', subdistrict);
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>Name : "+address_name+"</b></div></ul>";
+            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
             $("#address-info").empty().append(html);
         }
     </script>
