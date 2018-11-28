@@ -11,7 +11,7 @@
                             <div class="col-lg-12 col-12 order-2">
                                 <div class="about-img black-opacity" style="position: relative;">
                                     <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
-                                    <img src="{{ asset('assets/images/bg_etalase/'.$detail->produk_image) }}" alt="" style="height: 400px">
+                                    <img src="{{ asset('assets/images/bg_etalase/'.$produk->user->user_store_image) }}" alt="" style="height: 400px">
                                 </div>
                             </div>
                         </div>
@@ -28,11 +28,11 @@
                             </div>
                         </div>
                         <div class="product-active owl-carousel next-prev-style">
+                            @foreach ($produk as $p)
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
+                                    <!--  -->
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -41,6 +41,7 @@
                                         </ul>
                                     </div>
                                 </div>
+                                
                                 <div class="product-content">
                                     <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
                                     <p><span>$20.00</span>
@@ -55,11 +56,12 @@
                                     </ul>
                                 </div>
                             </div>
+                            @endforeach
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -85,8 +87,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -112,8 +114,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -139,8 +141,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -166,8 +168,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -192,8 +194,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -219,8 +221,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
+                                    <img class="first" src="" alt="">
+                                    <img class="second" src="" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>

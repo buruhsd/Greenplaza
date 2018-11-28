@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Produk;
+use App\Models\Produk_image;
 use App\Models\Review;
 use App\Models\Produk_discuss;
 use App\Models\Category;
@@ -110,9 +111,11 @@ class FrontController extends Controller
     */
     public function etalase(Request $request, $id)
     {
-        $produk = Produk::where('produk_seller_id', Auth::user()->id)->first();
-
-        return view('frontend.etalase', compact('produk'));
+        $user = produk::find($id);
+        $produk = Produk::where('produk_seller_id', User::where('id'))->first();
+        // $item = Produk_image::where('');
+        // dd($item);
+        return view('frontend.etalase', compact('produk', 'user', 'user_produk'));
     }
 
     /**
