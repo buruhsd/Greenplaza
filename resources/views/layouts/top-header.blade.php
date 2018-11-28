@@ -11,42 +11,36 @@
                             <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
                             <span class="badge-1">3</span></li>
                             <li>
-                                    
-                                        @guest
-                                        @else
-                                            {{Auth::user()->name}}
-                                        @endguest
-                                    
-                                    @guest
-                                        <li><a href="{{route('login')}}">Login</a></li>
-                                        <li><a href="{{route('register')}}">Register</a></li>
+                                @guest
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
+                                @else
+                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> 
+                                        {{Auth::user()->name}}
+                                    <i class="fa fa-angle-down"></i></a>
+                                @endguest
+                                @guest
+                                @else
                                 <ul>
-                                    @else
-                                        <li><a href="{{route('profil')}}">Profil</a></li>
-                                        @if(Auth::user()->is_admin())
-                                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                            <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
-                                        @elseif(Auth::user()->is_member())
-                                            <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
-                                            <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
-                                        @endif
-                                        <li>
-                                            <a onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
-                                            </a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
-                                        </li>
-                                    @endguest
+                                    <li><a href="{{route('profil')}}">Profil</a></li>
+                                    @if(Auth::user()->is_admin())
+                                        <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                        <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
+                                    @elseif(Auth::user()->is_member())
+                                        <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
+                                        <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    @endif
+                                    <li>
+                                        <a onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
                                 </ul>
-                                {{--<ul>
-                                    <li><a href="login.html">LogIn</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                </ul>--}}
+                                @endguest
                             </li>
                         </ul>
                     </div>
