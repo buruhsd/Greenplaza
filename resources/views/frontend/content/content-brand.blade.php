@@ -8,7 +8,7 @@
                         @else
                             @foreach($brand as $item)
                                 <div class="brand-items">
-                                    <a href="{{url('brand/'.$item->brand_slug)}}">
+                                    <a href="{{route('brand', ['brand' => $item->brand_slug])}}">
                                         <img src="{{ asset('assets/images/brand/'.(($item->brand_image)?$item->brand_image:'1.jpg')) }}" alt="{{asset('assets/images/brand/'.$item->brand_name)}}">
                                     </a>
                                 </div>

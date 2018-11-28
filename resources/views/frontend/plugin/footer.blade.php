@@ -7,9 +7,21 @@
                         <div class="footer-widget footer-contact">
                             <h2 class="section-title">Contact us</h2>
                             <ul>
-                                <li><i class="fa fa-map-marker"></i>House No. 09 , Road No.25 Dhaka,Bangladesh </li>
+                                <!-- <li><i class="fa fa-map-marker"></i>House No. 09 , Road No.25 Dhaka,Bangladesh </li>
                                 <li><i class="fa fa-phone"></i>+1(888)234-56789 <span>+1(888)234-56789</span> </li>
-                                <li><i class="fa fa-envelope-o"></i>youremail@gmail.com <span>youremail@gmail.com</span></li>
+                                <li><i class="fa fa-envelope-o"></i>youremail@gmail.com <span>youremail@gmail.com</span></li>--> 
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    {{FunctionLib::get_config('profil_address')}}
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    {{FunctionLib::get_config('profil_phone')}}
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope-o"></i>
+                                    {{FunctionLib::get_config('profil_email')}}
+                                </li>
                             </ul>
                         </div>
                     </div>

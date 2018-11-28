@@ -17,7 +17,8 @@
                    
     <!-- .shop-page-area enc -->
     <!-- footer -->
-    @include('frontend.plugin.footer')
+    {!! Plugin::footer()!!}
+    {{-- @include('frontend.plugin.footer') --}}
     <!-- footer -->
     
     <!-- script -->
