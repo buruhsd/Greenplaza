@@ -9,7 +9,7 @@
                         <ul class="d-flex account-info">
                         <li>
                             <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
-                            <span class="badge-1">3</span></li>
+                            <span class="badge-1" data-badge="6"></span></li>
                             <li>
                                 @guest
                                     <li><a href="{{route('login')}}">Login</a></li>
