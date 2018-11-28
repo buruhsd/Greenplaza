@@ -23,13 +23,18 @@
         <span><i class="fa fa-bars"></i> Category </span>
         <ul class="cetagory-items">
         	@foreach($category as $item)
-        	<li>
-            	<a href="{{url('category?cat='.$item->category_slug)}}"><i class="{{$item->category_icon}}"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-left"></i></a>
+        	<li style="border-bottom: solid 1px;">
+            	<a href="{{url('category?cat='.$item->category_slug)}}">
+                    {{ucfirst(strtolower($item->category_name))}} 
+                    <i class="pull-right" style="height: 30px;line-height: 0;">
+                        <img src="{{asset('img_category_icon/'.$item->category_image)}}" style="height: 100%;">
+                    </i>
+                </a>
             </li>
             @endforeach
             
             <div class="cetagory-bottom">
-                <a href="#">All Category</a>
+                <a href="{{route('category')}}">All Category</a>
             </div>
         </ul>
     </div>

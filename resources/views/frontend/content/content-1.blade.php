@@ -5,14 +5,14 @@
                             <div class="col-lg-4 col-sm-3 col-12">
                                 <h2 class="section-title">New Arivel</h2>
                             </div>
-                            <div class="col-lg-8 text-right col-sm-9 col-12">
+                            {{-- <div class="col-lg-8 text-right col-sm-9 col-12">
                                 <ul class="tab-menu nav">
                                     <li><a class="active" data-toggle="tab" href="#chair">Chair</a></li>
                                     <li><a data-toggle="tab" href="#table">Table</a></li>
                                     <li><a data-toggle="tab" href="#laptop">Laptop</a></li>
                                     <li><a data-toggle="tab" href="#dextop">Dextop</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="chair">
@@ -85,7 +85,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="table">
+                            {{-- <div class="tab-pane fade" id="table">
                                 <div class="product-active owl-carousel next-prev-style">
                                     <div class="product-items">
                                         <div class="product-wrap mb-15">
@@ -264,7 +264,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
