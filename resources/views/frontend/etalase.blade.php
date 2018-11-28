@@ -35,7 +35,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -62,7 +62,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -89,7 +89,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -116,7 +116,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -143,7 +143,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -170,7 +170,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -196,7 +196,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -223,7 +223,7 @@
                                     <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>

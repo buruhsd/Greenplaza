@@ -42,7 +42,7 @@
                                                 <img class="second" src="assets/images/product/2.jpg" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
@@ -77,8 +77,8 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
-                                                <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
+                                                <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
+                                                <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="{{action('member\\FrontController@detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li>
@@ -134,7 +134,7 @@
                                                     <img class="second" src="assets/images/product/2.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -165,7 +165,7 @@
                                                     <img class="second" src="assets/images/product/4.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -196,7 +196,7 @@
                                                     <img class="second" src="assets/images/product/6.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -227,7 +227,7 @@
                                                     <img class="second" src="assets/images/product/8.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -258,7 +258,7 @@
                                                     <img class="second" src="assets/images/product/10.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>
@@ -289,7 +289,7 @@
                                                     <img class="second" src="assets/images/product/12.jpg" alt="">
                                                     <div class="shop-icon">
                                                         <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                         </ul>

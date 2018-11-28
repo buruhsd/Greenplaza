@@ -15,18 +15,18 @@
                                 <div class="product-wrap">
                                     <div class="product-img black-opacity">
                                         <span class="new">New</span>
-                                        <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
-                                        <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="">
+                                        <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
+                                        <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                         <div class="shop-icon">
                                             <ul>
-                                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                 <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h3><a href="shop.html">{{$item->produk_name}}</a></h3>
+                                        <h3><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a></h3>
                                         @if($item->produk_discount > 0)
                                             <p>
                                                 <span>{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
@@ -53,7 +53,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -80,7 +80,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -107,7 +107,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -134,7 +134,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -161,7 +161,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -187,7 +187,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>
@@ -214,7 +214,7 @@
                                 <img class="second" src="{{ asset('frontend/images/product/5.jpg') }}" alt="">
                                 <div class="shop-icon">
                                     <ul>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                     </ul>

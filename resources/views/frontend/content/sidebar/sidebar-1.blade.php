@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -180,7 +180,7 @@
                                     </div>
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
@@ -210,7 +210,7 @@
                                     </div>
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                         </ul>
