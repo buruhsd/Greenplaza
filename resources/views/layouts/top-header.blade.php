@@ -70,7 +70,11 @@
                         <ul class="cart-wishlist-wrap d-flex">
                             <li><a href="{{route('chart')}}">
                                 <i class="fa fa-shopping-cart"></i></a>
-                                <span class="badge">3</span>
+                                @if(Session::has('chart') && count(Session::get('chart')) > 0)
+                                    <span class="badge">{{count(Session::get('chart'))}}</span>
+                                @else
+                                    <span class="badge">0</span>
+                                @endif
                             </li>
                         </ul>
                     </div>
