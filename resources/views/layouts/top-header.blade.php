@@ -73,7 +73,6 @@
                                 @if(Session::has('chart') && count(Session::get('chart')) > 0)
                                     <span class="badge">{{count(Session::get('chart'))}}</span>
                                 @else
-                                    <span class="badge">0</span>
                                 @endif
                             </li>
                         </ul>
