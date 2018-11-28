@@ -92,7 +92,8 @@
                                 </div>
                             </div>
                             <hr>
-                            <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" />
+                            {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Place Order" class="btn btn-success" id="btn-pick-address" />
                         </form>
                     </div>
                 </div>
@@ -100,5 +101,42 @@
         </div>
     </div>
     <!-- checkout-area end -->
-
+<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+<script type="text/javascript">
+    function process_payment(){
+        var text = $("#btn-choose-shipment").val();
+        $("#btn-choose-shipment").val("Loading");
+        $.ajax({
+            type: "POST", // or post?
+            url: "{{route("localapi.midtrans.process")}}", // change as needed
+            data: $("#form-shipment").serialize(), // change as needed
+            success: function(data) {
+                if (data) {
+                    $('#shipment-price').empty().append(data);
+                } else {
+                    swal({   
+                        type: "error",
+                        title: "failed",   
+                        text: "Layanan Tidak Tersedia",   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
+                }
+                $("#btn-choose-shipment").val(text);
+            },
+            error: function(xhr, textStatus) {
+                swal({
+                    type: "error",
+                    title: "failed",   
+                    text: "Layanan Tidak Tersedia",   
+                    showConfirmButton: false ,
+                    showCloseButton: true,
+                    footer: ''
+                });
+                $("#btn-choose-shipment").val(text);
+            }
+        });
+    }
+</script>
 @endsection

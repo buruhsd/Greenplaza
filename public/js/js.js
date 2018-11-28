@@ -5,7 +5,18 @@ function modal_get(e){
         url: e.data('href'), // change as needed
         success: function(data) {
             if (data) {
-                $('#ajax-modal').empty().append(data).modal();
+                if(typeof data.status !== 'undefined' && data.status == 500){
+                    swal({   
+                        type: "error",
+                        title: "failed",   
+                        text: data.message,   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
+                }else{
+                    $('#ajax-modal').empty().append(data).modal();
+                }
             } else {
                 alert(data);
             }
@@ -22,7 +33,18 @@ function modal_post(e, data=''){
         data: data, // change as needed
         success: function(data) {
             if (data) {
-                $('#ajax-modal').empty().append(data).modal();
+                if(typeof data.status !== 'undefined' && data.status == 500){
+                    swal({   
+                        type: "error",
+                        title: "failed",   
+                        text: data.message,   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
+                }else{
+                    $('#ajax-modal').empty().append(data).modal();
+                }
             } else {
                 alert(data);
             }

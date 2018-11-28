@@ -246,6 +246,11 @@ Route::group(['middleware' => ['auth']], function () {
 
 // without auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
+	Route::group(['prefix' => 'midtrans', 'as' => '.midtrans'], function () {
+		Route::get('payment', 'MidtransController@payment')->name('.payment');
+		Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
+		Route::post('process', 'MidtransController@process')->name('.process');
+	});
 	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
 		Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
 		Route::get('get_province/{id}', 'ContentController@get_province')->name('.get_province');

@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-md-8 col-sm-9 col-12">
                         <div class="search-wrap">
-                            <form action="search">
-                                <input type="text" placeholder="Cari Produk...">
+                            <form action="{{route('category')}}" method="GET">
+                                <input name="src" type="text" placeholder="Cari Produk...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
                         </div>
