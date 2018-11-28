@@ -111,10 +111,9 @@ class FrontController extends Controller
     */
     public function etalase(Request $request, $id)
     {
-        $user = produk::find($id);
-        $produk = Produk::where('produk_seller_id', User::where('id'))->first();
-        // $item = Produk_image::where('');
-        // dd($item);
+        $user = User::find($id);
+        $produk = Produk::where('produk_seller_id', $user->id)->get();
+        // dd($produk);
         return view('frontend.etalase', compact('produk', 'user', 'user_produk'));
     }
 
