@@ -137,6 +137,48 @@ class FrontController extends Controller
         return view('auth.login_green');
     }
 
+     public function about()
+    {
+
+        return view('frontend.about');
+    }
+
+     public function ketentuan()
+    {
+
+        return view('frontend.ketentuan');
+    }
+
+     public function carabayar()
+    {
+
+        return view('frontend.pembayaran');
+    }
+
+     public function aturan()
+    {
+
+        return view('frontend.aturan');
+    }
+
+     public function syarat()
+    {
+
+        return view('frontend.syarat');
+    }
+
+     public function alurtransaksi()
+    {
+
+        return view('frontend.alur-transaksi');
+    }
+
+     public function carabelanja()
+    {
+
+        return view('frontend.cara-belanja');
+    }
+
     // /**
     // * @param
     // * @return

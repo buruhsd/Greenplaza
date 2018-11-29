@@ -15,6 +15,14 @@
 //     return view('welcome');
 // });
 
+Route::get('/tentang-greenplaza', 'member\\FrontController@about')->name('about') ;
+Route::get('/cara-belanja', 'member\\FrontController@carabelanja')->name('cara-belanja') ;
+Route::get('/cara-pembayaran', 'member\\FrontController@pembayaran')->name('cara-pembayaran') ;
+Route::get('/aturan-penggunaan', 'member\\FrontController@aturan')->name('aturan') ;
+Route::get('/syarat-ketentuan', 'member\\FrontController@syarat')->name('syarat') ;
+Route::get('/alur-transaksi', 'member\\FrontController@alurtransaksi')->name('alur') ;
+
+
 Route::get('/', function () {
     return view('layouts.home');
 });

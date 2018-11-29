@@ -1,4 +1,4 @@
-<!-- footer-area start -->
+footer-area start -->
     <footer class="footer-area bg-1">
         <div class="footer-top">
             <div class="container">
@@ -25,19 +25,19 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="footer-widget footer-menu">
-                            <h2 class="section-title">Customer Service</h2>
+                            <h2 class="section-title">Member</h2>
                             <ul>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Order History</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Specials</a></li>
-                                <li><a href="#">Help Center</a></li>
+                                <li><a href="#">Cara Belanja</a></li>
+                                <li><a href="#">Ketentuan Member</a></li>
+                                <li><a href="#">Cara Pembayaran</a></li>
+                                <li><a href="#">Aturan Penggunaan</a></li>
+                                <li><a href="#">Bantuan</a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <!-- <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Corporation</h2>
                             <ul>
@@ -48,19 +48,17 @@
                                 <li><a href="#">Advanced Search</a></li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Greenplaza</h2>
                             <ul>
                                 <li><a href="#">Tentang Greenplaza</a></li>
-                                <li><a href="blog.html">Cara Belanja</a></li>
-                                <li><a href="#">Ketentuan Member</a></li>
-                                <li><a href="#">Cara Pembayaran</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="#">Syarat & Ketentuan</a></li>
+                                <li><a href="#">Alur Transaksi</a></li>
                             </ul>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,4 +72,4 @@
             </div>
         </div>
     </footer>
-    <!-- footer-area end -->
+    <!-- footer-area end
