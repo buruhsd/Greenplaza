@@ -1,4 +1,4 @@
-footer-area start -->
+<!-- footer-area start -->
     <footer class="footer-area bg-1">
         <div class="footer-top">
             <div class="container">
@@ -72,4 +72,4 @@ footer-area start -->
             </div>
         </div>
     </footer>
-    <!-- footer-area end
+    <!-- footer-area end -->

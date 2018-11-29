@@ -11,6 +11,7 @@ use App\Models\Produk_discuss;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Shipment;
+use App\Models\Page;
 use App\User;
 use Auth;
 use FunctionLib;
@@ -25,6 +26,30 @@ class FrontController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function page(Request $request, $page)
+    {
+        // if(Auth::guest())
+        // {
+        //     $data['page'] = Page::where('page_role_id', 0)->where('page_status', 1)
+        //         ->wherePage_slug($page)
+        //         ->get();
+        // }else{
+        //     $data['page'] = Page::whereIn('page_role_id', [0, Auth::user()->role])->where('page_status', 1)
+        //     // $data['page'] = Auth::user()->role->page()->where('page_status', 1)
+        //         ->wherePage_slug($page)
+        //         ->get();
+        // }
+        // $data['side_related'] = FunctionLib::produk_by('category', 'all')->orderBy('created_at', 'DESC')->limit(5)->get();
+        $data['page'] = Page::wherePage_slug($page)->first();
+        $data['side_cat'] = Category::limit(6)->get();
+        $data['side_related'] = Produk::orderByRaw("RAND(), created_at DESC")->limit(5)->get();
+        return view('frontend.page', $data);
     }
 
     /**
