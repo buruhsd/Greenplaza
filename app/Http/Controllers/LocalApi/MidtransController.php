@@ -95,51 +95,54 @@ class MidtransController extends Controller
               'order_id' => rand(),
               'gross_amount' => FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'), // no decimal allowed for creditcard
             );
-            foreach (Session::get('chart') as $key => $item) {
-                $item_details[] = [
-                    'id' => $key,
-                    'price' => $item['trans_detail_amount_total'],
-                    'quantity' => $item['trans_detail_qty'],
-                    'name' => Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_name')[0]
-                ];
-            }
-            // Optional
-            $billing_address = array(
-              'first_name'    => "Andri",
-              'last_name'     => "Litani",
-              'address'       => "Mangga 20",
-              'city'          => "Jakarta",
-              'postal_code'   => "16602",
-              'phone'         => "081122334455",
-              'country_code'  => 'IDN'
-            );
-            // Optional
-            $shipping_address = array(
-              'first_name'    => "Obet",
-              'last_name'     => "Supriadi",
-              'address'       => "Manggis 90",
-              'city'          => "Jakarta",
-              'postal_code'   => "16601",
-              'phone'         => "08113366345",
-              'country_code'  => 'IDN'
-            );
-            // Optional
-            $customer_details = array(
-              'first_name'    => "Andri",
-              'last_name'     => "Litani",
-              'email'         => "andri@litani.com",
-              'phone'         => "081122334455",
-              'billing_address'  => $billing_address,
-              'shipping_address' => $shipping_address
-            );
-            // Optional, remove this to display all available payment methods
-            $enable_payments = array('credit_card','cimb_clicks','mandiri_clickpay','echannel');
-            // Fill transaction details
+            // foreach (Session::get('chart') as $key => $item) {
+            //     $item_details[] = [
+            //         'id' => $key,
+            //         'price' => $item['trans_detail_amount_total'],
+            //         'quantity' => $item['trans_detail_qty'],
+            //         'name' => Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_name')[0]
+            //     ];
+            // }
+            // // Optional
+            // $billing_address = array(
+            //   'first_name'    => "Andri",
+            //   'last_name'     => "Litani",
+            //   'address'       => "Mangga 20",
+            //   'city'          => "Jakarta",
+            //   'postal_code'   => "16602",
+            //   'phone'         => "081122334455",
+            //   'country_code'  => 'IDN'
+            // );
+            // // Optional
+            // $shipping_address = array(
+            //   'first_name'    => "Obet",
+            //   'last_name'     => "Supriadi",
+            //   'address'       => "Manggis 90",
+            //   'city'          => "Jakarta",
+            //   'postal_code'   => "16601",
+            //   'phone'         => "08113366345",
+            //   'country_code'  => 'IDN'
+            // );
+            // // Optional
+            // $customer_details = array(
+            //   'first_name'    => "Andri",
+            //   'last_name'     => "Litani",
+            //   'email'         => "andri@litani.com",
+            //   'phone'         => "081122334455",
+            //   'billing_address'  => $billing_address,
+            //   'shipping_address' => $shipping_address
+            // );
+            // // Optional, remove this to display all available payment methods
+            // $enable_payments = array('credit_card','cimb_clicks','mandiri_clickpay','echannel');
+            // // Fill transaction details
+            // $transaction = array(
+            //   'enabled_payments' => $enable_payments,
+            //   'transaction_details' => $transaction_details,
+            //   'customer_details' => $customer_details,
+            //   'item_details' => $item_details,
+            // );
             $transaction = array(
-              'enabled_payments' => $enable_payments,
               'transaction_details' => $transaction_details,
-              'customer_details' => $customer_details,
-              'item_details' => $item_details,
             );
             $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
             return view('localapi.midtrans.checkout-process', $data);

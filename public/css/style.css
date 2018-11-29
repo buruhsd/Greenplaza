@@ -29,5 +29,54 @@
 }
 
 .h100{
+  height: 100px;
   max-height: 100px;
+}
+
+.h-100{
+  max-height: 100%;
+}
+
+.h50{
+  max-height: 50px;
+}
+
+.h-50{
+  max-height: 50%;
+}
+
+.h20{
+  max-height: 20px;
+}
+
+.h-20{
+  max-height: 20%;
+}
+
+.w-auto{
+  max-width: 100px;
+}
+
+.w100{
+  max-width: 100px;
+}
+
+.w-100{
+  max-width: 100%;
+}
+
+.w50{
+  max-width: 50px;
+}
+
+.w-50{
+  max-width: 50%;
+}
+
+.w20{
+  max-width: 20px;
+}
+
+.w-20{
+  max-width: 20%;
 }

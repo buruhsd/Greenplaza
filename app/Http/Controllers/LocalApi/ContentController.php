@@ -66,6 +66,7 @@ class ContentController extends Controller
         $message = "Choose shipment success.";
         $requestData = $request->all();
         extract($requestData);
+        $weight = $weight * $qty;
         $req = [
             'data' => [
                 'origin' => $origin,

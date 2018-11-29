@@ -7,9 +7,9 @@
                         @if($brand->count() == 0)
                         @else
                             @foreach($brand as $item)
-                                <div class="brand-items">
+                                <div class="bg-white w-100">
                                     <a href="{{route('brand', ['brand' => $item->brand_slug])}}">
-                                        <img src="{{ asset('assets/images/brand/'.(($item->brand_image)?$item->brand_image:'1.jpg')) }}" alt="{{asset('assets/images/brand/'.$item->brand_name)}}">
+                                        <img class="h100" src="{{ asset('assets/images/brand/'.(($item->brand_image)?$item->brand_image:'1.jpg')) }}" alt="{{asset('assets/images/brand/'.$item->brand_name)}}">
                                     </a>
                                 </div>
                             @endforeach

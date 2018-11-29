@@ -52,8 +52,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
-                            <div class="row">
+                            {{-- <hr> --}}
+                            <div class="row" hidden>
                                 <div class="col-12">
                                     <div class="row">
                                         <div class="col-12 text-center">
