@@ -1,7 +1,7 @@
 
             <!-- Page Sidebar -->
             <div class="page-sidebar">
-                <a class="logo-box" href="index.html">
+                <a class="logo-box" href="{{route('admin.home')}}">
                     <span>Greenplaza</span>
                     <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
                     <i class="icon-close" id="sidebar-toggle-button-close"></i>
