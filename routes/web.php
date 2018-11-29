@@ -59,6 +59,12 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'admin\\FrontController@dashboard')->name('.dashboard');
 
+		//EmailController
+		Route::post('/send_email', 'admin\\EmailController@email')->name('.send_email');
+		Route::get('/list_email', 'admin\\EmailController@list_email')->name('.list_email');
+		Route::get('/delete_email/{id}', 'admin\\EmailController@delete')->name('.delete_email');
+		Route::get('/resend_email/{id}', 'admin\\EmailController@resend')->name('.resend_email');
+
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
