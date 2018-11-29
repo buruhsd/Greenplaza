@@ -272,6 +272,14 @@ a#scrollUp:hover {
     margin-right: 0;
     margin-left: 10px;
     font-size: 15px;
+
+}
+
+.account-info li a i.fa-shopping-cart {
+    padding-top: 5px;
+    margin-right: 0;
+    margin-left: 10px;
+    font-size: 17px;
 }
 
 .account-info li:first-child a {
@@ -519,6 +527,19 @@ a#scrollUp:hover {
       border-radius: 50%;
       background-color: red;
       color: white;
+}
+
+.badge-2 {
+    position: absolute;
+      top: 3px;
+      width:20px;height:20px;
+      right: 17px;
+      border-radius: 50%;
+      background-color: red;
+      color: white;
+      text-align:center;
+   line-height:18px;
+   box-shadow:0 0 1px #333;
 }
 
 .badge-1 {

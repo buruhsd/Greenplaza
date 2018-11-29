@@ -7,10 +7,20 @@
                     </div>
                     <div class="col-md-8 col-sm-7 col-12">
                         <ul class="d-flex account-info">
+                        <li class="li-cart"><a href="{{route('chart')}}">
+                                <i class="fa fa-shopping-cart"></i></a>
+                                @if(Session::has('chart') && count(Session::get('chart')) > 0)
+                                    <span class="badge-2">{{count(Session::get('chart'))}}</span>
+                                @else
+                                @endif
+                            </li>
                         <li>
+
                             <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
                             <span class="badge-1" data-badge="6"></span></li>
                             <li>
+
+
                                 @guest
                                     <li><a href="{{route('login')}}">Login</a></li>
                                     <li><a href="{{route('register')}}">Register</a></li>
@@ -59,7 +69,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-8 col-sm-9 col-12">
+                    <div class="col-md-7 col-sm-8 col-12">
                         <div class="search-wrap">
                             <form action="{{route('category')}}" method="GET">
                                 <input name="src" type="text" placeholder="Cari Produk...">
@@ -67,7 +77,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-10">
+                    <div class="col-md-2 col-sm-10 d-sm-none d-md-block d-none d-sm-block">
                         <ul class="cart-wishlist-wrap d-flex">
                             <li><a href="{{route('chart')}}">
                                 <i class="fa fa-shopping-cart"></i></a>
