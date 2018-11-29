@@ -5,6 +5,55 @@ class FunctionLib
     * @param
     * @return
     **/
+    public static function page($type="member") {
+        switch ($type) {
+            case 'member':
+                if(Auth::guest())
+                {
+                    $return = App\Models\Page::where('page_role_id', 0)
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'member');
+                }else{
+                    $return = App\Models\Page::whereIn('page_role_id', [0, Auth::user()->role])
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'member');
+                }
+            break;
+            case 'seller':
+                if(Auth::guest())
+                {
+                    $return = App\Models\Page::where('page_role_id', 0)
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'seller');
+                }else{
+                    $return = App\Models\Page::whereIn('page_role_id', [0, Auth::user()->role])
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'seller');
+                }
+            break;
+            case 'greenplaza':
+                if(Auth::guest())
+                {
+                    $return = App\Models\Page::where('page_role_id', 0)
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'greenplaza');
+                }else{
+                    $return = App\Models\Page::whereIn('page_role_id', [0, Auth::user()->role])
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'greenplaza');
+                }
+            break;
+            default:
+                $page = [];
+                break;
+        }
+        return $return;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
     public static function config_arr($type="profil") {
         switch ($type) {
             case 'profil':

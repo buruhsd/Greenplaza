@@ -3,7 +3,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-4 col-sm-6 col-12">
                         <div class="footer-widget footer-contact">
                             <h2 class="section-title">Contact us</h2>
                             <ul>
@@ -25,14 +25,13 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Member</h2>
                             <ul>
-                                <li><a href="#">Cara Belanja</a></li>
-                                <li><a href="#">Ketentuan Member</a></li>
-                                <li><a href="#">Cara Pembayaran</a></li>
-                                <li><a href="#">Aturan Penggunaan</a></li>
+                                @foreach(FunctionLib::page('member')->get() as $item)
+                                    <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
+                                @endforeach
                                 <li><a href="#">Bantuan</a></li>
                             </ul>
                         </div>
@@ -49,13 +48,14 @@
                             </ul>
                         </div>
                     </div> -->
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-4 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Greenplaza</h2>
                             <ul>
                                 <li><a href="#">Tentang Greenplaza</a></li>
-                                <li><a href="#">Syarat & Ketentuan</a></li>
-                                <li><a href="#">Alur Transaksi</a></li>
+                                @foreach(FunctionLib::page('greenplaza')->get() as $item)
+                                    <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
