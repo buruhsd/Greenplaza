@@ -2,7 +2,7 @@ footer-area start -->
     <footer class="footer-area bg-1">
         <div class="footer-top">
             <div class="container">
-                <div class="row">
+                <div class="row"> hahahah
                     <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-contact">
                             <h2 class="section-title">Contact us</h2>
