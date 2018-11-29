@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/bank', 'Superadmin\\Conf_configController@bank')->name('.bank');
 			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
 			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');
 			Route::get('/create', 'Superadmin\\Conf_configController@create')->name('.create');

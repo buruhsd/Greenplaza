@@ -56,6 +56,9 @@ class FunctionLib
     **/
     public static function config_arr($type="profil") {
         switch ($type) {
+            case 'bank':
+                $arr = App\Models\Conf_config::where('configs_name', 'LIKE', 'bank_%')->pluck('configs_name');
+                break;
             case 'profil':
                 $arr = App\Models\Conf_config::where('configs_name', 'LIKE', 'profil_%')->pluck('configs_name');
                 break;

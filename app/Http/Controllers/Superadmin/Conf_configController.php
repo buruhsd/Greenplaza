@@ -18,56 +18,55 @@ class Conf_configController extends Controller
 {
     private $perPage = 25;
     private $mainTable = 'conf_configs';
-    
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param
+    * @return
+    */
+    public function bank(Request $request)
+    {
+        $arr = FunctionLib::config_arr('bank');
+        $data['config'] = Conf_config::whereIn('configs_name', $arr)
+                ->paginate($this->perPage);
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+
+        return view('superadmin.config.bank', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
     public function profil(Request $request)
     {
-        $keyword = $request->get('search');
-
         $arr = FunctionLib::config_arr('profil');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
+        // $arr = FunctionLib::config_arr('profil')->toArray();
+        // $arr = array_merge($arr, ['bank_greenplaza']);
+        $data['config'] = Conf_config::whereIn('configs_name', $arr)
                 ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('superadmin.config.index', $data);
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param
+    * @return
+    */
     public function transaction(Request $request)
     {
-        $keyword = $request->get('search');
-
         $arr = FunctionLib::config_arr('transaksi');
-        if (!empty($keyword)) {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
+        $data['config'] = Conf_config::whereIn('configs_name', $arr)
                 ->paginate($this->perPage);
-        } else {
-            $data['config'] = Conf_config::whereIn('configs_name', $arr)
-                ->paginate($this->perPage);
-        }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('superadmin.config.index', $data);
     }
-    
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param
+    * @return
+    */
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -87,10 +86,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param
+    * @return
+    */
     public function create()
     {
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
@@ -98,12 +96,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
+    * @param
+    * @return
+    */
     public function store(Request $request)
     {
         $status = 200;
@@ -127,12 +122,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param $id
+    * @return
+    */
     public function show($id)
     {
         $data['conf_config'] = Conf_config::findOrFail($id);
@@ -142,12 +134,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
-     */
+    * @param $id
+    * @return
+    */
     public function edit($id)
     {
         $data['conf_config'] = Conf_config::findOrFail($id);
@@ -157,13 +146,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
+    * @param $id
+    * @return
+    */
     public function update(Request $request, $id)
     {
         $status = 200;
@@ -173,7 +158,6 @@ class Conf_configController extends Controller
 			'configs_value' => 'required'
 		]);
         $requestData = $request->all();
-        
         $conf_config = Conf_config::findOrFail($id);
         $res = $conf_config->update($requestData);
         if(!$res){
@@ -189,12 +173,9 @@ class Conf_configController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
+    * @param $id
+    * @return
+    */
     public function destroy($id)
     {
         $status = 200;
@@ -236,9 +217,387 @@ class Conf_configController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
-            case 'index':
+            case 'bank':
                 ?>
-                    <script type="text/javascript"></script>
+                    <script type="text/javascript">
+                        function search(val){
+                            $('#status').val(val);
+                            $('#src').submit();
+                        }
+                        function get_content(){
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo route("localapi.content.config_content");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                }
+                            });
+                        }
+                        function update_config(e, val=0){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/update");?>/"+val, // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Save');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Save');
+                                }
+                            });
+                        }
+                        function store_config(e){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/store");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                        location.reload();
+                                        // $('#content_config').empty();
+                                        // get_content();
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Add');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Add');
+                                }
+                            });
+                        }
+                    </script>
+                <?php
+                break;
+            case 'profil':
+                ?>
+                    <script type="text/javascript">
+                        function search(val){
+                            $('#status').val(val);
+                            $('#src').submit();
+                        }
+                        function get_content(){
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo route("localapi.content.config_content");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                }
+                            });
+                        }
+                        function update_config(e, val=0){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/update");?>/"+val, // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Save');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Save');
+                                }
+                            });
+                        }
+                        function store_config(e){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/store");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                        location.reload();
+                                        // $('#content_config').empty();
+                                        // get_content();
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Add');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Add');
+                                }
+                            });
+                        }
+                        CKEDITOR.replace( 'configs_name' );
+                    </script>
+                <?php
+                break;
+            case 'transaction':
+                ?>
+                    <script type="text/javascript">
+                        function search(val){
+                            $('#status').val(val);
+                            $('#src').submit();
+                        }
+                        function get_content(){
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo route("localapi.content.config_content");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                }
+                            });
+                        }
+                        function update_config(e, val=0){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/update");?>/"+val, // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Save');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Save');
+                                }
+                            });
+                        }
+                        function store_config(e){
+                            var form = e.closest("form");
+                            $.ajax({
+                                type: "POST", // or post?
+                                url: "<?php echo url("admin/config/store");?>", // change as needed
+                                data: $(form).serialize(), // change as needed
+                                beforeSend: function(){
+                                    $(e).html('loading...');
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        var status = (data.flash_status == 200)?'success':'error';
+                                        var status_type = (data.flash_status == 200)?'Success':'Failed';
+                                        swal({   
+                                            type: status,
+                                            title: status_type,
+                                            text: data.flash_message,   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                        location.reload();
+                                        // $('#content_config').empty();
+                                        // get_content();
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Update Failed",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    $(e).html('Add');
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $(e).html('Add');
+                                }
+                            });
+                        }
+                        CKEDITOR.replace( 'configs_name' );
+                    </script>
                 <?php
                 break;
             case 'create':

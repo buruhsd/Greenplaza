@@ -182,6 +182,7 @@
         </div><!-- /Page Container -->
         
         
-        @include('admin.layouts.script')
+        @include('superadmin.layouts.script')
+        {!! (isset($footer_script))? $footer_script:'' !!}
     </body>
 </html>
