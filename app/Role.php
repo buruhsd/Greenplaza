@@ -46,4 +46,13 @@ class Role extends Model
     {
         return __CLASS__ . " model has been {$eventName}";
     }
+
+    /**
+    * get wallet user
+    * @return joined one to one
+    **/
+    public function page()
+    {
+        return $this->hasMany('App\Role', 'page_role_id');
+    }
 }

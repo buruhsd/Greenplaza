@@ -93,11 +93,11 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="panel panel-white col-md-12 no-border">
+                    {{-- <div class="panel panel-white col-md-12 no-border">
                         <div class="panel-body">
                             <button type="submit" class="btn btn-success mb-2">Save</button>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

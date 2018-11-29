@@ -22,11 +22,12 @@
                                 @guest
                                 @else
                                 <ul>
-                                    <li><a href="{{route('profil')}}">Profil</a></li>
                                     @if(Auth::user()->is_admin())
+                                        <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
                                         <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                                         <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
                                     @elseif(Auth::user()->is_member())
+                                        <li><a href="{{route('member.profil')}}">Profil</a></li>
                                         <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
                                         <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                     @endif
