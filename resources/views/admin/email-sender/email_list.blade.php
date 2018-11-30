@@ -7,9 +7,7 @@
     	<div class="col-md-12">
             <div class="panel panel-white">
             	<div class="col-md-6">
-	                <div class="panel-heading clearfix">
-	                    <h4 class="panel-title">List Email</h4>
-	                </div>
+	                <a href="{{route('admin.email_sender')}}"><button type="" class="btn btn-default">Kembali</button></a>
 	            </div>
 	            <div class="col-md-6">
 	                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -76,8 +76,10 @@ class EmailController extends Controller
         $email = Email::find($id);
         // dd($email);
 
-        if ($email != null) {
-                               
+        if ($email->email_to != null) {
+            $email = Email::find($id);
+            $email->is_send = 1;
+            $email->save(); 
             Mail::send('admin.mail.tes', compact(['email', 'users']), function ($m) use ($email) {
                 $m->to($email->email_to, $email->email_to)->subject('tes');
             });
@@ -86,6 +88,9 @@ class EmailController extends Controller
                         "message"=>"Email Sending to " .$email->email_to
                     ]);
         } else {
+            $email = Email::find($id);
+            $email->is_send = 1;
+            $email->save();
             Mail::send('admin.mail.tes', compact(['email', 'users']), function ($m) use ($users) {
                 $m->to($users, $users)->subject('tes');
             });
