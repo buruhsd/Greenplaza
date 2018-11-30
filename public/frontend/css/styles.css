@@ -658,15 +658,15 @@ a#scrollUp:hover {
 }
 
 .responsive-menu-tigger a:hover span {
-    background: #4CAF50;
+    background: #FFD700;
 }
 
 .responsive-menu-area {
     position: absolute;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    width: 50%;
     z-index: 99;
-    background: #4CAF50;
+    background: #f8f9fa;
     top: 100%;
     padding: 20px;
     transition: all .3s;
@@ -681,6 +681,8 @@ a#scrollUp:hover {
     transform-origin: top;
     -webkit-transform-origin: top;
     -moz-transform-origin: top;
+    border: 1px solid;
+    box-shadow: 5px 10px #888888;
 }
 
 .responsive-menu-area.active {
