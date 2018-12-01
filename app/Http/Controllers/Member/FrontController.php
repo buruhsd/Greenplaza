@@ -162,6 +162,12 @@ class FrontController extends Controller
         return view('auth.login_green');
     }
 
+     public function dashboard_member()
+    {
+
+        return view('member.dashboard.index');
+    }
+
     //  public function about()
     // {
 

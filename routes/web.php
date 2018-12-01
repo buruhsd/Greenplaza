@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+Route::get('/dashboard_member' , 'member\\FrontController@dashboard_member')->name('dash_member');
+
 Route::get('/tentang-greenplaza', 'member\\FrontController@about')->name('about') ;
 Route::get('/cara-belanja', 'member\\FrontController@carabelanja')->name('cara-belanja') ;
 Route::get('/cara-pembayaran', 'member\\FrontController@pembayaran')->name('cara-pembayaran') ;
