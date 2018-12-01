@@ -55,7 +55,7 @@ class EmailController extends Controller
     {
         $search = \Request::get('search');
     	$email = Email::where('email_to', 'like', '%'.$search.'%')
-                ->orderBy('updated_at', 'DESC')->paginate(10);
+                ->orderBy('created_at', 'DESC')->paginate(10);
     	return view('admin.email-sender.email_list', compact('email'));
     }
 
