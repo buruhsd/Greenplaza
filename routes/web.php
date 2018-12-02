@@ -48,12 +48,6 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 // auth superadmin & admin
 Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
-		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
-			Route::get('edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
-			Route::post('update/{id}', 'Admin\\ProdukController@update')->name('.update');
-			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
-			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
-		});
 		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
 		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
@@ -132,8 +126,10 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/store', 'Admin\\ProdukController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
-			Route::patch('/update', 'Admin\\ProdukController@update')->name('.update');
+			Route::post('update/{id}', 'Admin\\ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
+			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
+			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
 		});
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
 			Route::get('/', 'Admin\\TransactionController@index')->name('.index');
@@ -165,66 +161,67 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin']], function
 // auth admin & member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member'], function () {
-		Route::get('/profil', 'Member\\UserController@index')->name('.profil');
-		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
-			Route::get('/', 'Member\\ShipmentController@index')->name('.index');
-			Route::get('/create', 'Member\\ShipmentController@create')->name('.create');
-			Route::post('/store', 'Member\\ShipmentController@store')->name('.store');
-			Route::get('/show/{id}', 'Member\\ShipmentController@show')->name('.show');
-			Route::get('/edit/{id}', 'Member\\ShipmentController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'Member\\ShipmentController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\ShipmentController@destroy')->name('.destroy');
-		});
-		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
-			Route::get('/', 'Member\\BankController@index')->name('.index');
-			Route::get('/create', 'Member\\BankController@create')->name('.create');
-			Route::post('/store', 'Member\\BankController@store')->name('.store');
-			Route::get('/show/{id}', 'Member\\BankController@show')->name('.show');
-			Route::get('/edit/{id}', 'Member\\BankController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'Member\\BankController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\BankController@destroy')->name('.destroy');
-		});
-		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
-			Route::get('/', 'Member\\BrandController@index')->name('.index');
-			Route::get('/create', 'Member\\BrandController@create')->name('.create');
-			Route::post('/store', 'Member\\BrandController@store')->name('.store');
-			Route::get('/show/{id}', 'Member\\BrandController@show')->name('.show');
-			Route::get('/edit/{id}', 'Member\\BrandController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'Member\\BrandController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\BrandController@destroy')->name('.destroy');
-		});
-		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
-			Route::get('/', 'Member\\ProdukController@index')->name('.index');
-			Route::get('/create', 'Member\\ProdukController@create')->name('.create');
-			Route::post('/store', 'Member\\ProdukController@store')->name('.store');
-			Route::get('/show/{id}', 'Member\\ProdukController@show')->name('.show');
-			Route::get('/edit/{id}', 'Member\\ProdukController@edit')->name('.edit');
-			Route::patch('/update', 'Member\\ProdukController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\ProdukController@destroy')->name('.destroy');
-		});
-		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
-			Route::get('/', 'Member\\TransactionController@index')->name('.index');
-			Route::get('/create', 'Member\\TransactionController@create')->name('.create');
-			Route::post('/store', 'Member\\TransactionController@store')->name('.store');
-			Route::get('/show/{id}', 'Member\\TransactionController@show')->name('.show');
-			Route::get('/edit/{id}', 'Member\\TransactionController@edit')->name('.edit');
-			Route::patch('/update', 'Member\\TransactionController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\TransactionController@destroy')->name('.destroy');
-		});
-		Route::group(['prefix' => 'review', 'as' => '.review'], function () {
-			Route::get('/', 'Member\\ReviewController@index')->name('.index');
-			Route::get('/create', 'Member\\ReviewController@create')->name('.create');
-			Route::post('/store', 'Member\\ReviewController@store')->name('.store');
-			Route::get('/edit/{id}', 'Member\\ReviewController@edit')->name('.edit');
-			Route::patch('/update', 'Member\\ReviewController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Member\\ReviewController@destroy')->name('.destroy');
-		});
 	});
 });
 
 // auth member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
+		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
+			Route::get('/', 'BrandController@index')->name('.index');
+			Route::get('/create', 'BrandController@create')->name('.create');
+			Route::post('/store', 'BrandController@store')->name('.store');
+			Route::get('/show/{id}', 'BrandController@show')->name('.show');
+			Route::get('/edit/{id}', 'BrandController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'BrandController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'BrandController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::get('/', 'ProdukController@index')->name('.index');
+			Route::get('/create', 'ProdukController@create')->name('.create');
+			Route::post('/store', 'ProdukController@store')->name('.store');
+			Route::get('/show/{id}', 'ProdukController@show')->name('.show');
+			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
+			Route::patch('/update', 'ProdukController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
+			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
+		});
+		Route::get('/profil', 'Member\\UserController@index')->name('.profil');
+		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
+			Route::get('/', 'ShipmentController@index')->name('.index');
+			Route::get('/create', 'ShipmentController@create')->name('.create');
+			Route::post('/store', 'ShipmentController@store')->name('.store');
+			Route::get('/show/{id}', 'ShipmentController@show')->name('.show');
+			Route::get('/edit/{id}', 'ShipmentController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'ShipmentController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'ShipmentController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
+			Route::get('/', 'BankController@index')->name('.index');
+			Route::get('/create', 'BankController@create')->name('.create');
+			Route::post('/store', 'BankController@store')->name('.store');
+			Route::get('/show/{id}', 'BankController@show')->name('.show');
+			Route::get('/edit/{id}', 'BankController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'BankController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'BankController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
+			Route::get('/', 'TransactionController@index')->name('.index');
+			Route::get('/create', 'TransactionController@create')->name('.create');
+			Route::post('/store', 'TransactionController@store')->name('.store');
+			Route::get('/show/{id}', 'TransactionController@show')->name('.show');
+			Route::get('/edit/{id}', 'TransactionController@edit')->name('.edit');
+			Route::patch('/update', 'TransactionController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'TransactionController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'review', 'as' => '.review'], function () {
+			Route::get('/', 'ReviewController@index')->name('.index');
+			Route::get('/create', 'ReviewController@create')->name('.create');
+			Route::post('/store', 'ReviewController@store')->name('.store');
+			Route::get('/edit/{id}', 'ReviewController@edit')->name('.edit');
+			Route::patch('/update', 'ReviewController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
+		});
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
 		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
@@ -283,6 +280,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
 		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
 		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
+		Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

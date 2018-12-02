@@ -82,9 +82,7 @@
                                                 :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
                                         </td>
                                         <td scope="row">
-                                            <a href="{{route('member.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
                                             <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
-                                            <a href="{{route('member.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

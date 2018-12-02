@@ -17,7 +17,7 @@ use Auth;
 
 class BrandController extends Controller
 {
-    private $perPage = 25;
+    private $perPage = 5;
     private $mainTable = 'sys_brand';
     /**
      * Display a listing of the resource.
@@ -28,7 +28,7 @@ class BrandController extends Controller
     {
         $keyword = $request->get('search');
 
-        $where = 'brand_user_status = 3 AND brand_seller_id ='.Auth::id();
+        $where = 'brand_user_status = 3 AND brand_seller_id ='.Auth::id().' and brand_status != 2';
         if (!empty($keyword)) {
             $data['brand'] = Brand::whereRaw($where)->paginate($this->perPage);
         } else {
@@ -65,13 +65,14 @@ class BrandController extends Controller
         $requestData = $request->all();
         $this->validate($request, [
             'brand_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'brand_name' => 'required',
-            'brand_slug' => 'required',
+            'brand_name' => 'required|unique:sys_brand,brand_name',
             // 'brand_note' => 'required',
         ]);
         
         $res = new Brand;
-        $res->brand_name = $request->brand_name;
+        $res->brand_user_status = Auth::user()->roles->first()->id;
+        $res->brand_seller_id = Auth::id();
+        $res->brand_name = ucfirst(strtolower($request->brand_name));
         // upload
         if ($request->hasFile('brand_image')){
             $image = $request->file('brand_image');
@@ -89,7 +90,7 @@ class BrandController extends Controller
             $res->brand_image = $imagename;
         }
 
-        $res->brand_slug = $request->brand_slug;
+        $res->brand_slug = str_slug($request->brand_name);
         $res->brand_status = 0;
         $res->brand_note = $request->brand_note;
         $res->save();
@@ -144,37 +145,42 @@ class BrandController extends Controller
         $status = 200;
         $message = 'Brand added!';
         
-        $requestData = $request->all();
-        // upload
-        if ($request->hasFile('brand_image')){
-            $image = $request->file('brand_image');
-            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
-            $uploadPath = public_path('assets/images/brand');
-            // $uploadPath2 = public_path('assets/images/brand/thumb');
-            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
-            $imagesize = $image->getClientSize();
-            $imagetmp = $image->getPathName();
-            if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
-                File::delete($uploadPath . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
+        if(Brand::where('id', '=', "$id")->pluck('brand_status')[0] == 1){
+            $requestData = $request->all();
+            // upload
+            if ($request->hasFile('brand_image')){
+                $image = $request->file('brand_image');
+                // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $uploadPath = public_path('assets/images/brand');
+                // $uploadPath2 = public_path('assets/images/brand/thumb');
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+                $imagesize = $image->getClientSize();
+                $imagetmp = $image->getPathName();
+                if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
+                    File::delete($uploadPath . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
+                }
+                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                    $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+                }
+                // if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
+                //     File::delete($uploadPath2 . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
+                // }
+                $image->move($uploadPath, $imagename);
+                // $imaget->save($uploadPath2.'/'.$imagename,80);
+                $requestData['brand_image'] = $imagename;
+            }else{
+                $requestData['brand_image'] = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
             }
-            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
-                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+            
+            $brand = Brand::findOrFail($id);
+            $res = $brand->update($requestData);
+            if(!$res){
+                $status = 500;
+                $message = 'Brand Not updated!';
             }
-            // if(Brand::where('id', '=', "$id")->pluck('brand_image')[0] != ''){
-            //     File::delete($uploadPath2 . '/' . Brand::where('id', '=', "$id")->pluck('brand_image')[0]);   
-            // }
-            $image->move($uploadPath, $imagename);
-            // $imaget->save($uploadPath2.'/'.$imagename,80);
-            $requestData['brand_image'] = $imagename;
         }else{
-            $requestData['brand_image'] = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
-        }
-        
-        $brand = Brand::findOrFail($id);
-        $res = $brand->update($requestData);
-        if(!$res){
-            $status = 500;
-            $message = 'Brand Not updated!';
+                $status = 500;
+                $message = 'Brand Is Active, cannot be edit!';
         }
 
         return redirect('member/brand')

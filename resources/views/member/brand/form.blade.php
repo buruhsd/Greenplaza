@@ -29,17 +29,6 @@
     {!! $errors->first('brand_name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-<div class="form-group mx-sm-3 mb-2 {{ $errors->has('brand_slug') ? 'has-error' : ''}}">
-    {!! Form::label('brand_slug', 'Status : ', ['class' => 'col-md-3 control-label']) !!}
-    <div class="col-md-9">
-        {!! Form::text('brand_slug', null, [
-            'class' => 'form-control', 
-            'placeholder' => 'Slug', 
-            'required'
-        ])!!}
-    {!! $errors->first('brand_slug', '<p class="help-block">:message</p>') !!}
-    </div>
-</div>
 <div class="form-group mx-sm-3 mb-2 {{ $errors->has('brand_note') ? 'has-error' : ''}}">
     {!! Form::label('brand_note', 'Note : ', ['class' => 'col-md-3 control-label']) !!}
     <div class="col-md-9">

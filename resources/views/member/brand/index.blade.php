@@ -34,50 +34,26 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Configuration Brand</h4>
-                    <a href="{{ url('member/brand/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <a href="{{ url('member/brand/create') }}" class="btn btn-success btn-sm pull-right">Request Brand</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>NO</th>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>User</th>
                                     <th>Detail</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $no = 1; ?>
                                 @foreach($brand as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $no++ }}</td>
                                         <td><img class="h100" src="{{asset("assets/images/brand/".$item->brand_image)}}"></td>
                                         <td>{{ $item->brand_name }}</td>
-                                        <td scope="row">
-                                            <ul>
-                                                <?php 
-                                                switch ($item->brand_user_status) {
-                                                    case 3:
-                                                        $users = FunctionLib::data_user_by_id($item->brand_seller_id);
-                                                        break;
-                                                    case 2:
-                                                        $users = FunctionLib::data_user_by_id($item->brand_admin_id);
-                                                        break;
-                                                    case 1:
-                                                        $users = FunctionLib::data_user_by_id($item->brand_superadmin_id);
-                                                        break;
-                                                    default:
-                                                        break;
-                                                }
-                                                ?>
-                                                <li>window : {{$users->user_store}}</li>
-                                                <li>Username : {{$users->username}}</li>
-                                                <li>Name : {{$users->name}}</li>
-                                                <li>Email : {{$users->email}}</li>
-                                            </ul>
-                                        </td>
                                         <td>
                                             <ul>
                                                 <li>Slug : {{ $item->brand_slug }}</li>
@@ -87,31 +63,19 @@
                                                     :"<button class='btn btn-danger btn-xs'>Not Active</button>" !!}
                                                 </li>
                                                 <li>Note : {{ $item->brand_note }}</li>
+                                                <li>
+                                                    <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.brand_detail", $item->id)}} class='btn btn-info btn-xs'>
+                                                        More
+                                                    </button>
+                                                    @if($item->brand_status == 0)
+                                                        <a href="{{ url('/member/brand/edit/' . $item->id) }}">
+                                                            <button class="btn btn-warning btn-xs">
+                                                                <i class="fa fa-edit" aria-hidden="true"></i>Edit
+                                                            </button>
+                                                        </a>
+                                                    @endif
+                                                </li>
                                             </ul>
-                                        </td>
-                                        <td>
-                                            <a href="{{ url('/member/brand/show/' . $item->id) }}">
-                                                <button class="btn btn-info btn-xs">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>View
-                                                </button>
-                                            </a>
-                                            <a href="{{ url('/member/brand/edit/' . $item->id) }}">
-                                                <button class="btn btn-warning btn-xs">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>Edit
-                                                </button>
-                                            </a>
-                                            {!! Form::open([
-                                                'method'=>'DELETE',
-                                                'url' => ['/member/brand/destroy', $item->id],
-                                                'style' => 'display:inline'
-                                            ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
-                                                        'class' => 'btn btn-danger btn-xs',
-                                                        'type' => 'submit',
-                                                        'title' => 'Delete blog',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
-                                                )) !!}
-                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
