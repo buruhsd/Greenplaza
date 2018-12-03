@@ -35,10 +35,10 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Produk</h4>
-                    <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1)}}</span></button>
-                    <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button>
-                    <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2)}}</span></button>
-                    <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2, Auth::id())}}</span></button>
+                    <a href="{{ url('member/produk/create') }}" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Request Product</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -62,9 +62,17 @@
                                         <td scope="row">
                                             <ul>
                                                 <li>Name : {{$item->produk_name}}</li>
-                                                <li>Brand : {{$item->produk_brand_id}}</li>
-                                                <li>Category : {{$item->produk_category_id}}</li>
-                                                <li>Price : {{$item->produk_price}}</li>
+                                                <li>Brand : {{ucfirst(strtolower($item->brand->brand_name))}}</li>
+                                                <li>Category : {{ucfirst(strtolower($item->category->category_name))}}</li>
+                                                <li>Price : Rp. 
+                                                    @if($item->produk_discount > 0)
+                                                        {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}
+                                                        &nbsp;/&nbsp;
+                                                        <del class="text-danger">Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del>
+                                                    @else
+                                                        Rp. {{FunctionLib::number_to_text($item->produk_price)}}
+                                                    @endif
+                                                </li>
                                                 <li>Stock : {{$item->produk_stock}}</li>
                                             </ul>
                                         </td>

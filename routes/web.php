@@ -206,7 +206,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::delete('/destroy/{id}', 'BankController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
-			Route::get('/', 'TransactionController@index')->name('.index');
+			Route::get('/', 'TransactionController@sales')->name('.index');
+			Route::get('/sales', 'TransactionController@sales')->name('.sales');
+			Route::get('/purchase', 'TransactionController@purchase')->name('.purchase');
 			Route::get('/create', 'TransactionController@create')->name('.create');
 			Route::post('/store', 'TransactionController@store')->name('.store');
 			Route::get('/show/{id}', 'TransactionController@show')->name('.show');

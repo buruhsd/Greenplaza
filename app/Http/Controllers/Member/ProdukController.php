@@ -71,7 +71,7 @@ class ProdukController extends Controller
             "2" =>'block',
             "0,1,2" =>'',
         ];
-        $where = "1";
+        $where = "1 AND produk_seller_id=".Auth::id();//.' AND produk_user_status=3';
         if(!empty($request->get('name'))){
             $name = $request->get('name');
             $where .= ' AND produk_name LIKE "%'.$name.'%"';

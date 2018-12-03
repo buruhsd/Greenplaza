@@ -371,12 +371,16 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function count_produk($status = ""){
+    public static function count_produk($status = "", $id = 0){
         $where = 1;
         if($status !== ""){
             $where .= " AND produk_status = ".$status;
         }
-        $total = App\Models\Produk::whereRaw($where)->count();
+        $total = App\Models\Produk::whereRaw($where);
+        if($id != 0){
+            $total = $total->where("produk_seller_id", $id);
+        }
+        $total = $total->count();
         return $total;
     }
 
@@ -384,13 +388,17 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function count_produk_hot($status = ""){
+    public static function count_produk_hot($status = "", $id = 0){
         $where = 1;
         $where .= " AND produk_is_hot = 1";
         if($status !== ""){
             $where .= " AND produk_status = ".$status;
         }
-        $total = App\Models\Produk::whereRaw($where)->count();
+        $total = App\Models\Produk::whereRaw($where);
+        if($id != 0){
+            $total = $total->where("produk_seller_id", $id);
+        }
+        $total = $total->count();
         return $total;
     }
 

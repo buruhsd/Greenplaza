@@ -196,39 +196,27 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        $uploadPath = public_path('assets/images/brand');
-        $image = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
-        $status = 200;
-        $message = 'Brand deleted!';
-        $res = Brand::destroy($id);
-        if(!$res){
-            $status = 500;
-            $message = 'Brand Not deleted!';
-        }
-        $image_path = $uploadPath . '/' . $image;  // Value is not URL but directory file path
-        if(File::exists($image_path)) {
-            File::delete($image_path);
+        if(Brand::where('id', '=', "$id")->pluck('brand_status')[0] == 1){
+            $uploadPath = public_path('assets/images/brand');
+            $image = Brand::where('id', '=', "$id")->pluck('brand_image')[0];
+            $status = 200;
+            $message = 'Brand deleted!';
+            $res = Brand::destroy($id);
+            if(!$res){
+                $status = 500;
+                $message = 'Brand Not deleted!';
+            }
+            $image_path = $uploadPath . '/' . $image;  // Value is not URL but directory file path
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+        }else{
+                $status = 500;
+                $message = 'Brand Is Active, cannot be deleted!';
         }
 
         return redirect('member/brand')
             ->with(['flash_status' => $status,'flash_message' => $message]);
-    }
-
-    /**
-    * @param $where
-    * @return
-    */
-    public function get_one_row($where='1', $join=array()){
-        $qry = 'SELECT * FROM '.$this->mainTable;
-        if(!empty($join)){
-            foreach ($join as $value) {
-                $qry .= $value;
-            }
-        }
-        $qry .= ' WHERE '.$where.' Limit 1';
-        $brand = DB::query($qry);
-
-        return $brand;
     }
 
     /**

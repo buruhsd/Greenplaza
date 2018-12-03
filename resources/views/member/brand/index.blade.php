@@ -73,6 +73,18 @@
                                                                 <i class="fa fa-edit" aria-hidden="true"></i>Edit
                                                             </button>
                                                         </a>
+                                                        {!! Form::open([
+                                                            'method'=>'DELETE',
+                                                            'url' => ['/admin/shipment/destroy', $item->id],
+                                                            'style' => 'display:inline'
+                                                        ]) !!}
+                                                            {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
+                                                                    'class' => 'btn btn-danger btn-xs',
+                                                                    'type' => 'submit',
+                                                                    'title' => 'Delete blog',
+                                                                    'onclick'=>'return confirm("Confirm delete?")'
+                                                            )) !!}
+                                                        {!! Form::close() !!}
                                                     @endif
                                                 </li>
                                             </ul>
