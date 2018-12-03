@@ -165,7 +165,7 @@ class FrontController extends Controller
      public function dashboard()
     {
 
-        return view('member.dashboard.index');
+        return view('member.ubah_password.pass_transaksi');
     }
 
     //  public function about()

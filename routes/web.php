@@ -23,6 +23,8 @@ Route::get('/aturan-penggunaan', 'member\\FrontController@aturan')->name('aturan
 Route::get('/syarat-ketentuan', 'member\\FrontController@syarat')->name('syarat') ;
 Route::get('/alur-transaksi', 'member\\FrontController@alurtransaksi')->name('alur') ;
 
+Route::get('/dashboard-member', 'member\\FrontController@dashboard');
+
 
 Route::get('/', function () {
     return view('layouts.home');
