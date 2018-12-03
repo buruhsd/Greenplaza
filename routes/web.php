@@ -226,6 +226,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update', 'ReviewController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
 		});
+		Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
+		Route::get('/alamat_seller', function(){return view('member.alamat_seller.index');})->name('.alamat_seller');
+		Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
+		Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
+		Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
 		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
