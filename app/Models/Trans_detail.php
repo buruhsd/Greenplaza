@@ -42,6 +42,16 @@ class Trans_detail extends Model
     * @return
     * 
     */
+    public function shipment()
+    {
+        return $this->belongsTo('App\Models\Shipment', 'trans_detail_shipment_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function user_address()
     {
         return $this->belongsTo('App\Models\User_address', 'trans_detail_user_address_id');

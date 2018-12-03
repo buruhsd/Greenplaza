@@ -46,21 +46,22 @@
                                 <ul>
                                     <li>From : 
                                         {{
-                                            $item->user_address->user_address_province
-                                            .'-'
-                                            .$item->user_address->user_address_city
-                                            .'-'
-                                            .$item->user_address->user_address_subdist
+                                            FunctionLib::address_info($item->produk->user->user_address->first()->id)
                                         }}
                                     </li>
-                                    <li>To :                                         {{
-                                            $item->user_address->user_address_province
-                                            .'-'
-                                            .$item->user_address->user_address_city
-                                            .'-'
-                                            .$item->user_address->user_address_subdist
+                                    <li>To : 
+                                        {{
+                                            FunctionLib::address_info($item->user_address->id)
                                         }}
                                     </li>
+                                    {{-- @if($item->trans_detail_status == 5) --}}
+                                    <?php $status = FunctionLib::get_waybill($item->id);?>
+                                    <li>Sent Status : 
+                                        {{
+                                            $status
+                                        }}
+                                    </li>
+                                    {{-- @endif --}}
                                 </ul>
                             </td>
                             <td>

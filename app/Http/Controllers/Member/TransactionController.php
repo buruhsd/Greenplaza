@@ -12,6 +12,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
 class TransactionController extends Controller
@@ -26,72 +27,23 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-// "id" => $id,
-// "trans_code" => $trans_code,
-// "trans_user_id" => $trans_user_id,
-// "trans_user_bank_id" => $trans_user_bank_id,
-// "trans_is_paid" => $trans_is_paid,
-// "trans_payment_id" => $trans_payment_id,
-// "trans_paid_image" => $trans_paid_image,
-// "trans_paid_date" => $trans_paid_date,
-// "trans_paid_note" => $trans_paid_note,
-// "trans_amount" => $trans_amount,
-// "trans_amount_ship" => $trans_amount_ship,
-// "trans_amount_total" => $trans_amount_total,
-// "trans_note" => $trans_note,
-
-// "id" => $id,
-// "trans_code" => $trans_code,
-// "trans_detail_trans_id" => $trans_detail_trans_id,
-// "trans_detail_produk_id" => $trans_detail_produk_id,
-// "trans_detail_shipment_id" => $trans_detail_shipment_id,
-// "trans_detail_user_address_id" => $trans_detail_user_address_id,
-// "trans_detail_no_resi" => $trans_detail_no_resi,
-// "trans_detail_qty" => $trans_detail_qty,
-// "trans_detail_size" => $trans_detail_size,
-// "trans_detail_color" => $trans_detail_color,
-// "trans_detail_amount" => $trans_detail_amount,
-// "trans_detail_amount_ship" => $trans_detail_amount_ship,
-// "trans_detail_amount_total" => $trans_detail_amount_total,
-// "trans_detail_status" => $trans_detail_status,
-// "trans_detail_transfer" => $trans_detail_transfer,
-// "trans_detail_transfer_date" => $trans_detail_transfer_date,
-// "trans_detail_transfer_note" => $trans_detail_transfer_note,
-// "trans_detail_able" => $trans_detail_able,
-// "trans_detail_able_date" => $trans_detail_able_date,
-// "trans_detail_able_note" => $trans_detail_able_note,
-// "trans_detail_packing" => $trans_detail_packing,
-// "trans_detail_packing_date" => $trans_detail_packing_date,
-// "trans_detail_packing_note" => $trans_detail_packing_note,
-// "trans_detail_send" => $trans_detail_send,
-// "trans_detail_send_date" => $trans_detail_send_date,
-// "trans_detail_send_note" => $trans_detail_send_note,
-// "trans_detail_drop" => $trans_detail_drop,
-// "trans_detail_drop_date" => $trans_detail_drop_date,
-// "trans_detail_drop_note" => $trans_detail_drop_note,
-// "trans_detail_note" => $trans_detail_note,
         $arr = [
             "0" =>'chart',
             "1" =>'order',
             "2" =>'transfer',
-            "3" =>'seller',
-            "4" =>'packing',
+            "3,4" =>'packing',
             "5" =>'shipping',
+            "5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
-        $where = "1";
+        $where = "1 AND trans_user_id=".Auth::id();
         $having = "1";
         // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
             $name = $request->get('code');
             $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
         }
-        // if(!empty($request->get('status'))){
-        //     $status = $request->get('status');
-        //     $status = array_search($status,$arr);
-        //     $having .= ' AND trans_detail_status IN ('.$status.')';
-        // }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
             $status = array_search($status,$arr);

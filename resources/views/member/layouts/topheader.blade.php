@@ -82,7 +82,15 @@
                                             <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#">Account Settings</a></li>
-                                            <li><a href="#">Log Out</a></li>
+                                            <li>
+                                                <a onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

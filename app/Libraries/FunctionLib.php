@@ -5,6 +5,22 @@ class FunctionLib
     * @param
     * @return
     **/
+    public static function address_info($id=0) {
+        $address = "";
+        if($id != 0){
+            $item = App\Models\User_address::whereId($id)->first();
+            $subdistrict = App\Models\Subdistrict::whereId($item->user_address_subdist)->pluck('subdistrict_name')[0];
+            $city = App\Models\City::whereId($item->user_address_city)->pluck('city_name')[0];
+            $province = App\Models\Province::whereId($item->user_address_province)->pluck('province_name')[0];
+            $address = $item->user_address_address.', '.$subdistrict.', '.$city.', '.$province;
+        }
+        return $address;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
     public static function page($type="member") {
         switch ($type) {
             case 'member':
@@ -183,6 +199,100 @@ class FunctionLib
     * @param
     * @return
     **/
+    public static function insert_province(){
+        $data = [];
+        $status = 200;
+        $message = 'Province added!';
+
+        $province = RajaOngkir::province($data);
+        $province = json_decode($province, true);
+        $province = $province['rajaongkir']['results'];
+        foreach ($province as $item) {
+            $province = new App\Models\Province;
+            $province->id = $item['province_id'];
+            $province->province_name = $item['province'];
+            $province->save();
+        }
+        if(!$province){
+            $status = 500;
+            $message = 'Province Not added!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function insert_city($id = 0){
+        $data = [];
+        $status = 200;
+        $message = 'Province added!';
+
+        $city = RajaOngkir::city($data);
+        $city = json_decode($city, true);
+        $city = $city['rajaongkir']['results'];
+        foreach ($city as $item) {
+            $city = new App\Models\City;
+            $city->id = $item['city_id'];
+            $city->city_province_id = $item['province_id'];
+            $city->city_province_name = $item['province'];
+            $city->city_name = $item['city_name'];
+            $city->city_type = $item['type'];
+            $city->city_postal_code = $item['postal_code'];
+            $city->save();
+        }
+        if(!$city){
+            $status = 500;
+            $message = 'Province Not added!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function insert_subdistrict($offset = 0, $limit = 100){
+        $data = [];
+        $status = 200;
+        $message = 'Province added!';
+
+        // $city = FunctionLib::get_city();
+        $city = App\Models\City::offset($offset)
+                ->limit($limit)->pluck('id');
+        foreach ($city as $item) {
+            $data = ['id' => $item];
+            $subdistrict = RajaOngkir::subdistrict($data);
+            $subdistrict = json_decode($subdistrict, true);
+            $subdistrict = $subdistrict['rajaongkir']['results'];
+            foreach ($subdistrict as $item) {
+                // dd($item);
+                $subdistrict = new App\Models\Subdistrict;
+                $subdistrict->id = $item['subdistrict_id'];
+                $subdistrict->subdistrict_province_id = $item['province_id'];
+                $subdistrict->subdistrict_province_name = $item['province'];
+                $subdistrict->subdistrict_city_id = $item['city_id'];
+                $subdistrict->subdistrict_city_name = $item['city'];
+                $subdistrict->subdistrict_city_type = $item['type'];
+                $subdistrict->subdistrict_name = $item['subdistrict_name'];
+                $subdistrict->save();
+            }
+        }
+        if(!$subdistrict){
+            $status = 500;
+            $message = 'Province Not added!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * @param
+    * @return
+    **/
     public static function get_province($id = 0){
         $data = [];
         if($id != 0){
@@ -203,10 +313,10 @@ class FunctionLib
         if($id != 0){
             $data = ['id' => $id];
         }
-        $province = RajaOngkir::city($data);
-        $province = json_decode($province, true);
-        $province = $province['rajaongkir']['results'];
-        return $province;
+        $city = RajaOngkir::city($data);
+        $city = json_decode($city, true);
+        $city = $city['rajaongkir']['results'];
+        return $city;
     }
 
     /**
@@ -218,10 +328,43 @@ class FunctionLib
         if($id != 0){
             $data = ['id' => $id];
         }
-        $province = RajaOngkir::subdistrict($data);
-        $province = json_decode($province, true);
-        $province = $province['rajaongkir']['results'];
-        return $province;
+        $subdistrict = RajaOngkir::subdistrict($data);
+        $subdistrict = json_decode($subdistrict, true);
+        $subdistrict = $subdistrict['rajaongkir']['results'];
+        return $subdistrict;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function get_waybill($id = 0){
+        $data = [];
+        $status = 'Receipt Number is not valid';
+        if($id != 0){
+            $item = App\Models\Trans_detail::whereId($id)->first();
+            if($item){
+                $req = [
+                    'data' => [
+                        'waybill' => $item->trans_detail_no_resi,
+                        'courier' => strtolower($item->shipment->shipment_name),
+                    ]
+                ];
+
+                $shipment = RajaOngkir::waybill($req);
+                $shipment = json_decode($shipment, true);
+                if($shipment['rajaongkir']['status']['code'] && $shipment['rajaongkir']['status']['code'] == 200){
+                    if(delivered){
+                        $status = 'Sent';
+                    }else{
+                        $status = 'On Process';
+                    }
+                }else{
+                    $status = 'Receipt Number is not valid';
+                }
+            }
+        }
+        return $status;
     }
 
     /**
@@ -281,12 +424,17 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function count_trans($status = ""){
+    public static function count_trans($status = "", $id = 0){
         $where = 1;
         if($status !== ""){
             $where .= " AND trans_detail_status = ".$status;
         }
-        $total = App\Models\Trans_detail::whereRaw($where)->count();
+        $total = App\Models\Trans_detail::whereRaw($where);
+        if($id != 0){
+            $total = $total->leftjoin('sys_trans', 'sys_trans.id', 'sys_trans_detail.trans_detail_trans_id')
+                ->where("trans_user_id", $id);
+        }
+        $total = $total->count();
         return $total;
     }
 

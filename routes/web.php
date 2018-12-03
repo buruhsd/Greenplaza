@@ -15,7 +15,6 @@
 //     return view('welcome');
 // });
 
-Route::get('/dashboard_member' , 'member\\FrontController@dashboard_member')->name('dash_member');
 
 Route::get('/tentang-greenplaza', 'member\\FrontController@about')->name('about') ;
 Route::get('/cara-belanja', 'member\\FrontController@carabelanja')->name('cara-belanja') ;
@@ -167,6 +166,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 // auth member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
+		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
 			Route::get('/', 'BrandController@index')->name('.index');
 			Route::get('/create', 'BrandController@create')->name('.create');
@@ -239,7 +239,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');
-	Route::get('/member/dashboard', function(){return;})->name('member.dashboard');
 
 	//wishlishController
 	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');
