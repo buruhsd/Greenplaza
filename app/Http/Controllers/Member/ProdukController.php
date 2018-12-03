@@ -123,10 +123,10 @@ class ProdukController extends Controller
         $message = 'Produk added!';
         
         $requestData = $request->all();
+        dd($requestData);
         
         $this->validate($request, [
             'produk_name' => 'required',
-            'produk_slug' => 'required',
             'produk_unit' => 'required',
             'produk_price' => 'required',
             'produk_size' => 'required',
@@ -143,7 +143,7 @@ class ProdukController extends Controller
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
-        $res->produk_slug = str_slug($request->produk_name);
+        $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
         $res->produk_size = $request->produk_size;
@@ -153,8 +153,22 @@ class ProdukController extends Controller
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
-        $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
+        // upload
+        if ($request->hasFile('produk_image')){
+            $image = $request->file('produk_image');
+            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+            $uploadPath = public_path('assets/images/product');
+            // $uploadPath2 = public_path('assets/images/brand/thumb');
+            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+            $imagesize = $image->getClientSize();
+            $imagetmp = $image->getPathName();
+            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+            }
+            $image->move($uploadPath, $imagename);
+            // $imaget->save($uploadPath2.'/'.$imagename,80);
+            $res->produk_image = $imagename;
+        }
         $res->produk_note = $request->produk_note;
         $res->save();
         if(!$res){
@@ -313,7 +327,214 @@ class ProdukController extends Controller
                 break;
             case 'create':
                 ?>
-                    <script type="text/javascript"></script>
+                    <script type="text/javascript">
+                        $(document).on('click', '#close-preview', function(){ 
+                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // Hover befor close the preview
+                            $('.image-preview').hover(
+                                function () {
+                                   $(this).popover('show');
+                                }, 
+                                 function () {
+                                   $(this).popover('hide');
+                                }
+                            );    
+                        });
+
+                        $(function() {
+                            // Create the close button
+                            var closebtn = $('<button/>', {
+                                type:"button",
+                                text: 'x',
+                                id: 'close-preview',
+                                style: 'font-size: initial;',
+                            });
+                            closebtn.attr("class","close pull-right");
+                            // Set the popover default content
+                            $('.image-preview').popover({
+                                trigger:'manual',
+                                html:true,
+                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                content: "There's no image",
+                                placement:'bottom'
+                            });
+                            // Clear event
+                            $('.image-preview-clear').click(function(){
+                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                            }); 
+                            // Create the preview image
+                            $(".image-preview-input input:file").change(function (){     
+                                var img = $('<img/>', {
+                                    id: 'dynamic',
+                                    width:250,
+                                    height:200
+                                });      
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                var x = $(this);
+                                // Set preview image into the popover data-content
+                                reader.onload = function (e) {
+                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
+                                    img.attr('src', e.target.result);
+                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                }        
+                                reader.readAsDataURL(file);
+                            });  
+                        });
+                        $("#add-file-field").click(function(){
+                            var html = '<div class="parent-img m-t-xs">'+
+                            '<div class="input-group image-preview">'+
+                                '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
+                                '<span class="input-group-btn">'+
+                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                        '<span class="glyphicon glyphicon-remove"></span> Clear'+
+                                    '</button>'+
+                                    '<div class="btn btn-default image-preview-input">'+
+                                        '<span class="glyphicon glyphicon-folder-open"></span>'+
+                                        '<span class="image-preview-input-title">Browse</span>'+
+                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>'+
+                                    '</div>'+
+                                    '<button type="button" class="btn btn-danger remove-btn">'+
+                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                    '</button>'+
+                                '</span>'+
+                            '</div>'+
+                            '</div>';
+                            $(".append-img").append(html);
+                            $(".remove-btn").click(function() {
+                                $(this).parents('.parent-img').remove();
+                            });
+
+                            // $(document).on('click', '.close', function(){ 
+                            //     console.log($(this).parents('.parent-img'));
+                            //     $(this).parents('.popover').hide();
+                                // Hover befor close the preview
+                                $('.image-preview').hover(
+                                    function () {
+                                       $(this).popover('show');
+                                    }, 
+                                     function () {
+                                       $(this).popover('hide');
+                                    }
+                                );    
+                            // });
+
+                            $(function() {
+                                // Create the close button
+                                var closebtn = $('<button/>', {
+                                    type:"button",
+                                    text: 'x',
+                                    id: 'close-preview',
+                                    style: 'font-size: initial;',
+                                });
+                                closebtn.attr("class","close pull-right");
+                                // Set the popover default content
+                                $('.image-preview').popover({
+                                    trigger:'manual',
+                                    html:true,
+                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                    content: "There's no image",
+                                    placement:'bottom'
+                                });
+                                // Clear event
+                                $('.image-preview-clear').click(function(){
+                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                    $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                    $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                    $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                                }); 
+                                // Create the preview image
+                                $(".image-preview-input input:file").change(function (){     
+                                    var img = $('<img/>', {
+                                        id: 'dynamic',
+                                        width:250,
+                                        height:200
+                                    });      
+                                    var file = this.files[0];
+                                    var reader = new FileReader();
+                                    var x = $(this);
+                                    // Set preview image into the popover data-content
+                                    reader.onload = function (e) {
+                                        $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                        $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                        $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
+                                        img.attr('src', e.target.result);
+                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                    }        
+                                    reader.readAsDataURL(file);
+                                });  
+                            });
+                        });
+
+                        // $(document).ready(function(){
+                        //     $(document).on('change', '.btn-file :file', function() {
+                        //         var input = $(this),
+                        //         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                        //         input.trigger('fileselect', [label]);
+                        //     });
+                        //     $('.btn-file :file').on('fileselect', function(event, label) {
+                        //         console.log(label);
+                        //         var input = $(this).parents('.input-group').find(':text'),
+                        //         log = label;
+                        //         if( input.length ) {
+                        //             input.val(log);
+                        //         } else {
+                        //             if( log ) alert(log);
+                        //         }
+                        //     });
+                        //     function readURL(input) {
+                        //         if (input.files && input.files[0]) {
+                        //             var reader = new FileReader();
+
+                        //             reader.onload = function (e) {
+                        //                 // $('#img-upload').attr('src', e.target.result);
+                        //                 // console.log($(input).parent().parent().parent().parent().parent("div .img-thumb"));
+                        //                 // .parent('.img-thumb').attr('src', e.target.result);
+                        //                 $(input).parents('.added-field').find('.img-thumb').attr('src', e.target.result);
+                        //             }
+                        //             reader.readAsDataURL(input.files[0]);
+                        //         }
+                        //     }
+                        //     $("#imgInp").change(function(){
+                        //         readURL(this);
+                        //     });
+
+                        //     // This will add new input field
+                        //     $("#add-file-field").click(function(){
+                        //         var html = '<div class="added-field">'+
+                        //             '<div class="col-md-9">'+
+                        //                 '<div class="input-group">'+
+                        //                     '<span class="input-group-btn">'+
+                        //                         '<span class="btn btn-default btn-file">'+
+                        //                             'Browse… <input type="file" name="produk_image[]" id="imgInp">'+
+                        //                         '</span>'+
+                        //                     '</span>'+
+                        //                     '<input type="text" class="form-control" readonly>'+
+                        //                     '<span class="input-group-btn">'+
+                        //                         '<input type="button" class="remove-btn form-control" value="X"/>'+
+                        //                     '</span>'+
+                        //                 '</div>'+
+                        //             '</div>'+
+                        //             '<div class="col-md-3">'+
+                        //                 '<img class="h50 img-thumb"/>'+
+                        //             '</div>'+
+                        //         '</div>';
+                        //         $("#append-upload").append(html);
+                        //         $(".remove-btn").click(function() {
+                        //             $(this).parents('.added-field').remove();
+                        //         });
+                        //     });
+                        //     // The live function binds elements which are added to the DOM at later time
+                        //     // So the newly added field can be removed too
+                        // });
+                    </script>
                 <?php
                 break;
             case 'show':

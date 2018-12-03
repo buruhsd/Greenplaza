@@ -1,25 +1,50 @@
+<div class="panel panel-white col-md-12">
+    <div class="panel-body">
+        <div class="row">
+            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            <div class="col-xs-10 col-md-8 col-sm-10 append-img">
+            @if(str_contains(Request::url(), ['create']))
+                <div class="parent-img">
+                    <div class="input-group image-preview">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> Clear
+                            </button>
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input type="file" class="input-file-preview" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            @elseif(str_contains(Request::url(), ['edit']))
+                <div class="parent-img">
+                    <div class="input-group image-preview">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> Clear
+                            </button>
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input type="file" class="input-file-preview" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            @endif
+            </div>
+            <button type="button" class="btn btn-success col-sm-1 col-xs-1" id="add-file-field">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </div>
+    </div>
+</div>
 <div class="panel panel-white col-md-6 no-border">
     <div class="panel-body">
-        @if(str_contains(Request::url(), ['create']))
-        @elseif(str_contains(Request::url(), ['edit']))
-        <div class="form-group">
-            {!! Form::label('image', ' ', ['class' => 'col-md-3 control-label']) !!}
-            <div class="col-md-9">
-                <img class="h100" src="{{asset('assets/images/product/'.$produk->produk_image) }}" onerror="this.src='http://placehold.it/700x400'" alt="">
-            </div>
-        </div>
-        @endif
-        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_image') ? 'has-error' : ''}}">
-            {!! Form::label('produk_image', 'Image : ', ['class' => 'col-md-3 control-label']) !!}
-            <div class="col-md-9">
-                {!! Form::file('produk_image', null, [
-                    'class' => 'form-control', 
-                    'placeholder' => 'Image', 
-                    'required'
-                ])!!}
-                {!! $errors->first('produk_image', '<p class="help-block">:message</p>') !!}
-            </div>
-        </div>
         @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_user_status') ? 'has-error' : ''}}">
             {!! Form::label('produk_user_status', 'User Level : ', ['class' => 'col-md-3 control-label']) !!}
@@ -129,17 +154,6 @@
                     'required'
                 ])!!}
             {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
-            </div>
-        </div>
-        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_slug') ? 'has-error' : ''}}">
-            {!! Form::label('produk_slug', 'Slug : ', ['class' => 'col-md-3 control-label']) !!}
-            <div class="col-md-9">
-                {!! Form::text('produk_slug', null, [
-                    'class' => 'form-control', 
-                    'placeholder' => 'Slug', 
-                    'required'
-                ])!!}
-            {!! $errors->first('produk_slug', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_unit') ? 'has-error' : ''}}">
