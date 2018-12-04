@@ -126,25 +126,25 @@
 }
 
 /*checkbox*/
-.btn input[type="checkbox"] {
+.btn input[type="checkbox"] , .btn input[type="radio"] {
     display: none;
 }
 
-.btn input[type="checkbox"] + .btn-group > label span {
+.btn input[type="checkbox"] + .btn-group > label span , .btn input[type="radio"] + .btn-group > label span {
     width: 20px;
 }
 
-.btn input[type="checkbox"] + .btn-group > label span:first-child {
+.btn input[type="checkbox"] + .btn-group > label span:first-child , .btn input[type="radio"] + .btn-group > label span:first-child {
     display: none;
 }
-.btn input[type="checkbox"] + .btn-group > label span:last-child {
+.btn input[type="checkbox"] + .btn-group > label span:last-child , .btn input[type="radio"] + .btn-group > label span:last-child {
     display: inline-block;   
 }
 
-.btn input[type="checkbox"]:checked + .btn-group > label span:first-child {
+.btn input[type="checkbox"]:checked + .btn-group > label span:first-child .btn input[type="radio"]:checked + .btn-group > label span:first-child {
     display: inline-block;
 }
-.btn input[type="checkbox"]:checked + .btn-group > label span:last-child {
+.btn input[type="checkbox"]:checked + .btn-group > label span:last-child , .btn input[type="radio"]:checked + .btn-group > label span:last-child {
     display: none;   
 }
 .btn span.check.glyphicon {         

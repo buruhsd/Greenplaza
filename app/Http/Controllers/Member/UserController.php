@@ -10,6 +10,7 @@ use App\Role;
 use App\User;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -28,13 +29,16 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
+    public function profil(Request $request)
     {
-        $where = "1";
-        $data['user'] = User::whereRaw($where)->where('id', Auth::id())->first();
-        // dd($data['user']);
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['brand'] = Brand::all();
+        $data['cfg_bank'] = Bank::all();
+        $data['user'] = User::findOrFail(Auth::id());
 
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.user.index', $data);
     }
 
@@ -253,7 +257,7 @@ class UserController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
-            case 'index':
+            case 'profil':
                 ?>
                     <script type="text/javascript">
                         $(function(){

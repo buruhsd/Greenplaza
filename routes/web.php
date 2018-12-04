@@ -201,7 +201,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
 			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
 		});
-		Route::get('/profil', 'Member\\UserController@index')->name('.profil');
+		Route::get('/profil', 'UserController@profil')->name('.profil');
+		Route::get('/profil_user', function(){return view('member.pengaturan_profil.profil-user');})->name('.profil_user');
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
 			Route::get('/create', 'ShipmentController@create')->name('.create');
@@ -239,11 +240,18 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update', 'ReviewController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
 		});
-		Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
 		Route::get('/alamat_seller', function(){return view('member.alamat_seller.index');})->name('.alamat_seller');
 		Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
 		Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
+		Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
 		Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
+		Route::get('/beli_poin', function(){return view('member.hotlist.beli_poin');})->name('.beli_poin');
+		// Route::get('/profil_user', function(){return view('member.pengaturan_profil.profil-user');})->name('.profil_user');
+		Route::get('/transfer_cw', function(){return view('member.transfer_cw.index');})->name('.transfer_cw');
+		Route::get('/ubah_password', function(){return view('member.ubah_password.index');})->name('.ubah_password');
+		Route::get('/upload_foto_profil', function(){return view('member.upload_foto_profil.index');})->name('.upload_foto_profil');
+		Route::get('/upload_scan_npwp', function(){return view('member.upload_scan_npwp.index');})->name('.upload_scan_npwp');
+		Route::get('/upload_siup', function(){return view('member.upload_siup.index');})->name('.upload_siup');
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
 		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
