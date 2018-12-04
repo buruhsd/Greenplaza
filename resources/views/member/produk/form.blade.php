@@ -1,9 +1,9 @@
 <div class="panel panel-white col-md-12">
     <div class="panel-body">
         <div class="row">
+            @if(str_contains(Request::url(), ['create']))
             {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
-            @if(str_contains(Request::url(), ['create']))
                 <div class="parent-img">
                     <div class="input-group image-preview">
                         <input type="text" class="form-control image-preview-filename" disabled="disabled">
@@ -14,29 +14,54 @@
                             <div class="btn btn-default image-preview-input">
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input type="file" class="input-file-preview" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>
+                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>
                             </div>
                         </span>
                     </div>
                 </div>
-            @elseif(str_contains(Request::url(), ['edit']))
-                <div class="parent-img">
-                    <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                <span class="glyphicon glyphicon-remove"></span> Clear
-                            </button>
-                            <div class="btn btn-default image-preview-input">
-                                <span class="glyphicon glyphicon-folder-open"></span>
-                                <span class="image-preview-input-title">Browse</span>
-                                <input type="file" class="input-file-preview" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-            @endif
             </div>
+            @elseif(str_contains(Request::url(), ['edit']))
+            {!! Form::label('produk_user_status', 'Choose Main Picture : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            <div class="col-xs-10 col-md-8 col-sm-10">
+                <div class="form-group">
+                @foreach($produk->images->all() as $item)
+                    @if ($loop->first)
+                        <div class="col-md-2">
+                            <label class="btn btn-primary">
+                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check img-checked">
+                                <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
+                            </label>
+                        </div>
+                    @else
+                        <div class="col-md-2">
+                            <label class="btn btn-primary">
+                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check">
+                                <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
+                            </label>
+                        </div>
+                    @endif
+                @endforeach
+                </div>
+            </div>
+            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            <div class="col-xs-10 col-md-8 col-sm-10 append-img">
+                <div class="parent-img">
+                    <div class="input-group image-preview">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> Clear
+                            </button>
+                            <div class="btn btn-default image-preview-input">
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @endif
             <button type="button" class="btn btn-success col-sm-1 col-xs-1" id="add-file-field">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>

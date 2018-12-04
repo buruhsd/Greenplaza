@@ -178,13 +178,20 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update/{id}', 'BrandController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'BrandController@destroy')->name('.destroy');
 		});
+		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
+			Route::get('/', 'MessageController@index')->name('.index');
+			Route::get('/create', 'MessageController@create')->name('.create');
+			Route::post('/store', 'MessageController@store')->name('.store');
+			Route::get('/destroy/{id}', 'MessageController@destroy')->name('.destroy');
+			Route::get('arsip/{id}', 'MessageController@arsip')->name('.arsip');
+		});
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('/', 'ProdukController@index')->name('.index');
 			Route::get('/create', 'ProdukController@create')->name('.create');
 			Route::post('/store', 'ProdukController@store')->name('.store');
 			Route::get('/show/{id}', 'ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
-			Route::patch('/update', 'ProdukController@update')->name('.update');
+			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
 			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
 		});

@@ -135,7 +135,7 @@ class ProdukController extends Controller
         $this->validate($request, [
             'produk_name' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required|numeric|between:0.00,99.99',
+            'produk_price' => 'required|numeric|min:0.00',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
@@ -145,7 +145,7 @@ class ProdukController extends Controller
             'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
         // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
@@ -164,8 +164,8 @@ class ProdukController extends Controller
         $res->produk_discount = $request->produk_discount;
         $res->produk_user_status = Auth::user()->roles->first()->id;
         // upload
-        if ($request->hasFile('input-file-preview')){
-            foreach ($request->file('input-file-preview') as $key => $item) {
+        if ($request->hasFile('input_file_preview')){
+            foreach ($request->file('input_file_preview') as $key => $item) {
                 $image = $item;
                 // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
                 $uploadPath = public_path('assets/images/product');
@@ -271,47 +271,124 @@ class ProdukController extends Controller
         $message = 'Produk added!';
         
         $requestData = $request->all();
+        dd($requestData);
         
         $this->validate($request, [
-            'produk_seller_id' => 'required',
             'produk_name' => 'required',
-            'produk_slug' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required',
+            'produk_price' => 'required|numeric|between:0.00,99.99',
             'produk_size' => 'required',
-            'produk_length' => 'required',
-            'produk_wide' => 'required',
+            'produk_length' => 'required|numeric',
+            'produk_wide' => 'required|numeric',
             'produk_color' => 'required',
-            'produk_stock' => 'required',
-            'produk_weight' => 'required',
-            'produk_discount' => 'required',
-            'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'produk_stock' => 'required|numeric',
+            'produk_weight' => 'required|numeric',
+            'produk_discount' => 'required|numeric|between:0.00,99.99',
         ]);
+
         $produk = Produk::findOrFail($id);
-        $produk->produk_seller_id = $request->produk_seller_id;
+        if($produk->produk_seller_id !== Auth::user()->id || $res->produk_user_status !== Auth::user()->roles->first()->id){
+            $status = 500;
+            $message = 'Produk Not updated!';
+            return redirect('admin/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+
+        }
         $produk->produk_category_id = $request->produk_category_id;
         $produk->produk_brand_id = $request->produk_brand_id;
         $produk->produk_name = $request->produk_name;
         $produk->produk_slug = $request->produk_slug;
         $produk->produk_unit = $request->produk_unit;
         $produk->produk_price = $request->produk_price;
-        $produk->produk_size = $request->produk_size;
+        $produk->produk_size = implode (",", $request->produk_size);
         $produk->produk_length = $request->produk_length;
         $produk->produk_wide = $request->produk_wide;
-        $produk->produk_color = $request->produk_color;
+        $produk->produk_color = implode (",", $request->produk_color);
         $produk->produk_stock = $request->produk_stock;
         $produk->produk_weight = $request->produk_weight;
         $produk->produk_discount = $request->produk_discount;
-        $produk->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$produk->produk_image);
+        if ($request->hasFile('input_file_choose')){
+            $request->produk_image = $request->input_file_choose;
+        }
+        // upload
+        if ($request->hasFile('input_file_preview')){
+            foreach ($request->file('input_file_preview') as $key => $item) {
+                $image = $item;
+                // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $uploadPath = public_path('assets/images/product');
+                // $uploadPath2 = public_path('assets/images/brand/thumb');
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+                $imagesize = $image->getClientSize();
+                $imagetmp = $image->getPathName();
+                // exist on db delete image path
+                if(Produk::where('id', '=', "$id")->pluck('produk_image')[0] != ''){
+                    if(file_exists($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0])){
+                        File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
+                    }
+                }
+                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                    $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+                }
+                $image->move($uploadPath, $imagename);
+                $produk_image_image[] = $imagename;
+                // $imaget->save($uploadPath2.'/'.$imagename,80);
+                if($produk->images->count() == 0 && $key == 0){
+                    $res->produk_image = $imagename;
+                }
+            }
+        }
         $produk->produk_note = $request->produk_note;
         $produk->save();
-        $res = $produk->update($requestData);
+        // $res = $produk->update($requestData);
+        if(!$produk){
+            $status = 500;
+            $message = 'Produk Not Updated!';
+            return redirect('admin/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            // add produk image
+            if ($request->hasFile('input_file_preview')){
+                foreach ($produk_image_image as $item) {
+                    $produk_image = new Produk_image;
+                    $produk_image->produk_image_produk_id = $res->id;
+                    $produk_image->produk_image_image = $item;
+                    $produk_image->save();
+                }
+                if(!$produk_image){
+                    $status = 500;
+                    $message = 'Produk Image Not added!';
+                    return redirect('admin/produk')
+                        ->with(['flash_status' => $status,'flash_message' => $message]);
+                }
+            }
+            // add grosir
+            if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
+                foreach ($request->produk_grosir_start as $key => $item) {
+                    $produk_grosir = new Produk_grosir;
+                    $produk_grosir->produk_grosir_produk_id = $res->id;
+                    $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                    $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                    $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                    $produk_grosir->save();
+                }
+            }
+        }
+        return redirect('admin/produk')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    public function produk_image_delete($id){
+        $status = 200;
+        $message = 'Produk Image deleted!';
+        $res = Produk_image::destroy($id);
         if(!$res){
             $status = 500;
-            $message = 'Produk Not updated!';
+            $message = 'Produk Not deleted!';
         }
 
+        if($request->ajax()){
+            return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
+        }
         return redirect('admin/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
@@ -442,7 +519,7 @@ class ProdukController extends Controller
                                     '<div class="btn btn-default image-preview-input">'+
                                         '<span class="glyphicon glyphicon-folder-open"></span>'+
                                         '<span class="image-preview-input-title">Browse</span>'+
-                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview[]"/>'+
+                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
                                     '</div>'+
                                     '<button type="button" class="btn btn-danger remove-btn">'+
                                         '<span class="glyphicon glyphicon-remove"></span>'+
@@ -562,7 +639,159 @@ class ProdukController extends Controller
                 break;
             case 'edit':
                 ?>
-                    <script type="text/javascript"></script>
+                    <script type="text/javascript">
+                        $(document).on('click', '#close-preview', function(){ 
+                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // Hover befor close the preview
+                            $('.image-preview').hover(
+                                function () {
+                                   $(this).popover('show');
+                                }, 
+                                 function () {
+                                   $(this).popover('hide');
+                                }
+                            );    
+                        });
+
+                        $(function() {
+                            // Create the close button
+                            var closebtn = $('<button/>', {
+                                type:"button",
+                                text: 'x',
+                                id: 'close-preview',
+                                style: 'font-size: initial;',
+                            });
+                            closebtn.attr("class","close pull-right");
+                            // Set the popover default content
+                            $('.image-preview').popover({
+                                trigger:'manual',
+                                html:true,
+                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                content: "There's no image",
+                                placement:'bottom'
+                            });
+                            // Clear event
+                            $('.image-preview-clear').click(function(){
+                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                            }); 
+                            // Create the preview image
+                            $(".image-preview-input input:file").change(function (){     
+                                var img = $('<img/>', {
+                                    id: 'dynamic',
+                                    width:250,
+                                    height:200
+                                });      
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                var x = $(this);
+                                // Set preview image into the popover data-content
+                                reader.onload = function (e) {
+                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
+                                    img.attr('src', e.target.result);
+                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                }        
+                                reader.readAsDataURL(file);
+                            });  
+                        });
+                        $("#add-file-field").click(function(){
+                            var html = '<div class="parent-img m-t-xs">'+
+                            '<div class="input-group image-preview">'+
+                                '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
+                                '<span class="input-group-btn">'+
+                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                        '<span class="glyphicon glyphicon-remove"></span> Clear'+
+                                    '</button>'+
+                                    '<div class="btn btn-default image-preview-input">'+
+                                        '<span class="glyphicon glyphicon-folder-open"></span>'+
+                                        '<span class="image-preview-input-title">Browse</span>'+
+                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                    '</div>'+
+                                    '<button type="button" class="btn btn-danger remove-btn">'+
+                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                    '</button>'+
+                                '</span>'+
+                            '</div>'+
+                            '</div>';
+                            $(".append-img").append(html);
+                            $(".remove-btn").click(function() {
+                                $(this).parents('.parent-img').remove();
+                            });
+
+                            // $(document).on('click', '.close', function(){ 
+                            //     console.log($(this).parents('.parent-img'));
+                            //     $(this).parents('.popover').hide();
+                                // Hover befor close the preview
+                                $('.image-preview').hover(
+                                    function () {
+                                       $(this).popover('show');
+                                    }, 
+                                     function () {
+                                       $(this).popover('hide');
+                                    }
+                                );    
+                            // });
+
+                            $(function() {
+                                // Create the close button
+                                var closebtn = $('<button/>', {
+                                    type:"button",
+                                    text: 'x',
+                                    id: 'close-preview',
+                                    style: 'font-size: initial;',
+                                });
+                                closebtn.attr("class","close pull-right");
+                                // Set the popover default content
+                                $('.image-preview').popover({
+                                    trigger:'manual',
+                                    html:true,
+                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                    content: "There's no image",
+                                    placement:'bottom'
+                                });
+                                // Clear event
+                                $('.image-preview-clear').click(function(){
+                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                    $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                    $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                    $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                                }); 
+                                // Create the preview image
+                                $(".image-preview-input input:file").change(function (){     
+                                    var img = $('<img/>', {
+                                        id: 'dynamic',
+                                        width:250,
+                                        height:200
+                                    });      
+                                    var file = this.files[0];
+                                    var reader = new FileReader();
+                                    var x = $(this);
+                                    // Set preview image into the popover data-content
+                                    reader.onload = function (e) {
+                                        $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                        $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                        $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
+                                        img.attr('src', e.target.result);
+                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                    }        
+                                    reader.readAsDataURL(file);
+                                });  
+                            });
+                        });
+
+                        $('.img-check').click(function(e) {
+                            $('.img-check').not(this).removeClass('img-checked')
+                                .siblings('input').prop('checked',false);
+                            $(this).addClass('img-checked')
+                                .siblings('input').prop('checked',true);
+                        });
+                    </script>
                 <?php
                 break;
         }

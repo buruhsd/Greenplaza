@@ -77,7 +77,7 @@
                                     <i class="menu-icon icon-layers"></i><span>Pesan & Diskusi</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.message.index')}} --}}">Pesan</a></li>
+                                    <li><a href="{{route('member.message.index')}}">Pesan</a></li>
                                     <li><a href="{{-- {{route('member.produk_discuss.index')}} --}}">Diskusi Produk</a></li>
                                 </ul>
                             </li>

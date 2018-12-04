@@ -14,6 +14,7 @@ class SysMessage extends Migration
     public function up()
     {
         // diskusi produk
+        Schema::dropIfExists('sys_message');
         Schema::create('sys_message', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('message_from_id')->unsigned();
@@ -23,6 +24,7 @@ class SysMessage extends Migration
             $table->tinyInteger('message_status_from')->default(1)->comment('tampil from, 1.tampil');
             $table->tinyInteger('message_status_to')->default(1)->comment('tampil to, 1.tampil');
             $table->tinyInteger('message_is_read')->default(0)->comment('1.dibaca');
+            $table->tinyInteger('message_is_arsip')->default(0)->comment('1.arsip');
             $table->timestamps();
             $table->foreign('message_from_id')
                 ->references('id')

@@ -148,8 +148,18 @@
     display: none;   
 }
 .btn span.check.glyphicon {         
-  opacity: 0;       
+    opacity: 0;       
 }
 .btn.active span.check.glyphicon {        
-  opacity: 1;       
+    opacity: 1;       
+}
+
+.img-checked
+{
+    opacity:0.5;
+    color:#996;
+}
+
+.text-break{
+  word-break: break-all;
 }

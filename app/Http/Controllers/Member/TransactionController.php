@@ -63,7 +63,7 @@ class TransactionController extends Controller
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
-        return view('member.transaction.index', $data);
+        return view('member.transaction.purchase', $data);
     }
 
     /**
