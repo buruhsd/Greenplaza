@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-1 mb-30">
-                    {!!$page->page_text!!}
+                    {!!$page!!}
                     {{-- content --}}
                 </div>
                 <div class="col-lg-3 col-12">

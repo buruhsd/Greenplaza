@@ -30,6 +30,11 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{route('admin.page')}}">
+                                    <i class="menu-icon icon-inbox"></i><span>Page</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{route('admin.res_kom.index')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
                                 </a>

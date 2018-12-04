@@ -62,6 +62,12 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/delete_email/{id}', 'admin\\EmailController@delete')->name('.delete_email');
 		Route::get('/resend_email/{id}', 'admin\\EmailController@resend')->name('.resend_email');
 
+		//PageController
+		Route::get('/page', 'admin\\PageController@page')->name('.page');
+		Route::post('/page_add', 'admin\\PageController@page_add')->name('.page_add');
+		Route::get('/page_list', 'admin\\PageController@page_list')->name('.page_list');
+		Route::get('/delete_email/{id}', 'admin\\PageController@delete')->name('.delete_page');
+
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
