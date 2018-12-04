@@ -10,12 +10,17 @@ use App\Role;
 use App\User;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Produk_unit;
+use App\Models\Produk_location;
+use App\Models\Produk_image;
+use App\Models\Produk_grosir;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use FunctionLib;
 
 
 class ProdukController extends Controller
@@ -105,6 +110,8 @@ class ProdukController extends Controller
         $data['role'] = Role::all();
         $data['user'] = User::all();
         $data['category'] = Category::all();
+        $data['produk_unit'] = Produk_unit::all();
+        $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.produk.create', $data);
@@ -123,21 +130,23 @@ class ProdukController extends Controller
         $message = 'Produk added!';
         
         $requestData = $request->all();
-        dd($requestData);
+        // dd($requestData);
         
         $this->validate($request, [
             'produk_name' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required',
+            'produk_price' => 'required|numeric|between:0.00,99.99',
             'produk_size' => 'required',
-            'produk_length' => 'required',
-            'produk_wide' => 'required',
+            'produk_length' => 'required|numeric',
+            'produk_wide' => 'required|numeric',
             'produk_color' => 'required',
-            'produk_stock' => 'required',
-            'produk_weight' => 'required',
-            'produk_discount' => 'required',
+            'produk_stock' => 'required|numeric',
+            'produk_weight' => 'required|numeric',
+            'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        
+        // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;
@@ -146,37 +155,70 @@ class ProdukController extends Controller
         $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
-        $res->produk_size = $request->produk_size;
+        $res->produk_size = implode (",", $request->produk_size);
         $res->produk_length = $request->produk_length;
         $res->produk_wide = $request->produk_wide;
-        $res->produk_color = $request->produk_color;
+        $res->produk_color = implode (",", $request->produk_color);
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
+        $res->produk_user_status = Auth::user()->roles->first()->id;
         // upload
-        if ($request->hasFile('produk_image')){
-            $image = $request->file('produk_image');
-            // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
-            $uploadPath = public_path('assets/images/product');
-            // $uploadPath2 = public_path('assets/images/brand/thumb');
-            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
-            $imagesize = $image->getClientSize();
-            $imagetmp = $image->getPathName();
-            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
-                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+        if ($request->hasFile('input-file-preview')){
+            foreach ($request->file('input-file-preview') as $key => $item) {
+                $image = $item;
+                // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $uploadPath = public_path('assets/images/product');
+                // $uploadPath2 = public_path('assets/images/brand/thumb');
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+                $imagesize = $image->getClientSize();
+                $imagetmp = $image->getPathName();
+                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                    $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+                }
+                $image->move($uploadPath, $imagename);
+                $produk_image_image[] = $imagename;
+                // $imaget->save($uploadPath2.'/'.$imagename,80);
+                if($key == 0){
+                    $res->produk_image = $imagename;
+                }
             }
-            $image->move($uploadPath, $imagename);
-            // $imaget->save($uploadPath2.'/'.$imagename,80);
-            $res->produk_image = $imagename;
         }
         $res->produk_note = $request->produk_note;
         $res->save();
         if(!$res){
             $status = 500;
             $message = 'Produk Not added!';
+            return redirect('admin/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            // add produk image
+            foreach ($produk_image_image as $item) {
+                $produk_image = new Produk_image;
+                $produk_image->produk_image_produk_id = $res->id;
+                $produk_image->produk_image_image = $item;
+                $produk_image->save();
+            }
+            if(!$produk_image){
+                $status = 500;
+                $message = 'Produk Image Not added!';
+                return redirect('admin/produk')
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            // add grosir
+            if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
+                foreach ($request->produk_grosir_start as $key => $item) {
+                    $produk_grosir = new Produk_grosir;
+                    $produk_grosir->produk_grosir_produk_id = $res->id;
+                    $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                    $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                    $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                    $produk_grosir->save();
+                }
+            }
+            return redirect('admin/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        return redirect('admin/produk')
-            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**
@@ -206,6 +248,8 @@ class ProdukController extends Controller
         $data['role'] = Role::all();
         $data['user'] = User::all();
         $data['category'] = Category::all();
+        $data['produk_unit'] = Produk_unit::all();
+        $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
         $data['produk'] = Produk::findOrFail($id);
 
@@ -473,67 +517,41 @@ class ProdukController extends Controller
                             });
                         });
 
-                        // $(document).ready(function(){
-                        //     $(document).on('change', '.btn-file :file', function() {
-                        //         var input = $(this),
-                        //         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-                        //         input.trigger('fileselect', [label]);
-                        //     });
-                        //     $('.btn-file :file').on('fileselect', function(event, label) {
-                        //         console.log(label);
-                        //         var input = $(this).parents('.input-group').find(':text'),
-                        //         log = label;
-                        //         if( input.length ) {
-                        //             input.val(log);
-                        //         } else {
-                        //             if( log ) alert(log);
-                        //         }
-                        //     });
-                        //     function readURL(input) {
-                        //         if (input.files && input.files[0]) {
-                        //             var reader = new FileReader();
-
-                        //             reader.onload = function (e) {
-                        //                 // $('#img-upload').attr('src', e.target.result);
-                        //                 // console.log($(input).parent().parent().parent().parent().parent("div .img-thumb"));
-                        //                 // .parent('.img-thumb').attr('src', e.target.result);
-                        //                 $(input).parents('.added-field').find('.img-thumb').attr('src', e.target.result);
-                        //             }
-                        //             reader.readAsDataURL(input.files[0]);
-                        //         }
-                        //     }
-                        //     $("#imgInp").change(function(){
-                        //         readURL(this);
-                        //     });
-
-                        //     // This will add new input field
-                        //     $("#add-file-field").click(function(){
-                        //         var html = '<div class="added-field">'+
-                        //             '<div class="col-md-9">'+
-                        //                 '<div class="input-group">'+
-                        //                     '<span class="input-group-btn">'+
-                        //                         '<span class="btn btn-default btn-file">'+
-                        //                             'Browse… <input type="file" name="produk_image[]" id="imgInp">'+
-                        //                         '</span>'+
-                        //                     '</span>'+
-                        //                     '<input type="text" class="form-control" readonly>'+
-                        //                     '<span class="input-group-btn">'+
-                        //                         '<input type="button" class="remove-btn form-control" value="X"/>'+
-                        //                     '</span>'+
-                        //                 '</div>'+
-                        //             '</div>'+
-                        //             '<div class="col-md-3">'+
-                        //                 '<img class="h50 img-thumb"/>'+
-                        //             '</div>'+
-                        //         '</div>';
-                        //         $("#append-upload").append(html);
-                        //         $(".remove-btn").click(function() {
-                        //             $(this).parents('.added-field').remove();
-                        //         });
-                        //     });
-                        //     // The live function binds elements which are added to the DOM at later time
-                        //     // So the newly added field can be removed too
-                        // });
+                        var clicks = 1;
+                        function add_grosir_row() {
+                            clicks += 1;
+                            if (clicks < 6) {
+                                $("#grosir_row").append(
+                                    '<tr id="row_"' + clicks + '>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_start[]" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_end[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 50%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_price[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td class="text-center">'+
+                                    '<a class="btn btn-xs btn-danger remove_grosir">'+
+                                    '<i class="fa fa-minus"></i>'+
+                                    '</a>'+
+                                    '</td>'+
+                                    '</tr>'
+                                );
+                            } else {
+                                clicks -= 1;
+                                $(".add_grosir_row").hide();
+                            }
+                            $(".remove_grosir").on("click", function(){
+                                clicks -= 1;
+                                $(this).parents("tr").remove();
+                                $(".add_grosir_row").show();
+                            })
+                        }
                     </script>
                 <?php
                 break;

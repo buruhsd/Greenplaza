@@ -100,14 +100,18 @@ class FrontController extends Controller
         if($request->input("order") !== ""){
             $order .= $request->input("order").' ASC';
         }
+        $where = "1";
+        if($request->input("src") != ""){
+            $where .= " AND produk_name LIKE '%".$request->input("src")."%'";
+        }
         if($request->input("cat") != ""){
             $id_cat = Category::whereCategory_slug($request->input("cat"))->orderByRaw($order)->pluck('id')->first();
             $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
             if($id_cat !== null){
-                $data['produk'] = FunctionLib::produk_by('category', $id_cat)->paginate($perPage);
+                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where)->paginate($perPage);
             }
         }else{
-            $data['produk'] = Produk::orderByRaw("rand()")->paginate($perPage);
+            $data['produk'] = Produk::whereRaw($where)->orderByRaw("rand()")->paginate($perPage);
         }
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->get();
         return view('frontend.category', $data);

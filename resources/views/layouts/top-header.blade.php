@@ -72,6 +72,13 @@
                     <div class="col-md-7 col-sm-8 col-12">
                         <div class="search-wrap">
                             <form action="{{route('category')}}" method="GET">
+                                <select name="cat" hidden>
+                                    @if(isset($_GET['cat']) && $_GET['cat'] != "")
+                                    <option value="{{$_GET['cat']}}" selected>{{$_GET['cat']}}</option>
+                                    @else
+                                    <option value="" selected>null</option>
+                                    @endif
+                                </select>
                                 <input name="src" type="text" placeholder="Cari Produk...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
