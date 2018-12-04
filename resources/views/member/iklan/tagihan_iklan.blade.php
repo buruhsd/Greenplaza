@@ -3,7 +3,7 @@
                <!-- Page Inner -->
                 <div class="page-inner">
                     <div class="page-title">
-                        <h3 class="breadcrumb-header">Tagihan Hot List </h3>
+                        <h3 class="breadcrumb-header">Tagihan Iklan </h3>
                     </div>
                     <div class="panel-body">
                     </div>
@@ -45,7 +45,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="panel panel-white">
                                     <div class="panel-heading clearfix">
-                                        <h4 class="panel-title">Tagihan Hot List</h4>
+                                        <h4 class="panel-title">Tagihan Iklan</h4>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive invoice-table">
@@ -53,12 +53,9 @@
                                                 <tbody>
                                                     <tr>
                                                         <th scope="row">No</th>
-                                                        <td>Kode Order</td>
-                                                        <td>Tanggal Order</td>
-                                                        <td>Paket</span></td>
-                                                        <td>Total Tagihan</td>
-                                                        <td>Status</td>
-                                                        <td>Aksi</td>
+                                                        <td>Pin Kode Iklan</td>
+                                                        <td>Iklan</td>
+                                                        
 
 
                                                     </tr>
@@ -66,10 +63,7 @@
                                                         <th scope="row">No</th>
                                                         <td>Haloo</td>
                                                         <td>Haloo</td>
-                                                        <td>Haloo</td>
-                                                        <td>Haloo</td>
-                                                        <td>Haloo</td>
-                                                        <td>Haloo</td>
+                                                        
                                                     </tr>
                                                 </tbody>
                                             </table>

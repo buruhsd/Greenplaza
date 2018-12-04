@@ -3,7 +3,7 @@
                <!-- Page Inner -->
                 <div class="page-inner">
                     <div class="page-title">
-                        <h3 class="breadcrumb-header">Tagihan Hot List </h3>
+                        <h3 class="breadcrumb-header">Tagihan Pin Code </h3>
                     </div>
                     <div class="panel-body">
                     </div>
@@ -45,7 +45,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="panel panel-white">
                                     <div class="panel-heading clearfix">
-                                        <h4 class="panel-title">Tagihan Hot List</h4>
+                                        <h4 class="panel-title">Tagihan Pin Code</h4>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive invoice-table">
