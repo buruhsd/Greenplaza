@@ -369,18 +369,10 @@ class UserController extends Controller
         $user->user_store = $request->user_store;
         // upload
         if ($request->hasFile('user_store_image')){
-            $image = $request->file('user_store_image');
-            $uploadPath = public_path('assets/images/bg_etalase');
-            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
-            $imagesize = $image->getClientSize();
-            $imagetmp = $image->getPathName();
-            if($user->user_store_image !== '' && $user->user_store_image !== null){
-                File::delete($uploadPath . '/' . $user->user_store_image);   
-            }
-            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
-                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
-            }
-            $image->move($uploadPath, $imagename);
+            $file = $request->file('user_store_image');
+            $path = public_path('assets/images/bg_etalase');
+            $field = $user->user_store_image;
+            $imagename = FunctionLib::doUpload($file, $path, $field);
             $user->user_store_image = $imagename;
         }
         $user->user_slogan = $request->user_slogan;
@@ -397,18 +389,10 @@ class UserController extends Controller
         // $user->user_detail->user_detail_phone = $request->user_detail_phone;
         // upload
         if ($request->hasFile('user_detail_image')){
-            $image = $request->file('user_detail_image');
-            $uploadPath = public_path('assets/images/profil');
-            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
-            $imagesize = $image->getClientSize();
-            $imagetmp = $image->getPathName();
-            if($user->user_store_image !== '' && $user->user_detail->user_detail_image !== null){
-                File::delete($uploadPath . '/' . $user->user_detail->user_detail_image);   
-            }
-            if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
-                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
-            }
-            $image->move($uploadPath, $imagename);
+            $file = $request->file('user_detail_image');
+            $path = public_path('assets/images/profil');
+            $field = $user->user_detail->user_detail_image;
+            $imagename = FunctionLib::doUpload($file, $path, $field);
             $user->user_detail->user_detail_image = $imagename;
         }
         $user->user_detail->user_detail_tlp = $request->user_detail_tlp;
