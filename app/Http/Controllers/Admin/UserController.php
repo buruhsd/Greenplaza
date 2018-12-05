@@ -318,17 +318,26 @@ class UserController extends Controller
 
     function editmember_data (Request $request, $id)
     {
+        $value = $request->value;
         $users = User::find($id);
         $users->username = $request->username;
         $users->name = $request->name;
         $users->user_store = $request->user_store;
         $users->user_store_image = $request->user_store_image;
         $users->user_slogan = $request->user_slogan;
-        $users->save();
-        Session::flash("flash_notification", [
+        if ($value == $request->password){
+            $users->password = bcrypt($request->password);
+            $users->save();
+            Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Profile Berhasil Diubah."
             ]);
+        } else {
+            Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Password Salah"
+            ]);
+        }
         return redirect()->back();
     }
 }
