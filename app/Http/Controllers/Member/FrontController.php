@@ -169,7 +169,7 @@ class FrontController extends Controller
      public function dashboard()
     {
 
-        return view('member.log.log_saldo_iklan');
+        return view('member.buyer.alamat_pembeli');
     }
 
     //  public function about()

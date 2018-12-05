@@ -5,6 +5,9 @@
                     <div class="page-title">
                         <h3 class="breadcrumb-header">Log Saldo Iklan</h3>
                     </div>
+                    <div class="page-title">
+                        <center><p style="border: 1px solid; padding: 10px; background-color: red; border-radius: 10px;">Log Saldo Iklan</p></center>
+                    </div>
                     <div class="panel-body">
                     </div>
                     <div id="main-wrapper"> 
