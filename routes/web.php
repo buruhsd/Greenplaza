@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/page', 'admin\\PageController@page')->name('.page');
 		Route::post('/page_add', 'admin\\PageController@page_add')->name('.page_add');
 		Route::get('/page_list', 'admin\\PageController@page_list')->name('.page_list');
-		Route::get('/delete_email/{id}', 'admin\\PageController@delete')->name('.delete_page');
+		Route::get('/delete_page/{id}', 'admin\\PageController@delete')->name('.delete_page');
 
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
@@ -126,6 +126,9 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::patch('/update/{id}', 'Admin\\UserController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
 			Route::get('disabled/{id}', 'Admin\\UserController@disabled')->name('.disabled');
+			Route::get('listmember', 'Admin\\UserController@listmember')->name('.listmember');
+			Route::get('editmember/{id}', 'Admin\\UserController@editmember')->name('.editmember');
+			Route::post('editmember_data/{id}', 'Admin\\UserController@editmember_data')->name('.editmember_data');
 		});
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('/', 'Admin\\ProdukController@index')->name('.index');

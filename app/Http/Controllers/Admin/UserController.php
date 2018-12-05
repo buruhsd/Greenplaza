@@ -301,4 +301,34 @@ class UserController extends Controller
         ob_end_clean();
         return $script;
     }
+
+    public function listmember ()
+    {
+        $search = \Request::get('search');
+        $users = User::where('email', 'like', '%'.$search.'%')
+                ->orderBy('updated_at', 'DESC')->paginate(10);
+        return view('admin.akun_member.listmember', compact('users'));
+    }
+
+    public function editmember (Request $request, $id)
+    {
+        $users = User::find($id);
+        return view('admin.akun_member.editmember', compact('users'));
+    }
+
+    function editmember_data (Request $request, $id)
+    {
+        $users = User::find($id);
+        $users->username = $request->username;
+        $users->name = $request->name;
+        $users->user_store = $request->user_store;
+        $users->user_store_image = $request->user_store_image;
+        $users->user_slogan = $request->user_slogan;
+        $users->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Profile Berhasil Diubah."
+            ]);
+        return redirect()->back();
+    }
 }

@@ -229,4 +229,8 @@ class User_detailController extends Controller
         ob_end_clean();
         return $script;
     }
+
+    
+
+    
 }

@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1">
+                    <div class="breadcumb-wrap bg-1" style="background-color: #000">
                         <div class="breadcumb-content black-opacity">
                             <h2>Blog Details</h2>
                             <ul>
@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-1 mb-30">
-                    {!!$page!!}
+                    {!!$page->page_judul!!}
                     {{-- content --}}
                 </div>
                 <div class="col-lg-3 col-12">

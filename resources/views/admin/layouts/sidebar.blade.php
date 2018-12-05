@@ -30,11 +30,6 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('admin.page')}}">
-                                    <i class="menu-icon icon-inbox"></i><span>Page</span>
-                                </a>
-                            </li>
-                            <li>
                                 <a href="{{route('admin.res_kom.index')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
                                 </a>
@@ -65,7 +60,7 @@
                                     <li><a href="{{route('admin.transaction.index')}}">Transaksi Barang</a></li>
                                     <li><a href="#">Transaksi Hot List</a></li>
                                     <li><a href="#">Transaksi Pin Code</a></li>
-                                    <li><a href="#">Akun Member</a></li>
+                                    <li><a href="{{route('admin.user.listmember')}}">Akun Member</a></li>
                                     <li><a href="{{route('admin.brand.index')}}">Brand</a></li>
                                     <li><a href="#">Iklan Banner Khusus</a></li>
                                     <li><a href="#">Iklan Banner Seller</a></li>
@@ -142,7 +137,7 @@
                                         <li><a href="#">Tambah Akun Admin</a></li>
                                         <li><a href="#">Grade Member</a></li>
                                         <li><a href="#">Grade Seller</a></li>
-                                        <li><a href="#">Page List</a></li>
+                                        <li><a href="{{route('admin.page')}}">Page List</a></li>
                                         <li><a href="#">Update Password Admin</a></li>
                                         {{-- <a href="#">Setting Akun</a>
                                         <ul class="sub-menu">
