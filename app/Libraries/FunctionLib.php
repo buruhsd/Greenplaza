@@ -1,6 +1,26 @@
 <?php
 class FunctionLib
 {
+
+    /**
+    * check user have conf shipment
+    *
+    **/
+    public static function class_arr(){
+        $arr = ['primary', 'success', 'default', 'warning', 'danger'];
+        return $arr;
+    }
+
+    /**
+    * check user have conf shipment
+    *
+    **/
+    public static function have_shipment($id, $user_id){
+        $user = App\Models\User_shipment::where('user_shipment_user_id', $user_id)->pluck('user_shipment_shipment_id')->toArray();
+        // $shipment = App\Models\Shipment::pluck('id')->toArray();
+        return (bool)in_array($id, $user);
+    }
+
     /**
     * Upload image
     *

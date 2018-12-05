@@ -11,6 +11,8 @@ use App\User;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Bank;
+use App\Models\Shipment;
+use App\Models\User_shipment;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -38,6 +40,56 @@ class UserController extends Controller
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.user.index', $data);
+    }
+
+    /**
+     * update password page.
+     *
+     */
+    public function set_shipment(Request $request)
+    {
+        $data['shipment'] = Shipment::where('shipment_is_usable', 1)->get();
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.user.set_shipment', $data);
+    }
+
+    /**
+     * update password process
+     * $request
+     */
+    public function set_shipment_update(Request $request)
+    {
+        $status = 200;
+        $message = 'Shipment updated!';
+        $requestData = $request->all();
+        $this->validate($request, [
+            'user_shipment_shipment_id' => 'required',
+        ]);
+
+        $user = User::findOrFail(Auth::id());
+        $id = Auth::id();
+        $input = $requestData['user_shipment_shipment_id'];
+        $usershipment = $user->user_shipment()->pluck('user_shipment_shipment_id')->toArray();
+        // delete if uncheck
+        array_walk($usershipment, function($value) use ($input, $id) {
+            if(!in_array((integer)$value, $input)){
+                User_shipment::where('user_shipment_shipment_id', $value)
+                    ->where('user_shipment_user_id', $id)
+                    ->delete();
+            }
+        });
+        // insert if check and not exist
+        array_walk($input, function($value) use ($usershipment, $id) {
+            if(!in_array((integer)$value, $usershipment)){
+                $user_shipment = new User_shipment;
+                $user_shipment->user_shipment_user_id = $id;
+                $user_shipment->user_shipment_shipment_id = $value;
+                $user_shipment->save();
+            }
+        });
+        return redirect('member/user/set_shipment')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

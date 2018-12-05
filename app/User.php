@@ -99,7 +99,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * get wallet user
+    * get User detail
     * @return joined one to one
     **/
     public function user_detail()
@@ -108,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * get wallet user
+    * get user bank
     * @return joined one to one
     **/
     public function user_bank()
@@ -117,12 +117,21 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-    * get wallet user
+    * get user address
     * @return joined one to one
     **/
     public function user_address()
     {
         return $this->hasMany('App\Models\User_address', 'user_address_user_id');
+    }
+
+    /**
+    * get user shipment
+    * @return joined one to one
+    **/
+    public function user_shipment()
+    {
+        return $this->hasMany('App\Models\User_shipment', 'user_shipment_user_id');
     }
 
     public function MailVerification(){

@@ -206,17 +206,18 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		Route::get('/profil', 'UserController@profil')->name('.profil');
 		Route::patch('/user/update', 'UserController@update')->name('.user.update');
-		Route::get('/change_password', 'UserController@change_password')->name('.change_password');
+		Route::get('/user/change_password', 'UserController@change_password')->name('.user.change_password');
 		Route::post('/user/change_password_update', 'UserController@change_password_update')->name('.user.change_password_update');
-		Route::get('/seller_address', 'UserController@seller_address')->name('.seller_address');
+		Route::get('/user/seller_address', 'UserController@seller_address')->name('.user.seller_address');
 		Route::post('/user/seller_address_update', 'UserController@seller_address_update')->name('.user.seller_address_update');
-
-		Route::get('/upload_foto_profil', 'UserController@upload_foto_profil')->name('.upload_foto_profil');
+		Route::get('/user/upload_foto_profil', 'UserController@upload_foto_profil')->name('.user.upload_foto_profil');
 		Route::post('/user/upload_foto_profil_update', 'UserController@upload_foto_profil_update')->name('.user.upload_foto_profil_update');
-		Route::get('/upload_scan_npwp', 'UserController@upload_scan_npwp')->name('.upload_scan_npwp');
+		Route::get('/user/upload_scan_npwp', 'UserController@upload_scan_npwp')->name('.user.upload_scan_npwp');
 		Route::post('/user/upload_scan_npwp_update', 'UserController@upload_scan_npwp_update')->name('.user.upload_scan_npwp_update');
-		Route::get('/upload_siup', 'UserController@upload_siup')->name('.upload_siup');
+		Route::get('/user/upload_siup', 'UserController@upload_siup')->name('.user.upload_siup');
 		Route::post('/user/upload_siup_update', 'UserController@upload_siup_update')->name('.user.upload_siup_update');
+		Route::get('/user/set_shipment', 'UserController@set_shipment')->name('.user.set_shipment');
+		Route::post('/user/set_shipment_update', 'UserController@set_shipment_update')->name('.user.set_shipment_update');
 
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
