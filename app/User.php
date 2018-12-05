@@ -53,6 +53,52 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+    * 
+    * 
+    **/
+    public function seller_active(){
+        if((bool)$this->user_store && (bool)$this->user_store !== null && (bool)$this->user_store !== ""){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function member_actiive(){
+        if($this->have_bank() && $this->have_detail() && $this->have_address()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function have_bank(){
+        return (bool)$this->user_bank->count();
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function have_detail(){
+        return (bool)$this->user_detail->count();
+    }
+
+    /**
+    * 
+    * 
+    **/
+    public function have_address(){
+        return (bool)$this->user_address->count();
+    }
+
+    /**
     * get wallet user
     * @return joined one to one
     **/

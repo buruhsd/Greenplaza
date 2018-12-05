@@ -1,6 +1,5 @@
 @extends('member.index')
 @section('content')
-
 <div class="page-title">
     <h3 class="breadcrumb-header">Configuration Profil</h3>
 </div>
@@ -38,7 +37,7 @@
                 <div class="panel-body">
                 {!! Form::model($user, [
                     'method' => 'PATCH',
-                    'url' => ['/member/user/update', $user->id],
+                    'url' => ['/member/user/update'],
                     'class' => 'form-horizontal',
                     'files' => true
                 ]) !!}
@@ -50,6 +49,7 @@
                                     {!! Form::text('name', null, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Name', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
@@ -61,6 +61,7 @@
                                     {!! Form::text('email', null, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'email', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
@@ -72,6 +73,7 @@
                                     {!! Form::text('user_detail_phone', $user->user_detail->user_detail_phone, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Phone', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_detail_phone', '<p class="help-block">:message</p>') !!}
@@ -85,17 +87,6 @@
                                         'placeholder' => 'phone House'
                                     ])!!}
                                 {!! $errors->first('user_detail_tlp', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_slogan') ? 'has-error' : ''}}">
-                                {!! Form::label('user_slogan', 'Slogan', ['class' => 'col-md-3 control-label']) !!}
-                                <div class="col-md-9">
-                                    {!! Form::text('user_slogan', null, [
-                                        'class' => 'form-control', 
-                                        'placeholder' => 'Slogan', 
-                                        'required'
-                                    ])!!}
-                                {!! $errors->first('user_slogan', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_jk') ? 'has-error' : ''}}">
@@ -116,7 +107,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_slug') ? 'has-error' : ''}}">
+                            {{-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_slug') ? 'has-error' : ''}}">
                                 {!! Form::label('user_slug', 'Slug', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_slug', null, [
@@ -126,7 +117,7 @@
                                     ])!!}
                                 {!! $errors->first('user_slug', '<p class="help-block">:message</p>') !!}
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_store') ? 'has-error' : ''}}">
                                 {!! Form::label('user_store', 'Window', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
@@ -157,6 +148,18 @@
                             </div>
                         </div>
                         <div class="col-md-12 m-t-sm">
+                            {!! Form::label('user_slogan', 'Slogan', ['class' => 'col-md-12']) !!}
+                            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_slogan') ? 'has-error' : ''}}">
+                                <div class="col-md-12">
+                                    {!! Form::textarea('user_slogan', null, [
+                                        'class' => 'form-control', 
+                                        'placeholder' => 'Slogan',
+                                        'rows' => '3', 
+                                        'required'
+                                    ])!!}
+                                {!! $errors->first('user_slogan', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </div>
                             <hr/>
                             <div class="row">
                                 <div class="col-md-3">
@@ -178,7 +181,7 @@
                                                     <option value='{{$item['city_id']}}'>{{$item['city_name']}}</option>
                                                 @endforeach --}}
                                             </select>
-                                            {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
+                                            {!! $errors->first('user_detail_city', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +235,7 @@
                                             <option value='{{$item->id}}' <?php if($user->user_detail->user_detail_bank_id == $item->id){echo "selected";}?>>{{$item->bank_name}}</option>
                                         @endforeach
                                     </select>
-                                {!! $errors->first('user_detail_bank_name', '<p class="help-block">:message</p>') !!}
+                                {!! $errors->first('user_detail_bank_id', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_owner') ? 'has-error' : ''}}">

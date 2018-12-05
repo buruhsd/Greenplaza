@@ -2,6 +2,23 @@
 class FunctionLib
 {
     /**
+    * Upload image
+    *
+    **/
+    public static function doUpload($file, $path, $field){
+        $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$file->getClientOriginalExtension();
+        $imagesize = $file->getClientSize();
+        $imagetmp = $file->getPathName();
+        if($field !== '' && $field !== null){
+            File::delete($path . '/' . $user->user_store_image);   
+        }
+        if(file_exists($path . '/' . $imagename)){// || file_exists($path . '/thumb' . $imagename)){
+            $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$file->getClientOriginalExtension();
+        }
+        $file->move($path, $imagename);
+        return $imagename;
+    }
+    /**
     * date indo
     * @param $date date, $day boolean
     **/
