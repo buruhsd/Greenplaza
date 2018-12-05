@@ -41,7 +41,84 @@
                               <h4 class="modal-title">Ubah Alamat</h4>
                             </div>
                             <div class="modal-body">
-                              <p>Some text in the modal.</p>
+                              <div class="col-md-12">
+                                <div class="row">
+                                    <div class="panel-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">Nama Penerima</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">Label</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="input-Default" class="col-sm-2 control-label">Provinsi</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="sel1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="input-Default" class="col-sm-2 control-label">Kota / Kab</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="sel1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="input-Default" class="col-sm-2 control-label">Kecamatan</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="sel1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">Kode Pos</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">Alamat</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">No Handphone</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input-Default" class="col-sm-2 control-label">No Telp</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="input-Default">
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-info btn-block">Kirim</button>
+                                    </form>
+                                </div>
+                            </div>
                             </div>
                             <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
