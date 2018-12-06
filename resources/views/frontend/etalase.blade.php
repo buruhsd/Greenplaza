@@ -5,21 +5,33 @@
     <div class="about-area mb-30">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="p-10 bg-1">
-                        <div class="row">
-                            <div class="col-lg-12 col-12 order-2">
-                                <div class="about-img black-opacity" style="position: relative;">
-                                    <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
-                                    <img src="{{ asset('assets/images/bg_etalase/'.$user->user_store_image) }}" alt="" style="height: 400px">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
+    
+    <div class="col-lg-3 ">
+        <div class="author-wrap">
+            <img src="{{ asset('frontend/images/author.png') }}" alt="">
+            <h4>Alex Smeet</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Maxime</p>
+            <ul>
+            <a href=""><li class="btn-chat"> Chat </li></a>
+            </ul>
+        </div>  
+    </div>
+    
+        <hr>
+    <div class="col-lg-12 ">
+        <div class="author-wrap" style="position: relative;">
+            <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
+           <ul>
+            <a href=""><li class="btn-chat"> Produk </li></a>
+            <a href=""><li class="btn-chat"> Diskusi Produk </li></a>
+            </ul>
+        </div>
+    </div>
+    
     <div class="col-lg-12 col-md-8 col-12">
         <div class="shop-area">
             <div class="row">

@@ -3431,6 +3431,27 @@ transition: background .55s ease;
     position: relative;
 }
 
+li.btn-chat{
+
+  color: black;
+  border: 2px solid black; 
+  color: black;
+  border-radius: 10px;
+  padding: 5px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+li.btn-chat:hover{
+    background-color: #FFD700;
+}
+
 
 
 /*--------team-area end--------*/

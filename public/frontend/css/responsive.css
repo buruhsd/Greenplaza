@@ -405,6 +405,10 @@
     
     }
 
+    .slider-item{
+        display: none;
+    }
+
     .black-opacity{
         background-image: none;
 
