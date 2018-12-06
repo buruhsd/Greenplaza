@@ -38,7 +38,7 @@
                       <div class="form-group">
                           <label for="input-Default" class="col-sm-2 control-label">Image File</label>
                           <div class="col-sm-10">
-                              <input type="file" name="gambar">
+                              <input type="file" name="user_store_image">
                           </div>
                       </div>         
                       <div class="form-group">
