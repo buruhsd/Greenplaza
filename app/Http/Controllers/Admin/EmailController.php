@@ -14,22 +14,32 @@ class EmailController extends Controller
     public function email (Request $request)
     {
         $email = new Email;
-        $email->email_to = $request->email_to;
+    
         $email->email_from = 'super admin';
         $email->email_subject = $request->email_subject;
         $email->is_send = 0;
         $email->email_text = $request->email_text;
+        $email->is_send_datetime = date("d-M-Y_H-i-s");
+        if($request->email_to){
+            $user = User::where('email', $request->email_to)->first();
+            if($user){
+                $email->email_to = $request->email_to;
+                $email->save();
+            } else {
+                Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Email Salah"
+                        ]);
+                return redirect()->back();
+            } 
+        }
         if ($email->email_to == null){
             $email->email_type = 'send for all';
-        } else {
-            $email->email_type = 'single send';
-        }
-        $email->is_send_datetime = date("d-M-Y_H-i-s");
+            } else {
+                $email->email_type = 'single send';
+            }
         $email->save();
-
-        $user = User::find($email->email_to);
         $users = User::pluck('email')->toArray();
-        // dd($users);
         if ($email->email_to != null) {
                                
             Mail::send('admin.mail.tes', compact(['email', 'user', 'users']), function ($m) use ($email) {

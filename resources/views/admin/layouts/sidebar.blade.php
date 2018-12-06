@@ -70,7 +70,7 @@
                                     <li><a href="{{route('admin.produk.index')}}">Produk</a></li>
                                     <li><a href="#">Request Saldo Iklan</a></li>
                                     <li><a href="#">Withdrawal Seller</a></li>
-                                    <li><a href="#">Withdrawal Member</a></li>
+                                    <li><a href="{{route('admin.withdrawal.withdrawal_member')}}">Withdrawal Member</a></li>
                                 </ul>
                             </li>
                             <li>
