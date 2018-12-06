@@ -20,6 +20,7 @@ class ConfPage extends Migration
             $table->string('page_judul')->comment('');
             $table->integer('page_role_id')->unsigned()->default(0)->nullable()->comment('title page menu');
             $table->string('page_kategori')->comment('title page menu');
+            $table->string('page_header_image')->comment('image header')->nullable();
             $table->text('page_text')->comment('content page');
             $table->tinyInteger('page_status')->default(1)->comment('status page 0.non active, 1.active');
             $table->string('page_slug')->comment('');

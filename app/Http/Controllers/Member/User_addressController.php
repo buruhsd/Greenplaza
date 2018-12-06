@@ -61,7 +61,18 @@ class User_addressController extends Controller
         $message = 'User_address added!';
         
         $requestData = $request->all();
-        
+        $this->validate($request, [
+            'address_label' => 'required',
+            'address_owner' => 'required',
+            'address_phone' => 'required',
+            'address_tlp' => 'required',
+            'address_province' => 'required|numeric',
+            'address_city' => 'required|numeric',
+            'address_subdist' => 'required|numeric',
+            'address_pos' => 'required',
+            'address_address' => 'required',
+        ]);
+
         $res = new User_address;
         $res->user_address_user_id = Auth::id();
         $res->user_address_label = $request->address_label;

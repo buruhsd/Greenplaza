@@ -704,6 +704,7 @@ class UserController extends Controller
                     </script>
                 <?php
                 break;
+            case 'buyer_address':
             case 'seller_address':
                 ?>
                     <script type="text/javascript">

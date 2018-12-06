@@ -8,9 +8,9 @@
         
         <div class="modal-body">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 col-md-12">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-6 col-md-6">
                             {!! Form::label('address_label', 'Label') !!}
                             <div class="form-group {{ $errors->has('address_label') ? 'has-error' : ''}}">
                                 {!! Form::text('address_label', null, [
@@ -21,7 +21,7 @@
                                 {!! $errors->first('address_label', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-6">
                             {!! Form::label('address_owner', 'Receiver') !!}
                             <div class="form-group {{ $errors->has('address_owner') ? 'has-error' : ''}}">
                                 {!! Form::text('address_owner', null, [
@@ -32,7 +32,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-6">
                             {!! Form::label('address_phone', 'Phone') !!}
                             <div class="form-group {{ $errors->has('address_phone') ? 'has-error' : ''}}">
                                 {!! Form::text('address_phone', null, [
@@ -43,7 +43,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-6 col-md-6">
                             {!! Form::label('address_tlp', 'Telpon') !!}
                             <div class="form-group {{ $errors->has('address_tlp') ? 'has-error' : ''}}">
                                 {!! Form::text('address_tlp', null, [
@@ -54,7 +54,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-3">
                             {!! Form::label('address_province', 'Provice') !!}
                             <div class="form-group {{ $errors->has('address_province') ? 'has-error' : ''}}">
                                 <select name='address_province' id='address_province' class="form-control" onchange="get_city(this.value);">
@@ -65,7 +65,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-3">
                             {!! Form::label('address_city', 'City') !!}
                             <div class="form-group {{ $errors->has('address_city') ? 'has-error' : ''}}">
                                 <select name='address_city' id='address_city' class="form-control" onchange="get_subdistrict(this.value);">
@@ -76,7 +76,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-3">
                             {!! Form::label('address_subdist', 'Subdistrict') !!}
                             <div class="form-group {{ $errors->has('address_subdist') ? 'has-error' : ''}}">
                                 <select name='address_subdist' id='address_subdist' class="form-control">
@@ -87,7 +87,7 @@
                                 {!! $errors->first('address_subdist', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 col-md-3">
                             {!! Form::label('address_pos', 'Postal Code') !!}
                             <div class="form-group {{ $errors->has('address_pos') ? 'has-error' : ''}}">
                                 {!! Form::text('address_pos', null, [
@@ -98,7 +98,7 @@
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 col-md-12">
                             <label>Address</label>
                             <div class="form-group">
                                 <textarea class="form-control" id="address_address" name="address_address" placeholder="Address..."></textarea>

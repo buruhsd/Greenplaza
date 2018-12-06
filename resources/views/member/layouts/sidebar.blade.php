@@ -65,7 +65,7 @@
 
                                     <h4 class="m-l-sm text-danger">Buyer</h4>
                                     <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Biodata</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Alamat Kirim</a></li>
+                                    <li><a href="{{route('member.user.buyer_address')}}">Alamat Kirim</a></li>
                                     <li><a href="{{route('member.bank.index')}}">Rekening Bank</a></li>
                                     <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Ubah Password Login</a></li>
                                     <li><a href="{{-- {{route('member.cw.index')}} --}}">Ubah Password Transaksi</a></li>
