@@ -3452,6 +3452,42 @@ li.btn-chat:hover{
     background-color: #FFD700;
 }
 
+.account-info-social li>a {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 5px;
+    padding-bottom: -50px;
+    position: relative;
+    display: block;
+   
+}
+
+.account-info-social li {
+
+}
+
+/*.account-info-social li a {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 20px;
+    text-align: center;
+    display: block;
+    background: #e1e1e1;
+    border-radius: 50%;
+   
+}
+
+.account-info-social li a:hover {
+    background: #FFD700;
+}
+*/
+
+
+
 
 
 /*--------team-area end--------*/

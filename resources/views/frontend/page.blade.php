@@ -29,10 +29,6 @@
     <div class="blog-details-area mb-30">
         <div class="container">
             <div class="row">
-                <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-1 mb-30">
-                    {!!$page->page_judul!!}
-                    {{-- content --}}
-                </div>
                 <div class="col-lg-3 col-12">
                     <aside class="sidebar-area p-10 bg-1">
                         <div class="widget widget_categories">
@@ -74,6 +70,10 @@
                             </div>
                         </div>
                     </aside>
+                </div>
+                <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-1 mb-30">
+                    {!!$page->page_judul!!}
+                    {{-- content --}}
                 </div>
             </div>
         </div>
