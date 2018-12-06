@@ -43,6 +43,17 @@ class UserController extends Controller
     }
 
     /**
+     * alamat kirim.
+     *
+     */
+    public function buyer_address(Request $request)
+    {
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.user.buyer_address', $data);
+    }
+
+    /**
      * update password page.
      *
      */

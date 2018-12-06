@@ -218,6 +218,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::post('/user/upload_siup_update', 'UserController@upload_siup_update')->name('.user.upload_siup_update');
 		Route::get('/user/set_shipment', 'UserController@set_shipment')->name('.user.set_shipment');
 		Route::post('/user/set_shipment_update', 'UserController@set_shipment_update')->name('.user.set_shipment_update');
+		// pembeli
+		Route::get('/user/buyer_address', 'UserController@buyer_address')->name('.user.buyer_address');
+		Route::post('/user/buyer_address_update', 'UserController@buyer_address_update')->name('.user.buyer_address_update');
+		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
 
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
