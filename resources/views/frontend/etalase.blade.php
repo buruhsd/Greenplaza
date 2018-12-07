@@ -9,34 +9,237 @@
             </div>
         </div>
     </div>
-    
-    <div class="col-lg-3 ">
-        <div class="author-wrap">
-            <img src="{{ asset('frontend/images/author.png') }}" alt="">
-            <h4>Alex Smeet</h4>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Maxime</p>
-            <ul>
-            <a href=""><li class="btn-chat"> Chat </li></a>
-            </ul>
-        </div>  
-    </div>
-    
-        <hr>
-    <div class="col-lg-12 ">
-        <div class="author-wrap" style="position: relative;">
-            <!-- <p style="position: absolute; color: blue; margin-top: 10%">jajajjajaa</p> -->
-           <ul>
-            <a href=""><li class="btn-chat"> Produk </li></a>
-            <a href=""><li class="btn-chat"> Diskusi Produk </li></a>
-            </ul>
+
+    <div class="breadcumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 ">
+                    <div class="author-wrap">
+                        <img src="{{ asset('frontend/images/author.png') }}" alt="">
+                        <h4>Alex Smeet</h4>
+                        <p>Pengrajin Kerang ajaib</p>
+                        <ul>
+                        <a href=""><li class="btn-chat"> Chat </li></a>
+                        </ul>
+                    </div>  
+                </div>
+                <div class="col-9">
+                    <div class="breadcumb-wrap bg-1" src="">
+                        <div class="breadcumb-content black-opacity">
+                            <h2></h2>
+                            <ul>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
+    <div class="row">
+                            <div class="col-12">
+                                <div class="single-product-menu">
+                                    <ul class="nav">
+                                        <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
+                                        <li><a data-toggle="tab" href="#faq">Faq</a></li>
+                                        <li><a data-toggle="tab" href="#review">Review</a></li>
+                                        <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="description">
+                                        <div class="description-wrap">
+                                            <h4>Keterangan</h4>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="review">
+                                        <div class="review-wrap">
+                                            <ul>
+                                                
+                                                <li class="review-items">
+                                                    <div class="review-img">
+                                                        <img src="assets/images/comment/1.png" alt="">
+                                                    </div>
+                                                    <div class="review-content">
+                                                        <h3><a href="#"></a></h3>
+                                                        <span></span>
+                                                        <p></p>
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="add-review">
+                                            <h4>Add A Review</h4>
+                                            <div class="ratting-wrap">
+                                                <table>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>task</th>
+                                                            <th>1 Star</th>
+                                                            <th>2 Star</th>
+                                                            <th>3 Star</th>
+                                                            <th>4 Star</th>
+                                                            <th>5 Star</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Stars</td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="radio" name="stars" />
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                                <input name="review_user_id" type="text" value="" placeholder="Your name here..." hidden />
+                                                                <input name="review_produk_id" type="text" value="" placeholder="Your name here..." hidden />
+                                                                <div class="col-12">
+                                                                    <h4>Your Review:</h4>
+                                                                    <textarea name="review_text" class="form-control" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <button type="submit" class="btn-style">Submit</button>
+                                                                </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                               
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="diskusi">
+                                        <div class="faq-wrap" id="accordion">
+                                            
+                                                <div class="card">
+                                                    <div class="card-header" id="headdiscuss">
+                                                        <h5><button data-toggle="collapse" data-target="#discuss" aria-expanded="true" aria-controls="collapseOne"></button> </h5>
+                                                    </div>
+                                                    <div id="discuss" class="collapse show" aria-labelledby="headdiscuss" data-parent="#accordion">
+                                                        <br/>
+                                                        <ul class="ml-2">
+                                                            <li class="review-items">
+                                                                <div class="review-img">
+                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                </div>
+                                                                <div class="review-content">
+                                                                    <h3><a href="#"></a></h3>
+                                                                    <span></span>
+                                                                    <p></p>
+                                                                </div>
+                                                                <hr/>
+                                                                    
+                                                                        <ul class="ml-5">
+                                                                            <li class="review-items">
+                                                                                <div class="review-img">
+                                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                                </div>
+                                                                                <div class="review-content">
+                                                                                    <h3><a href="#"></a></h3>
+                                                                                    <span></span>
+                                                                                    <p></p>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    
+                                                                <hr/>
+                                                            </li>
+                                                        </ul>
+                                                        <br/>
+                                                    </div>
+                                                </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="faq">
+                                        <div class="faq-wrap" id="accordion">
+                                            <div class="card">
+                                                <div class="card-header" id="headingOne">
+                                                    <h5><button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">General Inquiries ?</button> </h5>
+                                                </div>
+                                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingTwo">
+                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How To Use ?</button></h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingThree">
+                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Shipping & Delivery ?</button></h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingfour">
+                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">Additional Information ?</button></h5>
+                                                </div>
+                                                <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header" id="headingfive">
+                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">Return Policy ?</button></h5>
+                                                </div>
+                                                <div id="collapsefive" class="collapse" aria-labelledby="headingfive" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    <div class="container">
     <div class="col-lg-12 col-md-8 col-12">
         <div class="shop-area">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="section-title">Featured products</h2>
+                    <h2 class="section-title">products</h2>
                 </div>
             </div>
             
@@ -74,6 +277,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 {!! (isset($footer_script))? $footer_script:'' !!}
