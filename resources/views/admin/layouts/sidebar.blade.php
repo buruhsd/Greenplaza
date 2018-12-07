@@ -44,7 +44,7 @@
                                     <i class="menu-icon icon-live_tv"></i><span>Monitoring</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="#">Laporan</a></li>
+                                    <li><a href="{{route('admin.monitoring.laporan')}}">Laporan</a></li>
                                     <li><a href="#">Profit</a></li>
                                     <li><a href="#">Wallet</a></li>
                                     <li><a href="#">Wallet Pin Code</a></li>

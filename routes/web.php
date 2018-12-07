@@ -163,6 +163,9 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('/withdrawal_member', 'Admin\\WithdrawalController@withdrawal_member')->name('.withdrawal_member');
 			Route::post('/withdrawal_member_reject/{id}', 'Admin\\WithdrawalController@reject')->name('.withdrawal_member_reject');
 		});
+		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
+			Route::get('laporan', 'Admin\\MonitoringController@laporan')->name('.laporan');
+		});
 	});
 });
 
