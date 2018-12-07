@@ -31,7 +31,8 @@ class TransactionController extends Controller
             "0" =>'chart',
             "1" =>'order',
             "2" =>'transfer',
-            "3,4" =>'packing',
+            "3" =>'seller',
+            "4" =>'packing',
             "5" =>'shipping',
             "5" =>'sent',
             "6" =>'dropping',
@@ -83,7 +84,7 @@ class TransactionController extends Controller
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
-        $where = "1 AND trans_user_id=".Auth::id();
+        $where = "1 AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
         $having = "1";
         // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
@@ -92,8 +93,17 @@ class TransactionController extends Controller
         }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            $status = array_search($status,$arr);
-            $where .= ' AND trans_detail_status IN ('.$status.')';
+            if($request->has('type')){
+                $arr = [
+                    "3" =>'wait',
+                    "4" =>'approve'
+                ];
+                $status = array_search($request->get('type'),$arr);
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }else{
+                $status = array_search($status,$arr);
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }
         }
 
         if (!empty($where)) {

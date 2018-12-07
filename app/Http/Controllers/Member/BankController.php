@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Member;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Models\Bank;
+use App\Models\User_bank;
+use App\User;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
 class BankController extends Controller
@@ -24,16 +26,36 @@ class BankController extends Controller
      */
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
-
-        if (!empty($keyword)) {
-            $data['bank'] = Bank::paginate($this->perPage);
-        } else {
-            $data['bank'] = Bank::paginate($this->perPage);
-        }
+        $data['user'] = User::findOrFail(Auth::id());
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('member.bank.index', $data);
+    }
+
+    /**
+    * Set default user bank
+    * @param $id #sys_user_bank
+    **/
+    public function set_default($id){
+        $status = 200;
+        $message = "Bank Updated";
+        $user = User::findOrFail(Auth::id());
+        $user_id = Auth::id();
+        $userbank = $user->user_bank()->pluck('id')->toArray();
+        // delete if uncheck
+        array_walk($userbank, function($value) use ($user_id, $id) {
+            if($value == (integer)$id){
+                $user_bank = User_bank::where('id', $value)->first();
+                $user_bank->user_bank_status = 1;
+                $user_bank->save();
+            }else{
+                $user_bank = User_bank::where('id', $value)->first();
+                $user_bank->user_bank_status = 0;
+                $user_bank->save();
+            }
+        });
+        return redirect('member/bank')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

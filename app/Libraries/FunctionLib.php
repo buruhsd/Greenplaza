@@ -544,18 +544,24 @@ class FunctionLib
     }
 
     /**
-    * @param
+    * @param $status = status transaksi
+    * @param $id = id user
+    * @param $type = status user
     * @return
     **/
-    public static function count_trans($status = "", $id = 0){
+    public static function count_trans($status = "", $id = 0, $type = 'buyer'){
         $where = 1;
         if($status !== ""){
-            $where .= " AND trans_detail_status = ".$status;
+            $where .= " AND trans_detail_status IN (".$status.")";
         }
         $total = App\Models\Trans_detail::whereRaw($where);
         if($id != 0){
-            $total = $total->leftjoin('sys_trans', 'sys_trans.id', 'sys_trans_detail.trans_detail_trans_id')
-                ->where("trans_user_id", $id);
+            if($type == 'seller'){
+                $total = $total->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".$id.")");
+            }else{
+                $total = $total->leftjoin('sys_trans', 'sys_trans.id', 'sys_trans_detail.trans_detail_trans_id')
+                    ->where("trans_user_id", $id);
+            }
         }
         $total = $total->count();
         return $total;

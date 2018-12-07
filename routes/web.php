@@ -238,6 +238,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
 			Route::get('/', 'BankController@index')->name('.index');
+			Route::get('/set_default/{id}', 'BankController@set_default')->name('.set_default');
 			Route::get('/create', 'BankController@create')->name('.create');
 			Route::post('/store', 'BankController@store')->name('.store');
 			Route::get('/show/{id}', 'BankController@show')->name('.show');
@@ -327,6 +328,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
 		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
+		Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
 		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 		Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
 	});

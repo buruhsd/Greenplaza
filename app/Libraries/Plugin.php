@@ -150,4 +150,25 @@ class Plugin
         return view('frontend.plugin.category', $data);
     }
 
+    /**
+    * @param $id $type=buyer/seller, $status=trans/detail
+    * @return
+    */
+    public static function trans_purchase_btn($param=[]){
+        // default
+        $type = 'buyer';
+        $status = 'trans';
+        // extraxt variabel @param
+        extract($param);
+        $data['type'] = $type;
+        $data['status'] = $status;
+        if($status !== 'detail'){
+            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->orderBy('trans_detail_status')->first();
+        }else{
+            $data['detail'] = App\Models\Trans_detail::whereId($id)->first();
+        }
+        $data['status_shipment'] = FunctionLib::get_waybill($data['detail']->id);
+        return view('member.plugin.trans_purchase_btn', $data);
+    }
+
 }

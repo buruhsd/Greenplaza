@@ -163,3 +163,8 @@
 .text-break{
   word-break: break-all;
 }
+table > tbody > tr > td > ul > li{
+  list-style-type: square;
+  font-size: 12px;
+  font-style: italic;
+}

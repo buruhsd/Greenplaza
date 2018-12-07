@@ -10,30 +10,33 @@
                 </div>
             </div> --}}
             <div class="table-responsive">
-                <table class="table m-t-20 respon">
+                <table class="table table-bordered m-t-xs">
                     <thead>
                         <th class="text-center">Code</th>
+                        <th class="text-center"></th>
                         <th class="text-center">Produk Detail</th>
                         <th class="text-center">Seller Detail</th>
                         <th class="text-center">Shipment Detail</th>
                         <th class="text-center">Transaction Detail</th>
                         <th class="text-center">Actions</th>
                     </thead>
+                    <tbody>
                     @foreach($trans_detail as $item)
-                        <tbody>
+                        <tr>
                             <td><b>{{$item->trans_code}}</b></td>
                             <td>
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-sm-12">
                                         <img src="{{asset('assets/images/product/'.$item->produk->produk_image)}}" style="max-height: 100px;">
                                     </div>
-                                    <div class="col-lg-8 col-md-6 col-sm-12">
-                                        <ul>
-                                            <li>Name : {{$item->produk->produk_name}}</li>
-                                            <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
-                                        </ul>
-                                    </div>
                                 </div>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Name : {{$item->produk->produk_name}}</li>
+                                    <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
+                                    <li>Status : <button class="btn btn-info btn-xs">{{$item->trans_detail_status}}</button></li>
+                                </ul>
                             </td>
                             <td>
                                 <ul>
@@ -55,10 +58,10 @@
                                         }}
                                     </li>
                                     {{-- @if($item->trans_detail_status == 5) --}}
-                                    <?php $status = FunctionLib::get_waybill($item->id);?>
+                                    <?php $ship_status = FunctionLib::get_waybill($item->id);?>
                                     <li>Sent Status : 
                                         {{
-                                            $status
+                                            $ship_status
                                         }}
                                     </li>
                                     {{-- @endif --}}
@@ -71,9 +74,22 @@
                                     <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
                                 </ul>
                             </td>
-                            <td>{{$item->trans_code}}</td>
-                        </tbody>
+                            <td>
+                                {!!Plugin::trans_purchase_btn(['id' => $item->trans->id])!!}
+                            </td>
+                        </tr>
                     @endforeach
+                        <tr>
+                            <td class="bg-info" colspan="5">
+                                Total Bayar : 
+                            </td>
+                            <td class="bg-info text-right" colspan="2">
+                                <u><b>
+                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total'))}}
+                                </b></u>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -3,33 +3,80 @@
 <!-- Page Inner -->
 <div class="page-inner">
     <div class="page-title">
-        <h3 class="breadcrumb-header">Daftar Alamat</h3>
+        <h3 class="breadcrumb-header">Rekening Bank</h3>
     </div>
     <div class="panel-body">
     </div>
         <div class="panel panel-white">
-            <input onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addaddress")}} type="button" class="btn btn-danger btn-sm" name="addAdress" value="Tambah Alamat Baru" />
+            <a class="btn btn-info" data-toggle="collapse" href="#add" role="button" aria-expanded="false" aria-controls="add">Tambah Rekening Baru</a>
+            <div id="add" class="collapse">
+                <table class="table table-bordered table-striped table-highlight m-t-xs">
+                    <thead>
+                    </thead>
+                    <tbody id="add_row">
+                        <tr>
+                            <th style="width: 30%;">Bank</th>
+                            <th style="width: 30%;">Owner</th>
+                            <th style="width: 30%;">Account Number</th>
+                            <th>Action</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group-sm {{ $errors->has('user_bank_bank_id') ? 'has-error' : ''}}">
+                                    {!! Form::text('address_label', null, [
+                                        'class' => 'form-control', 
+                                        'placeholder' => 'Label', 
+                                        'required'
+                                    ])!!}
+                                    {!! $errors->first('user_bank_bank_id', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group-sm {{ $errors->has('user_bank_owner') ? 'has-error' : ''}}">
+                                    {!! Form::text('user_bank_owner', null, [
+                                        'class' => 'form-control', 
+                                        'placeholder' => 'Owner', 
+                                        'required'
+                                    ])!!}
+                                    {!! $errors->first('user_bank_owner', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group-sm {{ $errors->has('user_bank_no') ? 'has-error' : ''}}">
+                                    {!! Form::text('user_bank_no', null, [
+                                        'class' => 'form-control', 
+                                        'placeholder' => 'Account Number', 
+                                        'required'
+                                    ])!!}
+                                    {!! $errors->first('user_bank_no', '<p class="help-block">:message</p>') !!}
+                                </div>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-success btn-block">Save</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     <div id="main-wrapper">
     <div class="row">
         <?php $no = 1; ?>
-        @foreach($user->user_address->all() as $item)
+        @foreach($user->user_bank->all() as $item)
             <div class="col-md-6">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4><b>{{$item->user_address_label}}</b></h4>
+                        <h4><b>{{$item->user_bank_no}} </b>{!!($item->user_bank_status == 1)?"<i class='btn btn-danger disabled'>Default</i>":""!!}</h4>
                     </div>
                     <div class="panel-body">
-                        <i>Penerima : {{$item->user_address_owner}}</i><br>
+                        <i>Owner : {{$item->user_bank_owner}}</i><br>
                         {{FunctionLib::address_info($item->id)}}<br>
-                        Kode POS {{$item->user_address_pos}}<br>
-                        HP. {{$item->user_address_phone}}<br>
-                        Tlp. {{$item->user_address_tlp}}<br><br>
+                        Bank {{$item->user_bank_name}}<br>
                         <div class="col-md-6">
                             <a class="btn btn-info btn-block" data-toggle="collapse" href="#edit{{$no}}" role="button" aria-expanded="false" aria-controls="edit"><b>Ubah</b></a>
                         </div>
                         <div class="col-md-6">
-                            <a class="btn btn-primary btn-block" data-toggle="collapse" href="#edit{{$no}}" role="button" aria-expanded="false" aria-controls="edit"><b>Set to Default</b></a>
+                            <a class="btn btn-primary btn-block" href="{{route('member.bank.set_default', $item->id)}}" ><b>Set to Default</b></a>
                         </div>
                         <div id="edit{{$no}}" class="collapse">
                             <table class="table table-bordered table-striped table-highlight m-t-xs">

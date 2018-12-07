@@ -38,14 +38,14 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Transaction</h4>
-                    <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('order');" class="btn btn-info">Order<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('transfer');" class="btn btn-info">Transfer<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('order');" class="btn btn-info">Order<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('transfer');" class="btn btn-info">Transfer<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id(), 'seller')}}</span></button>
                     {{-- <button type="button" onclick="search('seller');" class="btn btn-info">Seller<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id())}}</span></button> --}}
-                    <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans("3,4", Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id(), 'seller')}}</span></button>
                     {{-- <button type="button" onclick="search('Sent');" class="btn btn-info">Sent<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button> --}}
-                    <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id(), 'seller')}}</span></button>
                     <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
                 </div>
                 <div class="panel-body">
@@ -73,10 +73,12 @@
                                                 <li>Amount Ship : {{$item->trans_amount_ship}}</li>
                                                 <li>Amount Total : {{$item->trans_amount_total}}</li>
                                                 <li>Date : {{$item->created_at}}</li>
+                                                <li>Total Transaksi : <button class="btn btn-warning btn-xs">{{$item->trans_detail->count()}}</button></li>
                                                 <li>
-                                                    <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.trans_detail", $item->id)}} value="Choose Address" class='btn btn-info btn-xs'>
-                                                        More
-                                                    </button>
+                                                    {!! Form::open(['id' => 'form-transDetail']) !!}
+                                                        <input type="hidden" name="status" value="seller"/>
+                                                        <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.trans_detail_post", $item->id)}} value="More" class="btn btn-info btn-xs" />
+                                                    {!! Form::close() !!}
                                                 </li>
                                             </ul>
                                         </td>
@@ -93,8 +95,9 @@
                                                 :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
                                         </td>
                                         <td scope="row">
-                                            <a href="{{route('member.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
-                                            <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
+                                            {!!Plugin::trans_purchase_btn(['id'=>$item->id, 'type'=>'seller'])!!}
+                                            {{-- <a href="{{route('member.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
+                                            <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a> --}}
                                             {{-- <a href="{{route('member.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a> --}}
                                         </td>
                                     </tr>

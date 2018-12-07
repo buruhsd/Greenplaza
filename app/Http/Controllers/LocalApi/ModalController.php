@@ -76,10 +76,22 @@ class ModalController extends Controller
      * @param
      * @return 
      */
-    public function transDetail($id)
+    public function transDetail(Request $request, $id)
     {
-        $trans = Trans::whereId($id)->first();
-        $data['trans_detail'] = $trans->trans_detail;
+        if($request->has('status') && $request->status == 'seller'){
+            $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
+                ->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")")
+                ->get();
+            $data['status'] = 'seller';
+        }elseif($request->has('status') && $request->status == 'buyer'){
+            $trans = Trans::whereId($id)->first();
+            $data['trans_detail'] = $trans->trans_detail;
+            $data['status'] = 'buyer';
+        }else{
+            $trans = Trans::whereId($id)->first();
+            $data['trans_detail'] = $trans->trans_detail;
+            $data['status'] = 'all';
+        }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.trans-detail', $data);
     }

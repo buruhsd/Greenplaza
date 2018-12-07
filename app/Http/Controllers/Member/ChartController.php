@@ -34,7 +34,7 @@ class ChartController extends Controller
         }
     	// dd($request);
     	// random string
-    	$trans_code = FunctionLib::str_rand(5);
+    	$trans_code = FunctionLib::str_rand(8);
 
         $courier = 0;
         print_r($request->courier);
@@ -50,9 +50,9 @@ class ChartController extends Controller
 			'trans_detail_qty' => $request->qty,
 			'trans_detail_size' => $request->size,
 			'trans_detail_color' => $request->color,
-			'trans_detail_amount' => $produk['produk_price'],
+			'trans_detail_amount' => ($produk['produk_price'] * $request->qty),
 			'trans_detail_amount_ship' => $request->ship_cost,
-			'trans_detail_amount_total' => ($produk['produk_price'] + $request->ship_cost),
+			'trans_detail_amount_total' => (($produk['produk_price'] * $request->qty) + $request->ship_cost),
 			'trans_detail_status' => 0,
 			'trans_detail_note' => $request->note
 		];

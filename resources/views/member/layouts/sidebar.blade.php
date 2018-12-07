@@ -119,7 +119,7 @@
                                     <i class="menu-icon icon-layers"></i><span>Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Beli Saldo Iklan></li>
+                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Beli Saldo Iklan</a></li>
                                     <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Tagihan Iklan</a></li>
                                     <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Iklan Baris</a></li>
                                     <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Iklan Banner</a></li>
