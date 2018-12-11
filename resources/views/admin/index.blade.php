@@ -183,6 +183,7 @@
         
         
         @include('admin.layouts.script')
+        @yield('script')
         {!! (isset($footer_script))? $footer_script:'' !!}
     </body>
 </html>

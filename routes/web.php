@@ -165,6 +165,9 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			Route::get('laporan', 'Admin\\MonitoringController@laporan')->name('.laporan');
+			Route::get('laporan_transfer', 'Admin\\MonitoringController@laporan_list_transfer')->name('.laporan_transfer');
+			Route::get('laporan_dikirim', 'Admin\\MonitoringController@laporan_list_dikirim')->name('.laporan_dikirim');
+			Route::get('laporan_sampai', 'Admin\\MonitoringController@laporan_list_sampai')->name('.laporan_sampai');
 		});
 	});
 });
