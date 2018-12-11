@@ -169,7 +169,7 @@ class FrontController extends Controller
      public function dashboard()
     {
 
-        return view('member.buyer.alamat_pembeli');
+        return view('member.dashboard.index');
     }
 
     //  public function about()
