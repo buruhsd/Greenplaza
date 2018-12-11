@@ -14,7 +14,7 @@
     @csrf
     @include('layouts._flash')
     <div class="container">
-        <a href="index.html">
+        <a href="{{url('/')}}">
             <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="300px" height="100px">
         </a>
         <h1>Register</h1>

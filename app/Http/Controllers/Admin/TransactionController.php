@@ -20,6 +20,32 @@ class TransactionController extends Controller
     private $mainTable = 'sys_trans';
 
     /**
+     * 
+     * @param
+     * @return
+     */
+    public function konfirmasi_approve($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            $trans_detail->trans_detail_status = 3;
+            $trans_detail->trans_detail_transfer = 1;
+            $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_transfer_note = "Transfer approved by ".Auth::user()->name;
+            $trans_detail->trans_detail_able_date = date('y-m-d h:i:s');
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View

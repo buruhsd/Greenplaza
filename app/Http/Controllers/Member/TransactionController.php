@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use FunctionLib;
 
 
 class TransactionController extends Controller
@@ -21,9 +22,149 @@ class TransactionController extends Controller
     private $mainTable = 'sys_trans';
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
+     * #member
+     * process brang diambil oleh buyer
+     * @param
+     * @return
+     */
+    public function dropping($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to dropping
+            $trans_detail->trans_detail_status = 6;
+            $trans_detail->trans_detail_drop = 1;
+            $trans_detail->trans_detail_drop_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_drop_note = "Transaction be dropping by buyer";
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #seller status 4
+     * process sudah dikirim oleh seller wait dropping
+     * @param
+     * @return
+     */
+    public function sending($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to shipping true
+            $trans_detail->trans_detail_status = 5;
+            $trans_detail->trans_detail_send = 1;
+            $trans_detail->trans_detail_send_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #seller status 4
+     * process sudah packing oleh seller pindah ke wait shipping
+     * @param
+     * @return
+     */
+    public function packing($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to shipping false
+            $trans_detail->trans_detail_packing = 1;
+            $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
+            $trans_detail->trans_detail_send_date = date('y-m-d h:i:s');
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #seller status 3 approve admin
+     * process seller menyanggupi pengiriman
+     * @param
+     * @return
+     */
+    public function able($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to packing
+            $trans_detail->trans_detail_status = 4;
+            $trans_detail->trans_detail_able = 1;
+            $trans_detail->trans_detail_able_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_able_note = "Transaction be able by seller";
+            $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #buyer
+     * process buyer mengkonfirmasi pembayaran
+     * @param
+     * @return
+     */
+    public function konfirmasi($id){
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        $trans = Trans::findOrFail($id);
+        // $status = FunctionLib::midtrans_status($trans->trans_code);
+        // if($status){
+            foreach ($trans->trans_detail as $item) {
+                $trans_detail = Trans_detail::findOrFail($item->id);
+                // to transfer
+                $trans_detail->trans_detail_status = 2;
+                $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                $trans_detail->save();
+            }
+            if(!$trans_detail){
+                $status = 500;
+                $message = 'Transfer unconfirmed!';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        // }else{
+        //     $data['trans'] = Trans::where('trans_code', $trans->trans_code)->first();
+        //     return view('member.transaction.konfirmasi', $data);
+        // }
+    }
+
+    /**
+     * #buyer
+     * @param
+     * @return
      */
     public function purchase(Request $request)
     {
@@ -34,7 +175,7 @@ class TransactionController extends Controller
             "3" =>'seller',
             "4" =>'packing',
             "5" =>'shipping',
-            "5" =>'sent',
+            "5,5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
@@ -68,9 +209,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
+     * #seller
+     * @param
+     * @return
      */
     public function sales(Request $request)
     {
@@ -80,7 +221,7 @@ class TransactionController extends Controller
             "2" =>'transfer',
             "3,4" =>'packing',
             "5" =>'shipping',
-            "5" =>'sent',
+            "5,5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
@@ -101,7 +242,7 @@ class TransactionController extends Controller
                 $status = array_search($request->get('type'),$arr);
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }else{
-                $status = array_search($status,$arr);
+                $status = array_search('shipping',$arr);
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }
         }
@@ -123,9 +264,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\View\View
+     * 
+     * @param
+     * @return
      */
     public function create()
     {
@@ -134,11 +275,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * 
+     * @param
+     * @return
      */
     public function store(Request $request)
     {
@@ -189,11 +328,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
+     * 
+     * @param
+     * @return
      */
     public function show($id)
     {
@@ -204,11 +341,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
+     * 
+     * @param
+     * @return
      */
     public function edit($id)
     {
@@ -219,12 +354,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * 
+     * @param
+     * @return
      */
     public function update(Request $request, $id)
     {
@@ -278,11 +410,9 @@ class TransactionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * 
+     * @param
+     * @return
      */
     public function destroy($id)
     {

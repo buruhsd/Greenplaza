@@ -18,6 +18,7 @@ use Auth;
 
 class MidtransController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -27,13 +28,16 @@ class MidtransController extends Controller
     {
         $this->middleware('auth');
         //Set Your server key
-        Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
+        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
         // Uncomment for production environment
         // Veritrans_Config::$isProduction = true;
         // Enable sanitization
-        Veritrans_Config::$isSanitized = true;
+        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        // Veritrans_Config::$isSanitized = true;
         // Enable 3D-Secure
-        Veritrans_Config::$is3ds = true;
+        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        // Veritrans_Config::$is3ds = true;
     }
 
     /**
@@ -87,60 +91,62 @@ class MidtransController extends Controller
     * @param
     * @return
     */
-    public function process(){
-        $data = Session::get('chart');
-        $trans = [];
-        array_walk($data, function ($item) use (&$trans) {
-            $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
-            $trans[$seller_id][] = $item;
-        });
-        $trans_code = FunctionLib::str_rand(7);
-        foreach ($trans as $value) {
-            // add to DB sys_trans
-            $trans = new Trans;
-            $trans->trans_code = $trans_code;
-            $trans->trans_user_id = Auth::id();
-            $trans->trans_user_bank_id = Auth::user()->first()->user_bank()->where('user_bank_status', 1)->first()->id;
-            // $trans->trans_is_paid = $request->trans_is_paid;
-            $trans->trans_payment_id = 2;
-            // $trans->trans_paid_image = $request->trans_paid_image;
-            // $trans->trans_paid_date = $request->trans_paid_date;
-            // $trans->trans_paid_note = $request->trans_paid_note;
-            $trans->trans_amount = FunctionLib::array_sum_key($value, 'trans_detail_amount');
-            $trans->trans_amount_ship = FunctionLib::array_sum_key($value, 'trans_detail_amount_ship');
-            $trans->trans_amount_total = FunctionLib::array_sum_key($value, 'trans_detail_amount_total');
-            $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
-            $trans->save();
-            foreach ($value as $key => $item) {
-                $transDetail = new Trans_detail;
-                $transDetail->trans_detail_trans_id = $trans->id;
-                $transDetail->trans_code = $item['trans_code'];
-                $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
-                $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
-                $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
-                // $transDetail->trans_detail_no_resi = $item['trans_detail_no_resi'];
-                $transDetail->trans_detail_qty = $item['trans_detail_qty'];
-                $transDetail->trans_detail_size = 's,m,l,xl';//$item['trans_detail_size'];
-                $transDetail->trans_detail_color = 'blue,orange,red,green,white';//$item['trans_detail_color'];
-                $transDetail->trans_detail_amount = $item['trans_detail_amount'];
-                $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
-                $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
-                $transDetail->trans_detail_status = 1;
-                $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
-                $transDetail->save();
-            }
-        }
-
-
-        // get produk seller $item['trans_detail_produk_id']
-        // get Buyer Auth::id()
-        // get Buyer address trans_detail_user_address_id
-        $item_details = [];
+    public function process(Request $request){
         if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
+            $data = Session::get('chart');
+            $trans = [];
+            array_walk($data, function ($item) use (&$trans) {
+                $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
+                $trans[$seller_id][] = $item;
+            });
+            $trans_code = FunctionLib::str_rand(7);
+            $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+
+            foreach ($trans as $value) {
+                // add to DB sys_trans
+                $trans = new Trans;
+                $trans->trans_code = $trans_code;
+                $trans->trans_user_id = Auth::id();
+                $trans->trans_user_bank_id = Auth::user()->first()->user_bank()->where('user_bank_status', 1)->first()->id;
+                // $trans->trans_is_paid = $request->trans_is_paid;
+                $trans->trans_payment_id = 2;
+                // $trans->trans_paid_image = $request->trans_paid_image;
+                // $trans->trans_paid_date = $request->trans_paid_date;
+                // $trans->trans_paid_note = $request->trans_paid_note;
+                $trans->trans_amount = FunctionLib::array_sum_key($value, 'trans_detail_amount');
+                $trans->trans_amount_ship = FunctionLib::array_sum_key($value, 'trans_detail_amount_ship');
+                $trans->trans_amount_total = FunctionLib::array_sum_key($value, 'trans_detail_amount_total');
+                $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
+                $trans->save();
+                foreach ($value as $key => $item) {
+                    $transDetail = new Trans_detail;
+                    $transDetail->trans_detail_trans_id = $trans->id;
+                    $transDetail->trans_code = $item['trans_code'];
+                    $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
+                    $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
+                    $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
+                    // $transDetail->trans_detail_no_resi = $item['trans_detail_no_resi'];
+                    $transDetail->trans_detail_qty = $item['trans_detail_qty'];
+                    $transDetail->trans_detail_size = 's,m,l,xl';//$item['trans_detail_size'];
+                    $transDetail->trans_detail_color = 'blue,orange,red,green,white';//$item['trans_detail_color'];
+                    $transDetail->trans_detail_amount = $item['trans_detail_amount'];
+                    $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
+                    $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
+                    $transDetail->trans_detail_status = 1;
+                    $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
+                    $transDetail->save();
+                }
+            }
+            Session::forget('chart');
+
+            // get produk seller $item['trans_detail_produk_id']
+            // get Buyer Auth::id()
+            // get Buyer address trans_detail_user_address_id
+            $item_details = [];
             // Required
             $transaction_details = array(
-              'order_id' => rand(),
-              'gross_amount' => FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'), // no decimal allowed for creditcard
+              'order_id' => $trans_code,
+              'gross_amount' => $gross_amount, // no decimal allowed for creditcard
             );
             // foreach (Session::get('chart') as $key => $item) {
             //     $item_details[] = [

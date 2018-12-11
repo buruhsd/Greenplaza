@@ -3,6 +3,57 @@ class FunctionLib
 {
 
     /**
+     * check status midtrans.
+     * @return void
+     */
+    public static function midtrans_status($order_id){
+        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        try {
+            $status = Veritrans_Transaction::status($order_id);
+            return $status;
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+
+    /**
+    * approve midtrans
+    *
+    **/
+    public static function midtrans_approve($order_id){
+        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        try {
+            $approve = Veritrans_Transaction::approve($order_id);
+            return $approve;
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+
+    /**
+    * cancel modtrans
+    *
+    **/
+    public static function midtrans_cancel($order_id){
+        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        try {
+            $cancel = Veritrans_Transaction::cancel($order_id);
+            return $cancel;
+        } catch (Exception $e) {
+            report($e);
+            return false;
+        }
+    }
+
+    /**
     * check user have conf shipment
     *
     **/

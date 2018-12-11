@@ -8,7 +8,9 @@
 	    	@if($type == 'buyer')
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
-			    		<button class="btn btn-success btn-xs">Konfirmasi</button>
+			    		<a href="{{route('member.transaction.konfirmasi', $detail->trans->id)}}">
+				    		<button class="btn btn-success btn-xs">Konfirmasi</button>
+			    		</a>
 			    	</div>
 			    </div>
 	    	@elseif($type == 'seller')
@@ -29,6 +31,13 @@
 			    	</div>
 			    </div>
 	    	@elseif($type == 'seller')
+		    	<div class="row">
+		    		<div class="col-md-12 text-center">
+			    		<a href="{{route('member.transaction.able', $detail->trans->id)}}">
+		    				<button class="btn btn-success btn-xs">Move to Packing</button>
+			    		</a>
+			    	</div>
+			    </div>
 	    	@endif
 	    @break
 		{{-- Packing --}}
@@ -40,6 +49,22 @@
 			    	</div>
 			    </div>
 	    	@elseif($type == 'seller')
+	    		@if($detail->trans_detail_send_date == null || $detail->trans_detail_send_date == "")
+			    	<div class="row">
+			    		<div class="col-md-12 text-center">
+				    		<a href="{{route('member.transaction.packing', $detail->trans->id)}}">
+			    				<button class="btn btn-info btn-xs">Wait Shipping</button>
+				    		</a>
+				    	</div>
+				    </div>
+	    		@endif
+		    	<div class="row">
+		    		<div class="col-md-12 text-center">
+			    		<a href="{{route('member.transaction.sending', $detail->trans->id)}}">
+		    				<button class="btn btn-success btn-xs">Sending</button>
+			    		</a>
+			    	</div>
+			    </div>
 	    	@endif
 	    @break
 		{{-- Shipment --}}

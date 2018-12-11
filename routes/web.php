@@ -253,6 +253,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/', 'TransactionController@sales')->name('.index');
 			Route::get('/sales', 'TransactionController@sales')->name('.sales');
 			Route::get('/purchase', 'TransactionController@purchase')->name('.purchase');
+			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
+			Route::get('/able/{id}', 'TransactionController@able')->name('.able');
+			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
+			Route::get('/sending/{id}', 'TransactionController@sending')->name('.sending');
+			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 			Route::get('/create', 'TransactionController@create')->name('.create');
 			Route::post('/store', 'TransactionController@store')->name('.store');
 			Route::get('/show/{id}', 'TransactionController@show')->name('.show');
