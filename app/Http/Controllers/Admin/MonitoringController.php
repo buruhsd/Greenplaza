@@ -7,14 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
 use App\Models\Produk;
 use App\User;
+use App\Role;
 use Session;
 use Carbon\Carbon;
 
 class MonitoringController extends Controller
 {
+//LAPORAN
     public function laporan (Request $request) 
     {   
-
     	$value1 = $request->tglawal;
     	$value2 = $request->tglakir;
         $detail = Trans_detail::orderBy('created_at', 'DESC')->paginate(10);
@@ -113,6 +114,34 @@ class MonitoringController extends Controller
 	    }
         return view('admin.monitoring.laporan.laporan_listsampai', compact('detail'));
 	}
+
+//PROFIT
+    public function profit ()
+    {
+        return view('admin.monitoring.profit.profit');
+    }
+
+    public function profit_detail ()
+    {
+        return view('admin.monitoring.profit.detail');
+    }
+
+//WALLET
+    public function wallet_sellerlist ()
+    {
+        $users = Role::where('name', 'member')->first()->users;
+        // dd($users);
+        $seller = $users->where('user_store', '!=', 'null')->first();
+        // dd($seller);
+        return view('admin.monitoring.wallet.wallet_sellerlist', compact('seller'));
+    }
+
+    public function wallet_memberlist ()
+    {
+        $users = Role::where('name', 'member')->first()->users;
+        // dd($users); die();
+        return view('admin.monitoring.wallet.wallet_memberlist', compact('users'));
+    }
 
 
 }

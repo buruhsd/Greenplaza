@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Role;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -136,6 +137,20 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function MailVerification(){
         return true;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+    * get User detail
+    * @return joined one to one
+    **/
+    public function wallet()
+    {
+        return $this->hasMany('App\Models\Wallet', 'wallet_user_id');
     }
 
 }

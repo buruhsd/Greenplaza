@@ -36,4 +36,14 @@ class Wallet extends Model
     {
         return $this->belongsTo('App\User', 'wallet_user_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function role_user()
+    {
+        return $this->belongsTo('App\User', 'wallet_user_id');
+    }
 }

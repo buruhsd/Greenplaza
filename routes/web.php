@@ -164,10 +164,17 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/withdrawal_member_reject/{id}', 'Admin\\WithdrawalController@reject')->name('.withdrawal_member_reject');
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
+			//Laporan
 			Route::get('laporan', 'Admin\\MonitoringController@laporan')->name('.laporan');
 			Route::get('laporan_transfer', 'Admin\\MonitoringController@laporan_list_transfer')->name('.laporan_transfer');
 			Route::get('laporan_dikirim', 'Admin\\MonitoringController@laporan_list_dikirim')->name('.laporan_dikirim');
 			Route::get('laporan_sampai', 'Admin\\MonitoringController@laporan_list_sampai')->name('.laporan_sampai');
+			//Profit
+			Route::get('profit', 'Admin\\MonitoringController@profit')->name('.profit');
+			Route::get('profit_detail', 'Admin\\MonitoringController@profit_detail')->name('.profit_detail');
+			//Wallet
+			Route::get('wallet_sellerlist', 'Admin\\MonitoringController@wallet_sellerlist')->name('.wallet_sellerlist');
+			Route::get('wallet_memberlist', 'Admin\\MonitoringController@wallet_memberlist')->name('.wallet_memberlist');
 		});
 	});
 });
