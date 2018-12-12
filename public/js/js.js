@@ -27,10 +27,14 @@ function modal_get(e){
     });
 }
 function modal_post(e, data=''){
+    var val = e.val();
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         data: data, // change as needed
+        beforeSend:function(){
+            e.val("loading");
+        },
         success: function(data) {
             if (data) {
                 if(typeof data.status !== 'undefined' && data.status == 500){
@@ -48,6 +52,7 @@ function modal_post(e, data=''){
             } else {
                 alert(data);
             }
+            e.val(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);

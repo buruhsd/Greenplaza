@@ -102,6 +102,7 @@ class SysTrans extends Migration
             $table->tinyInteger('trans_detail_drop')->default(0)->comment('diambil #member, 0.menunggu 1.diambil');
             $table->dateTime('trans_detail_drop_date')->nullable();
             $table->text('trans_detail_drop_note')->nullable();
+            $table->tinyInteger('trans_detail_is_cancel')->default(0)->comment('1=transaction cancel');
             $table->text('trans_detail_note');
             $table->timestamps();
             $table->foreign('trans_detail_trans_id')

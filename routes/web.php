@@ -266,7 +266,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
 			Route::get('/able/{id}', 'TransactionController@able')->name('.able');
 			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
-			Route::get('/sending/{id}', 'TransactionController@sending')->name('.sending');
+			Route::post('/sending', 'TransactionController@sending')->name('.sending');
+			Route::get('/add_resi/{id}', 'TransactionController@add_resi')->name('.add_resi');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 			Route::get('/create', 'TransactionController@create')->name('.create');
 			Route::post('/store', 'TransactionController@store')->name('.store');
@@ -349,6 +350,9 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
 		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 		Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
+		Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
+		Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
+		Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

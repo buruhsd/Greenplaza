@@ -9,20 +9,34 @@
                     <input onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addaddress")}} type="button" class="btn btn-success btn-sm" name="addAdress" value="Add Address" />
                 </div>
             </div> --}}
+        {!! Form::open(['id' => 'form-pick-produk']) !!}
             <div class="table-responsive">
                 <table class="table table-bordered m-t-xs">
                     <thead>
+                        <th class="text-center">Actions</th>
                         <th class="text-center">Code</th>
                         <th class="text-center"></th>
                         <th class="text-center">Produk Detail</th>
                         <th class="text-center">Seller Detail</th>
                         <th class="text-center">Shipment Detail</th>
                         <th class="text-center">Transaction Detail</th>
-                        <th class="text-center">Actions</th>
                     </thead>
                     <tbody>
                     @foreach($trans_detail as $item)
                         <tr>
+                            <td>
+                                <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
+                                    <div class="col-md-12">
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="checkbox" name="detail_id[]" value="{{$item->id}}" autocomplete="off">
+                                                <span class="check glyphicon glyphicon-ok"></span>
+                                            </label>
+                                        </div>
+                                    {!! $errors->first('produk_size', '<p class="help-block">:message</p>') !!}
+                                    </div>
+                                </div>
+                            </td>
                             <td><b>{{$item->trans_code}}</b></td>
                             <td>
                                 <div class="row">
@@ -74,9 +88,6 @@
                                     <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
                                 </ul>
                             </td>
-                            <td>
-                                {!!Plugin::trans_purchase_btn(['id' => $item->trans->id, 'status' => 'detail', 'type' => $type])!!}
-                            </td>
                         </tr>
                     @endforeach
                         <tr>
@@ -92,6 +103,24 @@
                     </tbody>
                 </table>
             </div>
+            @if($trans_status == 'cancel')
+                <div class="form-group mx-sm-3 mb-2 {{ $errors->has('note') ? 'has-error' : ''}}">
+                    {!! Form::label('note', 'Alasan tidak sanggup : ', ['class' => 'col-md-12 control-label']) !!}
+                    <div class="col-md-12 m-b-xs">
+                        {!! Form::textarea('note', null, [
+                          'class' => 'form-control', 
+                          'placeholder' => 'Note', 
+                          'required',
+                          'rows' => 3
+                        ])!!}
+                        {!! $errors->first('note', '<p class="help-block">:message</p>') !!}
+                    </div>
+                </div>
+            @endif
+            <div class="col-md-2">
+                <input type="button" onclick='modal_post($(this), $("#form-pick-produk").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.transaction.sending")}} value="Save" class="btn btn-success btn-xs btn-block" />
+            </div>
+        {!! Form::close() !!}
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
