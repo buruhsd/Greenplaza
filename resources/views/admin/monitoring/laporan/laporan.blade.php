@@ -3,6 +3,8 @@
 
 <link href="{{asset('admin/plugins/summernote-master/summernote.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('admin/plugins/bootstrap-datepicker/css/datepicker3.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{asset('admin/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css')}}" rel="stylesheet" type="text/css"/>
+<link href="{{asset('admin/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" type="text/css"/>
 
 <div id="main-wrapper">
     <div class="row">
@@ -24,12 +26,12 @@
 		            	{{ csrf_field() }}
 		            	<div class="col-md-3">
 		            		<div class="form-group" style="padding-right: 3%">
-				                <input type="text" name="value1" class="form-control date-picker" id="" placeholder="Tanggal Mulai">
+				                <input type="text" name="tglawal" class="form-control date-picker" id="" placeholder="Tanggal Mulai">
 				            </div>
 		            	</div>
 		            	<div class="col-md-3">
 		            		<div class="form-group" style="padding-right: 3%">
-				                <input type="text" name="value2" class="form-control date-picker" id="" placeholder="Tanggal Sampai">
+				                <input type="text" name="tglakir" class="form-control date-picker" id="" placeholder="Tanggal Sampai">
 				            </div>
 		            	</div>
                         <div class="col-md-3">
@@ -56,22 +58,26 @@
                                     <th><center>Detail Member</center></th>
                                 </tr>
                             </thead>
-                            @foreach ($detail as $d)
+                             @if(count($detail) != 0)
                             <tbody>
+                                @foreach ($detail as $d)
                                 <tr>
-                                	<td>{{$d->id}}</td>
-                                	<td></td>
-                                	<td>
-                                		<center>{{$d->trans_code}}</center> <br/>
-                                		<center><img style="width: 20%" src="{{ asset('assets/images/product/'.$d->produk->produk_image) }}" alt=""></center>
-                                	</td>
-                                	<td></td>
-                                	<td></td>
-                                	<td></td>
-
+                                    <td>{{$d->id}}</td>
+                                    <td>{{$d->created_at}}</td>
+                                    <td>
+                                        <center>{{$d->trans_code}}</center> <br/>
+                                        <center><img style="width: 20%" src="{{ asset('assets/images/product/'.$d->produk->produk_image) }}" alt=""></center>
+                                    </td>
+                                    <td>{{App\User::where('id', $d->produk->produk_seller_id)->first()->username}}</td>
+                                    <td>{{App\User::where('id', $d->user_address->user_address_user_id)->first()->username}}</td>
                                 </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="5" class="text-center">Kosong</td>
+                                </tr>
+                            @endif
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
                 </div>
@@ -92,5 +98,6 @@
 <script src="{{asset('admin/plugins/summernote-master/summernote.min.js')}}"></script>
 <script src="{{asset('admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('admin/js/pages/form-elements.js')}}"></script>
+
 @endsection
 
