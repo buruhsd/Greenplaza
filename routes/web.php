@@ -303,7 +303,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/category', 'member\\FrontController@category')->name('category');
 	Route::get('/brand', 'member\\FrontController@brand')->name('brand');
 	Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
-	Route::get('/etalase/{id}', 'member\\FrontController@etalase')->name('etalase');
+	Route::get('/etalase/{user_store}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');

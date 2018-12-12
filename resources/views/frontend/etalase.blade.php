@@ -15,9 +15,10 @@
             <div class="row">
                 <div class="col-lg-3 ">
                     <div class="author-wrap">
-                        <img src="{{ asset('frontend/images/author.png') }}" alt="">
-                        <h4>Alex Smeet</h4>
-                        <p>Pengrajin Kerang ajaib</p>
+                        <img src="{{ asset('frontend/images/'.$user->user_detail->user_detail_image.'') }}" alt="">
+
+                        <h4>{{$user->name}}</h4>
+                        <p>{{$user->user_slogan}}</p>
                         <ul>
                         <a href=""><li class="btn-chat"> Chat </li></a>
                         </ul>
@@ -25,7 +26,7 @@
                 </div>
                 <div class="col-9">
                     <div class="breadcumb-wrap bg-1" src="">
-                        <div class="breadcumb-content black-opacity">
+                        <div class="breadcumb-content-etalase black-opacity" style="background: url('{{ asset('/assets/images/banner-page/'.$user->user_store_image.'')}}') no-repeat center center/ cover;">
                             <h2></h2>
                             <ul>
                                 <li></li>

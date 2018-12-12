@@ -3434,10 +3434,10 @@ transition: background .55s ease;
 li.btn-chat{
 
   color: black;
-  border: 2px solid black; 
+  border: 1px solid black; 
   color: black;
   border-radius: 10px;
-  padding: 5px 40px;
+  padding: 1px 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -3466,6 +3466,20 @@ li.btn-chat:hover{
 
 .account-info-social li {
 
+}
+
+.breadcumb-content-etalase {
+    padding: 50px;
+    position: relative;
+    z-index: 9;
+    
+}
+
+.breadcumb-content-etalase.black-opacity:before {
+    background: #000;
+    opacity: .5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    z-index: -9;
 }
 
 /*.account-info-social li a {

@@ -138,12 +138,13 @@ class FrontController extends Controller
     * @param
     * @return
     */
-    public function etalase(Request $request, $id)
+    public function etalase(Request $request, $user_store)
     {
-        $user = User::find($id);
-        $produk = Produk::where('produk_seller_id', $user->id)->get();
+        $user = User::where('user_slug', $user_store)->first();
+        // dd($user);
+        $produk = Produk::where('produk_seller_id', $user['id'])->get();
         // dd($produk);
-        return view('frontend.etalase', compact('produk', 'user', 'user_produk'));
+        return view('frontend.etalase', compact('produk', 'user'));
     }
 
     /**
