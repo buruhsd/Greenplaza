@@ -47,7 +47,7 @@ class ModalController extends Controller
      */
     public function add_komplain($id)
     {
-        $data['id'] = $id;
+        $data['trans'] = Trans::whereId($id)->first();
         $data['komplain'] = Conf_komplain::where('komplain_status', 1)->get();
         $data['solusi'] = Conf_solusi::where('solusi_status', 1)->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);

@@ -115,9 +115,6 @@
 </div>
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('.input-tanggal').datepicker();       
-    });
     function search(val){
         $('#status').val(val);
         $('#src').submit();

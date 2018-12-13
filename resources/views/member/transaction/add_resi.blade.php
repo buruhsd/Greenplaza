@@ -53,10 +53,12 @@
 			                                    </li>
 			                                    {{-- @if($item->trans_detail_status == 5) --}}
 			                                    <?php $ship_status = FunctionLib::get_waybill($item->id);?>
-			                                    <li>Sent Status : 
+			                                    <li>
+			                                    	Sent Status : <b>
 			                                        {{
 			                                            $ship_status
 			                                        }}
+			                                    	</b>
 			                                    </li>
 			                                    {{-- @endif --}}
 			                                </ul>
@@ -74,24 +76,24 @@
 			                            <td width="40%">
 									        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_name') ? 'has-error' : ''}}">
 									            <div class="col-md-12">
-									                <div class="input-group">
-									                    {!! Form::text('trans_detail_no_resi', null, [
+								                	{!! Form::open(['url' => '/member/transaction/add_resi/'.$item->id, 'class' => 'input-group', 'files' => true, 'method' => 'POST']) !!}
+									                    {!! Form::text('trans_detail_no_resi', $item->trans_detail_no_resi, [
 									                        'class' => 'form-control', 
 									                        'placeholder' => 'No.Resi', 
 									                        'required'
 									                    ])!!}
 									                    <span class="input-group-btn" style="width:0px;"></span>
-										                {!! Form::text('trans_detail_send_date', null, [
-										                    'class' => 'form-control', 
+										                {!! Form::text('trans_detail_send_date', $item->trans_detail_send_date, [
+										                    'class' => 'form-control datepicker', 
 										                    'placeholder' => 'Date', 
 										                    'required'
 										                ])!!}
 								                        <span class="input-group-btn">
-								                            <button type="button" class="btn btn-success image-preview-clear">
+								                            <button type="submit" class="btn btn-success image-preview-clear">
 								                                Save
 								                            </button>
 								                        </span>
-									                </div>
+								                    {!! Form::close() !!}
 									            </div>
 									        </div>
 			                            </td>

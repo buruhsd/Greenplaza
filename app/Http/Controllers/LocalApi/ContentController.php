@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LocalApi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Conf_solusi;
 use Plugin;
 use RajaOngkir;
 use FunctionLib;
@@ -18,6 +19,21 @@ class ContentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_solusi($id = 0){
+        $data = Conf_solusi::first(null, new Conf_solusi)->get();
+        if($id != 0){
+            $data = Conf_solusi::whereRaw('solusi_komplain_id LIKE "'.$id.',%"')
+                ->orWhereRaw('solusi_komplain_id LIKE "%,'.$id.'"')
+                ->orWhereRaw('solusi_komplain_id = "'.$id.'"')
+                ->get();
+        }
+        return $data;
     }
 
     /**

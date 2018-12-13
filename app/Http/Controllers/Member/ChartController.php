@@ -64,7 +64,7 @@ class ChartController extends Controller
 
         $status = 200;
         $message = 'Add Chart Successfully';
-    	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);;
+    	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

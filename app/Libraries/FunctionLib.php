@@ -81,7 +81,7 @@ class FunctionLib
         $imagesize = $file->getClientSize();
         $imagetmp = $file->getPathName();
         if($field !== '' && $field !== null){
-            File::delete($path . '/' . $user->user_store_image);   
+            File::delete($path . '/' . $field);   
         }
         if(file_exists($path . '/' . $imagename)){// || file_exists($path . '/thumb' . $imagename)){
             $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$file->getClientOriginalExtension();
@@ -561,7 +561,7 @@ class FunctionLib
                 $shipment = RajaOngkir::waybill($req);
                 $shipment = json_decode($shipment, true);
                 if($shipment['rajaongkir']['status']['code'] && $shipment['rajaongkir']['status']['code'] == 200){
-                    if(delivered){
+                    if($shipment['rajaongkir']['result']['delivered'] == true){
                         $status = 'Sent';
                     }else{
                         $status = 'On Process';
@@ -642,7 +642,8 @@ class FunctionLib
     * @return
     **/
     public static function count_trans($status = "", $id = 0, $type = 'buyer'){
-        $where = 1;
+        $where = "1
+            AND trans_detail_is_cancel != 1";
         if($status !== ""){
             $where .= " AND trans_detail_status IN (".$status.")";
         }

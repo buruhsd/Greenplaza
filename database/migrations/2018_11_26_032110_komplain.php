@@ -30,6 +30,7 @@ class Komplain extends Migration
         // config solusi
         Schema::create('conf_solusi', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('solusi_komplain_id')->nullable()->comment('komplain can access');
             $table->string('solusi_name');
             $table->tinyInteger('solusi_status')->default(0)->comment('0.not active, 1.active');
             $table->text('solusi_note')->nullable();

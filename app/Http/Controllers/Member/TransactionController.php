@@ -55,6 +55,14 @@ class TransactionController extends Controller
      * @return
      */
     public function add_resi(Request $request, $id){
+        if ($request->has('trans_detail_no_resi')) {
+            // update
+            $trans_detail = Trans_detail::findOrFail($id);
+            $trans_detail->trans_detail_no_resi = $request->trans_detail_no_resi;
+            $trans_detail->trans_detail_send_date = $request->trans_detail_send_date;
+            $trans_detail->save();
+            return redirect()->back();
+        }
         $status = 200;
         $message = 'Transfer approved!';
         $data['trans'] = Trans::findOrFail($id);
@@ -92,7 +100,7 @@ class TransactionController extends Controller
                         $trans_detail->trans_detail_status = 5;
                         $trans_detail->trans_detail_packing = 1;
                         $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
-                        $trans_detail->trans_detail_send = 1;
+                        $trans_detail->trans_detail_send = 0;
                         $trans_detail->trans_detail_send_date = $date;
                         $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
                     }
@@ -106,7 +114,7 @@ class TransactionController extends Controller
                         $trans_detail->trans_detail_note = $request->note;
                         $message = 'Shipment cancelled!';
                     }else{
-                        $trans_detail->trans_detail_send = 1;
+                        $trans_detail->trans_detail_send = 0;
                         $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
                     }
                 }
@@ -124,7 +132,7 @@ class TransactionController extends Controller
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         if(empty($request->note)){
-            return redirect('member/transaction/add_resi')
+            return redirect('member/transaction/add_resi/'.$trans_detail->trans->id)
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         return redirect()->back()
@@ -281,7 +289,9 @@ class TransactionController extends Controller
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
-        $where = "1 AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+        $where = "1 
+            AND trans_detail_is_cancel != 1
+            AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
         $having = "1";
         // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
@@ -511,6 +521,15 @@ class TransactionController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
+            case 'add_resi':
+                ?>
+                    <link href="<?php echo asset('admin/plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css') ?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js') ?>"></script>
+                    <script type="text/javascript">
+                        $('.datepicker').datetimepicker();
+                    </script>
+                <?php
+                break;
             case 'index':
                 ?>
                     <script type="text/javascript"></script>

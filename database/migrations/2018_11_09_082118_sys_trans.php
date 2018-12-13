@@ -79,7 +79,7 @@ class SysTrans extends Migration
             $table->integer('trans_detail_produk_id')->unsigned();
             $table->integer('trans_detail_shipment_id')->unsigned();
             $table->integer('trans_detail_user_address_id')->unsigned();
-            $table->integer('trans_detail_no_resi');
+            $table->string('trans_detail_no_resi')->default(0);
             $table->integer('trans_detail_qty');
             $table->string('trans_detail_size');
             $table->string('trans_detail_color', 150);

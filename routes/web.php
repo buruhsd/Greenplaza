@@ -222,23 +222,29 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
 		});
 		Route::get('/profil', 'UserController@profil')->name('.profil');
-		Route::patch('/user/update', 'UserController@update')->name('.user.update');
-		Route::get('/user/change_password', 'UserController@change_password')->name('.user.change_password');
-		Route::post('/user/change_password_update', 'UserController@change_password_update')->name('.user.change_password_update');
-		Route::get('/user/seller_address', 'UserController@seller_address')->name('.user.seller_address');
-		Route::post('/user/seller_address_update', 'UserController@seller_address_update')->name('.user.seller_address_update');
-		Route::get('/user/upload_foto_profil', 'UserController@upload_foto_profil')->name('.user.upload_foto_profil');
-		Route::post('/user/upload_foto_profil_update', 'UserController@upload_foto_profil_update')->name('.user.upload_foto_profil_update');
-		Route::get('/user/upload_scan_npwp', 'UserController@upload_scan_npwp')->name('.user.upload_scan_npwp');
-		Route::post('/user/upload_scan_npwp_update', 'UserController@upload_scan_npwp_update')->name('.user.upload_scan_npwp_update');
-		Route::get('/user/upload_siup', 'UserController@upload_siup')->name('.user.upload_siup');
-		Route::post('/user/upload_siup_update', 'UserController@upload_siup_update')->name('.user.upload_siup_update');
-		Route::get('/user/set_shipment', 'UserController@set_shipment')->name('.user.set_shipment');
-		Route::post('/user/set_shipment_update', 'UserController@set_shipment_update')->name('.user.set_shipment_update');
-		// pembeli
-		Route::get('/user/buyer_address', 'UserController@buyer_address')->name('.user.buyer_address');
-		Route::post('/user/buyer_address_update', 'UserController@buyer_address_update')->name('.user.buyer_address_update');
+		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+			Route::patch('/update', 'UserController@update')->name('.update');
+			Route::get('/change_password', 'UserController@change_password')->name('.change_password');
+			Route::post('/change_password_update', 'UserController@change_password_update')->name('.change_password_update');
+			Route::get('/seller_address', 'UserController@seller_address')->name('.seller_address');
+			Route::post('/seller_address_update', 'UserController@seller_address_update')->name('.seller_address_update');
+			Route::get('/upload_foto_profil', 'UserController@upload_foto_profil')->name('.upload_foto_profil');
+			Route::post('/upload_foto_profil_update', 'UserController@upload_foto_profil_update')->name('.upload_foto_profil_update');
+			Route::get('/upload_scan_npwp', 'UserController@upload_scan_npwp')->name('.upload_scan_npwp');
+			Route::post('/upload_scan_npwp_update', 'UserController@upload_scan_npwp_update')->name('.upload_scan_npwp_update');
+			Route::get('/upload_siup', 'UserController@upload_siup')->name('.upload_siup');
+			Route::post('/upload_siup_update', 'UserController@upload_siup_update')->name('.upload_siup_update');
+			Route::get('/set_shipment', 'UserController@set_shipment')->name('.set_shipment');
+			Route::post('/set_shipment_update', 'UserController@set_shipment_update')->name('.set_shipment_update');
+			// pembeli
+			Route::get('/buyer_address', 'UserController@buyer_address')->name('.buyer_address');
+			Route::post('/buyer_address_update', 'UserController@buyer_address_update')->name('.buyer_address_update');
+		});
 		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
+
+		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
+			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');
+		});
 
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
@@ -268,6 +274,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
 			Route::post('/sending', 'TransactionController@sending')->name('.sending');
 			Route::get('/add_resi/{id}', 'TransactionController@add_resi')->name('.add_resi');
+			Route::post('/add_resi/{id}', 'TransactionController@add_resi')->name('.post_add_resi');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 			Route::get('/create', 'TransactionController@create')->name('.create');
 			Route::post('/store', 'TransactionController@store')->name('.store');
@@ -339,6 +346,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('get_city/{id}', 'ContentController@get_city')->name('.get_city');
 		Route::get('get_subdistrict/{id}', 'ContentController@get_subdistrict')->name('.get_subdistrict');
 		Route::get('config_content', function(){return true;})->name('.config_content');
+		Route::get('get_solusi/{id}', 'ContentController@get_solusi')->name('.get_solusi');
 	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
 		Route::get('form_config', 'ModalController@formConfig')->name('.form_config');
