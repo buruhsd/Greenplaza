@@ -54,22 +54,78 @@ class TransactionController extends Controller
      * @param
      * @return
      */
-    public function sending($id){
+    public function add_resi(Request $request, $id){
         $status = 200;
         $message = 'Transfer approved!';
-        $trans = Trans::findOrFail($id);
-        foreach ($trans->trans_detail as $item) {
-            $trans_detail = Trans_detail::findOrFail($item->id);
-            // to shipping true
-            $trans_detail->trans_detail_status = 5;
-            $trans_detail->trans_detail_send = 1;
-            $trans_detail->trans_detail_send_date = date('y-m-d h:i:s');
-            $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
-            $trans_detail->save();
+        $data['trans'] = Trans::findOrFail($id);
+        $data['trans_detail'] = $data['trans']->trans_detail->where('trans_detail_status', 5);
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        
+        return view('member.transaction.add_resi', $data);
+    }
+
+    /**
+     * #seller status 4
+     * process sudah dikirim oleh seller wait dropping
+     * @param
+     * @return
+     */
+    public function sending(Request $request){
+        $requestData = $request->all();
+        $status = 200;
+        $message = 'Shipment approved!';
+        $date = date('y-m-d h:i:s');
+        if(!empty($request->detail_id)){            
+            foreach ($requestData['detail_id'] as $item) {
+                $trans_detail = Trans_detail::findOrFail($item);
+                // to shipping true
+                if($trans_detail->trans_detail_status == 4){
+                    $trans_detail->trans_detail_packing_date = $date;
+                    if(!empty($request->note)){
+                        $trans_detail->trans_detail_is_cancel = 1;
+                        $trans_detail->trans_detail_status = 4;
+                        $trans_detail->trans_detail_packing = 2;
+                        $trans_detail->trans_detail_packing_note = "Transaction be Cancel by seller";
+                        $trans_detail->trans_detail_note = $request->note;
+                        $message = 'Shipment cancelled!';
+                    }else{
+                        $trans_detail->trans_detail_status = 5;
+                        $trans_detail->trans_detail_packing = 1;
+                        $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
+                        $trans_detail->trans_detail_send = 1;
+                        $trans_detail->trans_detail_send_date = $date;
+                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+                    }
+                }elseif($trans_detail->trans_detail_status == 5){
+                    $trans_detail->trans_detail_status = 5;
+                    $trans_detail->trans_detail_send_date = $date;
+                    if(!empty($request->note)){
+                        $trans_detail->trans_detail_is_cancel = 1;
+                        $trans_detail->trans_detail_send = 2;
+                        $trans_detail->trans_detail_send_note = "Transaction be Cancel by seller";
+                        $trans_detail->trans_detail_note = $request->note;
+                        $message = 'Shipment cancelled!';
+                    }else{
+                        $trans_detail->trans_detail_send = 1;
+                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+                    }
+                }
+                $trans_detail->save();
+            }
         }
-        if(!$trans_detail){
+        if(!isset($trans_detail) || !$trans_detail){
             $status = 500;
-            $message = 'Transfer unapproved!';
+            $message = 'Shipment unapproved!';
+        }
+        if(empty($request->detail_id)){
+            $status = 500;
+            $message = 'Shipment unapproved!';
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        if(empty($request->note)){
+            return redirect('member/transaction/add_resi')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -242,7 +298,7 @@ class TransactionController extends Controller
                 $status = array_search($request->get('type'),$arr);
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }else{
-                $status = array_search('shipping',$arr);
+                $status = array_search($request->get('status'),$arr);
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }
         }

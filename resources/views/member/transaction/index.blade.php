@@ -76,7 +76,7 @@
                                                 <li>Total Transaksi : <button class="btn btn-warning btn-xs">{{$item->trans_detail->count()}}</button></li>
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
-                                                        <input type="hidden" name="status" value="seller"/>
+                                                        <input type="hidden" name="type" value="seller"/>
                                                         <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.trans_detail_post", $item->id)}} value="More" class="btn btn-info btn-xs" />
                                                     {!! Form::close() !!}
                                                 </li>
@@ -108,10 +108,10 @@
                     <div> {!! $transaction->appends(['search' => Request::get('search')])->render() !!} </div>
                 </div>
             </div>
-        </div>
+            </div>
+            </div>
         </div>
     </div><!-- Row -->
-</div>
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 <script type="text/javascript">
     $(document).ready(function(){

@@ -60,9 +60,16 @@
 	    		@endif
 		    	<div class="row">
 		    		<div class="col-md-12 text-center">
-			    		<a href="{{route('member.transaction.sending', $detail->trans->id)}}">
+		                {!! Form::open(['id' => 'form-pick-approve', 'class' => 'col-md-6']) !!}
+		                    <input type="button" onclick='modal_post($(this), $("#form-pick-approve").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship", $detail->trans->id)}} value="Sending" class="btn btn-success btn-xs btn-block" />
+		                {!! Form::close() !!}
+		                {!! Form::open(['id' => 'form-pick-cancel', 'class' => 'col-md-6']) !!}
+		                	<input type="hidden" name="status" value="cancel"/>
+		                    <input type="button" onclick='modal_post($(this), $("#form-pick-cancel").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship", $detail->trans->id)}} value="Cancel" class="btn btn-danger btn-xs btn-block" />
+		                {!! Form::close() !!}
+			    		{{-- <a href="{{route('member.transaction.sending', $detail->trans->id)}}">
 		    				<button class="btn btn-success btn-xs">Sending</button>
-			    		</a>
+			    		</a> --}}
 			    	</div>
 			    </div>
 	    	@endif
@@ -78,7 +85,9 @@
 			    </div>
 		    	<div class="row">
 		    		<div class="col-md-12 text-center">
-		    			<button class="btn btn-danger btn-xs">Komplain</button>
+						<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.add_komplain", $detail->trans->id)}} class='btn btn-info btn-xs'>
+                                Komplain
+                        </button>
 			    	</div>
 			    </div>
 	    	@elseif($type == 'seller')

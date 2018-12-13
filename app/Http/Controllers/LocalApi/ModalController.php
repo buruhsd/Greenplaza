@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User_address;
 use App\Models\Trans;
+use App\Models\Conf_komplain;
+use App\Models\Conf_solusi;
 use App\Models\Trans_detail;
 use FunctionLib;
 use Auth;
@@ -20,6 +22,36 @@ class ModalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * pemanggil admin transaksi
+     * @param
+     * @return 
+     */
+    public function trans_pickProdukShip(Request $request, $id)
+    {
+        $data['trans_status'] = $request->status;
+        $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
+            ->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")")
+            ->get();
+        $data['status'] = 'seller';
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.pick-produk-ship', $data);
+    }
+
+    /**
+     * member membuat komplain ketika barang sampai
+     * @param
+     * @return 
+     */
+    public function add_komplain($id)
+    {
+        $data['id'] = $id;
+        $data['komplain'] = Conf_komplain::where('komplain_status', 1)->get();
+        $data['solusi'] = Conf_solusi::where('solusi_status', 1)->get();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.komplain-form', $data);
     }
 
     /**
@@ -78,19 +110,19 @@ class ModalController extends Controller
      */
     public function transDetail(Request $request, $id)
     {
-        if($request->has('status') && $request->status == 'seller'){
+        if($request->has('type') && $request->type == 'seller'){
             $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
                 ->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")")
                 ->get();
-            $data['status'] = 'seller';
-        }elseif($request->has('status') && $request->status == 'buyer'){
+            $data['type'] = 'seller';
+        }elseif($request->has('type') && $request->type == 'buyer'){
             $trans = Trans::whereId($id)->first();
             $data['trans_detail'] = $trans->trans_detail;
-            $data['status'] = 'buyer';
+            $data['type'] = 'buyer';
         }else{
             $trans = Trans::whereId($id)->first();
             $data['trans_detail'] = $trans->trans_detail;
-            $data['status'] = 'all';
+            $data['type'] = 'all';
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.trans-detail', $data);
