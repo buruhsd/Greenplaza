@@ -958,6 +958,7 @@ a#scrollUp:hover {
     margin-bottom: 10px;
     outline: 1px solid #e1e1e1;
     outline-offset: -10px;
+
 }
 
 .author-wrap:hover {
@@ -1893,7 +1894,7 @@ ul.rating li {
     padding: 50px;
     position: relative;
     z-index: 9;
-    background: url(/assets/images/banner-page/cabel.png) no-repeat center center/ cover;
+    
 }
 
 .breadcumb-content.black-opacity:before {
@@ -3482,6 +3483,53 @@ li.btn-chat:hover{
     z-index: -9;
 }
 
+.breadcumb-wrap-etalase {
+    padding: 10px;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 30px 0px;
+}
+
+.author-wrap-etalase {
+    text-align: center;
+    padding: 20px;
+    background: #f5f5f5;
+    margin-bottom: 10px;
+    outline: 1px solid #e1e1e1;
+    outline-offset: -10px;
+    background-image: none;
+}
+
+.author-wrap-etalase:hover {
+    outline-color: #666;
+}
+
+.author-wrap-etalase img {
+    border-radius: 50%;
+    border: 2px solid #eee;
+    margin-bottom: 10px;
+}
+
+.author-wrap-etalase h4 {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.author-wrap-etalase p {
+    font-size: 13px;
+    line-height: 20px;
+}
 /*.account-info-social li a {
     height: 30px;
     width: 30px;

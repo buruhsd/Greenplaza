@@ -11,8 +11,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1" style="background-color: #000;background-image: url({{asset("images/header_page/".$page->page_header_image)}});background-size: 100% 100%;" src="">
-                        <div class="breadcumb-content black-opacity">
+                    <div class="breadcumb-wrap bg-1" src="">
+                        <div class="breadcumb-content black-opacity" style="background-image: url({{asset("images/header_page/".$page->page_header_image)}});background-size: 100% 100%;">
                             <h2></h2>
                             <ul>
                                 <li></li>
