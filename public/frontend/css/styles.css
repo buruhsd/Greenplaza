@@ -491,7 +491,7 @@ a#scrollUp:hover {
 }
 
 .cart-wishlist-wrap li {
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .cart-wishlist-wrap li:last-child {
@@ -502,18 +502,18 @@ a#scrollUp:hover {
     display: block;
     height: 35px;
     border: 0px solid #eee;
-    padding: 0px 15px;
+    padding: 0px 5px;
     line-height: 35px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     font-size: 13px;
 
 
 }
 
 .cart-wishlist-wrap li a i.fa-shopping-cart {
-    padding: 10px 10px 10px 0px;
-    margin-right: 20px;
+    padding: 5px 5px 5px 0px;
+    margin-right: 5px;
     border-right: 0px solid #eee;
     position: absolute;
     font-size: 20px;
@@ -628,6 +628,7 @@ a#scrollUp:hover {
 
 .header-bottom-area {
     position: relative;
+
 }
 
 .responsive-menu-tigger {
