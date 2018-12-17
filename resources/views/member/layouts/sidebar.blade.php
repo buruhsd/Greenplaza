@@ -21,7 +21,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.transaction.sales')}}">Transaction</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Resolusi Komplain</a></li>
+                                    <li><a href="{{route('member.komplain.index')}}">Resolusi Komplain</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}
@@ -31,7 +31,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.transaction.purchase')}}">Transaction</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Resolusi Komplain</a></li>
+                                    <li><a href="{{route('member.komplain.buyer')}}">Resolusi Komplain</a></li>
                                     <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Wishlist</a></li>
                                 </ul>
                             </li>
@@ -41,7 +41,7 @@
                                     <i class="menu-icon icon-layers"></i><span>Get Penjual</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Sponsor</a></li>
+                                    <li><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
                                     <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Register Penjual</a></li>
                                     <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">History Saldo</a></li>
                                     <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Withdrawal</a></li>

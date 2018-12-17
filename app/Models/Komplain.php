@@ -30,6 +30,16 @@ class Komplain extends Model
     * @return
     * 
     */
+    public function solusi()
+    {
+        return $this->hasOne('App\Models\Solusi', 'solusi_komplain_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function trans_detail()
     {
         return $this->belongsTo('App\Models\Trans_detail', 'komplain_trans_id');

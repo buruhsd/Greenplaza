@@ -28,6 +28,8 @@
                         <option value="packing" {!! (!empty($_GET['status']) && $_GET['status'] == "packing")?"selected":"" !!}>Packing</option>
                         <option value="shipping" {!! (!empty($_GET['status']) && $_GET['status'] == "shipping")?"selected":"" !!}>Shipping</option>
                         <option value="dropping" {!! (!empty($_GET['status']) && $_GET['status'] == "dropping")?"selected":"" !!}>Dropping</option>
+                        <option value="cancel" {!! (!empty($_GET['status']) && $_GET['status'] == "cancel")?"selected":"" !!}>Cancel</option>
+                        <option value="komplain" {!! (!empty($_GET['status']) && $_GET['status'] == "komplain")?"selected":"" !!}>Komplain</option>
                     </select>
                   </div>
                   <button type="submit" class="btn btn-primary mb-2">Cari</button>
@@ -47,6 +49,8 @@
                     <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button>
                     {{-- <button type="button" onclick="search('Sent');" class="btn btn-info">Sent<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button> --}}
                     <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('cancel');" class="btn btn-info">Cancel<span class="label label-default pull-right">{{FunctionLib::count_trans(7, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('komplain');" class="btn btn-info">Komplain<span class="label label-default pull-right">{{FunctionLib::count_trans(8, Auth::id())}}</span></button>
                     {{-- <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> --}}
                 </div>
                 <div class="panel-body">

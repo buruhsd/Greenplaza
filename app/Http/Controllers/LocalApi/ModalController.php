@@ -9,6 +9,7 @@ use App\Models\Trans;
 use App\Models\Conf_komplain;
 use App\Models\Conf_solusi;
 use App\Models\Trans_detail;
+use App\Models\Komplain;
 use FunctionLib;
 use Auth;
 
@@ -42,7 +43,25 @@ class ModalController extends Controller
 
     /**
      * member membuat komplain ketika barang sampai
-     * @param
+     * @param id sys_komplain
+     * @return 
+     */
+    public function update_komplain(Request $request, $id)
+    {
+        $type = 'seller';
+        $data['type'] = ($request->has('type'))?$request->type:$type;
+        $data['komplain'] = Komplain::whereId($id)->first();
+        $data['solusi_type'] = Conf_solusi::where('solusi_status', 1)
+            ->whereRaw('solusi_komplain_id LIKE "'.$id.',%"')
+            ->orWhereRaw('solusi_komplain_id LIKE "%,'.$id.'"')
+            ->orWhereRaw('solusi_komplain_id = "'.$id.'"')->get();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.update-komplain', $data);
+    }
+
+    /**
+     * member membuat komplain ketika barang sampai
+     * @param id sys_trans
      * @return 
      */
     public function add_komplain($id)
@@ -133,9 +152,22 @@ class ModalController extends Controller
      * @param
      * @return 
      */
-    public function res_kom_transDetail($id)
+    public function res_kom_transDetail(Request $request, $id)
     {
-        $data['trans_detail'] = Trans_detail::whereId($id)->get();
+        if($request->has('type') && $request->type == 'seller'){
+            $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
+                ->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")")
+                ->get();
+            $data['type'] = 'seller';
+        }elseif($request->has('type') && $request->type == 'buyer'){
+            $trans = Trans::whereId($id)->first();
+            $data['trans_detail'] = $trans->trans_detail;
+            $data['type'] = 'buyer';
+        }else{
+            $trans = Trans::whereId($id)->first();
+            $data['trans_detail'] = $trans->trans_detail;
+            $data['type'] = 'all';
+        }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.trans-detail', $data);
     }

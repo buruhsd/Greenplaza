@@ -33,6 +33,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\View\View
      */
+    public function sponsor(Request $request)
+    {
+        $data['cfg_bank'] = Bank::all();
+        $user = User::findOrFail(Auth::id());
+        $data['user'] = User::findOrFail($user->sponsor->user_tree_sponsor_id);
+
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.user.sponsor', $data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\View\View
+     */
     public function profil(Request $request)
     {
         $data['cfg_bank'] = Bank::all();

@@ -642,12 +642,22 @@ class FunctionLib
     * @return
     **/
     public static function count_trans($status = "", $id = 0, $type = 'buyer'){
-        $where = "1
-            AND trans_detail_is_cancel != 1";
+        $where = "1";
+        // check transalsi cancel
         if($status !== ""){
-            $where .= " AND trans_detail_status IN (".$status.")";
+            if($status == 7){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 8){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }else{
+                $where .= " AND sys_trans_detail.trans_detail_status IN (".$status.")";
+                $where .= " AND sys_trans_detail.trans_detail_is_cancel != 1";
+            }
         }
-        $total = App\Models\Trans_detail::whereRaw($where);
+        $total = App\Models\Trans_detail::whereRaw($where)
+            ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id');
         if($id != 0){
             if($type == 'seller'){
                 $total = $total->whereRaw("trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".$id.")");

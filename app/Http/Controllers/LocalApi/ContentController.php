@@ -22,7 +22,7 @@ class ContentController extends Controller
     }
 
     /**
-    * @param
+    * @param id komplain type
     * @return
     */
     public static function get_solusi($id = 0){

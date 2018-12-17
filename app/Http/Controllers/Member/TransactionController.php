@@ -252,14 +252,23 @@ class TransactionController extends Controller
         }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            $status = array_search($status,$arr);
-            $where .= ' AND trans_detail_status IN ('.$status.')';
+            if($status == 'cancel'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 'komplain'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }else{
+                $status = array_search($status,$arr);
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }
         }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
                 // ->havingRaw($having)
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')

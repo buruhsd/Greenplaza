@@ -71,6 +71,11 @@
                                                 <li>Komplain : {{$item->komplain_type->komplain_name}}</li>
                                                 <li>Date Create : {{FunctionLib::datetime_indo($item->created_at, true, 'full')}}</li>
                                                 {{-- <li>Date Clear : {{FunctionLib::datetime_indo($item->komplain_clear_date, true, 'full')}}</li> --}}
+                                                <li>
+                                                    <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
+                                                    <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
+                                                    <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
+                                                </li>
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
@@ -79,7 +84,7 @@
                                                 <li>Amount : {{$item->trans_detail->trans_detail_amount_total}}</li>
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
-                                                        <input type="hidden" name="type" value="seller"/>
+                                                        <input type="hidden" name="type" value="buyer"/>
                                                         <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->id)}} value="More" class="btn btn-info btn-xs" />
                                                     {!! Form::close() !!}
                                                 </li>
@@ -98,6 +103,8 @@
                                                     </button>
                                                 </li>
                                             </ul>
+                                        </td>
+                                        <td>
                                         </td>
                                     </tr>
                                     <tr>
@@ -123,16 +130,16 @@
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_solusi", $item->solusi->id)}} class='btn btn-danger btn-xs'>
-                                                Terima Solusi Tawaran Pembeli
+                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.add_shipment_buyer", $item->id)}} class='btn btn-danger btn-xs'>
+                                                Konfirmasi Kirim Barang
                                             </button><br/>
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_buyer", $item->solusi->id)}} class='btn btn-danger btn-xs'>
-                                                Menerima Barang Kembalian
-                                            </button><br/>
-                                            {!! Form::open(['id' => 'approve_shipment_buyer']) !!}
+                                            {!! Form::open(['id' => 'approve_shipment_seller']) !!}
                                                 <input type="hidden" name="type" value="seller"/>
-                                                <input type="button" onclick='modal_post($(this), $("#approve_shipment_buyer").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.solusi.add_shipment_seller", $item->solusi->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
+                                                <input type="button" onclick='modal_post($(this), $("#approve_shipment_buyer").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.solusi.add_shipment_seller", $item->solusi->id)}} value="Menerima Barang Baru" class="btn btn-info btn-xs" />
                                             {!! Form::close() !!}
+                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.komplain.done_komplain", $item->id)}} class='btn btn-danger btn-xs'>
+                                                Komplain Selesai
+                                            </button><br/>
                                             <ul>
                                                 <li>
                                                     {{$item->solusi->solusi_note}}

@@ -22,7 +22,7 @@ class Solusi extends Model
     */
     public function komplain()
     {
-        return $this->belongsTo('App\Komplain', 'solusi_komplain_id');
+        return $this->belongsTo('App\Models\Komplain', 'solusi_komplain_id');
     }
 
     /**
@@ -32,7 +32,7 @@ class Solusi extends Model
     */
     public function solusi_type()
     {
-        return $this->belongsTo('App\Conf_solusi', 'solusi_solusi_id');
+        return $this->belongsTo('App\Models\Conf_solusi', 'solusi_solusi_id');
     }
 
     /**
@@ -42,6 +42,6 @@ class Solusi extends Model
     */
     public function user()
     {
-        return $this->belongsTo('App\User', 'solusi_user_id');
+        return $this->belongsTo('App\Models\User', 'solusi_user_id');
     }
 }

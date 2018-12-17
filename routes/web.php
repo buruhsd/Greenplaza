@@ -220,9 +220,17 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
 			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
+			Route::group(['prefix' => 'discuss', 'as' => '.discuss'], function () {
+				Route::get('/', 'Produk_discussController@index')->name('.index');
+				Route::get('/create', 'Produk_discuss@create')->name('.create');
+				Route::post('/store', 'Produk_discuss@store')->name('.store');
+				Route::get('/destroy/{id}', 'Produk_discuss@destroy')->name('.destroy');
+				Route::get('arsip/{id}', 'Produk_discuss@arsip')->name('.arsip');
+			});
 		});
 		Route::get('/profil', 'UserController@profil')->name('.profil');
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+			Route::get('/sponsor', 'UserController@sponsor')->name('.sponsor');
 			Route::patch('/update', 'UserController@update')->name('.update');
 			Route::get('/change_password', 'UserController@change_password')->name('.change_password');
 			Route::post('/change_password_update', 'UserController@change_password_update')->name('.change_password_update');
@@ -243,7 +251,19 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
 
 		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
+			Route::get('/', 'KomplainController@index')->name('.index');
+			Route::get('/buyer', 'KomplainController@buyer')->name('.buyer');
 			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');
+			Route::post('/update_komplain/{id}', 'KomplainController@update_komplain')->name('.update_komplain');
+			Route::get('/done_komplain/{id}', 'KomplainController@done_komplain')->name('.done_komplain');
+		});
+
+		Route::group(['prefix' => 'solusi', 'as' => '.solusi'], function () {
+			Route::get('/approve_solusi/{id}', 'SolusiController@approve_solusi')->name('.approve_solusi');
+			Route::post('/add_shipment_buyer/{id}', 'SolusiController@add_shipment_buyer')->name('.add_shipment_buyer');
+			Route::get('/approve_shipment_buyer/{id}', 'SolusiController@approve_shipment_buyer')->name('.approve_shipment_buyer');
+			Route::post('/add_shipment_seller/{id}', 'SolusiController@add_shipment_seller')->name('.add_shipment_seller');
+			Route::get('/approve_shipment_seller/{id}', 'SolusiController@approve_shipment_seller')->name('.approve_shipment_seller');
 		});
 
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
@@ -357,8 +377,10 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
 		Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
 		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
+		Route::post('res_kom_transDetail_post/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 		Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
 		Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
+		Route::get('update_komplain/{id}', 'ModalController@update_komplain')->name('.update_komplain');
 		Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
 		Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
 	});

@@ -56,4 +56,14 @@ class Trans_detail extends Model
     {
         return $this->belongsTo('App\Models\User_address', 'trans_detail_user_address_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function komplain()
+    {
+        return $this->hasOne('App\Models\Komplain', 'komplain_trans_id');
+    }
 }

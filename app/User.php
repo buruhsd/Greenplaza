@@ -153,4 +153,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\Wallet', 'wallet_user_id');
     }
 
+    /**
+    * get user sponsor
+    * @return joined one to one
+    **/
+    public function sponsor()
+    {
+        return $this->hasOne('App\Models\Sponsor', 'user_tree_user_id');
+    }
+
 }
