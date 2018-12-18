@@ -6,8 +6,9 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use File;
 use View;
-use App\conf_config; 
-use App\Observers\conf_configLogObserver; 
+use App\Models\Wallet; 
+use App\User; 
+use App\Observers\WalletLogObserver; 
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        // conf_config::observe(conf_configLogObserver::class);
+        // ketika ada aktifitas wallet
+        Wallet::observe(WalletLogObserver::class);
+        // ketika member register
+        User::observe(WalletRegisterUserObserver::class);
     }
 
     /**

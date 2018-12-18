@@ -29,7 +29,8 @@ class UserWallet extends Migration
             $table->increments('id');
             $table->integer('wallet_user_id')->unsigned();
             $table->tinyInteger('wallet_type')->nullable()->comment('mengambil dari conf_wallet_type');
-            $table->string('wallet_ballance')->nullable();
+            $table->decimal('wallet_ballance_before', 20, 2)->default(0.00);
+            $table->decimal('wallet_ballance', 20, 2)->default(0.00);
             $table->string('wallet_address')->nullable();
             $table->string('wallet_public')->nullable();
             $table->string('wallet_private')->nullable();

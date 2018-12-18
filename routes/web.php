@@ -266,6 +266,17 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/approve_shipment_seller/{id}', 'SolusiController@approve_shipment_seller')->name('.approve_shipment_seller');
 		});
 
+		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
+			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
+			Route::get('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
+			Route::get('/transfer_rw', 'WalletController@transfer_rw')->name('.transfer_rw');
+			Route::get('/', 'WalletController@index')->name('.index');
+			Route::get('/type/{slug}', 'WalletController@type')->name('.type');
+			Route::get('/cw_bonus', 'WalletController@cw_bonus')->name('.cw_bonus');
+			Route::get('/cw_trans', 'WalletController@cw_trans')->name('.cw_trans');
+			Route::get('/rw', 'WalletController@rw')->name('.rw');
+		});
+
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
 			Route::get('/create', 'ShipmentController@create')->name('.create');
@@ -313,11 +324,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
 		Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
-		Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
 		Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
+		// Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
 		Route::get('/beli_poin', function(){return view('member.hotlist.beli_poin');})->name('.beli_poin');
 		// Route::get('/profil_user', function(){return view('member.pengaturan_profil.profil-user');})->name('.profil_user');
-		Route::get('/transfer_cw', function(){return view('member.transfer_cw.index');})->name('.transfer_cw');
+		// Route::get('/transfer_cw', function(){return view('member.transfer_cw.index');})->name('.transfer_cw');
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
 		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {

@@ -43,10 +43,10 @@
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
                                     <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Register Penjual</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">History Saldo</a></li>
-                                    <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Withdrawal</a></li>
-                                    <li><a href="{{-- {{route('member.cw.index')}} --}}">Transfer CW</a></li>
-                                    <li><a href="{{-- {{route('member.rw.index')}} --}}">Transfer RW</a></li>
+                                    <li><a href="{{route('member.wallet.index')}}">History Saldo</a></li>
+                                    <li><a href="{{route('member.wallet.withdrawal')}}">Withdrawal</a></li>
+                                    <li><a href="{{route('member.wallet.transfer_cw')}}">Transfer CW</a></li>
+                                    <li><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -78,7 +78,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.message.index')}}">Pesan</a></li>
-                                    <li><a href="{{-- {{route('member.produk_discuss.index')}} --}}">Diskusi Produk</a></li>
+                                    <li><a href="{{route('member.produk.discuss.index')}}">Diskusi Produk</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}

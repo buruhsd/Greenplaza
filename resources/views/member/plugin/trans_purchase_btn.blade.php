@@ -109,7 +109,9 @@
 		    		<div class="col-md-12 text-center"><i>{{$status_shipment}}</i></div>
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
-			    			<button class="btn btn-success btn-xs">Barang diterima</button>
+							<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.transaction.dropping", $detail->trans->id)}} class='btn btn-success btn-xs'>
+	                                Barang diterima
+	                        </button>
 				    	</div>
 				    </div>
 			    	<div class="row">
@@ -214,7 +216,9 @@
 		    		<div class="col-md-12 text-center"><i>{{$status_shipment}}</i></div>
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
-			    			<button class="btn btn-success btn-xs">Barang diterima</button>
+							<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.transaction.dropping", $detail->trans->id)}} class='btn btn-success btn-xs'>
+	                                Barang diterima
+	                        </button>
 				    	</div>
 				    </div>
 			    	<div class="row">

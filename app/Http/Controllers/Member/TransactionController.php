@@ -261,6 +261,7 @@ class TransactionController extends Controller
             }else{
                 $status = array_search($status,$arr);
                 $where .= ' AND trans_detail_status IN ('.$status.')';
+                $where .= ' AND sys_komplain.id IS NULL';
             }
         }
 

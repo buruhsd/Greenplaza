@@ -32,6 +32,16 @@ class Wallet extends Model
     * @return
     * 
     */
+    public function log()
+    {
+        return $this->hasMany('App\Models\Log_wallet', 'wallet_user_id', 'wallet_user_id')->where('wallet_type', $this->wallet_type);
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function user()
     {
         return $this->belongsTo('App\User', 'wallet_user_id');
