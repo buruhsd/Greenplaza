@@ -171,4 +171,12 @@ class Plugin
         return view('member.plugin.trans_purchase_btn', $data);
     }
 
+    public static function category2($param=[]){
+        $pid = 0;
+        $perPage = 8;
+        extract($param);
+        $data['category'] = App\Models\Category::where('category_parent_id', 0)->limit(8)->get();
+        return view('frontend.plugin.category-home', $data);
+    }
+
 }

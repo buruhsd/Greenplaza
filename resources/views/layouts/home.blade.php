@@ -7,6 +7,8 @@
     
     @include('layouts.top-header')
     @include('frontend.plugin.slider')
+
+    {!! Plugin::category2()!!}
    
     <!-- .product-area start -->
     {{-- @include('frontend.content.content-1') --}}

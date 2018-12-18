@@ -3,7 +3,7 @@
         <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 col-sm-3 col-12">
+                    <div class="col-md-4 col-sm-3 col-4">
                         <ul  class="d-flex account-info-social" style="display: inline;">
                                         <li>Ikuti kami :</li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -110,7 +110,7 @@
         <div class="header-bottom-area bg-1 header-bottom-area-two">
             <div class="container">
                 <div class="row">
-                    {!!Plugin::category()!!}
+
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
                             <li><a href="{{route('home')}}">Home </a></li>
