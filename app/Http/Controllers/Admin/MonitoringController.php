@@ -143,5 +143,11 @@ class MonitoringController extends Controller
         return view('admin.monitoring.wallet.wallet_memberlist', compact('users'));
     }
 
+//LOG_ACTIVITY
+    public function log ()
+    {
+        return view('admin.monitoring.log_activity.activity');
+    }
+
 
 }

@@ -47,9 +47,9 @@
                                     <li><a href="{{route('admin.monitoring.laporan')}}">Laporan</a></li>
                                     <li><a href="{{route('admin.monitoring.profit')}}">Profit</a></li>
                                     <li><a href="{{route('admin.monitoring.wallet_memberlist')}}">Wallet</a></li>
-                                    <li><a href="#">Wallet Pin Code</a></li>
-                                    <li><a href="#">Wallet Saldo Iklan</a></li>
-                                    <li><a href="#">Log Aktivitas</a></li>
+                                    <!-- <li><a href="#">Wallet Pin Code</a></li>
+                                    <li><a href="#">Wallet Saldo Iklan</a></li> -->
+                                    <li><a href="{{route('admin.monitoring.activity')}}">Log Aktivitas</a></li>
                                 </ul>
                             </li>
                             <li>

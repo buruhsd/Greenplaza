@@ -175,6 +175,8 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			//Wallet
 			Route::get('wallet_sellerlist', 'Admin\\MonitoringController@wallet_sellerlist')->name('.wallet_sellerlist');
 			Route::get('wallet_memberlist', 'Admin\\MonitoringController@wallet_memberlist')->name('.wallet_memberlist');
+			//Log_activity
+			Route::get('log_activity', 'Admin\\MonitoringController@log')->name('.activity');
 		});
 	});
 });
