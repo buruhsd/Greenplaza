@@ -344,7 +344,11 @@ a#scrollUp:hover {
 .header-middle-area {
     padding-right: 5px;
     padding-top: -10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 0px solid #eee;
+    padding-bottom: -100px;
+}
+
+.header-middle-area .mainmenu {
     padding-bottom: -100px;
 }
 
@@ -628,6 +632,7 @@ a#scrollUp:hover {
 
 .header-bottom-area {
     position: relative;
+    padding-bottom: -100px;
 
 }
 
@@ -3530,6 +3535,21 @@ li.btn-chat:hover{
 .author-wrap-etalase p {
     font-size: 13px;
     line-height: 20px;
+}
+.wave-list{
+    margin-top: 5px;
+    height: .875rem;
+    font-size: .75rem;
+    font-weight: 300;
+    line-height: .875rem;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
 }
 
 .mySlides {display:none}

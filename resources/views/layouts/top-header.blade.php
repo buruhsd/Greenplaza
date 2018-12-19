@@ -90,6 +90,9 @@
                                 <input name="src" type="text" placeholder="Cari Produk...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
+                            <div class="wave-list">
+                                <a class="wave-items" href="">Celana</a>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-2 d-sm-none d-md-block d-none d-sm-block ">
@@ -107,7 +110,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-bottom-area bg-1 header-bottom-area-two">
+        <!-- <div class="header-bottom-area bg-1 header-bottom-area-two">
             <div class="container">
                 <div class="row">
 
@@ -153,9 +156,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- responsive-menu area start -->
-            <div class="responsive-menu-area d-block d-md-none">
+           <!--  <div class="responsive-menu-area d-block d-md-none">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -192,8 +195,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- responsive-menu area start -->
-        </div>
+        <!-- </div> -->
     </header>
     <!-- header-area end -->

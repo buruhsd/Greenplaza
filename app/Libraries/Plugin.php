@@ -175,7 +175,7 @@ class Plugin
         $pid = 0;
         $perPage = 8;
         extract($param);
-        $data['category'] = App\Models\Category::where('category_parent_id', 0)->limit(8)->get();
+        $data['category'] = App\Models\Category::where('category_parent_id', 0)->get();
         return view('frontend.plugin.category-home', $data);
     }
 
