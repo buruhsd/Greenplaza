@@ -34,10 +34,12 @@
                                     <td><center>{{$seller->id}}</center></td>
                                     <td><center>
                                         <p>Id :{{$seller->id}}</p>
-                                        <p>Level : Member</p>
+                                        <p>Level : Seller</p>
                                         <p>Nama :{{$seller->username}}</p></center>
                                     </td>
-                                    <td>{{App\Models\Wallet::where($seller->id, 'wallet_user_id')->first()}}</td>
+                                    <td><center>
+                                        {{App\Models\Wallet::where('wallet_user_id', $seller->id)->first()->wallet_ballance}}</center>
+                                    </td>
                                     <td></td>
                                 </tr>
                             </tbody>

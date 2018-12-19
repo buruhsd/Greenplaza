@@ -25,17 +25,29 @@
                                 <tr>
                                     <th><center>Id</center></th>
                                     <th><center>Detail Member</center></th>
-                                    <th><center>Saldo</center></th>
+                                    <th><center>Saldo Utama</center></th>
+                                    <th><center>Saldo Iklan</center></th>
+                                    <th><center>Wallet Type</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $u)
                                 <tr>
-                                    <td></td>
+                                    <td><center>{{$u->id}}</center></td>
+                                    <td><center>
+                                        <p>Id :{{$u->id}}</p>
+                                        <p>Level : Member</p>
+                                        <p>Nama :{{$u->username}}</p></center>
+                                    </td>
+                                    <td><center>
+                                        {{App\Models\Wallet::where('wallet_user_id', $u->id)->first()->wallet_ballance}}</center>
+                                    </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
