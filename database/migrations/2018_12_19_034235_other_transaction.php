@@ -43,7 +43,7 @@ class OtherTransaction extends Migration
         Schema::dropIfExists('sys_trans_iklan');
         Schema::create('sys_trans_iklan', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('trans_code');
+            $table->string('trans_iklan_code');
             $table->integer('trans_iklan_user_id')->unsigned()->comment('id user');
             $table->integer('trans_iklan_paket_id')->unsigned()->comment('id paket');
             $table->integer('trans_iklan_bank_id')->unsigned()->comment('id bank');
@@ -55,7 +55,7 @@ class OtherTransaction extends Migration
             $table->integer('trans_iklan_user_response')->default(0)->unsigned()->nullable()->comment('id user');
             $table->dateTime('trans_iklan_date_response')->nullable();
             $table->text('trans_iklan_response_note')->nullable();
-            $table->text('trans_note');
+            $table->text('trans_iklan_note');
             $table->timestamps();
         });
         Schema::dropIfExists('sys_trans_pincode');
