@@ -279,6 +279,21 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/rw', 'WalletController@rw')->name('.rw');
 		});
 
+		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
+			Route::get('/beli_saldo', function(){return view('member.iklan.beli_saldo');})->name('.beli_saldo');
+			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
+			Route::get('/banner', function(){return view('member.iklan.banner');})->name('.banner');
+			Route::get('/banner_khusus', function(){return view('member.iklan.banner_khusus');})->name('.banner_khusus');
+			Route::get('/baris', function(){return view('member.iklan.baris');})->name('.baris');
+			Route::get('/tagihan', function(){return view('member.iklan.tagihan');})->name('.tagihan');
+		});
+
+		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
+			Route::get('/beli_pincode', function(){return view('member.iklan.beli_saldo');})->name('.beli_saldo');
+			Route::get('/list', function(){return view('member.iklan.history');})->name('.history');
+			Route::get('/tagihan', function(){return view('member.iklan.tagihan');})->name('.tagihan');
+		});
+
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
 			Route::get('/create', 'ShipmentController@create')->name('.create');
