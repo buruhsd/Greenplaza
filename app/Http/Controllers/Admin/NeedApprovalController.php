@@ -9,14 +9,26 @@ use App\User;
 use Session;
 use Mail;
 
-class WithdrawalController extends Controller
+class NeedApprovalController extends Controller
 {
+//WITHDRAWAL
     public function withdrawal_member ()
     {
     	$search = \Request::get('search');
         $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
                 ->orderBy('created_at', 'DESC')->paginate(10);
-    	return view('admin.withdrawal.withdrawal_member', compact('with'));
+    	return view('admin.need_approval.withdrawal.withdrawal_member', compact('with'));
+    }
+
+    public function withdrawal_seller ()
+    {
+        $user = User::where('user_store', '!=', 'null')->get();
+        // dd($user);
+        $search = \Request::get('search');
+        $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
+                ->orderBy('created_at', 'DESC')->paginate(10);
+                // dd($with);
+        return view('admin.need_approval.withdrawal.withdrawal_seller', compact('with', 'user'));
     }
 
     public function approve (Request $request, $id) 

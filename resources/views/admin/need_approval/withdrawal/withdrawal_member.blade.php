@@ -8,13 +8,24 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form action="#" method="GET">
-                            <div class="input-group pull-right" style="width: 225px;">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Email Member ..."></a>
-                            </div>
-                        </form>
+                    <div class="col-md-6">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <form action="#" method="GET">
+                                <div class="input-group pull-right" style="width: 225px;">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Email Member ..."></a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group pull-left">
+                            <select id="select-withdrawal" type="text" class="form-control">
+                                <option value="">--Choose Option List--</option>
+                                <option value="/admin/needapproval/withdrawal_member">Withdrawal Member</option>
+                                <option value="/admin/needapproval/withdrawal_seller">Withdrawal Seller</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -57,7 +68,7 @@
                                                   <span aria-hidden="true">&times;</span>
                                                 </button>
                                               </div>
-                                              <form action="{{route('admin.withdrawal.withdrawal_member_reject', $w->id)}}" method="POST" id="usrform">
+                                              <form action="{{route('admin.needapproval.withdrawal_member_reject', $w->id)}}" method="POST" id="usrform">
                                                 {{ csrf_field() }}
                                               <div class="modal-body">
                                                 <textarea rows="4" cols="75"  name="comment" form="usrform">
@@ -85,4 +96,12 @@
 </div><!-- Main Wrapper -->
 </div>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+  $('#select-withdrawal').on('change',function(e){
+      console.log($(this).find(':selected').val());
+      window.location.href = $(this).find(':selected').val();
+      })
+</script>
 @endsection

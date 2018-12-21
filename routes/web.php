@@ -159,9 +159,10 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::patch('/update', 'Admin\\KomplainController@res_kom_update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\KomplainController@res_kom_destroy')->name('.destroy');
 		});
-		Route::group(['prefix' => 'withdrawal', 'as' => '.withdrawal'], function () {
-			Route::get('/withdrawal_member', 'Admin\\WithdrawalController@withdrawal_member')->name('.withdrawal_member');
-			Route::post('/withdrawal_member_reject/{id}', 'Admin\\WithdrawalController@reject')->name('.withdrawal_member_reject');
+		Route::group(['prefix' => 'needapproval', 'as' => '.needapproval'], function () {
+			Route::get('/withdrawal_member', 'Admin\\NeedApprovalController@withdrawal_member')->name('.withdrawal_member');
+			Route::get('/withdrawal_seller', 'Admin\\NeedApprovalController@withdrawal_seller')->name('.withdrawal_seller');
+			Route::post('/withdrawal_member_reject/{id}', 'Admin\\NeedApprovalController@reject')->name('.withdrawal_member_reject');
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			//Laporan
