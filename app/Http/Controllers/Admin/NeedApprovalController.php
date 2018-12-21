@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
 use App\User;
+use App\Models\Trans_iklan;
 use Session;
 use Mail;
 
@@ -22,13 +23,16 @@ class NeedApprovalController extends Controller
 
     public function withdrawal_seller ()
     {
-        $user = User::where('user_store', '!=', 'null')->get();
+        // $user = User::where('user_store', '!=', 'null')->get();
         // dd($user);
         $search = \Request::get('search');
-        $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
-                ->orderBy('created_at', 'DESC')->paginate(10);
+        // $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
+        //         ->orderBy('created_at', 'DESC')->with('userhasstore')->paginate(10);
                 // dd($with);
-        return view('admin.need_approval.withdrawal.withdrawal_seller', compact('with', 'user'));
+            $with = Withdrawal::whereHas('user', function ($query) {
+                    $query->where('user_store', '!=', 'null');
+                })->paginate(10);
+        return view('admin.need_approval.withdrawal.withdrawal_seller', compact('with'));
     }
 
     public function approve (Request $request, $id) 
@@ -57,5 +61,14 @@ class NeedApprovalController extends Controller
                 ]);
             });
     	return redirect()->back(); 
+    }
+
+//SALDO IKLAN
+    public function iklan ()
+    {
+        // $user = User::orderBy('id', 'DESC')->get();
+        // dd($user);
+        $iklan = Trans_iklan::orderBy('created_at', 'DESC')->get();
+        return view('admin.need_approval.saldoiklan.saldoiklan', compact('iklan'));
     }
 }

@@ -160,9 +160,13 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::delete('/destroy/{id}', 'Admin\\KomplainController@res_kom_destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'needapproval', 'as' => '.needapproval'], function () {
+			//WITHDRAWAL
 			Route::get('/withdrawal_member', 'Admin\\NeedApprovalController@withdrawal_member')->name('.withdrawal_member');
 			Route::get('/withdrawal_seller', 'Admin\\NeedApprovalController@withdrawal_seller')->name('.withdrawal_seller');
 			Route::post('/withdrawal_member_reject/{id}', 'Admin\\NeedApprovalController@reject')->name('.withdrawal_member_reject');
+			//SALDOIKLAN
+			Route::get('/saldoiklan', 'Admin\\NeedApprovalController@iklan')->name('.saldoiklan');
+
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			//Laporan

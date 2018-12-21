@@ -25,7 +25,11 @@ class Withdrawal extends Model
     {
         return $this->belongsTo('App\User', 'withdrawal_user_id');
     }
+    public function userhasstore(){
+        return $this->belongsTo('App\User', 'withdrawal_user_id')->where('name', '!=', null);
 
+    }
+    
     /**
     * @param
     * @return
