@@ -26,7 +26,7 @@ class MidtransController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         //Set Your server key
         Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
         // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
@@ -45,7 +45,92 @@ class MidtransController extends Controller
     * @return
     */
     public function payment($param=[]){
-        return view('localapi.midtrans.index');//, $data);
+        if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
+            $data = Session::get('chart');
+            $trans = [];
+            array_walk($data, function ($item) use (&$trans) {
+                $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
+                $trans[$seller_id][] = $item;
+            });
+            $trans_code = FunctionLib::str_rand(7);
+            $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+
+            foreach ($trans as $value) {
+                // add to DB sys_trans
+                $trans = new Trans;
+                $trans->trans_code = $trans_code;
+                $trans->trans_user_id = Auth::id();
+                $trans->trans_user_bank_id = Auth::user()->first()->user_bank()->where('user_bank_status', 1)->first()->id;
+                $trans->trans_payment_id = 2;
+                $trans->trans_amount = FunctionLib::array_sum_key($value, 'trans_detail_amount');
+                $trans->trans_amount_ship = FunctionLib::array_sum_key($value, 'trans_detail_amount_ship');
+                $trans->trans_amount_total = FunctionLib::array_sum_key($value, 'trans_detail_amount_total');
+                $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
+                $trans->save();
+                foreach ($value as $key => $item) {
+                    $transDetail = new Trans_detail;
+                    $transDetail->trans_detail_trans_id = $trans->id;
+                    $transDetail->trans_code = $item['trans_code'];
+                    $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
+                    $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
+                    $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
+                    $transDetail->trans_detail_qty = $item['trans_detail_qty'];
+                    $transDetail->trans_detail_size = 's,m,l,xl';//$item['trans_detail_size'];
+                    $transDetail->trans_detail_color = 'blue,orange,red,green,white';//$item['trans_detail_color'];
+                    $transDetail->trans_detail_amount = $item['trans_detail_amount'];
+                    $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
+                    $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
+                    $transDetail->trans_detail_status = 1;
+                    $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
+                    $transDetail->save();
+                }
+            }
+            Session::forget('chart');
+
+            $item_details = [];
+            $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';
+            $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+            // Required
+            $transaction_details = array(
+              'order_id' => $trans_code,
+              'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+            );
+            $transaction = array(
+              'transaction_details' => $transaction_details,
+            );
+            $data['trans_detail'] = $trans_detail;
+            $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+            // return view('localapi.midtrans.checkout-process', $data);
+            return view('localapi.midtrans.index', $data);
+        }else{
+            $status = 500;
+            $message = 'Total Amount must more then 0.01';
+            return ['status' => $status, 'message' => $message];
+        }
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function re_payment($code){
+        $in = 'select id from sys_trans where trans_code = "'.$code.'"';
+        $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+
+        $trans_code = $code;
+        $gross_amount = FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total');
+        // Required
+        $transaction_details = array(
+          'order_id' => $trans_code,
+          'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+        );
+        $transaction = array(
+          'transaction_details' => $transaction_details,
+        );
+        $data['trans_detail'] = $trans_detail;
+        $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+        // dd($data['trans_detail']);
+        return view('localapi.midtrans.re_index', $data);//, $data);
     }
 
     /**
@@ -203,6 +288,84 @@ class MidtransController extends Controller
             $status = 500;
             $message = 'Total Amount must more then 0.01';
             return ['status' => $status, 'message' => $message];
+        }
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function done(Request $request){
+        // dd($request);
+        // return response()->json('tes');
+        // return response()->json(['message'=>'failed', 'status'=>500]);
+        // $order_id = $data['order_id'];
+        // $transaction_time = $data['transaction_time'];
+        // $gross_amount = $data['gross_amount'];
+        // $order_id = $data['order_id'];
+        // $payment_type = $data['payment_type'];
+        // $signature_key = $data['signature_key'];
+        // $status_code = $data['status_code'];
+        // $transaction_id = $data['transaction_id'];
+        // $transaction_status = $data['transaction_status'];
+        // $fraud_status = $data['fraud_status'];
+        // $status_message = $data['status_message'];
+        $data = $request->all();
+        extract($data);
+        // dd($status_message);
+
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        switch ($transaction_status) {
+            case 'settlement':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                foreach ($trans_detail as $item) {
+                    $trans_detail = Trans_detail::findOrFail($item->id);
+                    // to transfer
+                    $trans_detail->trans_detail_status = 3;
+                    $trans_detail->trans_detail_transfer = 1;
+                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
+                    $trans_detail->save();
+                }
+                return response()->json(['message'=>'berhasil', 'status'=>200]);
+            break;
+            case 'pending':
+            break;
+            case 'expire':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                foreach ($trans_detail as $item) {
+                    $trans_detail = Trans_detail::findOrFail($item->id);
+                    // to transfer
+                    $trans_detail->trans_detail_status = 3;
+                    $trans_detail->trans_detail_transfer = 2;
+                    $trans_detail->trans_detail_transfer_is_cancel = 1;
+                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Expired, Transaction cancelled.';
+                    $trans_detail->save();
+                }
+                return response()->json(['message'=>'berhasil', 'status'=>200]);
+            break;
+            case 'deny':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                foreach ($trans_detail as $item) {
+                    $trans_detail = Trans_detail::findOrFail($item->id);
+                    // to transfer
+                    $trans_detail->trans_detail_status = 3;
+                    $trans_detail->trans_detail_transfer = 2;
+                    $trans_detail->trans_detail_transfer_is_cancel = 1;
+                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer denied, Transaction cancelled..';
+                    $trans_detail->save();
+                }
+                return response()->json(['message'=>'berhasil', 'status'=>200]);
+            break;
+            default:
+                return response()->json(['message'=>'failed', 'status'=>500]);
+            break;
         }
     }
 }

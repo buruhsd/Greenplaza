@@ -204,8 +204,8 @@ class TransactionController extends Controller
         $status = 200;
         $message = 'Transfer confirmed!';
         $trans = Trans::findOrFail($id);
-        // $status = FunctionLib::midtrans_status($trans->trans_code);
-        // if($status){
+        $status = FunctionLib::midtrans_status($trans->trans_code);
+        if($status){
             foreach ($trans->trans_detail as $item) {
                 $trans_detail = Trans_detail::findOrFail($item->id);
                 // to transfer
@@ -219,10 +219,10 @@ class TransactionController extends Controller
             }
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
-        // }else{
-        //     $data['trans'] = Trans::where('trans_code', $trans->trans_code)->first();
-        //     return view('member.transaction.konfirmasi', $data);
-        // }
+        }else{
+            $data['trans'] = Trans::where('trans_code', $trans->trans_code)->first();
+            return view('member.transaction.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+        }
     }
 
     /**

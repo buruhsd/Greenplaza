@@ -294,9 +294,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 
 		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
-			Route::get('/beli_pincode', function(){return view('member.iklan.beli_saldo');})->name('.beli_saldo');
-			Route::get('/list', function(){return view('member.iklan.history');})->name('.history');
-			Route::get('/tagihan', function(){return view('member.iklan.tagihan');})->name('.tagihan');
+			Route::get('/buy_pincode', 'PincodeController@buy_pincode')->name('.buy_pincode');
+			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
+			Route::get('/tagihan', function(){return view('member.pincode.tagihan');})->name('.tagihan');
 		});
 
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
@@ -390,8 +390,10 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
 	Route::group(['prefix' => 'midtrans', 'as' => '.midtrans'], function () {
 		Route::get('payment', 'MidtransController@payment')->name('.payment');
+		Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
 		Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
 		Route::post('process', 'MidtransController@process')->name('.process');
+		// Route::post('done', 'MidtransController@done')->name('.done');
 	});
 	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
 		Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');

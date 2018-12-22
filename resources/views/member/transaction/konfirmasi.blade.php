@@ -30,7 +30,7 @@
                     </div>
                     <hr>
                     {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
-                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
                 </div>
             </div>
         </div>
