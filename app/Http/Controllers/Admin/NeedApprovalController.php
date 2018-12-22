@@ -71,4 +71,109 @@ class NeedApprovalController extends Controller
         $iklan = Trans_iklan::orderBy('created_at', 'DESC')->get();
         return view('admin.need_approval.saldoiklan.saldoiklan', compact('iklan'));
     }
+
+    public function konfirmasi_iklan (Request $request, $id) 
+    {
+        $iklan = Trans_iklan::find($id);
+        $iklan->trans_iklan_status = 2;
+        $iklan->save();
+        return redirect()->back(); 
+    }
+
+    public function approve_admin (Request $request, $id) 
+    {
+        $iklan = Trans_iklan::find($id);
+        $iklan->trans_iklan_status = 3;
+        $iklan->save();
+        return redirect()->back(); 
+    }
+
+    public function tolak (Request $request, $id) 
+    {
+        $iklan = Trans_iklan::find($id);
+        $iklan->trans_iklan_status = 4;
+        $iklan->save();
+        return redirect()->back(); 
+    }
+
+//IKLAN
+    //BANNER_KHUSUS
+    public function banner_khusus () 
+    {
+        return view('admin.need_approval.iklan.bannerkhusus.banner_khusus');
+    }
+    public function bannerkhusus_review () 
+    {
+        return view('admin.need_approval.iklan.bannerkhusus.menunggu_review');
+    }
+    public function bannerkhusus_aktif () 
+    {
+        return view('admin.need_approval.iklan.bannerkhusus.aktif');
+    }
+    public function bannerkhusus_ditolak () 
+    {
+        return view('admin.need_approval.iklan.bannerkhusus.ditolak');
+    }
+    //BANNER_SLIDER
+    public function banner_slider () 
+    {
+        return view('admin.need_approval.iklan.bannerslider.banner_slider');
+    }
+    public function bannerslider_review () 
+    {
+        return view('admin.need_approval.iklan.bannerslider.menunggu_review');
+    }
+    public function bannerslider_aktif () 
+    {
+        return view('admin.need_approval.iklan.bannerslider.aktif');
+    }
+    public function bannerslider_ditolak () 
+    {
+        return view('admin.need_approval.iklan.bannerslider.ditolak');
+    }
+    //BANNER_SELLER
+    public function banner_seller () 
+    {
+        return view('admin.need_approval.iklan.bannerseller.banner_seller');
+    }
+    public function bannerseller_review () 
+    {
+        return view('admin.need_approval.iklan.bannerseller.menunggu_review');
+    }
+    public function bannerseller_aktif () 
+    {
+        return view('admin.need_approval.iklan.bannerseller.aktif');
+    }
+    public function bannerseller_ditolak () 
+    {
+        return view('admin.need_approval.iklan.bannerseller.ditolak');
+    }
+    //BANNER_PEMBELI
+    public function banner_pembeli () 
+    {
+        return view('admin.need_approval.iklan.bannerpembeli.banner_pembeli');
+    }
+    public function bannerpembeli_review () 
+    {
+        return view('admin.need_approval.iklan.bannerpembeli.menunggu_review');
+    }
+    public function bannerpembeli_aktif () 
+    {
+        return view('admin.need_approval.iklan.bannerpembeli.aktif');
+    }
+    public function bannerpembeli_ditolak () 
+    {
+        return view('admin.need_approval.iklan.bannerpembeli.ditolak');
+    }
+    //BARIS_SELLER
+    public function baris_seller () 
+    {
+        return view('admin.need_approval.iklan.baris_seller');
+    }
+
+
+    public function baris_pembeli () 
+    {
+        return view('admin.need_approval.iklan.baris_pembeli');
+    }
 }

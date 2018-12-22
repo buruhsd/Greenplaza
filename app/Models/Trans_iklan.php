@@ -46,4 +46,14 @@ class Trans_iklan extends Model
     {
         return $this->belongsTo('App\User', 'brand_superadmin_id');
     }
+
+    public function produk()
+    {
+        return $this->belongsTo('App\Models\Produk', 'trans_iklan_paket_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'trans_iklan_user_id');
+    }
 }

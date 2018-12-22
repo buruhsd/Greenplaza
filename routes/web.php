@@ -166,6 +166,33 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('/withdrawal_member_reject/{id}', 'Admin\\NeedApprovalController@reject')->name('.withdrawal_member_reject');
 			//SALDOIKLAN
 			Route::get('/saldoiklan', 'Admin\\NeedApprovalController@iklan')->name('.saldoiklan');
+			Route::get('/konfirmasi_iklan/{id}', 'Admin\\NeedApprovalController@konfirmasi_iklan')->name('.konfirmasi_iklan');
+			Route::get('/approve_admin/{id}', 'Admin\\NeedApprovalController@approve_admin')->name('.approve_admin');
+			Route::get('/tolak/{id}', 'Admin\\NeedApprovalController@tolak')->name('.tolak');
+			//IKLAN
+			//khusus
+			Route::get('/banner_khusus', 'Admin\\NeedApprovalController@banner_khusus')->name('.banner_khusus');
+			Route::get('/bannerkhusus_review', 'Admin\\NeedApprovalController@bannerkhusus_review')->name('.bannerkhusus_review');
+			Route::get('/bannerkhusus_aktif', 'Admin\\NeedApprovalController@bannerkhusus_aktif')->name('.bannerkhusus_aktif');
+			Route::get('/bannerkhusus_ditolak', 'Admin\\NeedApprovalController@bannerkhusus_ditolak')->name('.bannerkhusus_ditolak');
+			//slider
+			Route::get('/banner_slider', 'Admin\\NeedApprovalController@banner_slider')->name('.banner_slider');
+			Route::get('/bannerslider_review', 'Admin\\NeedApprovalController@bannerslider_review')->name('.bannerslider_review');
+			Route::get('/bannerslider_aktif', 'Admin\\NeedApprovalController@bannerslider_aktif')->name('.bannerslider_aktif');
+			Route::get('/bannerslider_ditolak', 'Admin\\NeedApprovalController@bannerslider_ditolak')->name('.bannerslider_ditolak');
+			//seller
+			Route::get('/banner_seller', 'Admin\\NeedApprovalController@banner_seller')->name('.banner_seller');
+			Route::get('/bannerseller_review', 'Admin\\NeedApprovalController@bannerslider_review')->name('.bannerslider_review');
+			Route::get('/bannerseller_aktif', 'Admin\\NeedApprovalController@bannerseller_aktif')->name('.bannerseller_aktif');
+			Route::get('/bannerseller_ditolak', 'Admin\\NeedApprovalController@bannerseller_ditolak')->name('.bannerseller_ditolak');
+			//pembeli
+			Route::get('/banner_pembeli', 'Admin\\NeedApprovalController@banner_pembeli')->name('.banner_pembeli');
+			Route::get('/bannerpembeli_review', 'Admin\\NeedApprovalController@bannerslider_review')->name('.bannerslider_review');
+			Route::get('/bannerpembeli_aktif', 'Admin\\NeedApprovalController@bannerpembeli_aktif')->name('.bannerpembeli_aktif');
+			Route::get('/bannerpembeli_ditolak', 'Admin\\NeedApprovalController@bannerpembeli_ditolak')->name('.bannerpembeli_ditolak');
+			//baris
+			Route::get('/baris_seller', 'Admin\\NeedApprovalController@baris_seller')->name('.baris_seller');
+			Route::get('/baris_pembeli', 'Admin\\NeedApprovalController@baris_pembeli')->name('.baris_pembeli');
 
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {

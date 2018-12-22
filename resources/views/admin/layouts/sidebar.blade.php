@@ -62,11 +62,11 @@
                                     <li><a href="#">Transaksi Pin Code</a></li>
                                     <li><a href="{{route('admin.user.listmember')}}">Akun Member</a></li>
                                     <li><a href="{{route('admin.brand.index')}}">Brand</a></li>
-                                    <li><a href="#">Iklan Banner Khusus</a></li>
-                                    <li><a href="#">Iklan Banner Seller</a></li>
+                                    <li><a href="{{route('admin.needapproval.banner_khusus')}}">Iklan Banner dan Baris</a></li>
+                                    <!-- <li><a href="#">Iklan Banner Seller</a></li>
                                     <li><a href="#">Iklan Baris Seller</a></li>
                                     <li><a href="#">Iklan Banner Pembeli</a></li>
-                                    <li><a href="#">Iklan Baris Pembeli</a></li>
+                                    <li><a href="#">Iklan Baris Pembeli</a></li> -->
                                     <li><a href="{{route('admin.produk.index')}}">Produk</a></li>
                                     <li><a href="{{route('admin.needapproval.saldoiklan')}}">Request Saldo Iklan</a></li><!-- 
                                     <li><a href="#">Withdrawal Seller</a></li> -->
