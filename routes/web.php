@@ -229,39 +229,55 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
-		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
-			Route::get('/', 'BrandController@index')->name('.index');
-			Route::get('/create', 'BrandController@create')->name('.create');
-			Route::post('/store', 'BrandController@store')->name('.store');
-			Route::get('/show/{id}', 'BrandController@show')->name('.show');
-			Route::get('/edit/{id}', 'BrandController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'BrandController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'BrandController@destroy')->name('.destroy');
+		// Sales & purchase
+		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
+			Route::get('/', 'TransactionController@sales')->name('.index');
+			Route::get('/create', 'TransactionController@create')->name('.create');
+			Route::post('/store', 'TransactionController@store')->name('.store');
+			Route::get('/show/{id}', 'TransactionController@show')->name('.show');
+			Route::get('/edit/{id}', 'TransactionController@edit')->name('.edit');
+			Route::patch('/update', 'TransactionController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'TransactionController@destroy')->name('.destroy');
+			// sales
+			Route::get('/sales', 'TransactionController@sales')->name('.sales');
+			Route::get('/able/{id}', 'TransactionController@able')->name('.able');
+			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
+			Route::post('/sending', 'TransactionController@sending')->name('.sending');
+			Route::get('/add_resi/{id}', 'TransactionController@add_resi')->name('.add_resi');
+			Route::post('/add_resi/{id}', 'TransactionController@add_resi')->name('.post_add_resi');
+			// purchase
+			Route::get('/purchase', 'TransactionController@purchase')->name('.purchase');
+			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
+			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 		});
-		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
-			Route::get('/', 'MessageController@index')->name('.index');
-			Route::get('/create', 'MessageController@create')->name('.create');
-			Route::post('/store', 'MessageController@store')->name('.store');
-			Route::get('/destroy/{id}', 'MessageController@destroy')->name('.destroy');
-			Route::get('arsip/{id}', 'MessageController@arsip')->name('.arsip');
+		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
+			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');
+			Route::post('/update_komplain/{id}', 'KomplainController@update_komplain')->name('.update_komplain');
+			Route::get('/done_komplain/{id}', 'KomplainController@done_komplain')->name('.done_komplain');
+			// sales
+			Route::get('/', 'KomplainController@index')->name('.index');
+			// purchase
+			Route::get('/buyer', 'KomplainController@buyer')->name('.buyer');
 		});
-		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
-			Route::get('/', 'ProdukController@index')->name('.index');
-			Route::get('/create', 'ProdukController@create')->name('.create');
-			Route::post('/store', 'ProdukController@store')->name('.store');
-			Route::get('/show/{id}', 'ProdukController@show')->name('.show');
-			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
-			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
-			Route::group(['prefix' => 'discuss', 'as' => '.discuss'], function () {
-				Route::get('/', 'Produk_discussController@index')->name('.index');
-				Route::get('/create', 'Produk_discuss@create')->name('.create');
-				Route::post('/store', 'Produk_discuss@store')->name('.store');
-				Route::get('/destroy/{id}', 'Produk_discuss@destroy')->name('.destroy');
-				Route::get('arsip/{id}', 'Produk_discuss@arsip')->name('.arsip');
-			});
+		Route::group(['prefix' => 'solusi', 'as' => '.solusi'], function () {
+			Route::get('/approve_solusi/{id}', 'SolusiController@approve_solusi')->name('.approve_solusi');
+			Route::post('/add_shipment_buyer/{id}', 'SolusiController@add_shipment_buyer')->name('.add_shipment_buyer');
+			Route::get('/approve_shipment_buyer/{id}', 'SolusiController@approve_shipment_buyer')->name('.approve_shipment_buyer');
+			Route::post('/add_shipment_seller/{id}', 'SolusiController@add_shipment_seller')->name('.add_shipment_seller');
+			Route::get('/approve_shipment_seller/{id}', 'SolusiController@approve_shipment_seller')->name('.approve_shipment_seller');
 		});
+		// Get Penjual
+		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
+			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
+			Route::get('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
+			Route::get('/transfer_rw', 'WalletController@transfer_rw')->name('.transfer_rw');
+			Route::get('/', 'WalletController@index')->name('.index');
+			Route::get('/type/{slug}', 'WalletController@type')->name('.type');
+			Route::get('/cw_bonus', 'WalletController@cw_bonus')->name('.cw_bonus');
+			Route::get('/cw_trans', 'WalletController@cw_trans')->name('.cw_trans');
+			Route::get('/rw', 'WalletController@rw')->name('.rw');
+		});
+		// Pengaturan Profil
 		Route::get('/profil', 'UserController@profil')->name('.profil');
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
 			Route::get('/sponsor', 'UserController@sponsor')->name('.sponsor');
@@ -276,41 +292,60 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::post('/upload_scan_npwp_update', 'UserController@upload_scan_npwp_update')->name('.upload_scan_npwp_update');
 			Route::get('/upload_siup', 'UserController@upload_siup')->name('.upload_siup');
 			Route::post('/upload_siup_update', 'UserController@upload_siup_update')->name('.upload_siup_update');
-			Route::get('/set_shipment', 'UserController@set_shipment')->name('.set_shipment');
-			Route::post('/set_shipment_update', 'UserController@set_shipment_update')->name('.set_shipment_update');
 			// pembeli
 			Route::get('/buyer_address', 'UserController@buyer_address')->name('.buyer_address');
 			Route::post('/buyer_address_update', 'UserController@buyer_address_update')->name('.buyer_address_update');
 		});
 		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
-
-		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
-			Route::get('/', 'KomplainController@index')->name('.index');
-			Route::get('/buyer', 'KomplainController@buyer')->name('.buyer');
-			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');
-			Route::post('/update_komplain/{id}', 'KomplainController@update_komplain')->name('.update_komplain');
-			Route::get('/done_komplain/{id}', 'KomplainController@done_komplain')->name('.done_komplain');
+		// Pesan & Diskusi
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::group(['prefix' => 'discuss', 'as' => '.discuss'], function () {
+				Route::get('/', 'Produk_discussController@index')->name('.index');
+				Route::get('/create', 'Produk_discuss@create')->name('.create');
+				Route::post('/store', 'Produk_discuss@store')->name('.store');
+				Route::get('/destroy/{id}', 'Produk_discuss@destroy')->name('.destroy');
+				Route::get('arsip/{id}', 'Produk_discuss@arsip')->name('.arsip');
+			});
 		});
-
-		Route::group(['prefix' => 'solusi', 'as' => '.solusi'], function () {
-			Route::get('/approve_solusi/{id}', 'SolusiController@approve_solusi')->name('.approve_solusi');
-			Route::post('/add_shipment_buyer/{id}', 'SolusiController@add_shipment_buyer')->name('.add_shipment_buyer');
-			Route::get('/approve_shipment_buyer/{id}', 'SolusiController@approve_shipment_buyer')->name('.approve_shipment_buyer');
-			Route::post('/add_shipment_seller/{id}', 'SolusiController@add_shipment_seller')->name('.add_shipment_seller');
-			Route::get('/approve_shipment_seller/{id}', 'SolusiController@approve_shipment_seller')->name('.approve_shipment_seller');
+		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
+			Route::get('/', 'MessageController@index')->name('.index');
+			Route::get('/create', 'MessageController@create')->name('.create');
+			Route::post('/store', 'MessageController@store')->name('.store');
+			Route::get('/destroy/{id}', 'MessageController@destroy')->name('.destroy');
+			Route::get('arsip/{id}', 'MessageController@arsip')->name('.arsip');
 		});
-
-		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
-			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
-			Route::get('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
-			Route::get('/transfer_rw', 'WalletController@transfer_rw')->name('.transfer_rw');
-			Route::get('/', 'WalletController@index')->name('.index');
-			Route::get('/type/{slug}', 'WalletController@type')->name('.type');
-			Route::get('/cw_bonus', 'WalletController@cw_bonus')->name('.cw_bonus');
-			Route::get('/cw_trans', 'WalletController@cw_trans')->name('.cw_trans');
-			Route::get('/rw', 'WalletController@rw')->name('.rw');
+		// Hot List
+		Route::group(['prefix' => 'hotlist', 'as' => '.hotlist'], function () {
+			Route::get('/buy_poin', function(){return view('member.hot-list.buy_poin');})->name('.buy_poin');
+			Route::get('/tagihan', function(){return view('member.hot-list.tagihan');})->name('.tagihan');
 		});
-
+		// Produk & Brand
+		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
+			Route::get('/', 'BrandController@index')->name('.index');
+			Route::get('/create', 'BrandController@create')->name('.create');
+			Route::post('/store', 'BrandController@store')->name('.store');
+			Route::get('/show/{id}', 'BrandController@show')->name('.show');
+			Route::get('/edit/{id}', 'BrandController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'BrandController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'BrandController@destroy')->name('.destroy');
+		});
+		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
+			Route::get('/', 'ProdukController@index')->name('.index');
+			Route::get('/create', 'ProdukController@create')->name('.create');
+			Route::post('/store', 'ProdukController@store')->name('.store');
+			Route::get('/show/{id}', 'ProdukController@show')->name('.show');
+			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
+			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
+		});
+		// PIN Code
+		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
+			Route::get('/buy_pincode', 'PincodeController@buy_pincode')->name('.buy_pincode');
+			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
+			Route::get('/tagihan', function(){return view('member.pincode.tagihan');})->name('.tagihan');
+		});
+		// Pasang Iklan
 		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
 			Route::get('/beli_saldo', function(){return view('member.iklan.beli_saldo');})->name('.beli_saldo');
 			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
@@ -319,13 +354,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/baris', function(){return view('member.iklan.baris');})->name('.baris');
 			Route::get('/tagihan', function(){return view('member.iklan.tagihan');})->name('.tagihan');
 		});
-
-		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
-			Route::get('/buy_pincode', 'PincodeController@buy_pincode')->name('.buy_pincode');
-			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
-			Route::get('/tagihan', function(){return view('member.pincode.tagihan');})->name('.tagihan');
+		// Atur Kurir
+		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+			Route::get('/set_shipment', 'UserController@set_shipment')->name('.set_shipment');
+			Route::post('/set_shipment_update', 'UserController@set_shipment_update')->name('.set_shipment_update');
 		});
-
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'ShipmentController@index')->name('.index');
 			Route::get('/create', 'ShipmentController@create')->name('.create');
@@ -345,24 +378,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update/{id}', 'BankController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'BankController@destroy')->name('.destroy');
 		});
-		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
-			Route::get('/', 'TransactionController@sales')->name('.index');
-			Route::get('/sales', 'TransactionController@sales')->name('.sales');
-			Route::get('/purchase', 'TransactionController@purchase')->name('.purchase');
-			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
-			Route::get('/able/{id}', 'TransactionController@able')->name('.able');
-			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
-			Route::post('/sending', 'TransactionController@sending')->name('.sending');
-			Route::get('/add_resi/{id}', 'TransactionController@add_resi')->name('.add_resi');
-			Route::post('/add_resi/{id}', 'TransactionController@add_resi')->name('.post_add_resi');
-			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
-			Route::get('/create', 'TransactionController@create')->name('.create');
-			Route::post('/store', 'TransactionController@store')->name('.store');
-			Route::get('/show/{id}', 'TransactionController@show')->name('.show');
-			Route::get('/edit/{id}', 'TransactionController@edit')->name('.edit');
-			Route::patch('/update', 'TransactionController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'TransactionController@destroy')->name('.destroy');
-		});
 		Route::group(['prefix' => 'review', 'as' => '.review'], function () {
 			Route::get('/', 'ReviewController@index')->name('.index');
 			Route::get('/create', 'ReviewController@create')->name('.create');
@@ -371,11 +386,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update', 'ReviewController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
 		});
-		Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
-		Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
-		Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
+		// Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
+		// Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
+		// Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
 		// Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
-		Route::get('/beli_poin', function(){return view('member.hotlist.beli_poin');})->name('.beli_poin');
+		// Route::get('/beli_poin', function(){return view('member.hotlist.beli_poin');})->name('.beli_poin');
 		// Route::get('/profil_user', function(){return view('member.pengaturan_profil.profil-user');})->name('.profil_user');
 		// Route::get('/transfer_cw', function(){return view('member.transfer_cw.index');})->name('.transfer_cw');
 	});

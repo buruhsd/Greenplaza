@@ -15,7 +15,7 @@ use Auth;
 use FunctionLib;
 
 
-class ProdukController extends Controller
+class PincodeController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'sys_produk';

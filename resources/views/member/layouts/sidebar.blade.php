@@ -97,8 +97,8 @@
                                     <i class="menu-icon icon-layers"></i><span>Hot List</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Buy Poin Hot List</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Tagihan Hot List</a></li>
+                                    <li><a href="{{route('member.hotlist.buy_poin')}}">Buy Poin Hot List</a></li>
+                                    <li><a href="{{route('member.hotlist.tagihan')}}">Tagihan Hot List</a></li>
                                     <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">History Hot List Produk</a></li>
                                 </ul>
                             </li>
@@ -108,9 +108,9 @@
                                     <i class="menu-icon icon-layers"></i><span>PIN Code</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Beli Pin Kode</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Tagihan Pin Kode</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Daftar Pin Kode</a></li>
+                                    <li><a href="{{route('member.pincode.buy_pincode')}}">Beli Pin Kode</a></li>
+                                    <li><a href="{{route('member.pincode.tagihan')}}">Tagihan Pin Kode</a></li>
+                                    <li><a href="{{route('member.pincode.history')}}">Daftar Pin Kode</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}
@@ -119,12 +119,12 @@
                                     <i class="menu-icon icon-layers"></i><span>Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Beli Saldo Iklan</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Tagihan Iklan</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Iklan Baris</a></li>
-                                    <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Iklan Banner</a></li>
-                                    <li><a href="{{-- {{route('member.cw.index')}} --}}">Iklan Banner Khusus</a></li>
-                                    <li><a href="{{-- {{route('member.rw.index')}} --}}">History Iklan</a></li>
+                                    <li><a href="{{route('member.iklan.beli_saldo')}}">Beli Saldo Iklan</a></li>
+                                    <li><a href="{{route('member.iklan.tagihan')}}">Tagihan Iklan</a></li>
+                                    <li><a href="{{route('member.iklan.baris')}}">Iklan Baris</a></li>
+                                    <li><a href="{{route('member.iklan.banner')}}">Iklan Banner</a></li>
+                                    <li><a href="{{route('member.iklan.banner_khusus')}}">Iklan Banner Khusus</a></li>
+                                    <li><a href="{{route('member.iklan.history')}}">History Iklan</a></li>
                                 </ul>
                             </li>
                             <li>
