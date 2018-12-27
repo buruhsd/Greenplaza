@@ -126,9 +126,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::patch('/update/{id}', 'Admin\\UserController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\UserController@destroy')->name('.destroy');
 			Route::get('disabled/{id}', 'Admin\\UserController@disabled')->name('.disabled');
-			Route::get('listmember', 'Admin\\UserController@listmember')->name('.listmember');
-			Route::get('editmember/{id}', 'Admin\\UserController@editmember')->name('.editmember');
-			Route::post('editmember_data/{id}', 'Admin\\UserController@editmember_data')->name('.editmember_data');
+			
 		});
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::get('/', 'Admin\\ProdukController@index')->name('.index');
@@ -194,6 +192,22 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('/baris_seller', 'Admin\\NeedApprovalController@baris_seller')->name('.baris_seller');
 			Route::get('/baris_pembeli', 'Admin\\NeedApprovalController@baris_pembeli')->name('.baris_pembeli');
 
+			//LIST MEMBER/SELLER
+			//member
+			Route::get('listmember', 'Admin\\NeedApprovalController@listmember')->name('.listmember');
+			Route::get('detailmember/{id}', 'Admin\\NeedApprovalController@detailmember')->name('.detailmember');
+			Route::post('password_member/{id}', 'Admin\\NeedApprovalController@password_member')->name('.password_member');
+			Route::get('changepassword_member/{id}', 'Admin\\NeedApprovalController@changepassword_member')->name('.changepassword_member');
+			Route::get('editmember/{id}', 'Admin\\NeedApprovalController@editmember')->name('.editmember');
+			Route::post('editmember_data/{id}', 'Admin\\NeedApprovalController@editmember_data')->name('.editmember_data');
+			//seller
+			Route::get('listseller', 'Admin\\NeedApprovalController@listseller')->name('.listseller');
+
+			//TRANSAKSI HOTLIST
+			Route::get('hotlist', 'Admin\\NeedApprovalController@hotlist')->name('.hotlist');
+
+			//TRANSAKSI BARANG
+			Route::get('transaction', 'Admin\\NeedApprovalController@barang')->name('.barang');
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			//Laporan

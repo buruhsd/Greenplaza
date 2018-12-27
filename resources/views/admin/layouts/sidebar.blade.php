@@ -58,9 +58,9 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('admin.transaction.index')}}">Transaksi Barang</a></li>
-                                    <li><a href="#">Transaksi Hot List</a></li>
+                                    <li><a href="{{route('admin.needapproval.hotlist')}}">Transaksi Hot List</a></li>
                                     <li><a href="#">Transaksi Pin Code</a></li>
-                                    <li><a href="{{route('admin.user.listmember')}}">Akun Member</a></li>
+                                    <li><a href="{{route('admin.needapproval.listmember')}}">Akun Member</a></li>
                                     <li><a href="{{route('admin.brand.index')}}">Brand</a></li>
                                     <li><a href="{{route('admin.needapproval.banner_khusus')}}">Iklan Banner dan Baris</a></li>
                                     <!-- <li><a href="#">Iklan Banner Seller</a></li>

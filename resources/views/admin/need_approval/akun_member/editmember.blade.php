@@ -12,10 +12,10 @@
         <div class="col-md-12">
           <div class="panel panel-white">
             <div class="panel-heading clearfix">
-                <a href="{{route('admin.user.listmember')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
+                <a href="{{route('admin.needapproval.listmember')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
             </div>
               <div class="panel-body">
-                  <form class="form-horizontal" method="POST" action= "{{route('admin.user.editmember_data', $users->id)}}" enctype = "multipart/form-data">
+                  <form class="form-horizontal" method="POST" action= "{{route('admin.needapproval.editmember_data', $users->id)}}" enctype = "multipart/form-data">
                     {{ csrf_field() }}
                       <div class="form-group">
                           <label for="input-Default" class="col-sm-2 control-label">UserName</label>

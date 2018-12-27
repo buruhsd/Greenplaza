@@ -8,13 +8,24 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <form action="#" method="GET">
-                            <div class="input-group pull-right" style="width: 225px;">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Email Member ..."></a>
-                            </div>
-                        </form>
+                    <div class="col-md-6">
+                        <div class="input-group pull-left">
+                            <select id="select-list" type="text" class="form-control">
+                                <option value="">--Choose Option List--</option>
+                                <option value="/admin/needapproval/listmember">List Member</option>
+                                <option value="/admin/needapproval/listseller">List Seller</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <form action="#" method="GET">
+                                <div class="input-group pull-right" style="width: 225px;">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Email Member ..."></a>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -45,7 +56,7 @@
                                     <td>{{$u->user_slug}}</td>
                                     <td>{{$u->email}}</td>
                                     <td>
-                                        <a href="{{route('admin.user.editmember', $u->id)}}"><button type="submit" class="btn btn-primary">Edit</button></a>
+                                        <a href=""><button type="submit" class="btn btn-primary">Edit</button></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -60,4 +71,12 @@
 </div><!-- Main Wrapper -->
 </div>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+  $('#select-list').on('change',function(e){
+      console.log($(this).find(':selected').val());
+      window.location.href = $(this).find(':selected').val();
+      })
+</script>
 @endsection

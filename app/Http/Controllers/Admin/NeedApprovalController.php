@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
 use App\User;
 use App\Models\Trans_iklan;
+use App\Models\Trans_hotlist;
 use Session;
 use Mail;
 
@@ -175,5 +176,130 @@ class NeedApprovalController extends Controller
     public function baris_pembeli () 
     {
         return view('admin.need_approval.iklan.baris_pembeli');
+    }
+
+//LIST SELLER/MEMBER
+    //MEMBER
+    public function listmember ()
+    {
+        $search = \Request::get('search');
+        $users = User::where('email', 'like', '%'.$search.'%')
+                ->orderBy('updated_at', 'DESC')->paginate(10);
+        return view('admin.need_approval.akun_member.listmember', compact('users'));
+    }
+    public function changepassword_member (Request $request, $id)
+    {
+        $users = User::find($id);
+        // dd($users);
+        return view('admin.need_approval.akun_member.resetpassword_member', compact('users'));
+    }
+    public function password_member (Request $request, $id)
+    {
+            $value = $request->value;
+            $users = User::find($id);
+        if ($value == $request->password){
+            $users->password = bcrypt($request->password);
+            $users->save();
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Password Berhasil Diubah."
+            ]);
+        } else {
+            Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Password Salah"
+            ]);
+        }
+        return redirect()->back();
+    }
+    public function detailmember (Request $request, $id)
+    {
+        $users = User::find($id);
+
+        return view('admin.need_approval.akun_member.detailmember', compact('users'));
+    }
+
+    public function editmember (Request $request, $id)
+    {
+        $users = User::find($id);
+        return view('admin.need_approval.akun_member.editmember', compact('users'));
+    }
+
+    function editmember_data (Request $request, $id)
+    {
+        $value = $request->value;
+        $users = User::find($id);
+        $users->username = $request->username;
+        $users->name = $request->name;
+        $users->user_store = $request->user_store;
+        if ($users->user_store_image != null && $request->user_store_image) {
+        $users->user_store_image = date("d-M-Y_H-i-s").'_'.$request->user_store_image->getClientOriginalName();
+        $request->user_store_image->move(public_path('assets/images/user_store'),$users->user_store_image);
+        $users->save();
+        } elseif ($users->user_store_image == null && $request->user_store_image) {
+        $users->user_store_image = date("d-M-Y_H-i-s").'_'.$request->user_store_image->getClientOriginalName();
+        $request->user_store_image->move(public_path('assets/images/user_store'),$users->user_store_image);
+        $users->save();
+        }
+        $users->user_slogan = $request->user_slogan;
+        if ($value == $request->password){
+            $users->password = bcrypt($request->password);
+            $users->save();
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Profile Berhasil Diubah."
+            ]);
+        } else {
+            Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Password Salah"
+            ]);
+        }
+        return redirect()->back();
+    }
+
+    //SELLER
+     public function listseller ()
+    {
+        $search = \Request::get('search');
+        $users = User::where('email', 'like', '%'.$search.'%')
+                ->orderBy('updated_at', 'DESC')
+                ->where('user_store', '!=', null)
+                ->paginate(10);
+        return view('admin.need_approval.akun_member.listseller', compact('users'));
+    }
+    public function changepassword_seller (Request $request, $id)
+    {
+        $value = $request->value;
+        $users = User::find($id);
+        if ($value == $request->password){
+            $users->password = bcrypt($request->password);
+            $users->save();
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Profile Berhasil Diubah."
+            ]);
+        } else {
+            Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Password Salah"
+            ]);
+        }
+        return redirect()->back();
+    }
+
+//TRANSAKSI HOTLIST
+    public function hotlist ()
+    {
+        $hot = Trans_hotlist::orderBy('created_at', 'DESC')->get();
+        // dd($hot);
+        return view('admin.need_approval.transaksi_hotlist.hotlist', compact('hot'));
+    }
+
+//TRANSAKI BARANG
+    public function barang ()
+    {
+        return view('admin.need_approval.transaksi_barang.barang_list');
+
     }
 }

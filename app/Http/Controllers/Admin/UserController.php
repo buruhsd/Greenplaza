@@ -302,50 +302,5 @@ class UserController extends Controller
         return $script;
     }
 
-    public function listmember ()
-    {
-        $search = \Request::get('search');
-        $users = User::where('email', 'like', '%'.$search.'%')
-                ->orderBy('updated_at', 'DESC')->paginate(10);
-        return view('admin.akun_member.listmember', compact('users'));
-    }
-
-    public function editmember (Request $request, $id)
-    {
-        $users = User::find($id);
-        return view('admin.akun_member.editmember', compact('users'));
-    }
-
-    function editmember_data (Request $request, $id)
-    {
-        $value = $request->value;
-        $users = User::find($id);
-        $users->username = $request->username;
-        $users->name = $request->name;
-        $users->user_store = $request->user_store;
-        if ($users->user_store_image != null && $request->user_store_image) {
-        $users->user_store_image = date("d-M-Y_H-i-s").'_'.$request->user_store_image->getClientOriginalName();
-        $request->user_store_image->move(public_path('assets/images/user_store'),$users->user_store_image);
-        $users->save();
-        } elseif ($users->user_store_image == null && $request->user_store_image) {
-        $users->user_store_image = date("d-M-Y_H-i-s").'_'.$request->user_store_image->getClientOriginalName();
-        $request->user_store_image->move(public_path('assets/images/user_store'),$users->user_store_image);
-        $users->save();
-        }
-        $users->user_slogan = $request->user_slogan;
-        if ($value == $request->password){
-            $users->password = bcrypt($request->password);
-            $users->save();
-            Session::flash("flash_notification", [
-                        "level"=>"success",
-                        "message"=>"Profile Berhasil Diubah."
-            ]);
-        } else {
-            Session::flash("flash_notification", [
-                        "level"=>"danger",
-                        "message"=>"Password Salah"
-            ]);
-        }
-        return redirect()->back();
-    }
+    
 }
