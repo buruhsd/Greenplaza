@@ -1,4 +1,5 @@
 <!-- header-area start -->
+
     <header class="header-area">
         <div class="header-tor-area bg-1">
             <div class="container">
@@ -199,4 +200,5 @@
             <!-- responsive-menu area start -->
         <!-- </div> -->
     </header>
+
     <!-- header-area end -->
