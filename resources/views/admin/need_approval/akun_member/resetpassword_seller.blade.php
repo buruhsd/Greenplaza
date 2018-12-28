@@ -4,7 +4,7 @@
 
 <div class="page-inner">
   <div class="page-title">
-      <h3 class="breadcrumb-header">Change Password Member</h3>
+      <h3 class="breadcrumb-header">Change Password Seller</h3>
   </div>
 <div id="main-wrapper">
     <div class="row">
@@ -12,10 +12,10 @@
         <div class="col-md-12">
           <div class="panel panel-white">
             <div class="panel-heading clearfix">
-                <a href="{{route('admin.needapproval.listmember')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
+                <a href="{{route('admin.needapproval.listseller')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
             </div>
               <div class="panel-body">
-                  <form class="form-horizontal" method="POST" action= "{{route('admin.needapproval.password_member', $users->id)}}" enctype = "multipart/form-data">
+                  <form class="form-horizontal" method="POST" action= "{{route('admin.needapproval.password_seller', $users->id)}}" enctype = "multipart/form-data">
                     {{ csrf_field() }}
                       <div class="form-group">
                           <label for="input-Default" class="col-sm-2 control-label">Password Baru</label>

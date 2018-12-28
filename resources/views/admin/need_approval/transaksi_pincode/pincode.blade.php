@@ -35,52 +35,52 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Kode_Order</center></th>
-                                    <th><center>Nama_Seller</center></th>
+                                    <th><center>Nama</center></th>
                                     <th><center>Jumlah_Transfer</center></th>
                                     <th><center>Bank_Tujuan</center></th>
                                     <th><center>Status</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
-                            @foreach ($hot as $key => $h)
+                            @foreach ($pin as $key => $p)
                             <tbody>
                                 <tr>
                                     <td><center>{{++$key}}</center></td>
-                                    <td><center>{{$h->trans_hotlist_code}}</center></td>
-                                    <td><center>{{App\User::where('id', $h->trans_hotlist_user_id)->first()->name}}</center></td>
-                                    <td><center>{{$h->trans_hotlist_amount}}</center></td>
-                                    <td><center>{{App\Models\Bank::where('id', $h->trans_hotlist_bank_id)->first()->bank_kode}}</center></td>
-                                    </center></td>
-                                    @if ($h->trans_hotlist_status == 1)
+                                    <td><center>{{$p->trans_pincode_code}}</center></td>
+                                    <td><center>{{App\User::where('id', $p->trans_pincode_user_id)->first()->name}}</center></td>
+                                    <td><center>{{$p->trans_pincode_amount}}</center></td>
+                                    <td><center>{{App\Models\Bank::where('id', $p->trans_pincode_bank_id)->first()->bank_kode}}</center></td>
+                                    @if ($p->trans_pincode_status == 1)
                                     <td><center>Belum Konfirmasi</center></td>
-                                    @elseif ($h->trans_hotlist_status == 2)
+                                    @elseif ($p->trans_pincode_status == 2)
                                     <td><center>Sudah Konfirmasi</center></td>
-                                    @elseif ($h->trans_hotlist_status == 3)
+                                    @elseif ($p->trans_pincode_status == 3)
                                     <td><center>Approved</center></td>
-                                    @elseif ($h->trans_hotlist_status == 4)
+                                    @elseif ($p->trans_pincode_status == 4)
                                     <td><center>Ditolak</center></td>
                                     @endif
                                     </td>
                                     <td>
-                                        @if ($h->trans_hotlist_status == 1)
+                                        @if ($p->trans_pincode_status == 1)
                                         <center>
-                                            <a href="{{route('admin.needapproval.konfirmasi_hotlist', $h->id)}}"><button type="submit" class="btn btn-info">Konfirmasi</button></a>
-                                            <a href="{{route('admin.needapproval.tolakhotlist', $h->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
+                                            <a href="{{route('admin.needapproval.konfirmasi_pincode', $p->id)}}"><button type="submit" class="btn btn-info">Konfirmasi</button></a>
+                                            <a href="{{route('admin.needapproval.tolakpincode', $p->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
                                         </center>
-                                        @elseif ($h->trans_hotlist_status == 2)
+                                        @elseif ($p->trans_pincode_status == 2)
                                         <center>
-                                            <a href="{{route('admin.needapproval.approve_adminhotlist', $h->id)}}"><button type="submit" class="btn btn-success">Approve</button></a>
-                                            <a href="{{route('admin.needapproval.tolakhotlist', $h->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
+                                            <a href="{{route('admin.needapproval.approve_adminpincode', $p->id)}}"><button type="submit" class="btn btn-success">Approve</button></a>
+                                            <a href="{{route('admin.needapproval.tolakpincode', $p->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
                                         </center>
-                                        @elseif ($h->trans_hotlist_status == 3)
+                                        @elseif ($p->trans_pincode_status == 3)
                                         <center>
-                                            <a href="{{route('admin.needapproval.tolakhotlist', $h->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
+                                            <a href="{{route('admin.needapproval.tolakpincode', $p->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
                                         </center>
-                                        @elseif ($h->trans_hotlist_status == 4)
+                                        @elseif ($p->trans_pincode_status == 4)
                                         <center>
                                             <p style="color: red">IKLAN DITOLAK</p>
                                         </center>
                                         @endif
+                                    </td>
                                 </tr>
                             </tbody>
                             @endforeach

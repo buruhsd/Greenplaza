@@ -33,30 +33,40 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
-                                    <th>Name</th>
-                                    <th>User Store</th>
-                                    <th>User Store Image</th>
-                                    <th>User Slogan</th>
-                                    <th>User Slug</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
+                                    <th><center>No</center></th>
+                                    <th><center>Member_id</center></th>
+                                    <th><center>Name</center></th>
+                                    <th><center>Detail</center></th>
+                                    <th><center>Status</center></th>
+                                    <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             @foreach ($users as $key => $u)
                             <tbody>
                                 <tr>
                                     <td>{{++$key}}</td>
-                                    <td>{{$u->username}}</td>
+                                    <td>{{$u->id}}</td>
                                     <td>{{$u->name}}</td>
-                                    <td>{{$u->user_store}}</td>
-                                    <td>{{$u->user_store_image}}</td>
-                                    <td>{{$u->user_slogan}}</td>
-                                    <td>{{$u->user_slug}}</td>
-                                    <td>{{$u->email}}</td>
                                     <td>
-                                        <a href=""><button type="submit" class="btn btn-primary">Edit</button></a>
+                                        Jenis Kelamin :<br/>
+                                        Email : {{$u->email}}<br/>
+                                        Alamat :<br/>
+                                        No HP :<br/>
+                                        No Telp Rumah :<br/>
+                                        Kota :<br/>
+                                        Kode_pos :<br/>
+                                        Propinsi :<br/>
+                                        Kecamatan :<br/>
+                                        Tgl Registrasi :<br/>
+                                        Grade Member :<br/>
+                                        Username : {{$u->username}}<br/>
+                                        Grade Pajak CW Bonus :
+                                    </td>
+                                    <td></td>
+                                    <td><center>
+                                        <a href="{{route('admin.needapproval.changepassword_seller', $u->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a><br/>
+                                        <a href="{{route('admin.needapproval.detailseller', $u->id)}}"><button type="submit" class="btn btn-primary btn-rounded" style="width: 70%; margin-bottom: 1%">Detail</button></a> <br/>
+                                        <!-- <a href="{{route('admin.needapproval.editmember', $u->id)}}"><button type="submit" class="btn btn-warning btn-rounded" style="width: 70%">Update</button></a> --> </center>
                                     </td>
                                 </tr>
                             </tbody>

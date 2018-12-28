@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
 use App\User;
+use App\Models\User_detail;
 use App\Models\Trans_iklan;
 use App\Models\Trans_hotlist;
+use App\Models\Trans_pincode;
 use Session;
 use Mail;
 
@@ -185,7 +187,8 @@ class NeedApprovalController extends Controller
         $search = \Request::get('search');
         $users = User::where('email', 'like', '%'.$search.'%')
                 ->orderBy('updated_at', 'DESC')->paginate(10);
-        return view('admin.need_approval.akun_member.listmember', compact('users'));
+       
+        return view('admin.need_approval.akun_member.listmember', compact('users', 'detail'));
     }
     public function changepassword_member (Request $request, $id)
     {
@@ -197,26 +200,26 @@ class NeedApprovalController extends Controller
     {
             $value = $request->value;
             $users = User::find($id);
-        if ($value == $request->password){
-            $users->password = bcrypt($request->password);
-            $users->save();
-            Session::flash("flash_notification", [
-                        "level"=>"success",
-                        "message"=>"Password Berhasil Diubah."
-            ]);
-        } else {
-            Session::flash("flash_notification", [
-                        "level"=>"danger",
-                        "message"=>"Password Salah"
-            ]);
-        }
+            if ($value == $request->password){
+                $users->password = bcrypt($request->password);
+                $users->save();
+                Session::flash("flash_notification", [
+                            "level"=>"success",
+                            "message"=>"Password Berhasil Diubah."
+                ]);
+            } else {
+                Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Password Salah"
+                ]);
+            }
         return redirect()->back();
     }
     public function detailmember (Request $request, $id)
     {
         $users = User::find($id);
-
-        return view('admin.need_approval.akun_member.detailmember', compact('users'));
+        $detail = User_detail::where('user_detail_user_id', $users->id)->first();
+        return view('admin.need_approval.akun_member.detailmember', compact('users', 'detail'));
     }
 
     public function editmember (Request $request, $id)
@@ -270,22 +273,35 @@ class NeedApprovalController extends Controller
     }
     public function changepassword_seller (Request $request, $id)
     {
-        $value = $request->value;
         $users = User::find($id);
-        if ($value == $request->password){
-            $users->password = bcrypt($request->password);
-            $users->save();
-            Session::flash("flash_notification", [
-                        "level"=>"success",
-                        "message"=>"Profile Berhasil Diubah."
-            ]);
-        } else {
-            Session::flash("flash_notification", [
-                        "level"=>"danger",
-                        "message"=>"Password Salah"
-            ]);
-        }
+        return view('admin.need_approval.akun_member.resetpassword_seller', compact('users'));
+    }
+    public function password_seller (Request $request, $id)
+    {
+            $value = $request->value;
+            $users = User::find($id);
+            if ($value == $request->password){
+                $users->password = bcrypt($request->password);
+                $users->save();
+                Session::flash("flash_notification", [
+                            "level"=>"success",
+                            "message"=>"Password Berhasil Diubah."
+                ]);
+            } else {
+                Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Password Salah"
+                ]);
+            }
         return redirect()->back();
+    }
+    public function detailseller (Request $request, $id)
+    {
+        $users = User::find($id);
+        // dd($users);
+        $detail = User_detail::where('user_detail_user_id', $users->id)->first();
+        // dd($detail);
+        return view('admin.need_approval.akun_member.detailseller', compact('users', 'detail'));
     }
 
 //TRANSAKSI HOTLIST
@@ -295,11 +311,64 @@ class NeedApprovalController extends Controller
         // dd($hot);
         return view('admin.need_approval.transaksi_hotlist.hotlist', compact('hot'));
     }
+    public function konfirmasi_hotlist (Request $request, $id) 
+    {
+        $hot = Trans_hotlist::find($id);
+        $hot->trans_hotlist_status = 2;
+        $hot->save();
+        return redirect()->back(); 
+    }
+
+    public function approve_adminhotlist (Request $request, $id) 
+    {
+        $hot = Trans_hotlist::find($id);
+        $hot->trans_hotlist_status = 3;
+        $hot->save();
+        return redirect()->back(); 
+    }
+
+    public function tolakhotlist (Request $request, $id) 
+    {
+        $hot = Trans_hotlist::find($id);
+        $hot->trans_hotlist_status = 4;
+        $hot->save();
+        return redirect()->back(); 
+    }
 
 //TRANSAKI BARANG
     public function barang ()
     {
         return view('admin.need_approval.transaksi_barang.barang_list');
 
+    }
+
+//TRANSAKSI PINCODE 
+    public function pincode () 
+    {
+        $pin = Trans_pincode::orderBy('created_at', 'DESC')->get();
+        return view('admin.need_approval.transaksi_pincode.pincode', compact('pin'));
+    }
+    public function konfirmasi_pincode (Request $request, $id) 
+    {
+        $pin = Trans_pincode::find($id);
+        $pin->trans_pincode_status = 2;
+        $pin->save();
+        return redirect()->back(); 
+    }
+
+    public function approve_adminpincode (Request $request, $id) 
+    {
+        $pin = Trans_pincode::find($id);
+        $pin->trans_pincode_status = 3;
+        $pin->save();
+        return redirect()->back(); 
+    }
+
+    public function tolakpincode (Request $request, $id) 
+    {
+        $pin = Trans_pincode::find($id);
+        $pin->trans_pincode_status = 4;
+        $pin->save();
+        return redirect()->back(); 
     }
 }

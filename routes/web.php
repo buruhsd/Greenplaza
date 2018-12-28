@@ -202,12 +202,24 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::post('editmember_data/{id}', 'Admin\\NeedApprovalController@editmember_data')->name('.editmember_data');
 			//seller
 			Route::get('listseller', 'Admin\\NeedApprovalController@listseller')->name('.listseller');
+			Route::get('detailseller/{id}', 'Admin\\NeedApprovalController@detailseller')->name('.detailseller');
+			Route::post('password_seller/{id}', 'Admin\\NeedApprovalController@password_seller')->name('.password_seller');
+			Route::get('changepassword_seller/{id}', 'Admin\\NeedApprovalController@changepassword_seller')->name('.changepassword_seller');
 
 			//TRANSAKSI HOTLIST
 			Route::get('hotlist', 'Admin\\NeedApprovalController@hotlist')->name('.hotlist');
+			Route::get('/konfirmasi_hotlist/{id}', 'Admin\\NeedApprovalController@konfirmasi_hotlist')->name('.konfirmasi_hotlist');
+			Route::get('/approve_adminhotlist/{id}', 'Admin\\NeedApprovalController@approve_adminhotlist')->name('.approve_adminhotlist');
+			Route::get('/tolakhotlist/{id}', 'Admin\\NeedApprovalController@tolakhotlist')->name('.tolakhotlist');
 
 			//TRANSAKSI BARANG
 			Route::get('transaction', 'Admin\\NeedApprovalController@barang')->name('.barang');
+
+			//TRANSAKSI PINCODE
+			Route::get('pincode', 'Admin\\NeedApprovalController@pincode')->name('.pincode');
+			Route::get('/konfirmasi_pincode/{id}', 'Admin\\NeedApprovalController@konfirmasi_pincode')->name('.konfirmasi_pincode');
+			Route::get('/approve_adminpincode/{id}', 'Admin\\NeedApprovalController@approve_adminpincode')->name('.approve_adminpincode');
+			Route::get('/tolakpincode/{id}', 'Admin\\NeedApprovalController@tolakpincode')->name('.tolakpincode');
 		});
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			//Laporan

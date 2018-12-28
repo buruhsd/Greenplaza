@@ -51,7 +51,7 @@
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
                                         Alamat :<br/>
-                                        No HP :<br/>
+                                        No HP : {{$u->user_detail}}<br/>
                                         No Telp Rumah :<br/>
                                         Kota :<br/>
                                         Kode_pos :<br/>
