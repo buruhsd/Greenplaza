@@ -221,6 +221,12 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('/approve_adminpincode/{id}', 'Admin\\NeedApprovalController@approve_adminpincode')->name('.approve_adminpincode');
 			Route::get('/tolakpincode/{id}', 'Admin\\NeedApprovalController@tolakpincode')->name('.tolakpincode');
 		});
+
+		Route::group(['prefix' => 'konfigurasi', 'as' => '.konfigurasi'], function () {
+			//REG SELLER
+			Route::get('regseller', 'Admin\\KonfigurasiController@regseller')->name('.regseller');
+		});
+
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
 			//Laporan
 			Route::get('laporan', 'Admin\\MonitoringController@laporan')->name('.laporan');

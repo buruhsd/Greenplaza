@@ -123,7 +123,7 @@ class User extends Authenticatable implements MustVerifyEmail
     **/
     public function user_address()
     {
-        return $this->hasMany('App\Models\User_address', 'user_address_user_id');
+        return $this->hasOne('App\Models\User_address', 'user_address_user_id');
     }
 
     /**

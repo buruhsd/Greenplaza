@@ -22,7 +22,7 @@
                             <form action="#" method="GET">
                                 <div class="input-group pull-right" style="width: 225px;">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Email Member ..."></a>
+                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Name Member ..."></a>
                                 </div>
                             </form>
                         </div>
@@ -50,14 +50,14 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                        Alamat :<br/>
-                                        No HP : {{$u->user_detail}}<br/>
-                                        No Telp Rumah :<br/>
-                                        Kota :<br/>
-                                        Kode_pos :<br/>
-                                        Propinsi :<br/>
+                                        Alamat : {{$u->user_address->user_address_address}}<br/>
+                                        No HP : {{$u->user_address->user_address_phone}}<br/>
+                                        No Telp Rumah : {{$u->user_address->user_address_tlp}}<br/>
+                                        Kota : {{$u->user_address->user_address_city}}<br/>
+                                        Kode_pos : {{$u->user_address->user_address_pos}}<br/>
+                                        Propinsi : {{$u->user_address->user_address_province}}<br/>
                                         Kecamatan :<br/>
-                                        Tgl Registrasi :<br/>
+                                        Tgl Registrasi : {{$u->user_address->created_at}}<br/>
                                         Grade Member :<br/>
                                         Username : {{$u->username}}<br/>
                                         Grade Pajak CW Bonus :

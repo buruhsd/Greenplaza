@@ -185,7 +185,7 @@ class NeedApprovalController extends Controller
     public function listmember ()
     {
         $search = \Request::get('search');
-        $users = User::where('email', 'like', '%'.$search.'%')
+        $users = User::where('name', 'like', '%'.$search.'%')
                 ->orderBy('updated_at', 'DESC')->paginate(10);
        
         return view('admin.need_approval.akun_member.listmember', compact('users', 'detail'));
@@ -265,7 +265,7 @@ class NeedApprovalController extends Controller
      public function listseller ()
     {
         $search = \Request::get('search');
-        $users = User::where('email', 'like', '%'.$search.'%')
+        $users = User::where('name', 'like', '%'.$search.'%')
                 ->orderBy('updated_at', 'DESC')
                 ->where('user_store', '!=', null)
                 ->paginate(10);
