@@ -91,9 +91,9 @@
                                 <input name="src" type="text" placeholder="Cari Produk...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
-                            <div class="wave-list">
+                            <!-- <div class="wave-list">
                                 <a class="wave-items" href="">Celana</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-1 col-sm-2 d-sm-none d-md-block d-none d-sm-block ">

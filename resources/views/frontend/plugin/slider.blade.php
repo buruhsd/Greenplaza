@@ -1,10 +1,9 @@
-<!-- slider-area start -->
-    <div class="slider-area">
-        
-            
-            <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-4">
-                <div class="header-middle-area">
-                    <div class="col-9 .d-lg-none .d-xl-block .d-xl-none">
+<div class="slider-area">
+        <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-4">
+            <div class="header-middle-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 .d-lg-none .d-xl-block .d-xl-none">
                         <div class="search-wrap">
                             <form action="{{route('category')}}" method="GET">
                                 <select name="cat" hidden>
@@ -14,27 +13,14 @@
                                     <option value="" selected>null</option>
                                     @endif
                                 </select>
-                                <input name="src" type="text" placeholder="Cari Produk...">
-                                <button><i class="fa fa-search"></i></button>
+                                <input class=" d-md-none d-lg-none d-xl-none" name="src" type="text" placeholder="Cari Produk...">
+                                <button class=" d-md-none d-lg-none d-xl-none"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>
-                <div class=" col-3">
+                    <div class="col-6 .d-lg-none .d-xl-block .d-xl-none">
                         <ul class="d-flex account-info">
-                        <li class="li-cart"><a href="{{route('chart')}}">
-                                <i class="fa fa-shopping-cart"></i></a>
-                                @if(Session::has('chart') && count(Session::get('chart')) > 0)
-                                    <span class="badge-2">{{count(Session::get('chart'))}}</span>
-                                @else
-                                @endif
-                            </li>
-                        <li>
-
-                            <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
-                            <span class="badge-1" data-badge="6"></span></li>
                             <li>
-
-
                                 @guest
                                     <li><a href="{{route('login')}}">Login</a></li>
                                     <li><a href="{{route('register')}}">Register</a></li>
@@ -68,22 +54,24 @@
                                 @endguest
                             </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="slider-active owl-carousel next-prev-btn">
-                    <div class="slider-item black-opacity">
-                                      
-                        <img src="{{ asset('frontend/images/banner/BANNER1.png') }}" alt="" class="slider">
-                        <div class="slider-content">
-                            
                         </div>
                     </div>
-                    <div class="slider-item black-opacity">
-                        <img src="{{ asset('frontend/images/banner/BANNER2.png') }}" alt="" class="slider">
-                    </div>
-                </div>                                            
+                </div>                                         
             </div>
-            
-        
+        </div>
+        <div class="slider-active owl-carousel next-prev-btn">
+            <div class="slider-item black-opacity">
+                              
+                <img src="{{ asset('frontend/images/banner/BANNER1.png') }}" alt="" class="slider">
+                <div class="slider-content">
+                    
+                </div>
+            </div>
+            <div class="slider-item black-opacity">
+                <img src="{{ asset('frontend/images/banner/BANNER2.png') }}" alt="" class="slider">
+            </div>
+        </div>
     </div>
-    <!-- slider-area end -->
+</div>
+
+               
