@@ -348,8 +348,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		// Hot List
 		Route::group(['prefix' => 'hotlist', 'as' => '.hotlist'], function () {
-			Route::get('/buy_poin', function(){return view('member.hot-list.buy_poin');})->name('.buy_poin');
-			Route::get('/tagihan', function(){return view('member.hot-list.tagihan');})->name('.tagihan');
+			Route::get('/buy_poin', 'HotlistController@buy_poin')->name('.buy_poin');
+			Route::post('/buy_poin_store', 'HotlistController@buy_poin_store')->name('.buy_poin_store');
+			Route::post('/to_confirm/{$id}', 'HotlistController@to_confirm')->name('.to_confirm');
+			Route::post('/to_cancel/{$id}', 'HotlistController@to_cancel')->name('.to_cancel');
+			Route::get('/tagihan', 'HotlistController@tagihan')->name('.tagihan');
 		});
 		// Produk & Brand
 		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
@@ -379,7 +382,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		// Pasang Iklan
 		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
-			Route::get('/beli_saldo', function(){return view('member.iklan.beli_saldo');})->name('.beli_saldo');
+			Route::get('/beli_saldo', 'IklanController@beli_saldo')->name('.beli_saldo');
+			Route::post('/beli_saldo_store', 'IklanController@beli_saldo_store')->name('.beli_saldo_store');
 			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
 			Route::get('/banner', function(){return view('member.iklan.banner');})->name('.banner');
 			Route::get('/banner_khusus', function(){return view('member.iklan.banner_khusus');})->name('.banner_khusus');
