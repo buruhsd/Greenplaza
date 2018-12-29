@@ -24,11 +24,41 @@ class IklanController extends Controller
 
     /**
     * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function list(){
+        return view('member.pincode.tagihan');
+    }
+
+    /**
+    * @param method $method
     * @return view
     */
     public function beli_saldo(){
         $data['paket'] = Paket_iklan::all();
         return view('member.iklan.beli_saldo', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return view
+    */
+    public function to_confirm(Request $request, $id){
+        $res = Trans_iklan::findOrFail($id);
+        $res->trans_iklan_status = 1;
+        $res->save();
+        return redirect()->back();
+    }
+
+    /**
+    * @param method $method
+    * @return view
+    */
+    public function to_cancel(Request $request, $id){
+        $res = Trans_iklan::findOrFail($id);
+        $res->trans_iklan_status = 2;
+        $res->save();
+        return redirect()->back();
     }
 
     /**
@@ -53,15 +83,15 @@ class IklanController extends Controller
         //         ->with(['flash_status' => $status,'flash_message' => $message]);
         // }
         // input transaksi
-        $paket_hotlist = Paket_iklan::whereId($request->trans_hotlist_paket_id)->first();
+        $paket_iklan = Paket_iklan::whereId($request->trans_iklan_paket_id)->first();
         $code = FunctionLib::str_rand(4).FunctionLib::str_rand(6);
         $date = date('Y-m-d H:i:s');
         $res = new Trans_iklan;
         $res->trans_iklan_code = 'IKL-'.$code;
         $res->trans_iklan_user_id = Auth::id();
         // $res->trans_hotlist_status = 0;
-        $res->trans_iklan_paket_id = $request->trans_hotlist_paket_id;
-        $res->trans_iklan_amount = $paket_hotlist->paket_hotlist_price;
+        $res->trans_iklan_paket_id = $request->trans_iklan_paket_id;
+        $res->trans_iklan_amount = $paket_iklan->paket_iklan_price;
         $res->trans_iklan_note = $request->trans_iklan_note;//'Pembelian Paket Iklan '.$paket_hotlist->paket_hotlist_name.' by '.Auth::user()->username.' at '
             // .FunctionLib::datetime_indo($date, true, 'full');
         $res->save();
@@ -72,5 +102,13 @@ class IklanController extends Controller
 
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function tagihan(){
+        return view('member.iklan.tagihan');
     }
 }

@@ -341,7 +341,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		});
 		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
 			Route::get('/', 'MessageController@index')->name('.index');
-			Route::get('/create', 'MessageController@create')->name('.create');
+			Route::get('/create/{store_slug}', 'MessageController@create')->name('.create');
 			Route::post('/store', 'MessageController@store')->name('.store');
 			Route::get('/destroy/{id}', 'MessageController@destroy')->name('.destroy');
 			Route::get('arsip/{id}', 'MessageController@arsip')->name('.arsip');
@@ -377,6 +377,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		// PIN Code
 		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
 			Route::get('/buy_pincode', 'PincodeController@buy_pincode')->name('.buy_pincode');
+			Route::post('/buy_pincode_store', 'PincodeController@buy_pincode_store')->name('.buy_pincode_store');
+			Route::post('/to_confirm/{$id}', 'PincodeController@to_confirm')->name('.to_confirm');
+			Route::post('/to_cancel/{$id}', 'PincodeController@to_cancel')->name('.to_cancel');
 			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
 			Route::get('/tagihan', function(){return view('member.pincode.tagihan');})->name('.tagihan');
 		});

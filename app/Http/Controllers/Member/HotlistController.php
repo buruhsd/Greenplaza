@@ -24,6 +24,14 @@ class HotlistController extends Controller
 
     /**
     * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function list(){
+        return view('member.hot-list.tagihan');
+    }
+
+    /**
+    * @param method $method
     * @return view
     */
     public function buy_poin(){

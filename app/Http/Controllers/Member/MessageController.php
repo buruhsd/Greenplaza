@@ -28,6 +28,40 @@ class MessageController extends Controller
     private $perPage = 5;
     private $mainTable = 'sys_message';
 
+    /******/
+    public function create($store_slug){
+        $data['user'] = User::where('user_slug', $store_slug)->firstOrFail();
+        return view('member.message.create', $data);
+    }
+
+    /******/
+    public function store(Request $request){
+        $status = 200;
+        $message = 'Message Send!';
+        
+        $requestData = $request->all();
+        $this->validate($request, [
+            'message_to_id' => 'required|numeric',
+            'message_subject' => 'required',
+            'message_text' => 'required',
+            // 'brand_note' => 'required',
+        ]);
+        try {
+            $res = new Message;
+            $res->message_from_id = Auth::id();
+            $res->message_to_id = $request->message_to_id;
+            $res->message_subject = $request->message_subject;
+            $res->message_text = $request->message_text;
+            $res->save();
+        } catch (Exception $e) {
+            $status = 500;
+            $message = 'Message Failed to Send!';
+        }
+
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -65,7 +65,7 @@ class OtherTransaction extends Migration
             $table->integer('trans_pincode_user_id')->unsigned()->comment('id user');
             $table->integer('trans_pincode_paket_id')->unsigned()->comment('id paket');
             $table->integer('trans_pincode_bank_id')->unsigned()->comment('id bank');
-            $table->tinyInteger('trans_pincode_status')->default(0)->comment('status, 1.baru, 2.konfirmasi(paid), 3.approve admin, 4.ditolak');
+            $table->tinyInteger('trans_pincode_status')->default(0)->comment('status, 0.baru, 1.konfirmasi(paid), 2.batal, 3.approve admin, 4.ditolak');
             $table->integer('trans_pincode_payment_id')->default(0)->nullable()->unsigned()->comment('metode pembayaran');
             $table->string('trans_pincode_paid_image')->default('-');
             $table->dateTime('trans_pincode_paid_date')->nullable();
@@ -83,7 +83,7 @@ class OtherTransaction extends Migration
             $table->integer('trans_hotlist_user_id')->unsigned()->comment('id user');
             $table->integer('trans_hotlist_paket_id')->unsigned()->comment('id paket');
             $table->integer('trans_hotlist_bank_id')->unsigned()->comment('id bank');
-            $table->tinyInteger('trans_hotlist_status')->default(0)->comment('status, 1.baru, 2.konfirmasi(paid), 3.approve admin, 4.ditolak');
+            $table->tinyInteger('trans_hotlist_status')->default(0)->comment('status, 0.baru, 1.konfirmasi(paid), 2.batal, 3.approve admin, 4.ditolak');
             $table->integer('trans_hotlist_payment_id')->default(0)->nullable()->unsigned()->comment('metode pembayaran');
             $table->string('trans_hotlist_paid_image')->default('-');
             $table->dateTime('trans_hotlist_paid_date')->nullable();
