@@ -846,6 +846,7 @@ a#scrollUp:hover {
 .slider-area {
     margin-top: 20px;
     margin-bottom: 10px;
+
 }
 
 .slider-active {
@@ -854,9 +855,20 @@ a#scrollUp:hover {
     padding-top: 10px;
     background: #f5f5f5;
     overflow: hidden;
+    width : 50%;
+   /* margin-bottom: -90px;*/
+}
+
+.slider-active1 {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background: #f5f5f5;
+    overflow: hidden;
    /* width : 50%;*/
    /* margin-bottom: -90px;*/
 }
+
 
 .slider-item {
     position: relative;
@@ -1072,13 +1084,14 @@ span.discount {
 /*----------featured-area start----------*/
 
 .featured-area {
-    margin-top: -35%;
+    margin-top: 35%;
 }
 
 .featured-wrap {
     padding: 10px;
     background: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    height: 50%;
 }
 
 .featured-img {

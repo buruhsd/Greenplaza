@@ -739,6 +739,20 @@
 
 }
 
+@media screen and (min-width: 360px) and (max-width: 750px) {
+    .slider-active {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background: #f5f5f5;
+    overflow: hidden;
+     width : 100%;
+
+
+    }
+
+    }
+
 @media only screen and (min-width: 300px) and (max-width: 750px) {
     .logo {
         display: none;
@@ -751,7 +765,7 @@
     background: #f5f5f5;
     overflow: hidden;
     margin-bottom: -30px;
-
+     width : 100%;
 
     }
 
