@@ -89,8 +89,8 @@
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Harga</h4>
                                         <li><a href="{{route('admin.konfigurasi.regseller')}}">Paket Reg Seller</a></li>
-                                        <li><a href="#">Harga Iklan (Iklan Greenplaza)</a></li>
-                                        <li><a href="#">Harga Beli Saldo Iklan</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.hargaiklan')}}">Harga Iklan (Iklan Greenplaza)</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.hargabeli')}}">Harga Beli Saldo Iklan</a></li>
                                         {{-- <a href="#">Setting Harga</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Paket Reg Seller</a></li>

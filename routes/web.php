@@ -225,6 +225,13 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::group(['prefix' => 'konfigurasi', 'as' => '.konfigurasi'], function () {
 			//REG SELLER
 			Route::get('regseller', 'Admin\\KonfigurasiController@regseller')->name('.regseller');
+			Route::get('tambahregseller', 'Admin\\KonfigurasiController@tambah_regseller')->name('.tambah');
+
+			//HARGA IKLAN
+			Route::get('hargaiklan', 'Admin\\KonfigurasiController@hargaiklan')->name('.hargaiklan');
+
+			//HARGA BELI SALDO
+			Route::get('hargabelisaldo', 'Admin\\KonfigurasiController@hargabeli')->name('.hargabeli');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {

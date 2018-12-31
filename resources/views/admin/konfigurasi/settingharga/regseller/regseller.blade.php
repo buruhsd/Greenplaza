@@ -8,6 +8,7 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
+                    <a href="{{route('admin.konfigurasi.tambah')}}"><button type="" class="btn btn-primary pull-left" style="margin-bottom: 3%">Tambah +</button></a> <br/>
                     <!-- <div class="col-md-6">
                         <div class="input-group pull-left">
                             <select id="select-list" type="text" class="form-control">
@@ -28,6 +29,7 @@
                         </div>
                     </div> -->
                 </div>
+                <p>Pengaturan level <button type="" class="btn btn-primary btn-rounded btn-xs" style="width: 8%">Akun Seller</button> - Sesuaikan harga paket dengan fitur ( poin, banner, iklan baris ) yang diperoleh seller.</p>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table">
