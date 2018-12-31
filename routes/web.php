@@ -232,6 +232,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 
 			//HARGA BELI SALDO
 			Route::get('hargabelisaldo', 'Admin\\KonfigurasiController@hargabeli')->name('.hargabeli');
+			Route::get('tambah_hargabelisaldo', 'Admin\\KonfigurasiController@tambah_hargabeli')->name('.tambah_hargabeli');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {

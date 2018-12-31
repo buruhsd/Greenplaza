@@ -28,4 +28,8 @@ class KonfigurasiController extends Controller
     {
     	return view('admin.konfigurasi.settingharga.hargabelisaldo.hargabeli');
     }
+    public function tambah_hargabeli ()
+    {
+    	return view('admin.konfigurasi.settingharga.hargabelisaldo.tambah');
+    }
 }

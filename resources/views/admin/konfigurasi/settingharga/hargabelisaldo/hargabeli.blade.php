@@ -96,30 +96,61 @@
       </div>
   </div><!-- Row -->
   <div class="row">
-        @include('layouts._flash')
-        <div class="col-md-6">
-          <div class="panel panel-white">
-            <div class="panel-heading clearfix">
-            </div>
-            <p><center>SETTING PROFIT SPONSOR (dalam %)</center></p>
-              <div class="panel-body">
-                  <form class="form-horizontal" method="POST" action= "" enctype = "multipart/form-data">
-                    {{ csrf_field() }}
-                      <div class="form-group">
-                          <div class="form-group">
-                            <div class="col-md-10">
-                              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-                          </div>
-                          <div class="col-sm-2">
-                              <button type="submit" class="btn btn-danger btn-xs">Update</button>
-                          </div>
-                      </div>
-                  </form>
-                  <p style="font-size: 80%">*) Contoh : Isikan angka 5 untuk setting 5% <br/>
+    @include('layouts._flash')
+    <div class="col-md-6">
+      <div class="panel panel-white">
+        <div class="panel-heading clearfix">
+        </div>
+        <p><center>SETTING PROFIT SPONSOR (dalam %)</center></p>
+          <div class="panel-body">
+            <form class="form-horizontal" method="POST" action= "" enctype = "multipart/form-data">
+              {{ csrf_field() }}
+                <div class="form-group">
+                    <div class="form-group">
+                      <div class="col-md-10">
+                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-danger btn-xs">Update</button>
+                    </div>
+                </div>
+            </form>
+            <p style="font-size: 80%">*) Contoh : Isikan angka 5 untuk setting 5% <br/>
                   - Setiap pembeli/penjual membeli iklan maka sponsor akan mendapat 5%. </p>
-              </div>
           </div>
       </div>
+    </div>
+  </div><!-- Row -->
+</div><!-- Main Wrapper -->
+<div id="main-wrapper">
+  <div class="row">
+    @include('layouts._flash')
+    <div class="col-md-12">
+      <div class="panel panel-white">
+        <div class="panel-heading clearfix">
+          <a href="{{route('admin.konfigurasi.tambah_hargabeli')}}"><button type="" class="btn btn-danger pull-left" style="margin-bottom: 3%">Tambah Pilihan Order Saldo</button></a>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+              <table class="table">
+                  <thead>
+                      <tr>
+                          <th><center>Id</center></th>
+                          <th><center>Nama</center></th>
+                          <th><center>Harga</center></th>
+                          <th><center>Action</center></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div><!-- Row -->
 </div><!-- Main Wrapper -->
 </div>
