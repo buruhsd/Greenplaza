@@ -223,6 +223,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		});
 
 		Route::group(['prefix' => 'konfigurasi', 'as' => '.konfigurasi'], function () {
+		//SETTING HARGA
 			//REG SELLER
 			Route::get('regseller', 'Admin\\KonfigurasiController@regseller')->name('.regseller');
 			Route::get('tambahregseller', 'Admin\\KonfigurasiController@tambah_regseller')->name('.tambah');
@@ -233,6 +234,24 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			//HARGA BELI SALDO
 			Route::get('hargabelisaldo', 'Admin\\KonfigurasiController@hargabeli')->name('.hargabeli');
 			Route::get('tambah_hargabelisaldo', 'Admin\\KonfigurasiController@tambah_hargabeli')->name('.tambah_hargabeli');
+			Route::get('update_hargabelisaldo', 'Admin\\KonfigurasiController@update_hargabeli')->name('.update_hargabeli');
+
+		//SETTING IKLAN
+			//IKLAN SLIDER
+			Route::get('iklanslider', 'Admin\\KonfigurasiController@iklanslider')->name('.iklanslider');
+			Route::get('tambah_iklanslider', 'Admin\\KonfigurasiController@tambah_iklanslider')->name('.tambah_iklanslider');
+
+			//IKLAN BANNER KHUSUS
+			Route::get('iklanbennerkhusus', 'Admin\\KonfigurasiController@iklanbanner')->name('.iklanbanner');
+			Route::get('tambah_iklanbennerkhusus', 'Admin\\KonfigurasiController@tambah_iklanbanner')->name('.tambah_iklanbanner');
+
+		//PROFILE GREENPLAZA
+			//OFFICIAL EMAIL
+			Route::get('officialemail', 'Admin\\KonfigurasiController@officialemail')->name('.officialemail');
+
+		//SETTING AKUN
+			//AKUN ADMIN
+			Route::get('akunadmin', 'Admin\\KonfigurasiController@akunadmin')->name('.akunadmin');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {

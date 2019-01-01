@@ -100,8 +100,8 @@
                                     </li>
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Iklan</h4>
-                                        <li><a href="#">Iklan Slider</a></li>
-                                        <li><a href="#">Iklan Banner Khusus</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.iklanslider')}}">Iklan Slider</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.iklanbanner')}}">Iklan Banner Khusus</a></li>
                                         {{-- <a href="#">Setting Iklan</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Iklan Slider</a></li>
@@ -111,8 +111,8 @@
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Transaksi</h4>
                                         <li><a href="{{route('admin.config.transaction')}}">Jeda Waktu Transaksi</a></li>
-                                        <li><a href="#">Fee Transaksi</a></li>
-                                        <li><a href="#">Pajak</a></li>
+                                        <!-- <li><a href="#">Fee Transaksi</a></li>
+                                        <li><a href="#">Pajak</a></li> -->
                                         {{-- <a href="#">Setting Transaksi</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{route('admin.config.transaction')}}">Jeda Waktu Transaksi</a></li>
@@ -123,7 +123,7 @@
                                     <li>
                                         <h4 class="m-l-sm text-danger">Profil Greenplaza</h4>
                                         <li><a href="{{route('admin.config.profil')}}">Profil Greenplaza</a></li>
-                                        <li><a href="#">Official Email</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.officialemail')}}">Official Email</a></li>
                                         <li><a href="{{route('admin.bank.index')}}">Bank</a></li>
                                         {{-- <a href="#">Profil Greenplaza</a>
                                         <ul class="sub-menu">
@@ -134,7 +134,7 @@
                                     </li>
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Akun</h4>
-                                        <li><a href="#">Tambah Akun Admin</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
                                         <li><a href="#">Grade Member</a></li>
                                         <li><a href="#">Grade Seller</a></li>
                                         <li><a href="{{route('admin.page')}}">Page List</a></li>
