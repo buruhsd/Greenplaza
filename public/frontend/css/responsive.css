@@ -754,9 +754,142 @@
     }
 
 @media only screen and (min-width: 300px) and (max-width: 750px) {
+
+    /*navbar content*/
+        .new-navbar-content {
+    border-bottom: 1px solid #eee;
+
+
+        }
+
+        .new-navbar-content p {
+            padding: 10px 0;
+        }
+
+        .account-info {
+            -webkit-box-pack: end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+        }
+
+        .account-info li {
+            position: relative;
+        }
+
+        .account-info li>a {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 900;
+            padding-left: 10px;
+            padding-right: 20px;
+            padding-bottom: -50px;
+            position: relative;
+            border-left: 1px solid #eee;
+            display: block;
+        }
+
+        .account-info li:hover>a {
+            color: #FFD700;
+        }
+
+        .account-info li a i {
+            margin-right: 5px;
+        }
+
+        .account-info li a i.fa-angle-down {
+            margin-right: 0;
+            margin-left: 5px;
+        }
+
+        .account-info li a i.fa-bell {
+            padding-top: 5px;
+            margin-right: 0;
+            margin-left: 10px;
+            font-size: 15px;
+
+        }
+
+        .account-info li a i.fa-shopping-cart {
+            padding-top: 5px;
+            margin-right: 0;
+            margin-left: 10px;
+            font-size: 17px;
+        }
+
+        .account-info li:first-child a {
+            padding-left: 0;
+            border-left: none;
+        }
+
+        .account-info li:last-child a {
+            padding-right: 0;
+        }
+
+        .account-info li>ul {
+            position: absolute;
+            right: 0;
+            width: 250px;
+            padding: 20px;
+            background: #f5f5f5;
+            border-top: 1px solid #eee;
+            z-index: 99;
+            transform: scaleY(0);
+            -webkit-transform: scaleY(0);
+            -moz-transform: scaleY(0);
+            transform-origin: top;
+            -webkit-transform-origin: top;
+            -webkit-transform-origin: top;
+            visibility: hidden;
+            opacity: 0;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            text-align: right;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, .2);
+        }
+
+        .account-info li:last-child>ul {
+            width: 150px;
+        }
+
+        .account-info li:hover>ul {
+            transform: scaleY(1);
+            -webkit-transform: scaleY(1);
+            -moz-transform: scaleY(1);
+            visibility: visible;
+            opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        }
+
+        .account-info li>ul li a {
+            padding: 5px 0px;
+            border-left: none;
+        }
+
+        .account-info li>ul li:hover a {
+            padding-right: 5px;
+        }
+
+        .account-info li>ul li a img {
+            margin-left: 5px;
+        }
+
+    /*end navbar content*/
+
     .logo {
         display: none;
     }
+
+    .account-info1 li a i.fa-user {
+        padding-top: 5px;
+        margin-right: 0;
+        margin-left: 10px;
+        font-size: 17px;
+        color: #fff;
+    }
+
 
     .slider-active {
     padding-left: 10px;
@@ -803,6 +936,35 @@
     padding-bottom: -100px;
 
     }
+
+    .header-middle-area-content {
+    padding-right: 5px;
+    padding-top: -10px;
+    border-bottom: 1px solid #eee;
+    
+
+    }
+
+    .header-middle-area-content{
+     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+    /*Opacity end*/
+    background-color: black;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0px;
+    padding: 0;
+    margin: 0;
+    z-index: 99;
+    display: flex;
+    
+}
 
     .search-wrap form {
     padding-top: 5px;
@@ -989,9 +1151,25 @@
     display: none;
 }
 
-.header-area{
+.bg-1{
     display: none;
 }
+
+.header-tor-area{
+    
+    /*Opacity end*/
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    padding: 0;
+    margin: 0;
+    /*z-index: -99;*/
+   
+}
+
 .header-middle-area{
      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     filter: alpha(opacity=80);
