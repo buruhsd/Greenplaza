@@ -97,6 +97,11 @@ class MessageController extends Controller
         if (!empty($where)) {
             $data['message'] = Message::whereRaw($where)
                 ->paginate($this->perPage);
+            foreach ($data['message'] as $item) {
+                $message = Message::findOrFail($item->id);
+                $message->message_is_read = 1;
+                $message->save();
+            }
         } else {
             $data['message'] = Message::paginate($this->perPage);
         }

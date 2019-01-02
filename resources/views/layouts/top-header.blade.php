@@ -25,8 +25,8 @@
                             </li>
                         <li>
 
-                            <a href="javascript:void(0);"><i class="fa fa-bell"></i></a>
-                            <span class="badge-1" data-badge="6"></span></li>
+                            <a href="{{route('member.message.index')}}"><i class="fa fa-bell"></i></a>
+                            <span class="badge-1" data-badge="{{FunctionLib::count_message()->count()}}"></span></li>
                             <li>
 
 

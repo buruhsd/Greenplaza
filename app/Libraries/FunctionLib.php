@@ -2,6 +2,15 @@
 class FunctionLib
 {
 
+    /******/
+    public static function count_message(){
+        $where = 'message_to_id = '.Auth::id();
+        $where .= ' AND message_is_read = 0';
+        $message = App\Models\Message::whereRaw($where)->get();
+        // dd($data['message']);
+        return $message;
+    }
+
     /**
      * check status midtrans.
      * @return void
