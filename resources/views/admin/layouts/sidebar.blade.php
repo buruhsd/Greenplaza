@@ -137,8 +137,9 @@
                                         <li><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
                                         <li><a href="#">Grade Member</a></li>
                                         <li><a href="#">Grade Seller</a></li>
-                                        <li><a href="{{route('admin.page')}}">Page List</a></li>
-                                        <li><a href="#">Update Password Admin</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>
+                                        <!-- <li><a href="{{route('admin.page')}}">Page List</a></li> -->
+                                        <li><a href="{{route('admin.konfigurasi.updatepass', Auth::user()->id)}}">Update Password Admin</a></li>
                                         {{-- <a href="#">Setting Akun</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Tambah Akun Admin</a></li>

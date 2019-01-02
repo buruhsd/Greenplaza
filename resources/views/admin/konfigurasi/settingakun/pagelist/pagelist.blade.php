@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <a href="{{route('admin.konfigurasi.tambah_akunadmin')}}"><button type="" class="btn btn-primary pull-left" style="margin-bottom: 3%">+ Tambah User</button></a> <br/>
+                    <a href="{{route('admin.konfigurasi.tambah_pagelist')}}"><button type="" class="btn btn-primary pull-left" style="margin-bottom: 3%"><i class="fa fa-file-archive-o"></i> Tambah Page</button></a> <br/>
                     <!-- <div class="col-md-6">
                         <div class="input-group pull-left">
                             <select id="select-list" type="text" class="form-control">
@@ -38,8 +38,9 @@
                             <thead>
                                 <tr>
                                     <th><center>No.</center></th>
-                                    <th><center>Nama_User</center></th>
-                                    <th><center>Password</center></th>
+                                    <th><center>Judul_Page</center></th>
+                                    <th><center>Kategory</center></th>
+                                    <th><center>Status</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>

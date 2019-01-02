@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use Session;
 
 class KonfigurasiController extends Controller
 {
@@ -71,5 +73,60 @@ class KonfigurasiController extends Controller
     public function akunadmin ()
     {
     	return view('admin.konfigurasi.settingakun.akunadmin.akunadmin');
+    }
+    public function tambah_akunadmin ()
+    {
+    	return view('admin.konfigurasi.settingakun.akunadmin.tambah');
+    }
+    public function add (Request $request)
+    {
+    	$users = User::pluck('name')->toArray();
+    	// dd($users);
+    	$value = $request->value;
+    	if ($value != $users){
+    		Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Nama User Tidak Terdaftar."
+            ]);
+    	}else {
+    		
+    	}
+    	return redirect()->back();
+    }
+
+    //PAGELIST
+    public function pagelist ()
+    {
+    	return view('admin.konfigurasi.settingakun.pagelist.pagelist');
+    }
+    public function tambah_pagelist ()
+    {
+    	return view('admin.konfigurasi.settingakun.pagelist.tambah');
+    }
+
+    //UPDATEPASS
+    public function updatepass (Request $request, $id)
+    {
+    	$users = User::find($id);
+    	return view('admin.konfigurasi.settingakun.updatepass.updatepass', compact('users'));
+    }
+    public function changepass (Request $request, $id)
+    {
+    	$value = $request->value;
+        $users = User::find($id);
+        if ($value == $request->password){
+            $users->password = bcrypt($request->password);
+            $users->save();
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Password Berhasil Diubah."
+            ]);
+        } else {
+            Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Password Salah"
+            ]);
+        }
+    return redirect()->back();
     }
 }

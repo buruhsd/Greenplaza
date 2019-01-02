@@ -252,6 +252,16 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		//SETTING AKUN
 			//AKUN ADMIN
 			Route::get('akunadmin', 'Admin\\KonfigurasiController@akunadmin')->name('.akunadmin');
+			Route::get('tambah_akunadmin', 'Admin\\KonfigurasiController@tambah_akunadmin')->name('.tambah_akunadmin');
+			Route::post('add', 'Admin\\KonfigurasiController@add')->name('.add');
+
+			//PAGELIST
+			Route::get('pagelist', 'Admin\\KonfigurasiController@pagelist')->name('.pagelist');
+			Route::get('tambah_pagelist', 'Admin\\KonfigurasiController@tambah_pagelist')->name('.tambah_pagelist');
+
+			//UPDATE PASS
+			Route::get('updatepassword/{id}', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
+			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
