@@ -105,6 +105,51 @@
                                                 </li>
                                             </center>
                                         </div>
+                                        {{-- color and size --}}
+                                        <?php $size = explode(',', $detail->produk_size);?>
+                                        <?php 
+                                            $color_arr = [
+                                                    'blue' => '#007bff',
+                                                    'orange' => '#ffc107',
+                                                    'red' => '#dc3545',
+                                                    'green' => '#28a745',
+                                                    'white' => '#ffffff',
+                                                ];
+                                            $color_arr = [
+                                                    'blue' => 'primary',
+                                                    'orange' => 'warning',
+                                                    'red' => 'danger',
+                                                    'green' => 'success',
+                                                    'white' => 'default',
+                                                ];
+                                            $color = explode(',', $detail->produk_color);
+                                        ?>
+                                        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('size') ? 'has-error' : ''}}">
+                                            {!! Form::label('size', 'Size : ', ['class' => 'col-md-12 control-label']) !!}
+                                            <div class="col-md-12">
+                                                <div class="btn-group" data-toggle="buttons">
+                                                    @foreach($size as $item)
+                                                        <label class="border1 btn btn-default">
+                                                            <input type="radio" name="size" value="{{$item}}" autocomplete="off">
+                                                            {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('color') ? 'has-error' : ''}}">
+                                            {!! Form::label('color', 'Color : ', ['class' => 'col-md-12 control-label']) !!}
+                                            <div class="col-md-12">
+                                                <div class="" data-toggle="buttons">
+                                                    @foreach($color as $item)
+                                                        <label class="btn btn-default btn-block btn-{!!$color_arr[$item]!!}" {{-- style="background-color: {!!$color_arr[$item]!!}" --}}>
+                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off">
+                                                            {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <center>
                                                 <li class="col-4">
@@ -121,7 +166,7 @@
                                         <li>Categories:</li>
                                         <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
                                     </ul>
-                                    <div class="color-plate">
+                                    {{-- <div class="color-plate">
                                         <p>Color:</p>
                                         <ul>
                                             <li></li>
@@ -138,7 +183,7 @@
                                             <li><a href="#">L</a></li>
                                             <li><a href="#">XL</a></li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                     <ul class="socil-icon">
                                         <li>Share :</li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/fb.png') }}"></i></a></li>

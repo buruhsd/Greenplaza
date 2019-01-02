@@ -28,18 +28,26 @@ class ChartController extends Controller
     *
     **/
     public function addChart(Request $request, $id){
-    	$produk = Produk::where('id', $id)->first();
-        if($request->qty > $produk['produk_stock']){
+        $produk = Produk::where('id', $id)->first();
+        if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Stock is influence']);
         }
-    	// dd($request);
+        if($request->address_id == null || $request->address_id == ""){
+            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi alamat anda']);
+        }
+        if($request->ship_cost == null || $request->ship_cost == "" || $request->ship_cost == 0){
+            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
+        }
     	// random string
     	$trans_code = FunctionLib::str_rand(8);
 
         $courier = 0;
-        print_r($request->courier);
+        // print_r($request->courier);
         if(!empty($request->courier)){
             $courier = Shipment::where('shipment_name', '=', strtoupper($request->courier))->pluck('id')[0];
+        }
+        if($courier == null || $courier == "" || $courier == 0){
+            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
         }
     	$transaction = [
 			'trans_code' => $trans_code,

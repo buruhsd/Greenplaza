@@ -6,6 +6,7 @@ use Session;
 use App\User;
 use App\Role;
 use App\Models\User_detail;
+use App\Models\Sponsor;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -93,14 +94,18 @@ class RegisterController extends Controller
                 'user_detail_token' => "",//$data['user_detail_status'],
                 'user_detail_status' => 0//$data['user_detail_status'],
             ]);
+            $user_sponsor = Sponsor::create([
+                'user_tree_user_id' => $user->id,
+                'user_tree_sponsor_id' => 2,
+            ]);
         }
 
         // get role member
         $memberRole = Role::where('name', 'member')->pluck('name');
         $insert_role = $user->assignRole($memberRole);
         Session::flash("flash_notification", [
-                "level"=>"success",
-                "message"=>"Periksa Email Anda Untuk Informasi Lebih Lanjut"
+                "flash_status"=>"success",
+                "flash_message"=>"Periksa Email Anda Untuk Informasi Lebih Lanjut"
             ]);
         return $user;
 
@@ -113,7 +118,8 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        return view('auth.register_green');
+        $data['sponsor'] = User::limit(3)->get();
+        return view('auth.register_green', $data);
     }
 
 }

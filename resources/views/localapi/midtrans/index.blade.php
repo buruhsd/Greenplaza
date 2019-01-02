@@ -52,6 +52,24 @@
                                         </tr>
                                     @endforeach
                                 @endif
+                                @if(isset($trans_detail) && $trans_detail)
+                                    @foreach($trans_detail as $key => $item)
+                                        <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
+                                        <tr>
+                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
+                                            <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
+                                            <td class="quantity ">{{$item['trans_detail_qty']}}</td>
+                                            {{-- <td class="quantity ">
+                                                <div class="cart-plus-minus">
+                                                    <input type="text" value="1" />
+                                                </div>
+                                            </td> --}}
+                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                         <div class="row mt-60">
@@ -63,6 +81,7 @@
                                 <div class="cart-total text-right">
                                     <h3>Order Totals</h3>
                                     <ul>
+                                        @if(Session::has('chart'))
                                         <li>
                                             <span class="pull-left">Subtotal </span>
                                             Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount'))}}
@@ -71,6 +90,17 @@
                                             <span class="pull-left"> Total </span> 
                                             Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
                                         </li>
+                                        @endif
+                                        @if(isset($trans_detail) && $trans_detail)
+                                            <li>
+                                                <span class="pull-left">Subtotal </span>
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount'))}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left"> Total </span> 
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total'))}}
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -80,7 +110,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
+            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" id="close-button">
             <input type="submit" class="btn btn-success" value="Pay" id="pay-button">
         </div>
 		{{-- {!! Form::open(['id' => 'form-midtrans']) !!} --}}
@@ -108,6 +138,8 @@
                 //     form_data.append(key, result[key]);
                 // }
                 console.log(form_data);
+                var dataurl = "{{ route('member.transaction.konfirmasi',$item->trans->id)}}";
+                window.location = dataurl;
             },
             // Optional
             onPending: function(result){
@@ -119,6 +151,8 @@
                 //     form_data.append(key, result[key]);
                 // }
                 console.log(form_data);
+                var dataurl = "{{ route('member.transaction.konfirmasi',$item->trans->id)}}";
+                window.location = dataurl;
             },
             // Optional
             onError: function(result){
@@ -131,7 +165,13 @@
                 //     form_data.append(key, result[key]);
                 // }
                 // console.log(form_data);
+                var dataurl = "{{ route('member.transaction.konfirmasi',$item->trans->id)}}";
+                window.location = dataurl;
             }
         });
+    };
+    document.getElementById('close-button').onclick = function(){
+        var dataurl = "{{ route('member.transaction.konfirmasi',$item->trans->id)}}";
+        window.location = dataurl;
     };
 </script>

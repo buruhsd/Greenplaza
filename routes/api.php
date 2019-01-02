@@ -90,3 +90,8 @@ Route::post('user_detailupdate/{id}', 'AdminApi\User_detailController@update');
 Route::get('user_detaildestroy/{id}', 'AdminApi\User_detailController@destroy');
 
 Route::post('localapi/midtrans/done', 'LocalApi\\MidtransController@done');
+
+// area
+Route::post('province', 'AdminApi\\AreaController@province');
+Route::post('city', 'AdminApi\\AreaController@city');
+Route::post('subdistrict', 'AdminApi\\AreaController@subdistrict');
