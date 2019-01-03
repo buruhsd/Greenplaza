@@ -9,7 +9,7 @@
         <![endif]-->
     
     @include('layouts.top-header')
-    @include('frontend.plugin.slider')
+    @include('frontend.plugin.slider-new')
     
     <!-- .shop-page-area start -->
     

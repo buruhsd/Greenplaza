@@ -34,6 +34,10 @@
         display: none;
     }
 
+    .slider-area-new{
+        display: none;
+    }
+
     }
 
 @media screen and (min-width: 1024px) and (max-width: 1366px) {
@@ -154,6 +158,11 @@
         height: 50px;
         width: 50px;
     }
+
+    .slider-area-new{
+        display: none;
+    }
+
     .tag-wrap ul li a {
         padding: 5px 13px;
     }
@@ -249,6 +258,10 @@
         padding: 0px 10px;
         padding-right: 100px;
         
+    }
+
+    .slider-area-new{
+        display: none;
     }
     .cart-wishlist-wrap li a span {
         display: none;

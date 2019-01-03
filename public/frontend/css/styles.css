@@ -3681,6 +3681,17 @@ li.btn-chat:hover{
 .mySlides {display:none}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}
+
+
+.slider-area-new {
+    border: 1px solid orange; 
+    background-color: #fff; 
+    border-radius: 5px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
 /*.account-info-social li a {
     height: 30px;
     width: 30px;
