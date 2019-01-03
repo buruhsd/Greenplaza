@@ -161,6 +161,10 @@ div {
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 }
 
+.bg-5 {
+    background: #f5f5f5;
+}
+
 .bg-1 {
     background: #f5f5f5;
 }
@@ -1395,7 +1399,7 @@ ul.rating li {
 
 .product-content {
     padding: 20px 10px 10px;
-    border: 1px solid #e1e1e1;
+    border: 0px solid #e1e1e1;
     border-top: none;
 }
 
@@ -1516,6 +1520,17 @@ ul.rating li {
 
 
 /*----------banner-area end----------*/
+
+.banner-area-new div.col-3 {
+    border: 1px solid #fff;
+     border-right: 5px; 
+     box-sizing: border-box;
+      padding: 15px ;
+}
+
+.banner-area-new div.col-3:hover {
+    background-color: yellow;
+}
 
 .tab-menu {
     -webkit-box-pack: end;
@@ -2307,6 +2322,11 @@ ul.rating li {
 
 .rating-wrap ul li:last-child {
     color: #000;
+}
+
+
+.product-single-content h3 {
+    font-size: 20px;
 }
 
 .product-single-content p {

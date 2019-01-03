@@ -68,11 +68,13 @@
                                     <input type="text" name="width" value="{{$detail->produk_wide}}" hidden/>
                                     <ul class="input-style">
                                         <div class="col-md-12">
-                                            <li class="quantity cart-plus-minus" style="width: 100%; margin-bottom: 2%">
+                                            <center>
+                                            <li class="quantity cart-plus-minus " style="width: 100%; margin-bottom: 2%">
                                                 <input type="text" name="qty" value="1" />
                                             </li>
+                                            </center>
                                         </div>
-                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                        <div class="col-md-12 " style="margin-bottom: 2%">
                                             <center>
                                                 <li class="col-12">
                                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />

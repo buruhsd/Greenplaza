@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1">
+                    <div class="breadcumb-wrap bg-5">
                         <div class="breadcumb-content black-opacity">
                             <h2>Shopping Cart</h2>
                             <ul>
@@ -26,7 +26,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="cart-wrapper bg-1 p-10">
+                    <div class="cart-wrapper bg-5 p-10">
                         <table class="table-responsive cart-wrap">
                             <thead>
                                 <tr>

@@ -96,7 +96,7 @@
                             </div> -->
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-2 d-sm-none d-md-block d-none d-sm-block ">
+                    <div class="col-md-2 col-sm-2 d-sm-none d-md-block d-none d-sm-block ">
                         <ul class="cart-wishlist-wrap d-flex">
                             <li><a href="{{route('chart')}}">
                                 <i class="fa fa-shopping-cart"></i></a>

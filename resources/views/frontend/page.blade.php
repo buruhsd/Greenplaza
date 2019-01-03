@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1" src="">
+                    <div class="breadcumb-wrap bg-5" src="">
                         <div class="breadcumb-content black-opacity" style="background-image: url({{asset("images/header_page/".$page->page_header_image)}});background-size: 100% 100%;">
                             <h2></h2>
                             <ul>
@@ -30,7 +30,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-12">
-                    <aside class="sidebar-area p-10 bg-1">
+                    <aside class="sidebar-area p-10 bg-5">
                         <div class="widget widget_categories">
                             <h2 class="section-title">Categories</h2>
                             <ul>
@@ -71,7 +71,7 @@
                         </div>
                     </aside>
                 </div>
-                <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-1 mb-30">
+                <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-5 mb-30">
                     {!!$page->page_judul!!}
                     {{-- content --}}
                 </div>

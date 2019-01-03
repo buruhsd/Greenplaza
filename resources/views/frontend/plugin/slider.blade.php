@@ -18,7 +18,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-3 col-md-3 .d-lg-none .d-xl-block .d-xl-none">
+                    <div class="col-3 col-md-3 .d-lg-none .d-xl-block .d-xl-none ">
                         <ul class="d-flex account-info1">
                             <li>
                                 @guest
