@@ -4,9 +4,13 @@ class FunctionLib
 
     /******/
     public static function count_message(){
-        $where = 'message_to_id = '.Auth::id();
-        $where .= ' AND message_is_read = 0';
-        $message = App\Models\Message::whereRaw($where)->get();
+        if(\Auth::check()){
+            $where = 'message_to_id = '.Auth::id();
+            $where .= ' AND message_is_read = 0';
+            $message = App\Models\Message::whereRaw($where)->get();
+        }else{
+            $message = App\Models\Message::whereRaw('1 = 0')->get();
+        }
         // dd($data['message']);
         return $message;
     }
