@@ -2,7 +2,6 @@
 namespace App\Observers;
 use App\Models\Log_wallet;
 use App\Models\Wallet;
-use Auth;
 class WalletLogObserver
 {
     //listen to creating config

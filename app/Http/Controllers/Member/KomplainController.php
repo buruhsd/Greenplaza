@@ -201,7 +201,7 @@ class KomplainController extends Controller
         if($trans_detail){
             foreach ($trans_detail as $item) {
                 $trans_detail_to_cancel = Trans_detail::whereId($item->id)->first();
-                $trans_detail_to_cancel->trans_detail_trans_detail_drop = 1;
+                $trans_detail_to_cancel->trans_detail_drop = 1;
                 $trans_detail_to_cancel->trans_detail_drop_date = date("Y-m-d H:i:s");
                 $trans_detail_to_cancel->trans_detail_drop_note = "Barang sudah diterima member dan member mengajukan komplain";
                 $trans_detail_to_cancel->trans_detail_is_cancel = 1;

@@ -9,6 +9,7 @@ use View;
 use App\Models\Wallet; 
 use App\User; 
 use App\Observers\WalletLogObserver; 
+use App\Observers\WalletRegisterUserObserver; 
 
 class AppServiceProvider extends ServiceProvider
 {

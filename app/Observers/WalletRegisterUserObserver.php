@@ -3,11 +3,10 @@ namespace App\Observers;
 use App\Models\Wallet_type;
 use App\Models\Wallet;
 use App\User;
-use Auth;
 class WalletRegisterUserObserver
 {
     //listen to creating config
-    public function created(Wallet $item)
+    public function created(User $item)
     {
         $this->setLog("created", $item);
     }

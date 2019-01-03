@@ -19,9 +19,11 @@
                                         </div>
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
-                                        <div class="item black-opacity">
-                                            <img src="{{ asset('assets/images/product/'.$detail->produk_image) }}" alt="">
-                                        </div>
+                                        @foreach($detail->images as $image)
+                                            <div class="item black-opacity">
+                                                    <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -184,14 +186,14 @@
                                             <li><a href="#">XL</a></li>
                                         </ul>
                                     </div> --}}
-                                    <ul class="socil-icon">
+                                    {{-- <ul class="socil-icon">
                                         <li>Share :</li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/fb.png') }}"></i></a></li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/tw.png') }}"></i></a></li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/ig.png') }}"></i></a></li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/go.png') }}"></i></a></li>
                                         <li><a href="#"><img src="{{ asset('frontend/images/icon/yt.png') }}"></i></a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </div>
                         </div>
@@ -200,7 +202,7 @@
                                 <div class="single-product-menu">
                                     <ul class="nav">
                                         <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
-                                        <li><a data-toggle="tab" href="#faq">Faq</a></li>
+                                        {{-- <li><a data-toggle="tab" href="#faq">Faq</a></li> --}}
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
                                         <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
                                     </ul>

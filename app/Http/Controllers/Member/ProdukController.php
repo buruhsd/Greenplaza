@@ -208,6 +208,9 @@ class ProdukController extends Controller
             // add grosir
             if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
                 foreach ($request->produk_grosir_start as $key => $item) {
+                    if($request->produk_grosir_start[$key] == null){
+                        break;
+                    }
                     $produk_grosir = new Produk_grosir;
                     $produk_grosir->produk_grosir_produk_id = $res->id;
                     $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
@@ -216,7 +219,7 @@ class ProdukController extends Controller
                     $produk_grosir->save();
                 }
             }
-            return redirect('admin/produk')
+            return redirect('member/produk')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
     }
@@ -290,7 +293,7 @@ class ProdukController extends Controller
         if($produk->produk_seller_id !== Auth::user()->id || $res->produk_user_status !== Auth::user()->roles->first()->id){
             $status = 500;
             $message = 'Produk Not updated!';
-            return redirect('admin/produk')
+            return redirect('member/produk')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
 
         }
@@ -343,7 +346,7 @@ class ProdukController extends Controller
         if(!$produk){
             $status = 500;
             $message = 'Produk Not Updated!';
-            return redirect('admin/produk')
+            return redirect('member/produk')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
             // add produk image
@@ -357,7 +360,7 @@ class ProdukController extends Controller
                 if(!$produk_image){
                     $status = 500;
                     $message = 'Produk Image Not added!';
-                    return redirect('admin/produk')
+                    return redirect('member/produk')
                         ->with(['flash_status' => $status,'flash_message' => $message]);
                 }
             }
@@ -373,7 +376,7 @@ class ProdukController extends Controller
                 }
             }
         }
-        return redirect('admin/produk')
+        return redirect('member/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -389,7 +392,7 @@ class ProdukController extends Controller
         if($request->ajax()){
             return response()->json(['flash_status'=>$status, 'flash_message'=>$message]);
         }
-        return redirect('admin/produk')
+        return redirect('member/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -410,7 +413,7 @@ class ProdukController extends Controller
             $message = 'Produk Not deleted!';
         }
 
-        return redirect('admin/produk')
+        return redirect('member/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

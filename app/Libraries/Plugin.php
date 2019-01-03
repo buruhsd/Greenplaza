@@ -165,7 +165,8 @@ class Plugin
         if($status !== 'detail'){
             $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->orderBy('trans_detail_status')->first();
         }else{
-            $data['detail'] = App\Models\Trans_detail::whereId($id)->first();
+            // $data['detail'] = App\Models\Trans_detail::whereId($id)->first();
+            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->first();
         }
         $data['status_shipment'] = FunctionLib::get_waybill($data['detail']->id);
         return view('member.plugin.trans_purchase_btn', $data);
