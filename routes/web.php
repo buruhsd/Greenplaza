@@ -27,7 +27,7 @@ Route::get('/dashboard-member', 'member\\FrontController@dashboard');
 
 
 Route::get('/', function () {
-    return view('layouts.home');
+    return view('frontend.page.home');
 });
 
 //FrontController
