@@ -3,7 +3,7 @@
 
 @include('layouts.header')
 
-<body>
+<body style="background-color: #eee">
     
     @include('layouts.top-header')
     @include('frontend.plugin.slider')
