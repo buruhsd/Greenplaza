@@ -135,8 +135,8 @@
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Akun</h4>
                                         <li><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
-                                        <li><a href="#">Grade Member</a></li>
-                                        <li><a href="#">Grade Seller</a></li>
+                                        <li><a href="{{route('admin.konfigurasi.grademember')}}">Grade</a></li>
+                                        <!-- <li><a href="#">Grade Seller</a></li> -->
                                         <li><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>
                                         <!-- <li><a href="{{route('admin.page')}}">Page List</a></li> -->
                                         <li><a href="{{route('admin.konfigurasi.updatepass', Auth::user()->id)}}">Update Password Admin</a></li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Grade;
 use App\User;
 use Session;
 
@@ -102,6 +103,91 @@ class KonfigurasiController extends Controller
     public function tambah_pagelist ()
     {
     	return view('admin.konfigurasi.settingakun.pagelist.tambah');
+    }
+
+    //GRADE
+    public function grademember ()
+    {
+    	$grade = Grade::where('grade_member_status', '=', 2)->orderBy('created_at', 'DESC')->get();
+    	// dd($grade);
+    	return view('admin.konfigurasi.settingakun.grade.grademember', compact('grade'));
+    }
+    public function add_grademember (Request $request)
+    {
+    	$grade = new Grade;
+    	$grade->grade_member_name = $request->grade_member_name;
+    	$grade->grade_member_range = $request->grade_member_range;
+    	$grade->grade_member_status = 2;
+    	$grade->save();
+    	Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Grade Berhasil di Tambahkan."
+            ]);
+    	return redirect()->back();
+    }
+    public function update_grademember (Request $request, $id)
+    {
+    	$grade = Grade::find($id);
+    	$grade->grade_member_name = $request->grade_member_name;
+    	$grade->grade_member_range = $request->grade_member_range;
+    	$grade->save();
+    	Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Grade Berhasil Terupdate."
+            ]);
+    	return redirect()->back();
+    }
+    public function delete_grademember (Request $request, $id)
+    {
+    	$grade = Grade::find($id);
+    	$grade->delete();
+    	Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Grade Berhasil Dihapus."
+            ]);
+    	return redirect()->back();
+
+    }
+    public function gradeseller ()
+    {
+    	$grade = Grade::where('grade_member_status', '=', 1)->orderBy('created_at', 'DESC')->get();
+    	return view('admin.konfigurasi.settingakun.grade.gradeseller', compact('grade'));
+    }
+    public function add_gradeseller (Request $request)
+    {
+    	$grade = new Grade;
+    	$grade->grade_member_name = $request->grade_member_name;
+    	$grade->grade_member_range = $request->grade_member_range;
+    	$grade->grade_member_status = 1;
+    	$grade->save();
+    	Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Grade Berhasil di Tambahkan."
+            ]);
+    	return redirect()->back();
+    }
+    public function update_gradeseller (Request $request, $id)
+    {
+    	$grade = Grade::find($id);
+    	$grade->grade_member_name = $request->grade_member_name;
+    	$grade->grade_member_range = $request->grade_member_range;
+    	$grade->save();
+    	Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Grade Berhasil Terupdate."
+            ]);
+    	return redirect()->back();
+    }
+    public function delete_gradeseller (Request $request, $id)
+    {
+    	$grade = Grade::find($id);
+    	$grade->delete();
+    	Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Grade Berhasil Dihapus."
+            ]);
+    	return redirect()->back();
+
     }
 
     //UPDATEPASS

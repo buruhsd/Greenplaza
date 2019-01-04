@@ -259,6 +259,19 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('pagelist', 'Admin\\KonfigurasiController@pagelist')->name('.pagelist');
 			Route::get('tambah_pagelist', 'Admin\\KonfigurasiController@tambah_pagelist')->name('.tambah_pagelist');
 
+			//GRADE
+				//member
+			Route::get('grademember', 'Admin\\KonfigurasiController@grademember')->name('.grademember');
+			Route::post('add_grademember', 'Admin\\KonfigurasiController@add_grademember')->name('.add_grademember');
+			Route::post('grademember/{id}', 'Admin\\KonfigurasiController@update_grademember')->name('.update_grademember');
+			Route::get('delete_grademember/{id}', 'Admin\\KonfigurasiController@delete_grademember')->name('.delete_grademember');
+
+				//seller
+			Route::get('gradeseller', 'Admin\\KonfigurasiController@gradeseller')->name('.gradeseller');
+			Route::post('add_gradeseller', 'Admin\\KonfigurasiController@add_gradeseller')->name('.add_gradeseller');
+			Route::post('gradeseller/{id}', 'Admin\\KonfigurasiController@update_gradeseller')->name('.update_gradeseller');
+			Route::get('delete_gradeseller/{id}', 'Admin\\KonfigurasiController@delete_gradeseller')->name('.delete_gradeseller');
+
 			//UPDATE PASS
 			Route::get('updatepassword/{id}', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
 			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
