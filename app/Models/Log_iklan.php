@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Log_iklan extends Model
 {
-    protected $table = 'sys_withdrawal';
+    protected $table = 'log_iklan';
     /**
      * The attributes that are mass assignable.
      *
