@@ -12,7 +12,7 @@
     <!-- owl.carousel.2.0.0-beta.2.4 css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <!-- font-awesome v4.6.3 css -->
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}">
     <!-- animate.css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <!-- metisMenu.min.css -->
