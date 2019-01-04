@@ -1,5 +1,5 @@
 <!-- footer-area start -->
-    <footer class="footer-area bg-10">
+    <footer class="footer-area bg-5">
         <div class="footer-top">
             <div class="container">
                 <div class="row">

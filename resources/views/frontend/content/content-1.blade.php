@@ -1,9 +1,9 @@
- <div class="product-area ">
+ <div class="product-area">
         <div class="container">
-            <div class="shop-area-fs ">
+            <div class="shop-area">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
-                                <h2 class="section-title">Flash Sale</h2>
+                                <h2 class="section-title">New Arivel</h2>
                             </div>
                             {{-- <div class="col-lg-8 text-right col-sm-9 col-12">
                                 <ul class="tab-menu nav">

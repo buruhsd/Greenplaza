@@ -209,11 +209,11 @@ class FrontController extends Controller
     //     return view('frontend.alur-transaksi');
     // }
 
-     public function neweta()
-    {
+    //  public function carabelanja()
+    // {
 
-        return view('frontend.new-etalase');
-    }
+    //     return view('frontend.cara-belanja');
+    // }
 
     // /**
     // * @param

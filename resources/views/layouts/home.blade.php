@@ -3,7 +3,7 @@
 
 @include('layouts.header')
 
-<body style="background-color: #eeefff">
+<body style="background-color: #eee">
     
     @include('layouts.top-header')
     @include('frontend.plugin.slider')
@@ -24,7 +24,7 @@
         </div>
     </div>
     <!-- .product-area end -->
-    <!-- {!! Plugin::hot_promo()!!} -->
+    {!! Plugin::hot_promo()!!}
     {!! Plugin::recommended()!!}
     {!! Plugin::content_brand()!!}
     {{-- @include('frontend.content.content-brand') --}}
