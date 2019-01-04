@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 
+Route::get('/etalase', 'member\\FrontController@neweta')->name('etalase') ;
 
 Route::get('/tentang-greenplaza', 'member\\FrontController@about')->name('about') ;
 Route::get('/cara-belanja', 'member\\FrontController@carabelanja')->name('cara-belanja') ;

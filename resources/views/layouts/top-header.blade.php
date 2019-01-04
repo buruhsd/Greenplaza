@@ -1,7 +1,7 @@
 <!-- header-area start -->
 
     <header class="header-area">
-        <div class="header-tor-area bg-1">
+        <div class="header-tor-area bg-10">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-3 col-4">
@@ -67,7 +67,7 @@
                 </div>
             </div>
         </div> 
-        <div class="header-middle-area bg-1">
+        <div class="header-middle-area bg-10">
             <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-2">

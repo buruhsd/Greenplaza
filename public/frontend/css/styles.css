@@ -108,7 +108,7 @@ a {
 }
 
 a:hover {
-    color: #FF033D;
+    color:#4CAF50;
 }
 
 a:active,
@@ -160,6 +160,22 @@ div {
     content: "";
     opacity: .30;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+.bg-5 {
+    background: #f5f5f5;
+}
+
+.bg-11 {
+    background: #d71149;
+}
+
+.bg-12 {
+    background: #c30f42;
+}
+
+.bg-10 {
+    background: #fff;
 }
 
 .bg-1 {
@@ -1108,6 +1124,13 @@ ul.rating li {
 
 /*----------product-area start----------*/
 
+
+.shop-area-fs {
+    padding: 10px;
+    background: #4caf50;
+    margin-bottom: 30px;
+}
+
 .shop-area {
     padding: 10px;
     background: #f5f5f5;
@@ -1251,6 +1274,7 @@ ul.rating li {
     padding: 20px 10px 10px;
     border: 1px solid #e1e1e1;
     border-top: none;
+    background-color: #fff
 }
 
 .product-wrap:hover .product-content {
@@ -1371,6 +1395,36 @@ ul.rating li {
 
 /*----------banner-area end----------*/
 
+.banner-area {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.st12 {
+    border:solid 1px #ccc;
+    border-radius: 5px 10px;
+    width: 23%;
+    margin: 0.1% 1%;
+    padding: 5px;
+    line-height: 3;
+    background-color: #ffffff;
+}
+
+.st12:hover {
+    border-color: #d71149;
+}
+
+.banner-area-new div.col-3 {
+    border: 1px solid #fff;
+     border-right: 5px; 
+     box-sizing: border-box;
+      padding: 15px ;
+}
+
+.banner-area-new div.col-3:hover {
+    background-color: yellow;
+}
+
 .tab-menu {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
@@ -1379,6 +1433,7 @@ ul.rating li {
 
 .tab-content .owl-nav {
     display: none!important;
+
 }
 
 .tab-menu li {
@@ -2329,6 +2384,7 @@ ul.rating li {
     border: 1px solid #e1e1e1;
     padding: 20px;
     margin-top: -1px;
+    background-color: #fff;
 }
 
 .review-wrap {

@@ -1,6 +1,6 @@
 <div class="slider-area">
     <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-4">
-        <div class="header-middle-area">
+        <div class="header-middle-area bg-10">
             <div class="container">
                 <div class="row">
                     <div class="col-9 col-md-9 .d-lg-none .d-xl-block .d-xl-none">
