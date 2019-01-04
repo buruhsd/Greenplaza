@@ -307,6 +307,58 @@ class UserController extends Controller
      * update password page.
      *
      */
+    public function pass_trx(Request $request)
+    {
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.user.pass_trx', $data);
+    }
+
+    /**
+     * update password process
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function pass_trx_update(Request $request)
+    {
+        $status = 200;
+        $message = 'Password Has Been updated!';
+        
+        $requestData = $request->all();
+        
+        $this->validate($request, [
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        $user = User_detail::whereRaw('user_detail_user_id = '.Auth::id())->first();
+        if (!Hash::check($request->old_password, $user->user_detail_pass_trx)) {
+            $status = 500;
+            $message = 'Password does Not Match!';
+            return redirect('member/user/pass_trx')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        if ($request->new_password !== $request->re_new_password) {
+            $status = 500;
+            $message = 'New Password does Not Match!';
+            return redirect('member/user/pass_trx')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $password = $request->new_password;
+        $user->user_detail_pass_trx = Hash::make($password);
+        // $user->setRememberToken(Str::random(60));
+        $user->save();
+        if(!$user){
+            $status = 500;
+            $message = 'Password Not updated!';
+        }
+        return redirect('member/user/pass_trx')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * update password page.
+     *
+     */
     public function change_password(Request $request)
     {
         $data['user'] = User::findOrFail(Auth::id());

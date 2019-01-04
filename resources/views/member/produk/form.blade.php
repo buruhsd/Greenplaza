@@ -305,7 +305,7 @@
             {!! Form::label('produk_color', 'Warna : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="" data-toggle="buttons">
-                    <label class="btn btn-primary btn-block">
+                    {{-- <label class="btn btn-primary btn-block">
                         <input type="checkbox" name="produk_color[]" value="blue" autocomplete="off">
                         BlUE <span class="check glyphicon glyphicon-ok"></span>
                     </label>
@@ -328,7 +328,16 @@
                     <label class="btn btn-block">
                         <input type="checkbox" name="produk_color[]" value="other" autocomplete="off">
                         other <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
+                    </label> --}}
+                    <div class="input-group col-md-12 multiple-form-group" data-max="3">
+                        <div class="form-group">
+                            <div class="cp input-group colorpicker-component">
+                                <input type="text" name="produk_color[]" value="#00AABB" class="form-control" />
+                                <span class="input-group-addon"><i></i></span>
+                                <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- {!! Form::text('produk_color', null, [
                     'class' => 'form-control', 

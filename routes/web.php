@@ -353,6 +353,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update', 'UserController@update')->name('.update');
 			Route::get('/change_password', 'UserController@change_password')->name('.change_password');
 			Route::post('/change_password_update', 'UserController@change_password_update')->name('.change_password_update');
+			Route::get('/pass_trx', 'UserController@pass_trx')->name('.pass_trx');
+			Route::post('/pass_trx_update', 'UserController@pass_trx_update')->name('.pass_trx_update');
 			Route::get('/seller_address', 'UserController@seller_address')->name('.seller_address');
 			Route::post('/seller_address_update', 'UserController@seller_address_update')->name('.seller_address_update');
 			Route::get('/upload_foto_profil', 'UserController@upload_foto_profil')->name('.upload_foto_profil');
@@ -477,12 +479,12 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 });
 
 // auth all
+Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
+Route::get('/etalase/{user_store}', 'member\\FrontController@etalase')->name('etalase');
+Route::get('/category', 'member\\FrontController@category')->name('category');
+Route::get('/brand', 'member\\FrontController@brand')->name('brand');
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
-	Route::get('/category', 'member\\FrontController@category')->name('category');
-	Route::get('/brand', 'member\\FrontController@brand')->name('brand');
-	Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
-	Route::get('/etalase/{user_store}', 'member\\FrontController@etalase')->name('etalase');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');
@@ -522,6 +524,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('get_solusi/{id}', 'ContentController@get_solusi')->name('.get_solusi');
 	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
+		Route::get('login', function(){return view('localapi.login');})->name('.login');
 		Route::get('form_config', 'ModalController@formConfig')->name('.form_config');
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');

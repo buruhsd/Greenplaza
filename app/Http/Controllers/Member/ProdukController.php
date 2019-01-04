@@ -126,6 +126,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $status = 200;
         $message = 'Produk added!';
         
@@ -451,6 +452,55 @@ class ProdukController extends Controller
                 break;
             case 'create':
                 ?>
+                    <link href="<?php echo  asset('admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css');?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js');?> "></script>
+                    <script>
+                        $(function () {
+                            $('.cp').colorpicker();
+                            var no = 1;
+                            var addFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+                                var $formGroupClone = $formGroup.clone();
+
+                                $(this)
+                                    .toggleClass('btn-default btn-add btn-danger btn-remove')
+                                    .html('–');
+
+                                $formGroupClone.find('input').val('#00AABB');
+                                // $formGroupClone.find('.colorpicker-component').attr('id', 'cp'+ no);
+                                $formGroupClone.insertAfter($formGroup);
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                                if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+                                }
+                                $('.cp').colorpicker();
+                                no++;
+                            };
+                            var removeFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.input-group:last');
+                                if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+                                }
+
+                                $formGroup.remove();
+                                no--;
+                            };
+                            var countFormGroup = function ($form) {
+                                return $form.find('.form-group').length;
+                            };
+                            $(document).on('click', '.btn-add', addFormGroup);
+                            $(document).on('click', '.btn-remove', removeFormGroup);
+                        });
+                    </script>
                     <script type="text/javascript">
                         $(document).on('click', '#close-preview', function(){ 
                             $(this).parents(".parent-img").find('.image-preview').popover('hide');

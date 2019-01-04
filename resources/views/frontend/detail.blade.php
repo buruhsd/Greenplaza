@@ -29,34 +29,43 @@
                             </div>
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
-                                    <h3><a href="{{action('member\\FrontController@etalase', $detail->user->id)}}">{{$detail->user->user_store}}</a></h3>
+                                    <h3><a href="{{action('member\\FrontController@etalase', $detail->user->user_store)}}">{{$detail->user->user_store}}</a></h3>
                                     <div class="row">
                                         <div class="col-12">
                                             <h3 class="pull-left">{{ucfirst(strtolower($detail->produk_name))}}</h5>
                                         </div>
                                     </div>
                                     <hr/>
-                                    <div class="rating-wrap fix">
+                                    <div class="rating-wrap fix" style="margin-bottom: 0">
                                         @if($detail->produk_discount > 0)
                                             <h3 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</h3>
                                             <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del>
                                         @else
-                                            <h3 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</h3>
+                                            <h4 class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</h4>
                                         @endif
-                                        <ul class="rating pull-right">
+                                        {{-- <ul class="rating pull-right">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li>(05 Customar Review)</li>
-                                        </ul>
+                                        </ul> --}}
                                     </div>
                                     <ul style="width: 100%; margin-bottom: 2%">
-                                        <li><h4>Stock : {{$detail->produk_stock}} </h4></li>
+                                        <li><h5>Stock : {{$detail->produk_stock}} </h5></li>
                                     </ul>
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
+                                    @guest
+                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                            <center>
+                                                <li class="col-12">
+                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.login")}} value="Login" class="btn btn-info btn-sm col-12" id="btn-pick-address" />
+                                                </li>
+                                            </center>
+                                        </div>
+                                    @else
                                     <input type="text" name="address_id" id="address_id" value="{{Auth::user()->user_address()->first()['id']}}" hidden/>
                                     <input type="text" name="ship_cost" id="ship_cost" value="0" hidden/>
                                     <input type="text" name="origin" id="origin" value="{{$detail->user->user_address()->first()['user_address_subdist']}}" hidden/>
@@ -82,10 +91,7 @@
                                             </center>
                                         </div>
                                         <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
-                                            @guest
-                                            @else
-                                                <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>To Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b></div></ul>
-                                            @endguest
+                                            <ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-6 col-sm-12 col-md-12'><b>To Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b></div></ul>
                                         </div>
                                         <div class="col-md-12">
                                             <center>
@@ -146,9 +152,13 @@
                                             <div class="col-md-12">
                                                 <div class="" data-toggle="buttons">
                                                     @foreach($color as $item)
-                                                        <label class="btn btn-default btn-block btn-{!!$color_arr[$item]!!}" {{-- style="background-color: {!!$color_arr[$item]!!}" --}}>
+                                                        {{-- <label class="btn btn-default btn-block btn-{!!$color_arr[$item]!!}" >
                                                             <input type="radio" name="color" value="{{$item}}" autocomplete="off">
                                                             {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label> --}}
+                                                        <label class="border1 btn btn-default" style="background-color: {!! $item !!}">
+                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off">
+                                                            <span class="check glyphicon glyphicon-ok"></span>
                                                         </label>
                                                     @endforeach
                                                 </div>
@@ -164,6 +174,7 @@
                                                 </li>
                                             </center>
                                         </div>
+                                    @endguest
                                     </ul>
                                     {!! Form::close() !!}
                                     <ul class="cetagory">

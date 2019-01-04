@@ -57,18 +57,18 @@
                                     <h4 class="m-l-sm text-danger">Seller</h4>
                                     <li><a href="{{route('member.profil')}}">Profil Anda</a></li>
                                     <li><a href="{{route('member.user.change_password')}}">Ubah Password Login</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Ubah Password Transaksi</a></li>
+                                    <li><a href="{{route('member.user.pass_trx')}}">Ubah Password Transaksi</a></li>
                                     <li><a href="{{route('member.user.seller_address')}}">Alamat Seller</a></li>
                                     <li><a href="{{route('member.user.upload_foto_profil')}}">Upload Foto Profil</a></li>
                                     <li><a href="{{route('member.user.upload_scan_npwp')}}">Upload Scan NPWP</a></li>
                                     <li><a href="{{route('member.user.upload_siup')}}">Upload Scan SIUP/TDP</a></li>
 
                                     <h4 class="m-l-sm text-danger">Buyer</h4>
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Biodata</a></li>
+                                    {{-- <li><a href="{{route('member.sponsor.index')}}">Biodata</a></li> --}}
                                     <li><a href="{{route('member.user.buyer_address')}}">Alamat Kirim</a></li>
                                     <li><a href="{{route('member.bank.index')}}">Rekening Bank</a></li>
-                                    <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Ubah Password Login</a></li>
-                                    <li><a href="{{-- {{route('member.cw.index')}} --}}">Ubah Password Transaksi</a></li>
+                                    {{-- <li><a href="{{route('member.Withdrawal.create')}}">Ubah Password Login</a></li> --}}
+                                    {{-- <li><a href="{{route('member.cw.index')}}">Ubah Password Transaksi</a></li> --}}
                                 </ul>
                             </li>
                             {{-- need actived --}}
