@@ -89,10 +89,10 @@ class IklanController extends Controller
         $res = new Trans_iklan;
         $res->trans_iklan_code = 'IKL-'.$code;
         $res->trans_iklan_user_id = Auth::id();
-        // $res->trans_hotlist_status = 0;
+        // $res->trans_iklan_status = 0;
         $res->trans_iklan_paket_id = $request->trans_iklan_paket_id;
         $res->trans_iklan_amount = $paket_iklan->paket_iklan_price;
-        $res->trans_iklan_note = $request->trans_iklan_note;//'Pembelian Paket Iklan '.$paket_hotlist->paket_hotlist_name.' by '.Auth::user()->username.' at '
+        $res->trans_iklan_note = $request->trans_iklan_note;//'Pembelian Paket Iklan '.$paket_iklan->paket_iklan_name.' by '.Auth::user()->username.' at '
             // .FunctionLib::datetime_indo($date, true, 'full');
         $res->save();
         if(!$res){
@@ -108,7 +108,26 @@ class IklanController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function tagihan(){
-        return view('member.iklan.tagihan');
+    public function tagihan(Request $request){
+        $arr = [
+            "0" =>'new',
+            "1" =>'wait',
+            "3" =>'lunas',
+            "2" =>'batal',
+            "4" =>'ditolak',
+            "0,1,2,3,4" =>'',
+        ];
+        $where = "1 AND trans_iklan_user_id =".Auth::id();
+        if(!empty($request->get('code'))){
+            $code = $request->get('code');
+            $where .= ' AND trans_iklan_code LIKE "%'.$code.'%"';
+        }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND trans_iklan_status IN ('.$status.')';
+        }
+        $data['iklan'] = Trans_iklan::whereRaw($where)->paginate();
+        return view('member.iklan.tagihan', $data);
     }
 }

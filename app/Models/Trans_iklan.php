@@ -22,38 +22,38 @@ class Trans_iklan extends Model
     * @return
     * 
     */
-    public function seller()
-    {
-        return $this->belongsTo('App\User', 'brand_seller_id');
-    }
-
-    /**
-    * @param
-    * @return
-    * 
-    */
-    public function admin()
-    {
-        return $this->belongsTo('App\User', 'brand_admin_id');
-    }
-
-    /**
-    * @param
-    * @return
-    * 
-    */
-    public function superadmin()
-    {
-        return $this->belongsTo('App\User', 'brand_superadmin_id');
-    }
-
-    public function produk()
-    {
-        return $this->belongsTo('App\Models\Produk', 'trans_iklan_paket_id');
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User', 'trans_iklan_user_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function paket()
+    {
+        return $this->belongsTo('App\Models\Paket_iklan', 'trans_iklan_paket_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function bank()
+    {
+        return $this->belongsTo('App\Models\User_bank', 'trans_iklan_bank_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function payment()
+    {
+        return $this->belongsTo('App\Models\Payment', 'trans_iklan_payment_id');
     }
 }

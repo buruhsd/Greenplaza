@@ -433,7 +433,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::post('/to_confirm/{$id}', 'PincodeController@to_confirm')->name('.to_confirm');
 			Route::post('/to_cancel/{$id}', 'PincodeController@to_cancel')->name('.to_cancel');
 			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
-			Route::get('/tagihan', function(){return view('member.pincode.tagihan');})->name('.tagihan');
+			Route::get('/tagihan', 'PincodeController@tagihan')->name('.tagihan');
 		});
 		// Pasang Iklan
 		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
@@ -443,7 +443,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/banner', function(){return view('member.iklan.banner');})->name('.banner');
 			Route::get('/banner_khusus', function(){return view('member.iklan.banner_khusus');})->name('.banner_khusus');
 			Route::get('/baris', function(){return view('member.iklan.baris');})->name('.baris');
-			Route::get('/tagihan', function(){return view('member.iklan.tagihan');})->name('.tagihan');
+			Route::get('/tagihan', 'IklanController@tagihan')->name('.tagihan');
 		});
 		// Atur Kurir
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {

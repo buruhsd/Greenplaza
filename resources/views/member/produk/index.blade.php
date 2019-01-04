@@ -97,7 +97,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div> {!! $produk->appends(['search' => Request::get('search')])->render() !!} </div>
+                    <div> {!! $produk->appends(['name' => Request::get('name'), 'status' => Request::get('status')])->render() !!} </div>
                 </div>
             </div>
         </div>

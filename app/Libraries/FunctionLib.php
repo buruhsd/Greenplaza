@@ -2,6 +2,57 @@
 class FunctionLib
 {
 
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_trans_pincode($status = "", $id = 0){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND trans_pincode_status = ".$status;
+        }
+        $total = App\Models\Trans_pincode::whereRaw($where);
+        if($id != 0){
+            $total = $total->where("trans_pincode_user_id", $id);
+        }
+        $total = $total->count();
+        return $total;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_trans_iklan($status = "", $id = 0){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND trans_iklan_status = ".$status;
+        }
+        $total = App\Models\Trans_iklan::whereRaw($where);
+        if($id != 0){
+            $total = $total->where("trans_iklan_user_id", $id);
+        }
+        $total = $total->count();
+        return $total;
+    }
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function count_trans_hotlist($status = "", $id = 0){
+        $where = 1;
+        if($status !== ""){
+            $where .= " AND trans_hotlist_status = ".$status;
+        }
+        $total = App\Models\Trans_hotlist::whereRaw($where);
+        if($id != 0){
+            $total = $total->where("trans_hotlist_user_id", $id);
+        }
+        $total = $total->count();
+        return $total;
+    }
+
     /******/
     public static function count_message(){
         if(\Auth::check()){

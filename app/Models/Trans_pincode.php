@@ -22,9 +22,9 @@ class Trans_pincode extends Model
     * @return
     * 
     */
-    public function seller()
+    public function user()
     {
-        return $this->belongsTo('App\User', 'brand_seller_id');
+        return $this->belongsTo('App\User', 'trans_pincode_user_id');
     }
 
     /**
@@ -32,9 +32,9 @@ class Trans_pincode extends Model
     * @return
     * 
     */
-    public function admin()
+    public function paket()
     {
-        return $this->belongsTo('App\User', 'brand_admin_id');
+        return $this->belongsTo('App\Models\Paket_pincode', 'trans_pincode_paket_id');
     }
 
     /**
@@ -42,8 +42,18 @@ class Trans_pincode extends Model
     * @return
     * 
     */
-    public function superadmin()
+    public function bank()
     {
-        return $this->belongsTo('App\User', 'brand_superadmin_id');
+        return $this->belongsTo('App\Models\User_bank', 'trans_pincode_bank_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function payment()
+    {
+        return $this->belongsTo('App\Models\Payment', 'trans_pincode_payment_id');
     }
 }

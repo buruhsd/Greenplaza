@@ -108,7 +108,26 @@ class PincodeController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function tagihan(){
-        return view('member.pincode.tagihan');
+    public function tagihan(Request $request){
+        $arr = [
+            "0" =>'new',
+            "1" =>'wait',
+            "3" =>'lunas',
+            "2" =>'batal',
+            "4" =>'ditolak',
+            "0,1,2,3,4" =>'',
+        ];
+        $where = "1 AND trans_pincode_user_id =".Auth::id();
+        if(!empty($request->get('code'))){
+            $code = $request->get('code');
+            $where .= ' AND trans_pincode_code LIKE "%'.$code.'%"';
+        }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND trans_pincode_status IN ('.$status.')';
+        }
+        $data['pincode'] = Trans_pincode::whereRaw($where)->paginate();
+        return view('member.pincode.tagihan', $data);
     }
 }
