@@ -173,6 +173,39 @@ class FrontController extends Controller
         return view('member.dashboard.index');
     }
 
+
+//HOME 
+    public function index ()
+    {
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
+        $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
+        $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->get();
+        $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->skip(4)->get();
+        $review = Review::orderBy('created_at', 'DESC')->limit(3)->get();
+        $toprate = Produk::orderBy('produk_hotlist', 'DESC')->limit(4)->get();
+        $topratee = Produk::orderBy('produk_hotlist', 'DESC')->limit(4)->skip(4)->get();
+        $discountproduk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->get();
+        $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
+        $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
+        // dd($discountprice);
+        return view('frontend.page.home', 
+            compact(
+                'category', 
+                'newproduk', 
+                'discountprice', 
+                'popularproduk', 
+                'review',
+                'popularprodukk',
+                'toprate',
+                'topratee',
+                'discountproduk',
+                'discountprodukk',
+                'latestnews'
+            ));
+    }
+
+
     //  public function about()
     // {
 

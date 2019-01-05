@@ -125,7 +125,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/1.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/1.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/2.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/2.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/3.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/3.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -191,7 +191,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/5.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/5.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -207,7 +207,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -223,7 +223,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/7.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/7.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -239,7 +239,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/8.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/8.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -256,14 +256,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-sidebar">
+                    <div class="product-sidebar" style="width: 100%">
                         <h2 class="section-title">Discount Price</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
+                            @foreach ($discountprice as $d)
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
-                                    <span class="discount">20% Off</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/9.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/10.jpg" alt="">
+                                    <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
+                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}">
                                     <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
                                     </div>
@@ -277,8 +277,8 @@
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>$25.00</span>
-                                        <del>$14.00</del>
+                                    <p><span>Rp.{{($d->produk_price * $d->produk_discount) / 100}}</span>
+                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
                                     </p>
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
@@ -289,96 +289,28 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="discount">25% Off</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/10.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/9.jpg" alt="">
-                                    <div class="discount-wrap">
-                                        <div data-countdown="2017/10/03"></div>
-                                    </div>
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Retis lapen casen</a></h3>
-                                    <p><span>$25.00</span>
-                                        <del>$14.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="discount">15% Off</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/11.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/10.jpg" alt="">
-                                    <div class="discount-wrap">
-                                        <div data-countdown="2017/10/03"></div>
-                                    </div>
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                    <p><span>$25.00</span>
-                                        <del>$20.50</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="tag-wrap">
-                        <h2 class="section-title">Propular Tags</h2>
+                        <h2 class="section-title">Popular Tags</h2>
                         <ul>
-                            <li><a href="#">ecommerce</a></li>
-                            <li><a href="#">product</a></li>
-                            <li><a href="#">man</a></li>
-                            <li><a href="#">fan</a></li>
-                            <li><a href="#">woman</a></li>
-                            <li><a href="#">kids</a></li>
-                            <li><a href="#">babys</a></li>
-                            <li><a href="#">pant</a></li>
-                            <li><a href="#">kids</a></li>
-                            <li><a href="#">babys</a></li>
-                            <li><a href="#">pant</a></li>
-                            <li><a href="#">chair</a></li>
-                            <li><a href="#">table</a></li>
+                        @foreach ($category as $c)
+                            <li><a href="#">{{$c->category->category_name}}</a></li>
+                        @endforeach
                         </ul>
                     </div>
                     <div class="product-sidebar">
-                        <h2 class="section-title">Propular Product</h2>
+                        <h2 class="section-title">Popular Product</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
+                                @foreach ($popularproduk as $p)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/24.jpg" alt="">
+                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -386,65 +318,19 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        <p>{{number_format($p->produk_price,2)}}</p>
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/23.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/22.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/21.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="slidebar-product-wrap">
+                                @foreach ($popularprodukk as $p)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/20.jpg" alt="">
+                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -452,57 +338,10 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        <p>{{number_format($p->produk_price,2)}}</p>
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/19.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/18.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/17.jpg" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -515,11 +354,11 @@
                             </div>
                         </div>
                         <div class="product-active owl-carousel next-prev-style">
+                            @foreach($newproduk as $n)
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/1.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/2.jpg" alt="">
+                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -529,9 +368,9 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                    <p><span>$20.00</span>
-                                        <del>$30.00</del>
+                                    <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                    <p><span>Rp.{{($n->produk_price * $d->produk_discount) / 100}}</span>
+                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del>
                                     </p>
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
@@ -542,11 +381,10 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-wrap">
+                            <!-- <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/2.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/1.jpg" alt="">
+                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -556,9 +394,9 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                    <p><span>$14.00</span>
-                                        <del>$45.00</del>
+                                    <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                    <p><span>{{$n->produk_price}}</span>
+                                        <del>{{$n->product_discount}} %</del>
                                     </p>
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
@@ -568,173 +406,13 @@
                                         <li><i class="fa fa-star"></i></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/3.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/4.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                    <p><span>$20.50</span>
-                                        <del>$21.10</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/4.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/3.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>$48.00</span>
-                                        <del>$50.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/5.jpg" alt="">
-                                    <img class="second" src="a{{ asset('frontend/images/product/6.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                    <p><span>$20.00</span>
-                                        <del>$14.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/6.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/5.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                    <p><span>$22.00</span>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/7.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                    <p><span>$15.00</span>
-                                        <del>$20.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/8.jpg" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/7.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>$25.00</span>
-                                        <del>$14.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </div> -->
+                            @endforeach
                         </div>
                     </div>
                     <div class="banner-wrap mb-30">
                         <div class="banner-img black-opacity">
-                            <img src="{{ asset('frontend/images/banner/2.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/2.jpg') }}" alt="">
                             <div class="banner-content">
                                 <div class="banner-info">
                                     <h2>Sale <span>20%</span> off</h2>
@@ -747,26 +425,23 @@
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
                                 <h2 class="section-title">New Arivel</h2>
-                            </div>
+                            </div><!-- 
                             <div class="col-lg-8 text-right col-sm-9 col-12">
                                 <ul class="tab-menu nav">
-                                    <li><a class="active" data-toggle="tab" href="#chair">Chair</a></li>
-                                    <li><a data-toggle="tab" href="#table">Table</a></li>
-                                    <li><a data-toggle="tab" href="#laptop">Laptop</a></li>
-                                    <li><a data-toggle="tab" href="#dextop">Dextop</a></li>
-                                    <li><a data-toggle="tab" href="#mobail">Mobail</a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
+                        
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="chair">
                                 <div class="product-active owl-carousel next-prev-style">
+                                    @foreach ($category as $n)
+                                    @if ($n->produk_discount == 0)
                                     <div class="product-items">
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/30.jpg" alt="">
-                                                <img class="second" src="a{{ asset('frontend/images/product/29.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -776,92 +451,9 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$30.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/29.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/30.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                                <p><span>$14.00</span>
-                                                    <del>$45.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/28.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/27.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                                <p><span>$20.50</span>
-                                                    <del>$21.10</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/27.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/28.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$25.00</span>
-                                                    <del>$14.00</del>
+                                                <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                                <p>
+                                                    <span>Rp.{{number_format($n->produk_price, 2)}}</span>
                                                 </p>
                                                 <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
@@ -873,1025 +465,43 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/26.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/25.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/25.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/26.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/24.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/23.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                                <p><span>$22.00</span>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/22.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/23.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                                <p><span>$15.00</span>
-                                                    <del>$20.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="table">
+                            <div class="tab-pane fade show active" id="chair">
                                 <div class="product-active owl-carousel next-prev-style">
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="a{{ asset('frontend/images/product/21.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/20.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$30.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
+                                    @foreach ($category as $n)
+                                    @if ($n->produk_discount > 0)
+                                    <div class="product-wrap">
+                                        <div class="product-img black-opacity">
+                                            <span class="new sale">Sale</span>
+                                                <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
+                                            <div class="shop-icon">
+                                                <ul>
+                                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/20.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/21.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                                <p><span>$14.00</span>
-                                                    <del>$45.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
+                                        <div class="product-content">
+                                            <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                            <p>
+                                                <span>Rp.{{($n->produk_price * $d->produk_discount) / 100}}</span>
+                                                <del>Rp.{{number_format($n->produk_price, 2)}}</del>
+                                            </p>
+                                            <ul class="rating">
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/19.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/18.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                                <p><span>$20.50</span>
-                                                    <del>$21.10</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('frontend/images/product/18.jpg" alt="">
-                                                <img class="second" src="{{ asset('frontend/images/product/19.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$25.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/17.jpg" alt="">
-                                                <img class="second" src="assets/images/product/16.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/16.jpg" alt="">
-                                                <img class="second" src="assets/images/product/17.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/15.jpg" alt="">
-                                                <img class="second" src="assets/images/product/14.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                                <p><span>$22.00</span>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/14.jpg" alt="">
-                                                <img class="second" src="assets/images/product/15.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                                <p><span>$15.00</span>
-                                                    <del>$20.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="laptop">
-                                <div class="product-active owl-carousel next-prev-style">
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/13.jpg" alt="">
-                                                <img class="second" src="assets/images/product/12.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$30.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/12.jpg" alt="">
-                                                <img class="second" src="assets/images/product/13.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                                <p><span>$14.00</span>
-                                                    <del>$45.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/31.jpg" alt="">
-                                                <img class="second" src="assets/images/product/32.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                                <p><span>$20.50</span>
-                                                    <del>$21.10</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/32.jpg" alt="">
-                                                <img class="second" src="assets/images/product/31.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$25.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/33.jpg" alt="">
-                                                <img class="second" src="assets/images/product/1.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/2.jpg" alt="">
-                                                <img class="second" src="assets/images/product/1.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/33.jpg" alt="">
-                                                <img class="second" src="assets/images/product/5.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                                <p><span>$22.00</span>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/14.jpg" alt="">
-                                                <img class="second" src="assets/images/product/18.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                                <p><span>$15.00</span>
-                                                    <del>$20.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="dextop">
-                                <div class="product-active owl-carousel next-prev-style">
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/20.jpg" alt="">
-                                                <img class="second" src="assets/images/product/22.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$30.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/28.jpg" alt="">
-                                                <img class="second" src="assets/images/product/21.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                                <p><span>$14.00</span>
-                                                    <del>$45.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/16.jpg" alt="">
-                                                <img class="second" src="assets/images/product/27.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                                <p><span>$20.50</span>
-                                                    <del>$21.10</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/19.jpg" alt="">
-                                                <img class="second" src="assets/images/product/26.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$25.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/18.jpg" alt="">
-                                                <img class="second" src="assets/images/product/20.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/30.jpg" alt="">
-                                                <img class="second" src="assets/images/product/33.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/5.jpg" alt="">
-                                                <img class="second" src="assets/images/product/7.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                                <p><span>$22.00</span>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/7.jpg" alt="">
-                                                <img class="second" src="assets/images/product/5.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                                <p><span>$15.00</span>
-                                                    <del>$20.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="mobail">
-                                <div class="product-active owl-carousel next-prev-style">
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/3.jpg" alt="">
-                                                <img class="second" src="assets/images/product/6.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$30.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/9.jpg" alt="">
-                                                <img class="second" src="assets/images/product/3.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                                <p><span>$14.00</span>
-                                                    <del>$45.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/24.jpg" alt="">
-                                                <img class="second" src="assets/images/product/2.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                                <p><span>$20.50</span>
-                                                    <del>$21.10</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/8.jpg" alt="">
-                                                <img class="second" src="assets/images/product/13.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$25.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/17.jpg" alt="">
-                                                <img class="second" src="assets/images/product/28.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                                <p><span>$48.00</span>
-                                                    <del>$50.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/26.jpg" alt="">
-                                                <img class="second" src="assets/images/product/25.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                                <p><span>$20.00</span>
-                                                    <del>$14.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-half-o"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
-                                                <span class="new sale">Sale</span>
-                                                <img class="first" src="assets/images/product/24.jpg" alt="">
-                                                <img class="second" src="assets/images/product/23.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                                <p><span>$22.00</span>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity">
-                                                <span class="new">New</span>
-                                                <img class="first" src="assets/images/product/28.jpg" alt="">
-                                                <img class="second" src="assets/images/product/29.jpg" alt="">
-                                                <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                                <p><span>$15.00</span>
-                                                    <del>$20.00</del>
-                                                </p>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endif
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -1908,7 +518,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="banner-wrap">
                         <div class="banner-img">
-                            <img src="assets/images/banner/5.jpg" alt="">
+                            <img src="{{ asset('frontend/images/banner/5.jpg') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -1917,14 +527,14 @@
                         <div class="col-md-6 sm-mb-30 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="assets/images/banner/3.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/banner/3.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="assets/images/banner/4.jpg" alt="">
+                                    <img src="{{ asset('frontend/images/images/banner/4.jpg') }}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -1945,7 +555,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/16.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -1961,7 +571,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/15.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/15.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -1977,7 +587,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/16.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -1993,7 +603,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/13.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/13.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2011,7 +621,7 @@
                             <div class="slidebar-product-wrap">
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/12.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/12.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Floral Print Buttoned</a></h4>
@@ -2027,7 +637,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/11.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/11.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Push It Messenger Bag</a></h4>
@@ -2043,7 +653,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/10.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/10.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
@@ -2059,7 +669,7 @@
                                 </div>
                                 <div class="product-sidebar-items fix mb-0">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                        <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
@@ -2088,8 +698,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/25.jpg" alt="">
-                                    <img class="second" src="assets/images/product/14.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2115,8 +725,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/18.jpg" alt="">
-                                    <img class="second" src="assets/images/product/19.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2142,8 +752,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/28.jpg" alt="">
-                                    <img class="second" src="assets/images/product/33.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2169,8 +779,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/33.jpg" alt="">
-                                    <img class="second" src="assets/images/product/30.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2196,8 +806,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/15.jpg" alt="">
-                                    <img class="second" src="assets/images/product/16.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2223,8 +833,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/16.jpg" alt="">
-                                    <img class="second" src="assets/images/product/25.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/roduct/16.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2249,8 +859,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="assets/images/product/17.jpg" alt="">
-                                    <img class="second" src="assets/images/product/8.jpg" alt="">
+                                    <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
+                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -2322,36 +932,18 @@
                     <div class="testmonial-wrap">
                         <h2 class="section-title">Our Product Review</h2>
                         <div class="test-active owl-carousel next-prev-style">
+                            @foreach ($review as $r)
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="assets/images/test/1.jpg" alt="">
+                                    <img src="{{asset('assets/images/product/'.$r->userdetail->user_detail_image)}}">
                                 </div>
                                 <div class="test-content">
-                                    <h3>Alex Anderson</h3>
-                                    <span>CEO/Founder</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquid eaque cupiditate earum possimus doloremque quibusdam</p>
+                                    <h3>{{$r->user->name}}</h3>
+                                    <span>User</span>
+                                    <p>{{$r->review_text}}</p>
                                 </div>
                             </div>
-                            <div class="test-items">
-                                <div class="test-img">
-                                    <img src="assets/images/test/3.jpg" alt="">
-                                </div>
-                                <div class="test-content">
-                                    <h3>Alex Anderson</h3>
-                                    <span>CEO/Founder</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquid eaque cupiditate earum possimus doloremque quibusdam</p>
-                                </div>
-                            </div>
-                            <div class="test-items">
-                                <div class="test-img">
-                                    <img src="assets/images/test/2.jpg" alt="">
-                                </div>
-                                <div class="test-content">
-                                    <h3>Alex Anderson</h3>
-                                    <span>CEO/Founder</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident aliquid eaque cupiditate earum possimus doloremque quibusdam</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -2371,12 +963,13 @@
                                     <h2 class="section-title">Trending</h2>
                                     <div class="propuler-product-active next-prev-style owl-carousel">
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/1.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2384,65 +977,19 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/2.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/3.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/4.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/5.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2450,57 +997,10 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/6.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/7.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/8.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -2510,12 +1010,13 @@
                                     <h2 class="section-title">Top Rate</h2>
                                     <div class="propuler-product-active next-prev-style owl-carousel">
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($toprate as $t)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$t->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2523,65 +1024,19 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/10.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/11.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/12.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($topratee as $t)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/13.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$t->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2589,72 +1044,26 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/14.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/15.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/16.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="product-sidebar">
-                                    <h2 class="section-title">No Sale</h2>
+                                    <h2 class="section-title">Hot Produk</h2>
                                     <div class="propuler-product-active next-prev-style owl-carousel">
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
+                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2662,65 +1071,19 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/18.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/19.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/20.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/21.jpg" alt="">
+                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2728,57 +1091,10 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>{{number_format($p->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/22.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/23.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/24.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -2788,12 +1104,13 @@
                                     <h2 class="section-title">Discount Product</h2>
                                     <div class="propuler-product-active next-prev-style owl-carousel">
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($discountproduk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$d->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2801,65 +1118,19 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>{{number_format($d->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/17.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/18.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                         <div class="slidebar-product-wrap">
+                                            @foreach ($discountprodukk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/9.jpg" alt="">
+                                                    <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                                    <h4><a href="shop.html">{{$d->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -2867,57 +1138,10 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>$20.00</p>
+                                                    <p>{{number_format($d->produk_price,2)}}</p>
                                                 </div>
                                             </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/10.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/5.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
-                                            <div class="product-sidebar-items fix mb-0">
-                                                <div class="product-sidebar-img black-opacity">
-                                                    <img src="assets/images/product/sidebar/12.jpg" alt="">
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    <p>$20.00</p>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -2937,96 +1161,23 @@
                     <div class="blog-wrap">
                         <h2 class="section-title">latest News</h2>
                         <div class="blog-active owl-carousel next-prev-style">
+                            @foreach ($latestnews as $l)
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/1.jpg" alt="">
+                                    <img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px">
                                 </div>
                                 <div class="blog-content">
-                                    <h3><a href="blog.html">Dolorem eum fugiat voluptas nulla pariatur</a></h3>
+                                    <h3><a href="blog.html">{{$l->produk_name}}</a></h3>
                                     <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
+                                        <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
                                         <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
+                                        <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->update_at}}</a></li>
                                     </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
+                                    <p>{{$l->produk_note}}</p>
                                     <a class="readmore" href="blog-details.html">read more</a>
                                 </div>
                             </div>
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/2.jpg" alt="">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog.html">Standard blog post with photo woman</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
-                                    </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/3.jpg" alt="">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog.html">Backpack Hero Fashion Contest 2018</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
-                                    </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/4.jpg" alt="">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog.html">adipisicing elitcupiditate eius doloremque</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
-                                    </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/5.jpg" alt="">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog.html"> commodi perspiciatis maiores asperiores enim sint</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
-                                    </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
-                                </div>
-                            </div>
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <img src="assets/images/blog/6.jpg" alt="">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog.html">atque vitae aliquam nemo Nostrum, exercitationem?</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i> 12 Janu</a></li>
-                                    </ul>
-                                    <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

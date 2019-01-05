@@ -96,4 +96,8 @@ class Produk extends Model
     {
         return $this->hasMany('App\Models\Produk_image', 'produk_image_produk_id');
     }
+    public function review()
+    {
+        return $this->hasOne('App\Models\Review', 'review_user_id', 'produk_seller_id');
+    }
 }

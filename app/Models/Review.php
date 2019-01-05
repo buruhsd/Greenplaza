@@ -24,6 +24,11 @@ class Review extends Model
     {
         return $this->belongsTo('App\User', 'review_user_id');
     }
+
+    public function userdetail()
+    {
+        return $this->hasOne('App\Models\User_detail', 'user_detail_user_id', 'review_user_id');
+    }
 	
     /**
     * @param

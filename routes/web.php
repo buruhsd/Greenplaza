@@ -15,6 +15,8 @@
 //     return view('welcome');
 // });
 
+//HOME
+Route::get('/', 'member\\FrontController@index')->name('home');
 
 Route::get('/tentang-greenplaza', 'member\\FrontController@about')->name('about') ;
 Route::get('/cara-belanja', 'member\\FrontController@carabelanja')->name('cara-belanja') ;
@@ -25,10 +27,9 @@ Route::get('/alur-transaksi', 'member\\FrontController@alurtransaksi')->name('al
 
 Route::get('/dashboard-member', 'member\\FrontController@dashboard');
 
-
-Route::get('/', function () {
-    return view('frontend.page.home');
-});
+// Route::get('/', function () {
+//     return view('frontend.page.home');
+// });
 
 //FrontController
 Route::get('/register/seller', 'member\\FrontController@reg_seller')->name('register.seller');

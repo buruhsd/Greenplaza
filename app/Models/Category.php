@@ -26,4 +26,9 @@ class Category extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_parent_id');
     }
+
+    public function product()
+    {
+        return $this->belongsTo('App\Models\Produk', 'produk_category_id');
+    }
 }
