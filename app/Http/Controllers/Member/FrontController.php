@@ -113,8 +113,9 @@ class FrontController extends Controller
         }else{
             $data['produk'] = Produk::whereRaw($where)->orderByRaw("rand()")->paginate($perPage);
         }
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->get();
-        return view('frontend.category', $data);
+        return view('frontend.category', $data, compact('category'));
     }
 
     /**

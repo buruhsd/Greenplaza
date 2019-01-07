@@ -1,6 +1,24 @@
-@extends('layouts.index')
-@section('title', 'Page Title')
+@extends('frontend.layout.index', ['active' => 'home'])
+@section('title', 'home')
 @section('content')
+
+<div class="breadcumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcumb-wrap bg-1 ">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/banner/cat.jpg')">
+                            <h2>Category</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>Category</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- .shop-page-area start -->
     <div class="shop-page-area">

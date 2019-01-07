@@ -44,7 +44,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1">
-                        <div class="breadcumb-content black-opacity">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('/frontend/images/banner/cat.jpg')">
                             <h2>Shop Page</h2>
                             <ul>
                                 <li><a href="index.html">Home</a></li>
