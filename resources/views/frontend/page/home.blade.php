@@ -8,7 +8,8 @@
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-4">
                     <div class="slider-active owl-carousel next-prev-btn">
                         <div class="slider-item black-opacity">
-                            <img src="{{ asset('frontend/images/slider/1.jpg') }}" alt="" class="slider">
+                            <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image)}}" style="height: 
+                            310px">
                             <div class="slider-content">
                                 <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>35% </span> Discount</h3>
@@ -18,7 +19,30 @@
                             </div>
                         </div>
                         <div class="slider-item black-opacity">
-                            <img src="{{ asset('frontend/images/slider/2.jpg') }}" alt="" class="slider">
+                            <img src="{{asset('assets/images/iklan/'.$slider2->iklan_image)}}" style="height: 
+                            310px">
+                            <div class="slider-content text-right">
+                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <h3><span>25% </span> Discount</h3>
+                                <ul>
+                                    <li><a href="shop.html">shop now</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                         <div class="slider-item black-opacity">
+                            <img src="{{asset('assets/images/iklan/'.$slider3->iklan_image)}}" style="height: 
+                            310px">
+                            <div class="slider-content text-right">
+                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <h3><span>25% </span> Discount</h3>
+                                <ul>
+                                    <li><a href="shop.html">shop now</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="slider-item black-opacity">
+                            <img src="{{asset('assets/images/iklan/'.$slider4->iklan_image)}}" style="height: 
+                            310px">
                             <div class="slider-content text-right">
                                 <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>25% </span> Discount</h3>
@@ -56,7 +80,8 @@
                     <div class="banner-wrap">
                         <div class="banner-img">
                             <span class="discount">%20 Off</span>
-                            <img src="{{ asset('frontend/images/banner/1.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$banner1->iklan_image)}}" style="height: 
+                            270px">
                         </div>
                     </div>
                 </div>
@@ -71,7 +96,8 @@
                 <div class="col-lg-3 col-md-4 d-none d-lg-block">
                     <div class="featured-wrap">
                         <div class="featured-img black-opacity">
-                            <img src="{{ asset('frontend/images/featured/1.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$banner2->iklan_image) }}" alt="" style="height: 
+                            260px">
                             <div class="featured-content">
                                 <h2>Minilam Chair</h2>
                                 <p>consectetur adipisicing elit to Tempora, similique!</p>
@@ -85,7 +111,8 @@
                 <div class="col-lg-6 col-md-8">
                     <div class="featured-wrap">
                         <div class="featured-img black-opacity">
-                            <img src="{{ asset('frontend/images/featured/2.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image) }}" alt="" style="height: 
+                            260px">
                             <div class="featured-content text-center">
                                 <h2>Dual Handle Cardio Ball</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p>
@@ -99,7 +126,8 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="featured-wrap">
                         <div class="featured-img  black-opacity">
-                            <img src="{{ asset('frontend/images/featured/3.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image) }}" alt="" style="height: 
+                            260px">
                             <div class="featured-content text-right">
                                 <h2>Minilam Chair</h2>
                                 <p>consectetur adipisicing elit to Tempora, similique!</p>
@@ -518,7 +546,8 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="banner-wrap">
                         <div class="banner-img">
-                            <img src="{{ asset('frontend/images/banner/5.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$banner4->iklan_image)}}" style="height: 
+                            210px">
                         </div>
                     </div>
                 </div>
@@ -527,14 +556,16 @@
                         <div class="col-md-6 sm-mb-30 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="{{ asset('frontend/images/banner/3.jpg') }}" alt="">
+                                    <img src="{{asset('assets/images/iklan/'.$slider2->iklan_image)}}" style="height: 
+                            210px">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6 col-12">
                             <div class="banner-wrap">
                                 <div class="banner-img">
-                                    <img src="{{ asset('frontend/images/images/banner/4.jpg') }}" alt="">
+                                    <img src="{{asset('assets/images/iklan/'.$slider3->iklan_image)}}" style="height: 
+                            210px">
                                 </div>
                             </div>
                         </div>
@@ -695,11 +726,11 @@
                             </div>
                         </div>
                         <div class="product-active owl-carousel next-prev-style">
+                            @foreach ($featured as $f)
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/14.jpg') }}" alt="">
+                                    <img src="{{asset('assets/images/product/'.$f->produk_image)}}">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -709,10 +740,15 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">Dual Handle Cardio Ball</a></h3>
-                                    <p><span>$20.00</span>
-                                        <del>$30.00</del>
+                                    <h3><a href="shop.html">{{$f->produk_name}}</a></h3>
+                                    @if ($f->produk_discount == 0)
+                                    <p><span>{{$f->produk_price}}</span>
                                     </p>
+                                    @else
+                                    <p><span>{{$f->produk_price * $f->produk_discount / 100}}</span>
+                                        <del>{{$f->produk_price}}</del>
+                                    </p>
+                                    @endif
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -722,194 +758,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/18.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/19.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Sprite Foam Yoga Brick</a></h3>
-                                    <p><span>$14.00</span>
-                                        <del>$45.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/28.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Push It Messenger Bag</a></h3>
-                                    <p><span>$20.50</span>
-                                        <del>$21.10</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/33.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/30.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>$48.00</span>
-                                        <del>$50.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/15.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/16.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Silver Stainless Steel</a></h3>
-                                    <p><span>$20.00</span>
-                                        <del>$14.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-half-o"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="{{ asset('frontend/images/roduct/16.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/25.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html"> Retis lapen casen </a></h3>
-                                    <p><span>$22.00</span>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new">New</span>
-                                    <img class="first" src="{{ asset('frontend/images/product/17.jpg') }}" alt="">
-                                    <img class="second" src="{{ asset('frontend/images/product/8.jpg') }}" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Brone Lamp Glasses</a></h3>
-                                    <p><span>$15.00</span>
-                                        <del>$20.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img class="first" src="assets/images/product/16.jpg" alt="">
-                                    <img class="second" src="assets/images/product/5.jpg" alt="">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>$25.00</span>
-                                        <del>$14.00</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -924,7 +773,8 @@
                 <div class="col-lg-3 col-md-4 col-12 sm-mb-30">
                     <div class="banner-wrap">
                         <div class="banner-img">
-                            <img src="assets/images/banner/6.jpg" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$banner5->iklan_image)}}" style="height: 
+                            250px">
                         </div>
                     </div>
                 </div>

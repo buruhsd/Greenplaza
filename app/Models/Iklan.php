@@ -22,7 +22,7 @@ class Iklan extends Model
 		'iklan_link', 
 		'iklan_use', 
 		'iklan_done', 
-		'iklan_content'
+		'iklan_content',
 		'iklan_note'
 	];
 

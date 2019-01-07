@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Shipment;
 use App\Models\Page;
+use App\Models\Iklan;
 use App\User;
 use Auth;
 use FunctionLib;
@@ -191,7 +192,23 @@ class FrontController extends Controller
         $discountproduk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->get();
         $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
         $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
-        // dd($discountprice);
+        $featured = Produk::orderBy('created_at', 'ASC')->limit(12)->get();
+        $banner1 = Iklan::where('iklan_iklan_id', 1)->first();
+        $banner2 = Iklan::where('iklan_iklan_id', 2)->first();
+        $banner3 = Iklan::where('iklan_iklan_id', 3)->first();
+        $banner4 = Iklan::where('iklan_iklan_id', 4)->first();
+        $banner5 = Iklan::where('iklan_iklan_id', 5)->first();
+        $slider1 = Iklan::where('iklan_iklan_id', 6)->first();
+        $slider2 = Iklan::where('iklan_iklan_id', 7)->first();
+        $slider3 = Iklan::where('iklan_iklan_id', 8)->first();
+        $slider4 = Iklan::where('iklan_iklan_id', 9)->first();
+        $sponsor1 = Iklan::where('iklan_iklan_id', 10)->first();
+        $sponsor2 = Iklan::where('iklan_iklan_id', 11)->first();
+        $sponsor3 = Iklan::where('iklan_iklan_id', 12)->first();
+        $sponsor4 = Iklan::where('iklan_iklan_id', 13)->first();
+        $sponsor5 = Iklan::where('iklan_iklan_id', 14)->first();
+        $sponsor6 = Iklan::where('iklan_iklan_id', 15)->first();
+        // dd($sliderall);
         return view('frontend.page.home', 
             compact(
                 'category', 
@@ -204,7 +221,23 @@ class FrontController extends Controller
                 'topratee',
                 'discountproduk',
                 'discountprodukk',
-                'latestnews'
+                'latestnews',
+                'featured',
+                'banner1',
+                'banner2',
+                'banner3',
+                'banner4',
+                'banner5',
+                'slider1',
+                'slider2',
+                'slider3',
+                'slider4',
+                'sponsor1',
+                'sponsor2',
+                'sponsor3',
+                'sponsor4',
+                'sponsor5',
+                'sponsor6'
             ));
     }
 
