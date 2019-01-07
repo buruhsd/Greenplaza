@@ -118,21 +118,23 @@
                         <div class="cetagory-wrap">
                             <span>All cetagory</span>
                             <ul class="cetagory-items">
-                                <?php $cat = FunctionLib::category_by_parent($parent_cat= 0, $limit= 0, $where= 'category_parent_id = 0')->get();?>
+                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
                                     <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
-                                        <ul class="sub-cetagory col-md-12">
-                                            <li>
-                                                <p>Cetagory Title </p>
-                                                <ul>
-                                                    <?php $sub_cat = FunctionLib::category_by_parent($parent_cat= 0, $limit= 0, $where= 'category_parent_id = 0')->get();?>
-                                                    @foreach($cat as $item)
-                                                        <li><a href="#">sub Cetagory 1</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                        <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
+                                        @if($sub_cat->count() > 0)
+                                            <ul class="sub-cetagory col-md-12">
+                                                <li>
+                                                    <p>Cetagory Title </p>
+                                                    <ul>
+                                                        @foreach($sub_cat as $item)
+                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">{{$item->category_name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        @endif
                                     </li>
                                 @endforeach
                             </ul>

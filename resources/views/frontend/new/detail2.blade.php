@@ -104,14 +104,14 @@
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
                                             <div class="item black-opacity">
-                                                <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
+                                                <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
                                             </div>
                                         @endforeach
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
                                         @foreach($detail->images as $image)
                                             <div class="item black-opacity">
-                                                <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
+                                                <img class="h100" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
                                             </div>
                                         @endforeach
                                     </div>

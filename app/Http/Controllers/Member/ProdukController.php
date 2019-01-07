@@ -19,6 +19,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Intervention\Image\Facades\Image;
 use Auth;
 use FunctionLib;
 
@@ -126,7 +127,6 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $status = 200;
         $message = 'Produk added!';
         
@@ -168,16 +168,17 @@ class ProdukController extends Controller
         if ($request->hasFile('input_file_preview')){
             foreach ($request->file('input_file_preview') as $key => $item) {
                 $image = $item;
-                // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
                 $uploadPath = public_path('assets/images/product');
                 // $uploadPath2 = public_path('assets/images/brand/thumb');
                 $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
-                $imagesize = $image->getClientSize();
-                $imagetmp = $image->getPathName();
+                // $imagesize = $image->getClientSize();
+                // $imagetmp = $image->getPathName();
                 if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }
-                $image->move($uploadPath, $imagename);
+                $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
+                // $image = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $image->save($uploadPath.'/'.$imagename);
                 $produk_image_image[] = $imagename;
                 // $imaget->save($uploadPath2.'/'.$imagename,80);
                 if($key == 0){

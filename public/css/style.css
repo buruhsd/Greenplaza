@@ -37,6 +37,21 @@
   max-height: 100px;
 }
 
+.h200{
+  height: 200px;
+  max-height: 200px;
+}
+
+.h300{
+  height: 300px;
+  max-height: 300px;
+}
+
+.h400{
+  height: 400px;
+  max-height: 400px;
+}
+
 .h-100{
   max-height: 100%;
 }
