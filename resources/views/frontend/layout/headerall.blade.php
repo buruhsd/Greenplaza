@@ -118,13 +118,13 @@
                         <div class="cetagory-wrap">
                             <span>All cetagory</span>
                             <ul class="cetagory-items">
-                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->get();?>
+                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
                                     <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
                                         <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
                                         @if($sub_cat->count() > 0)
-                                            <ul class="sub-cetagory col-md-12">
+                                            <ul class="sub-cetagory col-md-12 col-sm-12">
                                                 <li>
                                                     <p>Cetagory Title </p>
                                                     <ul>
@@ -137,6 +137,7 @@
                                         @endif
                                     </li>
                                 @endforeach
+                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
                             </ul>
                         </div>
                     </div>
