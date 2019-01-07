@@ -140,11 +140,12 @@ class FrontController extends Controller
     */
     public function etalase(Request $request, $user_store)
     {
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $user = User::where('user_slug', $user_store)->first();
         // dd($user);
         $produk = Produk::where('produk_seller_id', $user['id'])->get();
         // dd($produk);
-        return view('frontend.etalase', compact('produk', 'user'));
+        return view('frontend.etalase', compact('produk', 'user', 'category'));
     }
 
     /**
