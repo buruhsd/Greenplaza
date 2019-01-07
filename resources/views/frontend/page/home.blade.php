@@ -935,7 +935,7 @@
                             @foreach ($review as $r)
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="{{asset('assets/images/product/'.$r->userdetail->user_detail_image)}}">
+                                    <img src="{{asset('assets/images/foto_profile/'.$r->userdetail->user_detail_image)}}">
                                 </div>
                                 <div class="test-content">
                                     <h3>{{$r->user->name}}</h3>
