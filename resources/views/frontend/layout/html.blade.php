@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/styles.css') }}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    {{-- added by fahmi --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- modernizr css -->
     <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>

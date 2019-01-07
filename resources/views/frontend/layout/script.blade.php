@@ -20,3 +20,48 @@
     <script src="{{ asset('frontend/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>
+    <script src="{{ asset('js/js.js') }}"></script>
+    <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    @if (Session::has('flash_message'))
+    <?php $status = (Session::get('flash_status') == 200)?'success':'error';?>
+    <?php $status_type = (Session::get('flash_status') == 200)?'Success':'Failed';?>
+    <script type="text/javascript">
+        swal({   
+            type: "{{ $status }}",
+            title: "{{ $status_type }}",   
+            text: "{{ Session::get('flash_message') }}",   
+            showConfirmButton: false ,
+            showCloseButton: true,
+            footer: ''
+        });
+    </script>
+    @endif
+
+    <script type="text/javascript">
+        var slideIndex = 1;
+        showDivs(slideIndex);
+
+        function plusDivs(n) {
+          showDivs(slideIndex += n);
+        }
+
+        function currentDiv(n) {
+          showDivs(slideIndex = n);
+        }
+
+        function showDivs(n) {
+          var i;
+          var x = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("demo");
+          if (n > x.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = x.length}
+          for (i = 0; i < x.length; i++) {
+             x[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+             dots[i].className = dots[i].className.replace(" w3-white", "");
+          }
+          x[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " w3-white";
+        }
+    </script>

@@ -1,4 +1,4 @@
-@extends('frontend.fahmi-layout.index')
+@extends('frontend.layout.indexall')
 @section('content')
     <!-- breadcumb-area start -->
     <div class="breadcumb-area">
@@ -333,7 +333,7 @@
                                                 <li class="review-items">
                                                     <div class="review-img">
                                                         <img src="{{ asset('assets/images/profil/'.$item->user->user_detail->user_detail_image) }}" alt="">
-                                                        <img src="assets/images/comment/1.png" alt="">
+                                                        {{-- <img src="assets/images/comment/1.png" alt=""> --}}
                                                     </div>
                                                     <div class="review-content">
                                                         <h3><a href="#">{{$item->user->name}}</a></h3>

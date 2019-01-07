@@ -121,55 +121,20 @@
                                 <?php $cat = FunctionLib::category_by_parent($parent_cat= 0, $limit= 0, $where= 'category_parent_id = 0')->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
-                                    <li><a href="#"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
-                                        <ul class="sub-cetagory">
+                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
+                                        <ul class="sub-cetagory col-md-12">
                                             <li>
                                                 <p>Cetagory Title </p>
                                                 <ul>
-                                                    <li><a href="#">sub Cetagory 1</a></li>
-                                                    <li><a href="#">sub Cetagory 2</a></li>
-                                                    <li><a href="#">sub Cetagory 3</a></li>
-                                                    <li><a href="#">sub Cetagory 4</a></li>
-                                                    <li><a href="#">sub Cetagory 5</a></li>
+                                                    <?php $sub_cat = FunctionLib::category_by_parent($parent_cat= 0, $limit= 0, $where= 'category_parent_id = 0')->get();?>
+                                                    @foreach($cat as $item)
+                                                        <li><a href="#">sub Cetagory 1</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
                                         </ul>
                                     </li>
                                 @endforeach
-                                <li><a href="#"><i class="fa fa-chain-broken"></i> cetagory One <i class="fa fa-angle-right pull-right"></i></a>
-                                    <ul class="sub-cetagory">
-                                        <li>
-                                            <p>Cetagory Title </p>
-                                            <ul>
-                                                <li><a href="#">sub Cetagory 1</a></li>
-                                                <li><a href="#">sub Cetagory 2</a></li>
-                                                <li><a href="#">sub Cetagory 3</a></li>
-                                                <li><a href="#">sub Cetagory 4</a></li>
-                                                <li><a href="#">sub Cetagory 5</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <p>Cetagory Title </p>
-                                            <ul>
-                                                <li><a href="#">sub Cetagory 1</a></li>
-                                                <li><a href="#">sub Cetagory 2</a></li>
-                                                <li><a href="#">sub Cetagory 3</a></li>
-                                                <li><a href="#">sub Cetagory 4</a></li>
-                                                <li><a href="#">sub Cetagory 5</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <p>Cetagory Title </p>
-                                            <ul>
-                                                <li><a href="#">sub Cetagory 1</a></li>
-                                                <li><a href="#">sub Cetagory 2</a></li>
-                                                <li><a href="#">sub Cetagory 3</a></li>
-                                                <li><a href="#">sub Cetagory 4</a></li>
-                                                <li><a href="#">sub Cetagory 5</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
                             </ul>
                         </div>
                     </div>
