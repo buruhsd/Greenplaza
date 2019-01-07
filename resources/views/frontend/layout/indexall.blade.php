@@ -8,7 +8,8 @@
     
     @include('frontend.layout.headerall')
     @yield('content')
-    @include('frontend.layout.footer')
+    {!! Plugin::footer()!!}
+    {{-- @include('frontend.layout.footer') --}}
     <!-- Popup Subscribe Form -->
     <div id="popup-subscribe" class="modal fade">
         <div class="modal-dialog subscribe-dialog">

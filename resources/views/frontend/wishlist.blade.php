@@ -1,5 +1,4 @@
-@extends('layouts.index', ['active' => 'wishlist'])
-@section('title', 'Wishlist')
+@extends('frontend.layout.indexall')
 @section('content')
 
 <!-- breadcumb-area start -->

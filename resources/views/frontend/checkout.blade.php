@@ -1,5 +1,4 @@
-@extends('layouts.index', ['active' => 'detail'])
-@section('title', 'Detail')
+@extends('frontend.layout.indexall')
 @section('content')
 
 <!-- breadcumb-area start -->
