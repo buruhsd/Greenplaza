@@ -1,5 +1,5 @@
-@extends('frontend.layout.index', ['active' => 'home'])
-@section('title', 'home')
+@extends('frontend.layout.indexall', ['active' => 'home'])
+@section('title', 'etalase')
 @section('content')
 <!-- breadcumb-area end -->
 <!--     <div class="about-area mb-30">

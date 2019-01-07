@@ -1,5 +1,5 @@
-@extends('frontend.layout.index', ['active' => 'home'])
-@section('title', 'home')
+@extends('frontend.layout.indexall', ['active' => 'home'])
+@section('title', 'category')
 @section('content')
 
 <div class="breadcumb-area">
