@@ -493,8 +493,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 });
 
 // auth all
-Route::get('/detail2/{slug}', 'member\\NewFrontController@detail')->name('detail2');
-Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
+Route::get('/detail/{slug}', 'member\\NewFrontController@detail')->name('detail');
+// Route::get('/detail/{slug}', 'member\\FrontController@detail')->name('detail');
 Route::get('/etalase/{user_store}', 'member\\FrontController@etalase')->name('etalase');
 Route::get('/category', 'member\\FrontController@category')->name('category');
 Route::get('/brand', 'member\\FrontController@brand')->name('brand');
