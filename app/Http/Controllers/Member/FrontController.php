@@ -46,10 +46,11 @@ class FrontController extends Controller
         //         ->get();
         // }
         // $data['side_related'] = FunctionLib::produk_by('category', 'all')->orderBy('created_at', 'DESC')->limit(5)->get();
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['page'] = Page::wherePage_slug($page)->first();
         $data['side_cat'] = Category::limit(6)->get();
         $data['side_related'] = Produk::orderByRaw("RAND(), created_at DESC")->limit(5)->get();
-        return view('frontend.page', $data);
+        return view('frontend.page', $data, compact('category'));
     }
 
     /**

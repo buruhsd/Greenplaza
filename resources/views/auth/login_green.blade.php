@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
-<link rel="stylesheet" type="text/css"  href="{{ asset('frontend/css/reg_style.css') }}">
+<link rel="stylesheet" type="text/css"  href="{{ asset('frontendlama/css/reg_style.css') }}">
 
 </head>
 <body>

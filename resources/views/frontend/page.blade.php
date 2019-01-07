@@ -1,4 +1,4 @@
-@extends('layouts.index')
+@extends('frontend.layout.indexall')
 @section('title', 'Page Title')
 @section('content')
 <body>
