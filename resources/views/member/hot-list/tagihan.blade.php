@@ -93,7 +93,7 @@
                                         {{-- <td>{{$item->trans_hotlist_status}}</td> --}}
                                         <td>
                                             @if($item->trans_hotlist_status == 1)
-                                                <button class="btn btn-xs btn-success">Konfirmasi</button>
+                                                <a href="{{route('member.hotlist.konfirmasi', 1)}}" class="btn btn-xs btn-success">Konfirmasi</a>
                                                 <button class="btn btn-xs btn-danger">Batal</button>
                                             @else
                                                 <button class="btn btn-xs btn-success">Detail</button>

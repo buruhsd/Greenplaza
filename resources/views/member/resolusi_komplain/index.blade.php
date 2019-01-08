@@ -123,16 +123,20 @@
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_solusi", $item->solusi->id)}} class='btn btn-danger btn-xs'>
-                                                Terima Solusi Tawaran Pembeli
-                                            </button><br/>
+                                            @if($item->solusi->solusi_status == 1)
+                                                <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_solusi", $item->solusi->id)}} class='btn btn-danger btn-xs'>
+                                                    Terima Solusi Tawaran Pembeli
+                                                </button><br/>
+                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null)
                                             <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_buyer", $item->solusi->id)}} class='btn btn-danger btn-xs'>
                                                 Menerima Barang Kembalian
                                             </button><br/>
+                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null && $item->solusi->solusi_buyer_accept == 1)
                                             {!! Form::open(['id' => 'approve_shipment_buyer']) !!}
                                                 <input type="hidden" name="type" value="seller"/>
                                                 <input type="button" onclick='modal_post($(this), $("#approve_shipment_buyer").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.solusi.add_shipment_seller", $item->solusi->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
                                             {!! Form::close() !!}
+                                            @endif
                                             <ul>
                                                 <li>
                                                     {{$item->solusi->solusi_note}}

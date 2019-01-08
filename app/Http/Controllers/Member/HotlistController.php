@@ -22,6 +22,38 @@ class HotlistController extends Controller
     private $perPage = 5;
     private $mainTable = 'sys_produk';
 
+
+    /**
+     * #buyer
+     * process buyer mengkonfirmasi pembayaran
+     * @param
+     * @return
+     */
+    public function konfirmasi($id){
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        $trans = Trans_hotlist::findOrFail($id);
+        $status = FunctionLib::midtrans_status($trans->trans_code);
+        if($status){
+            foreach ($trans->trans_detail as $item) {
+                $trans_detail = Trans_detail::findOrFail($item->id);
+                // to transfer
+                $trans_detail->trans_detail_status = 2;
+                $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                $trans_detail->save();
+            }
+            if(!$trans_detail){
+                $status = 500;
+                $message = 'Transfer unconfirmed!';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            $data['trans'] = $trans;
+            return view('member.hot-list.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+    }
+
     /**
     * @param method $method
     * @return add main footer script / in spesific method

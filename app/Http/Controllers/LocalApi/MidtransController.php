@@ -12,6 +12,9 @@ use Session;
 use App\Models\Produk;
 use App\Models\Trans;
 use App\Models\Trans_detail;
+use App\Models\Trans_hotlist;
+use App\Models\Trans_iklan;
+use App\Models\Trans_pincode;
 use App\Models\User_address;
 use App\User;
 use Auth;
@@ -38,6 +41,75 @@ class MidtransController extends Controller
         // Enable 3D-Secure
         Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
         // Veritrans_Config::$is3ds = true;
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function pincode_payment($code){
+        $trans_pincode = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+
+        $trans_code = $code;
+        $gross_amount = $trans_pincode->trans_pincode_amount;
+        // Required
+        $transaction_details = array(
+          'order_id' => $trans_code,
+          'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+        );
+        $transaction = array(
+          'transaction_details' => $transaction_details,
+        );
+        $data['trans_pincode'] = $trans_pincode;
+        $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+        // dd($data['trans_detail']);
+        return view('localapi.midtrans.pincode_index', $data);//, $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function iklan_payment($code){
+        $trans_iklan = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+
+        $trans_code = $code;
+        $gross_amount = $trans_iklan->trans_iklan_amount;
+        // Required
+        $transaction_details = array(
+          'order_id' => $trans_code,
+          'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+        );
+        $transaction = array(
+          'transaction_details' => $transaction_details,
+        );
+        $data['trans_iklan'] = $trans_iklan;
+        $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+        // dd($data['trans_detail']);
+        return view('localapi.midtrans.iklan_index', $data);//, $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function hotlist_payment($code){
+        $trans_hotlist = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+
+        $trans_code = $code;
+        $gross_amount = $trans_hotlist->trans_hotlist_amount;
+        // Required
+        $transaction_details = array(
+          'order_id' => $trans_code,
+          'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+        );
+        $transaction = array(
+          'transaction_details' => $transaction_details,
+        );
+        $data['trans_hotlist'] = $trans_hotlist;
+        $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+        // dd($data['trans_detail']);
+        return view('localapi.midtrans.hotlist_index', $data);//, $data);
     }
 
     /**
@@ -320,48 +392,156 @@ class MidtransController extends Controller
             case 'settlement':
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
-                foreach ($trans_detail as $item) {
-                    $trans_detail = Trans_detail::findOrFail($item->id);
-                    // to transfer
-                    $trans_detail->trans_detail_status = 3;
-                    $trans_detail->trans_detail_transfer = 1;
-                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
-                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
-                    $trans_detail->save();
+                if($trans_detail){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
+                        $trans_detail->save();
+                    }
+                }else{
+                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
+                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
+                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail->trans_hotlist_status = 3;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'pincode':
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail->trans_pincode_status = 3;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'iklan':
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail->trans_iklan_status = 3;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                        break;
+                        default:
+                            $status = 500;
+                            $message = 'Transfer Failed!';
+                        break;
+                    }
                 }
-                return response()->json(['message'=>'berhasil', 'status'=>200]);
+                return response()->json(['message'=>$message, 'status'=>$status]);
             break;
             case 'pending':
             break;
             case 'expire':
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
-                foreach ($trans_detail as $item) {
-                    $trans_detail = Trans_detail::findOrFail($item->id);
-                    // to transfer
-                    $trans_detail->trans_detail_status = 3;
-                    $trans_detail->trans_detail_transfer = 2;
-                    $trans_detail->trans_detail_transfer_is_cancel = 1;
-                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
-                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Expired, Transaction cancelled.';
-                    $trans_detail->save();
+                if($trans_detail){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 2;
+                        $trans_detail->trans_detail_transfer_is_cancel = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Expired, Transaction cancelled.';
+                        $trans_detail->save();
+                    }
+                }else{
+                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
+                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
+                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail->trans_hotlist_status = 4;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'pincode':
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail->trans_pincode_status = 4;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'iklan':
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail->trans_iklan_status = 4;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        default:
+                            $status = 500;
+                            $message = 'Transfer Expired!';
+                        break;
+                    }
                 }
-                return response()->json(['message'=>'berhasil', 'status'=>200]);
+                return response()->json(['message'=>$message, 'status'=>$status]);
             break;
             case 'deny':
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
-                foreach ($trans_detail as $item) {
-                    $trans_detail = Trans_detail::findOrFail($item->id);
-                    // to transfer
-                    $trans_detail->trans_detail_status = 3;
-                    $trans_detail->trans_detail_transfer = 2;
-                    $trans_detail->trans_detail_transfer_is_cancel = 1;
-                    $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
-                    $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer denied, Transaction cancelled..';
-                    $trans_detail->save();
+                if($trans_detail){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 4;
+                        $trans_detail->trans_detail_transfer = 2;
+                        $trans_detail->trans_detail_transfer_is_cancel = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer denied, Transaction cancelled.';
+                        $trans_detail->save();
+                    }
+                }else{
+                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
+                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
+                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail->trans_hotlist_status = 4;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer deny. updated by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'pincode':
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail->trans_pincode_status = 4;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer deny. updated by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'iklan':
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail->trans_iklan_status = 4;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = ' Transfer deny. updated by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        default:
+                            $status = 500;
+                            $message = 'Transfer Denied!';
+                        break;
+                    }
                 }
-                return response()->json(['message'=>'berhasil', 'status'=>200]);
+                return response()->json(['message'=>$message, 'status'=>$status]);
             break;
             default:
                 return response()->json(['message'=>'failed', 'status'=>500]);

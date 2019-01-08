@@ -109,7 +109,7 @@
                                                     <ul>
                                                         <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                         <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="{{action('member\\FrontController@detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -156,7 +156,7 @@
                                                         <ul>
                                                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                                             <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                            <li><a href="{{action('member\\FrontController@detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></i></a></li>
+                                                            <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -222,7 +222,7 @@
                             <ul>
                                 <li hidden><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                 <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="{{action('member\\FrontController@detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
                             </ul>
                         </div>
                     </div>

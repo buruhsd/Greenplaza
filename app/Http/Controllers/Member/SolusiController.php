@@ -96,9 +96,9 @@ class SolusiController extends Controller
         $message = "Solusi has been updated.";
         try{
             $solusi = Solusi::findOrFail($id);
-            $solusi->solusi_buyer_resi = $request->solusi_buyer_resi;
-            $solusi->solusi_buyer_shipment = $request->solusi_buyer_shipment;
-            $solusi->solusi_buyer_accept = 0;
+            $solusi->solusi_seller_resi = $request->solusi_buyer_resi;
+            $solusi->solusi_seller_shipment = $request->solusi_buyer_shipment;
+            $solusi->solusi_seller_accept = 0;
             $solusi->save();
         } catch (\Exception $e) {
             $status = 500;

@@ -403,6 +403,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::group(['prefix' => 'hotlist', 'as' => '.hotlist'], function () {
 			Route::get('/buy_poin', 'HotlistController@buy_poin')->name('.buy_poin');
 			Route::post('/buy_poin_store', 'HotlistController@buy_poin_store')->name('.buy_poin_store');
+			Route::get('/konfirmasi/{id}', 'HotlistController@konfirmasi')->name('.konfirmasi');
 			Route::post('/to_confirm/{$id}', 'HotlistController@to_confirm')->name('.to_confirm');
 			Route::post('/to_cancel/{$id}', 'HotlistController@to_cancel')->name('.to_cancel');
 			Route::get('/tagihan', 'HotlistController@tagihan')->name('.tagihan');
@@ -431,6 +432,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {
 			Route::get('/buy_pincode', 'PincodeController@buy_pincode')->name('.buy_pincode');
 			Route::post('/buy_pincode_store', 'PincodeController@buy_pincode_store')->name('.buy_pincode_store');
+			Route::get('/konfirmasi/{id}', 'PincodeController@konfirmasi')->name('.konfirmasi');
 			Route::post('/to_confirm/{$id}', 'PincodeController@to_confirm')->name('.to_confirm');
 			Route::post('/to_cancel/{$id}', 'PincodeController@to_cancel')->name('.to_cancel');
 			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
@@ -440,6 +442,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
 			Route::get('/beli_saldo', 'IklanController@beli_saldo')->name('.beli_saldo');
 			Route::post('/beli_saldo_store', 'IklanController@beli_saldo_store')->name('.beli_saldo_store');
+			Route::get('/konfirmasi/{id}', 'IklanController@konfirmasi')->name('.konfirmasi');
 			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
 			Route::get('/banner', function(){return view('member.iklan.banner');})->name('.banner');
 			Route::get('/banner_khusus', function(){return view('member.iklan.banner_khusus');})->name('.banner_khusus');
@@ -526,6 +529,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 	Route::group(['prefix' => 'midtrans', 'as' => '.midtrans'], function () {
 		Route::get('payment', 'MidtransController@payment')->name('.payment');
 		Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
+		Route::get('hotlist_payment/{code}', 'MidtransController@hotlist_payment')->name('.hotlist_payment');
 		Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
 		Route::post('process', 'MidtransController@process')->name('.process');
 		// Route::post('done', 'MidtransController@done')->name('.done');

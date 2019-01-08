@@ -46,7 +46,7 @@
                     <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id(), 'seller')}}</span></button>
                     {{-- <button type="button" onclick="search('Sent');" class="btn btn-info">Sent<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button> --}}
                     <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id(), 'seller')}}</span></button>
-                    <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    {{-- <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> --}}
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
