@@ -71,10 +71,15 @@
                         </div>
                     </div>
                 </div>
+                @if (\Auth::check())
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
+                        @if (Auth::user()->user_store_image)
+                        <img src="{{asset('assets/images/user_store/'.Auth::user_detail()->user_store_image)}}">
+                        @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
-                        <h4>Alex Smeet</h4>
+                        @endif
+                        <h4>{{Auth::user()->name}}</h4>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Maxime</p>
                     </div>
                     <div class="banner-wrap">
@@ -85,6 +90,21 @@
                         </div>
                     </div>
                 </div>
+                @else
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="author-wrap">
+                        <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image)}}" style="height: 
+                            130px">
+                    </div>
+                    <div class="banner-wrap">
+                        <div class="banner-img">
+                            <span class="discount">%20 Off</span>
+                            <img src="{{asset('assets/images/iklan/'.$banner1->iklan_image)}}" style="height: 
+                            270px">
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -297,9 +317,8 @@
                                     </div>
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -338,7 +357,7 @@
                                         <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                        <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -389,15 +408,15 @@
                                     <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                            <!-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> -->
+                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-                                    <p><span>Rp.{{($n->produk_price * $d->produk_discount) / 100}}</span>
+                                    <p><span>Rp.{{($n->produk_price * $n->produk_discount) / 100}}</span>
                                         <del>Rp.{{number_format($n->produk_price, 2)}}</del>
                                     </p>
                                     <ul class="rating">
@@ -440,10 +459,11 @@
                     </div>
                     <div class="banner-wrap mb-30">
                         <div class="banner-img black-opacity">
-                            <img src="{{ asset('frontend/images/banner/2.jpg') }}" alt="">
+                            <img src="{{asset('assets/images/iklan/'.$slider5->iklan_image)}}" style="height: 
+                            410px">
                             <div class="banner-content">
                                 <div class="banner-info">
-                                    <h2>Sale <span>20%</span> off</h2>
+                                    <h2>Sale <span>50%</span> off</h2>
                                     <h3>This Week Only</h3>
                                 </div>
                             </div>
@@ -472,9 +492,8 @@
                                                     <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                                 <div class="shop-icon">
                                                     <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -507,16 +526,15 @@
                                                 <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
                                             <div class="shop-icon">
                                                 <ul>
-                                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                                    <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
+                                                    <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="product-content">
                                             <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
                                             <p>
-                                                <span>Rp.{{($n->produk_price * $d->produk_discount) / 100}}</span>
+                                                <span>Rp.{{($n->produk_price * $n->produk_discount) / 100}}</span>
                                                 <del>Rp.{{number_format($n->produk_price, 2)}}</del>
                                             </p>
                                             <ul class="rating">
@@ -733,9 +751,8 @@
                                     <img src="{{asset('assets/images/product/'.$f->produk_image)}}">
                                     <div class="shop-icon">
                                         <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
+                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -819,7 +836,7 @@
                                                     <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -839,7 +856,7 @@
                                                     <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -866,7 +883,7 @@
                                                     <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$t->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -886,7 +903,7 @@
                                                     <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$t->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -913,7 +930,7 @@
                                                     <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -933,7 +950,7 @@
                                                     <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -960,7 +977,7 @@
                                                     <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$d->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -980,7 +997,7 @@
                                                     <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a href="shop.html">{{$d->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -1021,10 +1038,10 @@
                                     <ul class="blog-meta">
                                         <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
                                         <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
-                                        <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->update_at}}</a></li>
+                                        <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->updated_at}}</a></li>
                                     </ul>
                                     <p>{{$l->produk_note}}</p>
-                                    <a class="readmore" href="blog-details.html">read more</a>
+                                    <a class="readmore" href="{{route('detail', $l->produk_slug)}}">read more</a>
                                 </div>
                             </div>
                             @endforeach
@@ -1041,45 +1058,21 @@
             <div class="row">
                 <div class="col-12">
                     <div class="brand-active owl-carousel">
+                        @foreach ($brandall as $b)
                         <div class="brand-items">
                             <a href="#">
-                                <img src="assets/images/brand/1.jpg" alt="">
+                                <img src="{{asset('assets/images/iklan/'.$b->brand_image)}}" style="height: 
+                            50px">
                             </a>
                         </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/2.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/3.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/4.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/5.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/6.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="brand-items">
-                            <a href="#">
-                                <img src="assets/images/brand/7.jpg" alt="">
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- brand-area end -->
+    <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
+
+{!! (isset($footer_script))? $footer_script:'' !!}

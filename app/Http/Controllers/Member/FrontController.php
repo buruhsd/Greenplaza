@@ -14,6 +14,7 @@ use App\Models\Shipment;
 use App\Models\Page;
 use App\Models\Iklan;
 use App\User;
+use App\Role;
 use Auth;
 use FunctionLib;
 
@@ -181,6 +182,10 @@ class FrontController extends Controller
 //HOME 
     public function index ()
     {
+        // $users = Role::where('name', 'admin')->first()->users('id');
+        // // dd($users);
+        // $relatedproduk = Produk::where('produk_seller_id', $users)->first();
+        // dd($relatedproduk);
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
@@ -202,12 +207,8 @@ class FrontController extends Controller
         $slider2 = Iklan::where('iklan_iklan_id', 7)->first();
         $slider3 = Iklan::where('iklan_iklan_id', 8)->first();
         $slider4 = Iklan::where('iklan_iklan_id', 9)->first();
-        $sponsor1 = Iklan::where('iklan_iklan_id', 10)->first();
-        $sponsor2 = Iklan::where('iklan_iklan_id', 11)->first();
-        $sponsor3 = Iklan::where('iklan_iklan_id', 12)->first();
-        $sponsor4 = Iklan::where('iklan_iklan_id', 13)->first();
-        $sponsor5 = Iklan::where('iklan_iklan_id', 14)->first();
-        $sponsor6 = Iklan::where('iklan_iklan_id', 15)->first();
+        $slider5 = Iklan::where('iklan_iklan_id', 10)->first();
+        $brandall = Brand::orderBy('created_at', 'ASC')->get();
         // dd($sliderall);
         return view('frontend.page.home', 
             compact(
@@ -232,12 +233,8 @@ class FrontController extends Controller
                 'slider2',
                 'slider3',
                 'slider4',
-                'sponsor1',
-                'sponsor2',
-                'sponsor3',
-                'sponsor4',
-                'sponsor5',
-                'sponsor6'
+                'slider5',
+                'brandall'
             ));
     }
 

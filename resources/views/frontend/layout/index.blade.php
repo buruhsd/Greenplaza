@@ -8,7 +8,6 @@
     
     @include('frontend.layout.header')
     @yield('content')
-    @include('frontend.layout.footer')
     <!-- Popup Subscribe Form -->
     <div id="popup-subscribe" class="modal fade">
         <div class="modal-dialog subscribe-dialog">
@@ -40,8 +39,12 @@
         </div>
     </div>
     <!-- Popup Subscribe Form -->
+    {!! Plugin::footer()!!}
+    {{-- @include('frontend.plugin.footer') --}}
+
     @include('frontend.layout.script')
     @yield('script')
+    {!! (isset($footer_script))? $footer_script:'' !!}
 </body>
 
 </html>
