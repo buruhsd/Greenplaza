@@ -75,7 +75,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
                         @if (Auth::user()->user_store_image)
-                        <img src="{{asset('assets/images/user_store/'.Auth::user_detail()->user_store_image)}}">
+                        <img src="{{asset('assets/images/user_store/'.Auth::user()->user_store_image)}}">
                         @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif
