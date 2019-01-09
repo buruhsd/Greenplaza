@@ -1793,7 +1793,7 @@ ul.rating li {
 }
 
 .breadcumb-content.black-opacity:before {
-    background: #000;
+    background: #00000005;
     opacity: .5;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     z-index: -9;
