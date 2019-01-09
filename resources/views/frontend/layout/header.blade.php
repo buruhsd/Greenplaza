@@ -114,17 +114,24 @@
                         <div class="cetagory-wrap">
                             <span>All Category</span>
                             <ul class="cetagory-items">
-                                @foreach ($category as $p)
-                                <li><a href="#"><i class="fa fa-chain-broken"></i>{{$p->category->category_name}}<i class="fa fa-angle-right pull-right"></i></a>
-                                    <ul class="sub-cetagory">
-                                        <li>
-                                            <p>{{$p->category->category_name}}</p>
-                                            <ul>
-                                                <li><a href="#">{{$p->produk_name}}</a></li>
+                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
+                                {{-- {{dd($cat)}} --}}
+                                @foreach($cat as $item)
+                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
+                                        <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
+                                        @if($sub_cat->count() > 0)
+                                            <ul class="sub-cetagory col-md-12 col-sm-12">
+                                                <li>
+                                                    <p>Cetagory Title </p>
+                                                    <ul>
+                                                        @foreach($sub_cat as $item)
+                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">{{$item->category_name}}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
                                             </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                        @endif
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>

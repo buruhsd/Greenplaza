@@ -324,9 +324,16 @@
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="shop.html">Floral Print Buttoned</a></h3>
-                                    <p><span>Rp.{{($d->produk_price * $d->produk_discount) / 100}}</span>
+                                    @if ($d->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
                                         <del>Rp.{{number_format($d->produk_price, 2)}}</del>
                                     </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -365,7 +372,16 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>{{number_format($p->produk_price,2)}}</p>
+                                    @if ($p->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                    </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -385,7 +401,16 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>{{number_format($p->produk_price,2)}}</p>
+                                    @if ($p->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                    </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -416,9 +441,16 @@
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-                                    <p><span>Rp.{{($n->produk_price * $n->produk_discount) / 100}}</span>
+                                    @if ($n->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
                                         <del>Rp.{{number_format($n->produk_price, 2)}}</del>
                                     </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -499,9 +531,16 @@
                                             </div>
                                             <div class="product-content">
                                                 <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                                @if ($n->produk_discount != 0)
+                                                <p>
+                                                    <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
+                                                    <del>Rp.{{number_format($n->produk_price, 2)}}</del>
+                                                </p>
+                                                @else
                                                 <p>
                                                     <span>Rp.{{number_format($n->produk_price, 2)}}</span>
                                                 </p>
+                                                @endif
                                                 <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
@@ -533,10 +572,16 @@
                                         </div>
                                         <div class="product-content">
                                             <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                            @if ($n->produk_discount != 0)
                                             <p>
-                                                <span>Rp.{{($n->produk_price * $n->produk_discount) / 100}}</span>
+                                                <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
                                                 <del>Rp.{{number_format($n->produk_price, 2)}}</del>
                                             </p>
+                                            @else
+                                            <p>
+                                                <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                            </p>
+                                            @endif
                                             <ul class="rating">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
@@ -758,12 +803,14 @@
                                 </div>
                                 <div class="product-content">
                                     <h3><a href="shop.html">{{$f->produk_name}}</a></h3>
-                                    @if ($f->produk_discount == 0)
-                                    <p><span>{{$f->produk_price}}</span>
+                                    @if ($f->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($f->produk_price * $f->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($f->produk_price, 2)}}</del>
                                     </p>
                                     @else
-                                    <p><span>{{$f->produk_price * $f->produk_discount / 100}}</span>
-                                        <del>{{$f->produk_price}}</del>
+                                    <p>
+                                        <span>Rp.{{number_format($f->produk_price, 2)}}</span>
                                     </p>
                                     @endif
                                     <ul class="rating">
@@ -844,7 +891,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -864,7 +920,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -891,7 +956,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($t->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($t->produk_price * $t->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($t->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($t->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -911,7 +985,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>Rp.{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($t->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($t->produk_price * $t->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($t->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($t->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -938,7 +1021,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -958,7 +1050,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>{{number_format($p->produk_price,2)}}</p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -985,7 +1086,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>{{number_format($d->produk_price,2)}}</p>
+                                                    @if ($d->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach
@@ -1005,7 +1115,16 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    <p>{{number_format($d->produk_price,2)}}</p>
+                                                    @if ($d->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 </div>
                                             </div>
                                             @endforeach

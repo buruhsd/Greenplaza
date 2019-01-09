@@ -182,7 +182,7 @@ class FrontController extends Controller
 //HOME 
     public function index ()
     {
-        // $users = Role::where('name', 'admin')->first()->users('id');
+        // $users = Role::where('name', 'admin')->first()->users;
         // // dd($users);
         // $relatedproduk = Produk::where('produk_seller_id', $users)->first();
         // dd($relatedproduk);
