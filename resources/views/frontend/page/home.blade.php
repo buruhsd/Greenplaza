@@ -59,7 +59,7 @@
                                     <div class="banner-img">
                                         <span class="discount">50% Off</span>
                                         <img src="{{asset('assets/images/iklan/'.$slider6->iklan_image)}}" style="height: 
-                                        10px">
+                                        100px">
                                     </div>
                                 </div>
                             </div>
