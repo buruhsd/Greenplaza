@@ -55,17 +55,21 @@
                     <div class="info-wrap">
                         <div class="row">
                             <div class="col-sm-6 col-xs-15">
-                                <div class="info-items">
-                                    <img src="{{ asset('frontend/images/icon/2.png') }}" alt="">
-                                    <h4>MONEY BACK</h4>
-                                    <p>30 Days Money Back Guarantee</p>
+                                <div class="banner-wrap">
+                                    <div class="banner-img">
+                                        <span class="discount">50% Off</span>
+                                        <img src="{{asset('assets/images/iklan/'.$slider6->iklan_image)}}" style="height: 
+                                        10px">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="info-items">
-                                    <img src="{{ asset('frontend/images/icon/1.png') }}" alt="">
-                                    <h4>SPECIAL SALE</h4>
-                                    <p>Extra $5 off on all items</p>
+                                <div class="banner-wrap">
+                                    <div class="banner-img">
+                                        <span class="discount">50% Off</span>
+                                        <img src="{{asset('assets/images/iklan/'.$slider7->iklan_image)}}" style="height: 
+                                        100px">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +84,6 @@
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif
                         <h4>{{Auth::user()->name}}</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit Maxime</p>
                     </div>
                     <div class="banner-wrap">
                         <div class="banner-img">
@@ -171,12 +174,13 @@
                         <h2 class="section-title">Related Product</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
+                                @foreach ($relatedproduk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/1.jpg') }}" alt="">
+                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -184,65 +188,28 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
+                                        @else
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/2.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/3.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="slidebar-product-wrap">
+                                @foreach ($relatedprodukk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/5.jpg') }}" alt="">
+                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -250,57 +217,19 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
+                                        @else
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/4.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/7.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/8.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -323,7 +252,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">Floral Print Buttoned</a></h3>
+                                    <h3><a href="{{route('detail', $d->produk_slug)}}">Floral Print Buttoned</a></h3>
                                     @if ($d->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
@@ -361,7 +290,7 @@
                                 @foreach ($popularproduk as $p)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
-                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                        <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
@@ -390,10 +319,10 @@
                                 @foreach ($popularprodukk as $p)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
-                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                        <a href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">{{$p->produk_name}}</a></h4>
+                                        <h4><a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -440,7 +369,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
                                     @if ($n->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -530,7 +459,7 @@
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
                                                 @if ($n->produk_discount != 0)
                                                 <p>
                                                     <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -571,7 +500,7 @@
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
+                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
                                             @if ($n->produk_discount != 0)
                                             <p>
                                                 <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -644,15 +573,16 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Special Product</h2>
+                        <h2 class="section-title">Related Product</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
+                                @foreach ($relatedproduk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
+                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -660,65 +590,28 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
+                                        @else
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/15.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/16.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/13.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <div class="slidebar-product-wrap">
+                                @foreach ($relatedprodukk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/12.jpg') }}" alt="">
+                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Floral Print Buttoned</a></h4>
+                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
                                         <ul class="rating">
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -726,57 +619,19 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        <p>$20.00</p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
+                                        @else
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/11.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Push It Messenger Bag</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/10.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Sprite Foam Yoga Brick</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
-                                <div class="product-sidebar-items fix mb-0">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <img src="{{ asset('frontend/images/product/sidebar/9.jpg') }}" alt="">
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="shop.html">Dual Handle Cardio Ball</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        <p>$20.00</p>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -802,7 +657,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="shop.html">{{$f->produk_name}}</a></h3>
+                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{$f->produk_name}}</a></h3>
                                     @if ($f->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($f->produk_price * $f->produk_discount) / 100, 2)}}</span>
@@ -880,7 +735,9 @@
                                             @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
@@ -909,7 +766,9 @@
                                             @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
@@ -945,7 +804,9 @@
                                             @foreach ($toprate as $t)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
@@ -974,7 +835,9 @@
                                             @foreach ($topratee as $t)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
@@ -1010,7 +873,9 @@
                                             @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
-                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
@@ -1039,7 +904,9 @@
                                             @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
-                                                    <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
@@ -1075,7 +942,9 @@
                                             @foreach ($discountproduk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}">
+                                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
+                                                    </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
@@ -1104,7 +973,7 @@
                                             @foreach ($discountprodukk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity">
-                                                    <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
+                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px"></a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
@@ -1153,10 +1022,10 @@
                                     <img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px">
                                 </div>
                                 <div class="blog-content">
-                                    <h3><a href="blog.html">{{$l->produk_name}}</a></h3>
+                                    <h3><a href="{{route('detail', $l->produk_slug)}}">{{$l->produk_name}}</a></h3>
                                     <ul class="blog-meta">
                                         <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 05 Comments</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i>{{$l->review->count()}} Comments</a></li>
                                         <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->updated_at}}</a></li>
                                     </ul>
                                     <p>{{$l->produk_note}}</p>
@@ -1179,9 +1048,9 @@
                     <div class="brand-active owl-carousel">
                         @foreach ($brandall as $b)
                         <div class="brand-items">
-                            <a href="#">
+                            <a href="{{route('brand', ['brand' => $b->brand_slug])}}">
                                 <img src="{{asset('assets/images/iklan/'.$b->brand_image)}}" style="height: 
-                            50px">
+                            50px" alt="{{asset('assets/images/iklan/'.$b->brand_image)}}">
                             </a>
                         </div>
                         @endforeach

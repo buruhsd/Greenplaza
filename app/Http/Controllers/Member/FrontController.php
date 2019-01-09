@@ -182,10 +182,10 @@ class FrontController extends Controller
 //HOME 
     public function index ()
     {
-        // $users = Role::where('name', 'admin')->first()->users;
-        // // dd($users);
-        // $relatedproduk = Produk::where('produk_seller_id', $users)->first();
-        // dd($relatedproduk);
+        $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
+        // dd($users);
+        $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
+        $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
@@ -208,6 +208,8 @@ class FrontController extends Controller
         $slider3 = Iklan::where('iklan_iklan_id', 8)->first();
         $slider4 = Iklan::where('iklan_iklan_id', 9)->first();
         $slider5 = Iklan::where('iklan_iklan_id', 10)->first();
+        $slider6 = Iklan::where('iklan_iklan_id', 11)->first();
+        $slider7 = Iklan::where('iklan_iklan_id', 12)->first();
         $brandall = Brand::orderBy('created_at', 'ASC')->get();
         // dd($sliderall);
         return view('frontend.page.home', 
@@ -234,7 +236,12 @@ class FrontController extends Controller
                 'slider3',
                 'slider4',
                 'slider5',
-                'brandall'
+                'slider6',
+                'slider7',
+                'brandall',
+                'users',
+                'relatedproduk',
+                'relatedprodukk'
             ));
     }
 
