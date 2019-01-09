@@ -14,6 +14,8 @@ use Auth;
 use FunctionLib;
 use App\Models\Paket_iklan;
 use App\Models\Trans_iklan;
+use App\Models\Iklan;
+use App\Models\Category;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,6 +23,30 @@ class IklanController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'sys_iklan';
+
+    /**
+     * #buyer
+     * process buyer mengkonfirmasi pembayaran
+     * @param
+     * @return
+     */
+    public function konfirmasi($id){
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        $trans = Trans_iklan::findOrFail($id);
+        $status = FunctionLib::midtrans_status($trans->trans_iklan_code);
+        if($status){
+            $trans->trans_iklan_status = 1;
+            $trans->save();
+            $status = 200;
+            $message = 'You has been Transfered!';
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            $data['trans'] = $trans;
+            return view('member.iklan.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+    }
 
     /**
     * @param method $method
@@ -34,9 +60,116 @@ class IklanController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
+    public function add_baris(Request $request){
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'iklan_title' => 'required',
+                'iklan_category_id' => 'required',
+                'iklan_content' => 'required',
+            ]);
+            $iklan = new Iklan;
+            $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+            $iklan->iklan_user_id = Auth::id();
+            $iklan->iklan_title = $request->iklan_title;
+            $iklan->iklan_status = 1;
+            $iklan->iklan_category_id = $request->iklan_category_id;
+            if($request->is_link){
+                $iklan->iklan_link = $request->iklan_link;
+            }
+            $iklan->iklan_content = $request->iklan_content;
+            $iklan->iklan_note = 'created by '.Auth::user()->username.' at '.date('Y-m-d H:i:s');
+            $iklan->save();
+            dd($iklan);
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['category'] = Category::all();
+        return view('member.iklan.add_baris', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
     public function baris(){
-        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
-        return view('member.iklan.history', $data);
+        $where = 1;
+        $where .= ' AND iklan_user_id ='.Auth::id();
+        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        return view('member.iklan.baris', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function add_banner_khusus(){
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'iklan_title' => 'required',
+                'iklan_category_id' => 'required',
+                'iklan_content' => 'required',
+            ]);
+            $iklan = new Iklan;
+            $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+            $iklan->iklan_user_id = Auth::id();
+            $iklan->iklan_title = $request->iklan_title;
+            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_status = 1;
+            $iklan->iklan_category_id = $request->iklan_category_id;
+            // $iklan->iklan_link = $request->iklan_link;
+            $iklan->iklan_content = $request->iklan_content;
+            $iklan->iklan_note = $request->iklan_note;
+            // $iklan->save();
+            dd($iklan);
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['category'] = Category::all();
+        return view('member.iklan.add_banner_khusus', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function banner_khusus(){
+        $where = 1;
+        $where .= ' AND iklan_user_id ='.Auth::id();
+        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        return view('member.iklan.banner', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function add_banner(){
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'iklan_title' => 'required',
+                'iklan_category_id' => 'required',
+                'iklan_content' => 'required',
+            ]);
+            $iklan = new Iklan;
+            $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+            $iklan->iklan_user_id = Auth::id();
+            $iklan->iklan_title = $request->iklan_title;
+            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_status = 1;
+            $iklan->iklan_category_id = $request->iklan_category_id;
+            // $iklan->iklan_link = $request->iklan_link;
+            $iklan->iklan_content = $request->iklan_content;
+            $iklan->iklan_note = $request->iklan_note;
+            // $iklan->save();
+            dd($iklan);
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['category'] = Category::all();
+        return view('member.iklan.add_banner', $data);
     }
 
     /**
@@ -44,8 +177,41 @@ class IklanController extends Controller
     * @return add main footer script / in spesific method
     */
     public function banner(){
-        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
-        return view('member.iklan.history', $data);
+        $where = 1;
+        $where .= ' AND iklan_user_id ='.Auth::id();
+        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        return view('member.iklan.banner', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function add_slider(){
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'iklan_title' => 'required',
+                'iklan_category_id' => 'required',
+                'iklan_content' => 'required',
+            ]);
+            $iklan = new Iklan;
+            $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+            $iklan->iklan_user_id = Auth::id();
+            $iklan->iklan_title = $request->iklan_title;
+            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_status = 1;
+            $iklan->iklan_category_id = $request->iklan_category_id;
+            // $iklan->iklan_link = $request->iklan_link;
+            $iklan->iklan_content = $request->iklan_content;
+            $iklan->iklan_note = $request->iklan_note;
+            // $iklan->save();
+            dd($iklan);
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['category'] = Category::all();
+        return view('member.iklan.add_slider', $data);
     }
 
     /**
@@ -53,8 +219,10 @@ class IklanController extends Controller
     * @return add main footer script / in spesific method
     */
     public function slider(){
-        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
-        return view('member.iklan.history', $data);
+        $where = 1;
+        $where .= ' AND iklan_user_id ='.Auth::id();
+        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        return view('member.iklan.slider', $data);
     }
 
     /**

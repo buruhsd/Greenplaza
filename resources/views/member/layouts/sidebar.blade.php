@@ -15,6 +15,7 @@
                                 </a>
                             </li>
                             {{-- need actived --}}
+                            @if(Auth::user()->seller_active())
                             <li>
                                 <a href="javascript:void(0)">
                                     <i class="menu-icon fa fa-bar-chart-o"></i><span>Sales</span><i class="ion-android-arrow-dropdown-circle right"></i>
@@ -24,6 +25,7 @@
                                     <li><a href="{{route('member.komplain.index')}}">Resolusi Komplain</a></li>
                                 </ul>
                             </li>
+                            @endif
                             {{-- need actived --}}
                             <li>
                                 <a href="javascript:void(0)">
@@ -42,7 +44,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Register Penjual</a></li>
+                                    {{-- <li><a href="{{route('member.sponsor.register')}}">Register Penjual</a></li> --}}
                                     <li><a href="{{route('member.wallet.index')}}">History Saldo</a></li>
                                     <li><a href="{{route('member.wallet.withdrawal')}}">Withdrawal</a></li>
                                     <li><a href="{{route('member.wallet.transfer_cw')}}">Transfer CW</a></li>
@@ -82,6 +84,7 @@
                                 </ul>
                             </li>
                             {{-- need actived --}}
+                            @if(Auth::user()->seller_active())
                             <li>
                                 <a href="javascript:void(0)">
                                     <i class="menu-icon icon-layers"></i><span>Produk & Brand</span><i class="ion-android-arrow-dropdown-circle right"></i>
@@ -91,6 +94,7 @@
                                     <li><a href="{{route('member.brand.index')}}">Daftar Brand</a></li>
                                 </ul>
                             </li>
+                            @endif
                             {{-- need actived --}}
                             <li>
                                 <a href="javascript:void(0)">

@@ -467,3 +467,25 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
 .glyphicon-menu-right:before{content:"\e258"}
 .glyphicon-menu-down:before{content:"\e259"}
 .glyphicon-menu-up:before{content:"\e260"}
+
+.product-wrap .product-img img.first{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 250px !important;
+  margin: auto;
+  display: block;
+}
+.product-wrap .product-img img.second{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 250px !important;
+  margin: auto;
+  display: block;
+}
+/*.product-wrap .product-img img.first{
+  width: auto !important;
+  overflow: hidden !important;
+  height: 300px !important;
+}*/

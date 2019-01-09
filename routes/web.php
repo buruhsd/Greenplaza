@@ -444,9 +444,18 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::post('/beli_saldo_store', 'IklanController@beli_saldo_store')->name('.beli_saldo_store');
 			Route::get('/konfirmasi/{id}', 'IklanController@konfirmasi')->name('.konfirmasi');
 			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
-			Route::get('/banner', function(){return view('member.iklan.banner');})->name('.banner');
-			Route::get('/banner_khusus', function(){return view('member.iklan.banner_khusus');})->name('.banner_khusus');
-			Route::get('/baris', function(){return view('member.iklan.baris');})->name('.baris');
+			Route::get('/baris', 'IklanController@baris')->name('.baris');
+			Route::get('/add_baris', 'IklanController@add_baris')->name('.add_baris');
+			Route::post('/add_baris', 'IklanController@add_baris')->name('.add_baris');
+			Route::get('/slider', 'IklanController@slider')->name('.slider');
+			Route::get('/add_slider', 'IklanController@add_slider')->name('.add_slider');
+			Route::post('/add_slider', 'IklanController@add_slider')->name('.add_slider');
+			Route::get('/banner', 'IklanController@banner')->name('.banner');
+			Route::get('/add_banner', 'IklanController@add_banner')->name('.add_banner');
+			Route::post('/add_banner', 'IklanController@add_banner')->name('.add_banner');
+			Route::get('/banner_khusus', 'IklanController@banner_khusus')->name('.banner_khusus');
+			Route::get('/add_banner_khusus', 'IklanController@add_banner_khusus')->name('.add_banner_khusus');
+			Route::post('/add_banner_khusus', 'IklanController@add_banner_khusus')->name('.add_banner_khusus');
 			Route::get('/tagihan', 'IklanController@tagihan')->name('.tagihan');
 		});
 		// Atur Kurir
