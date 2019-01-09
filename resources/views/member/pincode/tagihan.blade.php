@@ -92,8 +92,8 @@
                                         </td>
                                         {{-- <td>{{$item->trans_pincode_status}}</td> --}}
                                         <td>
-                                            @if($item->trans_pincode_status == 1)
-                                                <button class="btn btn-xs btn-success">Konfirmasi</button>
+                                            @if($item->trans_pincode_status == 0)
+                                                <a href="{{route('member.pincode.konfirmasi', $item->id)}}" class="btn btn-xs btn-success">Konfirmasi</a>
                                                 <button class="btn btn-xs btn-danger">Batal</button>
                                             @else
                                                 <button class="btn btn-xs btn-success">Detail</button>

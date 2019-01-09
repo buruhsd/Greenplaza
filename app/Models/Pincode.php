@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pincode extends Model
 {
-    protected $table = 'sys_withdrawal';
+    protected $table = 'sys_pincode';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-		'pincode_pincode_id', 'pincode_user_id', 'pincode_iklan_id', 'pincode_use', 'pincode_done', 'pincode_note'
+		'pincode_code', 'pincode_pincode_id', 'pincode_user_id', 'pincode_iklan_id', 'pincode_use', 'pincode_done', 'pincode_note'
 	];
 
     /**

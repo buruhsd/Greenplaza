@@ -33,19 +33,12 @@ class HotlistController extends Controller
         $status = 200;
         $message = 'Transfer confirmed!';
         $trans = Trans_hotlist::findOrFail($id);
-        $status = FunctionLib::midtrans_status($trans->trans_code);
+        $status = FunctionLib::midtrans_status($trans->trans_hotlist_code);
         if($status){
-            foreach ($trans->trans_detail as $item) {
-                $trans_detail = Trans_detail::findOrFail($item->id);
-                // to transfer
-                $trans_detail->trans_detail_status = 2;
-                $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
-                $trans_detail->save();
-            }
-            if(!$trans_detail){
-                $status = 500;
-                $message = 'Transfer unconfirmed!';
-            }
+            $trans->trans_hotlist_status = 1;
+            $trans->save();
+            $status = 200;
+            $message = 'You has been Transfered!';
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{

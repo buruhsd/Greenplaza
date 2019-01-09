@@ -435,7 +435,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::get('/konfirmasi/{id}', 'PincodeController@konfirmasi')->name('.konfirmasi');
 			Route::post('/to_confirm/{$id}', 'PincodeController@to_confirm')->name('.to_confirm');
 			Route::post('/to_cancel/{$id}', 'PincodeController@to_cancel')->name('.to_cancel');
-			Route::get('/list', function(){return view('member.pincode.history');})->name('.history');
+			Route::get('/list', 'PincodeController@list')->name('.history');
 			Route::get('/tagihan', 'PincodeController@tagihan')->name('.tagihan');
 		});
 		// Pasang Iklan
@@ -530,6 +530,8 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('payment', 'MidtransController@payment')->name('.payment');
 		Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
 		Route::get('hotlist_payment/{code}', 'MidtransController@hotlist_payment')->name('.hotlist_payment');
+		Route::get('pincode_payment/{code}', 'MidtransController@pincode_payment')->name('.pincode_payment');
+		Route::get('iklan_payment/{code}', 'MidtransController@iklan_payment')->name('.iklan_payment');
 		Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
 		Route::post('process', 'MidtransController@process')->name('.process');
 		// Route::post('done', 'MidtransController@done')->name('.done');

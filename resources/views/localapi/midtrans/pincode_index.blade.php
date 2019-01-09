@@ -19,16 +19,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($trans_hotlist)
+                                @if($trans_pincode)
                                     <tr>
-                                        <td class="product"><a href="single-product.html">{{$trans_hotlist->paket->paket_hotlist_name}}</a></td>
-                                        <td class="quantity ">{{$trans_hotlist['trans_hotlist_jml']}}</td>
-                                        {{-- <td class="quantity ">
-                                            <div class="cart-plus-minus">
-                                                <input type="text" value="1" />
-                                            </div>
-                                        </td> --}}
-                                        <td class="total">{{$trans_hotlist['trans_hotlist_amount']}}</td>
+                                        <td class="product"><a href="single-product.html">{{$trans_pincode->paket->paket_pincode_name}}</a></td>
+                                        <td class="quantity ">{{intval($trans_pincode->paket->paket_pincode_amount) + intval($trans_pincode->paket->paket_pincode_bonus)}}</td>
+                                        <td class="total">Rp. {{FunctionLib::number_to_text($trans_pincode['trans_pincode_amount'])}}</td>
                                     </tr>
                                 @endif
                             </tbody>
@@ -44,7 +39,7 @@
                                     <ul>
                                         <li>
                                             <span class="pull-left"> Total </span> 
-                                            Rp. {{FunctionLib::number_to_text($trans_hotlist['trans_hotlist_amount'])}}
+                                            Rp. {{FunctionLib::number_to_text($trans_pincode['trans_pincode_amount'])}}
                                         </li>
                                     </ul>
                                 </div>
@@ -74,10 +69,9 @@
                 document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 // parse to form_data
                 var form_data = new FormData();
-                for ( var key in result ) {
-                    form_data.append(key, result[key]);
-                }
                 console.log(form_data);
+                var dataurl = "{{ route('member.pincode.konfirmasi',$trans_pincode->id)}}";
+                window.location = dataurl;
             },
             // Optional
             onPending: function(result){
@@ -86,10 +80,9 @@
                 document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 // parse to form_data
                 var form_data = new FormData();
-                for ( var key in result ) {
-                    form_data.append(key, result[key]);
-                }
                 console.log(form_data);
+                var dataurl = "{{ route('member.pincode.konfirmasi',$trans_pincode->id)}}";
+                window.location = dataurl;
             },
             // Optional
             onError: function(result){
@@ -97,10 +90,9 @@
                 document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
                 // parse to form_data
                 var form_data = new FormData();
-                for ( var key in result ) {
-                    form_data.append(key, result[key]);
-                }
                 console.log(form_data);
+                var dataurl = "{{ route('member.pincode.konfirmasi',$trans_pincode->id)}}";
+                window.location = dataurl;
             }
         });
     };

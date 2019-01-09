@@ -39,11 +39,6 @@ class PincodeAndHotlist extends Migration
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign('pincode_iklan_id')
-                ->references('id')
-                ->on('sys_iklan')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
     }
 

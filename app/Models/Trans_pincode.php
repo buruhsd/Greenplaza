@@ -56,4 +56,14 @@ class Trans_pincode extends Model
     {
         return $this->belongsTo('App\Models\Payment', 'trans_pincode_payment_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function pincode()
+    {
+        return $this->hasMany('App\Models\Pincode', 'pincode_pincode_id');
+    }
 }

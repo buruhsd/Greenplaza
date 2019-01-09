@@ -32,6 +32,33 @@ class IklanController extends Controller
 
     /**
     * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function baris(){
+        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
+        return view('member.iklan.history', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function banner(){
+        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
+        return view('member.iklan.history', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function slider(){
+        $data['iklan'] = Iklan::whereRaw('iklan_user_id ='.Auth::id())->paginate($this->perPage);
+        return view('member.iklan.history', $data);
+    }
+
+    /**
+    * @param method $method
     * @return view
     */
     public function beli_saldo(){

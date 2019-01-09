@@ -14,20 +14,57 @@ use Auth;
 use FunctionLib;
 use App\Models\Paket_pincode;
 use App\Models\Trans_pincode;
+use App\Models\Pincode;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
 class PincodeController extends Controller
 {
-    private $perPage = 5;
+    private $perPage = 10;
     private $mainTable = 'sys_trans_pincode';
+
+    /**
+     * #buyer
+     * process buyer mengkonfirmasi pembayaran
+     * @param
+     * @return
+     */
+    public function konfirmasi($id){
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        $trans = Trans_pincode::findOrFail($id);
+        $status = FunctionLib::midtrans_status($trans->trans_pincode_code);
+        if($status){
+            $trans->trans_pincode_status = 1;
+            $trans->save();
+            if($trans->pincode->count() == 0){
+                $target = intval($trans->paket->paket_pincode_amount) + intval($trans->paket->paket_pincode_bonus);
+                for ($no=1; $no <= $target; $no++) { 
+                    $code = FunctionLib::str_rand(2).FunctionLib::str_rand(2);
+                    $res = new Pincode;
+                    $res->pincode_code = $trans->trans_pincode_code.$code;
+                    $res->pincode_pincode_id = $trans->id;
+                    $res->pincode_user_id = Auth::id();
+                    $res->save();
+                }
+            }
+            $status = 200;
+            $message = 'You has been Transfered!';
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            $data['trans'] = $trans;
+            return view('member.pincode.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+    }
 
     /**
     * @param method $method
     * @return add main footer script / in spesific method
     */
     public function list(){
-        return view('member.pincode.tagihan');
+        $data['pincode'] = Pincode::whereRaw('pincode_user_id ='.Auth::id())->paginate($this->perPage);
+        return view('member.pincode.history', $data);
     }
 
     /**
@@ -92,8 +129,8 @@ class PincodeController extends Controller
         // $res->trans_pincode_status = 0;
         $res->trans_pincode_paket_id = $request->trans_pincode_paket_id;
         $res->trans_pincode_amount = $paket_pincode->paket_pincode_price;
-        $res->trans_pincode_note = $request->trans_pincode_note;//'Pembelian Paket Pincode '.$paket_pincode->paket_pincode_name.' by '.Auth::user()->username.' at '
-            // .FunctionLib::datetime_indo($date, true, 'full');
+        $res->trans_pincode_note = 'Pembelian Paket Pincode '.$paket_pincode->paket_pincode_name.' by '.Auth::user()->username.' at '
+            .FunctionLib::datetime_indo($date, true, 'full');
         $res->save();
         if(!$res){
             $status = 500;

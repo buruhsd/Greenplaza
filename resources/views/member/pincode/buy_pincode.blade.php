@@ -14,7 +14,7 @@
                 <h4 class="panel-title">Kurs Pin Code Saat Ini : nominal e hehe</h4>
                 <h4 class="panel-title">PIN Code digunakan untuk memasang link ke website halaman pribadi anda pada iklan baris atau banner</h4>
             </div>
-            {!! Form::open(['url' => route('member.iklan.beli_saldo_store'), 'id' => 'wizardForm', 'files' => true]) !!}
+            {!! Form::open(['url' => route('member.pincode.buy_pincode_store'), 'id' => 'wizardForm', 'files' => true]) !!}
             <div class="tab-content">
                 <div class="tab-pane active fade in" id="tab1">
                     <div class="row m-b-lg">
