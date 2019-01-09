@@ -28,6 +28,6 @@ class HomeController extends Controller
     {
         $perPage = 8;
         $data['produk_newest'] = Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
-        return view('frontend.page.home', $data);
+        return view('layouts.home', $data);
     }
 }
