@@ -1805,7 +1805,7 @@ ul.rating li {
     position: relative;
     padding-bottom: 10px;
     margin-bottom: 10px;
-    color: #fff;
+    color: #000;
 }
 
 .breadcumb-content h2:before,
@@ -1832,7 +1832,8 @@ ul.rating li {
 
 .breadcumb-content ul li {
     display: inline-block;
-    color: #fff;
+    font-weight: 500;
+    color: #000;
 }
 
 .breadcumb-content ul li:before {
@@ -1846,7 +1847,8 @@ ul.rating li {
 
 .breadcumb-content ul li a {
     display: block;
-    color: #fff;
+    font-weight: 500;
+    color: #000;
 }
 
 .breadcumb-content ul li a:hover {

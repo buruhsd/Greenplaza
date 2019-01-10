@@ -47,7 +47,7 @@
                         <div class="breadcumb-content black-opacity" style="background-image: url('/frontend/images/banner/cat.jpg')">
                             <h2>Shop Page</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>
                             </ul>
                         </div>
