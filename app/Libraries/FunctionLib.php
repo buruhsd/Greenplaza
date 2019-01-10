@@ -140,7 +140,7 @@ class FunctionLib
     * Upload image
     *
     **/
-    public static function doUpload($file, $path, $field){
+    public static function doUpload($file, $path, $field=""){
         $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$file->getClientOriginalExtension();
         $imagesize = $file->getClientSize();
         $imagetmp = $file->getPathName();

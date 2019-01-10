@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="panel panel-white">
-            <a href="#" class="btn btn-default">Post Iklan Baris</a>
+            <a href="{{route('member.iklan.add_baris')}}" class="btn btn-default">Post Iklan Baris</a>
         </div>                        
         <div class="row">
             <div class="col-lg-12 col-md-12">
@@ -54,6 +54,7 @@
                                 </tbody>
                             </table>
                         </div>
+                    <div> {!! $iklan->appends(['search' => Request::get('search')])->render() !!} </div>
                     </div>
                 </div>
             </div>

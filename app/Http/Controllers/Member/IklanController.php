@@ -6,18 +6,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-use Auth;
-use FunctionLib;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Paket_iklan;
 use App\Models\Trans_iklan;
 use App\Models\Iklan;
 use App\Models\Category;
 use App\User;
-use Illuminate\Support\Facades\Hash;
+use Session;
+use Auth;
+use FunctionLib;
 
 class IklanController extends Controller
 {
@@ -63,6 +63,7 @@ class IklanController extends Controller
     public function add_baris(Request $request){
         $requestData = $request->all();
         if(!empty($requestData)){
+        dd($requestData);
             $this->validate($request, [
                 'iklan_title' => 'required',
                 'iklan_category_id' => 'required',
@@ -74,17 +75,18 @@ class IklanController extends Controller
             $iklan->iklan_title = $request->iklan_title;
             $iklan->iklan_status = 1;
             $iklan->iklan_category_id = $request->iklan_category_id;
-            if($request->is_link){
+            if($request->is_link == 1){
                 $iklan->iklan_link = $request->iklan_link;
             }
             $iklan->iklan_content = $request->iklan_content;
-            $iklan->iklan_note = 'created by '.Auth::user()->username.' at '.date('Y-m-d H:i:s');
+            $iklan->iklan_note = 'Pembelian iklan baris oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             $iklan->save();
             dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $data['category'] = Category::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.iklan.add_baris', $data);
     }
 
@@ -95,7 +97,12 @@ class IklanController extends Controller
     public function baris(){
         $where = 1;
         $where .= ' AND iklan_user_id ='.Auth::id();
-        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        $data['iklan'] = Iklan::whereRaw($where)
+            ->whereHas('jenis', function($query){
+                $query->where('conf_iklan.iklan_type','=',3);
+                return $query;
+            })
+            ->paginate($this->perPage);
         return view('member.iklan.baris', $data);
     }
 
@@ -103,30 +110,36 @@ class IklanController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function add_banner_khusus(){
+    public function add_banner_khusus(Request $request){
         $requestData = $request->all();
         if(!empty($requestData)){
             $this->validate($request, [
-                'iklan_title' => 'required',
                 'iklan_category_id' => 'required',
-                'iklan_content' => 'required',
+                'iklan_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $iklan = new Iklan;
             $iklan->iklan_iklan_id = $request->iklan_iklan_id;
             $iklan->iklan_user_id = Auth::id();
-            $iklan->iklan_title = $request->iklan_title;
-            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_title = 'Banner Khusus';
             $iklan->iklan_status = 1;
             $iklan->iklan_category_id = $request->iklan_category_id;
-            // $iklan->iklan_link = $request->iklan_link;
-            $iklan->iklan_content = $request->iklan_content;
-            $iklan->iklan_note = $request->iklan_note;
+            if($request->is_link == 1){
+                $iklan->iklan_link = $request->iklan_link;
+            }
+            if ($request->hasFile('iklan_image')){
+                $file = $request->file('iklan_image');
+                $path = public_path('assets/images/iklan');
+                $imagename = FunctionLib::doUpload($file, $path);
+                $iklan->iklan_image = $imagename;
+            }
+            $iklan->iklan_note = 'Pembelian iklan banner khusus oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
             dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $data['category'] = Category::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.iklan.add_banner_khusus', $data);
     }
 
@@ -137,38 +150,49 @@ class IklanController extends Controller
     public function banner_khusus(){
         $where = 1;
         $where .= ' AND iklan_user_id ='.Auth::id();
-        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
-        return view('member.iklan.banner', $data);
+        $data['iklan'] = Iklan::whereRaw($where)
+            ->whereHas('jenis', function($query){
+                $query->where('conf_iklan.iklan_type','=',3);
+                return $query;
+            })
+            ->paginate($this->perPage);
+        return view('member.iklan.banner_khusus', $data);
     }
 
     /**
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function add_banner(){
+    public function add_banner(Request $request){
         $requestData = $request->all();
         if(!empty($requestData)){
             $this->validate($request, [
-                'iklan_title' => 'required',
                 'iklan_category_id' => 'required',
-                'iklan_content' => 'required',
+                'iklan_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $iklan = new Iklan;
             $iklan->iklan_iklan_id = $request->iklan_iklan_id;
             $iklan->iklan_user_id = Auth::id();
-            $iklan->iklan_title = $request->iklan_title;
-            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_title = 'Banner';
             $iklan->iklan_status = 1;
             $iklan->iklan_category_id = $request->iklan_category_id;
-            // $iklan->iklan_link = $request->iklan_link;
-            $iklan->iklan_content = $request->iklan_content;
-            $iklan->iklan_note = $request->iklan_note;
+            if($request->is_link == 1){
+                $iklan->iklan_link = $request->iklan_link;
+            }
+            if ($request->hasFile('iklan_image')){
+                $file = $request->file('iklan_image');
+                $path = public_path('assets/images/iklan');
+                $imagename = FunctionLib::doUpload($file, $path);
+                $iklan->iklan_image = $imagename;
+            }
+            $iklan->iklan_note = 'Pembelian iklan banner oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
             dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $data['category'] = Category::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.iklan.add_banner', $data);
     }
 
@@ -179,7 +203,12 @@ class IklanController extends Controller
     public function banner(){
         $where = 1;
         $where .= ' AND iklan_user_id ='.Auth::id();
-        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        $data['iklan'] = Iklan::whereRaw($where)
+            ->whereHas('jenis', function($query){
+                $query->where('conf_iklan.iklan_type','=',1);
+                return $query;
+            })
+            ->paginate($this->perPage);
         return view('member.iklan.banner', $data);
     }
 
@@ -187,30 +216,36 @@ class IklanController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function add_slider(){
+    public function add_slider(Request $request){
         $requestData = $request->all();
         if(!empty($requestData)){
             $this->validate($request, [
-                'iklan_title' => 'required',
                 'iklan_category_id' => 'required',
-                'iklan_content' => 'required',
+                'iklan_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
             $iklan = new Iklan;
             $iklan->iklan_iklan_id = $request->iklan_iklan_id;
             $iklan->iklan_user_id = Auth::id();
-            $iklan->iklan_title = $request->iklan_title;
-            // $iklan->iklan_image = $request->iklan_image;
+            $iklan->iklan_title = 'Slider';
             $iklan->iklan_status = 1;
             $iklan->iklan_category_id = $request->iklan_category_id;
-            // $iklan->iklan_link = $request->iklan_link;
-            $iklan->iklan_content = $request->iklan_content;
-            $iklan->iklan_note = $request->iklan_note;
+            if($request->is_link == 1){
+                $iklan->iklan_link = $request->iklan_link;
+            }
+            if ($request->hasFile('iklan_image')){
+                $file = $request->file('iklan_image');
+                $path = public_path('assets/images/iklan');
+                $imagename = FunctionLib::doUpload($file, $path);
+                $iklan->iklan_image = $imagename;
+            }
+            $iklan->iklan_note = 'Pembelian iklan slider oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
             dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $data['category'] = Category::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.iklan.add_slider', $data);
     }
 
@@ -221,7 +256,12 @@ class IklanController extends Controller
     public function slider(){
         $where = 1;
         $where .= ' AND iklan_user_id ='.Auth::id();
-        $data['iklan'] = Iklan::whereRaw($where)->paginate($this->perPage);
+        $data['iklan'] = Iklan::whereRaw($where)
+            ->whereHas('jenis', function($query){
+                $query->where('conf_iklan.iklan_type','=',2);
+                return $query;
+            })
+            ->paginate($this->perPage);
         return view('member.iklan.slider', $data);
     }
 
@@ -324,5 +364,89 @@ class IklanController extends Controller
         }
         $data['iklan'] = Trans_iklan::whereRaw($where)->paginate();
         return view('member.iklan.tagihan', $data);
+    }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function footer_script($method=''){
+        ob_start();
+        ?>
+            <script type="text/javascript"></script>
+        <?php
+        switch ($method) {
+            case 'add_baris':
+            case 'add_banner':
+            case 'add_banner_khusus':
+            case 'add_slider':
+                ?>
+                    <script type="text/javascript">
+                        $(document).on('click', '#close-preview', function(){ 
+                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // Hover befor close the preview
+                            $('.image-preview').hover(
+                                function () {
+                                   $(this).popover('show');
+                                }, 
+                                 function () {
+                                   $(this).popover('hide');
+                                }
+                            );    
+                        });
+
+                        $(function() {
+                            // Create the close button
+                            var closebtn = $('<button/>', {
+                                type:"button",
+                                text: 'x',
+                                id: 'close-preview',
+                                style: 'font-size: initial;',
+                            });
+                            closebtn.attr("class","close pull-right");
+                            // Set the popover default content
+                            $('.image-preview').popover({
+                                trigger:'manual',
+                                html:true,
+                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                content: "There's no image",
+                                placement:'bottom'
+                            });
+                            // Clear event
+                            $('.image-preview-clear').click(function(){
+                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                            }); 
+                            // Create the preview image
+                            $(".image-preview-input input:file").change(function (){     
+                                var img = $('<img/>', {
+                                    id: 'dynamic',
+                                    width:250,
+                                    height:200
+                                });      
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                var x = $(this);
+                                // Set preview image into the popover data-content
+                                reader.onload = function (e) {
+                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
+                                    img.attr('src', e.target.result);
+                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                }        
+                                reader.readAsDataURL(file);
+                            });  
+                        });
+                    </script>
+                <?php
+                break;
+        }
+        $script = ob_get_contents();
+        ob_end_clean();
+        return $script;
     }
 }

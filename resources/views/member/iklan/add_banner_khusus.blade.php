@@ -3,25 +3,16 @@
 <!-- Page Inner -->
 <div class="page-inner">
     <div class="page-title">
-        <h3 class="breadcrumb-header">Post Iklan Baris </h3>
+        <h3 class="breadcrumb-header">Post Iklan Banner Khusus </h3>
     </div>
     <div class="panel panel-white">
         <div class="panel-body">
-            {!! Form::open(['url' => route('member.iklan.add_baris'), 'id' => 'wizardForm', 'files' => true]) !!}
+            {!! Form::open(['url' => route('member.iklan.add_banner_khusus'), 'id' => 'wizardForm', 'files' => true]) !!}
                 <div class="tab-content">
                     <div class="tab-pane active fade in" id="tab1">
                         <div class="row m-b-lg">
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <label for="iklan_title">Judul (Maksimal 20 karakter) -- 20 karakter lagi</label>
-                                        {!! Form::text('iklan_title', null, [
-                                            'class' => 'form-control', 
-                                            'placeholder' => 'Judul', 
-                                            'required'
-                                        ])!!}
-                                        {!! $errors->first('iklan_title', '<p class="help-block">:message</p>') !!}
-                                    </div>
                                     <div class="form-group col-md-12">
                                         <label for="iklan_category_id">Kategory</label>
                                         <select class="form-control" id="iklan_category_id" name="iklan_category_id">
@@ -55,9 +46,28 @@
                                         ])!!}
                                         {!! $errors->first('iklan_link', '<p class="help-block">:message</p>') !!}
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label for="iklan_content">Konten (Maksimal 160 karakter) -- 160 karakter lagi</label>
-                                        <textarea class="form-control" name="iklan_content" placeholder="Konten" rows="4"></textarea>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="parent-img col-md-12">
+                                                <label for="user_detail_image">Upload foto profil</label>
+                                                <div class="input-group image-preview">
+                                                    <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
+                                                            <span class="glyphicon glyphicon-remove"></span> Clear
+                                                        </button>
+                                                        <div class="btn btn-default image-preview-input">
+                                                            <span class="glyphicon glyphicon-folder-open"></span>
+                                                            <span class="image-preview-input-title">Browse</span>
+                                                            <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="iklan_image"/>
+                                                        </div>
+                                                    </span>
+                                                </div>
+                                                {!! $errors->first('user_detail_image', '<p class="help-block">:message</p>') !!}
+                                                <p class="help-block">Max Size = 1000 kb, <br/>
+                                                Max. Dimension = 1000 kb x 1000 kb.</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
