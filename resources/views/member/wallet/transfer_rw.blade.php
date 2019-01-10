@@ -12,8 +12,8 @@
         <div class="panel-body">
             {!! Form::open(['url' => route('member.wallet.transfer_rw'), 'id' => 'wizardForm', 'class' => 'form-horizontal', 'files' => true]) !!}
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Withdrawal Saldo</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 control-label">Withdrawal Saldo</label>
+                    <div class="col-sm-9">
                         <select name="wallet_type" style="margin-bottom:15px;" class="form-control">
                             @foreach($type as $item)
                                 <option value="{{$item->id}}">{{ucfirst(strtolower(str_replace('_', ' ', $item->wallet_type_name)))}}</option>
@@ -22,25 +22,25 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">Transfer ke { Username }</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-3 control-label">Transfer ke { Username }</label>
+                    <div class="col-sm-9">
                         <select name="username" class="combobox form-control">
                             <option></option>
                             @foreach($user as $item)
-                                <option value="{{$item->username}}">{{$item->name}}</option>
+                                <option value="{{$item->username}}">{{$item->username}}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input-Default" class="col-sm-2 control-label">Input Saldo CW</label>
-                    <div class="col-sm-10">
+                    <label for="input-Default" class="col-sm-3 control-label">Input Saldo CW</label>
+                    <div class="col-sm-9">
                         <input name="wallet_amount" type="text" class="form-control" id="input-Default">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input-help-block" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
+                    <label for="input-help-block" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
                         <input name="password" type="text" class="form-control" id="input-default">
                     </div>
                 </div>

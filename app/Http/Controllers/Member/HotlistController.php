@@ -14,6 +14,7 @@ use Auth;
 use FunctionLib;
 use App\Models\Paket_hotlist;
 use App\Models\Trans_hotlist;
+use App\Models\Produk;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -48,15 +49,23 @@ class HotlistController extends Controller
     }
 
     /**
-    * @param method $method
-    * @return add main footer script / in spesific method
+    * @param $request
+    * @return view
     */
-    public function list(){
-        return view('member.hot-list.tagihan');
+    public function history(Request $request){
+        $where = 1;
+        $where .= ' AND produk_seller_id ='.Auth::id();
+        $where .= ' AND produk_is_hot = 1';
+        $where .= ' AND produk_hotlist > 0';
+        if(!empty($request->search)){
+            $where .= ' AND produk_name LIKE "%'.$request->search.'%"';
+        }
+        $data['hotlist'] = Produk::whereRaw($where)->paginate($this->perPage);
+        return view('member.hot-list.history', $data);
     }
 
     /**
-    * @param method $method
+    * @param 
     * @return view
     */
     public function buy_poin(){
@@ -65,7 +74,7 @@ class HotlistController extends Controller
     }
 
     /**
-    * @param method $method
+    * @param $request, $id
     * @return view
     */
     public function to_confirm(Request $request, $id){
@@ -76,7 +85,7 @@ class HotlistController extends Controller
     }
 
     /**
-    * @param method $method
+    * @param $request, $id
     * @return view
     */
     public function to_cancel(Request $request, $id){
@@ -87,8 +96,8 @@ class HotlistController extends Controller
     }
 
     /**
-    * @param method $method
-    * @return 
+    * @param $request
+    * @return redirect
     */
     public function buy_poin_store(Request $request){
         $status = 200;
@@ -131,8 +140,8 @@ class HotlistController extends Controller
     }
 
     /**
-    * @param method $method
-    * @return add main footer script / in spesific method
+    * @param $request
+    * @return View
     */
     public function tagihan(Request $request){
         $arr = [

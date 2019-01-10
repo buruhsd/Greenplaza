@@ -103,7 +103,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.hotlist.buy_poin')}}">Buy Poin Hot List</a></li>
                                     <li><a href="{{route('member.hotlist.tagihan')}}">Tagihan Hot List</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">History Hot List Produk</a></li>
+                                    <li><a href="{{route('member.hotlist.history')}}">History Hot List Produk</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}

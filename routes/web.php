@@ -410,6 +410,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::post('/to_confirm/{$id}', 'HotlistController@to_confirm')->name('.to_confirm');
 			Route::post('/to_cancel/{$id}', 'HotlistController@to_cancel')->name('.to_cancel');
 			Route::get('/tagihan', 'HotlistController@tagihan')->name('.tagihan');
+			Route::get('/history', 'HotlistController@history')->name('.history');
 		});
 		// Produk & Brand
 		Route::group(['prefix' => 'brand', 'as' => '.brand'], function () {
