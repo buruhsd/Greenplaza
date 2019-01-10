@@ -352,8 +352,11 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		// Get Penjual
 		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
 			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
+			Route::post('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
 			Route::get('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
+			Route::post('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
 			Route::get('/transfer_rw', 'WalletController@transfer_rw')->name('.transfer_rw');
+			Route::post('/transfer_rw', 'WalletController@transfer_rw')->name('.transfer_rw');
 			Route::get('/', 'WalletController@index')->name('.index');
 			Route::get('/type/{slug}', 'WalletController@type')->name('.type');
 			Route::get('/cw_bonus', 'WalletController@cw_bonus')->name('.cw_bonus');

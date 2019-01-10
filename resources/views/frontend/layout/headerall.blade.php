@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-md-5 col-sm-12 col-12">
                         <div class="search-wrap">
-                            <form action="search">
+                            <form action="{{route('category')}}">
                                 {{-- <div class="select-menu" tabindex="1">
                                     <span>Categories </span>
                                     <ul class="dropdown">
@@ -87,7 +87,7 @@
                                         <li><a href="javascript:void(0);">Babys</a></li>
                                     </ul>
                                 </div> --}}
-                                <input type="text" placeholder="Search Here...">
+                                <input name="src" type="text" placeholder="Search Here...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
                         </div>

@@ -88,8 +88,49 @@ class WalletController extends Controller
      * @param
      * @return \Illuminate\View\View
      */
-    public function withdrawal()
+    public function withdrawal(Request $request)
     {
+        $status = 200;
+        $message = 'Withdrawal Success.';
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            dd($requestData);
+            $this->validate($request, [
+                'withdrawal_wallet_type' => 'required',
+                'withdrawal_wallet_amount' => 'required',
+                'password' => 'required',
+            ]);
+            // validasi password
+            $user = User::findOrFail(Auth::id());
+            if (!Hash::check($request->user_detail_pass_trx, $user->user_detail->user_detail_pass_trx)) {
+                $status = 500;
+                $message = 'Password does Not Match!';
+                return redirect()->back()
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            $where = 'wallet_user_id = '.Auth::id();
+            $where .= ' AND wallet_type = '.$request->withdrawal_wallet_type;
+            $wallet = Wallet::whereRaw($where)->first();
+            if($wallet && $wallet->wallet_ballance >= $request->withdrawal_wallet_amount){
+                $wd = new Withdrawal;
+                $wd->withdrawal_user_id = Auth::id();
+                $wd->withdrawal_wallet_id = $wallet->id;
+                $wd->withdrawal_wallet_type = $request->withdrawal_wallet_type;
+                $wd->withdrawal_wallet_amount = $request->withdrawal_wallet_amount;
+                // $wd->withdrawal_status = $request->withdrawal_status;
+                // $wd->withdrawal_approval_id = $request->withdrawal_approval_id;
+                // $wd->withdrawal_response_date = $request->withdrawal_response_date;
+                // $wd->withdrawal_response_text = $request->withdrawal_response_text;
+                // $iklan->iklan_note = 'Pembelian iklan baris oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
+                $wd->save();
+            }else{
+                $status = 500;
+                $message = 'Withdrawal Failed.';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['type'] = Wallet_type::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.withdrawal', $data);
     }
@@ -99,8 +140,75 @@ class WalletController extends Controller
      * @param
      * @return \Illuminate\View\View
      */
-    public function transfer_cw()
+    public function transfer_cw(Request $request)
     {
+        $status = 200;
+        $message = 'Transfer Berhasil.';
+        $date = date('Y-m-d H:i:s');
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'wallet_type' => 'required',
+                'username' => 'required',
+                'wallet_amount' => 'required',
+                'password' => 'required',
+            ]);
+            // validasi password
+            $user = User::findOrFail(Auth::id());
+            if (!Hash::check($request->user_detail_pass_trx, $user->user_detail->user_detail_pass_trx)) {
+                $status = 500;
+                $message = 'Password does Not Match!';
+                return redirect()->back()
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            $where = 'wallet_user_id = '.Auth::id();
+            $where .= ' AND wallet_type = '.$request->wallet_type;
+            $wallet_from = Wallet::whereRaw($where)->first();
+            $where_to = 'wallet_type = '.$request->wallet_type;
+            $wallet_to = Wallet::whereRaw($where_to)->whereHas('user', function($query) use ($request){
+                    $query->where('users.username', $request->username);
+                    return $query;
+                })->first();
+            if($wallet_from && $wallet_from->wallet_ballance >= $request->wallet_amount){
+                $wallet_from->wallet_ballance_before = $wallet_from->wallet_ballance;
+                $wallet_from->wallet_ballance = ($wallet_from->wallet_ballance - $request->wallet_amount);
+                $wallet_from->wallet_address = $wallet_from->wallet_address;
+                $wallet_from->wallet_public = $wallet_from->wallet_public;
+                $wallet_from->wallet_private = $wallet_from->wallet_private;
+                $wallet_from->wallet_note = 'Transfer Wallet ke '.$request->username.' pada '.FunctionLib::date_indo($date, true, 'full');
+                $wallet_from->save();
+                $wallet_to->wallet_ballance_before = $wallet_to->wallet_ballance;
+                $wallet_to->wallet_ballance = ($wallet_to->wallet_ballance + $request->wallet_amount);
+                $wallet_to->wallet_address = $wallet_to->wallet_address;
+                $wallet_to->wallet_public = $wallet_to->wallet_public;
+                $wallet_to->wallet_private = $wallet_to->wallet_private;
+                $wallet_to->wallet_note = 'Transfer Wallet dari '.Auth::user()->username.' pada '.FunctionLib::date_indo($date, true, 'full');
+                $wallet_to->save();
+                // $wd = new Withdrawal;
+                // $log_wallet->wallet_type_log = 'manual';
+                // $log_wallet->wallet_type = $request->wallet_type;
+                // $log_wallet->wallet_user_id = $request->wallet_user_id;
+                // $log_wallet->wallet_user_name = $request->wallet_user_name;
+                // $log_wallet->wallet_ballance_before = $request->wallet_ballance_before;
+                // $log_wallet->wallet_ballance_after = $request->wallet_ballance_after;
+                // $log_wallet->wallet_cash_in = $request->wallet_cash_in;
+                // $log_wallet->wallet_cash_out = $request->wallet_cash_out;
+                // $log_wallet->wallet_user_from = $request->wallet_user_from;
+                // $log_wallet->wallet_user_from_name = $request->wallet_user_from_name;
+                // $log_wallet->wallet_note = $request->wallet_note;
+                // $log_wallet->wallet_pajak = $request->wallet_pajak;
+                // $log_wallet->wallet_id_grade_pajak = $request->wallet_id_grade_pajak;
+                // $log_wallet->wallet_id_referensi = $request->wallet_id_referensi;
+                // $wd->save();
+            }else{
+                $status = 500;
+                $message = 'Transfer Gagal.';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['user'] = User::all();
+        $data['type'] = Wallet_type::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.transfer_cw', $data);
     }
@@ -110,8 +218,75 @@ class WalletController extends Controller
      * @param
      * @return \Illuminate\View\View
      */
-    public function transfer_rw()
+    public function transfer_rw(Request $request)
     {
+        $status = 200;
+        $message = 'Transfer Berhasil.';
+        $date = date('Y-m-d H:i:s');
+        $requestData = $request->all();
+        if(!empty($requestData)){
+            $this->validate($request, [
+                'wallet_type' => 'required',
+                'username' => 'required',
+                'wallet_amount' => 'required',
+                'password' => 'required',
+            ]);
+            // validasi password
+            $user = User::findOrFail(Auth::id());
+            if (!Hash::check($request->user_detail_pass_trx, $user->user_detail->user_detail_pass_trx)) {
+                $status = 500;
+                $message = 'Password does Not Match!';
+                return redirect()->back()
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            $where = 'wallet_user_id = '.Auth::id();
+            $where .= ' AND wallet_type = '.$request->wallet_type;
+            $wallet_from = Wallet::whereRaw($where)->first();
+            $where_to = 'wallet_type = '.$request->wallet_type;
+            $wallet_to = Wallet::whereRaw($where_to)->whereHas('user', function($query) use ($request){
+                    $query->where('users.username', $request->username);
+                    return $query;
+                })->first();
+            if($wallet_from && $wallet_from->wallet_ballance >= $request->wallet_amount){
+                $wallet_from->wallet_ballance_before = $wallet_from->wallet_ballance;
+                $wallet_from->wallet_ballance = ($wallet_from->wallet_ballance - $request->wallet_amount);
+                $wallet_from->wallet_address = $wallet_from->wallet_address;
+                $wallet_from->wallet_public = $wallet_from->wallet_public;
+                $wallet_from->wallet_private = $wallet_from->wallet_private;
+                $wallet_from->wallet_note = 'Transfer Wallet ke '.$request->username.' pada '.FunctionLib::date_indo($date, true, 'full');
+                $wallet_from->save();
+                $wallet_to->wallet_ballance_before = $wallet_to->wallet_ballance;
+                $wallet_to->wallet_ballance = ($wallet_to->wallet_ballance + $request->wallet_amount);
+                $wallet_to->wallet_address = $wallet_to->wallet_address;
+                $wallet_to->wallet_public = $wallet_to->wallet_public;
+                $wallet_to->wallet_private = $wallet_to->wallet_private;
+                $wallet_to->wallet_note = 'Transfer Wallet dari '.Auth::user()->username.' pada '.FunctionLib::date_indo($date, true, 'full');
+                $wallet_to->save();
+                // $wd = new Withdrawal;
+                // $log_wallet->wallet_type_log = 'manual';
+                // $log_wallet->wallet_type = $request->wallet_type;
+                // $log_wallet->wallet_user_id = $request->wallet_user_id;
+                // $log_wallet->wallet_user_name = $request->wallet_user_name;
+                // $log_wallet->wallet_ballance_before = $request->wallet_ballance_before;
+                // $log_wallet->wallet_ballance_after = $request->wallet_ballance_after;
+                // $log_wallet->wallet_cash_in = $request->wallet_cash_in;
+                // $log_wallet->wallet_cash_out = $request->wallet_cash_out;
+                // $log_wallet->wallet_user_from = $request->wallet_user_from;
+                // $log_wallet->wallet_user_from_name = $request->wallet_user_from_name;
+                // $log_wallet->wallet_note = $request->wallet_note;
+                // $log_wallet->wallet_pajak = $request->wallet_pajak;
+                // $log_wallet->wallet_id_grade_pajak = $request->wallet_id_grade_pajak;
+                // $log_wallet->wallet_id_referensi = $request->wallet_id_referensi;
+                // $wd->save();
+            }else{
+                $status = 500;
+                $message = 'Transfer Gagal.';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $data['user'] = User::all();
+        $data['type'] = Wallet_type::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.transfer_rw', $data);
     }
@@ -176,9 +351,19 @@ class WalletController extends Controller
                     <script type="text/javascript"></script>
                 <?php
                 break;
-            case 'create':
+            case 'transfer_rw':
+            case 'transfer_cw':
                 ?>
-                    <script type="text/javascript"></script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.min.js"></script>
+                    <script type="text/javascript">
+                        $(document).ready(function(){
+                          $('.combobox').combobox();
+                          
+                          // bonus: add a placeholder
+                          $('.combobox').attr('placeholder', 'Contoh, tulis "user"');
+                        });
+                    </script>
                 <?php
                 break;
             case 'show':
