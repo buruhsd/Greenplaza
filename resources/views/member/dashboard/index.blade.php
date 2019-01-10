@@ -19,7 +19,12 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">$781,876</span>
+                                            <span class="stats-number">
+                                                <?php $chart = (Session::has('chart'))
+                                                    ?FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))
+                                                    :'0';?>
+                                                Rp. {{$chart}}
+                                            </span>
                                             <p class="stats-info">Keranjang</p>
                                         </div>
                                         
@@ -30,7 +35,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">578,100</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans(1, Auth::id())}}</span>
                                             <p class="stats-info">Pesanan</p>
                                         </div>
                                         
@@ -41,7 +46,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">+23,356</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans(2, Auth::id())}}</span>
                                             <p class="stats-info">Transfer</p>
                                         </div>
                                         
@@ -52,7 +57,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans(4, Auth::id())}}</span>
                                             <p class="stats-info">Pengepakan</p>
                                         </div>
                                         
@@ -63,7 +68,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans(5, Auth::id())}}</span>
                                             <p class="stats-info">Pengiriman</p>
                                         </div>
                                         
@@ -74,7 +79,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans(6, Auth::id())}}</span>
                                             <p class="stats-info">Barang Sampai</p>
                                         </div>
                                         
@@ -85,7 +90,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans("7,8", Auth::id())}}</span>
                                             <p class="stats-info">Penarikan</p>
                                         </div>
                                         
@@ -96,7 +101,7 @@
                                 <div class="panel panel-white stats-widget">
                                     <div class="panel-body">
                                         <div class="pull-left">
-                                            <span class="stats-number">58%</span>
+                                            <span class="stats-number">Rp. {{FunctionLib::sum_trans("1,2,3,4,5,6,7,8", Auth::id())}}</span>
                                             <p class="stats-info">Total Transaksi</p>
                                         </div>
                                         
