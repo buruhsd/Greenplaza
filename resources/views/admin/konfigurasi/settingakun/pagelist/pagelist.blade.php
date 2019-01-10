@@ -3,7 +3,7 @@
 
 <div class="page-inner">
     <div class="page-title">
-      <h3 class="breadcrumb-header">User Admin List</h3>
+      <h3 class="breadcrumb-header">Page List</h3>
   </div>
 <div id="main-wrapper">
     <div class="row">
@@ -45,9 +45,25 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($page as $key => $p)
                                 <tr>
-                                    
+                                    <td><center>{{$key++}}</center></td>
+                                    <td><center>{{$p->page_judul}}</center></td>
+                                    <td><center>{{$p->page_kategori}}</center></td>
+
+                                    @if ($p->page_status == 0)
+                                    <td><center>nonaktif <a href="{{route('admin.konfigurasi.status_active', $p->id)}}"><button class="btn btn-success btn-xs">aktifkan</button></a></center></td>
+                                    @elseif ($p->page_status == 1)
+                                    <td><center>aktif <a href="{{route('admin.konfigurasi.status_non_active', $p->id)}}"><button class="btn btn-danger btn-xs">nonaktifkan</button></a></center></td>
+                                    @endif
+
+                                    <td><center>
+                                        <a href="{{route('admin.konfigurasi.edit_page', $p->id)}}"><button class="btn btn-warning btn-xs">edit</button>
+                                        <a href="{{route('admin.konfigurasi.perview', $p->id)}}"><button class="btn btn-primary btn-xs" >perview</button></a>
+                                        <a href="{{route('admin.konfigurasi.deletepage', $p->id)}}"><button class="btn btn-danger btn-xs">hapus</button></a>
+                                    </center></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

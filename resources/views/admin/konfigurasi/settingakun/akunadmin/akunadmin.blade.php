@@ -44,9 +44,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $key => $u)
                                 <tr>
-                                    
+                                    <td><center>{{$key++}}</center></td>
+                                    <td><center>{{$u->name}}</center></td>
+                                    <td><center>{{$u->password}}</center></td>
+                                    <td><center>
+                                        <a href="{{route('admin.konfigurasi.deleteadmin', $u->id)}}"><button class="btn btn-danger">hapus</button></a>
+                                        <!-- <button class="btn btn-warning btn-xs">block akun</button> -->
+                                    </center></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

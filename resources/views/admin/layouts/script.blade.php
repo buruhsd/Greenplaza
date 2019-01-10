@@ -18,6 +18,10 @@
 	<script src="{{ asset('js/js.js') }}"></script>
     <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
 	<script src="{{asset('/plugin/ckeditor_standar/ckeditor.js')}}"></script>
+	<script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
     @if (Session::has('flash_message'))
     <?php $status = (Session::get('flash_status') == 200)?'success':'error';?>
     <?php $status_type = (Session::get('flash_status') == 200)?'Success':'Failed';?>

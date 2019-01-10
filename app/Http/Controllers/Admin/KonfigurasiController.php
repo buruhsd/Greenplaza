@@ -4,7 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Grade;
+use App\Models\Page;
+use App\Models\User_detail;
+use App\Models\Sponsor;
+use App\Role;
 use App\User;
 use Session;
 
@@ -73,36 +79,148 @@ class KonfigurasiController extends Controller
     //AKUN ADMIN
     public function akunadmin ()
     {
-    	return view('admin.konfigurasi.settingakun.akunadmin.akunadmin');
+        $users = User::whereHas('roles', function($query){
+                $query->where('name','=','admin');
+                return $query;
+            })
+            ->get();
+        // dd($users);
+    	return view('admin.konfigurasi.settingakun.akunadmin.akunadmin', compact('users'));
     }
     public function tambah_akunadmin ()
     {
     	return view('admin.konfigurasi.settingakun.akunadmin.tambah');
     }
-    public function add (Request $request)
+    public function add (Request $data)
     {
-    	$users = User::pluck('name')->toArray();
-    	// dd($users);
-    	$value = $request->value;
-    	if ($value != $users){
-    		Session::flash("flash_notification", [
-                        "level"=>"danger",
-                        "message"=>"Nama User Tidak Terdaftar."
+    	$user = User::create([
+            'username' => $data['username'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        // update detail user
+        if($user){
+            $user_detail = User_detail::create([
+                'user_detail_user_id' => $user->id,
+                'user_detail_jk' => $data['user_detail_jk'],
+                'user_detail_address' => "",//$data['user_detail_address'],
+                'user_detail_phone' => $data['user_detail_phone'],
+                'user_detail_province' => 1,//$data['user_detail_province'],
+                'user_detail_city' => 1,//$data['user_detail_city'],
+                'user_detail_subdist' => 1,//$data['user_detail_subdist'],
+                'user_detail_pos' => $data['user_detail_pos'],
+                'user_detail_token' => "",//$data['user_detail_status'],
+                'user_detail_status' => 0//$data['user_detail_status'],
             ]);
-    	}else {
-    		
-    	}
+            $user_sponsor = Sponsor::create([
+                'user_tree_user_id' => $user->id,
+                'user_tree_sponsor_id' => 1,
+            ]);
+        }
+
+        // get role member
+        $adminRole = Role::where('name', 'admin')->pluck('name');
+        $insert_role = $user->assignRole($adminRole);
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Akun Berhasil di Tambahkan."
+            ]);
     	return redirect()->back();
+    }
+    public function deleteadmin (Request $request, $id)
+    {
+        $users = User::find($id);
+        $users->delete();
+        Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Akun Berhasil di Hapus."
+            ]);
+        return redirect()->back();
     }
 
     //PAGELIST
     public function pagelist ()
     {
-    	return view('admin.konfigurasi.settingakun.pagelist.pagelist');
+        $page = Page::orderBy('created_at', 'DESC')->paginate(10);
+    	return view('admin.konfigurasi.settingakun.pagelist.pagelist', compact('page'));
     }
     public function tambah_pagelist ()
     {
     	return view('admin.konfigurasi.settingakun.pagelist.tambah');
+    }
+    public function add_page (Request $request)
+    {
+        $page = new Page;
+        $page->page_judul = $request->page_judul;
+        $page->page_role_id = $request->page_role_id;
+        $page->page_kategori = $request->page_kategori;
+        $page->page_text = $request->page_text;
+        $page->page_slug = str_slug($request->page_judul);
+        $page->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Page Berhasil di Tambahkan."
+            ]);
+        return redirect()->back();
+    }
+    public function status_active (Request $request, $id)
+    {
+        $page = Page::find($id);
+        $page->page_status = 1;
+        $page->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Page Status Aktif."
+            ]);
+        return redirect()->back();
+    }
+    public function status_non_active (Request $request, $id)
+    {
+        $page = Page::find($id);
+        $page->page_status = 0;
+        $page->save();
+        Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Page Status Non Aktif."
+            ]);
+        return redirect()->back();
+    }
+    public function edit_page (Request $request, $id)
+    {
+        $page = Page::find($id);
+        return view('admin.konfigurasi.settingakun.pagelist.editpage', compact('page'));
+    }
+    public function edit_page_add (Request $request, $id)
+    {
+        $page = Page::find($id);
+        $page->page_judul = $request->page_judul;
+        $page->page_role_id = $request->page_role_id;
+        $page->page_kategori = $request->page_kategori;
+        $page->page_text = $request->page_text;
+        $page->page_slug = str_slug($request->page_judul);
+        $page->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Page Berhasil di Edit."
+            ]);
+        return redirect()->back();
+    }
+    public function perview (Request $request, $id)
+    {
+        $page = Page::find($id);
+        return view('admin.konfigurasi.settingakun.pagelist.perview', compact('page'));
+    }
+    public function deletepage (Request $request, $id)
+    {
+        $page = Page::find($id);
+        $page->delete();
+        Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Page Berhasil di Hapus."
+            ]);
+        return redirect()->back();
     }
 
     //GRADE

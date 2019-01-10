@@ -255,10 +255,18 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('akunadmin', 'Admin\\KonfigurasiController@akunadmin')->name('.akunadmin');
 			Route::get('tambah_akunadmin', 'Admin\\KonfigurasiController@tambah_akunadmin')->name('.tambah_akunadmin');
 			Route::post('add', 'Admin\\KonfigurasiController@add')->name('.add');
+			Route::get('deleteakun/{id}', 'Admin\\KonfigurasiController@deleteadmin')->name('.deleteadmin');
 
 			//PAGELIST
 			Route::get('pagelist', 'Admin\\KonfigurasiController@pagelist')->name('.pagelist');
 			Route::get('tambah_pagelist', 'Admin\\KonfigurasiController@tambah_pagelist')->name('.tambah_pagelist');
+			Route::post('add_page', 'Admin\\KonfigurasiController@add_page')->name('.add_page');
+			Route::get('status_active/{id}', 'Admin\\KonfigurasiController@status_active')->name('.status_active');
+			Route::get('status_non_active/{id}', 'Admin\\KonfigurasiController@status_non_active')->name('.status_non_active');
+			Route::get('edit_page/{id}', 'Admin\\KonfigurasiController@edit_page')->name('.edit_page');
+			Route::post('edit_page_add/{id}', 'Admin\\KonfigurasiController@edit_page_add')->name('.edit_page_add');
+			Route::get('perviewpage/{id}', 'Admin\\KonfigurasiController@perview')->name('.perview');
+			Route::get('deletepage/{id}', 'Admin\\KonfigurasiController@deletepage')->name('.deletepage');
 
 			//GRADE
 				//member
