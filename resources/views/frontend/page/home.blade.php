@@ -362,7 +362,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
+                                    <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <!-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> -->
@@ -453,7 +454,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
+                                                    <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                    <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
@@ -494,7 +496,8 @@
                                     <div class="product-wrap">
                                         <div class="product-img black-opacity">
                                             <span class="new sale">Sale</span>
-                                                <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
+                                                <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                             <div class="shop-icon">
                                                 <ul>
                                                     <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
@@ -651,7 +654,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img src="{{asset('assets/images/product/'.$f->produk_image)}}">
+                                    <img class="first" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    <img class="second" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart"></i></a></li>
