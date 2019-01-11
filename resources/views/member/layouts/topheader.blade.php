@@ -28,11 +28,11 @@
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
                                     <li><a href="javascript:void(0)" id="toggle-fullscreen"><i class="fa fa-expand"></i></a></li>
-                                    <li style="margin: 15px;"><form action="#" method="GET">
+                                    <li style="margin: 15px;"><form action="{{url('category')}}" method="GET">
                                             <div class="panel-heading clearfix" style="margin-bottom: 10px;">
                                                 <div class="input-group pull-left" style="width: 500px;">
                                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                                    <input type="text" class="form-control" placeholder="Cari Nama Produk" name="search" value=""  id="search_table_currency">
+                                                    <input type="text" class="form-control" placeholder="Cari Nama Produk" name="src" value=""  id="search_table_currency">
                                                 </div>
                                               </div> 
                                         </form>

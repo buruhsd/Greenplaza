@@ -28,8 +28,8 @@ class FunctionLib
                     ->where("trans_user_id", $id);
             }
         }
-        dd($total->get());
-        $total = FunctionLib::number_to_text(FunctionLib::array_sum_key($total->get(), 'trans_detail_amount_total'));
+        $total = $total->get()->toArray();
+        $total = FunctionLib::array_sum_key($total, 'trans_detail_amount_total');
         return $total;
     }
 

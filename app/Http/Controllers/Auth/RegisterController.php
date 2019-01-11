@@ -103,10 +103,8 @@ class RegisterController extends Controller
         // get role member
         $memberRole = Role::where('name', 'member')->pluck('name');
         $insert_role = $user->assignRole($memberRole);
-        Session::flash("flash_notification", [
-                "flash_status"=>"success",
-                "flash_message"=>"Periksa Email Anda Untuk Informasi Lebih Lanjut"
-            ]);
+        Session::flash("flash_status", 200);
+        Session::flash("flash_message","Periksa Email Anda Untuk Informasi Lebih Lanjut");
         return $user;
 
     }
