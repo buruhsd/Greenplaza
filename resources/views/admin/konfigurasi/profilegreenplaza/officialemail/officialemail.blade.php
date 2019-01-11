@@ -44,9 +44,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($email as $e)
                                 <tr>
-                                    
+                                    <td>{{$e->id}}</td>
+                                    <td>{{$e->official_email_email}}</td>
+                                    <td>{{$e->official_email_note}}</td>
+                                    <td>{{$e->created_at}}</td>
+                                    <td><center>
+                                        <a href="{{route('admin.konfigurasi.delete_email', $e->id)}}"><button class="btn btn-danger">hapus</button></a>
+                                    </center></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

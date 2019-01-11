@@ -249,6 +249,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		//PROFILE GREENPLAZA
 			//OFFICIAL EMAIL
 			Route::get('officialemail', 'Admin\\KonfigurasiController@officialemail')->name('.officialemail');
+			Route::get('delete_email/{id}', 'Admin\\KonfigurasiController@delete_email')->name('.delete_email');
 
 		//SETTING AKUN
 			//AKUN ADMIN

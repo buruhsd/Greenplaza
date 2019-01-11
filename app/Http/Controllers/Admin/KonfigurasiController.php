@@ -10,6 +10,8 @@ use App\Models\Grade;
 use App\Models\Page;
 use App\Models\User_detail;
 use App\Models\Sponsor;
+use App\Models\Official_email;
+use App\Models\Iklan;
 use App\Role;
 use App\User;
 use Session;
@@ -67,12 +69,29 @@ class KonfigurasiController extends Controller
     {
     	return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.tambah');
     }
+    public function add_iklanbanner ()
+    {
+
+
+    }
 
 //PROFILE GREENPLAZA
     //OFFICIAL EMAIL
     public function officialemail ()
     {
-    	return view('admin.konfigurasi.profilegreenplaza.officialemail.officialemail');
+        $email = Official_email::orderBy('created_at', 'DESC')->get();
+        // dd($email);
+    	return view('admin.konfigurasi.profilegreenplaza.officialemail.officialemail', compact('email'));
+    }
+    public function delete_email (Request $request, $id)
+    {
+        $email = Official_email::find($id);
+        $email->delete();
+        Session::flash("flash_notification", [
+                        "level"=>"danger",
+                        "message"=>"Email Berhasil di Hapus."
+            ]);
+        return redirect()->back();
     }
 
 //SETTING AKUN
