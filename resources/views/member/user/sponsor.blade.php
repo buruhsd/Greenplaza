@@ -12,7 +12,7 @@
                 </div>
                 <div class="panel-body user-profile-panel">
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='http://via.placeholder.com/100x100'" class="user-profile-image img-circle" alt="">
-                    <h4 class="text-center m-t-lg">john doe</h4>
+                    <h4 class="text-center m-t-lg">{{$user->name}}</h4>
                     <p class="text-center">UI/UX Designer</p>
                     <hr>
                 </div>
@@ -26,7 +26,12 @@
                     <h4 class="panel-title">Profil</h4>
                 </div>
                 <div class="panel-body">
-                    <div class="form-horizontal">
+                {!! Form::model($user, [
+                    'method' => 'PATCH',
+                    'url' => ['/member/user/update'],
+                    'class' => 'form-horizontal',
+                    'files' => true
+                ]) !!}
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('name') ? 'has-error' : ''}}">
@@ -233,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                {!! Form::close() !!}
                 </div>
             </div>
           </section>

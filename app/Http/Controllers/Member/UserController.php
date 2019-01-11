@@ -618,6 +618,7 @@ class UserController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
+            case 'sponsor':
             case 'profil':
                 ?>
                     <script type="text/javascript">

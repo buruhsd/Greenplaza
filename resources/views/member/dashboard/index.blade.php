@@ -8,13 +8,19 @@
     <div class="panel-body">
         <div class="pull-right">
             <p class="stats-info">Total Transaksi :
-            <span class="stats-number">$781,876</span></p>
+                <span class="stats-number">
+                    {{FunctionLib::number_to_text(
+                        FunctionLib::sum_trans("", Auth::id())
+                        +FunctionLib::sum_trans("", Auth::id(), 'seller')
+                    )}}
+                </span>
+            </p>
             <p class="stats-info">Grade Toko :
             <span class="stats-number">$781,876</span></p>
         </div>
     </div>
     <div id="main-wrapper">
-        <div class="panel panel-white stats-widget">
+        <div class="panel panel-white stats-widget bg-info">
             <h3 class="breadcrumb-header">Penjualan</h3>
             <div class="panel-body">
                 <div class="row">
@@ -153,12 +159,12 @@
                 </div><!-- Row -->
             </div>
         </div>
-        <div class="panel panel-white stats-widget">
+        <div class="panel panel-white stats-widget bg-info">
             <h3 class="breadcrumb-header">Pembelian</h3>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
-                        <a href="{{route('member.transaction.purchase', ['status' => 'order'])}}">
+                        <a href="{{route('chart')}}">
                             <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                 <div class="panel-body">
                                     <div class="pull-left">
@@ -197,7 +203,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <a href="{{route('member.transaction.purchase', ['status' => 'order'])}}">
+                        <a href="{{route('member.transaction.purchase', ['status' => 'transfer'])}}">
                             <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                 <div class="panel-body">
                                     <div class="pull-left">
@@ -216,7 +222,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <a href="{{route('member.transaction.purchase', ['status' => 'order'])}}">
+                        <a href="{{route('member.transaction.purchase', ['status' => 'packing'])}}">
                             <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                 <div class="panel-body">
                                     <div class="pull-left">
@@ -293,7 +299,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                        <a href="{{route('member.transaction.purchase', ['status' => 'order'])}}">
+                        <a href="{{route('member.transaction.purchase')}}">
                             <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                 <div class="panel-body">
                                     <div class="pull-left">
