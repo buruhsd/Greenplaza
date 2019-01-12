@@ -63,16 +63,112 @@ class KonfigurasiController extends Controller
     //IKLAN BANNER KHUSUS
     public function iklanbanner ()
     {
-    	return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.iklanbanner');
+        $iklan = Iklan::orderBy('created_at', 'DESC')->paginate(10);
+    	return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.iklanbanner', compact('iklan'));
     }
     public function tambah_iklanbanner ()
     {
     	return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.tambah');
     }
-    public function add_iklanbanner ()
+    public function add_iklanbanner (Request $request)
     {
+        $this->validate($request, [
+            'iklan_title' => 'required',
+            'iklan_iklan_id' => 'required',
+            'iklan_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
+        ]); 
 
-
+        $iklan = new Iklan;
+        $iklan->iklan_title = $request->iklan_title;
+        $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+        $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
+        $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+        if($request->iklan_user_id){
+            $user = User::where('name', $request->iklan_user_id)->first();
+            if($user){
+                $iklan->iklan_user_id = $user->id;
+                $iklan->save();
+                
+            } else {
+                Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Nama yang di inputkan tidak terdaftar atau salah."
+                        ]);
+                return redirect()->back();
+            } 
+        }
+        Session::flash("flash_notification", [
+                            "level"=>"success",
+                            "message"=>"Berhasil Menambahkan Iklan."
+                        ]);
+        return redirect()->back();
+    }
+    public function delete_iklan (Request $request, $id)
+    {
+        $iklan = Iklan::find($id);
+        $iklan->delete();
+        return redirect()->back();
+    }
+    public function edit_iklan (Request $request, $id)
+    {
+        $iklan = Iklan::find($id);
+        return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.editiklan', compact('iklan'));
+    }
+    public function edit_iklanadd (Request $request, $id)
+    {
+        $iklan = Iklan::find($id);
+        $iklan->iklan_title = $request->iklan_title;
+        $iklan->iklan_iklan_id = $request->iklan_iklan_id;
+        
+        if($request->iklan_user_id){
+            $user = User::where('name', $request->iklan_user_id)->first();
+            if($user){
+                $iklan->iklan_user_id = $user->id;
+                if ($iklan->iklan_image != null && $request->iklan_image){
+                    $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
+                    $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+                } elseif ($iklan->iklan_image == null && $request->iklan_image){
+                    $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
+                    $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+                }
+                $iklan->save();
+                
+            } else {
+                Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Nama yang di inputkan tidak terdaftar atau salah."
+                        ]);
+                return redirect()->back();
+            } 
+        }
+        Session::flash("flash_notification", [
+                            "level"=>"success",
+                            "message"=>"Berhasil Mengedit Iklan."
+                        ]);
+        return redirect()->back();
+    }
+    public function publish (Request $request, $id)
+    {
+        $iklan = Iklan::find($id);
+        $iklan->iklan_status = 1;
+        $iklan->save();
+        Session::flash("flash_notification", [
+                            "level"=>"success",
+                            "message"=>"Iklan Publish."
+                        ]);
+        return redirect()->back();
+    }
+    public function unpublish (Request $request, $id)
+    {
+        $iklan = Iklan::find($id);
+        $iklan->iklan_status = 0;
+        $iklan->save();
+        Session::flash("flash_notification", [
+                            "level"=>"danger",
+                            "message"=>"Iklan Un-publish."
+                        ]);
+        return redirect()->back();
     }
 
 //PROFILE GREENPLAZA

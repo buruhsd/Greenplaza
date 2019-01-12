@@ -12,6 +12,7 @@
 
 <form method="POST" action="{{ route('login') }}">
     @csrf
+    @include('layouts._flash')
     <div class="container">
         <a class="gp" href="index.html" >
             <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="200px" height="50px" >

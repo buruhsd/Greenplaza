@@ -14,6 +14,7 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 
 //HOME
 Route::get('/', 'member\\FrontController@index')->name('home');
@@ -243,8 +244,14 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('tambah_iklanslider', 'Admin\\KonfigurasiController@tambah_iklanslider')->name('.tambah_iklanslider');
 
 			//IKLAN BANNER KHUSUS
-			Route::get('iklanbennerkhusus', 'Admin\\KonfigurasiController@iklanbanner')->name('.iklanbanner');
-			Route::get('tambah_iklanbennerkhusus', 'Admin\\KonfigurasiController@tambah_iklanbanner')->name('.tambah_iklanbanner');
+			Route::get('iklan', 'Admin\\KonfigurasiController@iklanbanner')->name('.iklanbanner');
+			Route::get('tambah_iklan', 'Admin\\KonfigurasiController@tambah_iklanbanner')->name('.tambah_iklanbanner');
+			Route::post('add_iklan', 'Admin\\KonfigurasiController@add_iklanbanner')->name('.add_iklanbanner');
+			Route::get('delete_iklan/{id}', 'Admin\\KonfigurasiController@delete_iklan')->name('.delete_iklan');
+			Route::get('edit_iklan/{id}', 'Admin\\KonfigurasiController@edit_iklan')->name('.edit_iklan');
+			Route::post('edit_iklanadd/{id}', 'Admin\\KonfigurasiController@edit_iklanadd')->name('.edit_iklanadd');
+			Route::get('publish/{id}', 'Admin\\KonfigurasiController@publish')->name('.publish');
+			Route::get('unpublish/{id}', 'Admin\\KonfigurasiController@unpublish')->name('.unpublish');
 
 		//PROFILE GREENPLAZA
 			//OFFICIAL EMAIL

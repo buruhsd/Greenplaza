@@ -100,8 +100,8 @@
                                     </li>
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Iklan</h4>
-                                        <li><a href="{{route('admin.konfigurasi.iklanslider')}}">Iklan Slider</a></li>
-                                        <li><a href="{{route('admin.konfigurasi.iklanbanner')}}">Iklan Banner Khusus</a></li>
+                                        <!-- <li><a href="{{route('admin.konfigurasi.iklanslider')}}">Iklan Slider</a></li> -->
+                                        <li><a href="{{route('admin.konfigurasi.iklanbanner')}}">Iklan Banner dan Slider</a></li>
                                         {{-- <a href="#">Setting Iklan</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Iklan Slider</a></li>

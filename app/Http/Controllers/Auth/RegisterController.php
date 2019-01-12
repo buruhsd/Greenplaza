@@ -96,7 +96,7 @@ class RegisterController extends Controller
             ]);
             $user_sponsor = Sponsor::create([
                 'user_tree_user_id' => $user->id,
-                'user_tree_sponsor_id' => 2,
+                'user_tree_sponsor_id' => 1,
             ]);
         }
 

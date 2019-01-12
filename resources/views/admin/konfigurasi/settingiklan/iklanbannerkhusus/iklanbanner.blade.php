@@ -41,11 +41,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($iklan as $i)
                                 <tr>
-                                    
+                                    <td><center>{{$i->id}}</center></td>
+                                    <td><center>{{$i->jenis->iklan_name}}</center></td>
+                                    <td><center>
+                                        pemesan : {{$i->user->name}} <br/>
+                                        <img src="{{asset('assets/images/iklan/'.$i->iklan_image)}}" style="width: 200px"> <br/>
+                                        nama paket banner : {{$i->jenis->iklan_name}} <br/>
+                                        @if ($i->iklan_status == 0)
+                                        status : <p style="color: red"> un-publish </p> <br/>
+                                        @elseif ($i->iklan_status == 1)
+                                        status : <p style="color: green"> publish </p> <br/>
+                                        @endif
+                                        tanggal publish terakir : {{$i->updated_at}}
+                                    </center></td>
+                                    <td><center>
+                                        <a href="{{route('admin.konfigurasi.edit_iklan', $i->id)}}"><button class="btn btn-warning btn-xs" style="width: 100%"> edit </button></a> <br/>
+                                        <a href="{{route('admin.konfigurasi.delete_iklan', $i->id)}}"><button class="btn btn-danger btn-xs" style="width: 100%"> delete </button></a> <br/>
+                                        <a href="{{route('admin.konfigurasi.publish', $i->id)}}"><button class="btn btn-success btn-xs" style="width: 100%"> publish </button> <br/>
+                                        <a href="{{route('admin.konfigurasi.unpublish', $i->id)}}"><button class="btn btn-primary btn-xs" style="width: 100%"> un-publish </button>
+                                    </center></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        {{$iklan->render()}}
                     </div>
                 </div>
             </div>
