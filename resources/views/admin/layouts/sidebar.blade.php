@@ -86,7 +86,7 @@
                                             <li><a href="{{route('admin.category.index')}}">Kategori Produk</a></li>
                                         </ul> --}}
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <h4 class="m-l-sm text-danger">Setting Harga</h4>
                                         <li><a href="{{route('admin.konfigurasi.regseller')}}">Paket Reg Seller</a></li>
                                         <li><a href="{{route('admin.konfigurasi.hargaiklan')}}">Harga Iklan (Iklan Greenplaza)</a></li>
@@ -97,7 +97,7 @@
                                             <li><a href="#">Harga Iklan (Iklan Greenplaza)</a></li>
                                             <li><a href="#">Harga Beli Saldo Iklan</a></li>
                                         </ul> --}}
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <h4 class="m-l-sm text-danger">Setting Iklan</h4>
                                         <!-- <li><a href="{{route('admin.konfigurasi.iklanslider')}}">Iklan Slider</a></li> -->
