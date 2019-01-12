@@ -143,10 +143,12 @@
                                     <i class="menu-icon fa fa-shopping-bag"></i><span>Log</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li><a href="{{-- {{route('member.sponsor.index')}} --}}">Log Cw Transaksi</a></li>
-                                    <li><a href="{{-- {{route('member.sponsor.register')}} --}}">Log Cw Bonus</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Log Saldo Iklan</a></li>
-                                    <li><a href="{{-- {{route('member.Withdrawal.create')}} --}}">Log Aktifitas</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'pincode')}}">Log Pincode</a></li>
+                                    <li><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
                                 </ul>
                             </li>
                         </ul>

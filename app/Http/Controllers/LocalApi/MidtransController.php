@@ -128,6 +128,24 @@ class MidtransController extends Controller
             $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
 
             foreach ($trans as $value) {
+                // dd(Session::get('chart'));
+                foreach ($value as $key => $value) {
+                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
+                    if($item['trans_detail_qty'] > $produk->produk_stock){
+                        $status = 500;
+                        $message = 'Mohon maaf, Stok tidak mencukupi untuk pemesanan produk '.$produk->produk_name;//.', item order akan otomatis dihapus dari chart.';
+
+                        // $array = Session::get('chart');
+                        // unset($array[$id]);
+                        // $data = $array;
+                        // Session::forget('chart');
+                        // Session::put('chart', $data);
+                        // Session::save();
+
+                        return redirect()->back()
+                            ->with(['status' => $status, 'message' => $message]);
+                    }
+                }
                 // add to DB sys_trans
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
@@ -155,6 +173,9 @@ class MidtransController extends Controller
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
+                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
+                    $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
+                    $produk->save();
                 }
             }
             Session::forget('chart');
