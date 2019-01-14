@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
+Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
 
 //HOME
 Route::get('/', 'member\\FrontController@index')->name('home');
@@ -405,10 +406,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::group(['prefix' => 'produk', 'as' => '.produk'], function () {
 			Route::group(['prefix' => 'discuss', 'as' => '.discuss'], function () {
 				Route::get('/', 'Produk_discussController@index')->name('.index');
-				Route::get('/create', 'Produk_discuss@create')->name('.create');
-				Route::post('/store', 'Produk_discuss@store')->name('.store');
-				Route::get('/destroy/{id}', 'Produk_discuss@destroy')->name('.destroy');
-				Route::get('arsip/{id}', 'Produk_discuss@arsip')->name('.arsip');
+				Route::get('/create', 'Produk_discussController@create')->name('.create');
+				Route::post('/store', 'Produk_discussController@store')->name('.store');
+				Route::get('/destroy/{id}', 'Produk_discussController@destroy')->name('.destroy');
+				Route::get('arsip/{id}', 'Produk_discussController@arsip')->name('.arsip');
 			});
 		});
 		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
@@ -531,7 +532,7 @@ Route::get('/etalase/{user_store}', 'member\\FrontController@etalase')->name('et
 Route::get('/category', 'member\\FrontController@category')->name('category');
 Route::get('/brand', 'member\\FrontController@brand')->name('brand');
 Route::group(['middleware' => ['auth']], function () {
-	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
+	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home')->middleware('is_active');
 	Route::get('/shop', 'member\\FrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');

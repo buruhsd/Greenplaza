@@ -19,7 +19,7 @@
         </a>
         <p>Belum Punya Akun ? <a href="{{ route('register') }}"> Daftar disini </a>.</p>
 
-        <label for="email"><b>Email</b></label>
+        <label for="email"><b>Email / Username</b></label>
         <input type="text" placeholder="Enter Email" name="email" required>
         @if ($errors->has('email'))
             <span class="invalid-feedback" role="alert">
@@ -70,4 +70,20 @@
 </form>
 
 </body>
+    <script src="{{ asset('js/js.js') }}"></script>
+    <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    @if (Session::has('flash_message'))
+    <?php $status = (Session::get('flash_status') == 200)?'success':'error';?>
+    <?php $status_type = (Session::get('flash_status') == 200)?'Success':'Failed';?>
+    <script type="text/javascript">
+        swal({   
+            type: "{{ $status }}",
+            title: "{{ $status_type }}",   
+            text: "{{ Session::get('flash_message') }}",   
+            showConfirmButton: false ,
+            showCloseButton: true,
+            footer: ''
+        });
+    </script>
+    @endif
 </html>

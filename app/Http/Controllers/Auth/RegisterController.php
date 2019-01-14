@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'token_register'=>str_random(190)
         ]);
 
         // update detail user
@@ -118,6 +119,14 @@ class RegisterController extends Controller
     {
         $data['sponsor'] = User::limit(3)->get();
         return view('auth.register_green', $data);
+    }
+
+    public function activating($token)
+    {
+        $model = User::where('token_register', $token)->where('active', 0)->firstOrFail();
+        $model->active = true;
+        $model->save();
+        return 'akun anda telah aktif silahkan login.';
     }
 
 }

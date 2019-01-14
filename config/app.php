@@ -163,6 +163,7 @@ return [
         App\Providers\HelperServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\RajaOngkirServiceProvider::class,
+        App\Providers\SendEmailServiceProvider::class,
 
         Unisharp\Ckeditor\ServiceProvider::class,
 
@@ -218,6 +219,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'RajaOngkir' => App\Facades\RajaOngkirFacade::class,
+        'SendEmail' => App\Facades\SendEmailFacade::class,
 
     ],
 

@@ -17,7 +17,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'username', 'name', 'user_store', 'user_store_image', 'user_slogan', 'user_slug', 'user_grade', 'user_grade_seller', 'email', 'password',
+        'username', 'name', 'user_store', 'user_store_image', 'user_slogan', 'user_slug', 'user_grade', 'user_grade_seller', 'email', 
+        'email_verified_at', 'active', 'token_register', 
+        'password',
     ];
 
     /**
@@ -26,8 +28,20 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
+        // 'email_verified_at', 'active', 'token_register', 
         'password', 'remember_token',
     ];
+
+    /**
+    * 
+    * 
+    **/
+    public function is_verify(){
+        if((bool)$this->active){
+            return true;
+        }
+        return false;
+    }
 
     /**
     * 
