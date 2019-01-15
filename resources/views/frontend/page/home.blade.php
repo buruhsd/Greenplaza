@@ -78,8 +78,8 @@
                 @if (\Auth::check())
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
-                        @if (Auth::user()->user_store_image)
-                        <img src="{{asset('assets/images/user_store/'.Auth::user()->user_store_image)}}">
+                        @if (Auth::user()->user_detail->user_detail_image != null)
+                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}">
                         @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif

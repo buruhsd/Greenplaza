@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
 		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
-		// Route::get('/wishlist', function(){return;})->name('.wishlist');
+		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'Admin\\FrontController@dashboard')->name('.dashboard');
 
 		//EmailController
