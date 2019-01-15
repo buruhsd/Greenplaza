@@ -18,24 +18,24 @@ Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification')
 Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
 
 //HOME
-Route::get('/', 'member\\NewFrontControllerindex')->name('home');
+Route::get('/', 'member\\NewFrontController@index')->name('home');
 
-Route::get('/tentang-greenplaza', 'member\\NewFrontControllerabout')->name('about') ;
-Route::get('/cara-belanja', 'member\\NewFrontControllercarabelanja')->name('cara-belanja') ;
-Route::get('/cara-pembayaran', 'member\\NewFrontControllerpembayaran')->name('cara-pembayaran') ;
-Route::get('/aturan-penggunaan', 'member\\NewFrontControlleraturan')->name('aturan') ;
-Route::get('/syarat-ketentuan', 'member\\NewFrontControllersyarat')->name('syarat') ;
-Route::get('/alur-transaksi', 'member\\NewFrontControlleralurtransaksi')->name('alur') ;
+Route::get('/tentang-greenplaza', 'member\\NewFrontController@about')->name('about') ;
+Route::get('/cara-belanja', 'member\\NewFrontController@carabelanja')->name('cara-belanja') ;
+Route::get('/cara-pembayaran', 'member\\NewFrontController@pembayaran')->name('cara-pembayaran') ;
+Route::get('/aturan-penggunaan', 'member\\NewFrontController@aturan')->name('aturan') ;
+Route::get('/syarat-ketentuan', 'member\\NewFrontController@syarat')->name('syarat') ;
+Route::get('/alur-transaksi', 'member\\NewFrontController@alurtransaksi')->name('alur') ;
 
-Route::get('/dashboard-member', 'member\\NewFrontControllerdashboard');
+Route::get('/dashboard-member', 'member\\NewFrontController@dashboard');
 
 // Route::get('/', function () {
 //     return view('frontend.page.home');
 // });
 
 //FrontController
-Route::get('/register/seller', 'member\\NewFrontControllerreg_seller')->name('register.seller');
-Route::get('/login/seller', 'member\\NewFrontControllerlog_seller')->name('login.seller');
+Route::get('/register/seller', 'member\\NewFrontController@reg_seller')->name('register.seller');
+Route::get('/login/seller', 'member\\NewFrontController@log_seller')->name('login.seller');
 
 
 Auth::routes(['verify' => true]);
@@ -52,12 +52,12 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 // auth superadmin & admin
 Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
-		Route::get('/email_sender', 'Admin\\NewFrontControlleremail_sender')->name('.email_sender');
-		// Route::get('/res_kom', 'Admin\\NewFrontControllerres_kom')->name('.resolusi_komplain');
+		Route::get('/email_sender', 'Admin\\NewFrontController@email_sender')->name('.email_sender');
+		// Route::get('/res_kom', 'Admin\\NewFrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
-		Route::get('/live_chat', 'Admin\\NewFrontControllerlive_chat')->name('.live_chat');
+		Route::get('/live_chat', 'Admin\\NewFrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
-		Route::get('/dashboard', 'admin\\NewFrontControllerdashboard')->name('.dashboard');
+		Route::get('/dashboard', 'admin\\NewFrontController@dashboard')->name('.dashboard');
 
 		//EmailController
 		Route::post('/send_email', 'admin\\EmailController@email')->name('.send_email');
@@ -328,7 +328,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 // auth member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
-		Route::get('/dashboard', 'NewFrontControllerdashboard')->name('.dashboard');
+		Route::get('/dashboard', 'NewFrontController@dashboard')->name('.dashboard');
 		// Sales & purchase
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
 			Route::get('/', 'TransactionController@sales')->name('.index');
@@ -526,14 +526,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 });
 
 // auth all
-Route::get('/detail/{slug}', 'member\\NewFrontControllerdetail')->name('detail');
-// Route::get('/detail/{slug}', 'member\\NewFrontControllerdetail')->name('detail');
-Route::get('/etalase/{user_store}', 'member\\NewFrontControlleretalase')->name('etalase');
-Route::get('/category', 'member\\NewFrontControllercategory')->name('category');
-Route::get('/brand', 'member\\NewFrontControllerbrand')->name('brand');
+Route::get('/detail/{slug}', 'member\\NewFrontController@detail')->name('detail');
+// Route::get('/detail/{slug}', 'member\\NewFrontController@detail')->name('detail');
+Route::get('/etalase/{user_store}', 'member\\NewFrontController@etalase')->name('etalase');
+Route::get('/category', 'member\\NewFrontController@category')->name('category');
+Route::get('/brand', 'member\\NewFrontController@brand')->name('brand');
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home')->middleware('is_active');
-	Route::get('/shop', 'member\\NewFrontControllershop')->name('shop');
+	Route::get('/shop', 'member\\NewFrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');
 
@@ -601,7 +601,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 	});
 });
 
-Route::get('/page/{page}', 'Member\\NewFrontControllerpage')->name('.page');
+Route::get('/page/{page}', 'Member\\NewFrontController@page')->name('.page');
 // helper
 Route::group(['prefix' => 'helper', 'as' => 'helper'], function(){
 	Route::get('/{function}/{admin}', function($function, $admin) {
