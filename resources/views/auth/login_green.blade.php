@@ -14,7 +14,7 @@
     @csrf
     @include('layouts._flash')
     <div class="container">
-        <a class="gp" href="{{route('/')}}" >
+        <a class="gp" href="{{url('/')}}" >
             <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="200px" height="50px" >
         </a>
         <p>Belum Punya Akun ? <a href="{{ route('register') }}"> Daftar disini </a>.</p>
