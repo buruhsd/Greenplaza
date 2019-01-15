@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-lg-6  col-md-6 col-12">
                                 <div class="product-single-content">
-                                    <h3><a href="{{action('member\\FrontController@etalase', $detail->user->user_store)}}">{{$detail->user->user_store}}</a></h3>
+                                    <h3><a href="{{route('etalase', $detail->user->user_store)}}">{{$detail->user->user_store}}</a></h3>
                                     <div class="row">
                                         <div class="col-12">
                                             <h3 class="pull-left">{{ucfirst(strtolower($detail->produk_name))}}</h5>
