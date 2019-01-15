@@ -14,7 +14,7 @@
     @csrf
     @include('layouts._flash')
     <div class="container">
-        <a class="gp" href="index.html" >
+        <a class="gp" href="{{route('/')}}" >
             <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="200px" height="50px" >
         </a>
         <p>Belum Punya Akun ? <a href="{{ route('register') }}"> Daftar disini </a>.</p>
@@ -62,10 +62,6 @@
 
         <button type="submit" class="registerbtn">Login</button>
         <p><a href="#">Lupa Password</a>.</p>
-    </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div>
 </form>
 
