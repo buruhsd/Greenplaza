@@ -34,7 +34,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.transaction.purchase')}}">Transaction</a></li>
                                     <li><a href="{{route('member.komplain.buyer')}}">Resolusi Komplain</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Wishlist</a></li>
+                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}

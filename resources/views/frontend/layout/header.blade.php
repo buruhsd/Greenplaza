@@ -40,7 +40,7 @@
                                     </li>
                                 </ul>
                                 @endguest
-                            </li>
+                            </li>{{-- 
                             <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
@@ -54,7 +54,7 @@
                                     <li><a href="javascript:void(0);">USD </a></li>
                                     <li><a href="javascript:void(0);">BDT </a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -149,15 +149,6 @@
                                     <li><a href="{{route('chart')}}">Shopping cart</a></li>
                                     <li><a href="{{route('checkout')}}">Checkout</a></li>
                                     <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
-                                </ul>
-                            </li>
-                            <li class="sidemenu-items"><a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="about.html">About Page</a></li>
-                                    <li><a href="Single-product.html">Product Details</a></li>
-                                    <li><a href="cart.html">Shopping cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
                                 </ul>
                             </li>
                             {{-- <li class="sidemenu-items"><a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>

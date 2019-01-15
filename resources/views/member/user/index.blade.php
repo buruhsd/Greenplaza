@@ -13,9 +13,8 @@
                 <div class="panel-body user-profile-panel">
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='http://via.placeholder.com/100x100'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
-                    <p class="text-center">UI/UX Designer</p>
                     <hr>
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             {!! Form::file('user_detail_image', null, [
                                 'class' => 'form-control', 
                                 'placeholder' => 'Image', 
@@ -23,7 +22,7 @@
                             ])!!}
                             {!! $errors->first('user_detail_image', '<p class="help-block">:message</p>') !!}
                         </div>
-                    <hr>
+                    <hr> --}}
                 </div>
             </div>
         </div>

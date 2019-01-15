@@ -23,7 +23,7 @@
                         <div class="col-md-12">
                             {!! Form::label('password', 'Password') !!}
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
-                                {!! Form::text('password', null, [
+                                {!! Form::password('password', null, [
                                     'class' => 'form-control', 
                                     'placeholder' => 'Enter password', 
                                     'required'
@@ -37,7 +37,7 @@
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
-            <input type="submit" class="btn btn-success" value="Save">
+            <input type="submit" class="btn btn-success" value="Login">
         </div>
         {!! Form::close() !!}
     </div>

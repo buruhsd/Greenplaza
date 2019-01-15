@@ -45,7 +45,7 @@
                                 </ul>
                                 @endguest
                             </li>
-                            <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
+                            {{-- <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
                                     <li><a href="javascript:void(0);">Bangla <img src="assets/images/language/2.png" alt=""></a></li>
@@ -58,7 +58,7 @@
                                     <li><a href="javascript:void(0);">USD </a></li>
                                     <li><a href="javascript:void(0);">BDT </a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
