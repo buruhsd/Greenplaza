@@ -1033,9 +1033,9 @@
                                     <ul class="blog-meta">
                                         <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
                                         @if ($l->review)
-                                        <li><a href="#"><i class="fa fa-comments"></i>0 Comments</a></li>
-                                        @else
                                         <li><a href="#"><i class="fa fa-comments"></i>{{$l->review->count()}} Comments</a></li>
+                                        @else
+                                        <li><a href="#"><i class="fa fa-comments"></i>0 Comments</a></li>
                                         @endif
                                         <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->updated_at}}</a></li>
                                     </ul>
