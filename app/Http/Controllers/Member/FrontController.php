@@ -120,7 +120,7 @@ class FrontController extends Controller
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->get();
         return view('frontend.category', $data, compact('category'));
     }
-
+    
     /**
     * @param
     * @return
@@ -135,8 +135,25 @@ class FrontController extends Controller
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
         $data['side_cat'] = FunctionLib::category_by_parent(0)->limit(6)->get();
         $data['side_related'] = FunctionLib::produk_by('category', $data['detail']->category->id)->orderBy('created_at', 'DESC')->limit(5)->get();
-        return view('frontend.detail', $data);
+        return view('frontend.new.detail2', $data);
     }
+
+    /**
+    * @param
+    * @return
+    */
+    // public function detail(Request $request, $slug)
+    // {
+    //     $data['shipment_type'] = Shipment::where('shipment_is_usable', 1)
+    //         ->where('shipment_parent_id', 0)
+    //         ->get();
+    //     $data['detail'] = Produk::where('produk_slug', $slug)->first();
+    //     $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
+    //     $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
+    //     $data['side_cat'] = FunctionLib::category_by_parent(0)->limit(6)->get();
+    //     $data['side_related'] = FunctionLib::produk_by('category', $data['detail']->category->id)->orderBy('created_at', 'DESC')->limit(5)->get();
+    //     return view('frontend.detail', $data);
+    // }
 
     /**
     * @param

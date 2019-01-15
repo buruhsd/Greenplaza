@@ -18,7 +18,6 @@ use App\Role;
 use Auth;
 use FunctionLib;
 
-
 class NewFrontController extends Controller
 {
     private $perPage = 25;
