@@ -18,24 +18,24 @@ Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification')
 Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
 
 //HOME
-Route::get('/', 'member\\NewFrontController@index')->name('home');
+Route::get('/', 'Member\\NewFrontController@index')->name('home');
 
-Route::get('/tentang-greenplaza', 'member\\NewFrontController@about')->name('about') ;
-Route::get('/cara-belanja', 'member\\NewFrontController@carabelanja')->name('cara-belanja') ;
-Route::get('/cara-pembayaran', 'member\\NewFrontController@pembayaran')->name('cara-pembayaran') ;
-Route::get('/aturan-penggunaan', 'member\\NewFrontController@aturan')->name('aturan') ;
-Route::get('/syarat-ketentuan', 'member\\NewFrontController@syarat')->name('syarat') ;
-Route::get('/alur-transaksi', 'member\\NewFrontController@alurtransaksi')->name('alur') ;
+Route::get('/tentang-greenplaza', 'Member\\NewFrontController@about')->name('about') ;
+Route::get('/cara-belanja', 'Member\\NewFrontController@carabelanja')->name('cara-belanja') ;
+Route::get('/cara-pembayaran', 'Member\\NewFrontController@pembayaran')->name('cara-pembayaran') ;
+Route::get('/aturan-penggunaan', 'Member\\NewFrontController@aturan')->name('aturan') ;
+Route::get('/syarat-ketentuan', 'Member\\NewFrontController@syarat')->name('syarat') ;
+Route::get('/alur-transaksi', 'Member\\NewFrontController@alurtransaksi')->name('alur') ;
 
-Route::get('/dashboard-member', 'member\\NewFrontController@dashboard');
+Route::get('/dashboard-member', 'Member\\NewFrontController@dashboard');
 
 // Route::get('/', function () {
 //     return view('frontend.page.home');
 // });
 
 //FrontController
-Route::get('/register/seller', 'member\\NewFrontController@reg_seller')->name('register.seller');
-Route::get('/login/seller', 'member\\NewFrontController@log_seller')->name('login.seller');
+Route::get('/register/seller', 'Member\\NewFrontController@reg_seller')->name('register.seller');
+Route::get('/login/seller', 'Member\\NewFrontController@log_seller')->name('login.seller');
 
 
 Auth::routes(['verify' => true]);
@@ -57,32 +57,32 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
 		Route::get('/live_chat', 'Admin\\NewFrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
-		Route::get('/dashboard', 'admin\\NewFrontController@dashboard')->name('.dashboard');
+		Route::get('/dashboard', 'Admin\\NewFrontController@dashboard')->name('.dashboard');
 
 		//EmailController
-		Route::post('/send_email', 'admin\\EmailController@email')->name('.send_email');
-		Route::get('/list_email', 'admin\\EmailController@list_email')->name('.list_email');
-		Route::get('/delete_email/{id}', 'admin\\EmailController@delete')->name('.delete_email');
-		Route::get('/resend_email/{id}', 'admin\\EmailController@resend')->name('.resend_email');
+		Route::post('/send_email', 'Admin\\EmailController@email')->name('.send_email');
+		Route::get('/list_email', 'Admin\\EmailController@list_email')->name('.list_email');
+		Route::get('/delete_email/{id}', 'Admin\\EmailController@delete')->name('.delete_email');
+		Route::get('/resend_email/{id}', 'Admin\\EmailController@resend')->name('.resend_email');
 
 		//PageController
-		Route::get('/page', 'admin\\PageController@page')->name('.page');
-		Route::post('/page_add', 'admin\\PageController@page_add')->name('.page_add');
-		Route::get('/page_list', 'admin\\PageController@page_list')->name('.page_list');
-		Route::get('/delete_page/{id}', 'admin\\PageController@delete')->name('.delete_page');
+		Route::get('/page', 'Admin\\PageController@page')->name('.page');
+		Route::post('/page_add', 'Admin\\PageController@page_add')->name('.page_add');
+		Route::get('/page_list', 'Admin\\PageController@page_list')->name('.page_list');
+		Route::get('/delete_page/{id}', 'Admin\\PageController@delete')->name('.delete_page');
 
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
-			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
-			Route::get('/bank', 'Superadmin\\Conf_configController@bank')->name('.bank');
-			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
-			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');
-			Route::get('/create', 'Superadmin\\Conf_configController@create')->name('.create');
-			Route::post('/store', 'Superadmin\\Conf_configController@store')->name('.store');
-			Route::get('/show/{id}', 'Superadmin\\Conf_configController@show')->name('.show');
-			Route::get('/edit/{id}', 'Superadmin\\Conf_configController@edit')->name('.edit');
-			Route::post('/update/{id}', 'Superadmin\\Conf_configController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Superadmin\\Conf_configController@destroy')->name('.destroy');
+			Route::get('/', 'Admin\\Conf_configController@index')->name('.index');
+			Route::get('/bank', 'Admin\\Conf_configController@bank')->name('.bank');
+			Route::get('/profil', 'Admin\\Conf_configController@profil')->name('.profil');
+			Route::get('/transaction', 'Admin\\Conf_configController@transaction')->name('.transaction');
+			Route::get('/create', 'Admin\\Conf_configController@create')->name('.create');
+			Route::post('/store', 'Admin\\Conf_configController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\Conf_configController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\Conf_configController@edit')->name('.edit');
+			Route::post('/update/{id}', 'Admin\\Conf_configController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\Conf_configController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'shipment', 'as' => '.shipment'], function () {
 			Route::get('/', 'Admin\\ShipmentController@index')->name('.index');
@@ -526,14 +526,14 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 });
 
 // auth all
-Route::get('/detail/{slug}', 'member\\NewFrontController@detail')->name('detail');
-// Route::get('/detail/{slug}', 'member\\NewFrontController@detail')->name('detail');
-Route::get('/etalase/{user_store}', 'member\\NewFrontController@etalase')->name('etalase');
-Route::get('/category', 'member\\NewFrontController@category')->name('category');
-Route::get('/brand', 'member\\NewFrontController@brand')->name('brand');
+Route::get('/detail/{slug}', 'Member\\NewFrontController@detail')->name('detail');
+// Route::get('/detail/{slug}', 'Member\\NewFrontController@detail')->name('detail');
+Route::get('/etalase/{user_store}', 'Member\\NewFrontController@etalase')->name('etalase');
+Route::get('/category', 'Member\\NewFrontController@category')->name('category');
+Route::get('/brand', 'Member\\NewFrontController@brand')->name('brand');
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home')->middleware('is_active');
-	Route::get('/shop', 'member\\NewFrontController@shop')->name('shop');
+	Route::get('/shop', 'Member\\NewFrontController@shop')->name('shop');
 
 	Route::get('/profil', function(){return;})->name('profil');
 
