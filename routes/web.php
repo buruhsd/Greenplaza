@@ -537,20 +537,20 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/profil', function(){return;})->name('profil');
 
 	//wishlishController
-	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');
+	Route::get('/member/wishlist', 'Member\\WishlistController@index')->name('member.wishlist');
 	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
-	Route::get('/member/addToChart', 'member\\WishlistController@moveToChart')->name('member.wishlist.moveToChart');
-	Route::get('/member/wishlist/delete/{id}', 'member\\WishlistController@destroy')->name('member.wishlist.delete');
+	Route::get('/member/addToChart', 'Member\\WishlistController@moveToChart')->name('member.wishlist.moveToChart');
+	Route::get('/member/wishlist/delete/{id}', 'Member\\WishlistController@destroy')->name('member.wishlist.delete');
 
 	//ChartController
-	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
-	Route::get('/checkout', 'member\\ChartController@checkout')->name('checkout');
-	Route::post('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
-	Route::get('/chart/destroy/{id}', 'member\\ChartController@destroy')->name('chart.destroy');
+	Route::get('/chart', 'Member\\ChartController@chart')->name('chart');
+	Route::get('/checkout', 'Member\\ChartController@checkout')->name('checkout');
+	Route::post('/addchart/{id}', 'Member\\ChartController@addChart')->name('addchart');
+	Route::get('/chart/destroy/{id}', 'Member\\ChartController@destroy')->name('chart.destroy');
 
 	//user_addressController
-	Route::get('/member/address', 'member\\User_addressController@chart')->name('member.address');
-	Route::post('/member/address/store', 'member\\User_addressController@store')->name('member.address.store');
+	Route::get('/member/address', 'Member\\User_addressController@chart')->name('member.address');
+	Route::post('/member/address/store', 'Member\\User_addressController@store')->name('member.address.store');
 });
 
 // without auth
