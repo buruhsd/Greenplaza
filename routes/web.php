@@ -41,7 +41,6 @@ Route::get('/login/seller', 'Member\\FrontController@log_seller')->name('login.s
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'Member\\HomeController@index')->name('home')->middleware('verified');
-Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
