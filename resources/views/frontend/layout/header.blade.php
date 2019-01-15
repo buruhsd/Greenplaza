@@ -71,10 +71,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-7 col-12">
+                    <div class="col-md-5 col-sm-12 col-12">
                         <div class="search-wrap">
-                            <form action="search">
-                                <!-- <div class="select-menu" tabindex="1">
+                            <form action="{{route('category')}}">
+                                {{-- <div class="select-menu" tabindex="1">
                                     <span>Categories </span>
                                     <ul class="dropdown">
                                         <li><a href="javascript:void(0);">Man</a></li>
@@ -82,13 +82,13 @@
                                         <li><a href="javascript:void(0);">Kids</a></li>
                                         <li><a href="javascript:void(0);">Babys</a></li>
                                     </ul>
-                                </div> -->
-                                <input type="text" placeholder=" Search Here...">
+                                </div> --}}
+                                <input name="src" type="text" placeholder="Search Here...">
                                 <button><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-5">
+                    <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
                             <li>
                                 <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>Cart
