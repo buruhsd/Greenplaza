@@ -1060,8 +1060,8 @@
                         @foreach ($brandall as $b)
                         <div class="brand-items">
                             <a href="{{route('brand', ['brand' => $b->brand_slug])}}">
-                                <img src="{{asset('assets/images/iklan/'.$b->brand_image)}}" style="height: 
-                            50px" alt="{{asset('assets/images/iklan/'.$b->brand_image)}}">
+                                <img src="{{asset('assets/images/brand/'.$b->brand_image)}}" style="height: 
+                            50px" alt="{{asset('assets/images/brand/'.$b->brand_image)}}">
                             </a>
                         </div>
                         @endforeach
