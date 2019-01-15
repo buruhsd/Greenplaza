@@ -1032,7 +1032,11 @@
                                     <h3><a href="{{route('detail', $l->produk_slug)}}">{{$l->produk_name}}</a></h3>
                                     <ul class="blog-meta">
                                         <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
+                                        @if ($l->review->count() == 0)
+                                        <li><a href="#"><i class="fa fa-comments"></i>0 Comments</a></li>
+                                        @else
                                         <li><a href="#"><i class="fa fa-comments"></i>{{$l->review->count()}} Comments</a></li>
+                                        @endif
                                         <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->updated_at}}</a></li>
                                     </ul>
                                     <p>{{$l->produk_note}}</p>
