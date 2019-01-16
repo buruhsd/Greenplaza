@@ -85,6 +85,7 @@ class RegisterController extends Controller
         if($user){
             $user_detail = User_detail::create([
                 'user_detail_user_id' => $user->id,
+                'user_detail_pass_trx' => Hash::make($data['password']),
                 'user_detail_jk' => $data['user_detail_jk'],
                 'user_detail_address' => "",//$data['user_detail_address'],
                 'user_detail_phone' => $data['user_detail_phone'],
@@ -123,7 +124,9 @@ class RegisterController extends Controller
 
     public function activating($token)
     {
+        $date = date('Y-m-d H:i:s');
         $model = User::where('token_register', $token)->where('active', 0)->firstOrFail();
+        $model->email_verified_at = $date;
         $model->active = true;
         $model->save();
         return 'akun anda telah aktif silahkan login.';
