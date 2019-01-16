@@ -130,7 +130,7 @@ class RegisterController extends Controller
         $model->active = true;
         $model->save();
         return redirect('auth.login_green')
-            ->with('flash_status' => 200, 'flash_message'=>'akun anda telah aktif silahkan login.');
+            ->with(['flash_status' => 200, 'flash_message' => 'akun anda telah aktif silahkan login.']);
     }
 
 }
