@@ -16,7 +16,7 @@
                     @yield('content')
                     </div><!-- Main Wrapper -->
                 </div><!-- /Page Inner -->
-                <div class="page-right-sidebar" id="main-right-sidebar">
+                {{-- <div class="page-right-sidebar" id="main-right-sidebar">
                     <div class="page-right-sidebar-inner">
                         <div class="right-sidebar-top">
                             <div class="right-sidebar-tabs">
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div><!-- /Page Content -->
         </div><!-- /Page Container -->
         
