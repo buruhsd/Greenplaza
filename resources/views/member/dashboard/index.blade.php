@@ -9,7 +9,7 @@
         <div class="pull-right">
             <p class="stats-info">Total Transaksi :
                 <span class="stats-number">
-                    {{FunctionLib::number_to_text(
+                    Rp. {{FunctionLib::number_to_text(
                         FunctionLib::sum_trans("", Auth::id())
                         +FunctionLib::sum_trans("", Auth::id(), 'seller')
                     )}}

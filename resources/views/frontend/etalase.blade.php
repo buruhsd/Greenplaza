@@ -178,12 +178,12 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
-                                                <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                {{-- <img class="second second2" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
                                                 <div class="shop-icon">
                                                     <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                                        {{-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> --}}
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
@@ -231,8 +231,8 @@
                                                 <div class="product-wrap">
                                                     <div class="product-img black-opacity">
                                                         <span class="new sale">Sale</span>
-                                                        <img class="first" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
-                                                        <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                        <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                        {{-- <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
                                                         <div class="shop-icon">
                                                             <ul>
                                                                 <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>

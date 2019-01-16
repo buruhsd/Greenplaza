@@ -362,8 +362,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
-                                    <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                     <div class="shop-icon">
                                         <ul>
                                             <!-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> -->
@@ -454,8 +454,8 @@
                                         <div class="product-wrap mb-15">
                                             <div class="product-img black-opacity">
                                                 <span class="new">New</span>
-                                                    <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
-                                                    <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                                 <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
@@ -496,8 +496,8 @@
                                     <div class="product-wrap">
                                         <div class="product-img black-opacity">
                                             <span class="new sale">Sale</span>
-                                                <img class="first" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
-                                                <img class="second" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                                {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                             <div class="shop-icon">
                                                 <ul>
                                                     <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
@@ -654,8 +654,8 @@
                             <div class="product-wrap">
                                 <div class="product-img black-opacity">
                                     <span class="new">New</span>
-                                    <img class="first" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
-                                    <img class="second" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    <img class="first2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                     <div class="shop-icon">
                                         <ul>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart"></i></a></li>
@@ -912,7 +912,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}">
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">

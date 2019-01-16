@@ -468,6 +468,30 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
 .glyphicon-menu-down:before{content:"\e259"}
 .glyphicon-menu-up:before{content:"\e260"}
 
+.brand-items img{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 70px !important;
+  margin: auto;
+  display: block;
+}
+.product-wrap .product-img img{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 250px !important;
+  margin: auto;
+  display: block;
+}
+.product-wrap .product-img img.first2{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 250px !important;
+  margin: auto;
+  display: block;
+}
 .product-wrap .product-img img.first{
   width: auto !important;
   /*max-width: none;*/
@@ -477,6 +501,30 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
   display: block;
 }
 .product-wrap .product-img img.second{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 250px !important;
+  margin: auto;
+  display: block;
+}
+.product-wrap .product-img img.first2{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 150px !important;
+  margin: auto;
+  display: block;
+}
+.product-wrap .product-img img.second2{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 150px !important;
+  margin: auto;
+  display: block;
+}
+.blog-item .blog-img img{
   width: auto !important;
   /*max-width: none;*/
   overflow: hidden !important;
