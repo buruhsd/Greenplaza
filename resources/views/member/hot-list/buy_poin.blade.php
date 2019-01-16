@@ -7,12 +7,12 @@
                     </div>
                     <div class="panel panel-white">
                                 <div class="panel-body">
-                                <div class="panel-heading clearfix">
+                                {{-- <div class="panel-heading clearfix">
                                     <h4 class="panel-title">Saldo Hot List Anda : nominal e hehe</h4>
                                 </div>
                                 <div class="panel-heading clearfix">
                                     <h4 class="panel-title">Kurs Hot List Saat Ini : nominal e hehe</h4>
-                                </div>
+                                </div> --}}
                                     {!! Form::open(['url' => route('member.hotlist.buy_poin_store'), 'id' => 'wizardForm', 'files' => true]) !!}
                                         <div class="tab-content">
                                             <div class="tab-pane active fade in" id="tab1">

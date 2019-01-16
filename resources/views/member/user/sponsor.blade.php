@@ -13,7 +13,6 @@
                 <div class="panel-body user-profile-panel">
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='http://via.placeholder.com/100x100'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
-                    <p class="text-center">UI/UX Designer</p>
                     <hr>
                 </div>
             </div>
@@ -75,6 +74,7 @@
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_tlp', $user->user_detail->user_detail_tlp, [
                                         'class' => 'form-control', 
+                                        'disabled',
                                         'placeholder' => 'phone House'
                                     ])!!}
                                 {!! $errors->first('user_detail_tlp', '<p class="help-block">:message</p>') !!}
@@ -111,6 +111,7 @@
                                     {!! Form::text('user_store', null, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Window', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_store', '<p class="help-block">:message</p>') !!}
@@ -131,6 +132,7 @@
                                         'class' => 'form-control', 
                                         'placeholder' => 'Slogan',
                                         'rows' => '3', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_slogan', '<p class="help-block">:message</p>') !!}
@@ -142,7 +144,7 @@
                                     {!! Form::label('user_detail_province', 'Provice', ['class' => 'col-md-12']) !!}
                                     <div class="form-group {{ $errors->has('user_detail_province') ? 'has-error' : ''}}">
                                         <div class="col-md-12">
-                                            <select name='user_detail_province' id='user_detail_province' class="form-control" onchange="get_city(this.value);">
+                                            <select name='user_detail_province' id='user_detail_province' class="form-control" onchange="get_city(this.value);" disabled>
                                             </select>
                                             {!! $errors->first('user_detail_province', '<p class="help-block">:message</p>') !!}
                                         </div>
@@ -152,7 +154,7 @@
                                     {!! Form::label('user_detail_city', 'City', ['class' => 'col-md-12']) !!}
                                     <div class="form-group {{ $errors->has('user_detail_city') ? 'has-error' : ''}}">
                                         <div class="col-md-12">
-                                            <select name='user_detail_city' id='user_detail_city' class="form-control" onchange="get_subdistrict(this.value);">
+                                            <select name='user_detail_city' id='user_detail_city' class="form-control" onchange="get_subdistrict(this.value);" disabled>
                                                 {{-- @foreach($city as $item)
                                                     <option value='{{$item['city_id']}}'>{{$item['city_name']}}</option>
                                                 @endforeach --}}
@@ -165,7 +167,7 @@
                                     {!! Form::label('user_detail_subdist', 'Subdistrict', ['class' => 'col-md-12']) !!}
                                     <div class="form-group {{ $errors->has('user_detail_subdist') ? 'has-error' : ''}}">
                                         <div class="col-md-12">
-                                            <select name='user_detail_subdist' id='user_detail_subdist' class="form-control">
+                                            <select name='user_detail_subdist' id='user_detail_subdist' class="form-control" disabled>
                                                 {{-- @foreach($subdistrict as $item)
                                                     <option value='{{$item['subdistrict_name']}}'>{{$item['subdistrict_name']}}</option>
                                                 @endforeach --}}
@@ -181,6 +183,7 @@
                                             {!! Form::text('user_detail_pos', $user->user_detail->user_detail_pos, [
                                                 'class' => 'form-control', 
                                                 'placeholder' => 'Postal Code', 
+                                                'disabled',
                                                 'required'
                                             ])!!}
                                         {!! $errors->first('user_detail_pos', '<p class="help-block">:message</p>') !!}
@@ -195,6 +198,7 @@
                                       'class' => 'form-control', 
                                       'placeholder' => 'Address', 
                                       'rows' => '5', 
+                                        'disabled',
                                       'cols' => '5', 
                                     ])!!}
                                     {!! $errors->first('user_detail_address', '<p class="help-block">:message</p>') !!}
@@ -206,7 +210,7 @@
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_name') ? 'has-error' : ''}}">
                                 {!! Form::label('user_detail_bank_id', 'Bank Name', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    <select name='user_detail_bank_id' class="form-control">
+                                    <select name='user_detail_bank_id' class="form-control" disabled>
                                         @foreach($cfg_bank as $item)
                                             <option value='{{$item->id}}' <?php if($user->user_detail->user_detail_bank_id == $item->id){echo "selected";}?>>{{$item->bank_name}}</option>
                                         @endforeach
@@ -220,6 +224,7 @@
                                     {!! Form::text('user_detail_bank_owner', $user->user_detail->user_detail_bank_owner, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Owner', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_detail_bank_owner', '<p class="help-block">:message</p>') !!}
@@ -231,6 +236,7 @@
                                     {!! Form::text('user_detail_bank_no', $user->user_detail->user_detail_bank_no, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Account number', 
+                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_detail_bank_no', '<p class="help-block">:message</p>') !!}

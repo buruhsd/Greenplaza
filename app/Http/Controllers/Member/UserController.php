@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Role;
 use App\User;
+use App\Models\User_detail;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Bank;
