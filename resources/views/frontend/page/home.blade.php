@@ -281,7 +281,10 @@
                         <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
-                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">{{$item->category_name}}</a>
+                                    <li>
+                                        <a href="{{route('category', ['cat'=>$item->category_slug])}}">
+                                            {{ucfirst(strtolower($item->category_name))}}
+                                        </a>
                                     </li>
                                 @endforeach
                         </ul>

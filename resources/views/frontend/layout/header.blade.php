@@ -74,7 +74,7 @@
                         <div class="">
                             <form action="{{route('category')}}">
                             <div class="input-group mb-3" style="padding: 3px 0;">
-                              <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                              <input type="text" class="form-control" placeholder="produk" aria-label="produk" aria-describedby="basic-addon2">
                               <div class="input-group-append">
                                 <button class="btn"><i class="fa fa-search"></i></button>
                               </div>
@@ -122,7 +122,7 @@
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
-                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
+                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
                                         <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
                                         @if($sub_cat->count() > 0)
                                             <ul class="sub-cetagory col-md-12 col-sm-12">
@@ -130,7 +130,9 @@
                                                     <p>Cetagory Title </p>
                                                     <ul>
                                                         @foreach($sub_cat as $item)
-                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">{{$item->category_name}}</a></li>
+                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">
+                                                                {{ucfirst(strtolower($item->category_name))}}
+                                                            </a></li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
