@@ -33,7 +33,7 @@
                             <td>{{$item->user_address_pos}}</td>
                             <td>{{$item->user_address_address}}</td>
                             <td>
-                                <input type="button" data-dismiss="modal" data-toggle='modal' class="btn btn-success btn-sm" onclick="use_address({{$item->id}}, '{{$item->user_address_label}}', {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="Use {{$item->user_address_label}}">
+                                <input type="button" class="btn btn-success btn-sm" onclick="$(this).closest('.modal').modal('hide');use_address({{$item->id}}, '{{$item->user_address_label}}', {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="Use {{$item->user_address_label}}">
                             </td>
                         </tbody>
                     @endforeach
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
+            <input type="button" class="btn btn-danger" value="Close" onclick="$(this).closest('.modal').modal('hide')">
         </div>
     </div>
 </div>

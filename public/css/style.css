@@ -489,3 +489,6 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
   overflow: hidden !important;
   height: 300px !important;
 }*/
+.header-middle-area{
+  padding: 10px 0;
+}

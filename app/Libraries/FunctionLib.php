@@ -1,6 +1,49 @@
 <?php
 class FunctionLib
 {
+    /**
+    * @param
+    * @return
+    **/
+    public static function user_address($id=0) {
+        $address = "";
+        if($id != 0){
+            $item = App\Models\User_detail::where('user_detail_user_id', $id)->first();
+            $subdistrict = App\Models\Subdistrict::whereId($item->user_detail_subdist)->pluck('subdistrict_name')[0];
+            $city = App\Models\City::whereId($item->user_detail_city)->pluck('city_name')[0];
+            $province = App\Models\Province::whereId($item->user_detail_province)->pluck('province_name')[0];
+            $address = $item->user_detail_address.', '.$subdistrict.', '.$city.', '.$province;
+        }
+        return $address;
+    }
+
+    public static function count_sell($id = 0, $status="success"){
+        if($id == 0){
+            $id = Auth::id();
+        }
+        $where = "1";
+        $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+        $where .= ' AND sys_trans_detail.trans_detail_status IN (5, 6)';
+        $where .= ' AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id='.$id.')';
+        if($status !== 'success'){
+            $where .= ' AND sys_komplain.id IS NOT NULL';
+        }else{
+            $where .= ' AND sys_komplain.id IS NULL';
+        }
+        $total = App\Models\Trans_detail::whereRaw($where)
+            ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
+            ->count();
+        return $total;
+    }
+
+    public static function get_saldo($type = 0){
+        $where = 'wallet_user_id ='.Auth::id();
+        if($type !== 0){
+            $where .= ' AND wallet_type ='.$type;
+        }
+        $saldo = App\Models\Wallet::whereRaw($where)->pluck('wallet_ballance');
+        return $saldo[0];
+    }
 
     /******/
     public static function sum_trans($status = "", $id = 0, $type = 'buyer'){

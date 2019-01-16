@@ -15,8 +15,8 @@
                     )}}
                 </span>
             </p>
-            <p class="stats-info">Grade Toko :
-            <span class="stats-number">$781,876</span></p>
+            {{-- <p class="stats-info">Grade Toko : --}}
+            {{-- <span class="stats-number">$781,876</span></p> --}}
         </div>
     </div>
     <div id="main-wrapper">

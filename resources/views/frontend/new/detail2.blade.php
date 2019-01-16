@@ -507,6 +507,7 @@
             console.log(service, ongkir);
         }
         function use_address(id, address_name, city, subdistrict){
+            $("#ajax-modal").modal("hide")
             console.log(city, subdistrict);
             $('#address_id').attr('value', id);
             $('#address_id').attr('value', id);

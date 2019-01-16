@@ -34,9 +34,12 @@
                             </div>
                             <div class="col-md-6">
                                 <h3>Info</h3>
-                                <p>Harga iklan saat : .<br>
-                                Iklan Baris : <br>
-                                Iklan Banner : <br></p>
+                                <h4>Saldo Iklan Anda : <b>Rp. {{FunctionLib::number_to_text(FunctionLib::get_saldo(4))}}</b></h4>
+                                <p>Harga iklan saat : <br>
+                                Iklan Baris : <b>Rp. {{FunctionLib::number_to_text(FunctionLib::get_config('price_iklan_baris'))}}</b><br>
+                                Iklan Banner : <b>Rp. {{FunctionLib::number_to_text(FunctionLib::get_config('price_iklan_banner'))}}</b><br>
+                                Iklan Banner Khusus : <b>Rp. {{FunctionLib::number_to_text(FunctionLib::get_config('price_iklan_banner_khusus'))}}</b><br>
+                                Iklan Slider : <b>Rp. {{FunctionLib::number_to_text(FunctionLib::get_config('price_iklan_slider'))}}</b><br></p>
 
                                 <p>Diskon 15% untuk pembelian saldo minimal Rp 500.000,00, atau setelah akumulasi pembelian mencapai Rp 1.500.000,00 (* </p><br>
 

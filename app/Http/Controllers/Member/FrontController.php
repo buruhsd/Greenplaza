@@ -98,29 +98,29 @@ class FrontController extends Controller
     public function category(Request $request)
     {
         $perPage = 8;
-        $order = 1;
+        $order = "rand()";
         $id_cat = 0;
-        if($request->input("order") !== ""){
-            $order .= $request->input("order").' ASC';
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $order = $request->input("order").' ASC';
         }
         $where = "1";
         if($request->input("src") != ""){
             $where .= " AND produk_name LIKE '%".$request->input("src")."%'";
         }
         if($request->input("cat") != ""){
-            $id_cat = Category::whereCategory_slug($request->input("cat"))->orderByRaw($order)->pluck('id')->first();
-            $data['produk'] = Produk::whereRaw('FALSE')->paginate($perPage);
+            $id_cat = Category::whereCategory_slug($request->input("cat"))->pluck('id')->first();
+            $data['produk'] = Produk::whereRaw('FALSE')->orderByRaw($order)->paginate($perPage);
             if($id_cat !== null){
-                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where)->paginate($perPage);
+                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where, $order)->paginate($perPage);
             }
         }else{
-            $data['produk'] = Produk::whereRaw($where)->orderByRaw("rand()")->paginate($perPage);
+            $data['produk'] = Produk::whereRaw($where)->orderByRaw($order)->paginate($perPage);
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->get();
         return view('frontend.category', $data, compact('category'));
     }
-    
+
     /**
     * @param
     * @return
@@ -161,12 +161,18 @@ class FrontController extends Controller
     */
     public function etalase(Request $request, $user_store)
     {
-        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $order = "rand()";
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $order = $request->input("order").' ASC';
+        }
+        $perPage = 8;
+        $data['category'] = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $user = User::where('user_slug', $user_store)->first();
         // dd($user);
-        $produk = Produk::where('produk_seller_id', $user['id'])->get();
+        $data['produk'] = Produk::where('produk_seller_id', $user['id'])->orderByRaw($order)->paginate($perPage);
+        $data['user'] = $user;
         // dd($produk);
-        return view('frontend.etalase', compact('produk', 'user', 'category'));
+        return view('frontend.etalase', $data);
     }
 
     /**

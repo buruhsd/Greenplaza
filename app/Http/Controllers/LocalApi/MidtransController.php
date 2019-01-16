@@ -129,7 +129,7 @@ class MidtransController extends Controller
 
             foreach ($trans as $value) {
                 // dd(Session::get('chart'));
-                foreach ($value as $key => $value) {
+                foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['trans_detail_produk_id']);
                     if($item['trans_detail_qty'] > $produk->produk_stock){
                         $status = 500;

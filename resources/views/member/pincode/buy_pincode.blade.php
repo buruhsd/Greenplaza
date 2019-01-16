@@ -8,10 +8,10 @@
     <div class="panel panel-white">
         <div class="panel-body">
             <div class="panel-heading clearfix">
-                <h4 class="panel-title">Saldo Pin Code Anda : nominal e hehe</h4>
+                <h4 class="panel-title">Saldo Pin Code Anda : <b>{{intval(FunctionLib::get_saldo(5))}} point</b></h4>
             </div>
             <div class="panel-heading clearfix">
-                <h4 class="panel-title">Kurs Pin Code Saat Ini : nominal e hehe</h4>
+                <h4 class="panel-title">Kurs Pin Code Saat Ini : <b>{{FunctionLib::get_config('price_kurs_pin_code')}} point</b></h4>
                 <h4 class="panel-title">PIN Code digunakan untuk memasang link ke website halaman pribadi anda pada iklan baris atau banner</h4>
             </div>
             {!! Form::open(['url' => route('member.pincode.buy_pincode_store'), 'id' => 'wizardForm', 'files' => true]) !!}
@@ -27,8 +27,8 @@
                                             <option value="{{$item->id}}">
                                                 {{$item->paket_pincode_name}} 
                                                 | Rp. {{FunctionLib::number_to_text($item->paket_pincode_price)}}
-                                                {{-- | {{intval($item->paket_hotlist_amount)}} Poin
-                                                | Bonus {{intval($item->paket_hotlist_bonus)}} Poin --}}
+                                                - {{intval($item->paket_pincode_amount)}} Pin Code
+                                                , Bonus {{intval($item->paket_pincode_bonus)}} Pin Code
                                             </option>
                                         @endforeach
                                       </select>

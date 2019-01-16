@@ -589,6 +589,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('update_komplain/{id}', 'ModalController@update_komplain')->name('.update_komplain');
 		Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
 		Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
+		Route::get('add_to_chart/{id}', 'ModalController@add_to_chart')->name('.add_to_chart');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

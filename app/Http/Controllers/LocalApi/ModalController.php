@@ -10,6 +10,8 @@ use App\Models\Conf_komplain;
 use App\Models\Conf_solusi;
 use App\Models\Trans_detail;
 use App\Models\Komplain;
+use App\Models\Produk;
+use App\Models\Shipment;
 use FunctionLib;
 use Auth;
 
@@ -23,6 +25,21 @@ class ModalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * add to chart form
+     * @param
+     * @return 
+     */
+    public function add_to_chart(Request $request, $id)
+    {
+        $data['shipment_type'] = Shipment::where('shipment_is_usable', 1)
+            ->where('shipment_parent_id', 0)
+            ->get();
+        $data['detail'] = Produk::whereId($id)->first();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.add-to-chart', $data);
     }
 
     /**

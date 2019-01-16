@@ -12,15 +12,6 @@
         </div>
     </div>
     <div id="main-wrapper">
-        <div class="panel panel-white">
-            <div class="panel-heading clearfix">
-                <h4 class="panel-title">Pencarian</h4>
-            </div>
-            <!-- Search form -->
-            <form>
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search"/>
-            </form>
-        </div>
         <div class="row">
             @foreach($wallet as $item)
                 <div class="col-lg-6 col-md-6">

@@ -1,10 +1,5 @@
-    <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-    
-    <!-- header-area start -->
     <header class="header-area">
-        <div class="header-tor-area bg-1">
+        {{-- <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-5 col-12">
@@ -45,7 +40,7 @@
                                 </ul>
                                 @endguest
                             </li>
-                            {{-- <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
+                            <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
                                     <li><a href="javascript:void(0);">Bangla <img src="assets/images/language/2.png" alt=""></a></li>
@@ -58,12 +53,12 @@
                                     <li><a href="javascript:void(0);">USD </a></li>
                                     <li><a href="javascript:void(0);">BDT </a></li>
                                 </ul>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
@@ -76,8 +71,14 @@
                         </div>
                     </div>
                     <div class="col-md-5 col-sm-12 col-12">
-                        <div class="search-wrap">
+                        <div class="">
                             <form action="{{route('category')}}">
+                            <div class="input-group mb-3" style="padding: 3px 0;">
+                              <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                              <div class="input-group-append">
+                                <button class="btn"><i class="fa fa-search"></i></button>
+                              </div>
+                            </div>
                                 {{-- <div class="select-menu" tabindex="1">
                                     <span>Categories </span>
                                     <ul class="dropdown">
@@ -87,8 +88,8 @@
                                         <li><a href="javascript:void(0);">Babys</a></li>
                                     </ul>
                                 </div> --}}
-                                <input name="src" type="text" placeholder="Search Here...">
-                                <button><i class="fa fa-search"></i></button>
+                                {{-- <input name="src" type="text" placeholder="Search Here...">
+                                <button><i class="fa fa-search"></i></button> --}}
                             </form>
                         </div>
                     </div>
@@ -143,6 +144,35 @@
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
+                            @guest
+                                <li><a href="{{route('login')}}">Login</a></li>
+                                <li><a href="{{route('register')}}">Register</a></li>
+                            @else
+                                <li class="sidemenu-items"><a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
+                            @endguest
+                            @guest
+                            @else
+                            <ul>
+                                @if(Auth::user()->is_admin())
+                                    <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
+                                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                    <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
+                                @elseif(Auth::user()->is_member())
+                                    <li><a href="{{route('member.profil')}}">Profil</a></li>
+                                    <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
+                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                @endif
+                                <li>
+                                    <a onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                            @endguest
                             <li><a href="{{url('/')}}">Home </a></li>
                             {{-- <li><a href="about.html">About</a></li> --}}
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>

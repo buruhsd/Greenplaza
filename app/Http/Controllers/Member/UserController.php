@@ -445,9 +445,9 @@ class UserController extends Controller
 
 
         $this->validate($request, [
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'name' => 'required',
-            'user_store' => 'required',
+            'user_store' => 'required|unique:users',
             'user_store_image' => 'required',
             'user_slogan' => 'required',
             'user_slug' => 'required',

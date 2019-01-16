@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
+            <input type="button" class="btn btn-danger" value="Close" onclick="$(this).closest('.modal').modal('hide')">
             <input type="submit" class="btn btn-success" value="Save">
         </div>
         {!! Form::close() !!}
