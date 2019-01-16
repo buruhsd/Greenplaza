@@ -37,8 +37,8 @@
                         </form>
                         </li>
                 </ul>
-                {{-- <ul class="nav navbar-nav navbar-right">
-                    <li><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
+                <ul class="nav navbar-nav navbar-right">
+                    {{-- <li><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
                         <ul class="dropdown-menu dropdown-lg dropdown-content">
