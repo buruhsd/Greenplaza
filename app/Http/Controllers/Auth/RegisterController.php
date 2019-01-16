@@ -129,7 +129,8 @@ class RegisterController extends Controller
         $model->email_verified_at = $date;
         $model->active = true;
         $model->save();
-        return 'akun anda telah aktif silahkan login.';
+        return redirect('login')
+            ->with('flash_status' => 200, 'flash_message'=>'akun anda telah aktif silahkan login.');
     }
 
 }
