@@ -17,7 +17,7 @@
   				<h2>Registrasi Berhasil !</h2>
    				<p>Selamat akun anda telah terdaftar di GreenPlaza</p>
 				<p>Klik link berikut untuk aktivasi: <br>
-					<a href="{{ $link }}"> Disini </a>
+					<a href="{!! $link !!}"> {!! $link !!} </a>
 				</p>
   			</td>
  		</tr>
