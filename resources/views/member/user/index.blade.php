@@ -79,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_tlp') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_tlp', 'phone House', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_tlp', 'Telp Kantor', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_tlp', $user->user_detail->user_detail_tlp, [
                                         'class' => 'form-control', 
@@ -117,6 +117,7 @@
                                 {!! $errors->first('user_slug', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div> --}}
+                            <?php $store_status = ($user->user_store !== null && $user->user_store !== "")?'disabled':'';?>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_store') ? 'has-error' : ''}}">
                                 {!! Form::label('user_store', 'Window', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">

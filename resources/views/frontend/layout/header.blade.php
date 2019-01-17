@@ -74,7 +74,8 @@
                         <div class="">
                             <form action="{{route('category')}}">
                             <div class="input-group mb-3" style="padding: 3px 0;">
-                              <input type="text" class="form-control" placeholder="produk" aria-label="produk" aria-describedby="basic-addon2">
+                                <input name="cat" class="form-control" type="hidden" value="{{(isset($_GET['cat']))?$_GET['cat']:''}}">
+                                <input name="src" class="form-control" type="text" placeholder="Produk" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
                               <div class="input-group-append">
                                 <button class="btn"><i class="fa fa-search"></i></button>
                               </div>

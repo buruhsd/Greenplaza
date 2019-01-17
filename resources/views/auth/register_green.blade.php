@@ -18,11 +18,15 @@
     @csrf
     @include('layouts._flash')
     <div class="container col-md-8 col-md-offset-2">
-        <a href="{{url('/')}}">
-            <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="300px" height="100px">
-        </a>
-        <h1>Register</h1>
-        <p>Please fill in this form to create an account.</p>
+        <br/>
+        <div class="text-center">
+            <a href="{{url('/')}}">
+                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="300px" height="100px">
+            </a>
+        </div>
+        <hr/>
+        <h1>Pendaftaran</h1>
+        <p>Lengkapi form di bawah untuk membuat akun baru.</p>
         <hr>
         {{-- <div class="form-group row col-lg-12 columns bg-warning text-white hidden">
             <label class="col-md-12" for="sponsor">Pilih salah satu penjual sebagai sponsor anda, atau silakan isi Username sponsor anda sendiri.<br>
@@ -114,7 +118,7 @@
         </div>
         <div class="form-group row">
             <div class="col-md-3">
-                {!! Form::label('user_detail_province', 'Provice', ['class' => 'col-md-12']) !!}
+                {!! Form::label('user_detail_province', 'Provinsi', ['class' => 'col-md-12']) !!}
                 <div class="form-group {{ $errors->has('user_detail_province') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_province' id='user_detail_province' class="form-control" onchange="get_city(this.value);">
@@ -124,7 +128,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {!! Form::label('user_detail_city', 'City', ['class' => 'col-md-12']) !!}
+                {!! Form::label('user_detail_city', 'Kota / Kabupaten', ['class' => 'col-md-12']) !!}
                 <div class="form-group {{ $errors->has('user_detail_city') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_city' id='user_detail_city' class="form-control" onchange="get_subdistrict(this.value);">
@@ -137,7 +141,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {!! Form::label('user_detail_subdist', 'Subdistrict', ['class' => 'col-md-12']) !!}
+                {!! Form::label('user_detail_subdist', 'Desa / Kelurahan', ['class' => 'col-md-12']) !!}
                 <div class="form-group {{ $errors->has('user_detail_subdist') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_subdist' id='user_detail_subdist' class="form-control">
@@ -150,7 +154,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                {!! Form::label('user_detail_pos', 'Postal Code', ['class' => 'col-md-12']) !!}
+                {!! Form::label('user_detail_pos', 'Kode Pos', ['class' => 'col-md-12']) !!}
                 <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_pos') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         {!! Form::text('user_detail_pos', null, [
@@ -200,11 +204,11 @@
             </div>
         </div>
         <hr>
-        <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+        <p>Dengan membuat akun Anda setuju dengan <a href="#">Ketentuan & Privasi kami</a>.</p>
 
         <button type="submit" class="btn btn-success btn-block">Register</button>
         {{-- <button type="submit" class="registerbtn">Register</button> --}}
-        <p>Already have an account? <a href="{{url('/login')}}">Sign in</a>.</p>
+        <p>Sudah punya akun? <a href="{{url('/login')}}">Login</a>.</p>
     </div>
 </form>
 
