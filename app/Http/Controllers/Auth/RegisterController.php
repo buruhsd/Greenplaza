@@ -137,7 +137,7 @@ class RegisterController extends Controller
     public function activating($token)
     {
         $date = date('Y-m-d H:i:s');
-        $model = User::where('token_register', $token)->where('active', 0)->firstOrFail();
+        $model = User::where('token_register', $token)->firstOrFail();
         $model->email_verified_at = $date;
         $model->active = true;
         $model->save();
