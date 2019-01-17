@@ -99,11 +99,11 @@
                                                 <h3><a href="{{route('detail', $item->id)}}">{{$item->produk_name}}</a></h3>
                                                 @if($item->produk_discount > 0)
                                                     <p>
-                                                        <span>{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
-                                                        <del>{{FunctionLib::number_to_text($item->produk_price)}}</del>
+                                                        <span> Rp. {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
+                                                        <del>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del>
                                                     </p>
                                                 @else
-                                                    <p><span>{{FunctionLib::number_to_text($item->produk_price)}}</span></p>
+                                                    <p><span>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</span></p>
                                                 @endif
                                                 {{-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>

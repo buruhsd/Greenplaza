@@ -915,7 +915,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1029,7 +1029,7 @@
                             @foreach ($latestnews as $l)
                             <div class="blog-item">
                                 <div class="blog-img black-opacity">
-                                    <img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px">
+                                    <a href="{{route('detail', $l->produk_slug)}}"><img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px"></a>
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="{{route('detail', $l->produk_slug)}}">{{$l->produk_name}}</a></h3>
