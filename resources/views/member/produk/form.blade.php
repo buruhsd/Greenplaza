@@ -258,10 +258,10 @@
                         <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off">
                         XL <span class="check glyphicon glyphicon-ok"></span>
                     </label>
-                    <label class="btn btn-default">
+                    {{-- <label class="btn btn-default">
                         <input type="checkbox" name="produk_size[]" value="other" autocomplete="off">
                         ETC <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
+                    </label> --}}
                 </div>
                 <!-- {!! Form::text('produk_size', null, [
                     'class' => 'form-control', 
@@ -412,7 +412,7 @@
             {!! $errors->first('produk_viewer', '<p class="help-block">:message</p>') !!}
             </div>
         </div> --}}
-        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_is_best') ? 'has-error' : ''}}">
+        {{-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_is_best') ? 'has-error' : ''}}">
             {!! Form::label('produk_is_best', 'Best Seller : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9 text-left">
                 {!! Form::radio('produk_is_best', 0, true, [])!!}
@@ -431,7 +431,7 @@
                 {!! Form::label('produk_is_hot', 'Yes', []) !!}
             {!! $errors->first('produk_is_hot', '<p class="help-block">:message</p>') !!}
             </div>
-        </div>
+        </div> --}}
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_note') ? 'has-error' : ''}}">
             {!! Form::label('produk_note', 'Note : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">

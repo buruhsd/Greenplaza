@@ -63,8 +63,8 @@ class BrandController extends Controller
         $requestData = $request->all();
         $this->validate($request, [
             'brand_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'brand_name' => 'required',
-            'brand_slug' => 'required',
+            'brand_name' => 'required|unique:sys_brand',
+            // 'brand_slug' => 'required',
             // 'brand_note' => 'required',
         ]);
         
@@ -87,7 +87,7 @@ class BrandController extends Controller
             $res->brand_image = $imagename;
         }
 
-        $res->brand_slug = $request->brand_slug;
+        $res->brand_slug = str_slug($request->brand_name);
         $res->brand_status = 0;
         $res->brand_note = $request->brand_note;
         $res->save();

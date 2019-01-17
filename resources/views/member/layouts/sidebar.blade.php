@@ -148,7 +148,7 @@
                                     <li><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li>
                                     <li><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li>
                                     <li><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
-                                    <li><a href="{{route('member.wallet.type', 'pincode')}}">Log Pincode</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'pin_code')}}">Log Pincode</a></li>
                                     <li><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
                                 </ul>
                             </li>
