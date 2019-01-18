@@ -298,7 +298,7 @@
                             <div class="slidebar-product-wrap">
                                 @foreach ($popularproduk as $p)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
+                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                         <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
