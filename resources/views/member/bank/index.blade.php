@@ -1,65 +1,62 @@
 @extends('member.index')
 @section('content')
 <!-- Page Inner -->
-<div class="page-inner">
-    <div class="page-title">
-        <h3 class="breadcrumb-header">Rekening Bank</h3>
+<div class="page-title">
+    <h3 class="breadcrumb-header">Rekening Bank</h3>
+</div>
+<div class="panel panel-white">
+    <a class="btn btn-info" data-toggle="collapse" href="#add" role="button" aria-expanded="false" aria-controls="add">Tambah Rekening Baru</a>
+    <div id="add" class="collapse">
+        <table class="table table-bordered table-striped table-highlight m-t-xs">
+            <thead>
+            </thead>
+            <tbody id="add_row">
+                <tr>
+                    <th style="width: 30%;">Bank</th>
+                    <th style="width: 30%;">Owner</th>
+                    <th style="width: 30%;">Account Number</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group-sm {{ $errors->has('user_bank_bank_id') ? 'has-error' : ''}}">
+                            {!! Form::text('address_label', null, [
+                                'class' => 'form-control', 
+                                'placeholder' => 'Label', 
+                                'required'
+                            ])!!}
+                            {!! $errors->first('user_bank_bank_id', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group-sm {{ $errors->has('user_bank_owner') ? 'has-error' : ''}}">
+                            {!! Form::text('user_bank_owner', null, [
+                                'class' => 'form-control', 
+                                'placeholder' => 'Owner', 
+                                'required'
+                            ])!!}
+                            {!! $errors->first('user_bank_owner', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group-sm {{ $errors->has('user_bank_no') ? 'has-error' : ''}}">
+                            {!! Form::text('user_bank_no', null, [
+                                'class' => 'form-control', 
+                                'placeholder' => 'Account Number', 
+                                'required'
+                            ])!!}
+                            {!! $errors->first('user_bank_no', '<p class="help-block">:message</p>') !!}
+                        </div>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success btn-block">Save</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="panel-body">
-    </div>
-        <div class="panel panel-white">
-            <a class="btn btn-info" data-toggle="collapse" href="#add" role="button" aria-expanded="false" aria-controls="add">Tambah Rekening Baru</a>
-            <div id="add" class="collapse">
-                <table class="table table-bordered table-striped table-highlight m-t-xs">
-                    <thead>
-                    </thead>
-                    <tbody id="add_row">
-                        <tr>
-                            <th style="width: 30%;">Bank</th>
-                            <th style="width: 30%;">Owner</th>
-                            <th style="width: 30%;">Account Number</th>
-                            <th>Action</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group-sm {{ $errors->has('user_bank_bank_id') ? 'has-error' : ''}}">
-                                    {!! Form::text('address_label', null, [
-                                        'class' => 'form-control', 
-                                        'placeholder' => 'Label', 
-                                        'required'
-                                    ])!!}
-                                    {!! $errors->first('user_bank_bank_id', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group-sm {{ $errors->has('user_bank_owner') ? 'has-error' : ''}}">
-                                    {!! Form::text('user_bank_owner', null, [
-                                        'class' => 'form-control', 
-                                        'placeholder' => 'Owner', 
-                                        'required'
-                                    ])!!}
-                                    {!! $errors->first('user_bank_owner', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group-sm {{ $errors->has('user_bank_no') ? 'has-error' : ''}}">
-                                    {!! Form::text('user_bank_no', null, [
-                                        'class' => 'form-control', 
-                                        'placeholder' => 'Account Number', 
-                                        'required'
-                                    ])!!}
-                                    {!! $errors->first('user_bank_no', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </td>
-                            <td>
-                                <button type="submit" class="btn btn-success btn-block">Save</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    <div id="main-wrapper">
+</div>
+<div id="main-wrapper">
     <div class="row">
         <?php $no = 1; ?>
         @foreach($user->user_bank->all() as $item)

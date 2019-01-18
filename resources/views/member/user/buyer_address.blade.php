@@ -1,16 +1,13 @@
 @extends('member.index')
 @section('content')
 <!-- Page Inner -->
-<div class="page-inner">
-    <div class="page-title">
-        <h3 class="breadcrumb-header">Daftar Alamat</h3>
-    </div>
-    <div class="panel-body">
-    </div>
-        <div class="panel panel-white">
-            <input onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addaddress")}} type="button" class="btn btn-danger btn-sm" name="addAdress" value="Tambah Alamat Baru" />
-        </div>
-    <div id="main-wrapper">
+<div class="page-title">
+    <h3 class="breadcrumb-header">Daftar Alamat</h3>
+</div>
+<div class="panel panel-white">
+    <input onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addaddress")}} type="button" class="btn btn-danger btn-sm" name="addAdress" value="Tambah Alamat Baru" />
+</div>
+<div id="main-wrapper">
     <div class="row">
         <?php $no = 1; ?>
         @foreach($user->user_address->all() as $item)
