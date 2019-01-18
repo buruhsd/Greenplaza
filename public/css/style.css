@@ -480,7 +480,7 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
   width: auto !important;
   /*max-width: none;*/
   overflow: hidden !important;
-  height: 250px !important;
+  height: 160px !important;
   margin: auto;
   display: block;
 }

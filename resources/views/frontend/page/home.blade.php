@@ -967,7 +967,7 @@
                                             @foreach ($discountproduk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}">
+                                                    <a href="{{route('detail', $d->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                     </a>
                                                 </div>
@@ -1047,9 +1047,9 @@
                                 @foreach($latestnews as $item)
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
-                                            <div class="product-img black-opacity" style="width: 156px; height: 160px" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
+                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 <span class="new sale">Sale</span>
-                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
+                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <!-- <div class="shop-icon">
                                                     <ul>
                                                         {{-- <li><a href="{{route('detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li> --}}
@@ -1092,7 +1092,7 @@
                                 @foreach($latestnewss as $item)
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
-                                            <div class="product-img black-opacity" style="width: 156px; height: 160px" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
+                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 <span class="new sale">Sale</span>
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">

@@ -14,11 +14,6 @@
             <div class="panel-heading clearfix">
               <a href="{{route('admin.konfigurasi.pagelist')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
               <div class="col-lg-12">
-                  <div class="col-lg-12">
-                  <div class="alert alert-info">
-                  <p class="alert-link">Perhatikan !!</p>
-                  Tetap isi Page Role Id dan Kategori meskipun tidak di edit, karna akan hilang saat di save jika tidak ikut di isi !
-              </div>
             </div>
               <div class="panel-body">
                   <form class="form-horizontal" method="POST" action= "{{route('admin.konfigurasi.edit_page_add', $page->id)}}" enctype = "multipart/form-data">
@@ -33,7 +28,11 @@
                         <label for="input-Default" class="col-sm-2 control-label">Page Role_id</label>
                         <div class="col-sm-10">
                             <select id="" type="text" name="page_role_id" class="form-control">
-                              <option value="">--Select Role--</option>
+                              @if ($page->page_role_id == 2)
+                              <option value="2" selected>Admin</option>
+                              @elseif ($page->page_role_id == 3)
+                              <option value="3" selected>Member</option>
+                              @endif
                               <option value="2">Admin</option>
                               <option value="3">Member</option>
                             </select>
@@ -46,7 +45,7 @@
                                 <option value="seller">Seller</option>
                                 <option value="member">Member</option>
                                 <option value="greenplaza">Greenplaza</option>
-                                <option value="" selected>Select Category Roles</option>
+                                <option value="{{$page->page_kategori}}" selected>{{$page->page_kategori}}</option>
                               </select>
                           </div>
                       </div>

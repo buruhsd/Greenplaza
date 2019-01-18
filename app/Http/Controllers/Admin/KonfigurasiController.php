@@ -325,11 +325,22 @@ class KonfigurasiController extends Controller
     {
         $page = Page::find($id);
         $page->page_judul = $request->page_judul;
-        $page->page_role_id = $request->page_role_id;
-        $page->page_kategori = $request->page_kategori;
+        
         $page->page_text = $request->page_text;
         $page->page_slug = str_slug($request->page_judul);
+        if($request->page_role_id){
+            if ($page->page_role_id != null && $request->page_role_id || $page->page_kategori != null && $request->page_kategori){
+                $page->page_role_id =$request->page_role_id;
+                $page->page_kategori =$request->page_kategori;
+            } elseif ($page->iklapage_role_id == null && $request->page_role_id || $page->page_kategori == null && $request->page_kategori){
+                $page->page_role_id =$request->page_role_id;
+                $page->page_kategori =$request->page_kategori;
+            }
+            $page->save();
+                
+        } 
         $page->save();
+
         Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Page Berhasil di Edit."
