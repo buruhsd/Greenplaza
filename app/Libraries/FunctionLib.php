@@ -36,8 +36,11 @@ class FunctionLib
         return $total;
     }
 
-    public static function get_saldo($type = 0){
-        $where = 'wallet_user_id ='.Auth::id();
+    public static function get_saldo($type = 0, $id = 0){
+        if($id == 0){
+            $id = Auth::id();
+        }
+        $where = 'wallet_user_id ='.$id;
         if($type !== 0){
             $where .= ' AND wallet_type ='.$type;
         }
