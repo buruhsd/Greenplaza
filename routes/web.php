@@ -72,10 +72,10 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
-			Route::get('/', 'Admin\\Conf_configController@index')->name('.index');
-			Route::get('/bank', 'Admin\\Conf_configController@bank')->name('.bank');
-			Route::get('/profil', 'Admin\\Conf_configController@profil')->name('.profil');
-			Route::get('/transaction', 'Admin\\Conf_configController@transaction')->name('.transaction');
+			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/bank', 'Superadmin\\Conf_configController@bank')->name('.bank');
+			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
+			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');
 			Route::get('/create', 'Admin\\Conf_configController@create')->name('.create');
 			Route::post('/store', 'Admin\\Conf_configController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\Conf_configController@show')->name('.show');
@@ -290,7 +290,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('delete_gradeseller/{id}', 'Admin\\KonfigurasiController@delete_gradeseller')->name('.delete_gradeseller');
 
 			//UPDATE PASS
-			Route::get('updatepassword/{id}', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
+			Route::get('updatepassword', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
 			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
 		});
 

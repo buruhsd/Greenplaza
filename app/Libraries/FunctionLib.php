@@ -449,9 +449,14 @@ class FunctionLib
     * @return
     **/
     public static function get_config($type, $status = 1){
-        $value = App\Models\Conf_config::where('configs_status', '=', $status)
-            ->where('configs_name', $type)
-            ->pluck('configs_value')[0];
+        try {
+            $value = App\Models\Conf_config::where('configs_status', '=', $status)
+                ->where('configs_name', $type)
+                ->pluck('configs_value')[0];
+        }
+        catch (\Exception $e) {
+            $value = '';
+        }
         return $value;
     } 
 
