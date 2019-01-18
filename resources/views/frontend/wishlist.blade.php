@@ -6,8 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1">
-                        <div class="breadcumb-content black-opacity">
+                    <div class="breadcumb-wrap bg-1 ">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/wishlist.jpg')">
                             <h2>Wishlist</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>

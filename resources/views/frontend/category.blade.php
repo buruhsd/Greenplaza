@@ -2,19 +2,20 @@
 @section('title', 'category')
 @section('content')
 
-<div class="breadcumb-area">
+    <div class="breadcumb-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1 ">
-                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/banner/cat.jpg')">
+                    <h4 class="pull-right" style="padding: 10px">Kategori</h4>
+                    <!-- <div class="breadcumb-wrap bg-1 ">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/wishlist.jpg')">
                             <h2>Kategori</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Kategori</li>
                             </ul>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -82,7 +83,7 @@
                                 @foreach($produk as $item)
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
-                                            <div class="product-img black-opacity" style="width: 156px; height: 160px">
+                                            <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
