@@ -11,7 +11,7 @@
                     <h4 class="panel-title">User Profile</h4>
                 </div>
                 <div class="panel-body user-profile-panel">
-                    <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='http://via.placeholder.com/100x100'" class="user-profile-image img-circle" alt="">
+                    <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
                     <hr>
                         {{-- <div class="col-md-12">
