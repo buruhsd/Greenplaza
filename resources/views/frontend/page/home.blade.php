@@ -79,7 +79,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
                         @if (Auth::user()->user_detail->user_detail_image != null)
-                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}">
+                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
                         @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif
@@ -238,21 +238,24 @@
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             @foreach ($discountprice as $d)
                             <div class="product-wrap">
-                                <div class="product-img black-opacity">
+                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                     <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
-                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}">
+                                        <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" ></a>
                                     <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
                                     </div>
-                                    <div class="shop-icon">
+                                    <!-- <div class="shop-icon">
                                         <ul>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="{{route('detail', $d->produk_slug)}}">Floral Print Buttoned</a></h3>
+                                    <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>
+                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                                        <a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                    </h3>
                                     @if ($d->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
@@ -295,7 +298,7 @@
                             <div class="slidebar-product-wrap">
                                 @foreach ($popularproduk as $p)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                         <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
@@ -363,20 +366,23 @@
                         <div class="product-active owl-carousel next-prev-style">
                             @foreach($newproduk as $n)
                             <div class="product-wrap">
-                                <div class="product-img black-opacity">
+                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
                                     <span class="new">New</span>
-                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
+                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                     <div class="shop-icon">
-                                        <ul>
-                                            <!-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> -->
+                                        <!-- <ul>
+                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
+                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                                        <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                    </h3>
                                     @if ($n->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -455,19 +461,22 @@
                                     @if ($n->produk_discount == 0)
                                     <div class="product-items">
                                         <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity">
+                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
                                                 <span class="new">New</span>
                                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
-                                                <div class="shop-icon">
+                                                <!-- <div class="shop-icon">
                                                     <ul>
                                                         <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
+                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                                                    <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                                </h3>
                                                 @if ($n->produk_discount != 0)
                                                 <p>
                                                     <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -497,19 +506,22 @@
                                     @foreach ($category as $n)
                                     @if ($n->produk_discount > 0)
                                     <div class="product-wrap">
-                                        <div class="product-img black-opacity">
+                                        <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
                                             <span class="new sale">Sale</span>
                                                 <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                                 {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
-                                            <div class="shop-icon">
+                                            <!-- <div class="shop-icon">
                                                 <ul>
                                                     <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
                                                     <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a></h3>
+                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                                <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                                                <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                            </h3>
                                             @if ($n->produk_discount != 0)
                                             <p>
                                                 <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
@@ -587,7 +599,7 @@
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedproduk as $r)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
+                                    <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                                         <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
@@ -616,7 +628,7 @@
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedprodukk as $r)
                                 <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
+                                    <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                                         <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
                                     </div>
                                     <div class="product-sedebar-content fix">
@@ -655,19 +667,22 @@
                         <div class="product-active owl-carousel next-prev-style">
                             @foreach ($featured as $f)
                             <div class="product-wrap">
-                                <div class="product-img black-opacity">
+                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $f->produk_slug)}}'">
                                     <span class="new">New</span>
                                     <img class="first2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
-                                    <div class="shop-icon">
+                                    <!-- <div class="shop-icon">
                                         <ul>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{$f->produk_name}}</a></h3>
+                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{$f->produk_name}}</a>
+                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                                        <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                    </h3>
                                     @if ($f->produk_discount != 0)
                                     <p>
                                         <span>Rp.{{number_format(($f->produk_price * $f->produk_discount) / 100, 2)}}</span>
@@ -744,7 +759,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -775,7 +790,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -813,7 +828,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($toprate as $t)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -844,7 +859,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($topratee as $t)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -882,7 +897,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($popularproduk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -913,7 +928,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($popularprodukk as $p)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
+                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -951,7 +966,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($discountproduk as $d)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $d->produk_slug)}}">
                                                         <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
                                                     </a>
@@ -982,7 +997,7 @@
                                         <div class="slidebar-product-wrap">
                                             @foreach ($discountprodukk as $d)
                                             <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity">
+                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px"></a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1019,7 +1034,112 @@
     </div>
     <!-- spacial-product-area end-->
     <!-- blog-area start -->
-    <div class="blog-area mb-30">
+    <div class="shop-page-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="shop-area">
+                        <h2 class="section-title">latest News</h2>
+                        <div class="propuler-product-active next-prev-style owl-carousel">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="grid">
+                                <div class="row">
+                                @foreach($latestnews as $item)
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                                        <div class="product-wrap">
+                                            <div class="product-img black-opacity" style="width: 156px; height: 160px" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
+                                                <span class="new sale">Sale</span>
+                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
+                                                <!-- <div class="shop-icon">
+                                                    <ul>
+                                                        {{-- <li><a href="{{route('detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li> --}}
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div> -->
+                                            </div>
+                                            <div class="product-content">
+                                                <h3>
+                                                    <a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
+                                                    <a href="{{route('detail', $item->id)}}"></a>
+                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
+                                                    <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                                </h3>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    <i class="fa fa-user"></i> {{$item->user->name}}
+                                                </ul>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    @if ($item->review)
+                                                    <i class="fa fa-comments"></i> {{$item->review->count()}} Comments
+                                                    @else
+                                                    <i class="fa fa-comments"></i> 0 Comments
+                                                    @endif
+                                                </ul>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    {{$item->produk_note}}
+                                                </ul>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">read more</button></a></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="grid">
+                                <div class="row">
+                                @foreach($latestnewss as $item)
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                                        <div class="product-wrap">
+                                            <div class="product-img black-opacity" style="width: 156px; height: 160px" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
+                                                <span class="new sale">Sale</span>
+                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
+                                                {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
+                                                <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt=""> --}}
+                                                <!-- <div class="shop-icon">
+                                                    <ul>
+                                                        {{-- <li><a href="{{route('detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li> --}}
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
+                                                        <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div> -->
+                                            </div>
+                                            <div class="product-content">
+                                                <h3>
+                                                    <a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
+                                                    <a href="{{route('detail', $item->id)}}"></a>
+                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
+                                                    <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                                </h3>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    <i class="fa fa-user"></i> {{$item->user->name}}
+                                                </ul>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    @if ($item->review)
+                                                    <i class="fa fa-comments"></i> {{$item->review->count()}} Comments
+                                                    @else
+                                                    <i class="fa fa-comments"></i> 0 Comments
+                                                    @endif
+                                                </ul>
+                                                <ul style="color: #999; font-size: 11px">
+                                                    {{$item->produk_note}}
+                                                </ul>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">read more</button></a></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="blog-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1028,8 +1148,8 @@
                         <div class="blog-active owl-carousel next-prev-style">
                             @foreach ($latestnews as $l)
                             <div class="blog-item">
-                                <div class="blog-img black-opacity">
-                                    <a href="{{route('detail', $l->produk_slug)}}"><img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px"></a>
+                                <div class="blog-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $l->produk_slug)}}'">
+                                    <img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px">
                                 </div>
                                 <div class="blog-content">
                                     <h3><a href="{{route('detail', $l->produk_slug)}}">{{$l->produk_name}}</a></h3>
@@ -1052,7 +1172,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- blog-area end -->
     <!-- brand-area start -->
     <div class="brand-area mb-30">

@@ -220,6 +220,7 @@ class FrontController extends Controller
         $discountproduk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->get();
         $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
         $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
+        $latestnewss = Produk::orderBy('created_at', 'DESC')->limit(6)->skip(6)->get();
         $featured = Produk::orderBy('created_at', 'ASC')->limit(12)->get();
         $banner1 = Iklan::where('iklan_iklan_id', 1)->first();
         $banner2 = Iklan::where('iklan_iklan_id', 2)->first();
@@ -248,6 +249,7 @@ class FrontController extends Controller
                 'discountproduk',
                 'discountprodukk',
                 'latestnews',
+                'latestnewss',
                 'featured',
                 'banner1',
                 'banner2',
