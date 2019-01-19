@@ -62,27 +62,102 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shop-area">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="single-product-menu">
+                                    <ul class="nav">
+                                        <li><a class="active" data-toggle="tab" href="#informasi">Informasi</a> </li>
+                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="informasi">
+                                        <div class="card col-md-12 p-0">
+                                            <div class="card-header">
+                                                Informasi
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{$user->user_store}} Etalase</h5>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <ul class="list-group list-group-flush">
+                                                            <?php 
+                                                                $shipment = App\Models\Shipment::whereIn('id', $user->user_shipment()->pluck('user_shipment_shipment_id')->toArray())->pluck('shipment_name')->toArray();
+                                                            ?>
+                                                            <li class="list-group-item">Sejak : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
+                                                            <li class="list-group-item">Total Produk : {{FunctionLib::count_produk("", $user->id)}}</li>
+                                                            <li class="list-group-item">Produk Terjual : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
+                                                            <li class="list-group-item">Transaksi Success : {{FunctionLib::count_sell($user->id)}}</li>
+                                                            <li class="list-group-item">Kurir : {{implode (", ", $shipment)}}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-7 offset-md-1">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="review-items">
+                                                                <div class="review-img" style="border:none">
+                                                                    <img style="" src="{{asset("assets/images/profil/".$user->user_detail->user_detail_image)}}">
+                                                                </div>
+                                                                <div class="review-content">
+                                                                    <i>
+                                                                        Alamat : {{FunctionLib::user_address($user->id)}}<br/>
+                                                                        Slogan Pemilik Toko : {{$user->user_slogan}}
+                                                                    </i>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="transaksi">
+                                        <div class="card col-md-12 p-0">
+                                            <div class="card-header">
+                                                Transaksi
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Penjualan Toko {{$user->user_store}}</h5>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <ul class="list-group list-group-flush">
+                                                            <li class="list-group-item">
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="shop-area">
                         <div class="row mb-30">
                             <div class="col-lg-3 col-sm-4 col-12">
-                                <select name="stor" class="select-style">
-                                    <option disabled selected>Sort by Defalt</option>
-                                    <option>Australia</option>
-                                    <option>Brazil</option>
-                                    <option>Cambodia</option>
-                                    <option>Dominica</option>
-                                    <option>France</option>
-                                    <option>Guyana</option>
-                                    <option>Hong Kong</option>
-                                    <option>Ireland</option>
-                                    <option>Japan</option>
-                                    <option>Malaysia</option>
-                                    <option>Nepal</option>
-                                    <option>Oman</option>
-                                    <option>Peru</option>
-                                </select>
+                                {!! Form::open([
+                                    'method' => 'GET',
+                                    'id' => 'form-etalase',
+                                    'files' => true
+                                ]) !!}
+                                    <select name="order" class="select-style" id="order">
+                                        <option disabled selected>Order by</option>
+                                        <option value="produk_name">Nama</option>
+                                        <option value="produk_price">Harga</option>
+                                    </select>
+                                {!! Form::close() !!}
                             </div>
                             <div class=" col-lg-5 col-sm-5 col-12">
-                                <p class="total-product">Showing 1-12 of 150 Results</p>
+                                <p class="total-product">
+                                    {{($produk->currentPage() - 1) * $produk->perPage() + 1}}-
+                                    {{$produk->perPage() * $produk->currentPage()}} 
+                                    dari {{$produk->count()}} Data
+                                </p>
                             </div>
                             <div class="col-lg-4 col-12 col-sm-3">
                                 <ul class="nav shop-menu">
@@ -99,25 +174,30 @@
                             <div class="tab-pane active" id="grid">
                                 <div class="row">
                                         @foreach ($produk as $p)
-                                    <div class="col-lg-3  col-md-4 col-sm-6  col-12">
+                                    <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity">
                                                 <span class="new sale">Sale</span>
-                                                <img class="first" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
-                                                <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                {{-- <img class="second second2" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
                                                 <div class="shop-icon">
                                                     <ul>
-                                                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                                        {{-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> --}}
+                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="product-content">
                                                 <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
-                                                <p><span><?php echo ($p->produk_price * $p->produk_discount);?></span>
-                                                    <del>{{$p->produk_price}}</del>
-                                                </p>
+                                                @if($p->produk_discount > 0)
+                                                    <p>
+                                                        <span>{{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
+                                                        <del>{{FunctionLib::number_to_text($p->produk_price)}}</del>
+                                                    </p>
+                                                @else
+                                                    <p><span>{{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                @endif
                                                 <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
@@ -130,7 +210,8 @@
                                     </div>
                                         @endforeach
                                     <div class="col-12">
-                                        <div class="pagination-wrapper text-center">
+                                        {!! $produk->appends(['order' => Request::get('order')])->render() !!}
+                                        {{-- <div class="pagination-wrapper text-center">
                                             <ul class="page-numbers">
                                                 <li><a class="prev page-numbers" href="#"><i class="fa fa-angle-left"></i></a></li>
                                                 <li><a class="page-numbers" href="#">1</a></li>
@@ -138,58 +219,51 @@
                                                 <li><a class="page-numbers" href="#">3</a></li>
                                                 <li><a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a></li>
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="list">
                                 <div class="product-list">
                                     <div class="row">
-                                            @foreach ($produk as $p)
-                                        <div class="col-lg-6">
-                                            <div class="product-wrap">
-                                                <div class="product-img black-opacity">
-                                                    <span class="new sale">Sale</span>
-                                                    <img class="first" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
-                                                    <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
-                                                    <div class="shop-icon">
-                                                        <ul>
-                                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                            <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></i></a></li>
+                                        @foreach ($produk as $p)
+                                            <div class="col-lg-6">
+                                                <div class="product-wrap">
+                                                    <div class="product-img black-opacity">
+                                                        <span class="new sale">Sale</span>
+                                                        <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
+                                                        {{-- <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
+                                                        <div class="shop-icon">
+                                                            <ul>
+                                                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                                                <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
+                                                                <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
+                                                        @if($p->produk_discount > 0)
+                                                            <p>
+                                                                <span>{{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
+                                                                <del>{{FunctionLib::number_to_text($p->produk_price)}}</del>
+                                                            </p>
+                                                        @else
+                                                            <p><span>{{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                        @endif
+                                                        <ul class="rating">
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="product-content">
-                                                    <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
-                                                    <p><span><?php echo ($p->produk_price * $p->produk_discount);?></span>
-                                                        <del>{{$p->produk_price}}</del>
-                                                    </p>
-                                                    <p>
-                                                        <span>$48.00</span>
-                                                        <del>$50.00</del>
-                                                    </p>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                </div>
                                             </div>
-                                        </div>
-                                            @endforeach
+                                        @endforeach
                                         <div class="col-12">
-                                            <div class="pagination-wrapper text-center">
-                                                <ul class="page-numbers">
-                                                    <li><a class="prev page-numbers" href="#"><i class="fa fa-angle-left"></i></a></li>
-                                                    <li><a class="page-numbers" href="#">1</a></li>
-                                                    <li><span class="page-numbers current">2</span></li>
-                                                    <li><a class="page-numbers" href="#">3</a></li>
-                                                    <li><a class="next page-numbers" href="#"><i class="fa fa-angle-right"></i></a></li>
-                                                </ul>
-                                            </div>
+                                            {!! $produk->appends(['order' => Request::get('order')])->render() !!}
                                         </div>
                                     </div>
                                 </div>
@@ -446,5 +520,11 @@
     </div>
     </div> -->
 @endsection
-
+@section('script')
+    <script type="text/javascript">
+        $('#order').change(function(){
+            $('#form-etalase').submit();
+        })
+    </script>
+@endsection
 {!! (isset($footer_script))? $footer_script:'' !!}

@@ -6,8 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-1">
-                        <div class="breadcumb-content black-opacity">
+                    <div class="breadcumb-wrap bg-1 ">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/wishlist.jpg')">
                             <h2>Wishlist</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
@@ -49,7 +49,8 @@
                                         @else
                                             <td class="stock">Out Stock</td>
                                         @endif
-                                        <td class="addcart"><a href="{{route('member.wishlist.moveToChart', $l->id)}}">Add to Cart</a></td>
+                                        <td class="addcart">
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.add_to_chart", $l->wishlist_produk_id)}} value="Add to Cart" class="btn btn-danger btn-sm col-12" id="btn-pick-address" />
                                         <td class="remove"><a href="{{route('member.wishlist.delete', $l->id)}}"><i class="fa fa-times"></i></a></td>
                                     </tr>
                                     @endforeach
@@ -62,5 +63,5 @@
         </div>
     </div>
     <!-- cart-area end -->
-
+<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection

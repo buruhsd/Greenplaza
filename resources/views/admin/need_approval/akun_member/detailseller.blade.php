@@ -90,7 +90,7 @@
                                     <th>Foto Profile dan KTP</th>
                                     <td> : 
                                         <center>
-                                            <img src="{{ asset('assets/images/foto_profile/'.$detail->user_detail_image) }}" alt="" class="h100">
+                                            <img src="{{ asset('assets/images/profil/'.$detail->user_detail_image) }}" alt="" class="h100">
                                             <figcaption style="padding: 5px">Foto Profile</figcaption>
                                             <img src="{{ asset('assets/images/ktp/'.$detail->user_detail_ktp) }}" alt="" class="h100">
                                             <figcaption style="padding: 5px">Foto KTP</figcaption>

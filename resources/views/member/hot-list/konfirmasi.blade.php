@@ -1,6 +1,5 @@
 @extends('member.index')
 @section('content')
-
 <div class="page-title">
     <h3 class="breadcrumb-header">Konfirmasi Pembayaran</h3>
 </div>

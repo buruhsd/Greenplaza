@@ -1,6 +1,5 @@
-<!-- header-area start -->
     <header class="header-area">
-        <div class="header-tor-area bg-1">
+        {{-- <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-5 col-12">
@@ -40,7 +39,7 @@
                                     </li>
                                 </ul>
                                 @endguest
-                            </li>
+                            </li> 
                             <li><a href="javascript:void(0);"><i class="fa fa-language"></i> Language <i class="fa fa-angle-down"></i></a>
                                 <ul>
                                     <li><a href="javascript:void(0);">English <img src="assets/images/language/1.png" alt=""></a></li>
@@ -59,7 +58,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
@@ -71,10 +70,17 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-7 col-12">
-                        <div class="search-wrap">
-                            <form action="search">
-                                <!-- <div class="select-menu" tabindex="1">
+                    <div class="col-md-5 col-sm-12 col-12">
+                        <div class="">
+                            <form action="{{route('category')}}">
+                            <div class="input-group mb-3" style="padding: 3px 0;">
+                                <input name="cat" class="form-control" type="hidden" value="{{(isset($_GET['cat']))?$_GET['cat']:''}}">
+                                <input name="src" class="form-control" type="text" placeholder="Produk" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
+                              <div class="input-group-append">
+                                <button class="btn"><i class="fa fa-search"></i></button>
+                              </div>
+                            </div>
+                                {{-- <div class="select-menu" tabindex="1">
                                     <span>Categories </span>
                                     <ul class="dropdown">
                                         <li><a href="javascript:void(0);">Man</a></li>
@@ -82,13 +88,13 @@
                                         <li><a href="javascript:void(0);">Kids</a></li>
                                         <li><a href="javascript:void(0);">Babys</a></li>
                                     </ul>
-                                </div> -->
-                                <input type="text" placeholder=" Search Here...">
-                                <button><i class="fa fa-search"></i></button>
+                                </div> --}}
+                                {{-- <input name="src" type="text" placeholder="Search Here...">
+                                <button><i class="fa fa-search"></i></button> --}}
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-5">
+                    <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
                             <li>
                                 <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>Cart
@@ -117,7 +123,7 @@
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
-                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{$item->category_name}} <i class="fa fa-angle-right pull-right"></i></a>
+                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
                                         <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
                                         @if($sub_cat->count() > 0)
                                             <ul class="sub-cetagory col-md-12 col-sm-12">
@@ -125,7 +131,9 @@
                                                     <p>Cetagory Title </p>
                                                     <ul>
                                                         @foreach($sub_cat as $item)
-                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">{{$item->category_name}}</a></li>
+                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">
+                                                                {{ucfirst(strtolower($item->category_name))}}
+                                                            </a></li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
@@ -139,6 +147,35 @@
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
+                            @guest
+                                <li><a href="{{route('login')}}">Login</a></li>
+                                <li><a href="{{route('register')}}">Register</a></li>
+                            @else
+                                <li class="sidemenu-items"><a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
+                            @endguest
+                            @guest
+                            @else
+                            <ul>
+                                @if(Auth::user()->is_admin())
+                                    <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
+                                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                    <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
+                                @elseif(Auth::user()->is_member())
+                                    <li><a href="{{route('member.profil')}}">Profil</a></li>
+                                    <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
+                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                @endif
+                                <li>
+                                    <a onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                            @endguest
                             <li><a href="{{url('/')}}">Home </a></li>
                             {{-- <li><a href="about.html">About</a></li> --}}
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
@@ -149,15 +186,6 @@
                                     <li><a href="{{route('chart')}}">Shopping cart</a></li>
                                     <li><a href="{{route('checkout')}}">Checkout</a></li>
                                     <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
-                                </ul>
-                            </li>
-                            <li class="sidemenu-items"><a href="javascript:void(0);">Pages <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="about.html">About Page</a></li>
-                                    <li><a href="Single-product.html">Product Details</a></li>
-                                    <li><a href="cart.html">Shopping cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
                                 </ul>
                             </li>
                             {{-- <li class="sidemenu-items"><a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>

@@ -2,6 +2,7 @@
             <!-- Page Sidebar -->
             <div class="page-sidebar">
                 <a class="logo-box" href="{{route('member.home')}}">
+                    {{-- <img class="col-lg-12 col-md-none col-sm-none" src="{{asset('frontend/logo-fix.png')}}"> --}}
                     <span>Greenplaza</span>
                     <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
                     <i class="icon-close" id="sidebar-toggle-button-close"></i>
@@ -34,7 +35,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="{{route('member.transaction.purchase')}}">Transaction</a></li>
                                     <li><a href="{{route('member.komplain.buyer')}}">Resolusi Komplain</a></li>
-                                    <li><a href="{{-- {{route('member.log_saldo.index')}} --}}">Wishlist</a></li>
+                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}
@@ -147,7 +148,7 @@
                                     <li><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li>
                                     <li><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li>
                                     <li><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
-                                    <li><a href="{{route('member.wallet.type', 'pincode')}}">Log Pincode</a></li>
+                                    <li><a href="{{route('member.wallet.type', 'pin_code')}}">Log Pincode</a></li>
                                     <li><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
                                 </ul>
                             </li>

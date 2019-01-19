@@ -42,9 +42,10 @@ class WalletController extends Controller
      */
     public function type($slug='')
     {
-        $wallet_type = Wallet_type::where('wallet_type_kode', $slug)->pluck('id')[0];
+        $wallet_type = Wallet_type::where('wallet_type_kode', $slug)->first();
+        $data['wallet_type'] = $wallet_type;
         $data['log_wallet'] = Log_wallet::where('wallet_user_id', Auth::id())
-            ->where('wallet_type', $wallet_type)
+            ->where('wallet_type', $wallet_type['id'])
             ->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.type', $data);

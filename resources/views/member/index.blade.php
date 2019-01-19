@@ -13,10 +13,99 @@
                 <!-- Page Inner -->
                 <div class="page-inner">
                     <!-- Row -->
+                    @if(!Auth::user()->seller_active())
+                        <div class="alert alert-info alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Info!</strong> Ingin jadi penjual? Isikan nama toko anda <a href="{{route('member.profil')}}">disini</a>.
+                        </div>
+                    @endif
+                    @if(!Auth::user()->is_verify())
+                        <div class="alert alert-danger alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Info!</strong> Belum dapat Email Aktifasi? Resend Email <a href="{{route('member.profil')}}">disini</a>.
+                        </div>
+                    @endif
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo CW : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(1)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo RW : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(2)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo Transaksi : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(3)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo Iklan : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(4)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo Pin Code : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(5)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                     </div><!-- Main Wrapper -->
                 </div><!-- /Page Inner -->
-                <div class="page-right-sidebar" id="main-right-sidebar">
+                {{-- <div class="page-right-sidebar" id="main-right-sidebar">
                     <div class="page-right-sidebar-inner">
                         <div class="right-sidebar-top">
                             <div class="right-sidebar-tabs">
@@ -174,7 +263,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div><!-- /Page Content -->
         </div><!-- /Page Container -->
         

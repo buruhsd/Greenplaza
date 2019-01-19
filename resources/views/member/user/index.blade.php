@@ -11,11 +11,10 @@
                     <h4 class="panel-title">User Profile</h4>
                 </div>
                 <div class="panel-body user-profile-panel">
-                    <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='http://via.placeholder.com/100x100'" class="user-profile-image img-circle" alt="">
+                    <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
-                    <p class="text-center">UI/UX Designer</p>
                     <hr>
-                        <div class="col-md-12">
+                        {{-- <div class="col-md-12">
                             {!! Form::file('user_detail_image', null, [
                                 'class' => 'form-control', 
                                 'placeholder' => 'Image', 
@@ -23,7 +22,7 @@
                             ])!!}
                             {!! $errors->first('user_detail_image', '<p class="help-block">:message</p>') !!}
                         </div>
-                    <hr>
+                    <hr> --}}
                 </div>
             </div>
         </div>
@@ -80,7 +79,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_tlp') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_tlp', 'phone House', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_tlp', 'Telp Kantor', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_tlp', $user->user_detail->user_detail_tlp, [
                                         'class' => 'form-control', 
@@ -118,6 +117,7 @@
                                 {!! $errors->first('user_slug', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div> --}}
+                            <?php $store_status = ($user->user_store !== null && $user->user_store !== "")?'disabled':'';?>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_store') ? 'has-error' : ''}}">
                                 {!! Form::label('user_store', 'Window', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">

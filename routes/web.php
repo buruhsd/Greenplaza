@@ -72,10 +72,10 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
-			Route::get('/', 'Admin\\Conf_configController@index')->name('.index');
-			Route::get('/bank', 'Admin\\Conf_configController@bank')->name('.bank');
-			Route::get('/profil', 'Admin\\Conf_configController@profil')->name('.profil');
-			Route::get('/transaction', 'Admin\\Conf_configController@transaction')->name('.transaction');
+			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/bank', 'Superadmin\\Conf_configController@bank')->name('.bank');
+			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
+			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');
 			Route::get('/create', 'Admin\\Conf_configController@create')->name('.create');
 			Route::post('/store', 'Admin\\Conf_configController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\Conf_configController@show')->name('.show');
@@ -290,7 +290,7 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('delete_gradeseller/{id}', 'Admin\\KonfigurasiController@delete_gradeseller')->name('.delete_gradeseller');
 
 			//UPDATE PASS
-			Route::get('updatepassword/{id}', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
+			Route::get('updatepassword', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
 			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
 		});
 
@@ -325,7 +325,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 });
 
 // auth member
-Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
+Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 		// Sales & purchase
@@ -510,13 +510,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 			Route::patch('/update', 'ReviewController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
 		});
-		// Route::get('/cw_bonus', function(){return view('member.history_saldo.saldo_cw_bonus');})->name('.cw_bonus');
-		// Route::get('/cw_trans', function(){return view('member.history_saldo.saldo_cw_transaksi');})->name('.cw_trans');
-		// Route::get('/rw', function(){return view('member.history_saldo.saldo_rw');})->name('.rw');
-		// Route::get('/withdrawal', function(){return view('member.withdrawal.index');})->name('.withdrawal');
-		// Route::get('/beli_poin', function(){return view('member.hotlist.beli_poin');})->name('.beli_poin');
-		// Route::get('/profil_user', function(){return view('member.pengaturan_profil.profil-user');})->name('.profil_user');
-		// Route::get('/transfer_cw', function(){return view('member.transfer_cw.index');})->name('.transfer_cw');
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
 		Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
@@ -524,71 +517,80 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 	});
 });
 
-// auth all
+// tanpa auth #frontController
 Route::get('/detail/{slug}', 'Member\\FrontController@detail')->name('detail');
-// Route::get('/detail/{slug}', 'Member\\FrontController@detail')->name('detail');
 Route::get('/etalase/{user_store}', 'Member\\FrontController@etalase')->name('etalase');
 Route::get('/category', 'Member\\FrontController@category')->name('category');
 Route::get('/brand', 'Member\\FrontController@brand')->name('brand');
+
+// semua auth
 Route::group(['middleware' => ['auth']], function () {
-	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home')->middleware('is_active');
-	Route::get('/shop', 'Member\\FrontController@shop')->name('shop');
-
-	Route::get('/profil', function(){return;})->name('profil');
-
+	Route::group(['middleware' => ['is_active']], function () {
+		//wishlishController
+		Route::get('/member/addToChart', 'Member\\WishlistController@moveToChart')->name('member.wishlist.moveToChart');
+		Route::get('/member/wishlist/delete/{id}', 'Member\\WishlistController@destroy')->name('member.wishlist.delete');
+		//ChartController
+		Route::get('/checkout', 'Member\\ChartController@checkout')->name('checkout');
+	});
+	Route::get('/member/home', 'Member\\HomeController@index')->name('member.home');
 	//wishlishController
-	Route::get('/member/wishlist', 'member\\WishlistController@index')->name('member.wishlist');
+	Route::get('/member/wishlist', 'Member\\WishlistController@index')->name('member.wishlist');
 	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
-	Route::get('/member/addToChart', 'member\\WishlistController@moveToChart')->name('member.wishlist.moveToChart');
-	Route::get('/member/wishlist/delete/{id}', 'member\\WishlistController@destroy')->name('member.wishlist.delete');
-
 	//ChartController
-	Route::get('/chart', 'member\\ChartController@chart')->name('chart');
-	Route::get('/checkout', 'member\\ChartController@checkout')->name('checkout');
-	Route::post('/addchart/{id}', 'member\\ChartController@addChart')->name('addchart');
-	Route::get('/chart/destroy/{id}', 'member\\ChartController@destroy')->name('chart.destroy');
-
+	Route::get('/chart', 'Member\\ChartController@chart')->name('chart');
+	Route::post('/addchart/{id}', 'Member\\ChartController@addChart')->name('addchart');
+	Route::get('/chart/destroy/{id}', 'Member\\ChartController@destroy')->name('chart.destroy');
 	//user_addressController
-	Route::get('/member/address', 'member\\User_addressController@chart')->name('member.address');
-	Route::post('/member/address/store', 'member\\User_addressController@store')->name('member.address.store');
+	Route::get('/member/address', 'Member\\User_addressController@chart')->name('member.address');
+	Route::post('/member/address/store', 'Member\\User_addressController@store')->name('member.address.store');
 });
 
-// without auth
+// tanpa auth
 Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalApi'], function () {
 	Route::group(['prefix' => 'midtrans', 'as' => '.midtrans'], function () {
-		Route::get('payment', 'MidtransController@payment')->name('.payment');
-		Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
-		Route::get('hotlist_payment/{code}', 'MidtransController@hotlist_payment')->name('.hotlist_payment');
-		Route::get('pincode_payment/{code}', 'MidtransController@pincode_payment')->name('.pincode_payment');
-		Route::get('iklan_payment/{code}', 'MidtransController@iklan_payment')->name('.iklan_payment');
-		Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
-		Route::post('process', 'MidtransController@process')->name('.process');
+		// need email active
+		Route::group(['middleware' => ['is_active']], function () {
+			Route::get('payment', 'MidtransController@payment')->name('.payment');
+			Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
+			Route::get('hotlist_payment/{code}', 'MidtransController@hotlist_payment')->name('.hotlist_payment');
+			Route::get('pincode_payment/{code}', 'MidtransController@pincode_payment')->name('.pincode_payment');
+			Route::get('iklan_payment/{code}', 'MidtransController@iklan_payment')->name('.iklan_payment');
+			Route::get('process', 'MidtransController@simple_process')->name('.simple_process');
+			Route::post('process', 'MidtransController@process')->name('.process');
+		});
 		// Route::post('done', 'MidtransController@done')->name('.done');
 	});
 	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
-		Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
+		// need email active
+		Route::group(['middleware' => ['is_active']], function () {
+			Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
+			Route::get('get_solusi/{id}', 'ContentController@get_solusi')->name('.get_solusi');
+		});
 		Route::get('get_province/{id}', 'ContentController@get_province')->name('.get_province');
 		Route::get('get_city/{id}', 'ContentController@get_city')->name('.get_city');
 		Route::get('get_subdistrict/{id}', 'ContentController@get_subdistrict')->name('.get_subdistrict');
 		Route::get('config_content', function(){return true;})->name('.config_content');
-		Route::get('get_solusi/{id}', 'ContentController@get_solusi')->name('.get_solusi');
 	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {
+		// need email active
+		Route::group(['middleware' => ['is_active']], function () {
+			Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
+			Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
+			Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
+			Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
+			Route::post('res_kom_transDetail_post/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
+			Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
+			Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
+			Route::get('update_komplain/{id}', 'ModalController@update_komplain')->name('.update_komplain');
+			Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
+			Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
+			Route::get('add_to_chart/{id}', 'ModalController@add_to_chart')->name('.add_to_chart');
+		});
 		Route::get('login', function(){return view('localapi.login');})->name('.login');
 		Route::get('form_config', 'ModalController@formConfig')->name('.form_config');
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
-		Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
-		Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
-		Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
-		Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
-		Route::post('res_kom_transDetail_post/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
-		Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
-		Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
-		Route::get('update_komplain/{id}', 'ModalController@update_komplain')->name('.update_komplain');
-		Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
-		Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});
@@ -610,13 +612,3 @@ Route::group(['prefix' => 'helper', 'as' => 'helper'], function(){
     	return Helpers::$function();
 	});
 });
-
-// Route::get('/member/home', function(){
-// 	return "member bos";
-// })->name('member.home')->middleware('auth');
-// Route::get('/admin/home', function(){
-// 	return "admin bos";
-// })->name('admin.home')->middleware('auth');
-// Route::get('/superadmin/home', function(){
-// 	return "superadmin bos";
-// })->name('superadmin.home')->middleware('auth');

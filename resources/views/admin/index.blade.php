@@ -15,9 +15,6 @@
                     <!-- Row -->
                     @yield('content')
                     </div><!-- Main Wrapper -->
-                    <div class="page-footer">
-                        <p>Made with <i class="fa fa-heart"></i> by stacks</p>
-                    </div>
                 </div><!-- /Page Inner -->
                 <div class="page-right-sidebar" id="main-right-sidebar">
                     <div class="page-right-sidebar-inner">

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Produk;
 use App\Role;
 use App\User;
+use App\Models\User_detail;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Bank;
@@ -444,9 +445,9 @@ class UserController extends Controller
 
 
         $this->validate($request, [
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'name' => 'required',
-            'user_store' => 'required',
+            'user_store' => 'required|unique:users',
             'user_store_image' => 'required',
             'user_slogan' => 'required',
             'user_slug' => 'required',
@@ -737,10 +738,11 @@ class UserController extends Controller
                                     $('#user_detail_subdist').html(rows);
                                 },
                                 success: function(data) {
+                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>");
                                     if (data) {
                                         $('#user_detail_subdist').empty();
                                         $.each( data, function(i, o){
-                                            $check = (o.subdistrict_id == parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>"))?"selected":"";
+                                            $check = (o.subdistrict_id == id)?"selected":"";
                                             row = "<option value="+o.subdistrict_id+" "+$check+">"+o.subdistrict_name+"</option>";
                                             $('#user_detail_subdist').append(row);
                                         });

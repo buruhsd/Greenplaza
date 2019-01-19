@@ -6,9 +6,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="breadcumb-wrap bg-5">
-                        <div class="breadcumb-content black-opacity">
-                            <h2>Shopping Cart</h2>
+                    <div class="breadcumb-wrap bg-1 ">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/chart.jpg')">
+                            <h2>Chart</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>

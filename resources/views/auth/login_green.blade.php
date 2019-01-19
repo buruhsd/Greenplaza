@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta content="width=device-width, initial-scale=1" name="viewport" />
-<link rel="stylesheet" type="text/css"  href="{{ asset('frontendlama/css/reg_style.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>GreenPlaza</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <link rel="stylesheet" type="text/css"  href="{{ asset('frontendlama/css/reg_style.css') }}"> --}}
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"  href="{{ asset('css/style.css') }}">
 
 </head>
 <body>
@@ -13,27 +20,39 @@
 <form method="POST" action="{{ route('login') }}">
     @csrf
     @include('layouts._flash')
-    <div class="container">
-        <a class="gp" href="index.html" >
-            <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="200px" height="50px" >
-        </a>
+    <div class="container col-md-8 col-md-offset-2">
+        <br/>
+        <div class="text-center">
+            <a href="{{url('/')}}">
+                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="300px" height="100px">
+            </a>
+        </div>
+        <hr/>
         <p>Belum Punya Akun ? <a href="{{ route('register') }}"> Daftar disini </a>.</p>
 
-        <label for="email"><b>Email / Username</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
-        @if ($errors->has('email'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('email') }}</strong>
-            </span>
-        @endif
+        <div class="form-group row">
+            <label class="col-md-12" for="email"><b>Email / Username</b></label>
+            <div class="col-md-12">
+                <input class="form-control" id="email" type="text" placeholder="Email / Username" name="email" required>
+                @if ($errors->has('email'))
+                    <span class="invalid-feedback text-danger" role="alert">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
-        @if ($errors->has('password'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('password') }}</strong>
-            </span>
-        @endif
+        <div class="form-group row">
+            <label class="col-md-12" for="password"><b>Password</b></label>
+            <div class="col-md-12">
+                <input class="form-control" id="password" type="password" placeholder="Password" name="password" required>
+                @if ($errors->has('password'))
+                    <span class="invalid-feedback text-danger" role="alert">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
 
 {{--         <div class="form-group row">
             <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -60,12 +79,9 @@
         </div> --}}
         <hr>
 
-        <button type="submit" class="registerbtn">Login</button>
+        <button type="submit" class="btn btn-success btn-block">Login</button>
+        <br/>
         <p><a href="#">Lupa Password</a>.</p>
-    </div>
-
-    <div class="container signin">
-        <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div>
 </form>
 

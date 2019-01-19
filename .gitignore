@@ -1,7 +1,7 @@
 /node_modules
-/public/*
 /public/hot
 /public/assets/images
+/public/img_category_icon
 /public/storage
 /resources/views/tmp
 /storage/*.key
