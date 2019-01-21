@@ -184,7 +184,7 @@
                                                     <ul>
                                                         {{-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                         <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></li>
+                                                        <li><a href="{{route('detail', $p->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -235,9 +235,8 @@
                                                         {{-- <img class="second" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
                                                         <div class="shop-icon">
                                                             <ul>
-                                                                <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                                                <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                                                <li><a href="{{route('detail', $p->produk_category_id)}}"><i class="fa fa-eye"></i></a></i></a></li>
+                                                                <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart"></i></a></li>
+                                                                <li><a href="{{route('detail', $p->produk_slug)}}"><i class="fa fa-eye"></i></a></i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

@@ -6,11 +6,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcumb-wrap">
-                        <div class="breadcumb-content black-opacity" style="background-image: url({{asset('assets/images/bg_etalase/'.$detail->user->user_detail->user_detail_image)}})">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('{{asset('assets/images/bg_etalase/'.$detail->user->user_detail->user_detail_image)}}'), url('{{asset('assets/images/bg_etalase/nopic.jpg')}}')">
                             <h2>Halaman Pembelian</h2>
                             <ul>
                                 <li><a href="{{url('/')}}">Home</a></li>
-                                <li>Shop</li>
+                                <li>Produk</li>
                             </ul>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
-                                            <li>(05 Customar Review)</li>
+                                            <li class="text-info">({{$review->count()}} Customar Review)</li>
                                         </ul>
                                     </div>
                                         {{$detail->produk_note}}
@@ -225,14 +225,17 @@
                                         <div class="col-md-12">
                                             <div class="" data-toggle="buttons">
                                                 @foreach($color as $item)
-                                                    {{-- <label class="btn btn-default btn-block btn-{!!$color_arr[$item]!!}" >
-                                                        <input type="radio" name="color" value="{{$item}}" autocomplete="off">
-                                                        {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
-                                                    </label> --}}
-                                                    <label class="border1 btn btn-default" style="background-color: {!! $item !!}">
-                                                        <input type="radio" name="color" value="{{$item}}" autocomplete="off">
-                                                        <span class="check glyphicon glyphicon-ok"></span>
-                                                    </label>
+                                                    @if ($loop->first)
+                                                        <label class="border1 btn btn-default active" style="background-color: {!! $item !!}">
+                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off" checked >
+                                                            <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @else
+                                                        <label class="border1 btn btn-default" style="background-color: {!! $item !!}" {{($status)?'active':''}}>
+                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off" {{($status)?'active':''}}>
+                                                            <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -242,10 +245,17 @@
                                         <div class="col-md-12">
                                             <div class="btn-group" data-toggle="buttons">
                                                 @foreach($size as $item)
-                                                    <label class="border1 btn btn-default">
-                                                        <input type="radio" name="size" value="{{$item}}" autocomplete="off">
-                                                        {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
-                                                    </label>
+                                                    @if ($loop->first)
+                                                        <label class="border1 btn btn-default active">
+                                                            <input type="radio" name="size" value="{{$item}}" autocomplete="off" checked>
+                                                            {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @else
+                                                        <label class="border1 btn btn-default">
+                                                            <input type="radio" name="size" value="{{$item}}" autocomplete="off">
+                                                            {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                        </label>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                         </div>
@@ -255,24 +265,6 @@
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
-                                    {{-- <div class="color-plate">
-                                        <p>Color:</p>
-                                        <ul>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product-size">
-                                        <p>Size:</p>
-                                        <ul>
-                                            <li><a href="#">S</a></li>
-                                            <li><a href="#">M</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li>
-                                        </ul>
-                                    </div> --}}
                                     <ul class="socil-icon">
                                         <li>Share :</li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -332,7 +324,7 @@
                                                 @foreach($review as $item)
                                                 <li class="review-items">
                                                     <div class="review-img">
-                                                        <img src="{{ asset('assets/images/profil/'.$item->user->user_detail->user_detail_image) }}" alt="">
+                                                        <img src="{{ asset('assets/images/profil/'.$item->user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
                                                         {{-- <img src="assets/images/comment/1.png" alt=""> --}}
                                                     </div>
                                                     <div class="review-content">
@@ -352,7 +344,7 @@
                                             </ul>
                                         </div>
                                         <div class="add-review">
-                                            <h4>Add A Review</h4>
+                                            {{-- <h4>Add A Review</h4>
                                             <div class="ratting-wrap">
                                                 <table>
                                                     <thead>
@@ -369,24 +361,49 @@
                                                         <tr>
                                                             <td>Stars</td>
                                                             <td>
-                                                                <input type="radio" name="stars" />
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <label class="border1 btn btn-default active">
+                                                                        <input type="radio" name="stars" value="1" autocomplete="off" checked>
+                                                                        <span class="check glyphicon glyphicon-ok"></span>
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                             <td>
-                                                                <input type="radio" name="stars" />
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <label class="border1 btn btn-default">
+                                                                        <input type="radio" name="stars" value="2" autocomplete="off">
+                                                                        <span class="check glyphicon glyphicon-ok"></span>
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                             <td>
-                                                                <input type="radio" name="stars" />
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <label class="border1 btn btn-default">
+                                                                        <input type="radio" name="stars" value="3" autocomplete="off">
+                                                                        <span class="check glyphicon glyphicon-ok"></span>
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                             <td>
-                                                                <input type="radio" name="stars" />
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <label class="border1 btn btn-default">
+                                                                        <input type="radio" name="stars" value="4" autocomplete="off">
+                                                                        <span class="check glyphicon glyphicon-ok"></span>
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                             <td>
-                                                                <input type="radio" name="stars" />
+                                                                <div class="btn-group" data-toggle="buttons">
+                                                                    <label class="border1 btn btn-default">
+                                                                        <input type="radio" name="stars" value="5" autocomplete="off">
+                                                                        <span class="check glyphicon glyphicon-ok"></span>
+                                                                    </label>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                            </div> --}}
                                             @guest
                                             @else
                                                 @if(!Auth::user()->is_superadmin())
@@ -396,11 +413,30 @@
                                                                 <input name="review_user_id" type="text" value="{{Auth::id()}}" placeholder="Your name here..." hidden />
                                                                 <input name="review_produk_id" type="text" value="{{$detail->id}}" placeholder="Your name here..." hidden />
                                                                 <div class="col-12">
-                                                                    <h4>Your Review:</h4>
-                                                                    <textarea name="review_text" class="form-control" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                                                    <h4>Review Anda:</h4>
+                                                                    <div class="product-size {{ $errors->has('size') ? 'has-error' : ''}}">
+                                                                        <div class="col-md-12">
+                                                                            <div class="btn-group" data-toggle="buttons">
+                                                                                @for($no=1;$no<=5;$no++)
+                                                                                    @if ($no == 1)
+                                                                                        <label class="border1 btn btn-default active">
+                                                                                            <input type="radio" name="stars" value="{{$no}}" autocomplete="off" checked>{{$no}} Stars<span class="check glyphicon glyphicon-ok"></span>
+                                                                                        </label>
+                                                                                    @else
+                                                                                        <label class="border1 btn btn-default">
+                                                                                            <input type="radio" name="stars" value="{{$no}}" autocomplete="off">{{$no}} Stars<span class="check glyphicon glyphicon-ok"></span>
+                                                                                        </label>
+                                                                                    @endif
+                                                                                @endfor
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <textarea name="review_text" class="form-control" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-12">
-                                                                    <button type="submit" class="btn-style">Submit</button>
+                                                                    <button type="submit" class="btn-style">Kirim</button>
                                                                 </div>
                                                             {!! Form::close() !!}
                                                         </div>
@@ -421,7 +457,7 @@
                                                         <ul class="ml-2">
                                                             <li class="review-items">
                                                                 <div class="review-img">
-                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                    <img src="{{asset('assets/images/profil/'.$item->user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
                                                                 </div>
                                                                 <div class="review-content">
                                                                     <h3><a href="#">{{$item->user['name']}}</a></h3>
@@ -429,16 +465,16 @@
                                                                     <p>{{$item->produk_discuss_text}}</p>
                                                                 </div>
                                                                 <hr/>
-                                                                    @foreach($item->reply as $item)
+                                                                    @foreach($item->reply as $item2)
                                                                         <ul class="ml-5">
                                                                             <li class="review-items">
                                                                                 <div class="review-img">
-                                                                                    <img src="{{asset('assets/images/profil/nopic.png')}}" alt="">
+                                                                                    <img src="{{asset('assets/images/profil/'.$item2->user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
                                                                                 </div>
                                                                                 <div class="review-content">
-                                                                                    <h3><a href="#">{{$item->user['name']}}</a></h3>
-                                                                                    <span>{{$item->created_at}}</span>
-                                                                                    <p>{{$item->produk_discuss_reply_text}}</p>
+                                                                                    <h3><a href="#">{{$item2->user['name']}}</a></h3>
+                                                                                    <span>{{$item2->created_at}}</span>
+                                                                                    <p>{{$item2->produk_discuss_reply_text}}</p>
                                                                                 </div>
                                                                             </li>
                                                                         </ul>

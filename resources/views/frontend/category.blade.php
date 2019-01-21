@@ -30,7 +30,7 @@
                         <hr/>
                         <ul class="tab-menu nav jabar">
                             @foreach($sub_cat as $item)
-                                <li><a href="{{route('category', ['cat' => str_slug($item->category_name)])}}">{{$item->category_name}}</a></li>
+                                <li style="margin-bottom: 5px;"><a href="{{route('category', ['cat' => str_slug($item->category_name)])}}">{{ucfirst(strtolower($item->category_name))}}</a></li>
                             @endforeach
                         </ul>                                                   
                         <hr/>
