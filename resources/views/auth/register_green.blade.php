@@ -122,7 +122,10 @@
                 <div class="form-group {{ $errors->has('user_detail_province') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_province' id='user_detail_province' class="form-control" onchange="get_city(this.value);">
-                        </select>
+                        <!-- @foreach($province as $items)
+                        <option value="{{$items->id}}">{{$items -> province_name }}</option>
+                        @endforeach -->
+                        </select><
                         {!! $errors->first('user_detail_province', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
@@ -132,9 +135,9 @@
                 <div class="form-group {{ $errors->has('user_detail_city') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_city' id='user_detail_city' class="form-control" onchange="get_subdistrict(this.value);">
-                            {{-- @foreach($city as $item)
+                            <!-- @foreach($city as $item)
                                 <option value='{{$item['city_id']}}'>{{$item['city_name']}}</option>
-                            @endforeach --}}
+                            @endforeach  -->
                         </select>
                         {!! $errors->first('user_detail_city', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -145,9 +148,9 @@
                 <div class="form-group {{ $errors->has('user_detail_subdist') ? 'has-error' : ''}}">
                     <div class="col-md-12">
                         <select name='user_detail_subdist' id='user_detail_subdist' class="form-control">
-                            {{-- @foreach($subdistrict as $item)
+                            <!-- @foreach($subdistrict as $item)
                                 <option value='{{$item['subdistrict_name']}}'>{{$item['subdistrict_name']}}</option>
-                            @endforeach --}}
+                            @endforeach -->
                         </select>
                         {!! $errors->first('user_detail_subdist', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -219,143 +222,143 @@
         function get_sponsor(){
             alert('sip');
         }
-        $(function(){
-            var rows, row;
-            get_province();
-        });
-        function get_province(){
-            $.ajax({
-                type: "GET", // or post?
-                url: "<?php echo url('localapi/content/get_province', 0);?>", // change as needed
-                beforeSend: function(){
-                    rows = "<option>Loading...</option>";
-                    $('#user_detail_province').empty();
-                    $('#user_detail_province').html(rows);
-                },
-                success: function(data) {
-                    if (data) {
-                        $('#user_detail_province').empty();
-                        $.each( data.province, function(i, o){
-                            $check = "";
-                            row = "<option value="+o.province_id+" "+$check+">"+
-                                o.province+"</option>";
-                            $('#user_detail_province').append(row);
-                            if(i == 0){
-                                get_city(o.province_id);
-                            }
+       $(function(){
+                            var rows, row;
+                            get_province();
                         });
-                    } else {
-                        swal({   
-                            type: "error",
-                            title: "failed",   
-                            text: "Layanan Tidak Tersedia",   
-                            showConfirmButton: false ,
-                            showCloseButton: true,
-                            footer: ''
-                        });
-                    }
-                    // $("#btn-choose-shipment").val(text);
-                },
-                error: function(xhr, textStatus) {
-                    swal({
-                        type: "error",
-                        title: "failed",   
-                        text: "Layanan Tidak Tersedia",   
-                        showConfirmButton: false ,
-                        showCloseButton: true,
-                        footer: ''
-                    });
-                    $("#btn-choose-shipment").val(text);
-                }
-            });
-        }
-        function get_city(id = 0){
-            $.ajax({
-                type: "GET", // or post?
-                url: "<?php echo url("localapi/content/get_city"); ?>/"+id, // change as needed
-                beforeSend: function(){
-                    rows = "<option>Loading...</option>";
-                    $('#user_detail_city').empty();
-                    $('#user_detail_city').html(rows);
-                },
-                success: function(data) {
-                    if (data) {
-                        $('#user_detail_city').empty();
-                        $.each( data.city, function(i, o){
-                            $check = "";
-                            row = "<option value="+o.city_id+" "+$check+">"+o.city_name+"</option>";
-                            $('#user_detail_city').append(row);
-                            if(i == 0){
-                                get_subdistrict(o.city_id);
-                            }
-                        });
-                    } else {
-                        swal({   
-                            type: "error",
-                            title: "failed",   
-                            text: "Layanan Tidak Tersedia",   
-                            showConfirmButton: false ,
-                            showCloseButton: true,
-                            footer: ''
-                        });
-                    }
-                    // $("#btn-choose-shipment").val(text);
-                },
-                error: function(xhr, textStatus) {
-                    swal({
-                        type: "error",
-                        title: "failed",   
-                        text: "Layanan Tidak Tersedia",   
-                        showConfirmButton: false ,
-                        showCloseButton: true,
-                        footer: ''
-                    });
-                    $("#btn-choose-shipment").val(text);
-                }
-            });
-        }
-        function get_subdistrict(id){
-            $.ajax({
-                type: "GET", // or post?
-                url: "<?php echo url("localapi/content/get_subdistrict");?>/"+id, // change as needed
-                beforeSend: function(){
-                    rows = "<option>Loading...</option>";
-                    $('#user_detail_subdist').empty();
-                    $('#user_detail_subdist').html(rows);
-                },
-                success: function(data) {
-                    if (data) {
-                        $('#user_detail_subdist').empty();
-                        $.each( data, function(i, o){
-                            $check = "";
-                            row = "<option value="+o.subdistrict_id+" "+$check+">"+o.subdistrict_name+"</option>";
-                            $('#user_detail_subdist').append(row);
-                        });
-                    } else {
-                        swal({   
-                            type: "error",
-                            title: "failed",   
-                            text: "Layanan Tidak Tersedia",   
-                            showConfirmButton: false ,
-                            showCloseButton: true,
-                            footer: ''
-                        });
-                    }
-                    // $("#btn-choose-shipment").val(text);
-                },
-                error: function(xhr, textStatus) {
-                    swal({
-                        type: "error",
-                        title: "failed",   
-                        text: "Layanan Tidak Tersedia",   
-                        showConfirmButton: false ,
-                        showCloseButton: true,
-                        footer: ''
-                    });
-                    $("#btn-choose-shipment").val(text);
-                }
-            });
-        }
+                        function get_province(){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url('localapi/content/get_db_province', 0);?>", // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_province').empty();
+                                    $('#user_detail_province').html(rows);
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                    if (data) {
+                                        $('#user_detail_province').empty();
+                                        $.each( data.province, function(i, o){
+                                            row = "<option value="+o.id+">"+
+                                                o.province_name+"</option>";
+                                            $('#user_detail_province').append(row);
+                                            if(i == 0){
+                                                    get_city(o.id);
+                                            }
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+                        function get_city(id = 0){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url("localapi/content/get_db_city"); ?>/"+id, // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_city').empty();
+                                    $('#user_detail_city').html(rows);
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                    if (data) {
+                                        $('#user_detail_city').empty();
+                                        $.each( data.city, function(i, o){
+                                            row = "<option value="+o.id+">"+o.city_name+"</option>";
+                                            $('#user_detail_city').append(row);
+                                            if(i == 0){
+                                                    get_subdistrict(o.id);
+                                            }
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+                        function get_subdistrict(id){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url("localapi/content/get_db_subdistrict");?>/"+id, // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_subdist').empty();
+                                    $('#user_detail_subdist').html(rows);
+                                },
+                                success: function(data) {
+                                    if (data) {
+                                        $('#user_detail_subdist').empty();
+                                        $.each( data, function(i, o){
+                                            row = "<option value="+o.id+">"+o.subdistrict_name+"</option>";
+                                            $('#user_detail_subdist').append(row);
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+
     </script>
     <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     @if (Session::has('flash_message'))
