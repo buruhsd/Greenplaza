@@ -526,6 +526,7 @@ class UserController extends Controller
             $imagename = FunctionLib::doUpload($file, $path, $field);
             $user->user_detail->user_detail_image = $imagename;
         }
+        $user->user_detail->user_detail_phone = $request->user_detail_phone;
         $user->user_detail->user_detail_tlp = $request->user_detail_tlp;
         $user->user_detail->user_detail_jk = $request->user_detail_jk;
         $user->user_detail->user_detail_province = $request->user_detail_province;

@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('sales', 'active-page')
 @section('content')
 
 <div class="page-title">

@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('get penjual', 'active-page')
 @section('content')
 <div class="page-title">
     <h3 class="breadcrumb-header">Profil</h3>

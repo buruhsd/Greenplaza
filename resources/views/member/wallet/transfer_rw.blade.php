@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('get penjual', 'active-page')
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">

@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('pin code', 'active-page')
 @section('content')
 <div class="page-title">
     <h3 class="breadcrumb-header">Tagihan Pin Code </h3>

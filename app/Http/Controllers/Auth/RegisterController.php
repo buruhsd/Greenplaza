@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use Session;
 use App\User;
 use App\Role;
+use App\Models\Province;
+use App\Models\City;
+use App\Models\Subdistrict;
 use App\Models\User_detail;
 use App\Models\User_address;
 use App\Models\Sponsor;
@@ -130,6 +133,9 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        $data['province'] = Province::all();
+        $data['city'] = City::all();
+        $data['subdistrict'] = Subdistrict::all();
         $data['sponsor'] = User::limit(3)->get();
         return view('auth.register_green', $data);
     }

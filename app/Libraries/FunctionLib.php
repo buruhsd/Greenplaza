@@ -1,6 +1,11 @@
 <?php
 class FunctionLib
 {
+
+    public static function setActive(string $path, string $class_name = "active-page")
+    {
+        return Request::path() === $path ? $class_name : "";
+    }
     /**
     * @param
     * @return

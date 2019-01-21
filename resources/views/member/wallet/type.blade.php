@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('log', 'active-page')
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">

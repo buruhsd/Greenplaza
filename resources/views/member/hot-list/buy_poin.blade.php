@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('hot list', 'active-page')
 @section('content')
 <div class="page-title">
 <h3 class="breadcrumb-header">Beli Poin Hot List </h3>

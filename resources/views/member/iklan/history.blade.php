@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('pasang iklan', 'active-page')
 @section('content')
                <!-- Page Inner -->
                 <div class="page-inner">

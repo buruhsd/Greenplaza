@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('pengaturan profil', 'active-page')
 @section('content')
 <div class="page-title">
     <h3 class="breadcrumb-header">Configuration Profil</h3>
@@ -43,7 +44,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('name') ? 'has-error' : ''}}">
-                                {!! Form::label('name', 'Name', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('name', 'Nama', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('name', null, [
                                         'class' => 'form-control', 
@@ -72,7 +73,6 @@
                                     {!! Form::text('user_detail_phone', $user->user_detail->user_detail_phone, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Phone', 
-                                        'disabled',
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_detail_phone', '<p class="help-block">:message</p>') !!}
@@ -119,7 +119,7 @@
                             </div> --}}
                             <?php $store_status = ($user->user_store !== null && $user->user_store !== "")?'disabled':'';?>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_store') ? 'has-error' : ''}}">
-                                {!! Form::label('user_store', 'Window', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_store', 'Toko', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_store', null, [
                                         'class' => 'form-control', 

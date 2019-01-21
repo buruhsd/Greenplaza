@@ -1,4 +1,5 @@
 @extends('member.index')
+@section('pengaturan profil', 'active-page')
 @section('content')
                <!-- Page Inner -->
 <div id="main-wrapper">
