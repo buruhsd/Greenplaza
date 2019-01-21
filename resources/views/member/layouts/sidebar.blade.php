@@ -115,7 +115,7 @@
                                 <ul class="sub-menu">
                                     <li class="{{FunctionLib::setActive('member/pincode/buy_pincode')}}"><a href="{{route('member.pincode.buy_pincode')}}">Beli Pin Kode</a></li>
                                     <li class="{{FunctionLib::setActive('member/pincode/tagihan')}}"><a href="{{route('member.pincode.tagihan')}}">Tagihan Pin Kode</a></li>
-                                    <li class="{{FunctionLib::setActive('member/pincode/history')}}"><a href="{{route('member.pincode.history')}}">Daftar Pin Kode</a></li>
+                                    <li class="{{FunctionLib::setActive('member/pincode/list')}}"><a href="{{route('member.pincode.history')}}">Daftar Pin Kode</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}

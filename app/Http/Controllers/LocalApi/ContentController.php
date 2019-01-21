@@ -170,6 +170,33 @@ class ContentController extends Controller
     }
 
     /**
+    * @param
+    * @return
+    */
+    public static function get_db_province($id = 0){
+        $data['province'] = FunctionLib::get_province($id, 'db');
+        return $data;
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_db_city($id = 0){
+        $data['city'] = FunctionLib::get_city($id, 'db');
+        return $data;
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function get_db_subdistrict($id = 0){
+        $data = FunctionLib::get_subdistrict($id, 'db');
+        return $data;
+    }
+
+    /**
     * @param method $method
     * @return add main footer script / in spesific method
     */

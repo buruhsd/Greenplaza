@@ -651,14 +651,22 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function get_province($id = 0){
-        $data = [];
-        if($id != 0){
-            $data = ['id' => $id];
+    public static function get_province($id = 0, $type='rajaongkir'){
+        if($type == 'rajaongkir'){
+            $data = [];
+            if($id != 0){
+                $data = ['id' => $id];
+            }
+            $province = RajaOngkir::province($data);
+            $province = json_decode($province, true);
+            $province = $province['rajaongkir']['results'];
+            return $province;
         }
-        $province = RajaOngkir::province($data);
-        $province = json_decode($province, true);
-        $province = $province['rajaongkir']['results'];
+        if($id != 0){
+            $province = App\Models\Province::whereId($id)->get();
+        }else{
+            $province = App\Models\Province::all();
+        }
         return $province;
     }
 
@@ -666,30 +674,46 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function get_city($id = 0){
-        $data = [];
-        if($id != 0){
-            $data = ['id' => $id];
+    public static function get_city($id = 0, $type='rajaongkir'){
+        if($type == 'rajaongkir'){
+            $data = [];
+            if($id != 0){
+                $data = ['id' => $id];
+            }
+            $city = RajaOngkir::city($data);
+            $city = json_decode($city, true);
+            $city = $city['rajaongkir']['results'];
+            return $city;
         }
-        $city = RajaOngkir::city($data);
-        $city = json_decode($city, true);
-        $city = $city['rajaongkir']['results'];
-        return $city;
+        if($id != 0){
+            $province = App\Models\City::whereRaw('city_province_id='.$id)->get();
+        }else{
+            $province = App\Models\City::all();
+        }
+        return $province;
     }
 
     /**
     * @param
     * @return
     **/
-    public static function get_subdistrict($id = 0){
-        $data = [];
-        if($id != 0){
-            $data = ['id' => $id];
+    public static function get_subdistrict($id = 0, $type='rajaongkir'){
+        if($type == 'rajaongkir'){
+            $data = [];
+            if($id != 0){
+                $data = ['id' => $id];
+            }
+            $subdistrict = RajaOngkir::subdistrict($data);
+            $subdistrict = json_decode($subdistrict, true);
+            $subdistrict = $subdistrict['rajaongkir']['results'];
+            return $subdistrict;
         }
-        $subdistrict = RajaOngkir::subdistrict($data);
-        $subdistrict = json_decode($subdistrict, true);
-        $subdistrict = $subdistrict['rajaongkir']['results'];
-        return $subdistrict;
+        if($id != 0){
+            $province = App\Models\Subdistrict::whereRaw('subdistrict_city_id='.$id)->get();
+        }else{
+            $province = App\Models\Subdistrict::all();
+        }
+        return $province;
     }
 
     /**

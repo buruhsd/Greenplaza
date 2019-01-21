@@ -776,7 +776,6 @@ class UserController extends Controller
                 <?php
                 break;
             case 'buyer_address':
-            case 'seller_address':
                 ?>
                     <script type="text/javascript">
                         $(function(){
@@ -899,6 +898,162 @@ class UserController extends Controller
                                         $.each( data, function(i, o){
                                             $check = (o.subdistrict_id == parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>"))?"selected":"";
                                             row = "<option value="+o.subdistrict_id+" "+$check+">"+o.subdistrict_name+"</option>";
+                                            $('#user_detail_subdist').append(row);
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+                    </script>
+                <?php
+                break;
+            case 'seller_address':
+                ?>
+                    <script type="text/javascript">
+                        $(function(){
+                            var rows, row;
+                            get_province();
+                        });
+                        function get_province(){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url('localapi/content/get_db_province', 0);?>", // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_province').empty();
+                                    $('#user_detail_province').html(rows);
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_province;?>");
+                                    if (data) {
+                                        $('#user_detail_province').empty();
+                                        $.each( data.province, function(i, o){
+                                            $check = (o.id == id)?"selected":"";
+                                            row = "<option value="+o.id+" "+$check+">"+
+                                                o.province_name+"</option>";
+                                            $('#user_detail_province').append(row);
+                                            if(i == 0){
+                                                if(id !== null || id !== 0){
+                                                    get_city(id);
+                                                }else{
+                                                    get_city(o.id);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+                        function get_city(id = 0){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url("localapi/content/get_db_city"); ?>/"+id, // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_city').empty();
+                                    $('#user_detail_city').html(rows);
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_city;?>");
+                                    if (data) {
+                                        $('#user_detail_city').empty();
+                                        $.each( data.city, function(i, o){
+                                            $check = (o.id == id)?"selected":"";
+                                            row = "<option value="+o.id+" "+$check+">"+o.city_name+"</option>";
+                                            $('#user_detail_city').append(row);
+                                            if(i == 0){
+                                                if(id !== null || id !== 0){
+                                                    get_subdistrict(id);
+                                                }else{
+                                                    get_subdistrict(o.id);
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        swal({   
+                                            type: "error",
+                                            title: "failed",   
+                                            text: "Layanan Tidak Tersedia",   
+                                            showConfirmButton: false ,
+                                            showCloseButton: true,
+                                            footer: ''
+                                        });
+                                    }
+                                    // $("#btn-choose-shipment").val(text);
+                                },
+                                error: function(xhr, textStatus) {
+                                    swal({
+                                        type: "error",
+                                        title: "failed",   
+                                        text: "Layanan Tidak Tersedia",   
+                                        showConfirmButton: false ,
+                                        showCloseButton: true,
+                                        footer: ''
+                                    });
+                                    $("#btn-choose-shipment").val(text);
+                                }
+                            });
+                        }
+                        function get_subdistrict(id){
+                            $.ajax({
+                                type: "GET", // or post?
+                                url: "<?php echo url("localapi/content/get_db_subdistrict");?>/"+id, // change as needed
+                                beforeSend: function(){
+                                    rows = "<option>Loading...</option>";
+                                    $('#user_detail_subdist').empty();
+                                    $('#user_detail_subdist').html(rows);
+                                },
+                                success: function(data) {
+                                    console.log(data);
+                                    if (data) {
+                                        $('#user_detail_subdist').empty();
+                                        $.each( data, function(i, o){
+                                            $check = (o.id == parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>"))?"selected":"";
+                                            row = "<option value="+o.id+" "+$check+">"+o.subdistrict_name+"</option>";
                                             $('#user_detail_subdist').append(row);
                                         });
                                     } else {
