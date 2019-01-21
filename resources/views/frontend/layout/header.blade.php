@@ -124,17 +124,34 @@
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
                                     <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
-                                        <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->get();?>
+                                        <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
                                         @if($sub_cat->count() > 0)
                                             <ul class="sub-cetagory col-md-12 col-sm-12">
                                                 <li>
-                                                    <p>Cetagory Title </p>
+                                                    <p>{{ucfirst(strtolower($item->category_name))}}</p>
                                                     <ul>
-                                                        @foreach($sub_cat as $item)
-                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">
-                                                                {{ucfirst(strtolower($item->category_name))}}
-                                                            </a></li>
+                                                        @foreach($sub_cat as $item2)
+                                                            <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">
+                                                                {{ucfirst(strtolower($item2->category_name))}}</a>
+                                                                <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item2->id)->limit(10)->get();?>
+                                                                @if($sub_cat->count() > 0)
+                                                                    <ul class="sub-cetagory col-md-12 col-sm-12">
+                                                                        <li>
+                                                                            <p>{{ucfirst(strtolower($item2->category_name))}}</p>
+                                                                            <ul>
+                                                                                @foreach($sub_cat as $item3)
+                                                                                    <li><a href="{{route('category', ['cat'=>$item3->category_slug])}}">
+                                                                                        {{ucfirst(strtolower($item3->category_name))}}</a>
+                                                                                    </li>
+                                                                                @endforeach
+                                                                                <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">Lainya...</a>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
                                                         @endforeach
+                                                        <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">Lainya...</a>
                                                     </ul>
                                                 </li>
                                             </ul>

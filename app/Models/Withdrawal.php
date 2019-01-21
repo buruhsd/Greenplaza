@@ -25,6 +25,7 @@ class Withdrawal extends Model
     {
         return $this->belongsTo('App\User', 'withdrawal_user_id');
     }
+
     public function userhasstore(){
         return $this->belongsTo('App\User', 'withdrawal_user_id')->where('name', '!=', null);
 
@@ -37,6 +38,16 @@ class Withdrawal extends Model
     */
     public function wallet()
     {
-        return $this->belongsTo('App\Models\Wallet', 'wallet_user_id');
+        return $this->belongsTo('App\Models\Wallet', 'withdrawal_wallet_id');
+    }
+    
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function type()
+    {
+        return $this->belongsTo('App\Models\Wallet_type', 'withdrawal_wallet_type');
     }
 }
