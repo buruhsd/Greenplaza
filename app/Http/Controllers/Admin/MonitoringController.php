@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
 use App\Models\Produk;
+use App\Models\Activity;
 use App\User;
 use App\Role;
 use Session;
@@ -146,7 +147,8 @@ class MonitoringController extends Controller
 //LOG_ACTIVITY
     public function log ()
     {
-        return view('admin.monitoring.log_activity.activity');
+        $log = Activity::orderBy('created_at', 'DESC')->paginate(10);
+        return view('admin.monitoring.log_activity.activity', compact('log'));
     }
 
 

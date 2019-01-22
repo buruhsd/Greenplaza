@@ -43,8 +43,12 @@
                                     <td>{{$e->created_at}}</td>
                                     @if ($e->email_to != null)
                                     <td>{{$e->email_to}}</td>
-                                    @else
-                                    <td>Kiri ke Semua</td>
+                                    @elseif ($e->email_to == null && $e->email_type == 'send for allmember')
+                                    <td>Send for All Member</td>
+                                    @elseif ($e->email_to == null && $e->email_type == 'send for allseller')
+                                    <td>Send for All Seller</td>
+                                    @elseif ($e->email_to == null && $e->email_type == 'send for all')
+                                    <td>Send for All</td>
                                     @endif
                                     <td>{{$e->email_from}}</td>
                                     <td>{{$e->email_subject}}</td>

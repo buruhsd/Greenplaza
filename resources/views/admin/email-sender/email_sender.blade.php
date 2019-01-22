@@ -7,28 +7,34 @@
 @include('layouts._flash')
 <div class="col-md-12">
     <div class="panel-body">
-        <a href="{{route('admin.list_email')}}"><button type="" class="btn btn-default pull-right">List Email</button></a>
+        <a href="{{route('admin.list_email')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">List Email</button></a>
         <center><form class="form-horizontal" method="POST" action= "{{route('admin.send_email')}}" enctype = "multipart/form-data">
             {{ csrf_field() }}
-            <div class="form-group" style="width: 40%">
-                <input type="text" name="email_to" class="form-control" id="" placeholder="Input Email Sending">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <select name="value" type="text" class="form-control">
+                          <option value="">--< Sender Option >--</option>
+                          <option value="2">All Member</option>
+                          <option value="3">All Seller</option>
+                          <option value="4">All Member & Seller</option>
+                          <option value="1">Single Email</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="email_to" placeholder="sending to" class="form-control">
+                    </div>
+                </div>
             </div>
-            <textarea class="form-control" id="article-ckeditor" name="email_subject" placeholder="Email Subject" rows="1" style="margin-bottom: 2%"></textarea>
+            <textarea class="form-control" name="email_subject" placeholder="Email Subject" rows="4" style="margin-bottom: 2%"></textarea>
             <textarea class="form-control" id="article-ckeditor" name="email_text" placeholder="Email Text" rows="6"></textarea>
-            <div class="col-md-6" style="margin-top: 3%">
-                <button type="submit" class="btn btn-primary">Send</button>
-            </div>
-            <div class="col-md-6" style="margin-top: 3%">
-                <button type="submit" class="btn btn-primary">Send for All</button>
-            </div>
+            <button type="submit" class="btn btn-danger" style="width: 100%; margin-top: 2%">Kirim Email</button>
         </form></center>
     </div>
 </div>
-    
 
-<script src="{{asset('backend/vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
 <script>
-    CKEDITOR.replace( 'article-ckeditor', {
+        CKEDITOR.replace( 'article-ckeditor', {
             height: 400,
             
         } );

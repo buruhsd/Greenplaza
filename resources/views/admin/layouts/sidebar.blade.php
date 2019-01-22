@@ -20,11 +20,11 @@
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                                 </a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="{{route('admin.live_chat')}}">
                                     <i class="menu-icon icon-voice_chat"></i><span>Live Chat</span>
                                 </a>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="{{route('admin.email_sender')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Email Sender</span>
@@ -46,7 +46,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li><a href="{{route('admin.monitoring.laporan')}}">Laporan</a></li>
-                                    <li><a href="{{route('admin.monitoring.profit')}}">Profit</a></li>
+                                    <!-- <li><a href="{{route('admin.monitoring.profit')}}">Profit</a></li> -->
                                     <li><a href="{{route('admin.monitoring.wallet_memberlist')}}">Wallet</a></li>
                                     <!-- <li><a href="#">Wallet Pin Code</a></li>
                                     <li><a href="#">Wallet Saldo Iklan</a></li> -->

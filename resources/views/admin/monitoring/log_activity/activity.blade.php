@@ -19,12 +19,24 @@
                                     <th><center>Id</center></th>
                                     <th><center>Tanggal</center></th>
                                     <th><center>Activitas Pegawai</center></th>
-                                    <th><center>Keterangan</center></th>
-                                    <th><center>Id Keterangan</center></th>
+                                    <th><center>Id Seller</center></th>
+                                    <th><center>Status</center></th>
                                 </tr>
                             </thead>
                             <tbody>
-                               
+                            @if($log->count() > 0)
+                                @foreach ($log as $l)
+                               <tr>
+                                    <td><center>{{$l->id}}</center></td>
+                                    <td><center>{{$l->created_at}}</center></td>
+                                    <td><center>{{$l->activity_note}}</center></td>
+                                    <td><center>{{$l->activity_user_id}}</center></td>
+                                    <td><center>{{$l->actyvity_status}}</center></td>
+                               </tr>
+                               @endforeach
+                            @else
+                                <td colspan="5"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
                         </table>
                     </div>

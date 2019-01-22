@@ -13,6 +13,7 @@ class EmailController extends Controller
 {
     public function email (Request $request)
     {
+        $value = $request->value;
         $email = new Email;
     
         $email->email_from = 'super admin';
@@ -33,13 +34,33 @@ class EmailController extends Controller
                 return redirect()->back();
             } 
         }
-        if ($email->email_to == null){
+        if ($email->email_to == null && $value == 2){
+            $email->email_type = 'send for allmember';
+        }elseif ($email->email_to == null && $value == 3) {
+            $email->email_type = 'send for allseller';
+        }elseif ($email->email_to == null && $value == 4) {
             $email->email_type = 'send for all';
-            } else {
+        }else {
                 $email->email_type = 'single send';
-            }
+        }
         $email->save();
-        $users = User::pluck('email')->toArray();
+        $usersall = User::whereHas('roles', function($query){
+                $query->where('name','=','member');
+                return $query;
+            })
+            ->pluck('email')->toArray();
+        $usermember = User::whereHas('roles', function($query){
+                $query->where('name','=','member');
+                return $query;
+            })
+            ->where('user_store', '==', null)->pluck('email')->toArray();
+        // dd($usermember);
+        $userseller = User::whereHas('roles', function($query){
+                $query->where('name','=','member');
+                return $query;
+            })
+            ->where('user_store', '!=', null)->pluck('email')->toArray();
+
         if ($email->email_to != null) {
                                
             Mail::send('admin.mail.tes', compact(['email', 'user', 'users']), function ($m) use ($email) {
@@ -49,13 +70,29 @@ class EmailController extends Controller
                         "level"=>"success",
                         "message"=>"Email Sending to " .$email->email_to
                     ]);
-        } else {
-            Mail::send('admin.mail.tes', compact(['email', 'users', 'user']), function ($m) use ($users) {
-                $m->to($users, $users)->subject('tes');
+        } elseif ($email->email_to == null && $value == 2) {
+            Mail::send('admin.mail.tes', compact(['email', 'usermember']), function ($m) use ($usermember) {
+                $m->to($usermember, $usermember)->subject('tes');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
-                        "message"=>"Email Send for All"
+                        "message"=>"Email Send for All Member"
+                    ]);
+        } elseif ($email->email_to == null && $value == 3) {
+            Mail::send('admin.mail.tes', compact(['email', 'userseller']), function ($m) use ($userseller) {
+                $m->to($userseller, $userseller)->subject('tes');
+            });
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Email Send for All Seller"
+                    ]);
+        } elseif ($email->email_to == null && $value == 4) {
+            Mail::send('admin.mail.tes', compact(['email', 'usersall']), function ($m) use ($usersall) {
+                $m->to($usersall, $usersall)->subject('tes');
+            });
+            Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Email Send for All Member and Seller"
                     ]);
         }
         return redirect()->back();

@@ -44,6 +44,7 @@
                                     <th>ID</th>
                                     <th>Reff</th>
                                     <th>Name</th>
+                                    <th>Keterangan</th>
                                     <th>Usable</th>
                                     <th>status</th>
                                     <th>Note</th>
@@ -62,6 +63,12 @@
                                             !!}
                                         </td>
                                         <td>{{ $item->category_name }}</td>
+                                            
+                                        @if ($item->category_parent_id == 0)
+                                            <td style="color: red">Parent Category</td>
+                                        @else 
+                                            <td style="color: blue">Child Category</td>
+                                        @endif
                                         <td>{!! ($item->category_is_usable == 1)
                                             ?"<button class='btn btn-success btn-xs'>Use</button>"
                                             :"<button class='btn btn-danger btn-xs'>Not Use</button>" !!}</td>
