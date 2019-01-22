@@ -81,7 +81,7 @@
 
         <button type="submit" class="btn btn-success btn-block">Login</button>
         <br/>
-        <p><a href="#">Lupa Password</a>.</p>
+        <p><a href="{{route('password.request')}}">Lupa Password</a>.</p>
     </div>
 </form>
 

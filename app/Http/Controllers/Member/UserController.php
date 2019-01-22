@@ -945,7 +945,6 @@ class UserController extends Controller
                                     $('#user_detail_province').html(rows);
                                 },
                                 success: function(data) {
-                                    console.log(data);
                                     var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_province;?>");
                                     if (data) {
                                         $('#user_detail_province').empty();
@@ -997,7 +996,6 @@ class UserController extends Controller
                                     $('#user_detail_city').html(rows);
                                 },
                                 success: function(data) {
-                                    console.log(data);
                                     var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_city;?>");
                                     if (data) {
                                         $('#user_detail_city').empty();
@@ -1048,7 +1046,6 @@ class UserController extends Controller
                                     $('#user_detail_subdist').html(rows);
                                 },
                                 success: function(data) {
-                                    console.log(data);
                                     if (data) {
                                         $('#user_detail_subdist').empty();
                                         $.each( data, function(i, o){

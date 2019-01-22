@@ -14,7 +14,7 @@ class SendEmail extends Controller
    		$from = env('MAIL_USERNAME', 'GreenPlaza@greenplaza.me');
    		$to = $from;
    		$subject = 'Notifikasi GreenPlaza';
-   		$view = 'basic';
+   		$view = 'email.basic';
 		extract($param);
 
 		$data = array('name'=>$name);
@@ -26,20 +26,23 @@ class SendEmail extends Controller
    }
 
    public function html($param=[]) {
-   		$name = env('MAIL_FROM_NAME', 'Admin GreenPlaza');
+	   	$name = ['name' => env('MAIL_FROM_NAME', 'Admin GreenPlaza')];
    		$from = env('MAIL_USERNAME', 'GreenPlaza@greenplaza.me');
    		$to = $from;
    		$subject = 'Notifikasi GreenPlaza';
    		$view = 'email.html';
 		extract($param);
-
-		$data = array('name'=>$name);
+		if(isset($data)){
+			$data = array_merge($data, $name);
+		}else{
+			$data = $name;
+		}
+		// dd($to, $from, $subject, $data);
 		Mail::send($view, $data, function($message) use ($to, $from, $subject) {
+			$message->from($from);
 			$message->to($to)
 				->subject($subject);
-			$message->from($from);
 		});
-		echo 'sip';
    }
 
    public function attach($param=[]) {
@@ -47,7 +50,7 @@ class SendEmail extends Controller
    		$from = env('MAIL_USERNAME', 'GreenPlaza@greenplaza.me');
    		$to = $from;
    		$subject = 'Notifikasi GreenPlaza';
-   		$view = 'attach';
+   		$view = 'email.attach';
    		$attach = [];
 		extract($param);
 

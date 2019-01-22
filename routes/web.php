@@ -10,16 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/change_password/{token}', 'Auth\\ForgotPasswordController@change_password')->name('password.change');
 
 //HOME
 Route::get('/', 'Member\\FrontController@index')->name('home');
-
+// page info greenplaza
 Route::get('/tentang-greenplaza', 'Member\\FrontController@about')->name('about') ;
 Route::get('/cara-belanja', 'Member\\FrontController@carabelanja')->name('cara-belanja') ;
 Route::get('/cara-pembayaran', 'Member\\FrontController@pembayaran')->name('cara-pembayaran') ;
@@ -28,10 +28,6 @@ Route::get('/syarat-ketentuan', 'Member\\FrontController@syarat')->name('syarat'
 Route::get('/alur-transaksi', 'Member\\FrontController@alurtransaksi')->name('alur') ;
 
 Route::get('/dashboard-member', 'Member\\FrontController@dashboard');
-
-// Route::get('/', function () {
-//     return view('frontend.page.home');
-// });
 
 //FrontController
 Route::get('/register/seller', 'Member\\FrontController@reg_seller')->name('register.seller');
