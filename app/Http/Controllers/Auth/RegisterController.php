@@ -56,6 +56,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+        $messages = [
+            'required'  => ':attribute wajib diisi ',
+            'min'       => ':attribute harus diisi minimal :min karakter ',
+            'max'       => ':attribute harus diisi maksimal :max karakter ',
+            'email'     =>  ':attribute harus berupa email yang valid.',
+            'unique'    =>  ':attribute sudah ada gunakan email yang lain',
+            'confirmed'  =>  'isi :attribute dengan benar',
+            'string'    =>  ':attribute harus berupa huruf',
+        ];
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -66,7 +76,7 @@ class RegisterController extends Controller
             'user_detail_city' => 'required|string|max:10',
             'user_detail_subdist' => 'required|string|max:10',
             'user_detail_pos' => 'required|string|max:10',
-        ]);
+        ], $messages);
     }
 
     /**
