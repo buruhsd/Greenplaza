@@ -74,18 +74,39 @@
                                     <th>Telp. Rumah</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_tlp}}</td>
                                 <tr>
+                                @if(App\Models\User_bank::where('user_bank_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Nama Bank</th>
                                     <td> : {{App\Models\User_bank::where('user_bank_user_id', $users->id)->first()->user_bank_name}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Nama Bank</th>
+                                    <td> : -</td>
+                                <tr>
+                                @endif
+                                @if(App\Models\User_bank::where('user_bank_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>No Rekening</th>
                                     <td> : {{App\Models\User_bank::where('user_bank_user_id', $users->id)->first()->user_bank_no}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>No Rekening</th>
+                                    <td> : -</td>
+                                <tr>
+                                @endif
+                                @if(App\Models\User_bank::where('user_bank_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Pemilik Rekening</th>
                                     <td> : {{App\Models\User_bank::where('user_bank_user_id', $users->id)->first()->user_bank_owner}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Pemilik Rekening</th>
+                                    <td> : -</td>
+                                <tr>
+                                @endif
                                 <tr>
                                     <th>Foto Profile dan KTP</th>
                                     <td> : 
