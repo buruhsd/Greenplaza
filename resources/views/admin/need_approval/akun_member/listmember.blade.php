@@ -50,40 +50,22 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    @if ($u->user_address->user_address_address != null)
+                                    @if($u->user_address->count() > 0)
                                         Alamat : {{$u->user_address->user_address_address}}<br/>
-                                    @else
-                                        Alamat : -
-                                    @endif
-                                    @if ($u->user_address->user_address_phone != null)
                                         No HP : {{$u->user_address->user_address_phone}}<br/>
-                                    @else
-                                        No HP : -
-                                    @endif
-                                    @if ($u->user_address->user_address_phone != null)
                                         No Telp Rumah : {{$u->user_address->user_address_tlp}}<br/>
-                                    @else
-                                        No Telp Rumah : -
-                                    @endif
-                                    @if ($u->user_address->user_address_city != null)
                                         Kota : {{$u->user_address->user_address_city}}<br/>
-                                    @else
-                                        Kota : -
-                                    @endif
-                                    @if ($u->user_address->user_address_pos != null)
                                         Kode_pos : {{$u->user_address->user_address_pos}}<br/>
-                                    @else
-                                        Kode_pos : -
-                                    @endif
-                                    @if ($u->user_address->user_address_province != null)
                                         Propinsi : {{$u->user_address->user_address_province}}<br/>
-                                    @else
-                                        Propinsi : -
-                                    @endif
-                                    @if ($u->user_address->created_at != null)
                                         Kecamatan :<br/>
                                         Tgl Registrasi : {{$u->user_address->created_at}}<br/>
                                     @else
+                                        Alamat : - <br/>
+                                        No HP : - <br/>
+                                        No Telp Rumah : - <br/>
+                                        Kota : - <br/>
+                                        Kode_pos : - <br/>
+                                        Propinsi : - <br/>
                                         Kecamatan :<br/>
                                         Tgl Registrasi : - <br/>
                                     @endif
