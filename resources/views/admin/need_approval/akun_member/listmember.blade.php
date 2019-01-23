@@ -50,7 +50,7 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    @if($u->user_address->count() > 0)
+                                    @if($u->user_address->user_address_user_id->count() > 0)
                                         Alamat : {{$u->user_address->user_address_address}}<br/>
                                         No HP : {{$u->user_address->user_address_phone}}<br/>
                                         No Telp Rumah : {{$u->user_address->user_address_tlp}}<br/>
