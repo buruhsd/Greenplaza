@@ -50,7 +50,7 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    @if($u->user_address())
+                                    @if($u->user_address()->get()->count())
                                     <?php
                                         $address = $u->user_address()->first();
                                     ?>
