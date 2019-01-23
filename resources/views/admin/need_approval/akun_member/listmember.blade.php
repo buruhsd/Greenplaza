@@ -50,15 +50,19 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    @if($u->user_address->user_address_user_id->count() > 0)
-                                        Alamat : {{$u->user_address->user_address_address}}<br/>
-                                        No HP : {{$u->user_address->user_address_phone}}<br/>
-                                        No Telp Rumah : {{$u->user_address->user_address_tlp}}<br/>
-                                        Kota : {{$u->user_address->user_address_city}}<br/>
-                                        Kode_pos : {{$u->user_address->user_address_pos}}<br/>
-                                        Propinsi : {{$u->user_address->user_address_province}}<br/>
+                                    @if($u->user_address()->get()->count() > 0)
+                                    <?php
+                                        $address = $u->user_address()->first();
+                                    ?>
+                                    <!-- {{FunctionLib::address_info($address->id)}} -->
+                                        Alamat : {{$address->user_address_address}}<br/>
+                                        No HP : {{$address->user_address_phone}}<br/>
+                                        No Telp Rumah : {{$address->user_address_tlp}}<br/>
+                                        Kota : {{$address->user_address_city}}<br/>
+                                        Kode_pos : {{$address->user_address_pos}}<br/>
+                                        Propinsi : {{$address->user_address_province}}<br/>
                                         Kecamatan :<br/>
-                                        Tgl Registrasi : {{$u->user_address->created_at}}<br/>
+                                        Tgl Registrasi : {{$u->created_at}}<br/>
                                     @else
                                         Alamat : - <br/>
                                         No HP : - <br/>
