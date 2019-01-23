@@ -387,13 +387,13 @@ class UserController extends Controller
         if (!Hash::check($request->old_password, $user->password)) {
             $status = 500;
             $message = 'Password does Not Match!';
-            return redirect('member/change_password')
+            return redirect('member/user/change_password')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         if ($request->new_password !== $request->re_new_password) {
             $status = 500;
             $message = 'New Password does Not Match!';
-            return redirect('member/change_password')
+            return redirect('member/user/change_password')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $password = $request->new_password;
@@ -404,7 +404,7 @@ class UserController extends Controller
             $status = 500;
             $message = 'Password Not updated!';
         }
-        return redirect('member/change_password')
+        return redirect('member/user/change_password')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -621,7 +621,7 @@ class UserController extends Controller
         <?php
         switch ($method) {
             case 'sponsor':
-            case 'profil':
+            // case 'profil':
                 ?>
                     <script type="text/javascript">
                         $(function(){
@@ -893,10 +893,11 @@ class UserController extends Controller
                                     $('#user_detail_subdist').html(rows);
                                 },
                                 success: function(data) {
+                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_city;?>");
                                     if (data) {
                                         $('#user_detail_subdist').empty();
                                         $.each( data, function(i, o){
-                                            $check = (o.subdistrict_id == parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>"))?"selected":"";
+                                            $check = (o.subdistrict_id == id)?"selected":"";
                                             row = "<option value="+o.subdistrict_id+" "+$check+">"+o.subdistrict_name+"</option>";
                                             $('#user_detail_subdist').append(row);
                                         });
@@ -928,6 +929,7 @@ class UserController extends Controller
                     </script>
                 <?php
                 break;
+            case 'profil':
             case 'seller_address':
                 ?>
                     <script type="text/javascript">
@@ -954,11 +956,10 @@ class UserController extends Controller
                                                 o.province_name+"</option>";
                                             $('#user_detail_province').append(row);
                                             if(i == 0){
-                                                if(id !== null || id !== 0){
-                                                    get_city(id);
-                                                }else{
-                                                    get_city(o.id);
-                                                }
+                                                get_city(o.id);
+                                            }
+                                            if($check == "selected"){
+                                                get_city(id);
                                             }
                                         });
                                     } else {
@@ -1004,11 +1005,10 @@ class UserController extends Controller
                                             row = "<option value="+o.id+" "+$check+">"+o.city_name+"</option>";
                                             $('#user_detail_city').append(row);
                                             if(i == 0){
-                                                if(id !== null || id !== 0){
-                                                    get_subdistrict(id);
-                                                }else{
-                                                    get_subdistrict(o.id);
-                                                }
+                                                get_subdistrict(o.id);
+                                            }
+                                            if($check == "selected"){
+                                                get_subdistrict(id);
                                             }
                                         });
                                     } else {
@@ -1046,10 +1046,11 @@ class UserController extends Controller
                                     $('#user_detail_subdist').html(rows);
                                 },
                                 success: function(data) {
+                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>");
                                     if (data) {
                                         $('#user_detail_subdist').empty();
                                         $.each( data, function(i, o){
-                                            $check = (o.id == parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_subdist;?>"))?"selected":"";
+                                            $check = (o.id == id)?"selected":"";
                                             row = "<option value="+o.id+" "+$check+">"+o.subdistrict_name+"</option>";
                                             $('#user_detail_subdist').append(row);
                                         });

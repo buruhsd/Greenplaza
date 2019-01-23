@@ -13,7 +13,6 @@
 <body>
     <form method="POST" action="{{ route('password.email') }}">
     @csrf
-    @include('layouts._flash')
         <div class="container col-md-8 col-md-offset-2">
             <br/>
             <div class="text-center">
@@ -24,12 +23,13 @@
             <hr/>
             <h1>{{ __('Reset Password') }}</h1>
             <p>Masukkan email anda.</p>
-            @if ($errors->has('email'))
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-            @endif
             <hr>
+            @if ($errors->has('email'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> Email Tidak terdaftar.
+                </div>
+            @endif
             {{-- @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
@@ -47,6 +47,8 @@
         </div>
     </form>
 </body>
+    <script src="{{ asset('admin/plugins/jquery/jquery-3.1.0.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     @if (Session::has('flash_message'))
     <?php $status = (Session::get('flash_status') == 200)?'success':'error';?>
