@@ -4,14 +4,13 @@ namespace App\Http\Controllers\AdminApi;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Bank;
 use App\Models\Province;
 use App\Models\City;
 use App\Models\Subdistrict;
 
 class AreaController extends Controller
 {
-	public function province(){
+	public function province(Request $request){
 		$status = 200;
 		$message = 'Berhasil mendapatkan data provinsi';
 		if(!empty($request->id)){
@@ -39,11 +38,11 @@ class AreaController extends Controller
 		}
 		if(!isset($data['city']) || empty($data['city']) || $data['city'] == null){
 			$status = 500;
-			$message = 'Gagal mendapatkan data provinsi';
+			$message = 'Gagal mendapatkan data kota';
 		}
         return response()->json(['status' => $status, 'message' => $message, 'data'=>$data]);
 	}
-	public function subdistrict(){
+	public function subdistrict(Request $request){
 		$status = 200;
 		$message = 'Berhasil mendapatkan data desa';
 		if(!empty($request->id)){
@@ -55,7 +54,7 @@ class AreaController extends Controller
 		}
 		if(!isset($data['subdistrict']) || empty($data['subdistrict']) || $data['subdistrict'] == null){
 			$status = 500;
-			$message = 'Gagal mendapatkan data provinsi';
+			$message = 'Gagal mendapatkan data desa';
 		}
         return response()->json(['status' => $status, 'message' => $message, 'data'=>$data]);
 	}

@@ -21,7 +21,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Barat',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23681',
@@ -32,7 +32,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Barat Daya',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23764',
@@ -43,7 +43,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Besar',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23951',
@@ -54,7 +54,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Jaya',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23654',
@@ -65,7 +65,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Selatan',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23719',
@@ -76,7 +76,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Singkil',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24785',
@@ -87,7 +87,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Tamiang',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24476',
@@ -98,7 +98,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Tengah',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24511',
@@ -109,7 +109,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 9,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Tenggara',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24611',
@@ -120,7 +120,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 10,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Timur',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24454',
@@ -131,7 +131,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 11,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Aceh Utara',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24382',
@@ -153,7 +153,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 13,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Alor',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85811',
@@ -230,7 +230,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 20,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Banda Aceh',
                 'city_type' => 'Kota',
                 'city_postal_code' => '23238',
@@ -648,7 +648,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 58,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Belu',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85711',
@@ -659,7 +659,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 59,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Bener Meriah',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24581',
@@ -758,7 +758,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 68,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Bima',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '84171',
@@ -769,7 +769,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 69,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Bima',
                 'city_type' => 'Kota',
                 'city_postal_code' => '84139',
@@ -802,7 +802,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 72,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Bireuen',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24219',
@@ -1308,7 +1308,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 118,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Dompu',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '84217',
@@ -1352,7 +1352,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 122,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Ende',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86351',
@@ -1385,7 +1385,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 125,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Flores Timur',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86213',
@@ -1407,7 +1407,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 127,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Gayo Lues',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24653',
@@ -2342,7 +2342,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 212,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Kupang',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85362',
@@ -2353,7 +2353,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 213,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Kupang',
                 'city_type' => 'Kota',
                 'city_postal_code' => '85119',
@@ -2540,7 +2540,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 230,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Langsa',
                 'city_type' => 'Kota',
                 'city_postal_code' => '24412',
@@ -2584,7 +2584,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 234,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Lembata',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86611',
@@ -2595,7 +2595,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 235,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Lhokseumawe',
                 'city_type' => 'Kota',
                 'city_postal_code' => '24352',
@@ -2628,7 +2628,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 238,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Lombok Barat',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '83311',
@@ -2639,7 +2639,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 239,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Lombok Tengah',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '83511',
@@ -2650,7 +2650,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 240,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Lombok Timur',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '83612',
@@ -2661,7 +2661,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 241,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Lombok Utara',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '83711',
@@ -2969,7 +2969,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 269,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Manggarai',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86551',
@@ -2980,7 +2980,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 270,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Manggarai Barat',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86711',
@@ -2991,7 +2991,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 271,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Manggarai Timur',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86811',
@@ -3046,7 +3046,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 276,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Mataram',
                 'city_type' => 'Kota',
                 'city_postal_code' => '83131',
@@ -3310,7 +3310,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 300,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Nagan Raya',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23674',
@@ -3321,7 +3321,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 301,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Nagekeo',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86911',
@@ -3354,7 +3354,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 304,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Ngada',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86413',
@@ -3948,7 +3948,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 358,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Pidie',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24116',
@@ -3959,7 +3959,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 359,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Pidie Jaya',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '24186',
@@ -4223,7 +4223,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 383,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Rote Ndao',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85982',
@@ -4234,7 +4234,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 384,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Sabang',
                 'city_type' => 'Kota',
                 'city_postal_code' => '23512',
@@ -4245,7 +4245,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 385,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sabu Raijua',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85391',
@@ -4542,7 +4542,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 412,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sikka',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '86121',
@@ -4564,7 +4564,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 414,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Simeulue',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '23891',
@@ -4729,7 +4729,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 429,
                 'city_province_id' => 21,
-            'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
+                'city_province_name' => 'Nanggroe Aceh Darussalam (NAD)',
                 'city_name' => 'Subulussalam',
                 'city_type' => 'Kota',
                 'city_postal_code' => '24882',
@@ -4784,7 +4784,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 434,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sumba Barat',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '87219',
@@ -4795,7 +4795,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 435,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sumba Barat Daya',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '87453',
@@ -4806,7 +4806,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 436,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sumba Tengah',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '87358',
@@ -4817,7 +4817,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 437,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Sumba Timur',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '87112',
@@ -4828,7 +4828,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 438,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Sumbawa',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '84315',
@@ -4839,7 +4839,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 439,
                 'city_province_id' => 22,
-            'city_province_name' => 'Nusa Tenggara Barat (NTB)',
+                'city_province_name' => 'Nusa Tenggara Barat (NTB)',
                 'city_name' => 'Sumbawa Barat',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '84419',
@@ -5279,7 +5279,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 479,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Timor Tengah Selatan',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85562',
@@ -5290,7 +5290,7 @@ class ConfCityTableSeeder extends Seeder
             array (
                 'id' => 480,
                 'city_province_id' => 23,
-            'city_province_name' => 'Nusa Tenggara Timur (NTT)',
+                'city_province_name' => 'Nusa Tenggara Timur (NTT)',
                 'city_name' => 'Timor Tengah Utara',
                 'city_type' => 'Kabupaten',
                 'city_postal_code' => '85612',

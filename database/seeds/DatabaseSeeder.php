@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(RoleUserTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
@@ -48,6 +48,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SysTransHotlistTableSeeder::class);
         $this->call(SysTransIklanTableSeeder::class);
         $this->call(SysTransPincodeTableSeeder::class);
+        $this->call(SysCategoryTableSeeder::class);
+        $this->call(SysBrandTableSeeder::class);
         $this->call(SysProdukTableSeeder::class);
         $this->call(SysProdukDiscussTableSeeder::class);
         $this->call(SysProdukDiscussReplyTableSeeder::class);
@@ -62,8 +64,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SysKomplainPicTableSeeder::class);
         $this->call(SysIklanTableSeeder::class);
         $this->call(SysEmailTableSeeder::class);
-        $this->call(SysCategoryTableSeeder::class);
-        $this->call(SysBrandTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(MigrationsTableSeeder::class);
         $this->call(LogWalletTableSeeder::class);

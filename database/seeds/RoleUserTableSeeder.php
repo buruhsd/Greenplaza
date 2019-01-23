@@ -32,16 +32,6 @@ class RoleUserTableSeeder extends Seeder
                 'role_id' => 3,
                 'user_id' => 3,
             ),
-            3 => 
-            array (
-                'role_id' => 3,
-                'user_id' => 4,
-            ),
-            4 => 
-            array (
-                'role_id' => 3,
-                'user_id' => 7,
-            ),
         ));
         
         
