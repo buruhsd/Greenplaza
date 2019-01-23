@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\User_bank;
+use App\Models\Bank;
 use App\User;
 use Illuminate\Http\Request;
 use Session;
@@ -18,11 +19,12 @@ use Auth;
 class BankController extends Controller
 {
     private $perPage = 25;
-    private $mainTable = 'conf_bank';
+    private $mainTable = 'sys_user_bank';
+    
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
+     * menampilkan data bank user.
+     * @param search $request
+     * @return view data bank user.
      */
     public function index(Request $request)
     {
@@ -70,98 +72,71 @@ class BankController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * menambahkan data bank user.
+     * @param $request
+     * @return redirect bank user
      */
     public function store(Request $request)
     {
         $status = 200;
-        $message = 'Bank added!';
+        $message = 'Bank berhasil ditambahkan!';
         
         $requestData = $request->all();
+        $this->validate($request, [
+            'user_bank_bank_id' => 'required|numeric',
+            'user_bank_owner' => 'required',
+            'user_bank_no' => 'required|numeric',
+        ]);
         
-        $res = new Bank;
-        $res->bank_kode = $request->bank_kode;
-        $res->bank_name = $request->bank_name;
-        $res->bank_note = $request->bank_note;
+        $res = new User_bank;
+        $res->user_bank_user_id = Auth::id();
+        $res->user_bank_bank_id = $request->user_bank_bank_id;
+        $res->user_bank_name = Bank::whereId($request->user_bank_bank_id)->pluck('bank_kode')[0];
+        $res->user_bank_owner = $request->user_bank_owner;
+        $res->user_bank_no = $request->user_bank_no;
+        $res->user_bank_note = 'User '.Auth::user()->username.' mengubah data bank.';
         $res->save();
         if(!$res){
             $status = 500;
-            $message = 'Bank Not added!';
+            $message = 'Bank gagal ditambahkan!';
         }
         return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**
-     * Display the specified resource.
-     *
+     * Update data bank user.
+     * @param  $request
      * @param  int  $id
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($id)
-    {
-        $data['bank'] = Bank::findOrFail($id);
-
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('member.bank.show', $data);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $data['bank'] = Bank::findOrFail($id);
-
-        $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('member.bank.edit', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return redirect bank user.
      */
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Bank added!';
+        $message = 'Bank berhasil dirubah!';
         
         $requestData = $request->all();
         
-        $bank = Bank::findOrFail($id);
-        $bank->bank_kode = $request->bank_kode;
-        $bank->bank_name = $request->bank_name;
-        $bank->bank_note = $request->bank_note;
-        $bank->save();
-        $res = $bank->update($requestData);
+        $res = User_bank::findOrFail($id);
+        $res->user_bank_user_id = Auth::id();
+        $res->user_bank_bank_id = $request->user_bank_bank_id;
+        $res->user_bank_name = Bank::whereId($request->user_bank_bank_id)->pluck('bank_kode')[0];
+        $res->user_bank_owner = $request->user_bank_owner;
+        $res->user_bank_no = $request->user_bank_no;
+        $res->user_bank_note = 'User '.Auth::user()->username.' menambahkan bank baru.';
+        $res->save();
         if(!$res){
             $status = 500;
-            $message = 'Bank Not updated!';
+            $message = 'Bank gagal dirubah!';
         }
-
         return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
+     * menghapus data bank.
      * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return redirect data bank.
      */
     public function destroy($id)
     {
@@ -172,7 +147,6 @@ class BankController extends Controller
             $status = 500;
             $message = 'Bank Not deleted!';
         }
-
         return redirect('member/bank')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }

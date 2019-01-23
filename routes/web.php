@@ -272,14 +272,14 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('perviewpage/{id}', 'Admin\\KonfigurasiController@perview')->name('.perview');
 			Route::get('deletepage/{id}', 'Admin\\KonfigurasiController@deletepage')->name('.deletepage');
 
-			//GRADE
-				//member
+		//GRADE
+			//member
 			Route::get('grademember', 'Admin\\KonfigurasiController@grademember')->name('.grademember');
 			Route::post('add_grademember', 'Admin\\KonfigurasiController@add_grademember')->name('.add_grademember');
 			Route::post('grademember/{id}', 'Admin\\KonfigurasiController@update_grademember')->name('.update_grademember');
 			Route::get('delete_grademember/{id}', 'Admin\\KonfigurasiController@delete_grademember')->name('.delete_grademember');
 
-				//seller
+			//seller
 			Route::get('gradeseller', 'Admin\\KonfigurasiController@gradeseller')->name('.gradeseller');
 			Route::post('add_gradeseller', 'Admin\\KonfigurasiController@add_gradeseller')->name('.add_gradeseller');
 			Route::post('gradeseller/{id}', 'Admin\\KonfigurasiController@update_gradeseller')->name('.update_gradeseller');
@@ -394,7 +394,6 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::post('/upload_siup_update', 'UserController@upload_siup_update')->name('.upload_siup_update');
 			// pembeli
 			Route::get('/buyer_address', 'UserController@buyer_address')->name('.buyer_address');
-			Route::post('/buyer_address_update', 'UserController@buyer_address_update')->name('.buyer_address_update');
 		});
 		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
 		// Pesan & Diskusi
@@ -491,11 +490,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		Route::group(['prefix' => 'bank', 'as' => '.bank'], function () {
 			Route::get('/', 'BankController@index')->name('.index');
 			Route::get('/set_default/{id}', 'BankController@set_default')->name('.set_default');
-			Route::get('/create', 'BankController@create')->name('.create');
 			Route::post('/store', 'BankController@store')->name('.store');
-			Route::get('/show/{id}', 'BankController@show')->name('.show');
-			Route::get('/edit/{id}', 'BankController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'BankController@update')->name('.update');
+			Route::post('/update/{id}', 'BankController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'BankController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'review', 'as' => '.review'], function () {
@@ -505,6 +501,13 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/edit/{id}', 'ReviewController@edit')->name('.edit');
 			Route::patch('/update', 'ReviewController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ReviewController@destroy')->name('.destroy');
+		});
+		//buyer address
+		Route::group(['prefix' => 'address', 'as' => '.address'], function () {
+			Route::get('/set_default/{id}', 'User_addressController@set_default')->name('.set_default');
+			Route::post('/store', 'Member\\User_addressController@store')->name('member.address.store');
+			Route::post('/update/{id}', 'Member\\User_addressController@update')->name('member.address.update');
+			Route::delete('/destroy/{id}', 'User_addressController@destroy')->name('.destroy');
 		});
 	});
 	Route::group(['prefix' => 'member/localapi', 'as' => 'member.localapi', 'namespace' => 'LocalApi'], function () {
@@ -536,9 +539,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/chart', 'Member\\ChartController@chart')->name('chart');
 	Route::post('/addchart/{id}', 'Member\\ChartController@addChart')->name('addchart');
 	Route::get('/chart/destroy/{id}', 'Member\\ChartController@destroy')->name('chart.destroy');
-	//user_addressController
-	Route::get('/member/address', 'Member\\User_addressController@chart')->name('member.address');
-	Route::post('/member/address/store', 'Member\\User_addressController@store')->name('member.address.store');
 });
 
 // tanpa auth
@@ -590,6 +590,9 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
+		Route::get('editaddress/{id}', 'ModalController@editaddress')->name('.editaddress');
+		Route::get('addbank', 'ModalController@addbank')->name('.addbank');
+		Route::get('editbank/{id}', 'ModalController@editbank')->name('.editbank');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

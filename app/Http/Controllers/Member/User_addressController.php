@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\User_address;
+use App\User;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -38,6 +39,32 @@ class User_addressController extends Controller
     }
 
     /**
+    * Set default user bank
+    * @param $id #sys_user_bank
+    **/
+    public function set_default($id){
+        $status = 200;
+        $message = "Update alamat berhasil";
+        $user = User::findOrFail(Auth::id());
+        $user_id = Auth::id();
+        $useraddress = $user->user_address()->pluck('id')->toArray();
+        // delete if uncheck
+        array_walk($useraddress, function($value) use ($user_id, $id) {
+            if($value == (integer)$id){
+                $user_address = User_address::where('id', $value)->first();
+                $user_address->user_address_status = 1;
+                $user_address->save();
+            }else{
+                $user_address = User_address::where('id', $value)->first();
+                $user_address->user_address_status = 0;
+                $user_address->save();
+            }
+        });
+        return redirect('member/user/buyer_address')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\View\View
@@ -58,7 +85,7 @@ class User_addressController extends Controller
     public function store(Request $request)
     {
         $status = 200;
-        $message = 'User_address added!';
+        $message = 'Alamat berhasil ditambahkan!';
         
         $requestData = $request->all();
         $this->validate($request, [
@@ -88,7 +115,7 @@ class User_addressController extends Controller
         $res->save();
         if(!$res){
             $status = 500;
-            $message = 'User_address Not added!';
+            $message = 'Alamat gagal ditambahkan!';
         }
         return redirect()->back()//('member/user_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -135,12 +162,23 @@ class User_addressController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'User_address added!';
+        $message = 'Alamat berhasil di ubah!';
         
         $requestData = $request->all();
         
+        $this->validate($request, [
+            'user_address_label' => 'required',
+            'user_address_owner' => 'required',
+            'user_address_phone' => 'required',
+            'user_address_tlp' => 'required',
+            'user_address_province' => 'required|numeric',
+            'user_address_city' => 'required|numeric',
+            'user_address_subdist' => 'required|numeric',
+            'user_address_pos' => 'required',
+        ]);
+
         $user_address = User_address::findOrFail($id);
-        $user_address->user_address_user_id = $request->user_address_user_id;
+        $user_address->user_address_user_id = Auth::id();
         $user_address->user_address_label = $request->user_address_label;
         $user_address->user_address_owner = $request->user_address_owner;
         $user_address->user_address_address = $request->user_address_address;
@@ -152,13 +190,13 @@ class User_addressController extends Controller
         $user_address->user_address_pos = $request->user_address_pos;
         $user_address->user_address_note = $request->user_address_note;
         $user_address->save();
-        $res = $user_address->update($requestData);
-        if(!$res){
+        // $res = $user_address->update($requestData);
+        if(!$user_address){
             $status = 500;
-            $message = 'User_address Not updated!';
+            $message = 'Alamat gagal diubah!';
         }
 
-        return redirect('member/user_address')
+        return redirect('member/user/buyer_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

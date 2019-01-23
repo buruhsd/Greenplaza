@@ -5,6 +5,8 @@ namespace App\Http\Controllers\LocalApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User_address;
+use App\Models\User_bank;
+use App\Models\Bank;
 use App\Models\Trans;
 use App\Models\Conf_komplain;
 use App\Models\Conf_solusi;
@@ -25,6 +27,37 @@ class ModalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    /**
+     * tambah bank user
+     * @param
+     * @return 
+     */
+    public function addBank()
+    {
+        $data['cfg_bank'] = Bank::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.bank-form', $data);
+    }
+
+    /**
+     * edit bank user
+     * @param
+     * @return 
+     */
+    public function editBank($id=0)
+    {
+        $data['cfg_bank'] = Bank::all();
+        $data['user_bank'] = User_bank::where('user_bank_user_id', Auth::id())->first();
+        if(!empty($id) && $id !== 0){
+            $where = '1';
+            $where .= ' AND user_bank_user_id='.Auth::id();
+            $where .= ' AND id='.$id;
+            $data['user_bank'] = User_bank::whereRaw($where)->first();
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.bank-form-edit', $data);
     }
 
     /**
@@ -137,6 +170,24 @@ class ModalController extends Controller
     {
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.address-form', $data);
+    }
+
+    /**
+     * 
+     * @param
+     * @return 
+     */
+    public function editAddress($id=0)
+    {
+        $data['user_address'] = User_address::where('user_address_user_id', Auth::id())->first();
+        if(!empty($id) && $id !== 0){
+            $where = '1';
+            $where .= ' AND user_address_user_id='.Auth::id();
+            $where .= ' AND id='.$id;
+            $data['user_address'] = User_address::whereRaw($where)->first();
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.address-form-edit', $data);
     }
 
     /**

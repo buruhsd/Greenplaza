@@ -88,7 +88,7 @@ class UserController extends Controller
     public function set_shipment_update(Request $request)
     {
         $status = 200;
-        $message = 'Shipment updated!';
+        $message = 'Jasa pengiriman berhasil dirubah!';
         $requestData = $request->all();
         $this->validate($request, [
             'user_shipment_shipment_id' => 'required',
@@ -137,7 +137,7 @@ class UserController extends Controller
     public function upload_foto_profil_update(Request $request)
     {
         $status = 200;
-        $message = 'User added!';
+        $message = 'Foto profil berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -159,9 +159,9 @@ class UserController extends Controller
         $userdetail->save();
         if(!$userdetail){
             $status = 500;
-            $message = 'Address Not updated!';
+            $message = 'Foto profil gagal dirubah!';
         }
-        return redirect('member/upload_foto_profil')
+        return redirect('member/user/upload_foto_profil')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -183,7 +183,7 @@ class UserController extends Controller
     public function upload_scan_npwp_update(Request $request)
     {
         $status = 200;
-        $message = 'NPWP added!';
+        $message = 'NPWP berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -205,7 +205,7 @@ class UserController extends Controller
         $userdetail->save();
         if(!$userdetail){
             $status = 500;
-            $message = 'NPWP Not updated!';
+            $message = 'NPWP gagal dirubah!';
         }
         return redirect('member/upload_scan_npwp')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -229,7 +229,7 @@ class UserController extends Controller
     public function upload_siup_update(Request $request)
     {
         $status = 200;
-        $message = 'SIUP Updated!';
+        $message = 'SIUP berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -251,7 +251,7 @@ class UserController extends Controller
         $userdetail->save();
         if(!$userdetail){
             $status = 500;
-            $message = 'SIUP Not updated!';
+            $message = 'SIUP gagal dirubah!';
         }
         return redirect('member/upload_siup')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -275,7 +275,7 @@ class UserController extends Controller
     public function seller_address_update(Request $request)
     {
         $status = 200;
-        $message = 'User added!';
+        $message = 'Alamat penjual berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -298,9 +298,9 @@ class UserController extends Controller
         $userdetail->save();
         if(!$userdetail){
             $status = 500;
-            $message = 'Address Not updated!';
+            $message = 'Alamat penjual gagal dirubah!';
         }
-        return redirect('member/seller_address')
+        return redirect('member/user/seller_address')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -777,156 +777,7 @@ class UserController extends Controller
                 break;
             case 'buyer_address':
                 ?>
-                    <script type="text/javascript">
-                        $(function(){
-                            var rows, row;
-                            get_province();
-                        });
-                        function get_province(){
-                            $.ajax({
-                                type: "GET", // or post?
-                                url: "<?php echo url('localapi/content/get_province', 0);?>", // change as needed
-                                beforeSend: function(){
-                                    rows = "<option>Loading...</option>";
-                                    $('#user_detail_province').empty();
-                                    $('#user_detail_province').html(rows);
-                                },
-                                success: function(data) {
-                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_province;?>");
-                                    if (data) {
-                                        $('#user_detail_province').empty();
-                                        $.each( data.province, function(i, o){
-                                            $check = (o.province_id == id)?"selected":"";
-                                            row = "<option value="+o.province_id+" "+$check+">"+
-                                                o.province+"</option>";
-                                            $('#user_detail_province').append(row);
-                                            if(i == 0){
-                                                if(id !== null || id !== 0){
-                                                    get_city(id);
-                                                }else{
-                                                    get_city(o.province_id);
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        swal({   
-                                            type: "error",
-                                            title: "failed",   
-                                            text: "Layanan Tidak Tersedia",   
-                                            showConfirmButton: false ,
-                                            showCloseButton: true,
-                                            footer: ''
-                                        });
-                                    }
-                                    // $("#btn-choose-shipment").val(text);
-                                },
-                                error: function(xhr, textStatus) {
-                                    swal({
-                                        type: "error",
-                                        title: "failed",   
-                                        text: "Layanan Tidak Tersedia",   
-                                        showConfirmButton: false ,
-                                        showCloseButton: true,
-                                        footer: ''
-                                    });
-                                    $("#btn-choose-shipment").val(text);
-                                }
-                            });
-                        }
-                        function get_city(id = 0){
-                            $.ajax({
-                                type: "GET", // or post?
-                                url: "<?php echo url("localapi/content/get_city"); ?>/"+id, // change as needed
-                                beforeSend: function(){
-                                    rows = "<option>Loading...</option>";
-                                    $('#user_detail_city').empty();
-                                    $('#user_detail_city').html(rows);
-                                },
-                                success: function(data) {
-                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_city;?>");
-                                    if (data) {
-                                        $('#user_detail_city').empty();
-                                        $.each( data.city, function(i, o){
-                                            $check = (o.city_id == id)?"selected":"";
-                                            row = "<option value="+o.city_id+" "+$check+">"+o.city_name+"</option>";
-                                            $('#user_detail_city').append(row);
-                                            if(i == 0){
-                                                if(id !== null || id !== 0){
-                                                    get_subdistrict(id);
-                                                }else{
-                                                    get_subdistrict(o.city_id);
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        swal({   
-                                            type: "error",
-                                            title: "failed",   
-                                            text: "Layanan Tidak Tersedia",   
-                                            showConfirmButton: false ,
-                                            showCloseButton: true,
-                                            footer: ''
-                                        });
-                                    }
-                                    // $("#btn-choose-shipment").val(text);
-                                },
-                                error: function(xhr, textStatus) {
-                                    swal({
-                                        type: "error",
-                                        title: "failed",   
-                                        text: "Layanan Tidak Tersedia",   
-                                        showConfirmButton: false ,
-                                        showCloseButton: true,
-                                        footer: ''
-                                    });
-                                    $("#btn-choose-shipment").val(text);
-                                }
-                            });
-                        }
-                        function get_subdistrict(id){
-                            $.ajax({
-                                type: "GET", // or post?
-                                url: "<?php echo url("localapi/content/get_subdistrict");?>/"+id, // change as needed
-                                beforeSend: function(){
-                                    rows = "<option>Loading...</option>";
-                                    $('#user_detail_subdist').empty();
-                                    $('#user_detail_subdist').html(rows);
-                                },
-                                success: function(data) {
-                                    var id = parseInt("<?php echo Auth::user()->user_detail()->first()->user_detail_city;?>");
-                                    if (data) {
-                                        $('#user_detail_subdist').empty();
-                                        $.each( data, function(i, o){
-                                            $check = (o.subdistrict_id == id)?"selected":"";
-                                            row = "<option value="+o.subdistrict_id+" "+$check+">"+o.subdistrict_name+"</option>";
-                                            $('#user_detail_subdist').append(row);
-                                        });
-                                    } else {
-                                        swal({   
-                                            type: "error",
-                                            title: "failed",   
-                                            text: "Layanan Tidak Tersedia",   
-                                            showConfirmButton: false ,
-                                            showCloseButton: true,
-                                            footer: ''
-                                        });
-                                    }
-                                    // $("#btn-choose-shipment").val(text);
-                                },
-                                error: function(xhr, textStatus) {
-                                    swal({
-                                        type: "error",
-                                        title: "failed",   
-                                        text: "Layanan Tidak Tersedia",   
-                                        showConfirmButton: false ,
-                                        showCloseButton: true,
-                                        footer: ''
-                                    });
-                                    $("#btn-choose-shipment").val(text);
-                                }
-                            });
-                        }
-                    </script>
+                    
                 <?php
                 break;
             case 'profil':

@@ -28,7 +28,7 @@
                 <div class="panel-body">
                 {!! Form::model($user, [
                     'method' => 'PATCH',
-                    'url' => ['/member/user/update'],
+                    'url' => ['#'],
                     'class' => 'form-horizontal',
                     'files' => true
                 ]) !!}
