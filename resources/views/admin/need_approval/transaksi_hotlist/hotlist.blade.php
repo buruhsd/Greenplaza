@@ -42,6 +42,7 @@
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
+                            @if($hot->count() > 0)
                             @foreach ($hot as $key => $h)
                             <tbody>
                                 <tr>
@@ -82,6 +83,9 @@
                                         </center>
                                         @endif
                                 </tr>
+                                @else
+                                    <td colspan="7"><center>KOSONG</center></td>
+                                @Endif
                             </tbody>
                             @endforeach
                         </table>
