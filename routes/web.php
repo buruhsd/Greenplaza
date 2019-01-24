@@ -53,6 +53,9 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'Admin\\FrontController@dashboard')->name('.dashboard');
+		Route::get('/dashboarddetail', 'Admin\\FrontController@dashboardseller')->name('.dashboardseller');
+		Route::post('password_seller/{id}', 'Admin\\NeedApprovalController@password_seller')->name('.password_seller');
+		Route::get('changepassword_seller/{id}', 'Admin\\NeedApprovalController@changepassword_seller')->name('.changepassword_seller');
 
 		//EmailController
 		Route::post('/send_email', 'Admin\\EmailController@email')->name('.send_email');
