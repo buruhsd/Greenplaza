@@ -276,12 +276,11 @@ class ProdukController extends Controller
         $message = 'Produk added!';
         
         $requestData = $request->all();
-        dd($requestData);
         
         $this->validate($request, [
             'produk_name' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required|numeric|between:0.00,99.99',
+            'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
@@ -292,7 +291,7 @@ class ProdukController extends Controller
         ]);
 
         $produk = Produk::findOrFail($id);
-        if($produk->produk_seller_id !== Auth::user()->id || $res->produk_user_status !== Auth::user()->roles->first()->id){
+        if($produk->produk_seller_id !== Auth::user()->id || $produk->produk_user_status !== Auth::user()->roles->first()->id){
             $status = 500;
             $message = 'Produk Not updated!';
             return redirect('member/produk')
@@ -369,8 +368,11 @@ class ProdukController extends Controller
             // add grosir
             if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
                 foreach ($request->produk_grosir_start as $key => $item) {
+                    if($request->produk_grosir_start[$key] == null){
+                            break;
+                    }
                     $produk_grosir = new Produk_grosir;
-                    $produk_grosir->produk_grosir_produk_id = $res->id;
+                    $produk_grosir->produk_grosir_produk_id = $produk->id;
                     $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
                     $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
                     $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];

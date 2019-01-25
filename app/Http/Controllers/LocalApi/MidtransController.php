@@ -142,15 +142,23 @@ class MidtransController extends Controller
                         // Session::put('chart', $data);
                         // Session::save();
 
-                        return redirect()->back()
-                            ->with(['status' => $status, 'message' => $message]);
+                        return ['status' => $status, 'message' => $message];
+                        // return redirect()->back()
+                        //     ->with(['status' => $status, 'message' => $message]);
                     }
                 }
                 // add to DB sys_trans
+                $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
+                if(!$bank_id || empty($bank_id) || $bank_id == null){
+                    $status = 500;
+                    $message = 'Silahkan isikan data bank anda.';
+                    return ['status' => $status, 'message' => $message];
+
+                }
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
                 $trans->trans_user_id = Auth::id();
-                $trans->trans_user_bank_id = Auth::user()->first()->user_bank()->where('user_bank_status', 1)->first()->id;
+                $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 2;
                 $trans->trans_amount = FunctionLib::array_sum_key($value, 'trans_detail_amount');
                 $trans->trans_amount_ship = FunctionLib::array_sum_key($value, 'trans_detail_amount_ship');
@@ -424,12 +432,12 @@ class MidtransController extends Controller
                         $trans_detail->save();
                     }
                 }else{
-                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
-                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
-                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
                     switch ($type) {
                         case 'hotlist':
-                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_hotlist_status = 3;
                             $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
@@ -437,7 +445,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'pincode':
-                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_pincode_status = 3;
                             $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
@@ -445,7 +453,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'iklan':
-                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_iklan_status = 3;
                             $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
@@ -477,12 +485,12 @@ class MidtransController extends Controller
                         $trans_detail->save();
                     }
                 }else{
-                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
-                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
-                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
                     switch ($type) {
                         case 'hotlist':
-                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_hotlist_status = 4;
                             $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_hotlist_response_note = 'Transfer Expired. updated by system.';
@@ -490,7 +498,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'pincode':
-                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_pincode_status = 4;
                             $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_pincode_response_note = 'Transfer Expired. updated by system.';
@@ -498,7 +506,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'iklan':
-                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_iklan_status = 4;
                             $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_iklan_response_note = 'Transfer Expired. updated by system.';
@@ -528,12 +536,12 @@ class MidtransController extends Controller
                         $trans_detail->save();
                     }
                 }else{
-                    $type = (strpos(strtolower($order_id), 'hl-'))?'hotlist'
-                        :(strpos(strtolower($order_id), 'ikl-'))?'iklan'
-                        :(strpos(strtolower($order_id), 'pc-'))?'pincode':'';
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
                     switch ($type) {
                         case 'hotlist':
-                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_hotlist_status = 4;
                             $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_hotlist_response_note = 'Transfer deny. updated by system.';
@@ -541,7 +549,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'pincode':
-                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_pincode_status = 4;
                             $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_pincode_response_note = 'Transfer deny. updated by system.';
@@ -549,7 +557,7 @@ class MidtransController extends Controller
                             $trans_detail->save();
                         break;
                         case 'iklan':
-                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+                            $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_iklan_status = 4;
                             $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_iklan_response_note = ' Transfer deny. updated by system.';

@@ -322,7 +322,7 @@ class UserController extends Controller
     public function pass_trx_update(Request $request)
     {
         $status = 200;
-        $message = 'Password Has Been updated!';
+        $message = 'Password Transaksi berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -334,13 +334,13 @@ class UserController extends Controller
         $user = User_detail::whereRaw('user_detail_user_id = '.Auth::id())->first();
         if (!Hash::check($request->old_password, $user->user_detail_pass_trx)) {
             $status = 500;
-            $message = 'Password does Not Match!';
+            $message = 'Password transaksi gagal dirubah!, masukkan password dengan benar!';
             return redirect('member/user/pass_trx')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         if ($request->new_password !== $request->re_new_password) {
             $status = 500;
-            $message = 'New Password does Not Match!';
+            $message = 'Password transaksi gagal dirubah!, masukkan konfirmasi password baru dengan benar!';
             return redirect('member/user/pass_trx')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -350,7 +350,7 @@ class UserController extends Controller
         $user->save();
         if(!$user){
             $status = 500;
-            $message = 'Password Not updated!';
+            $message = 'Password Transaksi gagal dirubah!';
         }
         return redirect('member/user/pass_trx')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -374,7 +374,7 @@ class UserController extends Controller
     public function change_password_update(Request $request)
     {
         $status = 200;
-        $message = 'Password Has Been updated!';
+        $message = 'Password berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -386,13 +386,13 @@ class UserController extends Controller
         $user = User::findOrFail(Auth::id());
         if (!Hash::check($request->old_password, $user->password)) {
             $status = 500;
-            $message = 'Password does Not Match!';
+            $message = 'Password gagal dirubah!, masukkan password dengan benar!';
             return redirect('member/user/change_password')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         if ($request->new_password !== $request->re_new_password) {
             $status = 500;
-            $message = 'New Password does Not Match!';
+            $message = 'Password gagal dirubah!, masukkan konfirmasi password baru dengan benar';
             return redirect('member/user/change_password')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -402,7 +402,7 @@ class UserController extends Controller
         $user->save();
         if(!$user){
             $status = 500;
-            $message = 'Password Not updated!';
+            $message = 'Password gagal dirubah!';
         }
         return redirect('member/user/change_password')
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -488,7 +488,7 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $status = 200;
-        $message = 'User added!';
+        $message = 'data berhasil dirubah!';
         
         $requestData = $request->all();
         
@@ -511,7 +511,7 @@ class UserController extends Controller
         $user->save();
         if(!$user){
             $status = 500;
-            $message = 'User Not updated!';
+            $message = 'data gagal dirubah!';
                 return redirect('member/user')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -542,7 +542,7 @@ class UserController extends Controller
         $userdetail->save();
         if(!$userdetail){
             $status = 500;
-            $message = 'Detail User Not updated!';
+            $message = 'Data gagal dirubah!';
                 return redirect('member/user')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }

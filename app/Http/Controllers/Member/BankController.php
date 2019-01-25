@@ -40,7 +40,7 @@ class BankController extends Controller
     **/
     public function set_default($id){
         $status = 200;
-        $message = "Bank Updated";
+        $message = "Data bank berhasil di update.";
         $user = User::findOrFail(Auth::id());
         $user_id = Auth::id();
         $userbank = $user->user_bank()->pluck('id')->toArray();

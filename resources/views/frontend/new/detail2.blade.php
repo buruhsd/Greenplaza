@@ -138,6 +138,10 @@
                                         </ul>
                                     </div>
                                         {{$detail->produk_note}}
+                                    <ul class="stock">
+                                        <li>Stok : </li>
+                                        <li>{{$detail->produk_stock}} <b>{{$detail->unit->produk_unit_name}}</b></li>
+                                    </ul>
                                     <ul class="cetagory">
                                         <li>Categories:</li>
                                         <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
@@ -173,13 +177,13 @@
                                     </ul>
                                     <div class="col-md-12 " style="margin-bottom: 2%">
                                         <center>
-                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Choose Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Alamat tujuan" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
                                         </center>
                                     </div>
                                     <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
                                         <ul style='width: 100%; margin-bottom: 2%'>
                                             <div class='col-lg-6 col-sm-12 col-md-12'>
-                                                <b>To Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b>
+                                                <b>Alamat tujuan : {{Auth::user()->user_address()->first()['user_address_label']}}</b>
                                             </div>
                                         </ul>
                                     </div>
@@ -198,7 +202,7 @@
                                     </div>
                                     <div class="col-md-12" style="margin-bottom: 2%">
                                         <center>
-                                            <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Choose Shipment" id="btn-choose-shipment" />
+                                            <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Jasa pengiriman" id="btn-choose-shipment" />
                                         </center>
                                     </div>
                                     {{-- color and size --}}

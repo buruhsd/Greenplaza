@@ -2,6 +2,186 @@
 class FunctionLib
 {
 
+    /**
+    * @param $data [order_id, transaction_status]
+    * @return
+    **/
+    public static function done_order($data=[]){
+        if(!empty($data)){
+            $response['status'] = 200;
+            $response['message'] = 'Transfer confirmed!';
+        }else{
+            $response['status'] = 500;
+            $response['message'] = 'Transfer Failed!';
+            return $response;
+        }
+        extract($data);
+        switch ($transaction_status) {
+            case 'settlement':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
+                        $trans_detail->save();
+                        $response['data'][] = $trans_detail;
+                    }
+                }else{
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = App\Models\Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_hotlist_status = 3;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        case 'pincode':
+                            $trans_detail = App\Models\Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_pincode_status = 3;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        case 'iklan':
+                            $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_iklan_status = 3;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        default:
+                            $response['status'] = 500;
+                            $response['message'] = 'Transfer Failed!';
+                            $response['data'][] = "";
+                        break;
+                    }
+                }
+                return $response;
+            break;
+            case 'pending':
+            break;
+            case 'expire':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                if($trans_detail){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 2;
+                        $trans_detail->trans_detail_transfer_is_cancel = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Expired, Transaction cancelled.';
+                        $trans_detail->save();
+                    }
+                }else{
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = App\Models\Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_hotlist_status = 4;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'pincode':
+                            $trans_detail = App\Models\Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_pincode_status = 4;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'iklan':
+                            $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_iklan_status = 4;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = 'Transfer Expired. updated by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Expired. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        default:
+                            $response['status'] = 500;
+                            $response['message'] = 'Transfer Expired!';
+                        break;
+                    }
+                }
+                return $response;
+            break;
+            case 'deny':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                if($trans_detail){
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 4;
+                        $trans_detail->trans_detail_transfer = 2;
+                        $trans_detail->trans_detail_transfer_is_cancel = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer denied, Transaction cancelled.';
+                        $trans_detail->save();
+                    }
+                }else{
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
+                    switch ($type) {
+                        case 'hotlist':
+                            $trans_detail = App\Models\Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_hotlist_status = 4;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer deny. updated by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'pincode':
+                            $trans_detail = App\Models\Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_pincode_status = 4;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer deny. updated by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        case 'iklan':
+                            $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_iklan_status = 4;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = ' Transfer deny. updated by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer deny. updated by system.';
+                            $trans_detail->save();
+                        break;
+                        default:
+                            $response['status'] = 500;
+                            $response['message'] = 'Transfer Denied!';
+                        break;
+                    }
+                }
+                return $response;
+            break;
+            default:
+                return $response;
+            break;
+        }
+    }
+
     public static function setActive(string $path, string $class_name = "active-page")
     {
         return Request::path() === $path ? $class_name : "";
@@ -144,7 +324,7 @@ class FunctionLib
         }else{
             $message = App\Models\Message::whereRaw('1 = 0')->get();
         }
-        // dd($data['message']);
+        // dd($response['message']);
         return $message;
     }
 

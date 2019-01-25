@@ -12,12 +12,43 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use FunctionLib;
 
 
 class TransactionController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'sys_trans';
+
+    /**
+     * 
+     * @param
+     * @return
+     */
+    public function done_order(Request $request){
+        $status = 200;
+        $message = 'Transfer Berhasil';
+        // $this->validate($request, [
+        //     'order_id' => 'required',
+        //     'transaction_status' => 'required',
+        // ]);
+        $requestData = $request->all();
+        $data = [
+            'order_id' => $requestData['order_id'],
+            'transaction_status' => $requestData['transaction_status']
+        ];
+        $response = FunctionLib::done_order($data);
+        if($response['status'] == 500){
+            $status = $response['status'];
+            $message = $response['message'];
+        }
+        $data = $response['data'];
+        if($request->ajax()){
+            return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        }
+        return view('admin.transaction.done-order', compact('data'))
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
 
     /**
      * 

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('done_order', 'Admin\\TransactionController@done_order')->name('done_order');
 Route::get('index', 'AdminApi\PermissionsController@index');
 
 //Bank

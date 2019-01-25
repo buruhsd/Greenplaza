@@ -71,7 +71,7 @@ class ChartController extends Controller
         Session::save();
 
         $status = 200;
-        $message = 'Add Chart Successfully';
+        $message = 'Item pembelian berhasil masuk ke chart.';
     	return redirect()->back()->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

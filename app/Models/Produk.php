@@ -54,7 +54,7 @@ class Produk extends Model
     */
     public function unit()
     {
-        return $this->hasMany('App\Models\Produk_unit', 'produk_unit');
+        return $this->belongsTo('App\Models\Produk_unit', 'produk_unit');
     }
 
     /**
