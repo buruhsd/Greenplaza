@@ -53,7 +53,16 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'Admin\\FrontController@dashboard')->name('.dashboard');
-		Route::get('/dashboarddetail', 'Admin\\FrontController@dashboardseller')->name('.dashboardseller');
+		//seller
+		Route::get('/dashboarddetail', 'Admin\\FrontController@dashboarddetail')->name('.dashboarddetail');
+		Route::get('/dashboardhotlist', 'Admin\\FrontController@dashboardhotlist')->name('.dashboardhotlist');
+		Route::get('/dashboardiklan', 'Admin\\FrontController@dashboardiklan')->name('.dashboardiklan');
+		Route::get('/dashboardpincode', 'Admin\\FrontController@dashboardpincode')->name('.dashboardpincode');
+		//member
+		Route::get('/dashboarddetailmember', 'Admin\\FrontController@dashboarddetailmember')->name('.dashboarddetailmember');
+		Route::get('/dashboardhotlistmember', 'Admin\\FrontController@dashboardhotlistmember')->name('.dashboardhotlistmember');
+		Route::get('/dashboardiklanmember', 'Admin\\FrontController@dashboardiklanmember')->name('.dashboardiklanmember');
+		Route::get('/dashboardpincodemember', 'Admin\\FrontController@dashboardpincodemember')->name('.dashboardpincodemember');
 		Route::post('password_seller/{id}', 'Admin\\NeedApprovalController@password_seller')->name('.password_seller');
 		Route::get('changepassword_seller/{id}', 'Admin\\NeedApprovalController@changepassword_seller')->name('.changepassword_seller');
 

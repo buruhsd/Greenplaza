@@ -6,8 +6,9 @@
         <div class="col-md-12">
             @include('layouts._flash')
             <div class="page-title">
-			    <h4 class="breadcrumb-header">Manage Seller Transaksi Detail</h3>
+			    <h4 class="breadcrumb-header">Manage Seller Transaksi Hotlist</h3>
 			</div>
+            <a href="{{route('admin.dashboard')}}"><button type="button" class="btn btn-warning btn-addon pull-right"><i class="fa fa-spin fa-refresh"></i> Back</button></a>
 			<form action="#" method="GET">
                 <div class="panel-heading clearfix" style="margin-bottom: 10px;">
                     <div class="input-group pull-left" style="width: 225px;">
@@ -16,6 +17,15 @@
                     </div>
                 </div> 
             </form>
+            <div class="input-group pull-right" style="margin-top: 2%; margin-right: 2%">
+                <select id="select-list" type="text" class="form-control">
+                    <option value="">--< Choose Option List >--</option>
+                    <option value="/admin/dashboarddetail">Detail Seller</option>
+                    <option value="/admin/dashboardhotlist">Hotlist Seller</option>
+                    <option value="/admin/dashboardiklan">Iklan Seller</option>
+                    <option value="/admin/dashboardpincode">Pincode Seller</option>
+                </select>
+            </div>
 			<div class="panel panel-white">
                 <div class="panel-heading clearfix">
                 </div>
@@ -32,25 +42,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if($detailseller->count() > 0)
-                                @foreach ($detailseller as $d)
+                            @if($hotlistseller->count() > 0)
+                                @foreach ($hotlistseller as $d)
                                <tr>
-                                    <td><center>{{$d->trans->trans_user_id}}</center></td>
-                                    <td><center>{{$d->trans->pembeli->name}}</center></td>
+                                    <td><center>{{$d->user->id}}</center></td>
+                                    <td><center>{{$d->user->name}}</center></td>
                                     <td><center></center></td>
 
-                                @if ($d->trans_detail_status == 1)
-                                    <td><center>Order</center></td>
-                                @elseif ($d->trans_detail_status == 2)
-                                    <td><center>Transfer</center></td>
-                                @elseif ($d->trans_detail_status == 3)
-                                    <td><center>Seller</center></td>
-                                @elseif ($d->trans_detail_status == 4)
-                                    <td><center>Packing</center></td>
-                                @elseif ($d->trans_detail_status == 5)
-                                    <td><center>Shipping</center></td>
-                                @elseif ($d->trans_detail_status == 6)
-                                    <td><center>Dropping</center></td>
+                                @if ($d->trans_hotlist_status == 0)
+                                    <td><center>Baru</center></td>
+                                @elseif ($d->trans_hotlist_status == 1)
+                                    <td><center>Konfirmasi (paid)</center></td>
+                                @elseif ($d->trans_hotlist_status == 2)
+                                    <td><center>Batal</center></td>
+                                @elseif ($d->trans_hotlist_status == 3)
+                                    <td><center>Approve Admin</center></td>
+                                @elseif ($d->trans_hotlist_status == 4)
+                                    <td><center>Ditolak</center></td>
                                 @endif
 
                                 	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
@@ -68,4 +76,12 @@
     </div>
 </div>
 
+@endsection
+@section('script')
+<script type="text/javascript">
+  $('#select-list').on('change',function(e){
+      console.log($(this).find(':selected').val());
+      window.location.href = $(this).find(':selected').val();
+      })
+</script>
 @endsection

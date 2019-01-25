@@ -6,7 +6,7 @@
         <div class="col-md-12">
             @include('layouts._flash')
             <div class="page-title">
-			    <h4 class="breadcrumb-header">Manage Seller Transaksi Detail</h3>
+			    <h4 class="breadcrumb-header">Manage Seller Transaksi Iklan</h3>
 			</div>
             <a href="{{route('admin.dashboard')}}"><button type="button" class="btn btn-warning btn-addon pull-right"><i class="fa fa-spin fa-refresh"></i> Back</button></a>
 			<form action="#" method="GET">
@@ -42,28 +42,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if($detailseller->count() > 0)
-                                @foreach ($detailseller as $d)
+                            @if($iklanseller->count() > 0)
+                                @foreach ($iklanseller as $d)
                                <tr>
-                                    <td><center>{{$d->trans->trans_user_id}}</center></td>
-                                    <td><center>{{$d->trans->pembeli->name}}</center></td>
+                                    <td><center>{{$d->user->id}}</center></td>
+                                    <td><center>{{$d->user->name}}</center></td>
                                     <td><center></center></td>
 
-                                @if ($d->trans_detail_status == 1)
-                                    <td><center>Order</center></td>
-                                @elseif ($d->trans_detail_status == 2)
-                                    <td><center>Transfer</center></td>
-                                @elseif ($d->trans_detail_status == 3)
-                                    <td><center>Seller</center></td>
-                                @elseif ($d->trans_detail_status == 4)
-                                    <td><center>Packing</center></td>
-                                @elseif ($d->trans_detail_status == 5)
-                                    <td><center>Shipping</center></td>
-                                @elseif ($d->trans_detail_status == 6)
-                                    <td><center>Dropping</center></td>
+                                @if ($d->trans_hotlist_status == 0)
+                                    <td><center>Baru</center></td>
+                                @elseif ($d->trans_hotlist_status == 1)
+                                    <td><center>KOnfirmasi (paid)</center></td>
+                                @elseif ($d->trans_hotlist_status == 2)
+                                    <td><center>Batal</center></td>
+                                @elseif ($d->trans_hotlist_status == 3)
+                                    <td><center>Approve Admin</center></td>
+                                @elseif ($d->trans_hotlist_status == 4)
+                                    <td><center>Ditolak</center></td>
                                 @endif
 
-                                	<td><center><a href="{{route('admin.needapproval.changepassword_seller', $d->trans->pembeli->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
+                                	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
                                </tr>
                                @endforeach
                             @else

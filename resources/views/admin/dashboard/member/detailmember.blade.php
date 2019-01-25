@@ -6,7 +6,7 @@
         <div class="col-md-12">
             @include('layouts._flash')
             <div class="page-title">
-			    <h4 class="breadcrumb-header">Manage Seller Transaksi Detail</h3>
+			    <h4 class="breadcrumb-header">Manage Member Transaksi Detail</h3>
 			</div>
             <a href="{{route('admin.dashboard')}}"><button type="button" class="btn btn-warning btn-addon pull-right"><i class="fa fa-spin fa-refresh"></i> Back</button></a>
 			<form action="#" method="GET">
@@ -17,13 +17,14 @@
                     </div>
                 </div> 
             </form>
+
             <div class="input-group pull-right" style="margin-top: 2%; margin-right: 2%">
                 <select id="select-list" type="text" class="form-control">
                     <option value="">--< Choose Option List >--</option>
-                    <option value="/admin/dashboarddetail">Detail Seller</option>
-                    <option value="/admin/dashboardhotlist">Hotlist Seller</option>
-                    <option value="/admin/dashboardiklan">Iklan Seller</option>
-                    <option value="/admin/dashboardpincode">Pincode Seller</option>
+                    <option value="/admin/dashboarddetailmember">Detail Member</option>
+                    <option value="/admin/dashboardhotlistmember">Hotlist member</option>
+                    <option value="/admin/dashboardiklanmember">Iklan Member</option>
+                    <option value="/admin/dashboardpincodemember">Pincode Member</option>
                 </select>
             </div>
 			<div class="panel panel-white">
@@ -42,8 +43,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if($detailseller->count() > 0)
-                                @foreach ($detailseller as $d)
+                            @if($detailmember->count() > 0)
+                                @foreach ($detailmember as $d)
                                <tr>
                                     <td><center>{{$d->trans->trans_user_id}}</center></td>
                                     <td><center>{{$d->trans->pembeli->name}}</center></td>
@@ -63,7 +64,7 @@
                                     <td><center>Dropping</center></td>
                                 @endif
 
-                                	<td><center><a href="{{route('admin.needapproval.changepassword_seller', $d->trans->pembeli->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
+                                	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
                                </tr>
                                @endforeach
                             @else

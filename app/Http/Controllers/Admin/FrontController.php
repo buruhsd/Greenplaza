@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
+use App\Models\Trans_hotlist;
+use App\Models\Trans_iklan;
+use App\Models\Trans_pincode;
 use App\Models\Trans;
 use App\User;
 
@@ -33,13 +36,19 @@ class FrontController extends Controller
 
 //DASBOARD
     public function dashboard(){
-    //SELLER
         //detail
         $userseller = User::whereHas('roles', function($query){
             $query->where('name','=','member');
             return $query;
         })
         ->where('user_store', '!=', null)->pluck('id')->toArray();
+
+        $usermember = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->pluck('id')->toArray();
+
         $transseller = Trans::where('trans_user_id', $userseller)->pluck('id')->toArray();
         $detailsellerorder = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
                                             ->where('trans_detail_status', '=', 1)->get();
@@ -54,37 +63,114 @@ class FrontController extends Controller
         $detailsellerdropping = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
                                             ->where('trans_detail_status', '=', 6)->get();  
 
-        //hotlist
-        $userseller = User::whereHas('roles', function($query){
-            $query->where('name','=','member');
-            return $query;
-        })
-        ->where('user_store', '!=', null)->pluck('id')->toArray();
-        $hotsellerbaru = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
-                                            ->where('trans_detail_status', '=', 0)->get();
-        $hotsellerkonf = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
+        $transmember = Trans::where('trans_user_id', $usermember)->pluck('id')->toArray();
+        $detailmemberorder = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
                                             ->where('trans_detail_status', '=', 1)->get();
-        $hotsellerbatal = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
+        $detailmembertransfer = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
                                             ->where('trans_detail_status', '=', 2)->get();
-        $hotsellerapprove = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
+        $detailmemberseller = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
                                             ->where('trans_detail_status', '=', 3)->get();
-        $hotsellerditolak = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
-                                            ->where('trans_detail_status', '=', 4)->get();               
+        $detailmemberpacking = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
+                                            ->where('trans_detail_status', '=', 4)->get();
+        $detailmembershipping = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
+                                            ->where('trans_detail_status', '=', 5)->get(); 
+        $detailmemberdropping = Trans_detail::whereIn('trans_detail_trans_id', $transmember)
+                                            ->where('trans_detail_status', '=', 6)->get();  
+
+        //hotlist
+        $hotsellerbaru = Trans_hotlist::whereIn('trans_hotlist_user_id', $userseller)
+                                            ->where('trans_hotlist_status', '=', 0)->get();
+        $hotsellerkonf = Trans_hotlist::whereIn('trans_hotlist_user_id', $userseller)
+                                            ->where('trans_hotlist_status', '=', 1)->get();
+        $hotsellerbatal = Trans_hotlist::whereIn('trans_hotlist_user_id', $userseller)
+                                            ->where('trans_hotlist_status', '=', 2)->get();
+        $hotsellerapprove = Trans_hotlist::whereIn('trans_hotlist_user_id', $userseller)
+                                            ->where('trans_hotlist_status', '=', 3)->get();
+        $hotsellerditolak = Trans_hotlist::whereIn('trans_hotlist_user_id', $userseller)
+                                            ->where('trans_hotlist_status', '=', 4)->get();
+
+        $hotmemberbaru = Trans_hotlist::whereIn('trans_hotlist_user_id', $usermember)
+                                            ->where('trans_hotlist_status', '=', 0)->get();
+        $hotmemberkonf = Trans_hotlist::whereIn('trans_hotlist_user_id', $usermember)
+                                            ->where('trans_hotlist_status', '=', 1)->get();
+        $hotmemberbatal = Trans_hotlist::whereIn('trans_hotlist_user_id', $usermember)
+                                            ->where('trans_hotlist_status', '=', 2)->get();
+        $hotmemberapprove = Trans_hotlist::whereIn('trans_hotlist_user_id', $usermember)
+                                            ->where('trans_hotlist_status', '=', 3)->get();
+        $hotmemberditolak = Trans_hotlist::whereIn('trans_hotlist_user_id', $usermember)
+                                            ->where('trans_hotlist_status', '=', 4)->get();
+
+        //iklan
+        $iklansellerbaru = Trans_iklan::whereIn('trans_iklan_user_id', $userseller)
+                                            ->where('trans_iklan_status', '=', 0)->get();
+        $iklansellerkonf = Trans_iklan::whereIn('trans_iklan_user_id', $userseller)
+                                            ->where('trans_iklan_status', '=', 1)->get();
+        $iklansellerbatal = Trans_iklan::whereIn('trans_iklan_user_id', $userseller)
+                                            ->where('trans_iklan_status', '=', 2)->get();
+        $iklansellerapprove = Trans_iklan::whereIn('trans_iklan_user_id', $userseller)
+                                            ->where('trans_iklan_status', '=', 3)->get();
+        $iklansellerditolak = Trans_iklan::whereIn('trans_iklan_user_id', $userseller)
+                                            ->where('trans_iklan_status', '=', 4)->get();
+
+        $iklanmemberbaru = Trans_iklan::whereIn('trans_iklan_user_id', $usermember)
+                                            ->where('trans_iklan_status', '=', 0)->get();
+        $iklanmemberkonf = Trans_iklan::whereIn('trans_iklan_user_id', $usermember)
+                                            ->where('trans_iklan_status', '=', 1)->get();
+        $iklanmemberbatal = Trans_iklan::whereIn('trans_iklan_user_id', $usermember)
+                                            ->where('trans_iklan_status', '=', 2)->get();
+        $iklanmemberapprove = Trans_iklan::whereIn('trans_iklan_user_id', $usermember)
+                                            ->where('trans_iklan_status', '=', 3)->get();
+        $iklanmemberditolak = Trans_iklan::whereIn('trans_iklan_user_id', $usermember)
+                                            ->where('trans_iklan_status', '=', 4)->get();
+
+        //pincode
+        $pinsellerbaru = Trans_pincode::whereIn('trans_pincode_user_id', $userseller)
+                                            ->where('trans_pincode_status', '=', 0)->get();
+        $pinsellerkonf = Trans_pincode::whereIn('trans_pincode_user_id', $userseller)
+                                            ->where('trans_pincode_status', '=', 1)->get();
+        $pinsellerbatal = Trans_pincode::whereIn('trans_pincode_user_id', $userseller)
+                                            ->where('trans_pincode_status', '=', 2)->get();
+        $pinsellerapprove = Trans_pincode::whereIn('trans_pincode_user_id', $userseller)
+                                            ->where('trans_pincode_status', '=', 3)->get();
+        $pinsellerditolak = Trans_pincode::whereIn('trans_pincode_user_id', $userseller)
+                                            ->where('trans_pincode_status', '=', 4)->get();
+
+        $pinmemberbaru = Trans_pincode::whereIn('trans_pincode_user_id', $usermember)
+                                            ->where('trans_pincode_status', '=', 0)->get();
+        $pinmemberkonf = Trans_pincode::whereIn('trans_pincode_user_id', $usermember)
+                                            ->where('trans_pincode_status', '=', 1)->get();
+        $pinmemberbatal = Trans_pincode::whereIn('trans_pincode_user_id', $usermember)
+                                            ->where('trans_pincode_status', '=', 2)->get();
+        $pinmemberapprove = Trans_pincode::whereIn('trans_pincode_user_id', $usermember)
+                                            ->where('trans_pincode_status', '=', 3)->get();
+        $pinmemberditolak = Trans_pincode::whereIn('trans_pincode_user_id', $usermember)
+                                            ->where('trans_pincode_status', '=', 4)->get();
+
         return view('admin.dashboard.dashboard', 
             compact(
-                'userseller', 
-                'transseller', 
-                'detailsellerorder', 
-                'detailsellertransfer',
-                'detailsellerseller',
-                'detailsellerpacking',
-                'detailsellershipping',
-                'detailsellerdropping',
-                'hotsellerbaru',
-                'hotsellerkonf',
-                'hotsellerbatal',
-                'hotsellerapprove',
-                'hotsellerditolak'
+                'userseller', 'usermember', 
+                'transseller', 'transmember', 
+                'detailsellerorder', 'detailmemberorder', 
+                'detailsellertransfer', 'detailmembertransfer',
+                'detailsellerseller', 'detailmemberseller',
+                'detailsellerpacking', 'detailmemberpacking',
+                'detailsellershipping', 'detailmembershipping',
+                'detailsellerdropping', 'detailmemberdropping',
+                'hotsellerbaru', 'hotmemberbaru',
+                'hotsellerkonf', 'hotmemberkonf',
+                'hotsellerbatal', 'hotmemberbatal',
+                'hotsellerapprove', 'hotmemberapprove',
+                'hotsellerditolak', 'hotmemberditolak',
+                'iklansellerbaru', 'iklanmemberbaru',
+                'iklansellerkonf', 'iklanmemberkonf',
+                'iklansellerbatal', 'iklanmemberbatal',
+                'iklansellerapprove', 'iklanmemberapprove',
+                'iklansellerditolak', 'iklanmemberditolak',
+                'pinsellerbaru', 'pinmemberbaru',
+                'pinsellerkonf', 'pinmemberkonf',
+                'pinsellerbatal', 'pinmemberbatal',
+                'pinsellerapprove', 'pinmemberapprove',
+                'pinsellerditolak', 'pinmemberditolak'
             ));
     }
 
@@ -100,6 +186,91 @@ class FrontController extends Controller
         $detailseller = Trans_detail::where('id', 'like', '%'.$search.'%')->whereIn('trans_detail_trans_id', $transseller)->get();
 
         return view('admin.dashboard.seller.detail', compact('userseller', 'transseller', 'detailseller'));
+    }
+    public function dashboardhotlist ()
+    {
+        $search = \Request::get('search');
+        $userseller = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->where('user_store', '!=', null)->pluck('id')->toArray();
+        $hotlistseller = Trans_hotlist::where('id', 'like', '%'.$search.'%')->whereIn('trans_hotlist_user_id', $userseller)->get();
+
+        return view('admin.dashboard.seller.hotlist', compact('userseller', 'hotlistseller'));
+    }
+    public function dashboardiklan ()
+    {
+        $search = \Request::get('search');
+        $userseller = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->where('user_store', '!=', null)->pluck('id')->toArray();
+        $iklanseller = Trans_iklan::where('id', 'like', '%'.$search.'%')->whereIn('trans_iklan_user_id', $userseller)->get();
+
+        return view('admin.dashboard.seller.iklan', compact('userseller', 'iklanseller'));
+    }
+    public function dashboardpincode ()
+    {
+        $search = \Request::get('search');
+        $userseller = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->where('user_store', '!=', null)->pluck('id')->toArray();
+        $pinseller = Trans_pincode::where('id', 'like', '%'.$search.'%')->whereIn('trans_pincode_user_id', $userseller)->get();
+
+        return view('admin.dashboard.seller.pincode', compact('userseller', 'pinseller'));
+    }
+    public function dashboarddetailmember ()
+    {
+        $search = \Request::get('search');
+        $usermember = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->pluck('id')->toArray();
+        $transmember = Trans::where('trans_user_id', $usermember)->pluck('id')->toArray();
+        $detailmember = Trans_detail::where('id', 'like', '%'.$search.'%')->whereIn('trans_detail_trans_id', $transmember)->get();
+
+        return view('admin.dashboard.member.detailmember', compact('usermember', 'transmember', 'detailmember'));
+    }
+    public function dashboardhotlistmember ()
+    {
+        $search = \Request::get('search');
+        $usermember = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->pluck('id')->toArray();
+        $hotlistmember = Trans_hotlist::where('id', 'like', '%'.$search.'%')->whereIn('trans_hotlist_user_id', $usermember)->get();
+
+        return view('admin.dashboard.member.hotlistmember', compact('usermember', 'hotlistmember'));
+    }
+    public function dashboardiklanmember ()
+    {
+        $search = \Request::get('search');
+        $usermember = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->pluck('id')->toArray();
+        $iklanmember = Trans_iklan::where('id', 'like', '%'.$search.'%')->whereIn('trans_iklan_user_id', $usermember)->get();
+
+        return view('admin.dashboard.member.iklanmember', compact('usermember', 'iklanmember'));
+    }
+    public function dashboardpincodemember ()
+    {
+        $search = \Request::get('search');
+        $usermember = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->pluck('id')->toArray();
+        $pinmember = Trans_pincode::where('id', 'like', '%'.$search.'%')->whereIn('trans_pincode_user_id', $usermember)->get();
+
+        return view('admin.dashboard.member.pincodemember', compact('usermember', 'pinmember'));
     }
     public function changepassword_seller (Request $request, $id)
     {
