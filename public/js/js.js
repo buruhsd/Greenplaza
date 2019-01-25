@@ -93,3 +93,15 @@ function modal_post2(e, data=''){
         }
     });
 }
+function checkDecimal(el){
+    // var RE = ^\d*\.?\d{0,2}$
+    // if(RE.test(value)){
+    //     return true;
+    // }else{
+    //     el.value = el.value.substring(0,el.value.length - 1);
+    // }
+    var ex = /^[0-9]+\.?[0-9]*$/;
+    if(ex.test(el.value)==false){
+        el.value = el.value.substring(0,el.value.length - 1);
+    }
+}

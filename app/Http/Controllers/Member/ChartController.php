@@ -30,7 +30,7 @@ class ChartController extends Controller
     public function addChart(Request $request, $id){
         $produk = Produk::where('id', $id)->first();
         if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
-            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Stock is influence']);
+            return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Stock barang tidak mencukupi.']);
         }
         if($request->address_id == null || $request->address_id == ""){
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi alamat anda']);

@@ -122,6 +122,15 @@
 				    	</div>
 				    </div>
 		    	@elseif($type == 'seller')
+		    		@if($detail->trans->trans_detail()->where('trans_detail_no_resi', 0)->exists())
+				    	<div class="row">
+				    		<div class="col-md-12 text-center">
+								<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.transaction.add_resi", $detail->trans->id)}} class='btn btn-info btn-xs'>
+		                                Shipment
+		                        </button>
+					    	</div>
+					    </div>
+					@endif
 		    	@endif
 		    @break
 			{{-- Dropping --}}

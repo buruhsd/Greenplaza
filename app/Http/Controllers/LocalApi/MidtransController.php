@@ -126,7 +126,6 @@ class MidtransController extends Controller
             });
             $trans_code = FunctionLib::str_rand(7);
             $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
-
             foreach ($trans as $value) {
                 // dd(Session::get('chart'));
                 foreach ($value as $key => $item) {
@@ -166,6 +165,15 @@ class MidtransController extends Controller
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
                 $trans->save();
                 foreach ($value as $key => $item) {
+                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
+                    if($produk->grosir()->exists()){
+                        foreach ($produk->grosir()->get() as $grosir) {
+                            if($item['trans_detail_qty'] >= $grosir->produk_grosir_start && $item['trans_detail_qty'] <= $grosir->produk_grosir_end){
+                                $item['trans_detail_amount'] = ($grosir->produk_grosir_price * $item['trans_detail_qty']);
+                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
+                            }
+                        }
+                    }
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
                     $transDetail->trans_code = $item['trans_code'];
@@ -173,15 +181,15 @@ class MidtransController extends Controller
                     $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
                     $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
                     $transDetail->trans_detail_qty = $item['trans_detail_qty'];
-                    $transDetail->trans_detail_size = 's,m,l,xl';//$item['trans_detail_size'];
-                    $transDetail->trans_detail_color = 'blue,orange,red,green,white';//$item['trans_detail_color'];
+                    $transDetail->trans_detail_size = $item['trans_detail_size'];//'s,m,l,xl';
+                    $transDetail->trans_detail_color = $item['trans_detail_color'];//'blue,orange,red,green,white';
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
                     $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
-                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
+                    // update stock
                     $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
                     $produk->save();
                 }
@@ -313,8 +321,8 @@ class MidtransController extends Controller
                     $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
                     // $transDetail->trans_detail_no_resi = $item['trans_detail_no_resi'];
                     $transDetail->trans_detail_qty = $item['trans_detail_qty'];
-                    $transDetail->trans_detail_size = 's,m,l,xl';//$item['trans_detail_size'];
-                    $transDetail->trans_detail_color = 'blue,orange,red,green,white';//$item['trans_detail_color'];
+                    $transDetail->trans_detail_size = $item['trans_detail_size'];//'s,m,l,xl';
+                    $transDetail->trans_detail_color = $item['trans_detail_color'];//'blue,orange,red,green,white';
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
                     $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
@@ -443,6 +451,14 @@ class MidtransController extends Controller
                             $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(6);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_hotlist_amount + $trans_detail->paket->paket_hotlist_bonus;
+                                $saldo->wallet_note = 'Update wallet hotlist dengan pembelian paket '.$trans_detail->paket->paket_hotlist_name.'.';
+                                $saldo->save();
                         break;
                         case 'pincode':
                             $trans_detail = Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
@@ -451,6 +467,14 @@ class MidtransController extends Controller
                             $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(5);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_pincode_amount + $trans_detail->paket->paket_pincode_bonus;
+                                $saldo->wallet_note = 'Update wallet pincode dengan pembelian paket '.$trans_detail->paket->paket_pincode_name.'.';
+                                $saldo->save();
                         break;
                         case 'iklan':
                             $trans_detail = Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
@@ -459,6 +483,14 @@ class MidtransController extends Controller
                             $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
                             $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(4);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_iklan_amount + $trans_detail->paket->paket_iklan_bonus;
+                                $saldo->wallet_note = 'Update wallet iklan dengan pembelian paket '.$trans_detail->paket->paket_iklan_name.'.';
+                                $saldo->save();
                         break;
                         default:
                             $status = 500;

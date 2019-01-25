@@ -86,7 +86,7 @@
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
             {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
-                <select name='produk_seller_id' class="form-control">
+                <select name='produk_category_id' class="form-control">
                     @foreach($category as $item)
                         <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{$item->category_name}}</option>
                     @endforeach
@@ -242,22 +242,44 @@
             {!! Form::label('produk_size', 'Ukuran : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-default">
-                        <input type="checkbox" name="produk_size[]" value="s" autocomplete="off">
-                        S <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
-                    <label class="btn btn-default">
-                        <input type="checkbox" name="produk_size[]" value="m" autocomplete="off">
-                        M <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
-                    <label class="btn btn-default">
-                        <input type="checkbox" name="produk_size[]" value="l" autocomplete="off">
-                        L <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
-                    <label class="btn btn-default">
-                        <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off">
-                        XL <span class="check glyphicon glyphicon-ok"></span>
-                    </label>
+                    @if(str_contains(Request::url(), ['create']))
+                        <label class="btn btn-default">
+                            <input type="checkbox" name="produk_size[]" value="s" autocomplete="off">
+                            S <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" name="produk_size[]" value="m" autocomplete="off">
+                            M <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" name="produk_size[]" value="l" autocomplete="off">
+                            L <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off">
+                            XL <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                    @elseif(str_contains(Request::url(), ['edit']))
+                        <?php 
+                            $array = explode (",", $produk->produk_size);
+                        ?>
+                        <label class="btn btn-default {{(in_array("s", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="s" autocomplete="off" {{(in_array("s", $array))?"checked":""}}>
+                            S <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default {{(in_array("m", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="m" autocomplete="off" {{(in_array("m", $array))?"checked":""}}>
+                            M <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default {{(in_array("l", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="l" autocomplete="off" {{(in_array("l", $array))?"checked":""}}>
+                            L <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default {{(in_array("xl", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off" {{(in_array("xl", $array))?"checked":""}}>
+                            XL <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                    @endif
                     {{-- <label class="btn btn-default">
                         <input type="checkbox" name="produk_size[]" value="other" autocomplete="off">
                         ETC <span class="check glyphicon glyphicon-ok"></span>
@@ -329,15 +351,32 @@
                         <input type="checkbox" name="produk_color[]" value="other" autocomplete="off">
                         other <span class="check glyphicon glyphicon-ok"></span>
                     </label> --}}
-                    <div class="input-group col-md-12 multiple-form-group" data-max="3">
-                        <div class="form-group">
-                            <div class="cp input-group colorpicker-component">
-                                <input type="text" name="produk_color[]" value="#00AABB" class="form-control" />
-                                <span class="input-group-addon"><i></i></span>
-                                <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                    @if(str_contains(Request::url(), ['create']))
+                        <div class="input-group col-md-12 multiple-form-group" data-max="3">
+                            <div class="form-group">
+                                <div class="cp input-group colorpicker-component">
+                                    <input type="text" name="produk_color[]" value="#00AABB" class="form-control" />
+                                    <span class="input-group-addon"><i></i></span>
+                                    <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @elseif(str_contains(Request::url(), ['edit']))
+                        <?php 
+                            $array = explode (",", $produk->produk_color);
+                        ?>
+                        <div class="input-group col-md-12 multiple-form-group" data-max="3">
+                            @foreach($array as $item)
+                                <div class="form-group">
+                                    <div class="cp input-group colorpicker-component">
+                                        <input type="text" name="produk_color[]" value="{{$item}}" class="form-control" />
+                                        <span class="input-group-addon"><i></i></span>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
                 <!-- {!! Form::text('produk_color', null, [
                     'class' => 'form-control', 
@@ -355,10 +394,11 @@
             {!! Form::label('produk_weight', 'Berat : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
-                    {!! Form::number('produk_weight', 0.00, [
+                    {!! Form::text('produk_weight', (isset($produk->produk_discount))?$produk->produk_weight:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
                         'placeholder' => 'Berat', 
+                        'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
                     <span class="input-group-addon">g</span>
@@ -370,10 +410,11 @@
             {!! Form::label('produk_wide', 'Discount : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
-                    {!! Form::number('produk_discount', 0.00, [
+                    {!! Form::text('produk_discount', (isset($produk->produk_discount))?$produk->produk_discount:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
                         'placeholder' => 'Discount', 
+                        'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
                     <span class="input-group-addon">%</span>

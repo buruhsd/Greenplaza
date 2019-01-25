@@ -235,8 +235,8 @@
                                                             <span class="check glyphicon glyphicon-ok"></span>
                                                         </label>
                                                     @else
-                                                        <label class="border1 btn btn-default" style="background-color: {!! $item !!}" {{($status)?'active':''}}>
-                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off" {{($status)?'active':''}}>
+                                                        <label class="border1 btn btn-default" style="background-color: {!! $item !!}">
+                                                            <input type="radio" name="color" value="{{$item}}" autocomplete="off">
                                                             <span class="check glyphicon glyphicon-ok"></span>
                                                         </label>
                                                     @endif

@@ -3,16 +3,46 @@ class FunctionLib
 {
 
     /**
+    * create wallet user #user wallet yang belum tersedia
+    * @param
+    * @return
+    **/
+    public static function create_wallet(){
+        $data['status'] = 200;
+        $data['message'] = "Wallet user telah dibuat oleh system.";
+        $user = App\User::orderBy('id')->get();
+        foreach ($user as $item) {
+            $wallet_type = App\Models\Wallet_type::all();
+            foreach ($wallet_type as $wallet) {
+                if(!$item->wallet()->whereRaw('wallet_type='.$wallet->id)->exists()){
+                    $log = [
+                        'wallet_user_id' => $item->id,
+                        'wallet_type' => $wallet->id, 
+                        'wallet_ballance_before' => 0,
+                        'wallet_ballance' => 0,
+                        // 'wallet_address' => $item->wallet_address,
+                        // 'wallet_public' => $item->wallet_public,
+                        // 'wallet_private' => $item->wallet_private,
+                        'wallet_note' => "Created by system."
+                    ];
+                    App\Models\Wallet::create($log);
+                }
+            }
+        }
+        return $data;
+    }
+
+    /**
     * @param $data [order_id, transaction_status]
     * @return
     **/
     public static function done_order($data=[]){
         if(!empty($data)){
             $response['status'] = 200;
-            $response['message'] = 'Transfer confirmed!';
+            $response['message'] = 'Transfer Berhasil!';
         }else{
             $response['status'] = 500;
-            $response['message'] = 'Transfer Failed!';
+            $response['message'] = 'Transfer Gagal!';
             return $response;
         }
         extract($data);
@@ -43,6 +73,14 @@ class FunctionLib
                             $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(6);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_hotlist_amount + $trans_detail->paket->paket_hotlist_bonus;
+                                $saldo->wallet_note = 'Update wallet hotlist dengan pembelian paket '.$trans_detail->paket->paket_hotlist_name.'.';
+                                $saldo->save();
                             $response['data'][] = $trans_detail;
                         break;
                         case 'pincode':
@@ -52,6 +90,14 @@ class FunctionLib
                             $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(5);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_pincode_amount + $trans_detail->paket->paket_pincode_bonus;
+                                $saldo->wallet_note = 'Update wallet pincode dengan pembelian paket '.$trans_detail->paket->paket_pincode_name.'.';
+                                $saldo->save();
                             $response['data'][] = $trans_detail;
                         break;
                         case 'iklan':
@@ -61,11 +107,19 @@ class FunctionLib
                             $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
                             $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';
                             $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(4);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_iklan_amount + $trans_detail->paket->paket_iklan_bonus;
+                                $saldo->wallet_note = 'Update wallet iklan dengan pembelian paket '.$trans_detail->paket->paket_iklan_name.'.';
+                                $saldo->save();
                             $response['data'][] = $trans_detail;
                         break;
                         default:
                             $response['status'] = 500;
-                            $response['message'] = 'Transfer Failed!';
+                            $response['message'] = 'Transfer Gagal!';
                             $response['data'][] = "";
                         break;
                     }
