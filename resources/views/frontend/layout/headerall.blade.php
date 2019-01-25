@@ -97,7 +97,7 @@
                     <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
                             <li>
-                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>Cart
+                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>{{__('front.cart')}}
                                 @if(Session::has('chart') && count(Session::get('chart')) > 0)
                                     <span>
                                         Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
                         <div class="cetagory-wrap">
-                            <span>All cetagory</span>
+                            <span>{{ __("front.all-cat") }}</span>
                             <ul class="cetagory-items">
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}

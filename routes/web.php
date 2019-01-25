@@ -10,6 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/change/language/{id}',function($lang){
+    Session::put('my_locale','id');
+    return redirect()->back();
+});
+
 Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
 // Password Reset Routes...
