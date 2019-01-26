@@ -1,4 +1,5 @@
-@extends('admin.index')
+@extends('admin.index', ['active' => 'dashboard'])
+@section('title', 'Dashboard')
 @section('content')
 
 <div class="page-title">

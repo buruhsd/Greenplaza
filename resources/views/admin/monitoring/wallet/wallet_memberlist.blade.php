@@ -6,12 +6,12 @@
         <div class="col-md-12">
             @include('layouts._flash')
             <div class="page-title">
-			    <h4 class="breadcrumb-header">Manage Wallet</h3>
+			    <h4 class="breadcrumb-header">Manage Wallet Member</h3>
 			</div>
 			<div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <div class="col-md-3"> 
-                        <select id="select-list" type="text" class="form-control">
+                        <select id="select-list" type="text" class="form-control pull_right">
                             <option value="">--Choose Option List--</option>
                             <option value="/admin/monitoring/wallet_memberlist">List Member</option>
                             <option value="/admin/monitoring/wallet_sellerlist">List Seller</option>
@@ -25,8 +25,7 @@
                                 <tr>
                                     <th><center>Id</center></th>
                                     <th><center>Detail Member</center></th>
-                                    <th><center>Saldo Utama</center></th>
-                                    <th><center>Saldo Iklan</center></th>
+                                    <th><center>Saldo</center></th>
                                     <th><center>Wallet Type</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
@@ -41,11 +40,22 @@
                                         <p>Nama :{{$u->username}}</p></center>
                                     </td>
                                     <td><center>
-                                        {{App\Models\Wallet::where('wallet_user_id', $u->id)->first()->wallet_ballance}}</center>
+                                        Saldo CW :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '1')->first()->wallet_ballance}} <br/>
+                                        Saldo RW :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '2')->first()->wallet_ballance}} <br/>
+                                        Saldo Transaksi :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '3')->first()->wallet_ballance}} <br/>
+                                        Saldo Iklan :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '4')->first()->wallet_ballance}} <br/>
+                                        Saldo Pincode :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '5')->first()->wallet_ballance}} <br/>
+                                    </center></td>
+                                    <td><center>
+                                        CW <br/>
+                                        RW <br/>
+                                        Transaksi <br/>
+                                        Iklan <br/>
+                                        Pincode <br/>
+                                    </center></td>
+                                    <td>
+                                        <center><a href="{{route('admin.monitoring.editsaldomember', $u->id)}}"><button class="btn btn-success btn-xs">Edit Saldo</button></a></center>
                                     </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                                 @endforeach
                             </tbody>

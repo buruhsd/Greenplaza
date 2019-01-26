@@ -318,6 +318,13 @@ Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['supera
 			Route::get('profit_detail', 'Admin\\MonitoringController@profit_detail')->name('.profit_detail');
 			//Wallet
 			Route::get('wallet_sellerlist', 'Admin\\MonitoringController@wallet_sellerlist')->name('.wallet_sellerlist');
+			Route::get('editsaldoseller/{id}', 'Admin\\MonitoringController@editsaldoseller')->name('.editsaldoseller');
+			Route::get('editsaldomember/{id}', 'Admin\\MonitoringController@editsaldomember')->name('.editsaldomember');
+			Route::post('editsaldoseller_cw/{id}', 'Admin\\MonitoringController@editsaldoseller_cw')->name('.editsaldoseller_cw');
+			Route::post('editsaldoseller_rw/{id}', 'Admin\\MonitoringController@editsaldoseller_rw')->name('.editsaldoseller_rw');
+			Route::post('editsaldoseller_transaksi/{id}', 'Admin\\MonitoringController@editsaldoseller_transaksi')->name('.editsaldoseller_transaksi');
+			Route::post('editsaldoseller_iklan/{id}', 'Admin\\MonitoringController@editsaldoseller_iklan')->name('.editsaldoseller_iklan');
+			Route::post('editsaldoseller_pincode/{id}', 'Admin\\MonitoringController@editsaldoseller_pincode')->name('.editsaldoseller_pincode');
 			Route::get('wallet_memberlist', 'Admin\\MonitoringController@wallet_memberlist')->name('.wallet_memberlist');
 			//Log_activity
 			Route::get('log_activity', 'Admin\\MonitoringController@log')->name('.activity');

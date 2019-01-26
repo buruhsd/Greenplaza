@@ -42,8 +42,10 @@
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
-                            @foreach ($pin as $key => $p)
+
                             <tbody>
+                            @if($pin->count() > 0)
+                            @foreach ($pin as $key => $p)
                                 <tr>
                                     <td><center>{{++$key}}</center></td>
                                     <td><center>{{$p->trans_pincode_code}}</center></td>
@@ -82,8 +84,11 @@
                                         @endif
                                     </td>
                                 </tr>
+                                @endforeach
+                            @else
+                                <td colspan="7"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
                 </div>

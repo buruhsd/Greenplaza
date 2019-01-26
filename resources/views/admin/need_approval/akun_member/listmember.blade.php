@@ -1,4 +1,5 @@
-@extends('admin.index')
+@extends('admin.index', ['active' => 'admin', 'page'=>'listmember'])
+@section('title', 'Listmember')
 @section('content')
 
 <div class="page-inner">

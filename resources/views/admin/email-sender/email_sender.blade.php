@@ -1,4 +1,5 @@
-@extends('admin.index')
+@extends('admin.index', ['active' => 'emailsender'])
+@section('title', 'Email Sender')
 @section('content')
 
 <div class="page-title">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
 use App\Models\Produk;
 use App\Models\Activity;
+use App\Models\Wallet;
 use App\User;
 use App\Role;
 use Session;
@@ -130,16 +131,117 @@ class MonitoringController extends Controller
 //WALLET
     public function wallet_sellerlist ()
     {
-        $users = Role::where('name', 'member')->first()->users;
+        // $users = User::find($id);
+        $users = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })
+        ->where('user_store', '!=', null)->get();
         // dd($users);
-        $seller = $users->where('user_store', '!=', 'null')->first();
-        // dd($seller);
-        return view('admin.monitoring.wallet.wallet_sellerlist', compact('seller'));
+        // $users = Role::where('name', 'member')->where('user_store', '!=', 'null')->first()->users;
+        // // dd($users);
+        // $seller = $users->where('user_store', '!=', 'null')->first();
+        // // dd($seller);
+        return view('admin.monitoring.wallet.wallet_sellerlist', compact('users'));
+    }
+    public function editsaldoseller (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '1')->first();
+        // dd($cw);
+        $rw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '2')->first();
+        $transaksi = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '3')->first();
+        $iklan = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '4')->first();
+        $pincode = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '5')->first();
+
+        return view('admin.monitoring.wallet.editsaldoseller', compact('users', 'cw', 'rw', 'transaksi', 'iklan', 'pincode'));
+    }
+    public function editsaldomember (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '1')->first();
+        // dd($cw);
+        $rw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '2')->first();
+        $transaksi = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '3')->first();
+        $iklan = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '4')->first();
+        $pincode = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '5')->first();
+
+        return view('admin.monitoring.wallet.editsaldomember', compact('users', 'cw', 'rw', 'transaksi', 'iklan', 'pincode'));
+    }
+    public function editsaldoseller_cw (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '1')->first();
+        $cw->wallet_ballance = $request->wallet_ballance;
+        $cw->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Saldo Berhasil di Ubah."
+            ]);
+        return redirect()->back();
+
+    }
+    public function editsaldoseller_rw (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '2')->first();
+        $cw->wallet_ballance = $request->wallet_ballance;
+        $cw->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Saldo Berhasil di Ubah."
+            ]);
+        return redirect()->back();
+
+    }
+    public function editsaldoseller_transaksi (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '3')->first();
+        $cw->wallet_ballance = $request->wallet_ballance;
+        $cw->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Saldo Berhasil di Ubah."
+            ]);
+        return redirect()->back();
+
+    }
+    public function editsaldoseller_iklan (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '4')->first();
+        $cw->wallet_ballance = $request->wallet_ballance;
+        $cw->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Saldo Berhasil di Ubah."
+            ]);
+        return redirect()->back();
+
+    }
+    public function editsaldoseller_pincode (Request $request, $id)
+    {
+        $users = User::find($id);
+        $cw = Wallet::where('wallet_user_id', $users->id)->where('wallet_type', '=', '5')->first();
+        $cw->wallet_ballance = $request->wallet_ballance;
+        $cw->save();
+        Session::flash("flash_notification", [
+                        "level"=>"success",
+                        "message"=>"Saldo Berhasil di Ubah."
+            ]);
+        return redirect()->back();
+
     }
 
     public function wallet_memberlist ()
     {
-        $users = Role::where('name', 'member')->first()->users;
+        $users = User::whereHas('roles', function($query){
+            $query->where('name','=','member');
+            return $query;
+        })->get();
+        // dd($users);
+        // $users = Role::where('name', 'member')->first()->users;
         // dd($users); die();
         return view('admin.monitoring.wallet.wallet_memberlist', compact('users'));
     }

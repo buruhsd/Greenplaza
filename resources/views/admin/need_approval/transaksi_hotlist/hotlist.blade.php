@@ -42,9 +42,9 @@
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
+                            <tbody class="table-responsive table table-striped">
                             @if($hot->count() > 0)
                             @foreach ($hot as $key => $h)
-                            <tbody>
                                 <tr>
                                     <td><center>{{++$key}}</center></td>
                                     <td><center>{{$h->trans_hotlist_code}}</center></td>
@@ -83,11 +83,11 @@
                                         </center>
                                         @endif
                                 </tr>
-                                @else
-                                    <td colspan="7"><center>KOSONG</center></td>
-                                @Endif
+                                @endforeach
+                            @else
+                                <td colspan="7"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
                 </div>

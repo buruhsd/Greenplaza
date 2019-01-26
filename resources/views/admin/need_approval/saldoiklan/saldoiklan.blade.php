@@ -24,6 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if($iklan->count() > 0)
                             @foreach ($iklan as $key => $i)
                                 <tr>
                                     <td>{{++$key}}</td>
@@ -62,6 +63,9 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @else
+                                <td colspan="7"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
                         </table>
                     </div>
