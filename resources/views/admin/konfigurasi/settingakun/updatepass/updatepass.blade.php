@@ -4,7 +4,7 @@
 
 <div class="page-inner">
   <div class="page-title">
-      <h3 class="breadcrumb-header">Update Password Superadmin</h3>
+      <h3 class="breadcrumb-header">Update Password Admin</h3>
   </div>
 <div id="main-wrapper">
     <div class="row">
