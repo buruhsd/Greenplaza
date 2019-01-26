@@ -77,11 +77,11 @@
                                     <li class="dropdown user-dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">Profile</a></li>
+                                            <!-- <li><a href="#">Profile</a></li>
                                             <li><a href="#">Calendar</a></li>
                                             <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a></li>
                                             <li role="separator" class="divider"></li>
-                                            <li><a href="#">Account Settings</a></li>
+                                            <li><a href="#">Account Settings</a></li> -->
                                             <li>
                                                 <a onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
