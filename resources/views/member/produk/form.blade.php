@@ -474,11 +474,11 @@
             </div>
         </div> --}}
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_note') ? 'has-error' : ''}}">
-            {!! Form::label('produk_note', 'Note : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_note', 'Keterangan : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::textarea('produk_note', null, [
                   'class' => 'form-control', 
-                  'placeholder' => 'Note', 
+                  'placeholder' => 'Keterangan', 
                 ])!!}
                 {!! $errors->first('produk_note', '<p class="help-block">:message</p>') !!}
             </div>

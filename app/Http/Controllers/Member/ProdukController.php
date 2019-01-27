@@ -127,7 +127,6 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $status = 200;
         $message = 'Produk added!';
         
