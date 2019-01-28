@@ -400,7 +400,7 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-                                    <center><a class="readmore" href="#"><button class="btn btn-success btn-sm col-12">Nama Etalase</button></a></center>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                 </div>
                             </div>
                             <!-- <div class="product-wrap">

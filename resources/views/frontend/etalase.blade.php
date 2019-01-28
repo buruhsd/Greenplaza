@@ -518,6 +518,7 @@
         </div>
     </div>
     </div> -->
+    <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
 @section('script')
     <script type="text/javascript">
