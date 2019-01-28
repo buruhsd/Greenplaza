@@ -83,7 +83,7 @@
                                 @foreach($produk as $item)
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
-                                            <div class="product-img black-opacity">
+                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 <span class="new sale">Sale</span>
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
@@ -97,7 +97,7 @@
                                                 </div> -->
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="{{route('detail', $item->id)}}">{{$item->produk_name}}</a>
+                                                <h3><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>

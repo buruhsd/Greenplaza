@@ -53,7 +53,7 @@
                                         </ul> --}}
                                     </div>
                                     <ul style="width: 100%; margin-bottom: 2%">
-                                        <li><h5>Stock : {{$detail->produk_stock}} </h5></li>
+                                        <li><h5>Stock : {{$detail}} </h5></li>
                                     </ul>
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
