@@ -47,12 +47,12 @@
                             </ul>
                         </div>
                         <div class="product-sidebar">
-                            <h2 class="section-title">Related Product</h2>
+                            <h2 class="section-title">Produk Terkait</h2>
                             <div class="slidebar-product-wrap">
                                 @foreach($side_related as $item)
                                     <div class="product-sidebar-items fix">
                                         <div class="product-sidebar-img">
-                                            <img class="h100 w100" style="border-radius: 50%;" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="" />{{-- assets/images/product/sidebar/24.jpg" alt=""> --}}
+                                            <a href="{{route('detail', $item->produk_slug)}}"><img class="h100 w100" style="border-radius: 50%;" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="" /></a>
                                         </div>
                                         <div class="product-sedebar-content fix">
                                             <h4><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a></h4>

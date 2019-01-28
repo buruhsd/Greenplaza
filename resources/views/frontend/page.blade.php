@@ -44,8 +44,8 @@
                             <div class="slidebar-product-wrap">
                                 @foreach($side_related as $item)
                                     <div class="product-sidebar-items fix">
-                                        <div class="product-sidebar-img black-opacity">
-                                            <img src="assets/images/product/sidebar/24.jpg" alt="">
+                                        <div class="product-sidebar-img">
+                                            <a href="{{route('detail', $item->produk_slug)}}"><img class="h100 w100" style="border-radius: 50%;" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="" /></a>
                                         </div>
                                         <div class="product-sedebar-content fix">
                                             <h4><a href="shop.html">{{$item->produk_name}}</a></h4>
