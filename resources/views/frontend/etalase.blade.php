@@ -176,27 +176,31 @@
                                         @foreach ($produk as $p)
                                     <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
-                                            <div class="product-img black-opacity">
+                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                 <span class="new sale">Sale</span>
                                                 <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
                                                 {{-- <img class="second second2" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
-                                                <div class="shop-icon">
+                                                <!-- <div class="shop-icon">
                                                     <ul>
                                                         {{-- <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li> --}}
                                                         <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart"></i></a></li>
                                                         <li><a href="{{route('detail', $p->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
                                                     </ul>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
+                                                <h3>
+                                                    <a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a>
+                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart pull-right"></i></a>
+                                                    <a href="{{route("detail", $p->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+                                                </h3>
                                                 @if($p->produk_discount > 0)
                                                     <p>
-                                                        <span>{{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
+                                                        <span>Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
                                                         <del>{{FunctionLib::number_to_text($p->produk_price)}}</del>
                                                     </p>
                                                 @else
-                                                    <p><span>{{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                    <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
                                                 @endif
                                                 <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>

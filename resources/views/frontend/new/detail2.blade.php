@@ -121,7 +121,7 @@
                                 <div class="product-single-content">
                                     <h3>{{ucfirst(strtolower($detail->produk_name))}}</h3>
                                     <h5><a href="{{route('etalase', $detail->user->user_store)}}">
-                                    <center>{{$detail->user->user_store}} Store</center></a></h5>
+                                    <center>Toko {{$detail->user->user_store}}</center></a></h5>
                                     <div class="rating-wrap fix">
                                         {{-- <span class="pull-left">$219.56</span> --}}
                                         @if($detail->produk_discount > 0)

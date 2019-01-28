@@ -400,11 +400,7 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-<<<<<<< HEAD
                                     <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-=======
-                                    <center><a href="{{route('etalase', $n->user->user_store)}}"><button class="btn btn-success btn-sm col-12">{{$n->user->user_store}}</button></a></center>
->>>>>>> url slug
                                 </div>
                             </div>
                             <!-- <div class="product-wrap">
@@ -1083,7 +1079,7 @@
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">read more</button></a></center>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
                                             </div>
                                         </div>
                                     </div>
@@ -1130,7 +1126,7 @@
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">read more</button></a></center>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
                                             </div>
                                         </div>
                                     </div>
