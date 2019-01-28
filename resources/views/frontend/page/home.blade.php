@@ -79,7 +79,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
                         @if (Auth::user()->user_detail->user_detail_image != null)
-                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}';" style="width: 110px">
+                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
                         @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif
@@ -171,7 +171,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Related Product</h2>
+                        <h2 class="section-title">Produk popular saat ini</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedproduk as $r)
@@ -234,7 +234,7 @@
                         </div>
                     </div>
                     <div class="product-sidebar" style="width: 100%">
-                        <h2 class="section-title">Discount Price</h2>
+                        <h2 class="section-title">Harga Diskon</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             @foreach ($discountprice as $d)
                             <div class="product-wrap">
@@ -279,7 +279,7 @@
                         </div>
                     </div>
                     <div class="tag-wrap">
-                        <h2 class="section-title">Popular Tags</h2>
+                        <h2 class="section-title">Kategori Populer</h2>
                         <ul>
                         <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
@@ -293,7 +293,7 @@
                         </ul>
                     </div>
                     <div class="product-sidebar">
-                        <h2 class="section-title">Popular Product</h2>
+                        <h2 class="section-title">Produk populer saat ini</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
                                 @foreach ($popularproduk as $p)
@@ -360,7 +360,7 @@
                     <div class="shop-area">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="section-title">New Product</h2>
+                                <h2 class="section-title">Produk baru saat ini</h2>
                             </div>
                         </div>
                         <div class="product-active owl-carousel next-prev-style">
@@ -400,7 +400,11 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-                                    <center><a class="readmore" href="#"><button class="btn btn-success btn-sm col-12">Nama Etalase</button></a></center>
+<<<<<<< HEAD
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+=======
+                                    <center><a href="{{route('etalase', $n->user->user_store)}}"><button class="btn btn-success btn-sm col-12">{{$n->user->user_store}}</button></a></center>
+>>>>>>> url slug
                                 </div>
                             </div>
                             <!-- <div class="product-wrap">
@@ -447,7 +451,7 @@
                     <div class="shop-area">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
-                                <h2 class="section-title">New Arivel</h2>
+                                <h2 class="section-title">Produk Baru</h2>
                             </div><!-- 
                             <div class="col-lg-8 text-right col-sm-9 col-12">
                                 <ul class="tab-menu nav">
@@ -595,7 +599,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Related Product</h2>
+                        <h2 class="section-title">Produk popular saat ini</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedproduk as $r)
@@ -662,7 +666,7 @@
                     <div class="shop-area">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="section-title">Featured products</h2>
+                                <h2 class="section-title">Barang barang pilhan saat ini</h2>
                             </div>
                         </div>
                         <div class="product-active owl-carousel next-prev-style">
@@ -725,7 +729,7 @@
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="testmonial-wrap">
-                        <h2 class="section-title">Our Product Review</h2>
+                        <h2 class="section-title">Kata Konsumen</h2>
                         <div class="test-active owl-carousel next-prev-style">
                             @foreach ($review as $r)
                             <div class="test-items">
@@ -962,7 +966,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="product-sidebar">
-                                    <h2 class="section-title">Discount Product</h2>
+                                    <h2 class="section-title">Produk Diskon</h2>
                                     <div class="propuler-product-active next-prev-style owl-carousel">
                                         <div class="slidebar-product-wrap">
                                             @foreach ($discountproduk as $d)
@@ -1040,7 +1044,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shop-area">
-                        <h2 class="section-title">latest News</h2>
+                        <h2 class="section-title">Produk populer konsumen</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                         <div class="tab-content">
                             <div class="tab-pane active" id="grid">
