@@ -26,8 +26,9 @@
                         <option value="active" {!! (!empty($_GET['status']) && $_GET['status'] == "active")?"selected":"" !!}>Active</option>
                         <option value="block" {!! (!empty($_GET['status']) && $_GET['status'] == "block")?"selected":"" !!}>Block</option>
                     </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Cari</button>
+                    <a href="{{ url('member/produk/create') }}" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Tambah Produk</a>
                 </form>
                         
             </div>
@@ -39,7 +40,6 @@
                     <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1, Auth::id())}}</span></button>
                     <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0, Auth::id())}}</span></button>
                     <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2, Auth::id())}}</span></button>
-                    <a href="{{ url('member/produk/create') }}" class="btn btn-success btn-sm pull-right"><i class="fa fa-plus-circle"></i> Request Product</a>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">

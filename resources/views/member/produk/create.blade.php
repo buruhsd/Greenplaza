@@ -19,9 +19,15 @@
                 </a>
                 <br />
                 <br />
-                {!! Form::open(['url' => '/member/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}
-                    @include ('member.produk.form')
-                {!! Form::close() !!}
+                @if(!Auth::user()->user_shipment()->exists())
+                    <div class="col-md-12 text-center">
+                        <a href="{{route('member.user.set_shipment')}}" class="btn btn-sm btn-success">Update Jasa pengiriman</a>
+                    </div>
+                @else
+                    {!! Form::open(['url' => '/member/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        @include ('member.produk.form')
+                    {!! Form::close() !!}
+                @endif
                 </div>
             </div>
           </section>
