@@ -17,6 +17,8 @@ Route::get('/change/language/{id}',function($lang){
 
 // Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\VerifManualController@activating')->name('activating-account');
+Route::get('/re_send_noauth', 'Auth\\VerifManualController@re_send_page')->name('re_send');
+Route::post('/re_send_noauth', 'Auth\\VerifManualController@re_send_noauth')->name('re_send_noauth');
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -346,9 +348,16 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 });
 
 // auth member
-Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], function () {
+	// mengirim ulang email aktivasi kepada user login
+	Route::get('/resend_mail', 'Auth\\VerifManualController@re_send_mail')->name('re_send_mail');
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
+	});
+});
+Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member']], function () {
+	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
+		// Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 		// Sales & purchase
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
 			Route::get('/', 'TransactionController@sales')->name('.index');

@@ -17,7 +17,7 @@ class CheckMail
     public function handle($request, Closure $next)
     {
         $status = 500;
-        $message = "Email Not Activate, Please check your email.";
+        $message = "Email Belum Aktif, Silahkan cek email anda untuk aktivasi.";
         // get mail
         // $mail = $request->user()->email;
         // Check if a email is activate.

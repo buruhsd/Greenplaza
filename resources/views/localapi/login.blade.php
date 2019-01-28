@@ -10,11 +10,11 @@
                 <div class="col-12 col-md-12">
                     <div class="row">
                         <div class="col-md-12">
-                            {!! Form::label('email', 'Email') !!}
+                            {!! Form::label('email', 'Email / Username') !!}
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                                 {!! Form::text('email', null, [
                                     'class' => 'form-control', 
-                                    'placeholder' => 'Enter Email', 
+                                    'placeholder' => 'Email / Username', 
                                     'required'
                                 ])!!}
                                 {!! $errors->first('address_label', '<p class="help-block">:message</p>') !!}
@@ -23,9 +23,9 @@
                         <div class="col-md-12">
                             {!! Form::label('password', 'Password') !!}
                             <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
-                                {!! Form::password('password', null, [
+                                {!! Form::password('password', [
                                     'class' => 'form-control', 
-                                    'placeholder' => 'Enter password', 
+                                    'placeholder' => 'Password', 
                                     'required'
                                 ])!!}
                                 {!! $errors->first('password', '<p class="help-block">:message</p>') !!}

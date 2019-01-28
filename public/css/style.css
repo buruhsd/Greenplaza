@@ -476,6 +476,15 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
   margin: auto;
   display: block;
 }
+img.h400{
+  width: auto !important;
+  /*max-width: none;*/
+  overflow: hidden !important;
+  height: 400px !important;
+  max-height: 400px !important;
+  margin: auto;
+  display: block;
+}
 .product-wrap .product-img img{
   width: auto !important;
   /*max-width: none;*/
@@ -539,4 +548,15 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
 }*/
 .header-middle-area{
   padding: 10px 0;
+}
+
+.zoom {
+  transition: transform .2s;
+}
+.zoom:hover {
+  -webkit-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  transform: scale(1.5);
 }

@@ -103,7 +103,7 @@
                                 <div class="product-single-img">
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
-                                            <div class="item black-opacity">
+                                            <div class="item black-opacity zoom">
                                                 <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
                                             </div>
                                         @endforeach
@@ -279,14 +279,14 @@
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
-                                    <ul class="socil-icon">
+                                    {{-- <ul class="socil-icon">
                                         <li>Share :</li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </div>
                             </div>
                         </div>

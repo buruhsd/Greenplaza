@@ -13,6 +13,12 @@
                 <!-- Page Inner -->
                 <div class="page-inner">
                     <!-- Row -->
+                    @if(!Auth::user()->is_verify())
+                        <div class="alert alert-danger alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Verifikasi Email!</strong> Belum dapat Email Aktifasi? Resend Email <a href="{{route('re_send_mail')}}">disini</a>.
+                        </div>
+                    @endif
                     @if(!Auth::user()->user_shipment()->exists())
                         <div class="alert alert-info alert-dismissible fade in">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -29,12 +35,6 @@
                         <div class="alert alert-info alert-dismissible fade in">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>Data User!</strong> Ingin jadi penjual? Isikan nama toko anda <a href="{{route('member.profil')}}">disini</a>.
-                        </div>
-                    @endif
-                    @if(!Auth::user()->is_verify())
-                        <div class="alert alert-danger alert-dismissible fade in">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>Info!</strong> Belum dapat Email Aktifasi? Resend Email <a href="{{route('member.profil')}}">disini</a>.
                         </div>
                     @endif
                     <div class="col-md-12">

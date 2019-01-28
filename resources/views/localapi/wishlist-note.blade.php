@@ -1,14 +1,14 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Reminder</h4>
+            <h4 class="modal-title" id="modal-title">Tambah ke wishlist</h4>
         </div>
         {!! Form::open(['url' => url('member/addwishlist/'.$id), 'method' => 'POST', 'id' => 'addwishlist']) !!}
         @csrf
         <div class="modal-body">
-                <label>Note</label>
+                <label>Pengingat</label>
                 <div class="form-group">
-                    <textarea class="form-control" id="note" name="note" placeholder="Note..."></textarea>
+                    <textarea class="form-control" id="note" name="note" placeholder="pengingat..."></textarea>
                 </div>
         </div>
         <div class="modal-footer">

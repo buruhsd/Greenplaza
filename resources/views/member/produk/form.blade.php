@@ -96,7 +96,7 @@
         </div>
         @endif
         @if(str_contains(Request::url(), ['create']))
-        <div class="form-group {{ $errors->has('produk_brand_id') ? 'has-error' : ''}}">
+        <div class="hidden form-group {{ $errors->has('produk_brand_id') ? 'has-error' : ''}}">
             {!! Form::label('produk_brand_id', 'Brand : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_brand_id' class="form-control">
@@ -108,7 +108,7 @@
             </div>
         </div>
         @elseif(str_contains(Request::url(), ['edit']))
-        <div class="form-group {{ $errors->has('produk_brand_id') ? 'has-error' : ''}}">
+        <div class="hidden form-group {{ $errors->has('produk_brand_id') ? 'has-error' : ''}}">
             {!! Form::label('produk_brand_id', 'Brand : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_brand_id' class="form-control">
