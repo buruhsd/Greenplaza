@@ -79,7 +79,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="author-wrap">
                         @if (Auth::user()->user_detail->user_detail_image != null)
-                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
+                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}';" style="width: 110px">
                         @else
                         <img src="{{ asset('frontend/images/author.png') }}" alt="">
                         @endif

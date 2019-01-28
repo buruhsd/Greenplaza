@@ -26,7 +26,7 @@
                                     @foreach($trans_detail as $key => $item)
                                         <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
                                         <tr>
-                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
+                                            <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
+            <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" id="close-button">
             <input type="submit" class="btn btn-success" value="Pay" id="pay-button">
             {{-- <input type="button" onclick='modal_post($(this), $("#form-midtrans").serialize());' data-toggle='modal' data-method='post' data-href={{route('localapi.midtrans.re_process', $trans_detail->first()->trans->trans_code)}} value="Save" class="btn btn-success" id="btn-pick-address" /> --}}
             {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
@@ -116,5 +116,9 @@
                 console.log(form_data);
             }
         });
+    };
+    document.getElementById('close-button').onclick = function(){
+        var dataurl = "{{ route('member.transaction.konfirmasi',$item->trans->id)}}";
+        window.location = dataurl;
     };
 </script>

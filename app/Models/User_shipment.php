@@ -24,4 +24,14 @@ class User_shipment extends Model
     {
         return $this->belongsTo('App\User', 'user_address_user_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function shipment()
+    {
+        return $this->belongsTo('App\Models\Shipment', 'user_shipment_shipment_id');
+    }
 }

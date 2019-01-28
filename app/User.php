@@ -101,6 +101,14 @@ class User extends Authenticatable implements MustVerifyEmail
     * 
     * 
     **/
+    public function have_shipment(){
+        return (bool)$this->user_shipment->count();
+    }
+
+    /**
+    * 
+    * 
+    **/
     public function have_detail(){
         return (bool)$this->user_detail->count();
     }

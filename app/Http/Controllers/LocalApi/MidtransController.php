@@ -222,9 +222,42 @@ class MidtransController extends Controller
     * @param
     * @return
     */
-    public function re_payment($code){
+    public function re_payment_code($code){
         $in = 'select id from sys_trans where trans_code = "'.$code.'"';
-        $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+        $where = 'trans_detail_trans_id IN ('.$in.')';
+        $where .= ' AND trans_detail_status = 1';
+        $trans_detail = Trans_detail::whereRaw($where)->get();
+
+        $trans_code = $code;
+        $gross_amount = FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total');
+        // Required
+        $transaction_details = array(
+          'order_id' => $trans_code,
+          'gross_amount' => $gross_amount, // no decimal allowed for creditcard
+        );
+        $transaction = array(
+          'transaction_details' => $transaction_details,
+        );
+        $data['trans_detail'] = $trans_detail;
+        $data['snapToken'] = Veritrans_Snap::getSnapToken($transaction);
+        // dd($data['trans_detail']);
+        return view('localapi.midtrans.re_index', $data);//, $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public function re_payment($code){
+        // $trans = Trans::whereId($code)->first();
+
+        $in = 'select id from sys_trans where trans_code = "'.$code.'"';
+        $where = 'trans_detail_trans_id IN ('.$in.')';
+        $where .= ' AND trans_detail_status = 1';
+        $trans_detail = Trans_detail::whereRaw($where)->get();
+        // $in = 'select id from sys_trans where trans_code = "'.$code.'"';
+        // $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+        // $trans_detail = $trans->trans_detail()->get();
 
         $trans_code = $code;
         $gross_amount = FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total');

@@ -15,7 +15,9 @@
             <div class="col-md-6">
                 <div class="panel panel-white">
                     <div class="panel-heading clearfix">
-                        <h4><b>{{$item->user_address_label}}</b></h4>
+                    <div class="panel-heading clearfix">
+                        <h4><b>{{$item->user_address_label}} </b>{!!($item->user_address_status == 1)?"<i class='btn btn-danger disabled'>Default</i>":""!!}</h4>
+                    </div>
                     </div>
                     <div class="panel-body">
                         <i>Penerima : {{$item->user_address_owner}}</i><br>

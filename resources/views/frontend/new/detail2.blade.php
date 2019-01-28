@@ -187,24 +187,32 @@
                                             </div>
                                         </ul>
                                     </div>
-                                    <div class="col-md-12">
-                                        <center>
-                                            <select name="courier" class="form-control">
-                                                @foreach($shipment_type as $item)
-                                                    <option value="{{ strtolower($item->shipment_name) }}">{{$item->shipment_name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </center>
-                                    </div>
-                                    <div class="col-md-12" id="shipment-price" style="margin-bottom: 2%">
-                                    </div>
-                                    <div class="col-md-12" id="ship-cost" style="margin-bottom: 2%">
-                                    </div>
-                                    <div class="col-md-12" style="margin-bottom: 2%">
-                                        <center>
-                                            <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Jasa pengiriman" id="btn-choose-shipment" />
-                                        </center>
-                                    </div>
+                                    @if($detail->user->user_shipment()->exists())
+                                        <div class="col-md-12">
+                                            <center>
+                                                <select name="courier" class="form-control">
+                                                    @foreach($detail->user->user_shipment()->get() as $item)
+                                                        <option value="{{ strtolower($item->shipment->shipment_name) }}">{{$item->shipment->shipment_name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </center>
+                                        </div>
+                                        <div class="col-md-12" id="shipment-price" style="margin-bottom: 2%">
+                                        </div>
+                                        <div class="col-md-12" id="ship-cost" style="margin-bottom: 2%">
+                                        </div>
+                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                            <center>
+                                                <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Jasa pengiriman" id="btn-choose-shipment" />
+                                            </center>
+                                        </div>
+                                    @else
+                                        <div class="col-md-12" style="margin-bottom: 2%">
+                                            <center>
+                                                <input type="button" href="#" class="btn btn-danger btn-sm col-12" id="btn-choose-shipment" value="Jasa Pengiriman belum tersedia" />
+                                            </center>
+                                        </div>
+                                    @endif
                                     {{-- color and size --}}
                                     <?php $size = explode(',', $detail->produk_size);?>
                                     <?php 

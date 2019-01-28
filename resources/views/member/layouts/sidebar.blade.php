@@ -88,11 +88,12 @@
                             @if(Auth::user()->seller_active())
                             <li class="@yield('produk & brand')">
                                 <a href="javascript:void(0)">
-                                    <i class="menu-icon icon-layers"></i><span>Produk & Brand</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                    <i class="menu-icon icon-layers"></i><span>Produk</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                 </a>
                                 <ul class="sub-menu">
+                                    <li class="{{FunctionLib::setActive('member/produk/create')}}"><a href="{{route('member.produk.create')}}">Tambah Produk</a></li>
                                     <li class="{{FunctionLib::setActive('member/produk')}}"><a href="{{route('member.produk.index')}}">Daftar Produk</a></li>
-                                    <li class="{{FunctionLib::setActive('member/brand')}}"><a href="{{route('member.brand.index')}}">Daftar Brand</a></li>
+                                    {{-- <li class="{{FunctionLib::setActive('member/brand')}}"><a href="{{route('member.brand.index')}}">Daftar Brand</a></li> --}}
                                 </ul>
                             </li>
                             @endif

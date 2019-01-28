@@ -153,6 +153,7 @@ class RegisterController extends Controller
 
     public function activating($token)
     {
+        Auth::logout();
         $date = date('Y-m-d H:i:s');
         $model = User::where('token_register', $token)->first();
         if(!empty($model)){
@@ -162,6 +163,7 @@ class RegisterController extends Controller
             return redirect('login')
                 ->with(['flash_status' => 200, 'flash_message' => 'akun anda telah aktif silahkan login.']);
         }
+        Auth::login($model);
         return redirect('login')
             ->with(['flash_status' => 500, 'flash_message' => 'Verifikasi gagal.']);
     }

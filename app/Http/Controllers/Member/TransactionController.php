@@ -200,13 +200,15 @@ class TransactionController extends Controller
      * @param
      * @return
      */
-    public function konfirmasi($id){
+    public function konfirmasi_all($id){
         $status = 200;
         $message = 'Transfer confirmed!';
         $trans = Trans::findOrFail($id);
-        $status = FunctionLib::midtrans_status($trans->trans_code);
-        if($status){
-            foreach ($trans->trans_detail as $item) {
+        $m_status = FunctionLib::midtrans_status($trans->trans_code);
+        if($m_status){
+            $in = 'select id from sys_trans where trans_code = "'.$trans->trans_code.'"';
+            $detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+            foreach ($detail as $item) {
                 $trans_detail = Trans_detail::findOrFail($item->id);
                 // to transfer
                 $trans_detail->trans_detail_status = 2;
@@ -220,7 +222,40 @@ class TransactionController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
-            $data['trans'] = Trans::where('trans_code', $trans->trans_code)->first();
+            $data['trans'] = Trans::where('trans_code', $trans->trans_code)->get();
+            return view('member.transaction.konfirmasi_all', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+    }
+
+    /**
+     * #buyer
+     * process buyer mengkonfirmasi pembayaran
+     * @param
+     * @return
+     */
+    public function konfirmasi($id){
+        $status = 200;
+        $message = 'Transfer confirmed!';
+        $trans = Trans::findOrFail($id);
+        $m_status = FunctionLib::midtrans_status($trans->trans_code);
+        if($m_status){
+            $in = 'select id from sys_trans where trans_code = "'.$trans->trans_code.'"';
+            $detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+            foreach ($detail as $item) {
+                $trans_detail = Trans_detail::findOrFail($item->id);
+                // to transfer
+                $trans_detail->trans_detail_status = 2;
+                $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                $trans_detail->save();
+            }
+            if(!$trans_detail){
+                $status = 500;
+                $message = 'Transfer unconfirmed!';
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            $data['trans'] = Trans::where('trans_code', $trans->trans_code)->get();
             return view('member.transaction.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
         }
     }

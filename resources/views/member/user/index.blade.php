@@ -9,7 +9,7 @@
         <div class="col-md-3">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">User Profile</h4>
+                    <h4 class="panel-title">Profil User</h4>
                 </div>
                 <div class="panel-body user-profile-panel">
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" class="user-profile-image img-circle" alt="">
@@ -123,7 +123,7 @@
                                 <div class="col-md-9">
                                     {!! Form::text('user_store', null, [
                                         'class' => 'form-control', 
-                                        'placeholder' => 'Window', 
+                                        'placeholder' => 'Toko', 
                                         'required'
                                     ])!!}
                                 {!! $errors->first('user_store', '<p class="help-block">:message</p>') !!}
@@ -252,7 +252,7 @@
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_no') ? 'has-error' : ''}}">
                                 {!! Form::label('user_detail_bank_no', 'Account number', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
-                                    {!! Form::text('user_detail_bank_no', $user->user_detail->user_detail_bank_no, [
+                                    {!! Form::number('user_detail_bank_no', $user->user_detail->user_detail_bank_no, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Account number', 
                                         'required'

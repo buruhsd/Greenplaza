@@ -13,10 +13,22 @@
                 <!-- Page Inner -->
                 <div class="page-inner">
                     <!-- Row -->
+                    @if(!Auth::user()->user_shipment()->exists())
+                        <div class="alert alert-info alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Jasa Kirim!</strong> silahkan isikan jasa pengiriman untuk berjualan. <a href="{{route('member.user.set_shipment')}}">disini</a>.
+                        </div>
+                    @endif
+                    @if(!Auth::user()->user_bank()->exists())
+                        <div class="alert alert-info alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Data bank!</strong> Ingin mulai membeli barang? Isikan data bank anda <a href="{{route('member.bank.index')}}">disini</a>.
+                        </div>
+                    @endif
                     @if(!Auth::user()->seller_active())
                         <div class="alert alert-info alert-dismissible fade in">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>Info!</strong> Ingin jadi penjual? Isikan nama toko anda <a href="{{route('member.profil')}}">disini</a>.
+                            <strong>Data User!</strong> Ingin jadi penjual? Isikan nama toko anda <a href="{{route('member.profil')}}">disini</a>.
                         </div>
                     @endif
                     @if(!Auth::user()->is_verify())

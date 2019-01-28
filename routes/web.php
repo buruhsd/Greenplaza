@@ -15,8 +15,8 @@ Route::get('/change/language/{id}',function($lang){
     return redirect()->back();
 });
 
-Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
-Route::get('/register/{token}','Auth\RegisterController@activating')->name('activating-account');
+// Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
+Route::get('/register/{token}','Auth\VerifManualController@activating')->name('activating-account');
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -39,18 +39,19 @@ Route::get('/register/seller', 'Member\\FrontController@reg_seller')->name('regi
 Route::get('/login/seller', 'Member\\FrontController@log_seller')->name('login.seller');
 
 
+// Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'Member\\HomeController@index')->name('home')->middleware('verified');
+Route::get('/home', 'Member\\HomeController@index')->name('home');
 Route::get('/admin/home', 'Member\\HomeController@index')->name('admin.home')->middleware('auth');
 Route::get('/superadmin/home', 'Member\\HomeController@index')->name('superadmin.home')->middleware('auth');
 
 // auth superadmin
-Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], function () {
 });
 
 // auth superadmin & admin
-Route::group(['middleware' => ['auth', 'roles', 'verified'], 'roles' => ['superadmin', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
 		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
 		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
@@ -367,6 +368,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			// purchase
 			Route::get('/purchase', 'TransactionController@purchase')->name('.purchase');
 			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
+			Route::get('/konfirmasi_all/{id}', 'TransactionController@konfirmasi_all')->name('.konfirmasi_all');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 		});
 		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
@@ -571,6 +573,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		// need email active
 		Route::group(['middleware' => ['is_active']], function () {
 			Route::get('payment', 'MidtransController@payment')->name('.payment');
+			// Route::get('re_payment_code/{code}', 'MidtransController@re_payment_code')->name('.re_payment_code');
 			Route::get('re_payment/{code}', 'MidtransController@re_payment')->name('.re_payment');
 			Route::get('hotlist_payment/{code}', 'MidtransController@hotlist_payment')->name('.hotlist_payment');
 			Route::get('pincode_payment/{code}', 'MidtransController@pincode_payment')->name('.pincode_payment');

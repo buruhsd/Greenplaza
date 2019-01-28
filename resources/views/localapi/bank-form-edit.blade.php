@@ -35,7 +35,7 @@
                         <div class="col-md-6">
                             {!! Form::label('user_bank_no', 'Nomor Rekening') !!}
                             <div class="form-group {{ $errors->has('user_bank_no') ? 'has-error' : ''}}">
-                                {!! Form::text('user_bank_no', null, [
+                                {!! Form::number('user_bank_no', null, [
                                     'class' => 'form-control', 
                                     'placeholder' => 'Nomor Rekening', 
                                     'required'
