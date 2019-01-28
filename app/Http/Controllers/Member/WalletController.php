@@ -95,7 +95,7 @@ class WalletController extends Controller
         $message = 'Withdrawal Success.';
         $requestData = $request->all();
         if(!empty($requestData)){
-            dd($requestData);
+            // dd($requestData);
             $this->validate($request, [
                 'withdrawal_wallet_type' => 'required',
                 'withdrawal_wallet_amount' => 'required',

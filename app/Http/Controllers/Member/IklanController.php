@@ -63,7 +63,7 @@ class IklanController extends Controller
     public function add_baris(Request $request){
         $requestData = $request->all();
         if(!empty($requestData)){
-        dd($requestData);
+        // dd($requestData);
             $this->validate($request, [
                 'iklan_title' => 'required',
                 'iklan_category_id' => 'required',
@@ -81,7 +81,7 @@ class IklanController extends Controller
             $iklan->iklan_content = $request->iklan_content;
             $iklan->iklan_note = 'Pembelian iklan baris oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             $iklan->save();
-            dd($iklan);
+            // dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -134,7 +134,7 @@ class IklanController extends Controller
             }
             $iklan->iklan_note = 'Pembelian iklan banner khusus oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
-            dd($iklan);
+            // dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -187,7 +187,7 @@ class IklanController extends Controller
             }
             $iklan->iklan_note = 'Pembelian iklan banner oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
-            dd($iklan);
+            // dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -240,7 +240,7 @@ class IklanController extends Controller
             }
             $iklan->iklan_note = 'Pembelian iklan slider oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
             // $iklan->save();
-            dd($iklan);
+            // dd($iklan);
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
