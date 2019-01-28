@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
                         <div class="cetagory-wrap">
-                            <span>{{ __("front.all-cat") }}</span>
+                            <span>Semua Kategori</span>
                             <ul class="cetagory-items">
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}

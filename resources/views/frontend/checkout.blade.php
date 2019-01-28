@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="checkout-form p-10 border">
-                        <h2 class="section-title">Billing Details</h2>
+                        <h2 class="section-title">Detail Belanjaan</h2>
                         <form action="checkout">
                             <div class="row">
                                 <div class="col-12">
@@ -92,7 +92,7 @@
                             </div>
                             <hr>
                             {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
-                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Place Order" class="btn btn-success" id="btn-pick-address" />
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
                         </form>
                     </div>
                 </div>

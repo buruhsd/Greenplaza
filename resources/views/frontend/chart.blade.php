@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1 ">
                         <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/chart.jpg')">
-                            <h2>Chart</h2>
+                            <h2>Cart</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>
@@ -29,13 +29,13 @@
                         <table class="table-responsive cart-wrap">
                             <thead>
                                 <tr>
-                                    <th class="images">Image</th>
-                                    <th class="product">Product</th>
-                                    <th class="ptice">Price</th>
-                                    <th class="ptice">Shipment</th>
-                                    <th class="quantity">Quantity</th>
+                                    <th class="images">Gambar</th>
+                                    <th class="product">Barang</th>
+                                    <th class="ptice">Harga</th>
+                                    <th class="ptice">Pengiriman</th>
+                                    <th class="quantity">Jumlah</th>
                                     <th class="total">Total</th>
-                                    <th class="remove">Remove</th>
+                                    <th class="remove">Hapus</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -80,19 +80,19 @@
                                         {{-- <li>
                                             <button>Update Cart</button>
                                         </li> --}}
-                                        <li><a href="{{route('category')}}">Continue Shopping</a></li>
+                                        <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    <h3>Cupon</h3>
-                                    <p>Enter Your Cupon Code if You Have One</p>
+                                    <h3>Kupon</h3>
+                                    <p>Masukkan kode kupon jika punya</p>
                                     <div class="cupon-wrap">
                                         <input type="text" placeholder="Cupon Code">
-                                        <button>Apply Cupon</button>
+                                        <button>Menggunakan Kupon</button>
                                     </div>
                                 </div>
                             </div>
                             <div class=" col-lg-4 offset-lg-3 col-md-6">
                                 <div class="cart-total text-right">
-                                    <h3>Cart Totals</h3>
+                                    <h3>Total Belanjaan</h3>
                                     <ul>
                                         <li>
                                             <span class="pull-left">Subtotal </span>
@@ -103,7 +103,7 @@
                                             Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
                                         </li>
                                     </ul>
-                                    <a href="{{route('checkout')}}">Proceed to Checkout</a>
+                                    <a href="{{route('checkout')}}">Memproses ke Checkout</a>
                                 </div>
                             </div>
                         </div>

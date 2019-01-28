@@ -32,7 +32,7 @@
                 <div class="col-lg-3 col-12">
                     <aside class="sidebar-area p-10 bg-5">
                         <div class="widget widget_categories">
-                            <h2 class="section-title">Categories</h2>
+                            <h2 class="section-title">Kategori</h2>
                             <ul>
                                 @foreach($side_cat as $item)
                                     <li><a href="{{url('category?cat='.$item->category_slug)}}">{{ucfirst(strtolower($item->category_name))}}</a></li>
@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                         <div class="product-sidebar">
-                            <h2 class="section-title">Related Product</h2>
+                            <h2 class="section-title">Produk yang berhubungan</h2>
                             <div class="slidebar-product-wrap">
                                 @foreach($side_related as $item)
                                     <div class="product-sidebar-items fix">

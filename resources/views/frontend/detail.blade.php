@@ -214,7 +214,7 @@
                             <div class="col-12">
                                 <div class="single-product-menu">
                                     <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
+                                        <li><a class="active" data-toggle="tab" href="#description">Deskripsi</a> </li>
                                         {{-- <li><a data-toggle="tab" href="#faq">Faq</a></li> --}}
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
                                         <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
@@ -254,7 +254,7 @@
                                             </ul>
                                         </div>
                                         <div class="add-review">
-                                            <h4>Add A Review</h4>
+                                            <h4>Tambahkan Review</h4>
                                             <div class="ratting-wrap">
                                                 <table>
                                                     <thead>
@@ -358,7 +358,7 @@
                                         <div class="faq-wrap" id="accordion">
                                             <div class="card">
                                                 <div class="card-header" id="headingOne">
-                                                    <h5><button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">General Inquiries ?</button> </h5>
+                                                    <h5><button data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Pertanyaan Umum ?</button> </h5>
                                                 </div>
                                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                                     <div class="card-body">
@@ -368,7 +368,7 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header" id="headingTwo">
-                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How To Use ?</button></h5>
+                                                    <h5><button class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Cara Berbelanja ?</button></h5>
                                                 </div>
                                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                                     <div class="card-body">
@@ -416,7 +416,7 @@
                 <div class="col-lg-3 col-sm-12 col-12">
                     <aside class="sidebar-area bg-1">
                         <div class="widget widget_categories">
-                            <h2 class="section-title">Categories</h2>
+                            <h2 class="section-title">Kategori</h2>
                             <ul>
                                 @foreach($side_cat as $item)
                                     <li><a href="{{url('category?cat='.$item->category_slug)}}">{{ucfirst(strtolower($item->category_name))}}</a></li>
@@ -424,7 +424,7 @@
                             </ul>
                         </div>
                         <div class="product-sidebar">
-                            <h2 class="section-title">Related Product</h2>
+                            <h2 class="section-title">Barang yang berhubungan</h2>
                             <div class="slidebar-product-wrap">
                                 @foreach($side_related as $item)
                                     <div class="product-sidebar-items fix">

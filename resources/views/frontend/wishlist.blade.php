@@ -30,12 +30,12 @@
                             <table class="table-responsive cart-wrap">
                                 <thead>
                                     <tr>
-                                        <th class="images">Image</th>
-                                        <th class="product">Product</th>
-                                        <th class="ptice">Price</th>
-                                        <th class="stock">Stock Stutus </th>
-                                        <th class="addcart">Add to Cart</th>
-                                        <th class="remove">Remove</th>
+                                        <th class="images">Gambar</th>
+                                        <th class="product">Barang</th>
+                                        <th class="ptice">Harga</th>
+                                        <th class="stock">Stock </th>
+                                        <th class="addcart">Tambah Ke Keranjang</th>
+                                        <th class="remove">Hapus</th>
                                     </tr>
                                 </thead>
                                 <tbody>

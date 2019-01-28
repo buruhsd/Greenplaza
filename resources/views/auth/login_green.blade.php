@@ -30,15 +30,26 @@
         <hr/>
         <p>Belum Punya Akun ? <a href="{{ route('register') }}"> Daftar disini </a>.</p>
 
+                @if ($errors->has('email'))
+                    <div class="alert alert-info">
+                        <strong></strong> {{ $errors->first('email') }}
+                    </div>
+                @endif
+                @if ($errors->has('password'))
+                    <div class="alert alert-info">
+                        <strong></strong> {{ $errors->first('password') }}
+                    </div>
+                @endif
+
         <div class="form-group row">
             <label class="col-md-12" for="email"><b>Email / Username</b></label>
             <div class="col-md-12">
                 <input class="form-control" id="email" type="text" placeholder="Email / Username" name="email" required>
-                @if ($errors->has('email'))
+                <!-- @if ($errors->has('email'))
                     <span class="invalid-feedback text-danger" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
-                @endif
+                @endif -->
             </div>
         </div>
 
@@ -46,11 +57,11 @@
             <label class="col-md-12" for="password"><b>Password</b></label>
             <div class="col-md-12">
                 <input class="form-control" id="password" type="password" placeholder="Password" name="password" required>
-                @if ($errors->has('password'))
+                <!-- @if ($errors->has('password'))
                     <span class="invalid-feedback text-danger" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
                     </span>
-                @endif
+                @endif -->
             </div>
         </div>
 

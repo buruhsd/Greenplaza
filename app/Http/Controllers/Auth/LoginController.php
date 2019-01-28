@@ -92,10 +92,22 @@ class LoginController extends Controller
      */
     protected function validateLogin(Request $request)
     {
+        $message = [
+            'required'  => ':attribute wajib diisi ',
+            'min'       => ':attribute harus diisi minimal :min karakter ',
+            'max'       => ':attribute harus diisi maksimal :max karakter ',
+            'email'     =>  ':attribute harus berupa email yang valid.',
+            'unique'    =>  ':attribute sudah ada gunakan email yang lain',
+            'confirmed'  =>  'isi :attribute dengan benar',
+            'string'    =>  ':attribute harus berupa huruf',
+            'failed'   => 'Email atau password salah.',
+            'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds detik.',
+        ];
+
         $request->validate([
-            $this->username() => 'required|string',
-            'password' => 'required|string',
-        ]);
+            $this->username() => 'required|string|failed',
+            'password' => 'required|string|failed',
+        ], $message);
     }
 
     /**

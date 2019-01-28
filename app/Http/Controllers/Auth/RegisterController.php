@@ -66,6 +66,7 @@ class RegisterController extends Controller
             'confirmed'  =>  'isi :attribute dengan benar',
             'string'    =>  ':attribute harus berupa huruf',
         ];
+        
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
