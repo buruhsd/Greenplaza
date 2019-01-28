@@ -83,10 +83,17 @@
                                 <div class="col-md-12">
                                     <div class="btn-group" data-toggle="buttons">
                                         @foreach($size as $item)
-                                            <label class="border1 btn btn-default">
-                                                <input type="radio" name="size" value="{{$item}}" autocomplete="off">
-                                                {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
-                                            </label>
+                                            @if ($loop->first)
+                                                <label class="border1 btn btn-default active">
+                                                    <input type="radio" name="size" value="{{$item}}" autocomplete="off" checked>
+                                                    {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            @else
+                                                <label class="border1 btn btn-default">
+                                                    <input type="radio" name="size" value="{{$item}}" autocomplete="off">
+                                                    {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
@@ -96,14 +103,17 @@
                                 <div class="col-md-12">
                                     <div class="" data-toggle="buttons">
                                         @foreach($color as $item)
-                                            {{-- <label class="btn btn-default btn-block btn-{!!$color_arr[$item]!!}" >
-                                                <input type="radio" name="color" value="{{$item}}" autocomplete="off">
-                                                {{strtoupper($item)}} <span class="check glyphicon glyphicon-ok"></span>
-                                            </label> --}}
-                                            <label class="border1 btn btn-default" style="background-color: {!! $item !!}">
-                                                <input type="radio" name="color" value="{{$item}}" autocomplete="off">
-                                                <span class="check glyphicon glyphicon-ok"></span>
-                                            </label>
+                                            @if ($loop->first)
+                                                <label class="border1 btn btn-default active" style="background-color: {!! $item !!}">
+                                                    <input type="radio" name="color" value="{{$item}}" autocomplete="off" checked >
+                                                    <span class="check glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            @else
+                                                <label class="border1 btn btn-default" style="background-color: {!! $item !!}">
+                                                    <input type="radio" name="color" value="{{$item}}" autocomplete="off">
+                                                    <span class="check glyphicon glyphicon-ok"></span>
+                                                </label>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>

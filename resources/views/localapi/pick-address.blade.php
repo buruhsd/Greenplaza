@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Choose Adrees</h4>
+            <h4 class="modal-title" id="modal-title">Pilih Alamat</h4>
         </div>
         <div class="modal-body">
             <div class="row m-t-20">

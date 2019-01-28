@@ -20,7 +20,7 @@ class ChartController extends Controller
 
     public function checkout()
     {
-        return view('frontend.checkout');
+        return view('frontend.checkout')->with(['flash_status' => 200]);
     }
 
     /**

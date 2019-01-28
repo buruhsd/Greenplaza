@@ -227,6 +227,48 @@ class SysWalletTableSeeder extends Seeder
                 'created_at' => '2019-01-15 03:55:54',
                 'updated_at' => '2019-01-15 03:55:54',
             ),
+            15 => 
+            array (
+                'id' => 16,
+                'wallet_user_id' => 1,
+                'wallet_type' => 6,
+                'wallet_ballance_before' => '0.00',
+                'wallet_ballance' => '0.00',
+                'wallet_address' => NULL,
+                'wallet_public' => NULL,
+                'wallet_private' => NULL,
+                'wallet_note' => 'Created by registration',
+                'created_at' => '2019-01-15 03:55:54',
+                'updated_at' => '2019-01-15 03:55:54',
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'wallet_user_id' => 2,
+                'wallet_type' => 6,
+                'wallet_ballance_before' => '0.00',
+                'wallet_ballance' => '0.00',
+                'wallet_address' => NULL,
+                'wallet_public' => NULL,
+                'wallet_private' => NULL,
+                'wallet_note' => 'Created by registration',
+                'created_at' => '2019-01-15 03:55:54',
+                'updated_at' => '2019-01-15 03:55:54',
+            ),
+            17 => 
+            array (
+                'id' => 18,
+                'wallet_user_id' => 3,
+                'wallet_type' => 6,
+                'wallet_ballance_before' => '0.00',
+                'wallet_ballance' => '0.00',
+                'wallet_address' => NULL,
+                'wallet_public' => NULL,
+                'wallet_private' => NULL,
+                'wallet_note' => 'Created by registration',
+                'created_at' => '2019-01-15 03:55:54',
+                'updated_at' => '2019-01-15 03:55:54',
+            ),
         ));
         
         

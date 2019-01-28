@@ -51,7 +51,7 @@ class WishlistController extends Controller
     {
         // dd($request);
         $status = 200;
-        $message = 'wishlist added!';
+        $message = 'Berhasil ditambahkan ke wishlist!';
         
         $res = new Wishlist;
         $res->wishlist_produk_id = $id;

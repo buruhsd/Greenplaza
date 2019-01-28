@@ -12,6 +12,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use \Validator;
 
 
 class ReviewController extends Controller
@@ -61,10 +62,21 @@ class ReviewController extends Controller
         $message = 'Review added!';
         
         $requestData = $request->all();
-        
+        $validator = Validator::make($request->all(), [
+            'stars' => 'required',
+            'review_text' => 'required',
+        ]);
+        if ($validator->fails()) {
+            $status = 500;
+            $message = "isikan komentar anda.";
+            return back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+
         $res = new Review;
         $res->review_produk_id = $request->review_produk_id;
         $res->review_user_id = $request->review_user_id;
+        // $res->review_stars = $request->stars;
         $res->review_text = $request->review_text;
         $res->save();
         if(!$res){

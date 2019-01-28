@@ -62,6 +62,15 @@ class ConfWalletTypeTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            5 => 
+            array (
+                'id' => 6,
+                'wallet_type_kode' => 'hotlist',
+                'wallet_type_name' => 'hotlist',
+                'wallet_type_note' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         
