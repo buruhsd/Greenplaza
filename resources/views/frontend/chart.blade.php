@@ -44,7 +44,7 @@
                                         <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
                                         <tr>
                                             <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
-                                            <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
+                                            <td class="product"><a href="#">{{$produk['produk_name']}}</a></td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>

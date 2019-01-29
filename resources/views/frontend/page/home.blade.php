@@ -385,8 +385,8 @@
                                     </h3>
                                     @if ($n->produk_discount != 0)
                                     <p>
-                                        <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
-                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del>
+                                        <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
                                     </p>
                                     @else
                                     <p>
@@ -399,6 +399,7 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
+                                    <span>
                                     </ul>
                                     <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                 </div>
@@ -438,8 +439,8 @@
                             410px">
                             <div class="banner-content">
                                 <div class="banner-info">
-                                    <h2>Sale <span>50%</span> off</h2>
-                                    <h3>This Week Only</h3>
+                                    <!-- <h2>Sale <span>50%</span> off</h2> -->
+                                    <h3><a href="{{url("/comming-soon")}}">Comming Soon</a></h3>
                                 </div>
                             </div>
                         </div>
@@ -478,16 +479,16 @@
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
-                                                @if ($n->produk_discount != 0)
-                                                <p>
-                                                    <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
-                                                    <del>Rp.{{number_format($n->produk_price, 2)}}</del>
-                                                </p>
-                                                @else
-                                                <p>
-                                                    <span>Rp.{{number_format($n->produk_price, 2)}}</span>
-                                                </p>
-                                                @endif
+                                                   @if ($n->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
+                                                    </p>
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
@@ -525,15 +526,15 @@
                                                 <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                             </h3>
                                             @if ($n->produk_discount != 0)
-                                            <p>
-                                                <span>Rp.{{number_format(($n->produk_price * $n->produk_discount) / 100, 2)}}</span>
-                                                <del>Rp.{{number_format($n->produk_price, 2)}}</del>
-                                            </p>
-                                            @else
-                                            <p>
-                                                <span>Rp.{{number_format($n->produk_price, 2)}}</span>
-                                            </p>
-                                            @endif
+                                                <p>
+                                                    <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                                    <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
+                                                </p>
+                                                @else
+                                                <p>
+                                                    <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                                </p>
+                                                @endif
                                             <ul class="rating">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
@@ -688,8 +689,8 @@
                                     </h3>
                                     @if ($f->produk_discount != 0)
                                     <p>
-                                        <span>Rp.{{number_format(($f->produk_price * $f->produk_discount) / 100, 2)}}</span>
-                                        <del>Rp.{{number_format($f->produk_price, 2)}}</del>
+                                        <span>Rp.{{number_format((($f->produk_price * $f->produk_discount) - $f->produk_price ), 2)}}</span>
+                                        <del>Rp.{{number_format($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span>
                                     </p>
                                     @else
                                     <p>
