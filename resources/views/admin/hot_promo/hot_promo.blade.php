@@ -21,7 +21,7 @@
             <input type="submit" class="btn btn-default" value="search">
     </form>
     <div class="input-group pull-right" style="width: 225px;">
-        <!-- <a type="button" class="btn btn-default">Tambah Produk Baru</a> -->
+        <a href="" type="button" class="btn btn-default">Tambah Produk Baru</a>
     </div>              
 </div> 
 <div class="row">

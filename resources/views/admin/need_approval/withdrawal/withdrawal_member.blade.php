@@ -8,7 +8,7 @@
         @include('layouts._flash')
         <div class="col-md-12">
             <div class="panel panel-white">
-                <div class="panel-heading clearfix">
+                <div class="panel-heading clearfix" style="margin-bottom: 2%">
                     <div class="col-md-6">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <form action="#" method="GET">
@@ -45,20 +45,22 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            @foreach ($with as $key => $w)
+                            
                             <tbody>
+                            @if($with->count() > 0)
+                                @foreach ($with as $key => $w)
                                 <tr>
-                                    <td>{{++$key}}</td>
-                                    <td>{{$w->user->username}}</td>
-                                    <td>{{$w->withdrawal_wallet_id}}</td>
-                                    <td>{{$w->withdrawal_wallet_type}}</td>
-                                    <td>{{$w->withdrawal_amount}}</td>
-                                    <td>{{$w->withdrawal_status}}</td>
-                                    <td>{{$w->withdrawal_response_text}}</td>
-                                    <td>{{$w->withdrawal_response_date}}</td>
+                                    <td><center>{{++$key}}</center></td>
+                                    <td><center>{{$w->user->username}}</center></td>
+                                    <td><center>{{$w->withdrawal_wallet_id}}</center></td>
+                                    <td><center>{{$w->withdrawal_wallet_type}}</center></td>
+                                    <td><center>{{$w->withdrawal_amount}}</center></td>
+                                    <td><center>{{$w->withdrawal_status}}</center></td>
+                                    <td><center>{{$w->withdrawal_response_text}}</center></td>
+                                    <td><center>{{$w->withdrawal_response_date}}</center></td>
                                     <td>
-                                        <a href=""><button type="submit" class="btn btn-success">Approve</button></a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button>
+                                        <a href=""><center><button type="submit" class="btn btn-success">Approve</button></a>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button></center>
                                          <!-- Modal -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
@@ -85,8 +87,12 @@
                                         </div>
                                     </td>
                                 </tr>
+                                 @endforeach
+                            @else
+                                <td colspan="9"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
-                            @endforeach
+
                         </table>
                         {{$with->render()}}
                     </div>

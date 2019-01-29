@@ -60,6 +60,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
 		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
+		Route::post('/hot_promo_create', 'Admin\\ProdukController@crete_hot')->name('.create_hot');
 		Route::get('/live_chat', 'Admin\\FrontController@live_chat')->name('.live_chat');
 		Route::get('/wishlist', function(){return;})->name('.wishlist');
 		Route::get('/dashboard', 'Admin\\FrontController@dashboard')->name('.dashboard');

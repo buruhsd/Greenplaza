@@ -91,11 +91,11 @@
                                             </ul>
                                         </td>
                                         <td>
-                                            <a href="{{ url('/admin/brand/show/' . $item->id) }}">
+                                            <!-- <a href="{{ url('/admin/brand/show/' . $item->id) }}">
                                                 <button class="btn btn-info btn-xs">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>View
                                                 </button>
-                                            </a>
+                                            </a> -->
                                             <a href="{{ url('/admin/brand/edit/' . $item->id) }}">
                                                 <button class="btn btn-warning btn-xs">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>Edit

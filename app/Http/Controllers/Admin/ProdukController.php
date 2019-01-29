@@ -99,14 +99,14 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create_hot ()
     {
         $data['role'] = Role::all();
         $data['user'] = User::all();
         $data['category'] = Category::all();
         $data['brand'] = Brand::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('admin.produk.create', $data);
+        return view('admin.hot_promo.create', $data);
     }
 
     /**
@@ -276,6 +276,18 @@ class ProdukController extends Controller
 
         return redirect('admin/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    public function create()
+    {
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['produk_unit'] = Produk_unit::all();
+        $data['produk_location'] = Produk_location::all();
+        $data['brand'] = Brand::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.produk.create', $data);
     }
 
     /**

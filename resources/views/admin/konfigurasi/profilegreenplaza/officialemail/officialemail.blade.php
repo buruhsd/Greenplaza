@@ -45,6 +45,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if($email->count() > 0)
                                 @foreach ($email as $e)
                                 <tr>
                                     <td>{{$e->id}}</td>
@@ -56,6 +57,9 @@
                                     </center></td>
                                 </tr>
                                 @endforeach
+                            @else
+                            <td colspan="5"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
                         </table>
                     </div>
