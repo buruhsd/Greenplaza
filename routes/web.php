@@ -542,8 +542,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		//buyer address
 		Route::group(['prefix' => 'address', 'as' => '.address'], function () {
 			Route::get('/set_default/{id}', 'User_addressController@set_default')->name('.set_default');
-			Route::post('/store', 'Member\\User_addressController@store')->name('member.address.store');
-			Route::post('/update/{id}', 'Member\\User_addressController@update')->name('member.address.update');
+			Route::post('/store', 'User_addressController@store')->name('member.address.store');
+			Route::post('/update/{id}', 'User_addressController@update')->name('member.address.update');
 			Route::delete('/destroy/{id}', 'User_addressController@destroy')->name('.destroy');
 		});
 	});

@@ -6,7 +6,6 @@
 </div>
 <div class="panel panel-white">
     <div class="panel-body">
-        {{FunctionLib::create_wallet()}}
     {{-- <div class="panel-heading clearfix">
         <h4 class="panel-title">Saldo Hot List Anda : nominal e hehe</h4>
     </div>

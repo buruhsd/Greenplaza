@@ -141,9 +141,19 @@ class UserController extends Controller
         
         $requestData = $request->all();
         
+
+        $messages = [
+            'required'  => ':attribute wajib diisi ',
+            'min'       => ':attribute minimal :min karakter ',
+            'max'       => ':attribute terlalu besar, max= :max ',
+            'mimes'     =>  ':attribute tipe gambar tidak valid',
+            'unique'    =>  ':attribute sudah ada gunakan email yang lain',
+            'confirmed'  =>  'isi :attribute dengan benar',
+            'string'    =>  ':attribute harus berupa huruf',
+        ];
         $this->validate($request, [
             'user_detail_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        ], $messages);
 
         $user = User::findOrFail(Auth::id());
         $userdetail = $user->user_detail()->first();
