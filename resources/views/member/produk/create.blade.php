@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Produk</h3>
+    <h3 class="breadcrumb-header">Tambah Produk</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -14,7 +14,7 @@
                 <div class="panel-body">
                 <a href="{{ url('/member/produk') }}" title="Back">
                     <button class="btn btn-warning btn-xs">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> kembali
                     </button>
                 </a>
                 <br />
