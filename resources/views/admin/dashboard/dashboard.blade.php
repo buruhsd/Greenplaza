@@ -62,27 +62,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($hotsellerbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$hotsellerbaru->trans_detail_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$hotsellerbaru->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotsellerkonf->trans_detail_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotsellerkonf->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$hotsellerbatal->trans_detail_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$hotsellerbatal->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$hotsellerapprove->trans_detail_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$hotsellerapprove->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$hotsellerditolak->trans_detail_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$hotsellerditolak->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
