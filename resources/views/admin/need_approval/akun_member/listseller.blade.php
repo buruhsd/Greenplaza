@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
-                                    <th><center>Member_id</center></th>
+                                    <th><center>Seller_id</center></th>
                                     <th><center>Name</center></th>
                                     <th><center>Detail</center></th>
                                     <th><center>Status</center></th>
@@ -51,15 +51,31 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                        Alamat : {{$u->user_address->user_address_address}}<br/>
-                                        No HP : {{$u->user_address->user_address_phone}}<br/>
-                                        No Telp Rumah : {{$u->user_address->user_address_tlp}}<br/>
-                                        Kota : {{$u->user_address->user_address_city}}<br/>
-                                        Kode_pos : {{$u->user_address->user_address_pos}}<br/>
-                                        Propinsi : {{$u->user_address->user_address_province}}<br/>
+                                    @php 
+                                        $address = $u->user_address->where('user_address_status', '=', 1)->first();
+                                    @endphp
+                                    @if($address)
+                                    
+                                        Alamat : {{$address->user_address_address}}<br/>
+                                        No HP : {{$address->user_address_phone}}<br/>
+                                        No Telp Rumah : {{$address->user_address_tlp}}<br/>
+                                        Kota : {{$address->user_address_city}}<br/>
+                                        Kode_pos : {{$address->user_address_pos}}<br/>
+                                        Propinsi : {{$address->user_address_province}}<br/>
                                         Kecamatan :<br/>
-                                        Tgl Registrasi : {{$u->user_address->created_at}}<br/>
-                                        Grade Member :<br/>
+                                        Tgl Registrasi : {{$u->created_at}}<br/>
+                                    @else
+                                        Alamat : - <br/>
+                                        No HP : - <br/>
+                                        No Telp Rumah : - <br/>
+                                        Kota : - <br/>
+                                        Kode_pos : - <br/>
+                                        Propinsi : - <br/>
+                                        Kecamatan :<br/>
+                                        Tgl Registrasi : - <br/>
+                                    @endif
+
+                                        Grade Seller : {{ ($u->grade_seller) ? $u->grade_seller->grade_member_name : '-'}}<br/>
                                         Username : {{$u->username}}<br/>
                                         Grade Pajak CW Bonus :
                                     </td>

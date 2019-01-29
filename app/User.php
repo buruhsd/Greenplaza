@@ -147,6 +147,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\User_address', 'user_address_user_id');
     }
+    public function grade_member()
+    {
+        return $this->hasOne('App\Models\Grade','id','user_grade');
+    }
+    public function grade_seller()
+    {
+        return $this->hasOne('App\Models\Grade','id','user_grade_seller');
+    }
 
     /**
     * get user shipment

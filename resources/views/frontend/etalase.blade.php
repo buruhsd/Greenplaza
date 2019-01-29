@@ -202,13 +202,13 @@
                                                 @else
                                                     <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
                                                 @endif
-                                                <ul class="rating">
+                                                <!-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
-                                                </ul>
+                                                </ul> -->
                                             </div>
                                         </div>
                                     </div>
@@ -254,13 +254,13 @@
                                                         @else
                                                             <p><span>{{FunctionLib::number_to_text($p->produk_price)}}</span></p>
                                                         @endif
-                                                        <ul class="rating">
+                                                        <!-- <ul class="rating">
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
-                                                        </ul>
+                                                        </ul> -->
                                                     </div>
                                                 </div>
                                             </div>

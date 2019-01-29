@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
-			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
+			Route::get('/', 'Superadmin\\@index')->name('.index');
 			Route::get('/bank', 'Superadmin\\Conf_configController@bank')->name('.bank');
 			Route::get('/profil', 'Superadmin\\Conf_configController@profil')->name('.profil');
 			Route::get('/transaction', 'Superadmin\\Conf_configController@transaction')->name('.transaction');

@@ -39,42 +39,98 @@
                                     <th>Nama Lengkap</th>
                                     <td> : {{$users->username}}</td>
                                 <tr>
+                                @if(App\Models\User_detail::where('user_detail_user_id', $users->id)->count() > 0)
                                 <tr>
-                                    <th>jenis Kelamin</th>
+                                    <th>Jenis Kelamin</th>
                                     <td> : {{App\Models\User_detail::where('user_detail_user_id', $users->id)->first()->user_detail_jk}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Jenis Kelamin</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Alamat</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_address}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Alamat</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Kode Pos</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_pos}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Kode Pos</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Provinsi</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_province}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Provinsi</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Kota/Kab</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_city}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Kota/Kab</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Kecamatan</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_subdist}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Kecamatan</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <th>Email</th>
                                     <td> : {{$users->email}}</td>
                                 <tr>
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>No. HP</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_phone}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>No. HP</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
+                                @if(App\Models\User_address::where('user_address_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Telp. Rumah</th>
                                     <td> : {{App\Models\User_address::where('user_address_user_id', $users->id)->first()->user_address_tlp}}</td>
                                 <tr>
+                                @else 
+                                <tr>
+                                    <th>Telp. Rumah</th>
+                                    <td> : - </td>
+                                </tr>
+                                @endif
                                 @if(App\Models\User_bank::where('user_bank_user_id', $users->id)->count() > 0)
                                 <tr>
                                     <th>Nama Bank</th>

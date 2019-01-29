@@ -51,11 +51,11 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    <!-- @if($u->user_address()->first())
-                                        <?php
-                                            $address = $u->user_address()->first();
-                                        ?>
-                                    {{FunctionLib::address_info($address->id)}}
+                                    @php 
+                                        $address = $u->user_address->where('user_address_status', '=', 1)->first();
+                                    @endphp
+                                    @if($address)
+                                    
                                         Alamat : {{$address->user_address_address}}<br/>
                                         No HP : {{$address->user_address_phone}}<br/>
                                         No Telp Rumah : {{$address->user_address_tlp}}<br/>
@@ -73,8 +73,9 @@
                                         Propinsi : - <br/>
                                         Kecamatan :<br/>
                                         Tgl Registrasi : - <br/>
-                                    @endif -->
-                                        Grade Member :<br/>
+                                    @endif
+
+                                        Grade Member : {{ ($u->grade_member) ? $u->grade_member->grade_member_name : '-'}}<br/>
                                         Username : {{$u->username}}<br/>
                                         Grade Pajak CW Bonus :
                                     </td>

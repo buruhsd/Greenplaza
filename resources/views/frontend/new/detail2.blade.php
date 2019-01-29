@@ -56,13 +56,13 @@
                                         </div>
                                         <div class="product-sedebar-content fix">
                                             <h4><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a></h4>
-                                            <ul class="rating">
+                                            <!-- <ul class="rating">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
+                                            </ul> -->
                                             <p>
                                                 @if($item->produk_discount > 0)
                                                     Rp. {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}&nbsp;/&nbsp;
@@ -131,11 +131,11 @@
                                             <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span>
                                         @endif
                                         <ul class="rating pull-right">
+                                            <!-- <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
+                                            <li><i class="fa fa-star"></i></li> -->
                                             <li class="text-info">({{$review->count()}} Customar Review)</li>
                                         </ul>
                                     </div>
@@ -345,13 +345,13 @@
                                                         <h3><a href="#">{{$item->user->name}}</a></h3>
                                                         <span>{{$item->created_at}}</span>
                                                         <p>{{$item->review_text}}</p>
-                                                        <ul class="rating">
+                                                        <!-- <ul class="rating">
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
-                                                        </ul>
+                                                        </ul> -->
                                                     </div>
                                                 </li>
                                                 @endforeach

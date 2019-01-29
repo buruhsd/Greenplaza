@@ -10,6 +10,7 @@ use App\Models\User_detail;
 use App\Models\Trans_iklan;
 use App\Models\Trans_hotlist;
 use App\Models\Trans_pincode;
+use App\Models\User_address;
 use Session;
 use Mail;
 
@@ -187,14 +188,16 @@ class NeedApprovalController extends Controller
         $search = \Request::get('search');
         $users = User::where('name', 'like', '%'.$search.'%')
                 ->orderBy('updated_at', 'DESC')->paginate(10);
+        $address = User_address::where('user_address_status', '=', 1)->orderBy('updated_at', 'DESC')->paginate(10);
+        // dd($address);
        
-        return view('admin.need_approval.akun_member.listmember', compact('users', 'detail'));
+        return view('admin.need_approval.akun_member.listmember', compact('users', 'address'));
     }
     public function changepassword_member (Request $request, $id)
     {
         $users = User::find($id);
         // dd($users);
-        return view('admin.need_approval.akun_member.resetpassword_member', compact('users'));
+        return view('admin.need_approval.akun_member.resetpassword_member', compact('users', 'address'));
     }
     public function password_member (Request $request, $id)
     {
