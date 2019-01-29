@@ -238,6 +238,7 @@ class TransactionController extends Controller
         $message = 'Transfer confirmed!';
         $trans = Trans::findOrFail($id);
         $m_status = FunctionLib::midtrans_status($trans->trans_code);
+        dd($m_status);
         if($m_status){
             $in = 'select id from sys_trans where trans_code = "'.$trans->trans_code.'"';
             $detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
