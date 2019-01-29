@@ -31,16 +31,17 @@ class MidtransController extends Controller
     {
         // $this->middleware('auth');
         //Set Your server key
-        Veritrans_Config::$serverKey = env('VERYTRANS_KEY', 'SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J');
+        // Veritrans_Config::$serverKey = 'SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J;
+        Veritrans_Config::$serverKey = 'Mid-server-7Y-NEaLe8gTOb4xVRDip6WyC';
         // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
         // Uncomment for production environment
         Veritrans_Config::$isProduction = true;
         // Enable sanitization
-        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
-        // Veritrans_Config::$isSanitized = true;
+        // Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        Veritrans_Config::$isSanitized = true;
         // Enable 3D-Secure
-        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
-        // Veritrans_Config::$is3ds = true;
+        // Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        Veritrans_Config::$is3ds = true;
     }
 
     /**
