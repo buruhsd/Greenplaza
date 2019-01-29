@@ -37,9 +37,8 @@
                                 <tr>
                                     <th><center>Seller Id</center></th>
                                     <th><center>Nama</center></th>
-                                    <th><center>Detail</center></th>
+                                    <th><center>Tagihan</center></th>
                                     <th><center>Status</center></th>
-                                    <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,7 +47,7 @@
                                <tr>
                                     <td><center>{{$d->trans->trans_user_id}}</center></td>
                                     <td><center>{{$d->trans->pembeli->name}}</center></td>
-                                    <td><center></center></td>
+                                    <td>{{$d->trans_detail_amount}}</td> 
 
                                 @if ($d->trans_detail_status == 1)
                                     <td><center>Order</center></td>
@@ -66,11 +65,11 @@
                                     <td><center>-</center></td>
                                 @endif
 
-                                	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
+                                	
                                </tr>
                                @endforeach
                             @else
-                                <td colspan="5"><center>KOSONG</center></td>
+                                <td colspan="4"><center>KOSONG</center></td>
                             @endif
                             </tbody>
                         </table>

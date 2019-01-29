@@ -36,7 +36,6 @@
                                 <tr>
                                     <th><center>Seller Id</center></th>
                                     <th><center>Nama</center></th>
-                                    <th><center>Detail</center></th>
                                     <th><center>Tagihan</center></th>
                                     <th><center>Status</center></th>
                                 </tr>
@@ -47,9 +46,7 @@
                                <tr>
                                     <td><center>{{$d->trans->trans_user_id}}</center></td>
                                     <td><center>{{$d->trans->pembeli->name}}</center></td>
-                                    <td><center>
-                                        <a href="{{route('admin.dasboarddetailseller', $d->id)}}"><button class="btn btn-danger btn-xs">detail</button></a>
-                                    </center></td>
+                                    
                                     <td>{{$d->trans_detail_amount}}</td>
 
                                 @if ($d->trans_detail_status == 1)
@@ -64,13 +61,15 @@
                                     <td><center>Shipping</center></td>
                                 @elseif ($d->trans_detail_status == 6)
                                     <td><center>Dropping</center></td>
+                                @else
+                                    <td><center>-</center></td>
                                 @endif
 
                                 	
                                </tr>
                                @endforeach
                             @else
-                                <td colspan="5"><center>KOSONG</center></td>
+                                <td colspan="4"><center>KOSONG</center></td>
                             @endif
                             </tbody>
                         </table>
