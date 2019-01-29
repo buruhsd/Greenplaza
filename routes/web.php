@@ -478,7 +478,9 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
 			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
-			Route::get('disabled/{id}', 'ProdukController@disabled')->name('.disabled');
+			Route::get('/disabled/{id}', 'ProdukController@disabled')->name('.disabled');
+			Route::get('/hotlist/{id}', 'ProdukController@hotlist')->name('.hotlist_id');
+			Route::get('/hotlist', 'ProdukController@hotlist')->name('.hotlist');
 		});
 		// PIN Code
 		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {

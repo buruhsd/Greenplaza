@@ -72,7 +72,9 @@
                     </aside>
                 </div>
                 <div class="col-lg-9 col-12 blog-details-wrap p-10 bg-5 mb-30">
-                    {!!$page->page_judul!!}
+                    <h4>{!!$page->page_judul!!}</h4>
+                    <hr/>
+                    <br/>
                     {!!$page->page_text!!}
                     {{-- content --}}
                 </div>

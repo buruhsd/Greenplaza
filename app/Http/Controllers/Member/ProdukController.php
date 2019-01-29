@@ -30,6 +30,15 @@ class ProdukController extends Controller
     private $mainTable = 'sys_produk';
 
     /**
+    *
+    * @param
+    * @return
+    **/
+    public function hotlist(Request $request, $id = 0){
+        return view('member.produk.hotlist');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View

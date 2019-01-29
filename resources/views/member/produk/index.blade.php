@@ -91,7 +91,12 @@
                                                 :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
                                         </td>
                                         <td scope="row">
-                                            <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
+                                                    <a href="{{route('member.produk.hotlist_id', $item->id)}}" class='btn btn-danger btn-xs'>Hotlist</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
