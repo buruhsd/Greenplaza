@@ -35,9 +35,44 @@ class ProdukController extends Controller
     * @return
     **/
     public function hotlist(Request $request, $id = 0){
+        if(!empty($request->all())){
+            $this->validate($request, [
+                'id' => 'required|numeric',
+                'produk_hotlist' => 'required|numeric',
+            ]);
+            // check wallet and update
+            if(FunctionLib::get_hotlist($request->id) >= $request->produk_hotlist){
+                // update wallet
+                $where = 'wallet_user_id='.Auth::id();
+                $where = ' AND wallet_type=6';
+                $wallet = Wallet::whereRaw($where)->first();
+                $wallet->wallet_ballance_before = $wallet->wallet_ballance;
+                $wallet->wallet_ballance = $wallet->wallet_ballance - $request->produk_hotlist;
+                $wallet->wallet_note = 'pengurangan saldo hotlist, saldo hotlist telah dipindahkan ke produk.';
+                $wallet->save();
+
+                // update produk
+                $produk = Produk::whereId($request->id)->first();
+                $produk->produk_is_hot = 1;
+                $produk->produk_hotlist = $request->produk_hotlist;
+                $produk->save();
+                $status = 200;
+                $message = 'hotlist produk '.$produk->produk_name.' berhasil di tambahkan.';
+                Session::flash('flash_status', $status);
+                Session::flash('flash_message', $message);
+            }else{
+                $status = 500;
+                $message = 'saldo hotlist anda tidak mencukupi.';
+                Session::flash('flash_status', $status);
+                Session::flash('flash_message', $message);
+            }
+        }
         $where = 1;
         $where .= ' AND produk_status=1';
         $where .= ' AND produk_seller_id='.Auth::id();
+        if($id != 0){
+            $where .= ' AND id='.$id;
+        }
         $data['produk'] = Produk::whereRaw($where)->get();
         return view('member.produk.hotlist', $data);
     }

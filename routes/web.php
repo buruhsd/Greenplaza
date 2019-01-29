@@ -483,6 +483,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/disabled/{id}', 'ProdukController@disabled')->name('.disabled');
 			Route::get('/hotlist/{id}', 'ProdukController@hotlist')->name('.hotlist_id');
 			Route::get('/hotlist', 'ProdukController@hotlist')->name('.hotlist');
+			Route::post('/hotlist', 'ProdukController@hotlist')->name('.hotlist');
 		});
 		// PIN Code
 		Route::group(['prefix' => 'pincode', 'as' => '.pincode'], function () {

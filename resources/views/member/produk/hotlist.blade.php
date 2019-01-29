@@ -24,7 +24,7 @@
                         <a href="{{route('member.user.set_shipment')}}" class="btn btn-sm btn-success">Update Jasa pengiriman</a>
                     </div>
                 @else
-                    {!! Form::open(['url' => '/member/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}
+                    {!! Form::open(['url' => '/member/produk/hotlist', 'class' => 'form-horizontal', 'files' => true]) !!}
                         <div class="panel panel-white col-md-6 no-border">
                             <div class="panel-body">
                                 <div class="row">
@@ -36,16 +36,17 @@
                                                 <option value='{{$item->id}}'>{{$item->produk_name}}</option>
                                                 @endforeach
                                             </select>
+                                            <p class="help-block">Hotlist anda saat ini : <span id="total-hotlist"></span></p>
                                             {!! $errors->first('id', '<p class="help-block">:message</p>') !!}
                                         </div>
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_hotlist') ? 'has-error' : ''}}">
-                                        {!! Form::label('produk_hotlist', 'Total Hotlist : ', ['class' => 'col-md-3 control-label']) !!}
+                                        {!! Form::label('produk_hotlist', 'Tambah Hotlist : ', ['class' => 'col-md-3 control-label']) !!}
                                         <div class="col-md-9">
                                             {!! Form::number('produk_hotlist', null, [
                                                 'class' => 'form-control', 
                                                 'id' => 'produk_hotlist',
-                                                'placeholder' => 'Total Hotlist', 
+                                                'placeholder' => 'Tambah Hotlist', 
                                                 'required'
                                             ])!!}
                                         {!! $errors->first('produk_hotlist', '<p class="help-block">:message</p>') !!}
@@ -84,7 +85,8 @@
                 type: 'get', // or post?
                 url: '{{url('localapi/content/get_hotlist')}}/'+id, // change as needed
                 success: function(data) {
-                    $('#produk_hotlist').val(data);
+                    $('#total-hotlist').html(data+' Click');
+                    // $('#produk_hotlist').val(data);
                 }
             });
         }

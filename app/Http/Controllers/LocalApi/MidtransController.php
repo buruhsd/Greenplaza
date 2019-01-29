@@ -34,7 +34,7 @@ class MidtransController extends Controller
         Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
         // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
         // Uncomment for production environment
-        // Veritrans_Config::$isProduction = true;
+        Veritrans_Config::$isProduction = true;
         // Enable sanitization
         Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
         // Veritrans_Config::$isSanitized = true;
