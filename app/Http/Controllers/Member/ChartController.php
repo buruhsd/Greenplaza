@@ -49,6 +49,10 @@ class ChartController extends Controller
         if($courier == null || $courier == "" || $courier == 0){
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
         }
+        $price = $produk['produk_price'];
+        if($produk['produk_discount'] > 0){
+            $price = ($produk['produk_price'] - ($produk['produk_price'] * $produk['produk_discount'] / 100)) * $request->qty;
+        }
     	$transaction = [
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],
@@ -58,9 +62,9 @@ class ChartController extends Controller
 			'trans_detail_qty' => $request->qty,
 			'trans_detail_size' => $request->size,
 			'trans_detail_color' => $request->color,
-			'trans_detail_amount' => ($produk['produk_price'] * $request->qty),
+			'trans_detail_amount' => $price,
 			'trans_detail_amount_ship' => $request->ship_cost,
-			'trans_detail_amount_total' => (($produk['produk_price'] * $request->qty) + $request->ship_cost),
+			'trans_detail_amount_total' => ($price + $request->ship_cost),
 			'trans_detail_status' => 0,
 			'trans_detail_note' => $request->note
 		];
