@@ -204,27 +204,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($hotmemberbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$hotmemberbaru->trans_detail_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$hotmemberbaru->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotmemberkonf->trans_detail_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotmemberkonf->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$hotmemberbatal->trans_detail_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$hotmemberbatal->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$hotmemberapprove->trans_detail_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$hotmemberapprove->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$hotmemberditolak->trans_detail_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$hotmemberditolak->trans_hotlist_status->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
