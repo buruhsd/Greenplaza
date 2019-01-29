@@ -12,6 +12,9 @@
         <center><form class="form-horizontal" method="POST" action= "{{route('admin.send_email')}}" enctype = "multipart/form-data">
             {{ csrf_field() }}
             <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    Pengiriman 'Single Email' perlu mengisikan email yang di tuju di kolom 'sending to' untuk pengiriman emailnya !! Tidak berlaku untuk pilihan pengiriman email yang lain.
+                </div>
                 <div class="form-group">
                     <div class="col-md-6">
                         <select name="value" type="text" class="form-control">

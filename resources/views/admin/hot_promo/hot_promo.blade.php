@@ -21,7 +21,7 @@
             <input type="submit" class="btn btn-default" value="search">
     </form>
     <div class="input-group pull-right" style="width: 225px;">
-        <a type="button" class="btn btn-default">Tambah Produk Baru</a>
+        <!-- <a type="button" class="btn btn-default">Tambah Produk Baru</a> -->
     </div>              
 </div> 
 <div class="row">
@@ -52,6 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                         @if($produk->count() > 0)
                             <?php $no = 1; ?>
                             @foreach($produk as $item)
                             <tr>
@@ -86,6 +87,9 @@
                                 </td>
                             </tr>
                             @endforeach
+                        @else
+                            <td colspan="6"><center>KOSONG</center></td>
+                        @endif
                         </tbody>
                     </table>
                 </div>

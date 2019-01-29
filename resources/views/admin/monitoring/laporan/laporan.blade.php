@@ -63,19 +63,19 @@
                             <tbody>
                                 @foreach ($detail as $d)
                                 <tr>
-                                    <td>{{$d->id}}</td>
-                                    <td>{{$d->created_at}}</td>
+                                    <td><center>{{$d->id}}</center></td>
+                                    <td><center>{{$d->created_at}}</center></td>
                                     <td>
                                         <center>{{$d->trans_code}}</center> <br/>
                                         <center><img style="width: 20%" src="{{ asset('assets/images/product/'.$d->produk->produk_image) }}" alt=""></center>
                                     </td>
-                                    <td>{{App\User::where('id', $d->produk->produk_seller_id)->first()->username}}</td>
-                                    <td>{{App\User::where('id', $d->user_address->user_address_user_id)->first()->username}}</td>
+                                    <td><center>{{App\User::where('id', $d->produk->produk_seller_id)->first()->username}}</center></td>
+                                    <td><center>{{App\User::where('id', $d->user_address->user_address_user_id)->first()->username}}</center></td>
                                 </tr>
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="5" class="text-center">Kosong</td>
+                                    <td colspan="5" class="text-center">KOSONG</td>
                                 </tr>
                             @endif
                             </tbody>

@@ -7,7 +7,7 @@
         @include('layouts._flash')
         <div class="col-md-12">
             <div class="panel panel-white">
-                <div class="panel-heading clearfix">
+                <div class="panel-heading clearfix" style="margin-bottom: 2%">
                 	<div class="col-md-6">
     	                <a href="{{route('admin.email_sender')}}"><button type="" class="btn btn-default">Kembali</button></a>
     	            </div>
@@ -37,8 +37,10 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            @foreach ($email as $e)
+                        
                             <tbody>
+                        @if($email->count() > 0)
+                            @foreach ($email as $e)
                                 <tr>
                                     <td>{{$e->created_at}}</td>
                                     @if ($e->email_to != null)
@@ -65,8 +67,12 @@
 
                                     </td>
                                 </tr>
+                                @endforeach
+                            @else
+                                <td colspan="8"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
-                            @endforeach
+
                         </table>
                         {{$email->render()}}
                     </div>

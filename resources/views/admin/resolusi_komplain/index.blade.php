@@ -38,7 +38,7 @@
                     <button type="button" onclick="search('new');" class="btn btn-info">New<span class="label label-default pull-right">{{FunctionLib::count_res_kom(1)}}</span></button>
                     <button type="button" onclick="search('help');" class="btn btn-warning">Admin Help<span class="label label-default pull-right">{{FunctionLib::count_res_kom(2)}}</span></button>
                     <button type="button" onclick="search('done');" class="btn btn-success">Done<span class="label label-default pull-right">{{FunctionLib::count_res_kom(3)}}</span></button>
-                    <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <!-- <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> -->
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -52,6 +52,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if($komplain->count() > 0)
                                 <?php $no = 1; ?>
                                 @foreach($komplain as $item)
                                     <tr>
@@ -89,6 +90,9 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            @else
+                                <td colspan="4"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
                         </table>
                     </div>
