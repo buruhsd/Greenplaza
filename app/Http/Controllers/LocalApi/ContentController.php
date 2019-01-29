@@ -25,6 +25,15 @@ class ContentController extends Controller
     * @param id komplain type
     * @return
     */
+    public static function get_hotlist($id = 0){
+        $data = FunctionLib::get_hotlist($id);
+        return $data;
+    }
+
+    /**
+    * @param id komplain type
+    * @return
+    */
     public static function get_solusi($id = 0){
         $data = Conf_solusi::first(null, new Conf_solusi)->get();
         if($id != 0){

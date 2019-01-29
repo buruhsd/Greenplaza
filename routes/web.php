@@ -608,6 +608,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('get_db_province/{id}', 'ContentController@get_db_province')->name('.get_db_province');
 		Route::get('get_db_city/{id}', 'ContentController@get_db_city')->name('.get_db_city');
 		Route::get('get_db_subdistrict/{id}', 'ContentController@get_db_subdistrict')->name('.get_db_subdistrict');
+		Route::get('get_hotlist/{id}', 'ContentController@get_hotlist')->name('.get_hotlist');
 		Route::get('config_content', function(){return true;})->name('.config_content');
 	});
 	Route::group(['prefix' => 'modal', 'as' => '.modal'], function () {

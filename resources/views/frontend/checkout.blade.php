@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="form-group mx-sm-3 mb-2">
+                            {{-- <div class="form-group mx-sm-3 mb-2">
                                 <div class="row" data-toggle="buttons">
                                     <div class="col-md-6">
                                         <label class="btn btn-info btn-block" data-toggle="collapse" data-target="#midtrans" aria-expanded="true" aria-controls="midtrans">
@@ -102,18 +102,18 @@
                                     <div class="col-md-6">
                                         <label class="btn btn-info btn-block" data-toggle="collapse" data-target="#masedi" aria-expanded="true" aria-controls="masedi">
                                             <input type="radio" name="komplain_komplain_id" value="1" autocomplete="off">
-                                            Mas Edi <span class="check glyphicon glyphicon-ok"></span>
+                                            MasEdi <span class="check glyphicon glyphicon-ok"></span>
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
-                            <div id="midtrans" class="collapse">
+                            </div> --}}
+                            <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" />
+                            {{-- <div id="midtrans" class="collapse">
                                 <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
                             </div>
                             <div id="masedi" class="collapse">
                                 <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
-                            </div>
+                            </div> --}}
                         </form>
                     </div>
                 </div>

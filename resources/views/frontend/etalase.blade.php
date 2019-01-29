@@ -106,6 +106,11 @@
                                                                     </i>
                                                                 </div>
                                                             </li>
+                                                            <li class="list-group-item">
+                                                                <a class="btn btn-success btn-block" href="{{route('member.message.create', $user->user_slug)}}">
+                                                                    Kirim Pesan
+                                                                </a>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>

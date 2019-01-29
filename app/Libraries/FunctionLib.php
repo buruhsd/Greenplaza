@@ -2,6 +2,12 @@
 class FunctionLib
 {
 
+    /*******/
+    public static function get_hotlist($id){
+        $produk = App\Models\Produk::whereId($id)->first();
+        return $produk->produk_hotlist;
+    }
+
     /**
     * create wallet user #user wallet yang belum tersedia
     * @param

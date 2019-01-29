@@ -35,7 +35,11 @@ class ProdukController extends Controller
     * @return
     **/
     public function hotlist(Request $request, $id = 0){
-        return view('member.produk.hotlist');
+        $where = 1;
+        $where .= ' AND produk_status=1';
+        $where .= ' AND produk_seller_id='.Auth::id();
+        $data['produk'] = Produk::whereRaw($where)->get();
+        return view('member.produk.hotlist', $data);
     }
 
     /**
