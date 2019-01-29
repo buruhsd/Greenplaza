@@ -31,7 +31,7 @@ class MidtransController extends Controller
     {
         // $this->middleware('auth');
         //Set Your server key
-        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        Veritrans_Config::$serverKey = env('VERYTRANS_KEY', 'SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J');
         // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
         // Uncomment for production environment
         Veritrans_Config::$isProduction = true;
