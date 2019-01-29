@@ -76,7 +76,7 @@
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     @foreach($category as $item)
-                    <option value='{{$item->id}}'>{{$item->category_name}}</option>
+                    <option value='{{$item->id}}'>{{ucfirst(strtolower($item->category_name))}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_category_id', '<p class="help-block">:message</p>') !!}
@@ -88,7 +88,7 @@
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     @foreach($category as $item)
-                        <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{$item->category_name}}</option>
+                        <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{ucfirst(strtolower($item->category_name))}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_category_id', '<p class="help-block">:message</p>') !!}
