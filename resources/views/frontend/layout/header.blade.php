@@ -205,8 +205,11 @@
                                     {{-- <li><a href="shop-sidebar.html">Shop Sidebar</a></li> --}}
                                     {{-- <li><a href="single-product.html">Product Details</a></li> --}}
                                     <li><a href="{{route('chart')}}">Shopping cart</a></li>
-                                    <li><a href="{{route('checkout')}}">Checkout</a></li>
-                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    @guest
+                                    @else
+                                        <li><a href="{{route('checkout')}}">Checkout</a></li>
+                                        <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    @endguest
                                 </ul>
                             </li>
                             {{-- <li class="sidemenu-items"><a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
