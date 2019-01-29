@@ -25,32 +25,32 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($detailsellerorder->count() > 0)
-                                            <li>Order<span class="label label-default pull-right">{{$detailsellerorder->trans_detail_status->count()}}</span></li>
+                                            <li>Order<span class="label label-default pull-right">{{$detailsellerorder->count()}}</span></li>
                                         @else
                                             <li>Order<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($detailsellertransfer->count() > 0)
-                                            <li>Transfer<span class="label label-default pull-right">{{$detailsellertransfer->trans_detail_status->count()}}</span></li>
+                                            <li>Transfer<span class="label label-default pull-right">{{$detailsellertransfer->count()}}</span></li>
                                         @else
                                             <li>Transfer<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($detailsellerseller->count() > 0)
-                                            <li>Seller<span class="label label-success pull-right">{{$detailsellerseller->trans_detail_status->count()}}</span></li>
+                                            <li>Seller<span class="label label-success pull-right">{{$detailsellerseller->count()}}</span></li>
                                         @else
                                             <li>Seller<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($detailsellerpacking->count() > 0)
-                                            <li>Packing<span class="label label-success pull-right">{{$detailsellerpacking->trans_detail_status->count()}}</span></li>
+                                            <li>Packing<span class="label label-success pull-right">{{$detailsellerpacking->count()}}</span></li>
                                         @else
                                             <li>Packing<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($detailsellershipping->count() > 0)
-                                            <li>Shipping<span class="label label-danger pull-right">{{$detailsellershipping->trans_detail_status->count()}}</span></li>
+                                            <li>Shipping<span class="label label-danger pull-right">{{$detailsellershipping->count()}}</span></li>
                                         @else
                                             <li>Shipping<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($detailsellerdropping->count() > 0)
-                                            <li>Dropping<span class="label label-danger pull-right">{{$detailsellerdropping->trans_detail_status->count()}}</span></li>
+                                            <li>Dropping<span class="label label-danger pull-right">{{$detailsellerdropping->count()}}</span></li>
                                         @else
                                             <li>Dropping<span class="label label-danger pull-right">0</span></li>
                                         @endif
@@ -167,32 +167,32 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($detailmemberorder->count() > 0)
-                                            <li>Order<span class="label label-default pull-right">{{$detailmemberorder->trans_detail_status->count()}}</span></li>
+                                            <li>Order<span class="label label-default pull-right">{{$detailmemberorder->count()}}</span></li>
                                         @else
                                             <li>Order<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($detailmembertransfer->count() > 0)
-                                            <li>Transfer<span class="label label-default pull-right">{{$detailmembertransfer->trans_detail_status->count()}}</span></li>
+                                            <li>Transfer<span class="label label-default pull-right">{{$detailmembertransfer->count()}}</span></li>
                                         @else
                                             <li>Transfer<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($detailmemberseller->count() > 0)
-                                            <li>Seller<span class="label label-success pull-right">{{$detailmemberseller->trans_detail_status->count()}}</span></li>
+                                            <li>Seller<span class="label label-success pull-right">{{$detailmemberseller->count()}}</span></li>
                                         @else
                                             <li>Seller<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($detailmemberpacking->count() > 0)
-                                            <li>Packing<span class="label label-success pull-right">{{$detailmemberpacking->trans_detail_status->count()}}</span></li>
+                                            <li>Packing<span class="label label-success pull-right">{{$detailmemberpacking->count()}}</span></li>
                                         @else
                                             <li>Packing<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($detailmembershipping->count() > 0)
-                                            <li>Shipping<span class="label label-danger pull-right">{{$detailmembershipping->trans_detail_status->count()}}</span></li>
+                                            <li>Shipping<span class="label label-danger pull-right">{{$detailmembershipping->count()}}</span></li>
                                         @else
                                             <li>Shipping<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($detailmemberdropping->count() > 0)
-                                            <li>Dropping<span class="label label-danger pull-right">{{$detailmemberdropping->trans_detail_status->count()}}</span></li>
+                                            <li>Dropping<span class="label label-danger pull-right">{{$detailmemberdropping->count()}}</span></li>
                                         @else
                                             <li>Dropping<span class="label label-danger pull-right">0</span></li>
                                         @endif
