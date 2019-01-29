@@ -748,6 +748,7 @@ class FunctionLib
     * @return
     **/
     public static function produk_by($status, $val= 0, $limit= 8, $where= 1, $order= "RAND()"){
+        // $where = $where.' AND produk_status=1';
         switch ($status) {
             case 'category':
                     $cat = Illuminate\Support\Facades\DB::select("SELECT GROUP_CONCAT(lv SEPARATOR ',') as lv FROM (
