@@ -37,7 +37,7 @@ class SendEmail extends Controller
 		}else{
 			$data = $name;
 		}
-		dd($to, $from, $subject, $data);
+		// dd($to, $from, $subject, $data);
 		Mail::send($view, $data, function($message) use ($to, $from, $subject) {
 			$message->from($from);
 			$message->to($to)
