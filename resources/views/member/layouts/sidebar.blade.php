@@ -121,7 +121,7 @@
                                     </ul>
                                 </li>
                                 {{-- need actived --}}
-                                <li class="@yield('pasang iklan')">
+                                <li class="@yield('pasang iklan') hidden">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
@@ -151,7 +151,7 @@
                                         <li class="{{FunctionLib::setActive('member/wallet/type/rw')}}"><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/type/iklan')}}"><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/type/pincode')}}"><a href="{{route('member.wallet.type', 'pin_code')}}">Log Pincode</a></li>
-                                        <li class="{{FunctionLib::setActive('member')}}"><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
+                                        <li class="{{FunctionLib::setActive('member')}} hidden"><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
                                     </ul>
                                 </li>
                             {{-- @endif --}}
