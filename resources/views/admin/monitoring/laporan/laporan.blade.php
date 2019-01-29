@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('monitoring', 'active-page')
 @section('content')
 
 <link href="{{asset('admin/plugins/summernote-master/summernote.css')}}" rel="stylesheet" type="text/css"/>

@@ -1,4 +1,5 @@
 @extends('superadmin.index')
+@section('konfigurasi', 'active-page')
 @section('content')
 
 <div class="page-title">

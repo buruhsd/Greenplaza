@@ -1,5 +1,5 @@
 @extends('admin.index', ['active' => 'admin', 'page'=>'listmember'])
-@section('title', 'Listmember')
+@section('need approval', 'active-page')
 @section('content')
 
 <div class="page-inner">

@@ -55,6 +55,7 @@
                                     <li class="{{FunctionLib::setActive('admin/monitoring/log_activity')}}"><a href="{{route('admin.monitoring.activity')}}">Log Aktivitas</a></li>
                                 </ul>
                             </li>
+                            {{-- need actived --}}
                             <li class="@yield('need approval')">
                                 <a href="javascript:void(0)">
                                     <i class="menu-icon icon-layers"></i><span>Need Approval</span><i class="accordion-icon fa fa-angle-left"></i>

@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('monitoring', 'active-page')
 @section('content')
 
 <div id="main-wrapper">

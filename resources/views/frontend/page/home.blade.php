@@ -1175,8 +1175,9 @@
         </div>
     </div> -->
     <!-- blog-area end -->
+    
     <!-- brand-area start -->
-    <div class="brand-area mb-30">
+    <!-- <div class="brand-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1193,7 +1194,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- brand-area end -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
