@@ -176,11 +176,15 @@
                                 @if(Auth::user()->is_admin())
                                     <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
                                     <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-                                    <li><a href="{{route('admin.wishlist')}}">Wishlist</a></li>
+                                    @if(Auth::user()->seller_active())
+                                        <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
+                                    @endif
                                 @elseif(Auth::user()->is_member())
                                     <li><a href="{{route('member.profil')}}">Profil</a></li>
                                     <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
-                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    @if(Auth::user()->seller_active())
+                                        <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
+                                    @endif
                                 @endif
                                 <li>
                                     <a onclick="event.preventDefault();

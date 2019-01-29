@@ -26,7 +26,7 @@ class ModalController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -141,6 +141,9 @@ class ModalController extends Controller
      */
     public function addWishlist($id)
     {
+        if(Auth::guest()){
+            return view('localapi.login');
+        }
         $data['id'] = $id;
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.wishlist-note', $data);
