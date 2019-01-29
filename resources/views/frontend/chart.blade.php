@@ -75,7 +75,7 @@
                         </table>
                         <div class="row mt-60">
                             <div class="col-lg-5 col-md-6 ">
-                                <div class="cartcupon-wrap">
+                                <div class="cartcupon-wrap" style="display: none;">
                                     <ul class="d-flex">
                                         {{-- <li>
                                             <button>Update Cart</button>

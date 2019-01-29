@@ -204,9 +204,12 @@
                                     {{-- <li><a href="shop.html">Shop Page</a></li> --}}
                                     {{-- <li><a href="shop-sidebar.html">Shop Sidebar</a></li> --}}
                                     {{-- <li><a href="single-product.html">Product Details</a></li> --}}
-                                    <li><a href="{{route('chart')}}">Shopping cart</a></li>
-                                    <li><a href="{{route('checkout')}}">Checkout</a></li>
-                                    <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    <li><a href="{{route('chart')}}">Keranjang</a></li>
+                                    @guest
+                                    @else
+                                        <li><a href="{{route('checkout')}}">Checkout</a></li>
+                                        <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                    @endguest
                                 </ul>
                             </li>
                         </ul>
