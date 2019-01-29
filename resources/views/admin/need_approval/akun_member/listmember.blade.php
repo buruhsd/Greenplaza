@@ -51,10 +51,10 @@
                                     <td>
                                         Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
-                                    @if($u->user_address()->first() !== null)
-                                    <?php
-                                        $address = $u->user_address()->first();
-                                    ?>
+                                    @if($u->user_address()->first())
+                                        <?php
+                                            $address = $u->user_address()->first();
+                                        ?>
                                     <!-- {{FunctionLib::address_info($address->id)}} -->
                                         Alamat : {{$address->user_address_address}}<br/>
                                         No HP : {{$address->user_address_phone}}<br/>
