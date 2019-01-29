@@ -47,20 +47,20 @@
                                     <td><center>{{$d->trans->trans_user_id}}</center></td>
                                     <td><center>{{$d->trans->pembeli->name}}</center></td>
                                     
-                                    <td>{{$d->trans_detail_amount}}</td>
+                                    <td><center>{{$d->trans_detail_amount}}</center></td>
 
                                 @if ($d->trans_detail_status == 1)
-                                    <td><center>Order</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Order</button></center></td>
                                 @elseif ($d->trans_detail_status == 2)
-                                    <td><center>Transfer</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Transfer</button></center></td>
                                 @elseif ($d->trans_detail_status == 3)
-                                    <td><center>Seller</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Seller</button></center></td>
                                 @elseif ($d->trans_detail_status == 4)
-                                    <td><center>Packing</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Packing</button></center></td>
                                 @elseif ($d->trans_detail_status == 5)
-                                    <td><center>Shipping</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Shipping</button></center></td>
                                 @elseif ($d->trans_detail_status == 6)
-                                    <td><center>Dropping</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Dropping</button></center></td>
                                 @else
                                     <td><center>-</center></td>
                                 @endif
