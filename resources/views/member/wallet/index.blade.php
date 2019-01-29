@@ -8,7 +8,7 @@
 <div class="panel-body">
 <div class="pull-right">
     <p class="stats-info">Grade Toko :
-    <span class="stats-number">$781,876</span></p>
+    {{-- <span class="stats-number">$781,876</span></p> --}}
     </div>
 </div>
 <div id="main-wrapper">
