@@ -20,10 +20,10 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="@yield('sales')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-bar-chart-o"></i><span>Sales</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <i class="menu-icon fa fa-bar-chart-o"></i><span>Penjualan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="{{FunctionLib::setActive('member/transaction/sales')}}"><a href="{{route('member.transaction.sales')}}">Transaction</a></li>
+                                        <li class="{{FunctionLib::setActive('member/transaction/sales')}}"><a href="{{route('member.transaction.sales')}}">Transaksi</a></li>
                                         <li class="{{FunctionLib::setActive('member/komplain')}}"><a href="{{route('member.komplain.index')}}">Resolusi Komplain</a></li>
                                     </ul>
                                 </li>
@@ -31,10 +31,10 @@
                                 {{-- need actived --}}
                                 <li class="@yield('purchase')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-shopping-bag"></i><span>Purchase</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <i class="menu-icon fa fa-shopping-bag"></i><span>Pembelian</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="{{FunctionLib::setActive('member/transaction/purchase')}}"><a href="{{route('member.transaction.purchase')}}">Transaction</a></li>
+                                        <li class="{{FunctionLib::setActive('member/transaction/purchase')}}"><a href="{{route('member.transaction.purchase')}}">Transaksi</a></li>
                                         <li class="{{FunctionLib::setActive('member/komplain/buyer')}}"><a href="{{route('member.komplain.buyer')}}">Resolusi Komplain</a></li>
                                         <li class="{{FunctionLib::setActive('member/wishlist')}}"><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                     </ul>
