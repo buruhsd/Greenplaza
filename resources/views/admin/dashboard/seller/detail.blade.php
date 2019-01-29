@@ -37,8 +37,8 @@
                                     <th><center>Seller Id</center></th>
                                     <th><center>Nama</center></th>
                                     <th><center>Detail</center></th>
+                                    <th><center>Tagihan</center></th>
                                     <th><center>Status</center></th>
-                                    <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +47,10 @@
                                <tr>
                                     <td><center>{{$d->trans->trans_user_id}}</center></td>
                                     <td><center>{{$d->trans->pembeli->name}}</center></td>
-                                    <td><center></center></td>
+                                    <td><center>
+                                        <a href="{{route('admin.dasboarddetailseller', $d->id)}}"><button class="btn btn-danger btn-xs">detail</button></a>
+                                    </center></td>
+                                    <td>{{$d->trans_detail_amount}}</td>
 
                                 @if ($d->trans_detail_status == 1)
                                     <td><center>Order</center></td>
@@ -63,7 +66,7 @@
                                     <td><center>Dropping</center></td>
                                 @endif
 
-                                	<td><center><a href="{{route('admin.changepassword_seller', $d->trans->pembeli->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
+                                	
                                </tr>
                                @endforeach
                             @else

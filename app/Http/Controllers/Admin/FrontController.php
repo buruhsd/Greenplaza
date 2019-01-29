@@ -187,6 +187,11 @@ class FrontController extends Controller
 
         return view('admin.dashboard.seller.detail', compact('userseller', 'transseller', 'detailseller'));
     }
+    public function dashboarddetailseller (Request $request, $id)
+    {
+        $seller = User::find($id);
+        return view('admin.dashboard.seller.detail', compact('seller'));
+    }
     public function dashboardhotlist ()
     {
         $search = \Request::get('search');

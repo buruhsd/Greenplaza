@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/dashboard', 'Admin\\FrontController@dashboard')->name('.dashboard');
 		//seller
 		Route::get('/dashboarddetail', 'Admin\\FrontController@dashboarddetail')->name('.dashboarddetail');
+		Route::get('/dashboarddetailseller/{id}', 'Admin\\FrontController@dashboarddetailseller')->name('.dashboarddetailseller');
 		Route::get('/dashboardhotlist', 'Admin\\FrontController@dashboardhotlist')->name('.dashboardhotlist');
 		Route::get('/dashboardiklan', 'Admin\\FrontController@dashboardiklan')->name('.dashboardiklan');
 		Route::get('/dashboardpincode', 'Admin\\FrontController@dashboardpincode')->name('.dashboardpincode');
