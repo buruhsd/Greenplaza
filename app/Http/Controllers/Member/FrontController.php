@@ -271,11 +271,11 @@ class FrontController extends Controller
     }
 
 
-    //  public function about()
-    // {
+     public function comming()
+    {
 
-    //     return view('frontend.about');
-    // }
+        return view('comming-soon');
+    }
 
     //  public function ketentuan()
     // {

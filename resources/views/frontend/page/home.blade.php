@@ -11,44 +11,44 @@
                             <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image)}}" style="height: 
                             310px">
                             <div class="slider-content">
-                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>35% </span> Discount</h3>
                                 <ul>
-                                    <li><a href="shop.html">shop now</a></li>
-                                </ul>
+                                    <li><a href="shop.html">Comming Soon</a></li>
+                                </ul> -->
                             </div>
                         </div>
                         <div class="slider-item black-opacity">
                             <img src="{{asset('assets/images/iklan/'.$slider2->iklan_image)}}" style="height: 
                             310px">
                             <div class="slider-content text-right">
-                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>25% </span> Discount</h3>
                                 <ul>
-                                    <li><a href="shop.html">shop now</a></li>
-                                </ul>
+                                    <li><a href="shop.html">Comming Soon</a></li>
+                                </ul> -->
                             </div>
                         </div>
                          <div class="slider-item black-opacity">
                             <img src="{{asset('assets/images/iklan/'.$slider3->iklan_image)}}" style="height: 
                             310px">
                             <div class="slider-content text-right">
-                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>25% </span> Discount</h3>
                                 <ul>
-                                    <li><a href="shop.html">shop now</a></li>
-                                </ul>
+                                    <li><a href="shop.html">Comming Soon</a></li>
+                                </ul> -->
                             </div>
                         </div>
                         <div class="slider-item black-opacity">
                             <img src="{{asset('assets/images/iklan/'.$slider4->iklan_image)}}" style="height: 
                             310px">
                             <div class="slider-content text-right">
-                                <h2>Shop Our <span> DrakShop</span></h2>
+                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
                                 <h3><span>25% </span> Discount</h3>
                                 <ul>
-                                    <li><a href="shop.html">shop now</a></li>
-                                </ul>
+                                    <li><a href="shop.html">Comming Soon</a></li>
+                                </ul> -->
                             </div>
                         </div>
                     </div>
@@ -122,10 +122,10 @@
                             <img src="{{asset('assets/images/iklan/'.$banner2->iklan_image) }}" alt="" style="height: 
                             260px">
                             <div class="featured-content">
-                                <h2>Minilam Chair</h2>
-                                <p>consectetur adipisicing elit to Tempora, similique!</p>
+                                <!-- <h2>Minilam Chair</h2>
+                                <p>consectetur adipisicing elit to Tempora, similique!</p> -->
                                 <ul>
-                                    <li><a href="shop.html">Shop Now</a></li>
+                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -137,10 +137,10 @@
                             <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image) }}" alt="" style="height: 
                             260px">
                             <div class="featured-content text-center">
-                                <h2>Dual Handle Cardio Ball</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p>
+                                <!-- <h2>Dual Handle Cardio Ball</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p> -->
                                 <ul>
-                                    <li><a href="shop.html">Shop Now</a></li>
+                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -152,10 +152,10 @@
                             <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image) }}" alt="" style="height: 
                             260px">
                             <div class="featured-content text-right">
-                                <h2>Minilam Chair</h2>
-                                <p>consectetur adipisicing elit to Tempora, similique!</p>
+                                <!-- <h2>Minilam Chair</h2>
+                                <p>consectetur adipisicing elit to Tempora, similique!</p> -->
                                 <ul>
-                                    <li><a href="shop.html">Shop Now</a></li>
+                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -379,7 +379,7 @@
                                     </div>
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
@@ -474,7 +474,7 @@
                                                 </div> -->
                                             </div>
                                             <div class="product-content">
-                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
@@ -495,6 +495,7 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star-o"></i></li>
                                                 </ul>
+                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                             </div>
                                         </div>
                                     </div>
@@ -519,7 +520,7 @@
                                             </div> -->
                                         </div>
                                         <div class="product-content">
-                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{$n->produk_name}}</a>
+                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
                                                 <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                 <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                             </h3>
@@ -540,6 +541,7 @@
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                             </ul>
+                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                         </div>
                                     </div>
                                     @endif
@@ -680,7 +682,7 @@
                                     </div> -->
                                 </div>
                                 <div class="product-content">
-                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{$f->produk_name}}</a>
+                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{ str_limit($f->produk_name, 15)}}</a>
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
@@ -701,6 +703,7 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                 </div>
                             </div>
                             @endforeach
@@ -904,7 +907,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{ str_limit($p->produk_name, 15)}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -935,7 +938,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{ str_limit($p->produk_name, 15)}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -973,7 +976,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{ str_limit($d->produk_name, 15)}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -1002,7 +1005,7 @@
                                                     <a class="readmore" href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px"></a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a></h4>
+                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{ str_limit($d->produk_name, 15)}}</a></h4>
                                                     <ul class="rating">
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star"></i></li>
@@ -1061,7 +1064,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <h3>
-                                                    <a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
+                                                    <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
@@ -1108,7 +1111,7 @@
                                             </div>
                                             <div class="product-content">
                                                 <h3>
-                                                    <a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
+                                                    <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>

@@ -15,6 +15,8 @@ Route::get('/change/language/{id}',function($lang){
     return redirect()->back();
 });
 
+Route::get('/comming-soon', 'Member\\FrontController@comming');
+
 // Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\VerifManualController@activating')->name('activating-account');
 Route::get('/re_send_noauth', 'Auth\\VerifManualController@re_send_page')->name('re_send');
