@@ -126,7 +126,6 @@ class MidtransController extends Controller
             });
             $trans_code = FunctionLib::str_rand(7);
             $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
-        dd(Session::get('chart'));
             foreach ($trans as $value) {
                 // dd(Session::get('chart'));
                 foreach ($value as $key => $item) {
