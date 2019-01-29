@@ -56,7 +56,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p>&copy; 2018 <span>Kinun</span> All Right Reserved</p>
+                        <p>&copy; 2019 <span>Greenplaza</span> All Right Reserved</p>
                     </div>
                 </div>
             </div>
