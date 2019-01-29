@@ -12,7 +12,7 @@
         <div class="col-md-12">
           <div class="panel panel-white">
             <div class="panel-heading clearfix">
-                <a href="{{route('admin.dasboardseller')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
+                <a href="{{route('admin.dasboardmember')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
             </div>
               <div class="panel-body">
                   <form class="form-horizontal" method="POST" action= "{{route('admin.needapproval.password_member', $users->id)}}" enctype = "multipart/form-data">

@@ -62,6 +62,8 @@
                                     <td><center>Shipping</center></td>
                                 @elseif ($d->trans_detail_status == 6)
                                     <td><center>Dropping</center></td>
+                                @else
+                                    <td><center>-</center></td>
                                 @endif
 
                                 	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>

@@ -63,7 +63,7 @@
                                     <td><center>Dropping</center></td>
                                 @endif
 
-                                	<td><center><a href="{{route('admin.needapproval.changepassword_seller', $d->trans->pembeli->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
+                                	<td><center><a href="{{route('admin.changepassword_seller', $d->trans->pembeli->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
                                </tr>
                                @endforeach
                             @else
