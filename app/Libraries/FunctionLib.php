@@ -415,9 +415,14 @@ class FunctionLib
     *
     **/
     public static function midtrans_approve($order_id){
-        Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
-        Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
-        Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
+        Veritrans_Config::$serverKey = 'Mid-server-7Y-NEaLe8gTOb4xVRDip6WyC';
+        Veritrans_Config::$isProduction = true;
+        Veritrans_Config::$isSanitized = true;
+        Veritrans_Config::$is3ds = true;
+        
+        // Veritrans_Config::$serverKey = env('VERYTRANS_KEY');
+        // Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
+        // Veritrans_Config::$is3ds = env('VERYTRANS_3DS');
         try {
             $approve = Veritrans_Transaction::approve($order_id);
             return $approve;
