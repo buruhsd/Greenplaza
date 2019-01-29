@@ -34,11 +34,10 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th><center>Seller Id</center></th>
+                                    <th><center>Member Id</center></th>
                                     <th><center>Nama</center></th>
-                                    <th><center>Detail</center></th>
+                                    <th><center>Tagihan</center></th>
                                     <th><center>Status</center></th>
-                                    <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,25 +46,24 @@
                                <tr>
                                     <td><center>{{$d->user->id}}</center></td>
                                     <td><center>{{$d->user->name}}</center></td>
-                                    <td><center></center></td>
+                                    <td><center>{{$d->trans_pincode_amount}}</center></td>
 
                                 @if ($d->trans_hotlist_status == 0)
-                                    <td><center>Baru</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Baru</button></center></td>
                                 @elseif ($d->trans_hotlist_status == 1)
-                                    <td><center>Konfirmasi (paid)</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Konfirmasi (paid)</button></center></td>
                                 @elseif ($d->trans_hotlist_status == 2)
-                                    <td><center>Batal</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Batal</button></center></td>
                                 @elseif ($d->trans_hotlist_status == 3)
-                                    <td><center>Approve Admin</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Approve Admin</button></center></td>
                                 @elseif ($d->trans_hotlist_status == 4)
-                                    <td><center>Ditolak</center></td>
+                                    <td><center><button class="btn btn-success btn-xs">Ditolak</button></center></td>
                                 @endif
 
-                                	<td><center><a href=""><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a></center></td>
                                </tr>
                                @endforeach
                             @else
-                                <td colspan="5"><center>KOSONG</center></td>
+                                <td colspan="4"><center>KOSONG</center></td>
                             @endif
                             </tbody>
                         </table>

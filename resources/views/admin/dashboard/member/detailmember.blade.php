@@ -35,7 +35,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th><center>Seller Id</center></th>
+                                    <th><center>Member Id</center></th>
                                     <th><center>Nama</center></th>
                                     <th><center>Tagihan</center></th>
                                     <th><center>Status</center></th>
