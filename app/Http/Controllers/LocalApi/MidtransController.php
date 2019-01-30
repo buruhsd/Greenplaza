@@ -196,6 +196,22 @@ class MidtransController extends Controller
                 }
             }
             Session::forget('chart');
+            if(isset($trans->pembeli->email)){
+                // send email
+                $status = FunctionLib::trans_arr(1);
+                $config = [
+                    'to' => $trans->pembeli->email,
+                    'data' => [
+                        'trans_code' => $trans_code,
+                        'trans_amount_total' => $gross_amount,
+                        'status' => $status,
+                    ]
+                ];
+                $send_notif = FunctionLib::transaction_notif($config);
+                if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                    $message .= ' ,'.$send_notif['message'];
+                }
+            }
 
             $item_details = [];
             $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';

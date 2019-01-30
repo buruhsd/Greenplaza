@@ -654,6 +654,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 });
 
 Route::get('/page/{page}', 'Member\\FrontController@page')->name('.page');
+Route::get('/about', 'Member\\FrontController@about')->name('about');
 // helper
 Route::group(['prefix' => 'helper', 'as' => 'helper'], function(){
 	Route::get('/{function}/{admin}', function($function, $admin) {

@@ -237,7 +237,7 @@
             </div>
         </div>
         <hr>
-        <p>Dengan membuat akun Anda setuju dengan <a href="{{url('page/ketentuan-&-privasi-kami')}}" target="_blank">Ketentuan & Privasi kami</a>.</p>
+        <p>Dengan membuat akun Anda setuju dengan <a href="{{url('about')}}" target="_blank">Ketentuan & Privasi kami</a>.</p>
 
         <button type="submit" class="btn btn-success btn-block">Register</button>
         {{-- <button type="submit" class="registerbtn">Register</button> --}}

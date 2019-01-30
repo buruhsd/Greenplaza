@@ -34,6 +34,18 @@ class FrontController extends Controller
     * @param
     * @return
     */
+    public function about()
+    {
+        $where = '1';
+        // $where .= '1';
+        $data['page'] = Page::whereRaw($where)->get();
+        return view('frontend.about', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
     public function page(Request $request, $page)
     {
         // if(Auth::guest())
