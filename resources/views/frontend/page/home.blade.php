@@ -475,7 +475,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content tambahan">
                                                 <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
@@ -692,7 +692,7 @@
                                     </h3>
                                     @if ($f->produk_discount != 0)
                                     <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{FunctionLib::number_to_text($f->produk_discount)}} %</span><br>
+                                        <del>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span><br>
                                         <span>Rp.{{FunctionLib::number_to_text($f->produk_price-($f->produk_price * $f->produk_discount / 100))}}</span>
                                     </p>
                                     @else
@@ -700,6 +700,7 @@
                                         <span>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</span>
                                     </p>
                                     @endif
+                                    <div class="tombol-product">
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
@@ -708,6 +709,7 @@
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
                                     <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach
@@ -1125,7 +1127,7 @@
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
                                                     @if ($item->review)
-                                                    <i class="fa fa-comments"></i> {{$item->review->count()}} Comments
+                                                    <i class="fa fa-comments"></i> {{ str_limit($item->review->count(), 15)}} Comments
                                                     @else
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
