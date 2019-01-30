@@ -20,9 +20,9 @@
         </div>
             <input type="submit" class="btn btn-default" value="search">
     </form>
-    <div class="input-group pull-right" style="width: 225px;">
+    <!-- <div class="input-group pull-right" style="width: 225px;">
         <a href="" type="button" class="btn btn-default">Tambah Produk Baru</a>
-    </div>              
+    </div>    -->           
 </div> 
 <div class="row">
     <div class="col-md-12">
@@ -81,9 +81,9 @@
                                         :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
                                 </td>
                                 <td scope="row">
-                                    <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
+                                    <!-- <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a> -->
                                     <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
-                                    <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
+                                    <!-- <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a> -->
                                 </td>
                             </tr>
                             @endforeach

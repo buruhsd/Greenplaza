@@ -12,10 +12,10 @@
             <section class="wrapper">
             <div class="panel panel-white">
                 <div class="panel-body">
-                <a href="{{ url('/admin/produk') }}" title="Back">
-                	<button class="btn btn-warning btn-xs">
-                		<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
-                	</button>
+                <a href="{{ url('/admin/needapproval/produkadmin') }}" title="Back">
+                    <button class="btn btn-warning btn-xs">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button>
                 </a>
                 <br />
                 <br />
@@ -25,8 +25,7 @@
                     'class' => 'form-horizontal',
                     'files' => true
                 ]) !!}
-                {!! Form::open(['url' => '/admin/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}
-                    @include ('admin.produk.form')
+                    @include ('member.produk.form')
                 {!! Form::close() !!}
                 </div>
             </div>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Role;
+use App\User;
+use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Trans;
 use App\Models\Trans_detail;
 use Illuminate\Http\Request;
@@ -261,10 +264,18 @@ class TransactionController extends Controller
      */
     public function edit($id)
     {
-        $data['produk'] = Trans::findOrFail($id);
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['brand'] = Brand::all();
+        $data['transaction'] = Trans::findOrFail($id);
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.transaction.edit', $data);
+    }
+    public function edit_trans ($id)
+    {
+        return view('admin.transaction.edit_trans');
     }
 
     /**

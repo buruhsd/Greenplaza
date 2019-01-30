@@ -5,7 +5,7 @@
         <div class="form-group">
             {!! Form::label('image', ' ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
-                <img class="h100" src="{{asset('assets/images/product/'.$produk->produk_image) }}" onerror="this.src='http://placehold.it/700x400'" alt="">
+                <img class="h100" src="{{asset('assets/images/product/'.$transaction->produk_image) }}" onerror="this.src='http://placehold.it/700x400'" alt="">
             </div>
         </div>
         @endif
@@ -38,7 +38,7 @@
             <div class="col-md-9">
                 <select name='produk_user_status' class="form-control">
                     @foreach($role as $item)
-                        <option value='{{$item->id}}' <?php if($produk->produk_user_status == $item->id){echo "selected";}?> >{{$item->name}}</option>
+                        <option value='{{$item->id}}' <?php if($transaction->produk_user_status == $item->id){echo "selected";}?> >{{$item->name}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_user_status', '<p class="help-block">:message</p>') !!}
@@ -63,7 +63,7 @@
             <div class="col-md-9">
                 <select name='produk_seller_id' class="form-control">
                     @foreach($user as $item)
-                        <option value='{{$item->id}}' <?php if($produk->produk_seller_id == $item->id){echo "selected";}?> >{{$item->name}}</option>
+                        <option value='{{$item->id}}' <?php if($transaction->produk_seller_id == $item->id){echo "selected";}?> >{{$item->name}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_seller_id', '<p class="help-block">:message</p>') !!}
@@ -88,7 +88,7 @@
             <div class="col-md-9">
                 <select name='produk_seller_id' class="form-control">
                     @foreach($category as $item)
-                        <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{$item->category_name}}</option>
+                        <option value='{{$item->id}}' <?php if($transaction->produk_category_id == $item->id){echo "selected";}?> >{{$item->category_name}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_category_id', '<p class="help-block">:message</p>') !!}
@@ -113,7 +113,7 @@
             <div class="col-md-9">
                 <select name='produk_brand_id' class="form-control">
                     @foreach($brand as $item)
-                        <option value='{{$item->id}}' <?php if($produk->produk_brand_id == $item->id){echo "selected";}?> >{{$item->brand_name}}</option>
+                        <option value='{{$item->id}}' <?php if($transaction->produk_brand_id == $item->id){echo "selected";}?> >{{$item->brand_name}}</option>
                     @endforeach
                 </select>
                 {!! $errors->first('produk_brand_id', '<p class="help-block">:message</p>') !!}

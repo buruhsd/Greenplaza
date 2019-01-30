@@ -75,6 +75,7 @@
                                     <li><a href="#">Iklan Banner Pembeli</a></li>
                                     <li><a href="#">Iklan Baris Pembeli</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/produk')}}"><a href="{{route('admin.produk.index')}}">Produk</a></li>
+                                    <li class="{{FunctionLib::setActive('admin/needapproval/produkadmin')}}"><a href= "{{route('admin.needapproval.produkadmin')}}">Produk Admin</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/saldoiklan')}}"><a href="{{route('admin.needapproval.saldoiklan')}}">Request Saldo Iklan</a></li><!-- 
                                     <li><a href="#">Withdrawal Seller</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/needapproval/withdrawal_member')}}"><a href="{{route('admin.needapproval.withdrawal_member')}}">Withdrawal Member</a></li>

@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Produk_unit;
+use App\Models\Produk_location;
+use App\Models\Produk_image;
+use App\Models\Produk_grosir;
 use App\Models\Produk;
 use App\Role;
 use App\User;
@@ -15,7 +19,9 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
-
+use Intervention\Image\Facades\Image;
+use Auth;
+use FunctionLib;
 
 class ProdukController extends Controller
 {
@@ -122,46 +128,99 @@ class ProdukController extends Controller
         $message = 'Produk added!';
         
         $requestData = $request->all();
+        // dd($requestData);
         
         $this->validate($request, [
             'produk_name' => 'required',
-            'produk_slug' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required',
+            'produk_price' => 'required|numeric|min:0.00',
             'produk_size' => 'required',
-            'produk_length' => 'required',
-            'produk_wide' => 'required',
+            'produk_length' => 'required|numeric',
+            'produk_wide' => 'required|numeric',
             'produk_color' => 'required',
-            'produk_stock' => 'required',
-            'produk_weight' => 'required',
-            'produk_discount' => 'required',
+            'produk_stock' => 'required|numeric',
+            'produk_weight' => 'required|numeric',
+            'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
-        $res->produk_slug = str_slug($request->produk_name);
+        $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
-        $res->produk_size = $request->produk_size;
+        $res->produk_size = implode (",", $request->produk_size);
         $res->produk_length = $request->produk_length;
         $res->produk_wide = $request->produk_wide;
-        $res->produk_color = $request->produk_color;
+        $res->produk_color = implode (",", $request->produk_color);
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
-        $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
+        $res->produk_user_status = Auth::user()->roles->first()->id;
+        // upload
+        if ($request->hasFile('input_file_preview')){
+            foreach ($request->file('input_file_preview') as $key => $item) {
+                $image = $item;
+                $uploadPath = public_path('assets/images/product');
+                // $uploadPath2 = public_path('assets/images/brand/thumb');
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+                // $imagesize = $image->getClientSize();
+                // $imagetmp = $image->getPathName();
+                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                    $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+                }
+                $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
+                // $image = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $image->save($uploadPath.'/'.$imagename);
+                $produk_image_image[] = $imagename;
+                // $imaget->save($uploadPath2.'/'.$imagename,80);
+                if($key == 0){
+                    $res->produk_image = $imagename;
+                }
+            }
+        }
         $res->produk_note = $request->produk_note;
         $res->save();
         if(!$res){
             $status = 500;
             $message = 'Produk Not added!';
+            return redirect('admin/needapproval/produkadmin')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            // add produk image
+            foreach ($produk_image_image as $item) {
+                $produk_image = new Produk_image;
+                $produk_image->produk_image_produk_id = $res->id;
+                $produk_image->produk_image_image = $item;
+                $produk_image->save();
+            }
+            if(!$produk_image){
+                $status = 500;
+                $message = 'Produk Image Not added!';
+                return redirect('admin/needapproval/produkadmin')
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            // add grosir
+            if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
+                foreach ($request->produk_grosir_start as $key => $item) {
+                    if($request->produk_grosir_start[$key] == null){
+                        break;
+                    }
+                    $produk_grosir = new Produk_grosir;
+                    $produk_grosir->produk_grosir_produk_id = $res->id;
+                    $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                    $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                    $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                    $produk_grosir->save();
+                }
+            }
+            return redirect('admin/needapproval/produkadmin')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        return redirect('admin/produk')
-            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**
@@ -191,6 +250,8 @@ class ProdukController extends Controller
         $data['role'] = Role::all();
         $data['user'] = User::all();
         $data['category'] = Category::all();
+        $data['produk_unit'] = Produk_unit::all();
+        $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
         $data['produk'] = Produk::findOrFail($id);
 
@@ -206,6 +267,7 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
+
     public function update(Request $request, $id)
     {
         $status = 200;
@@ -214,46 +276,109 @@ class ProdukController extends Controller
         $requestData = $request->all();
         
         $this->validate($request, [
-            'produk_seller_id' => 'required',
             'produk_name' => 'required',
-            'produk_slug' => 'required',
             'produk_unit' => 'required',
-            'produk_price' => 'required',
+            'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
-            'produk_length' => 'required',
-            'produk_wide' => 'required',
+            'produk_length' => 'required|numeric',
+            'produk_wide' => 'required|numeric',
             'produk_color' => 'required',
-            'produk_stock' => 'required',
-            'produk_weight' => 'required',
-            'produk_discount' => 'required',
-            'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'produk_stock' => 'required|numeric',
+            'produk_weight' => 'required|numeric',
+            'produk_discount' => 'required|numeric|between:0.00,99.99',
         ]);
+
         $produk = Produk::findOrFail($id);
-        $produk->produk_seller_id = $request->produk_seller_id;
+        if($produk->produk_seller_id !== Auth::user()->id || $produk->produk_user_status !== Auth::user()->roles->first()->id){
+            $status = 500;
+            $message = 'Produk Not updated!';
+            return redirect('member/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+
+        }
         $produk->produk_category_id = $request->produk_category_id;
         $produk->produk_brand_id = $request->produk_brand_id;
         $produk->produk_name = $request->produk_name;
-        $produk->produk_slug = $request->produk_slug;
+        $produk->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $produk->produk_unit = $request->produk_unit;
         $produk->produk_price = $request->produk_price;
-        $produk->produk_size = $request->produk_size;
+        $produk->produk_size = implode (",", $request->produk_size);
         $produk->produk_length = $request->produk_length;
         $produk->produk_wide = $request->produk_wide;
-        $produk->produk_color = $request->produk_color;
+        $produk->produk_color = implode (",", $request->produk_color);
         $produk->produk_stock = $request->produk_stock;
         $produk->produk_weight = $request->produk_weight;
         $produk->produk_discount = $request->produk_discount;
-        $produk->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$produk->produk_image);
+        if ($request->hasFile('input_file_choose')){
+            $request->produk_image = $request->input_file_choose;
+        }
+        // upload
+        if ($request->hasFile('input_file_preview')){
+            foreach ($request->file('input_file_preview') as $key => $item) {
+                $image = $item;
+                // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
+                $uploadPath = public_path('assets/images/product');
+                // $uploadPath2 = public_path('assets/images/brand/thumb');
+                $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
+                $imagesize = $image->getClientSize();
+                $imagetmp = $image->getPathName();
+                // exist on db delete image path
+                if(Produk::where('id', '=', "$id")->pluck('produk_image')[0] != ''){
+                    if(file_exists($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0])){
+                        File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
+                    }
+                }
+                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                    $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
+                }
+                $image->move($uploadPath, $imagename);
+                $produk_image_image[] = $imagename;
+                // $imaget->save($uploadPath2.'/'.$imagename,80);
+                if($produk->images->count() == 0 && $key == 0){
+                    $res->produk_image = $imagename;
+                }
+            }
+        }
         $produk->produk_note = $request->produk_note;
         $produk->save();
-        $res = $produk->update($requestData);
-        if(!$res){
+        // $res = $produk->update($requestData);
+        if(!$produk){
             $status = 500;
-            $message = 'Produk Not updated!';
+            $message = 'Produk Not Updated!';
+            return redirect('member/produk')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }else{
+            // add produk image
+            if ($request->hasFile('input_file_preview')){
+                foreach ($produk_image_image as $item) {
+                    $produk_image = new Produk_image;
+                    $produk_image->produk_image_produk_id = $res->id;
+                    $produk_image->produk_image_image = $item;
+                    $produk_image->save();
+                }
+                if(!$produk_image){
+                    $status = 500;
+                    $message = 'Produk Image Not added!';
+                    return redirect('member/produk')
+                        ->with(['flash_status' => $status,'flash_message' => $message]);
+                }
+            }
+            // add grosir
+            if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
+                foreach ($request->produk_grosir_start as $key => $item) {
+                    if($request->produk_grosir_start[$key] == null){
+                            break;
+                    }
+                    $produk_grosir = new Produk_grosir;
+                    $produk_grosir->produk_grosir_produk_id = $produk->id;
+                    $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                    $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                    $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                    $produk_grosir->save();
+                }
+            }
         }
-
-        return redirect('admin/produk')
+        return redirect('member/produk')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -287,7 +412,469 @@ class ProdukController extends Controller
         $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-        return view('member.produk.create', $data);
+        return view('admin.produk.create', $data);
+    }
+     public function footer_script($method=''){
+        ob_start();
+        ?>
+            <script type="text/javascript"></script>
+        <?php
+        switch ($method) {
+            case 'index':
+                ?>
+                    <script type="text/javascript"></script>
+                <?php
+                break;
+            case 'create':
+                ?>
+                    <link href="<?php echo  asset('admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css');?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js');?> "></script>
+                    <script>
+                        $(function () {
+                            $('.cp').colorpicker();
+                            var no = 1;
+                            var addFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+                                var $formGroupClone = $formGroup.clone();
+
+                                $(this)
+                                    .toggleClass('btn-default btn-add btn-danger btn-remove')
+                                    .html('–');
+
+                                $formGroupClone.find('input').val('#00AABB');
+                                // $formGroupClone.find('.colorpicker-component').attr('id', 'cp'+ no);
+                                $formGroupClone.insertAfter($formGroup);
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                                if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+                                }
+                                $('.cp').colorpicker();
+                                no++;
+                            };
+                            var removeFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.input-group:last');
+                                if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+                                }
+
+                                $formGroup.remove();
+                                no--;
+                            };
+                            var countFormGroup = function ($form) {
+                                return $form.find('.form-group').length;
+                            };
+                            $(document).on('click', '.btn-add', addFormGroup);
+                            $(document).on('click', '.btn-remove', removeFormGroup);
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $(document).on('click', '#close-preview', function(){ 
+                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // Hover befor close the preview
+                            $('.image-preview').hover(
+                                function () {
+                                   $(this).popover('show');
+                                }, 
+                                 function () {
+                                   $(this).popover('hide');
+                                }
+                            );    
+                        });
+
+                        $(function() {
+                            // Create the close button
+                            var closebtn = $('<button/>', {
+                                type:"button",
+                                text: 'x',
+                                id: 'close-preview',
+                                style: 'font-size: initial;',
+                            });
+                            closebtn.attr("class","close pull-right");
+                            // Set the popover default content
+                            $('.image-preview').popover({
+                                trigger:'manual',
+                                html:true,
+                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                content: "There's no image",
+                                placement:'bottom'
+                            });
+                            // Clear event
+                            $('.image-preview-clear').click(function(){
+                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                            }); 
+                            // Create the preview image
+                            $(".image-preview-input input:file").change(function (){     
+                                var img = $('<img/>', {
+                                    id: 'dynamic',
+                                    width:250,
+                                    height:200
+                                });      
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                var x = $(this);
+                                // Set preview image into the popover data-content
+                                reader.onload = function (e) {
+                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
+                                    img.attr('src', e.target.result);
+                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                }        
+                                reader.readAsDataURL(file);
+                            });  
+                        });
+                        $("#add-file-field").click(function(){
+                            var html = '<div class="parent-img m-t-xs">'+
+                            '<div class="input-group image-preview">'+
+                                '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
+                                '<span class="input-group-btn">'+
+                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                        '<span class="glyphicon glyphicon-remove"></span> Clear'+
+                                    '</button>'+
+                                    '<div class="btn btn-default image-preview-input">'+
+                                        '<span class="glyphicon glyphicon-folder-open"></span>'+
+                                        '<span class="image-preview-input-title">Browse</span>'+
+                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                    '</div>'+
+                                    '<button type="button" class="btn btn-danger remove-btn">'+
+                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                    '</button>'+
+                                '</span>'+
+                            '</div>'+
+                            '</div>';
+                            $(".append-img").append(html);
+                            $(".remove-btn").click(function() {
+                                $(this).parents('.parent-img').remove();
+                            });
+
+                            // $(document).on('click', '.close', function(){ 
+                            //     console.log($(this).parents('.parent-img'));
+                            //     $(this).parents('.popover').hide();
+                                // Hover befor close the preview
+                                $('.image-preview').hover(
+                                    function () {
+                                       $(this).popover('show');
+                                    }, 
+                                     function () {
+                                       $(this).popover('hide');
+                                    }
+                                );    
+                            // });
+
+                            $(function() {
+                                // Create the close button
+                                var closebtn = $('<button/>', {
+                                    type:"button",
+                                    text: 'x',
+                                    id: 'close-preview',
+                                    style: 'font-size: initial;',
+                                });
+                                closebtn.attr("class","close pull-right");
+                                // Set the popover default content
+                                $('.image-preview').popover({
+                                    trigger:'manual',
+                                    html:true,
+                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                    content: "There's no image",
+                                    placement:'bottom'
+                                });
+                                // Clear event
+                                $('.image-preview-clear').click(function(){
+                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                    $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                    $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                    $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                                }); 
+                                // Create the preview image
+                                $(".image-preview-input input:file").change(function (){     
+                                    var img = $('<img/>', {
+                                        id: 'dynamic',
+                                        width:250,
+                                        height:200
+                                    });      
+                                    var file = this.files[0];
+                                    var reader = new FileReader();
+                                    var x = $(this);
+                                    // Set preview image into the popover data-content
+                                    reader.onload = function (e) {
+                                        $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                        $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                        $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
+                                        img.attr('src', e.target.result);
+                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                    }        
+                                    reader.readAsDataURL(file);
+                                });  
+                            });
+                        });
+
+                        var clicks = 1;
+                        function add_grosir_row() {
+                            clicks += 1;
+                            if (clicks < 6) {
+                                $("#grosir_row").append(
+                                    '<tr id="row_"' + clicks + '>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_start[]" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_end[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 50%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_price[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td class="text-center">'+
+                                    '<a class="btn btn-xs btn-danger remove_grosir">'+
+                                    '<i class="fa fa-minus"></i>'+
+                                    '</a>'+
+                                    '</td>'+
+                                    '</tr>'
+                                );
+                            } else {
+                                clicks -= 1;
+                                $(".add_grosir_row").hide();
+                            }
+                            $(".remove_grosir").on("click", function(){
+                                clicks -= 1;
+                                $(this).parents("tr").remove();
+                                $(".add_grosir_row").show();
+                            })
+                        }
+                    </script>
+                <?php
+                break;
+            case 'show':
+                ?>
+                    <script type="text/javascript"></script>
+                <?php
+                break;
+            case 'edit':
+                ?>
+                    <link href="<?php echo  asset('admin/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css');?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js');?> "></script>
+                    <script>
+                        $(function () {
+                            $('.cp').colorpicker();
+                            var no = 1;
+                            var addFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+                                var $formGroupClone = $formGroup.clone();
+
+                                $(this)
+                                    .toggleClass('btn-default btn-add btn-danger btn-remove')
+                                    .html('–');
+
+                                $formGroupClone.find('input').val('#00AABB');
+                                // $formGroupClone.find('.colorpicker-component').attr('id', 'cp'+ no);
+                                $formGroupClone.insertAfter($formGroup);
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+                                if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', true);
+                                }
+                                $('.cp').colorpicker();
+                                no++;
+                            };
+                            var removeFormGroup = function (event) {
+                                event.preventDefault();
+
+                                var $formGroup = $(this).closest('.form-group');
+                                var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+
+                                var $lastFormGroupLast = $multipleFormGroup.find('.input-group:last');
+                                if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
+                                    $lastFormGroupLast.find('.btn-add').attr('disabled', false);
+                                }
+
+                                $formGroup.remove();
+                                no--;
+                            };
+                            var countFormGroup = function ($form) {
+                                return $form.find('.form-group').length;
+                            };
+                            $(document).on('click', '.btn-add', addFormGroup);
+                            $(document).on('click', '.btn-remove', removeFormGroup);
+                        });
+                    </script>
+                    <script type="text/javascript">
+                        $(document).on('click', '#close-preview', function(){ 
+                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // Hover befor close the preview
+                            $('.image-preview').hover(
+                                function () {
+                                   $(this).popover('show');
+                                }, 
+                                 function () {
+                                   $(this).popover('hide');
+                                }
+                            );    
+                        });
+
+                        $(function() {
+                            // Create the close button
+                            var closebtn = $('<button/>', {
+                                type:"button",
+                                text: 'x',
+                                id: 'close-preview',
+                                style: 'font-size: initial;',
+                            });
+                            closebtn.attr("class","close pull-right");
+                            // Set the popover default content
+                            $('.image-preview').popover({
+                                trigger:'manual',
+                                html:true,
+                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                content: "There's no image",
+                                placement:'bottom'
+                            });
+                            // Clear event
+                            $('.image-preview-clear').click(function(){
+                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                            }); 
+                            // Create the preview image
+                            $(".image-preview-input input:file").change(function (){     
+                                var img = $('<img/>', {
+                                    id: 'dynamic',
+                                    width:250,
+                                    height:200
+                                });      
+                                var file = this.files[0];
+                                var reader = new FileReader();
+                                var x = $(this);
+                                // Set preview image into the popover data-content
+                                reader.onload = function (e) {
+                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
+                                    img.attr('src', e.target.result);
+                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                }        
+                                reader.readAsDataURL(file);
+                            });  
+                        });
+                        $("#add-file-field").click(function(){
+                            var html = '<div class="parent-img m-t-xs">'+
+                            '<div class="input-group image-preview">'+
+                                '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
+                                '<span class="input-group-btn">'+
+                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                        '<span class="glyphicon glyphicon-remove"></span> Clear'+
+                                    '</button>'+
+                                    '<div class="btn btn-default image-preview-input">'+
+                                        '<span class="glyphicon glyphicon-folder-open"></span>'+
+                                        '<span class="image-preview-input-title">Browse</span>'+
+                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                    '</div>'+
+                                    '<button type="button" class="btn btn-danger remove-btn">'+
+                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                    '</button>'+
+                                '</span>'+
+                            '</div>'+
+                            '</div>';
+                            $(".append-img").append(html);
+                            $(".remove-btn").click(function() {
+                                $(this).parents('.parent-img').remove();
+                            });
+
+                            // $(document).on('click', '.close', function(){ 
+                            //     console.log($(this).parents('.parent-img'));
+                            //     $(this).parents('.popover').hide();
+                                // Hover befor close the preview
+                                $('.image-preview').hover(
+                                    function () {
+                                       $(this).popover('show');
+                                    }, 
+                                     function () {
+                                       $(this).popover('hide');
+                                    }
+                                );    
+                            // });
+
+                            $(function() {
+                                // Create the close button
+                                var closebtn = $('<button/>', {
+                                    type:"button",
+                                    text: 'x',
+                                    id: 'close-preview',
+                                    style: 'font-size: initial;',
+                                });
+                                closebtn.attr("class","close pull-right");
+                                // Set the popover default content
+                                $('.image-preview').popover({
+                                    trigger:'manual',
+                                    html:true,
+                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                    content: "There's no image",
+                                    placement:'bottom'
+                                });
+                                // Clear event
+                                $('.image-preview-clear').click(function(){
+                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.image-preview-filename').val("");
+                                    $(this).parents(".parent-img").find('.image-preview-clear').hide();
+                                    $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
+                                    $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
+                                }); 
+                                // Create the preview image
+                                $(".image-preview-input input:file").change(function (){     
+                                    var img = $('<img/>', {
+                                        id: 'dynamic',
+                                        width:250,
+                                        height:200
+                                    });      
+                                    var file = this.files[0];
+                                    var reader = new FileReader();
+                                    var x = $(this);
+                                    // Set preview image into the popover data-content
+                                    reader.onload = function (e) {
+                                        $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
+                                        $(x).parents(".parent-img").find(".image-preview-clear").show();
+                                        $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
+                                        img.attr('src', e.target.result);
+                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                    }        
+                                    reader.readAsDataURL(file);
+                                });  
+                            });
+                        });
+
+                        $('.img-check').click(function(e) {
+                            $('.img-check').not(this).removeClass('img-checked')
+                                .siblings('input').prop('checked',false);
+                            $(this).addClass('img-checked')
+                                .siblings('input').prop('checked',true);
+                        });
+                    </script>
+                <?php
+                break;
+        }
+        $script = ob_get_contents();
+        ob_end_clean();
+        return $script;
     }
 
     /**
@@ -311,7 +898,7 @@ class ProdukController extends Controller
     * @param method $method
     * @return add main footer script / in spesific method
     */
-    public function footer_script($method=''){
+    public function footer_scripts($method=''){
         ob_start();
         ?>
             <script type="text/javascript"></script>

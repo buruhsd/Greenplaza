@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Withdrawal;
 use App\User;
 use App\Models\User_detail;
+use App\Models\Produk;
 use App\Models\Trans_iklan;
 use App\Models\Trans_hotlist;
 use App\Models\Trans_pincode;
@@ -373,5 +374,28 @@ class NeedApprovalController extends Controller
         $pin->trans_pincode_status = 4;
         $pin->save();
         return redirect()->back(); 
+    }
+
+    //PRODUK ADMIN
+    public function produkadmin ()
+    {
+        $users = User::whereHas('roles', function($query){
+                $query->where('name','=','admin');
+                return $query;
+            })
+           ->pluck('id')->toArray();
+        $produk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
+        return view('admin.need_approval.produk_admin.produkadmin', compact('users', 'produk'));
+    }
+    public function create_produk ()
+    {
+        $data['role'] = Role::all();
+        $data['user'] = User::all();
+        $data['category'] = Category::all();
+        $data['produk_unit'] = Produk_unit::all();
+        $data['produk_location'] = Produk_location::all();
+        $data['brand'] = Brand::all();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.need_approval.produk_admin.create', $data);
     }
 }

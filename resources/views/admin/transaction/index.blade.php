@@ -47,7 +47,7 @@
                     <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4)}}</span></button>
                     <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5)}}</span></button>
                     <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6)}}</span></button>
-                    <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <!-- <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add Newssss</a> -->
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -59,10 +59,11 @@
                                     <th>Detail Transaction</th>
                                     <th>Detail Pembeli</th>
                                     <th>Paid</th>
-                                    <th>Action</th>
+                                    <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
+                            @if($transaction->count() > 0)
                                 <?php $no = 1; ?>
                                 @foreach($transaction as $item)
                                     <tr>
@@ -93,13 +94,16 @@
                                                 ?"<button class='btn btn-success btn-xs'>Done</button>"
                                                 :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
                                         </td>
-                                        <td scope="row">
+                                        <!-- <td scope="row">
                                             <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
-                                            <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
+                                            <a href="{{route('admin.transaction.edit_trans', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
                                             <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 @endforeach
+                            @else
+                                <td colspan="6"><center>KOSONG</center></td>
+                            @endif
                             </tbody>
                         </table>
                     </div>

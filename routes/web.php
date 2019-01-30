@@ -62,6 +62,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin']], fun
 // auth superadmin & admin
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admin']], function () {
 	Route::group(['prefix' => 'admin', 'as' => 'admin'], function () {
+		// Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+		// 	Route::get('/set_shipment', 'UserController@set_shipment')->name('.set_shipment');
+		// 	Route::post('/set_shipment_update', 'UserController@set_shipment_update')->name('.set_shipment_update');
+		// });
 		Route::get('/email_sender', 'Admin\\FrontController@email_sender')->name('.email_sender');
 		// Route::get('/res_kom', 'Admin\\FrontController@res_kom')->name('.resolusi_komplain');
 		Route::get('/hot_promo', 'Admin\\ProdukController@hot_promo')->name('.hot_promo');
@@ -161,7 +165,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::post('/store', 'Admin\\ProdukController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
-			Route::post('update/{id}', 'Admin\\ProdukController@update')->name('.update');
+			Route::patch('update/{id}', 'Admin\\ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
 			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
 			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
@@ -172,6 +176,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::post('/store', 'Admin\\TransactionController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\TransactionController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\TransactionController@edit')->name('.edit');
+			Route::get('/edit_trans/{id}', 'Admin\\TransactionController@edit_trans')->name('.edit_trans');
 			Route::patch('/update', 'Admin\\TransactionController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
 		});
@@ -232,6 +237,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('detailseller/{id}', 'Admin\\NeedApprovalController@detailseller')->name('.detailseller');
 			Route::post('password_seller/{id}', 'Admin\\NeedApprovalController@password_seller')->name('.password_seller');
 			Route::get('changepassword_seller/{id}', 'Admin\\NeedApprovalController@changepassword_seller')->name('.changepassword_seller');
+			//PRODUK ADMIN
+			Route::get('produkadmin', 'Admin\\NeedApprovalController@produkadmin')->name('.produkadmin');
+			Route::get('create_produkadmin', 'Admin\\NeedApprovalController@create_produk')->name('.create_produk');
+
 
 			//TRANSAKSI HOTLIST
 			Route::get('hotlist', 'Admin\\NeedApprovalController@hotlist')->name('.hotlist');

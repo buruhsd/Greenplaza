@@ -39,7 +39,7 @@
                     <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1)}}</span></button>
                     <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button>
                     <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2)}}</span></button>
-                    <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
+                    <!-- <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> -->
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -50,8 +50,8 @@
                                     <th>Foto Produk</th>
                                     <th>Detail Produk</th>
                                     <th>Detail Seller</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Status</th><!-- 
+                                    <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,11 +82,11 @@
                                                 ?"<button class='btn btn-success btn-xs'>Active</button>"
                                                 :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
                                         </td>
-                                        <td scope="row">
+                                        <!-- <td scope="row">
                                             <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
                                             <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
                                             <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 @endforeach
                             </tbody>
