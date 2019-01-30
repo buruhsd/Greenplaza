@@ -1262,6 +1262,13 @@ ul.rating li {
     padding: 20px 10px 10px;
     border: 1px solid #e1e1e1;
     border-top: none;
+    height: 175px;
+}
+
+.tombol-product {
+    bottom: 0;
+    padding-bottom: 10px;
+    position: absolute;
 }
 
 .product-wrap:hover .product-content {

@@ -188,13 +188,15 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($r->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($r->produk_price - ($r->produk_price * $r->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</del>
-                                            </p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
                                         @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</span></p>
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
                                         @endif
                                     </div>
                                 </div>
@@ -381,15 +383,17 @@
                                     @else
                                         <p><span>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</span></p>
                                     @endif
+                                    <div class="tombol-product">
                                     <ul class="rating">
+                                        <!-- <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    <span>
+                                        <li><i class="fa fa-star-o"></i></li> -->
+                                    
                                     </ul>
-                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="product-wrap">
@@ -467,22 +471,25 @@
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
-                                                @if($n->produk_discount > 0)
+                                                   @if ($n->produk_discount != 0)
                                                     <p>
-                                                        <span> Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount / 100))}}</span>
-                                                        <del>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</del>
+                                                        <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
                                                     </p>
-                                                @else
-                                                    <p><span>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</span></p>
-                                                @endif
+                                                    @else
+                                                    <p>
+                                                        <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                                    </p>
+                                                    @endif
                                                 <ul class="rating">
+                                                    <!-- <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li> -->
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -511,22 +518,26 @@
                                                 <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                 <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                             </h3>
-                                            @if($n->produk_discount > 0)
+                                            @if ($n->produk_discount != 0)
                                                 <p>
-                                                    <span> Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount / 100))}}</span>
-                                                    <del>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</del>
+                                                    <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                                    <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
                                                 </p>
-                                            @else
-                                                <p><span>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</span></p>
-                                            @endif
+                                                @else
+                                                <p>
+                                                    <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                                </p>
+                                                @endif
+                                            <div class="tombol-product">
                                             <ul class="rating">
+                                                <!-- <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li> -->
                                             </ul>
-                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
+                                            </div>
                                         </div>
                                     </div>
                                     @endif
@@ -675,14 +686,16 @@
                                     @else
                                         <p><span>Rp. {{FunctionLib::number_to_text($f->produk_price)}}</span></p>
                                     @endif
+                                    <div class="tombol-product">
                                     <ul class="rating">
+                                        <!-- <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li> -->
                                     </ul>
-                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
+                                </div>
                                 </div>
                             </div>
                             @endforeach
@@ -1025,7 +1038,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content" style="padding-bottom:30px">
                                                 <h3>
                                                     <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
@@ -1042,10 +1055,12 @@
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
                                                 </ul>
+                                                <div class="tombol-product" style="padding-bottom:40px">
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12" >selengkapnya</button></a></center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1089,10 +1104,12 @@
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
                                                 </ul>
+                                                <div class="tombol-product" style="padding-bottom:50px">
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
                                                 <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
