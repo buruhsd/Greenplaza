@@ -14,10 +14,30 @@
  		</tr>
  		<tr>
   			<td bgcolor="#ffffff" style="padding: 30px 20px 30px 20px; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; border-bottom: 5px solid #eee;">
-  				<h2>Registrasi Berhasil !</h2>
-   				<p>Selamat akun anda telah terdaftar di GreenPlaza</p>
-				<p>Klik link berikut untuk aktivasi: <br>
-				</p>
+  				<h2>Status Transaksi !</h2>
+				<p>Berikut informasi mengenai transaksi anda. <br></p>
+  				<table style="width: 100%;">
+  					<thead>
+  					</thead>
+  					<tbody>
+  						<tr>
+	  						<th style="text-align: left;">Kode Transaksi </th>
+	  						<th>:</th>
+	  						<th style="text-align: left;">{{$trans_code}}</th>
+  						</tr>
+  						<tr>
+	  						<th style="text-align: left;">Total Transaksi </th>
+	  						<th>:</th>
+	  						<th style="text-align: left;">Rp. {{FunctionLib::number_to_text($trans_amount_total)}}</th>
+  						</tr>
+  						<tr>
+	  						<th style="text-align: left;">Status Transaksi </th>
+	  						<th>:</th>
+	  						<th style="text-align: left;">{{$status}}</th>
+  						</tr>
+  					</tbody>
+  				</table>
+				<p>Silahkan login ke akun anda untuk mengecek kembali transaksi anda <a href="http://greenplaza.me/login">disini</a>. <br></p>
   			</td>
  		</tr>
  		<tr>

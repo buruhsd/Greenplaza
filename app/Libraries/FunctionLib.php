@@ -2,6 +2,35 @@
 class FunctionLib
 {
 
+    public static function trans_arr($key){
+        $arr = [
+            0 => 'Chart',
+            1 => 'Order',
+            2 => 'Transfer',
+            3 => 'Menunggu Seller',
+            4 => 'Pengepakan',
+            5 => 'Dikirim',
+            6 => 'Diambil',
+        ];
+        return $arr[$key];
+    } 
+
+    /******/
+    public static function transaction_notif($param=[]){
+        $data['status'] = 200;
+        $data['message'] = 'Notifikasi telah dikirim';
+        extract($param);
+        // send email
+        $config = [
+            'to' => $to,
+            'subject' => 'Status Transaksi',
+            'view' => 'email.transaction',
+            'data' => $data
+        ];
+        SendEmail::html($config);
+        return $data;
+    }
+
     /*******/
     public static function get_hotlist($id){
         $produk = App\Models\Produk::whereId($id)->first();
