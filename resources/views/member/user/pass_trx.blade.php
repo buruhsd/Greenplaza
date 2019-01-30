@@ -40,7 +40,8 @@
                     </div>
                     <div class="col-sm-6">
                         <h3>Info</h3>
-                        <p>Password default menggunakan password login anda.</p>
+                        <p>Password default menggunakan password login anda.<br/></p>
+                        <p>Reset Password <a class="btn btn-xs btn-info" href="{{route('password.request_trx')}}">disini</a>.</p>
                     </div>
                 </div>
         </div>

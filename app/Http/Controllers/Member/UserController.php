@@ -23,11 +23,76 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Auth;
 use FunctionLib;
+use SendEmail;
 
 class UserController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'users';
+
+    public function pass_trx_reset_change($token=null){
+        $user = User::whereRaw('token_register = "'.$token.'"')->first();
+        if($user){
+            $status = 200;
+            $message = 'Password transaksi berhasil di reset!, silahkan cek email anda untuk password baru anda.';
+
+            $password = FunctionLib::str_rand(9);
+            $user->user_detail->user_detail_pass_trx = Hash::make($password);
+            $user->user_detail->save();
+            if(!$user){
+                $status = 500;
+                $message = 'Password transaksi tidak berhasil di reset!';
+                return redirect('login')
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+
+            // send email
+            $config = [
+                'to' => $user->email,
+                'subject' => 'Reset Password Transaksi Greenplaza',
+                'view' => 'email.new-password-trx',
+                'data' => [
+                    'password' => $password,
+                ]
+            ];
+            SendEmail::html($config);
+
+            Auth::logout();
+            return redirect('login')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+    }
+
+    /**
+     * Send a reset link to user email.
+     * @param    $request
+     * @return 
+     */
+    public function pass_trx_reset_email(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|exists:users,email']);
+        $user = User::whereEmail($request->only('email'))->first();
+        $config = [
+            'to' => $request->email,
+            'subject' => 'Reset Password Greenplaza',
+            'view' => 'email.reset-link-trx',
+            'data' => [
+                'link' => route('password.change_trx', $user->token_register),
+            ]
+        ];
+        SendEmail::html($config);
+        return back()->with(['flash_status' => 200, 'flash_message' => 'Link Reset Password terkirim, silahkan buka email anda.']);
+    }
+
+    /**
+     * Display the form to request a password reset link.
+     * @param
+     * @return
+     */
+    public function pass_trx_reset(Request $request)
+    {
+        return view('auth.passwords.email_trx');
+    }
 
     /**
      * Display a listing of the resource.

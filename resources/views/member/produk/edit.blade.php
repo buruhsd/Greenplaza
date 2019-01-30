@@ -13,7 +13,7 @@
                 <div class="panel-body">
                 <a href="{{ url('/member/produk') }}" title="Back">
                 	<button class="btn btn-warning btn-xs">
-                		<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                		<i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
                 	</button>
                 </a>
                 <br />

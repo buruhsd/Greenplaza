@@ -11,7 +11,7 @@
 
 </head>
 <body>
-    <form method="POST" action="{{ route('password.email') }}">
+    <form method="POST" action="{{ route('password.email_trx') }}">
     @csrf
         <div class="container col-md-8 col-md-offset-2">
             <br/>
@@ -21,7 +21,10 @@
                 </a>
             </div>
             <hr/>
-            <h1>{{ __('Reset Password') }}</h1>
+            <h1>Reset Password Transaksi</h1>
+            <a class="btn btn-warning btn-xs" href="{{ url('/member/user/pass_trx') }}" title="Back">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Kembali
+            </a>
             <p>Masukkan email anda.</p>
             <hr>
             @if ($errors->has('email'))
@@ -44,7 +47,6 @@
             <button type="submit" class="btn btn-primary btn-block">
                 {{ __('Send Password Reset Link') }}
             </button>
-            <p><a href="{{url('/login')}}">Login</a>.</p>
         </div>
     </form>
 </body>

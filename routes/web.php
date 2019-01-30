@@ -17,6 +17,11 @@ Route::get('/change/language/{id}',function($lang){
 
 Route::get('/comming-soon', 'Member\\FrontController@comming');
 
+// ganti password transaksi
+Route::get('password/reset_trx', 'Member\\UserController@pass_trx_reset')->name('password.request_trx');
+Route::post('password/email_trx', 'Member\\UserController@pass_trx_reset_email')->name('password.email_trx');
+Route::get('password/change_trx/{token}', 'Member\\UserController@pass_trx_reset_change')->name('password.change_trx');
+
 // Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\VerifManualController@activating')->name('activating-account');
 Route::get('/re_send_noauth', 'Auth\\VerifManualController@re_send_page')->name('re_send');
