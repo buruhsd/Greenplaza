@@ -217,13 +217,15 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($r->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($r->produk_price - ($r->produk_price * $r->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</del>
-                                            </p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
                                         @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</span></p>
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
                                         @endif
                                     </div>
                                 </div>
@@ -254,13 +256,15 @@
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
-                                    @if($d->produk_discount > 0)
-                                        <p>
-                                            <span> Rp. {{FunctionLib::number_to_text($d->produk_price - ($d->produk_price * $d->produk_discount / 100))}}</span>
-                                            <del>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</del>
-                                        </p>
+                                    @if ($d->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
+                                    </p>
                                     @else
-                                        <p><span>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</span></p>
+                                    <p>
+                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                    </p>
                                     @endif
                                     <ul class="rating">
                                         <li><i class="fa fa-star"></i></li>
@@ -306,14 +310,16 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($p->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                            </p>
-                                        @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
-                                        @endif
+                                    @if ($p->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                    </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -333,14 +339,16 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($p->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                            </p>
-                                        @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
-                                        @endif
+                                    @if ($p->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                    </p>
+                                    @else
+                                    <p>
+                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                    </p>
+                                    @endif
                                     </div>
                                 </div>
                                 @endforeach
@@ -375,25 +383,25 @@
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
-                                    @if($n->produk_discount > 0)
-                                        <p>
-                                            <span> Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount / 100))}}</span>
-                                            <del>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</del>
-                                        </p>
+                                    @if ($n->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format((($n->produk_price * $n->produk_discount) - $n->produk_price ), 2)}}</span>
+                                        <del>Rp.{{number_format($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
+                                    </p>
                                     @else
-                                        <p><span>Rp. {{FunctionLib::number_to_text($n->produk_price)}}</span></p>
+                                    <p>
+                                        <span>Rp.{{number_format($n->produk_price, 2)}}</span>
+                                    </p>
                                     @endif
-                                    <div class="tombol-product">
                                     <ul class="rating">
-                                        <!-- <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li> -->
-                                    
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                    <span>
                                     </ul>
-                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
-                                    </div>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                 </div>
                             </div>
                             <!-- <div class="product-wrap">
@@ -482,14 +490,13 @@
                                                     </p>
                                                     @endif
                                                 <ul class="rating">
-                                                    <!-- <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li> -->
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
-                                                </div>
+                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                             </div>
                                         </div>
                                     </div>
@@ -528,16 +535,14 @@
                                                     <span>Rp.{{number_format($n->produk_price, 2)}}</span>
                                                 </p>
                                                 @endif
-                                            <div class="tombol-product">
                                             <ul class="rating">
-                                                <!-- <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li> -->
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
                                             </ul>
-                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
-                                            </div>
+                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                         </div>
                                     </div>
                                     @endif
@@ -610,13 +615,15 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($r->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($r->produk_price - ($r->produk_price * $r->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</del>
-                                            </p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
                                         @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</span></p>
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
                                         @endif
                                     </div>
                                 </div>
@@ -637,13 +644,15 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
-                                        @if($r->produk_discount > 0)
-                                            <p>
-                                                <span> Rp. {{FunctionLib::number_to_text($r->produk_price - ($r->produk_price * $r->produk_discount / 100))}}</span>
-                                                <del>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</del>
-                                            </p>
+                                        @if ($r->produk_discount != 0)
+                                        <p>
+                                            <span>Rp.{{number_format(($r->produk_price * $r->produk_discount) / 100, 2)}}</span>
+                                            <del>Rp.{{number_format($r->produk_price, 2)}}</del>
+                                        </p>
                                         @else
-                                            <p><span>Rp. {{FunctionLib::number_to_text($r->produk_price)}}</span></p>
+                                        <p>
+                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
+                                        </p>
                                         @endif
                                     </div>
                                 </div>
@@ -678,24 +687,24 @@
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
-                                    @if($f->produk_discount > 0)
-                                        <p>
-                                            <span> Rp. {{FunctionLib::number_to_text($f->produk_price - ($f->produk_price * $f->produk_discount / 100))}}</span>
-                                            <del>Rp. {{FunctionLib::number_to_text($f->produk_price)}}</del>
-                                        </p>
+                                    @if ($f->produk_discount != 0)
+                                    <p>
+                                        <span>Rp.{{number_format((($f->produk_price * $f->produk_discount) - $f->produk_price ), 2)}}</span>
+                                        <del>Rp.{{number_format($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span>
+                                    </p>
                                     @else
-                                        <p><span>Rp. {{FunctionLib::number_to_text($f->produk_price)}}</span></p>
+                                    <p>
+                                        <span>Rp.{{number_format($f->produk_price, 2)}}</span>
+                                    </p>
                                     @endif
-                                    <div class="tombol-product">
                                     <ul class="rating">
-                                        <!-- <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li> -->
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
-                                </div>
+                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                 </div>
                             </div>
                             @endforeach
@@ -769,13 +778,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($p->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -798,13 +809,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($p->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -834,13 +847,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($t->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($t->produk_price - ($t->produk_price * $t->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($t->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($t->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($t->produk_price * $t->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($t->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($t->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($t->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -863,13 +878,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($t->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($t->produk_price - ($t->produk_price * $t->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($t->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($t->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($t->produk_price * $t->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($t->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($t->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($t->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -899,13 +916,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($p->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -928,13 +947,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($p->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($p->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($p->produk_price * $p->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($p->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -964,13 +985,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($d->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($d->produk_price - ($d->produk_price * $d->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($d->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -991,13 +1014,15 @@
                                                         <li><i class="fa fa-star"></i></li>
                                                         <li><i class="fa fa-star-o"></i></li>
                                                     </ul>
-                                                    @if($d->produk_discount > 0)
-                                                        <p>
-                                                            <span> Rp. {{FunctionLib::number_to_text($d->produk_price - ($d->produk_price * $d->produk_discount / 100))}}</span>
-                                                            <del>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</del>
-                                                        </p>
+                                                    @if ($d->produk_discount != 0)
+                                                    <p>
+                                                        <span>Rp.{{number_format(($d->produk_price * $d->produk_discount) / 100, 2)}}</span>
+                                                        <del>Rp.{{number_format($d->produk_price, 2)}}</del>
+                                                    </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($d->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                                                    </p>
                                                     @endif
                                                 </div>
                                             </div>
@@ -1038,7 +1063,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content" style="padding-bottom:30px">
+                                            <div class="product-content">
                                                 <h3>
                                                     <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
@@ -1055,12 +1080,10 @@
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
                                                 </ul>
-                                                <div class="tombol-product" style="padding-bottom:40px">
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12" >selengkapnya</button></a></center>
-                                                </div>
+                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
                                             </div>
                                         </div>
                                     </div>
@@ -1104,12 +1127,10 @@
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
                                                 </ul>
-                                                <div class="tombol-product" style="padding-bottom:50px">
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{$item->produk_note}}
                                                 </ul>
                                                 <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
