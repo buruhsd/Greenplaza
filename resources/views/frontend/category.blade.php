@@ -96,15 +96,15 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
-                                                <h3><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a>
+                                            <div class="product-content tambahan">
+                                                <h3><a href="{{route('detail', $item->produk_slug)}}">{{str_limit($item->produk_name, 10)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
                                                 @if($item->produk_discount > 0)
                                                     <p>
-                                                        <span> Rp. {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
-                                                        <del>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del>
+                                                        <del>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del><span class="pull-right" style="color:red">{{number_format($item->produk_discount)}}%</span><br>
+                                                        <span> Rp.{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
                                                     </p>
                                                 @else
                                                     <p><span>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</span></p>
@@ -116,6 +116,7 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                 </ul> --}}
+                                                <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$item->user->user_store}}</button></a></center>
                                             </div>
                                         </div>
                                     </div>

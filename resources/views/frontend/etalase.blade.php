@@ -193,16 +193,16 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content tambahan">
                                                 <h3>
-                                                    <a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a>
+                                                    <a href="{{route('detail', $p->produk_slug)}}">{{str_limit($p->produk_name, 15)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $p->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
                                                 @if($p->produk_discount > 0)
                                                     <p>
+                                                        <del>{{FunctionLib::number_to_text($p->produk_price)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
                                                         <span>Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                        <del>{{FunctionLib::number_to_text($p->produk_price)}}</del>
                                                     </p>
                                                 @else
                                                     <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
@@ -253,11 +253,11 @@
                                                         <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
                                                         @if($p->produk_discount > 0)
                                                             <p>
-                                                                <span>{{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                                <del>{{FunctionLib::number_to_text($p->produk_price)}}</del>
+                                                                <span>Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
+                                                                <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
                                                             </p>
                                                         @else
-                                                            <p><span>{{FunctionLib::number_to_text($p->produk_price)}}</span></p>
+                                                            <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
                                                         @endif
                                                         <!-- <ul class="rating">
                                                             <li><i class="fa fa-star"></i></li>
