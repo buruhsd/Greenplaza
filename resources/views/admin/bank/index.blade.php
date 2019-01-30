@@ -42,30 +42,30 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Kode</th>
-                                    <th>Name</th>
-                                    <th>status</th>
-                                    <th>Note</th>
-                                    <th>Actions</th>
+                                    <th><center>ID</center></th>
+                                    <th><center>Kode</center></th>
+                                    <th><center>Name</center></th>
+                                    <th><center>status</center></th>
+                                    <th><center>Note</center></th>
+                                    <th><center>Actions</center></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($bank as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->bank_kode }}</td>
-                                        <td>{{ $item->bank_name }}</td>
-                                        <td>{!! ($item->bank_status == 1)
+                                        <td><center>{{ $item->id }}</center></td>
+                                        <td><center>{{ $item->bank_kode }}</center></td>
+                                        <td><center>{{ $item->bank_name }}</center></td>
+                                        <td><center>{!! ($item->bank_status == 1)
                                             ?"<button class='btn btn-success btn-xs'>Active</button>"
-                                            :"<button class='btn btn-danger btn-xs'>Not Active</button>" !!}</td>
-                                        <td>{{ $item->bank_note }}</td>
-                                        <td>
-                                            <a href="{{ url('/admin/bank/show/' . $item->id) }}">
+                                            :"<button class='btn btn-danger btn-xs'>Not Active</button>" !!}</center></td>
+                                        <td><center>{{ $item->bank_note }}</center></td>
+                                        <td><center>
+                                            <!-- <a href="{{ url('/admin/bank/show/' . $item->id) }}">
                                                 <button class="btn btn-info btn-xs">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>View
                                                 </button>
-                                            </a>
+                                            </a> -->
                                             <a href="{{ url('/admin/bank/edit/' . $item->id) }}">
                                                 <button class="btn btn-warning btn-xs">
                                                     <i class="fa fa-edit" aria-hidden="true"></i>Edit
@@ -83,7 +83,7 @@
                                                         'onclick'=>'return confirm("Confirm delete?")'
                                                 )) !!}
                                             {!! Form::close() !!}
-                                        </td>
+                                        </center></td>
                                     </tr>
                                 @endforeach
                             </tbody>

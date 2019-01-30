@@ -131,13 +131,13 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::delete('/destroy/{id}', 'Admin\\BrandController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'category', 'as' => '.category'], function () {
-			Route::get('/', 'Admin\\categoryController@index')->name('.index');
-			Route::get('/create', 'Admin\\categoryController@create')->name('.create');
-			Route::post('/store', 'Admin\\categoryController@store')->name('.store');
-			Route::get('/show/{id}', 'Admin\\categoryController@show')->name('.show');
-			Route::get('/edit/{id}', 'Admin\\categoryController@edit')->name('.edit');
-			Route::patch('/update/{id}', 'Admin\\categoryController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Admin\\categoryController@destroy')->name('.destroy');
+			Route::get('/', 'Admin\\CategoryController@index')->name('.index');
+			Route::get('/create', 'Admin\\CategoryController@create')->name('.create');
+			Route::post('/store', 'Admin\\CategoryController@store')->name('.store');
+			Route::get('/show/{id}', 'Admin\\CategoryController@show')->name('.show');
+			Route::get('/edit/{id}', 'Admin\\CategoryController@edit')->name('.edit');
+			Route::patch('/update/{id}', 'Admin\\CategoryController@update')->name('.update');
+			Route::delete('/destroy/{id}', 'Admin\\CategoryController@destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
 			Route::get('/', 'Admin\\UserController@index')->name('.index');
