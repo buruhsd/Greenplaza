@@ -536,7 +536,7 @@
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li> -->
                                             </ul>
-                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a></center>
+                                            <center>{{-- <a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="width: 170px !important;">Toko {{$n->user->user_store}}</button></a> --}}</center>
                                             </div>
                                         </div>
                                     </div>
