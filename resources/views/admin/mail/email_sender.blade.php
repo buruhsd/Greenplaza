@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>email tes</title>
+    <title>GreenPlaza</title>
     <style type="text/css">
 		body,td,div,p,a,input {font-family: arial, sans-serif;}
 	</style>
@@ -12,20 +12,20 @@
 	<table align="center" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #eee;">
  		<tr>
   			<td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0; border-bottom: 5px solid #eee;">
- 				<img src="{{asset('img/DiTeG.png')}}" alt="Editeg" style="display: block; width: 150px;"/>
+ 				<img src="{{asset('frontend/logo-fix.png')}}" alt="Editeg" style="display: block; width: 150px;"/>
 			</td>
  		</tr>
  		<tr>
   			<td bgcolor="#ffffff" style="padding: 30px 20px 30px 20px; color: #153643; font-size: 12px; line-height: 20px; border-bottom: 5px solid #eee;">
-   				Halo ,<br>
-				<p>haloo</p>
+   				{{$email->email_subject}}<br>
+				<p>{!!$email->email_text!!}</p>
   			</td>
  		</tr>
  		<tr>
   			<td style="font-family: Arial, sans-serif; font-size: 12px;">
 				<tr>
-				  <td bgcolor="#5893df">
-				   <p style="text-align: center; color: #fff;">&copy; Editeg</p>
+				  <td bgcolor="#4caf50">
+				   <p style="text-align: center; color: #fff;">&copy; GreenPlaza</p>
 				  </td>
 				 </tr>
   			</td>

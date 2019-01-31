@@ -63,32 +63,32 @@ class EmailController extends Controller
 
         if ($email->email_to != null) {
                                
-            Mail::send('admin.mail.tes', compact(['email', 'user', 'users']), function ($m) use ($email) {
-                $m->to($email->email_to, $email->email_to)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'user', 'users']), function ($m) use ($email) {
+                $m->to($email->email_to, $email->email_to)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Email Sending to " .$email->email_to
                     ]);
         } elseif ($email->email_to == null && $value == 2) {
-            Mail::send('admin.mail.tes', compact(['email', 'usermember']), function ($m) use ($usermember) {
-                $m->to($usermember, $usermember)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'usermember']), function ($m) use ($usermember) {
+                $m->to($usermember, $usermember)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Email Send for All Member"
                     ]);
         } elseif ($email->email_to == null && $value == 3) {
-            Mail::send('admin.mail.tes', compact(['email', 'userseller']), function ($m) use ($userseller) {
-                $m->to($userseller, $userseller)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'userseller']), function ($m) use ($userseller) {
+                $m->to($userseller, $userseller)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Email Send for All Seller"
                     ]);
         } elseif ($email->email_to == null && $value == 4) {
-            Mail::send('admin.mail.tes', compact(['email', 'usersall']), function ($m) use ($usersall) {
-                $m->to($usersall, $usersall)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'usersall']), function ($m) use ($usersall) {
+                $m->to($usersall, $usersall)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
