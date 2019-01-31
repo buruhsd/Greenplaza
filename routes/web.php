@@ -634,6 +634,10 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 			Route::get('addchart/{id}', 'ModalController@addChart')->name('.addchart');
 			Route::get('trans_detail/{id}', 'ModalController@transDetail')->name('.trans_detail');
 			Route::post('trans_detail_post/{id}', 'ModalController@transDetail')->name('.trans_detail_post');
+			Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
+				Route::get('add_shipment_buyer/{id}', 'ModalController@komplain_resi_buyer')->name('.add_shipment_buyer');
+				Route::get('add_shipment_seller/{id}', 'ModalController@komplain_resi_seller')->name('.add_shipment_seller');
+			});
 			Route::get('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 			Route::post('res_kom_transDetail_post/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
 			Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');

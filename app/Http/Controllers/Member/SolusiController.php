@@ -72,11 +72,13 @@ class SolusiController extends Controller
     * @return
     **/
     public function approve_shipment_buyer(Request $request, $id){
+        $date = date('Y-m-d H:i:s');
         $status = 200;
         $message = "Solusi has been updated.";
         try{
             $solusi = Solusi::findOrFail($id);
             $solusi->solusi_buyer_accept = 1;
+            $solusi->solusi_buyer_date = $date;
             $solusi->save();
         } catch (\Exception $e) {
             $status = 500;
@@ -96,8 +98,8 @@ class SolusiController extends Controller
         $message = "Solusi has been updated.";
         try{
             $solusi = Solusi::findOrFail($id);
-            $solusi->solusi_seller_resi = $request->solusi_buyer_resi;
-            $solusi->solusi_seller_shipment = $request->solusi_buyer_shipment;
+            $solusi->solusi_seller_resi = $request->solusi_seller_resi;
+            $solusi->solusi_seller_shipment = $request->solusi_seller_shipment;
             $solusi->solusi_seller_accept = 0;
             $solusi->save();
         } catch (\Exception $e) {
@@ -114,11 +116,13 @@ class SolusiController extends Controller
     * @return
     **/
     public function approve_shipment_seller(Request $request, $id){
+        $date = date('Y-m-d H:i:s');
         $status = 200;
         $message = "Solusi has been updated.";
         try{
             $solusi = Solusi::findOrFail($id);
             $solusi->solusi_seller_accept = 1;
+            $solusi->solusi_seller_date = $date;
             $solusi->save();
         } catch (\Exception $e) {
             $status = 500;

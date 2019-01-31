@@ -3,6 +3,10 @@ function modal_get(e){
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
+        beforeSend:function(){
+            e.html("loading");
+            e.val("loading");
+        },
         success: function(data) {
             if (data) {
                 if(typeof data.status !== 'undefined' && data.status == 500){
@@ -20,6 +24,8 @@ function modal_get(e){
             } else {
                 alert(data);
             }
+            e.val(val);
+            e.html(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);

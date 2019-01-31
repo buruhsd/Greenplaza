@@ -85,7 +85,7 @@
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
                                                         <input type="hidden" name="type" value="buyer"/>
-                                                        <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->id)}} value="More" class="btn btn-info btn-xs" />
+                                                        <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->komplain_trans_id)}} value="More" class="btn btn-info btn-xs" />
                                                     {!! Form::close() !!}
                                                 </li>
                                             </ul>
@@ -130,18 +130,18 @@
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
-                                            @if($item->solusi->solusi_status == 2)
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.add_shipment_buyer", $item->id)}} class='btn btn-danger btn-xs'>
-                                                Konfirmasi Kirim Barang
-                                            </button><br/>
-                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null)
-                                            {!! Form::open(['id' => 'approve_shipment_seller']) !!}
-                                                <input type="hidden" name="type" value="seller"/>
-                                                <input type="button" onclick='modal_post($(this), $("#approve_shipment_buyer").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.solusi.add_shipment_seller", $item->solusi->id)}} value="Menerima Barang Baru" class="btn btn-info btn-xs" />
-                                            {!! Form::close() !!}
-                                            @elseif($item->solusi->solusi_status == 2  && $item->solusi->solusi_seller_resi !== null && $item->solusi->solusi_seller_accept == 1)
+                                            @if($item->solusi->solusi_status == 2  && $item->solusi->solusi_seller_resi !== null && $item->solusi->solusi_seller_accept == 1)
                                             <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.komplain.done_komplain", $item->id)}} class='btn btn-danger btn-xs'>
                                                 Komplain Selesai
+                                            </button><br/>
+                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_seller_resi !== null && $item->solusi->solusi_seller_accept == 0)
+                                                <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_seller", $item->solusi->id)}} class='btn btn-info btn-xs'>
+                                                    Menerima Barang baru
+                                                </button><br/>
+                                            @endif
+                                            @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi == null)
+                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_buyer", $item->id)}} class='btn btn-danger btn-xs'>
+                                                Konfirmasi Kirim Barang
                                             </button><br/>
                                             @endif
                                             <ul>

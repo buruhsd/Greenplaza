@@ -52,7 +52,7 @@
                                                 <input class="form-control" type="file" name="komplain_pic_image" >
                                             @endif
                                             <i class='btn-block bg-danger m-t-xs'>Diskusi solusi dengan Pembeli</i>
-                                            {!! Form::textarea('note', $komplain->solusi->solusi_note, [
+                                            {!! Form::textarea('solusi_note', $komplain->solusi->solusi_note, [
                                               'class' => 'form-control', 
                                               'placeholder' => 'Note', 
                                               'required',

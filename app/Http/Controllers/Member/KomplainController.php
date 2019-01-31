@@ -176,6 +176,7 @@ class KomplainController extends Controller
                 $solusi->solusi_solusi_id = $request->solusi_solusi_id;
                 $solusi->solusi_user_id = Auth::id();
                 $solusi->solusi_value = $request->solusi_value;
+                $solusi->solusi_note = $request->solusi_note;
                 $solusi->save();
             }
         } catch (\Exception $e) {

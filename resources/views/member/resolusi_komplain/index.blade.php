@@ -80,7 +80,7 @@
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
                                                         <input type="hidden" name="type" value="seller"/>
-                                                        <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->id)}} value="More" class="btn btn-info btn-xs" />
+                                                        <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->komplain_trans_id)}} value="More" class="btn btn-info btn-xs" />
                                                     {!! Form::close() !!}
                                                 </li>
                                             </ul>
@@ -110,32 +110,35 @@
                                                     #Buyer&nbsp;
                                                     {!!
                                                         ($item->solusi->solusi_buyer_accept == 1)
-                                                        ?"<button class='btn btn-info btn-xs'>Done</button> at ".$item->solusi->solusi_buyer_date
+                                                        ?"<button class='btn btn-info btn-xs'>Done</button> at ".FunctionLib::date_indo($item->solusi->solusi_buyer_date, true, 'full')
                                                         :"<button class='btn btn-danger btn-xs'>Wait</button>"
                                                     !!} &nbsp;
+                                                </li>
+                                                <li>Status : &nbsp;
                                                     #Seller&nbsp;
                                                     {!!
                                                         ($item->solusi->solusi_seller_accept == 1)
-                                                        ?"<button class='btn btn-info btn-xs'>Done</button> at ".$item->solusi->solusi_seller_date
+                                                        ?"<button class='btn btn-info btn-xs'>Done</button> at ".FunctionLib::date_indo($item->solusi->solusi_seller_date, true, 'full')
                                                         :"<button class='btn btn-danger btn-xs'>Wait</button>"
                                                     !!}
                                                 </li>
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
+                                            {{-- jika ada komplain status new --}}
                                             @if($item->solusi->solusi_status == 1)
                                                 <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_solusi", $item->solusi->id)}} class='btn btn-danger btn-xs'>
                                                     Terima Solusi Tawaran Pembeli
                                                 </button><br/>
-                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null)
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_buyer", $item->solusi->id)}} class='btn btn-danger btn-xs'>
+                                            {{-- jika ada komplain status 2 nomor resi pembeli null --}}
+                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_seller_resi == null)
+                                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_seller", $item->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
+                                            @endif
+                                            {{-- jika ada komplain status 2 nomor resi pembeli bukan null dan buyer accept 0 --}}
+                                            @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null && $item->solusi->solusi_buyer_accept == 0)
+                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_buyer", $item->solusi->id)}} class='btn btn-info btn-xs'>
                                                 Menerima Barang Kembalian
                                             </button><br/>
-                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null && $item->solusi->solusi_buyer_accept == 1)
-                                            {!! Form::open(['id' => 'approve_shipment_buyer']) !!}
-                                                <input type="hidden" name="type" value="seller"/>
-                                                <input type="button" onclick='modal_post($(this), $("#approve_shipment_buyer").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.solusi.add_shipment_seller", $item->solusi->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
-                                            {!! Form::close() !!}
                                             @endif
                                             <ul>
                                                 <li>

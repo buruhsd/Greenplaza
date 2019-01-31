@@ -30,6 +30,30 @@ class ModalController extends Controller
     }
 
     /**
+     * komplain tambah resi buyer
+     * @param
+     * @return 
+     */
+    public function komplain_resi_buyer($id)
+    {
+        $data['item'] = Komplain::whereId($id)->first();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.komplain.add_shipment_buyer', $data);
+    }
+
+    /**
+     * komplain tambah resi seller
+     * @param
+     * @return 
+     */
+    public function komplain_resi_seller($id)
+    {
+        $data['item'] = Komplain::whereId($id)->first();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.komplain.add_shipment_seller', $data);
+    }
+
+    /**
      * tambah bank user
      * @param
      * @return 
