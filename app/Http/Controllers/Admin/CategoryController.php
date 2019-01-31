@@ -103,6 +103,7 @@ class CategoryController extends Controller
             // $imaget->save($uploadPath2.'/'.$imagename,80);
             $res->category_image = $imagename;
         }
+        $res->category_slug = str_slug($request->category_name);
         $res->category_note = $request->category_note;
         $res->save();
         if(!$res){
