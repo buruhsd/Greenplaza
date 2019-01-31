@@ -164,6 +164,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\RajaOngkirServiceProvider::class,
         App\Providers\SendEmailServiceProvider::class,
+        App\Providers\MasEdiServiceProvider::class,
 
         Unisharp\Ckeditor\ServiceProvider::class,
 
@@ -220,6 +221,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'RajaOngkir' => App\Facades\RajaOngkirFacade::class,
         'SendEmail' => App\Facades\SendEmailFacade::class,
+        'MasEdi' => App\Facades\MasEdiFacade::class,
 
     ],
 
