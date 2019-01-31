@@ -75,7 +75,7 @@ class CategoryController extends Controller
         if ($request->hasFile('category_icon')){
             $icon = $request->file('category_icon');
             // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
-            $uploadPath = public_path('img_category_icon');
+            $uploadPath = public_path('assets/images/category_image');
             // $uploadPath2 = public_path('assets/images/brand/thumb');
             $iconname = FunctionLib::str_rand(5).'.'.$icon->getClientOriginalExtension();
             $iconsize = $icon->getClientSize();

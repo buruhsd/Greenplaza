@@ -42,12 +42,14 @@ class FrontController extends Controller
             return $query;
         })
         ->where('user_store', '!=', null)->pluck('id')->toArray();
+        // dd($userseller);
 
         $usermember = User::whereHas('roles', function($query){
             $query->where('name','=','member');
             return $query;
         })
         ->pluck('id')->toArray();
+        dd($usermember);
 
         $transseller = Trans::where('trans_user_id', $userseller)->pluck('id')->toArray();
         $detailsellerorder = Trans_detail::whereIn('trans_detail_trans_id', $transseller)
