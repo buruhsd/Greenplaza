@@ -401,7 +401,9 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
-                                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    @if($n->user->seller_active())
+                                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    @endif
                                     </div>
                                 </div>
                             </div>
@@ -497,7 +499,9 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star-o"></i></li>
                                                 </ul>
+                                                @if($n->user->seller_active())
                                                 <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -544,7 +548,9 @@
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                             </ul>
+                                            @if($n->user->seller_active())
                                             <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                            @endif
                                             </div>
                                         </div>
                                     </div>
@@ -708,7 +714,9 @@
                                         <li><i class="fa fa-star"></i></li>
                                         <li><i class="fa fa-star-o"></i></li>
                                     </ul>
+                                    @if($n->user->seller_active())
                                     <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                                    @endif
                                     </div>
                                 </div>
                             </div>
