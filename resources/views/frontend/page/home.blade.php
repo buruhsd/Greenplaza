@@ -383,6 +383,13 @@
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
+                                    <ul class="rating">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                    </ul>
                                     @if ($n->produk_discount != 0)
                                     <p>
                                         <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
@@ -394,13 +401,6 @@
                                     </p>
                                     @endif
                                     <div class="tombol-product">
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
                                     @if($n->user->seller_active())
                                         <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                     @endif
@@ -482,6 +482,13 @@
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
+                                                <ul class="rating">
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star"></i></li>
+                                                    <li><i class="fa fa-star-o"></i></li>
+                                                </ul>
                                                    @if ($n->produk_discount != 0)
                                                     <p>
                                                         <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
@@ -492,13 +499,6 @@
                                                         <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
                                                     </p>
                                                     @endif
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
                                                 @if($n->user->seller_active())
                                                 <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                                 @endif
@@ -530,6 +530,13 @@
                                                 <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                                 <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                             </h3>
+                                            <ul class="rating">
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                            </ul>
                                             @if ($n->produk_discount != 0)
                                                 <p>
                                                     <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
@@ -541,13 +548,6 @@
                                                 </p>
                                                 @endif
                                             <div class="tombol-product">
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                            </ul>
                                             @if($n->user->seller_active())
                                             <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                             @endif
@@ -696,6 +696,13 @@
                                         <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
                                         <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                     </h3>
+                                    <ul class="rating">
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star-o"></i></li>
+                                    </ul>
                                     @if ($f->produk_discount != 0)
                                     <p>
                                         <del>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span><br>
@@ -707,13 +714,6 @@
                                     </p>
                                     @endif
                                     <div class="tombol-product">
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
                                     @if($n->user->seller_active())
                                     <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
                                     @endif
@@ -1094,7 +1094,7 @@
                                                     @endif
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
-                                                    {{$item->produk_note}}
+                                                    {{str_limit($item->produk_note, 25)}}
                                                 </ul>
                                                 <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
                                             </div>

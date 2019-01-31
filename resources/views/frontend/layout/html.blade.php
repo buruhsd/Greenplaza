@@ -4,7 +4,7 @@
     <title>GreenPlaza</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png"> --}}
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/GP.png')}}">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
     <!-- bootstrap v3.3.7 css -->
