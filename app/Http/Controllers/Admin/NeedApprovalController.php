@@ -386,7 +386,7 @@ class NeedApprovalController extends Controller
                 return $query;
             })
            ->pluck('id')->toArray();
-        $produk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
+        $produk = Produk::whereIn('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
         return view('admin.need_approval.produk_admin.produkadmin', compact('users', 'produk'));
     }
     public function create_produk ()
