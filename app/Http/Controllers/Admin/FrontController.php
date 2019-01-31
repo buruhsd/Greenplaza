@@ -49,7 +49,7 @@ class FrontController extends Controller
             return $query;
         })
         ->pluck('id')->toArray();
-        dd($usermember);
+        // dd($usermember);
 
         $transseller = Trans::where('trans_user_id', $userseller)->pluck('id')->toArray();
         $detailsellerorder = Trans_detail::whereIn('trans_detail_trans_id', $transseller)

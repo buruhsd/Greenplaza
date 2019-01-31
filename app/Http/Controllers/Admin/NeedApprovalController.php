@@ -311,7 +311,8 @@ class NeedApprovalController extends Controller
 //TRANSAKSI HOTLIST
     public function hotlist ()
     {
-        $hot = Trans_hotlist::orderBy('created_at', 'DESC')->get();
+        $search = \Request::get('search');
+        $hot = Trans_hotlist::where('trans_hotlist_code', 'like', '%'.$search.'%')->orderBy('created_at', 'DESC')->get();
         // dd($hot);
         return view('admin.need_approval.transaksi_hotlist.hotlist', compact('hot'));
     }
@@ -349,7 +350,8 @@ class NeedApprovalController extends Controller
 //TRANSAKSI PINCODE 
     public function pincode () 
     {
-        $pin = Trans_pincode::orderBy('created_at', 'DESC')->get();
+        $search = \Request::get('search');
+        $pin = Trans_pincode::where('trans_pincode_code', 'like', '%'.$search.'%')->orderBy('created_at', 'DESC')->get();
         return view('admin.need_approval.transaksi_pincode.pincode', compact('pin'));
     }
     public function konfirmasi_pincode (Request $request, $id) 
