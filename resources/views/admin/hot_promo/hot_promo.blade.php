@@ -61,8 +61,8 @@
                                 <td scope="row">
                                     <ul>
                                         <li>Name : {{$item->produk_name}}</li>
-                                        <li>Brand : {{$item->produk_brand_id}}</li>
-                                        <li>Category : {{$item->produk_category_id}}</li>
+                                        <li>Brand : {{$item->brand->brand_name}}</li>
+                                        <li>Category : {{$item->category->category_name}}</li>
                                         <li>Price : {{$item->produk_price}}</li>
                                         <li>Stock : {{$item->produk_stock}}</li>
                                     </ul>

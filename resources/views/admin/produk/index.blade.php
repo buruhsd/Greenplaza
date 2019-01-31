@@ -22,7 +22,7 @@
                     <label for="status" class="sr-only">Status</label>
                     <select class="form-control" id="status" name="status">
                         <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
-                        <option value="wait" {!! (!empty($_GET['status']) && $_GET['status'] == "wait")?"selected":"" !!}>Wait</option>
+                        <!-- <option value="wait" {!! (!empty($_GET['status']) && $_GET['status'] == "wait")?"selected":"" !!}>Wait</option> -->
                         <option value="active" {!! (!empty($_GET['status']) && $_GET['status'] == "active")?"selected":"" !!}>Active</option>
                         <option value="block" {!! (!empty($_GET['status']) && $_GET['status'] == "block")?"selected":"" !!}>Block</option>
                     </select>
@@ -37,7 +37,7 @@
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Produk</h4>
                     <button type="button" onclick="search('active');" class="btn btn-info">Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(1)}}</span></button>
-                    <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button>
+                    <!-- <button type="button" onclick="search('wait');" class="btn btn-info">Belum Approve<span class="label label-default pull-right">{{FunctionLib::count_produk(0)}}</span></button> -->
                     <button type="button" onclick="search('block');" class="btn btn-info">Block<span class="label label-default pull-right">{{FunctionLib::count_produk(2)}}</span></button>
                     <!-- <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> -->
                 </div>
@@ -63,8 +63,8 @@
                                         <td scope="row">
                                             <ul>
                                                 <li>Name : {{$item->produk_name}}</li>
-                                                <li>Brand : {{$item->produk_brand_id}}</li>
-                                                <li>Category : {{$item->produk_category_id}}</li>
+                                                <li>Brand : {{$item->brand->brand_name}}</li>
+                                                <li>Category : {{$item->category->category_name}}</li>
                                                 <li>Price : {{$item->produk_price}}</li>
                                                 <li>Stock : {{$item->produk_stock}}</li>
                                             </ul>

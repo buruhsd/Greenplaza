@@ -127,8 +127,8 @@ class EmailController extends Controller
             $email = Email::find($id);
             $email->is_send = 1;
             $email->save(); 
-            Mail::send('admin.mail.tes', compact(['email', 'users']), function ($m) use ($email) {
-                $m->to($email->email_to, $email->email_to)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'users']), function ($m) use ($email) {
+                $m->to($email->email_to, $email->email_to)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",
@@ -138,8 +138,8 @@ class EmailController extends Controller
             $email = Email::find($id);
             $email->is_send = 1;
             $email->save();
-            Mail::send('admin.mail.tes', compact(['email', 'users']), function ($m) use ($users) {
-                $m->to($users, $users)->subject('tes');
+            Mail::send('admin.mail.email_sender', compact(['email', 'users']), function ($m) use ($users) {
+                $m->to($users, $users)->subject('GreenPlaza');
             });
             Session::flash("flash_notification", [
                         "level"=>"success",

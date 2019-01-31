@@ -46,8 +46,8 @@
                                     <td scope="row">
                                         <ul>
                                             <li>Name : {{$h->produk_name}}</li>
-                                            <li>Brand : {{$h->produk_brand_id}}</li>
-                                            <li>Category : {{$h->produk_category_id}}</li>
+                                            <li>Brand : {{$h->brand->brand_name}}</li>
+                                            <li>Category : {{$h->category->category_name}}</li>
                                             <li>Price : {{$h->produk_price}}</li>
                                             <li>Stock : {{$h->produk_stock}}</li>
                                         </ul>
@@ -67,7 +67,7 @@
                                     </td>
                                     <td><center>
                                         <a href="{{route('admin.produk.edit', $h->id)}}"><button class='btn btn-warning btn-xs'>Edit</button></a>
-                                        <button class='btn btn-danger btn-xs'>Hapus</button>
+                                        <a href="{{route('admin.produk.destroy', $h->id)}}" class='btn btn-danger btn-xs'>Delete</a>
                                     </center></td>
                                 </tr>
                                 @endforeach

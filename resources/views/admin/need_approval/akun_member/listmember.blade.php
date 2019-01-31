@@ -38,18 +38,18 @@
                                     <th><center>Member_id</center></th>
                                     <th><center>Name</center></th>
                                     <th><center>Detail</center></th>
-                                    <th><center>Status</center></th>
+                                    <!-- <th><center>Status</center></th> -->
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             @foreach ($users as $key => $u)
                             <tbody>
                                 <tr>
-                                    <td>{{++$key}}</td>
-                                    <td>{{$u->id}}</td>
-                                    <td>{{$u->name}}</td>
-                                    <td>
-                                        Jenis Kelamin :<br/>
+                                    <td><center>{{++$key}}</center></td>
+                                    <td><center>{{$u->id}}</center></td>
+                                    <td><center>{{$u->name}}</center></td>
+                                    <td><center><a href="{{route('admin.needapproval.detailmember', $u->id)}}"><button type="submit" class="btn btn-primary btn-xs" style="width: 70%; margin-bottom: 1%">Detail</button></a></center>
+                                        <!-- Jenis Kelamin :<br/>
                                         Email : {{$u->email}}<br/>
                                     @php 
                                         $address = $u->user_address->where('user_address_status', '=', 1)->first();
@@ -77,13 +77,12 @@
 
                                         Grade Member : {{ ($u->grade_member) ? $u->grade_member->grade_member_name : '-'}}<br/>
                                         Username : {{$u->username}}<br/>
-                                        Grade Pajak CW Bonus :
+                                        Grade Pajak CW Bonus : -->
                                     </td>
-                                    <td></td>
                                     <td><center>
-                                        <a href="{{route('admin.needapproval.changepassword_member', $u->id)}}"><button type="submit" class="btn btn-success btn-rounded" style="width: 70%; margin-bottom: 1%">Reset Password</button></a><br/>
-                                        <a href="{{route('admin.needapproval.detailmember', $u->id)}}"><button type="submit" class="btn btn-primary btn-rounded" style="width: 70%; margin-bottom: 1%">Detail</button></a> <br/>
-                                        <!-- <a href="{{route('admin.needapproval.editmember', $u->id)}}"><button type="submit" class="btn btn-warning btn-rounded" style="width: 70%">Update</button></a> --> </center>
+                                        <a href="{{route('admin.needapproval.changepassword_member', $u->id)}}"><button type="submit" class="btn btn-success btn-xs" style="width: 70%; margin-bottom: 1%">Reset Password</button></a><br/></center>
+                                        
+                                        <!-- <a href="{{route('admin.needapproval.editmember', $u->id)}}"><button type="submit" class="btn btn-warning btn-rounded" style="width: 70%">Update</button></a> -->
                                     </td>
                                 </tr>
                             </tbody>

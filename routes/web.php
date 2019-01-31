@@ -166,7 +166,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
 			Route::patch('update/{id}', 'Admin\\ProdukController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
+			Route::get('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
 			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');
 			Route::get('disabled/{id}', 'Admin\\ProdukController@disabled')->name('.disabled');
 		});

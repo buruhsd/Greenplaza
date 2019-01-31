@@ -292,7 +292,7 @@ class ProdukController extends Controller
         if($produk->produk_seller_id !== Auth::user()->id || $produk->produk_user_status !== Auth::user()->roles->first()->id){
             $status = 500;
             $message = 'Produk Not updated!';
-            return redirect('member/produk')
+            return redirect('admin/needapproval/produkadmin')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
 
         }
@@ -345,7 +345,7 @@ class ProdukController extends Controller
         if(!$produk){
             $status = 500;
             $message = 'Produk Not Updated!';
-            return redirect('member/produk')
+            return redirect('admin/needapproval/produkadmin')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
             // add produk image
@@ -359,7 +359,7 @@ class ProdukController extends Controller
                 if(!$produk_image){
                     $status = 500;
                     $message = 'Produk Image Not added!';
-                    return redirect('member/produk')
+                    return redirect('admin/needapproval/produkadmin')
                         ->with(['flash_status' => $status,'flash_message' => $message]);
                 }
             }
@@ -378,7 +378,7 @@ class ProdukController extends Controller
                 }
             }
         }
-        return redirect('member/produk')
+        return redirect('admin/needapproval/produkadmin')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -399,7 +399,7 @@ class ProdukController extends Controller
             $message = 'Produk Not deleted!';
         }
 
-        return redirect('admin/produk')
+        return redirect('admin/needapproval/produkadmin')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

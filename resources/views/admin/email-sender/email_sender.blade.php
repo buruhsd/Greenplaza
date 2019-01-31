@@ -2,6 +2,11 @@
 @section('title', 'Email Sender')
 @section('content')
 
+<style type="text/css">
+    .hiden{
+        display: none;
+    }
+</style>
 <div class="page-title">
     <h3 class="breadcrumb-header">Dashboard</h3>
 </div>
@@ -12,21 +17,18 @@
         <center><form class="form-horizontal" method="POST" action= "{{route('admin.send_email')}}" enctype = "multipart/form-data">
             {{ csrf_field() }}
             <div class="col-md-12">
-                <div class="alert alert-info" role="alert">
-                    Pengiriman 'Single Email' perlu mengisikan email yang di tuju di kolom 'sending to' untuk pengiriman emailnya !! Tidak berlaku untuk pilihan pengiriman email yang lain.
-                </div>
                 <div class="form-group">
                     <div class="col-md-6">
-                        <select name="value" type="text" class="form-control">
-                          <option value="">--< Sender Option >--</option>
+                        <select name="value" type="text" class="form-control" id="mySelect" onchange="myFunction()">
+                          <option value="0">--< Sender Option >--</option>
                           <option value="2">All Member</option>
                           <option value="3">All Seller</option>
                           <option value="4">All Member & Seller</option>
                           <option value="1">Single Email</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <input type="text" name="email_to" placeholder="sending to" class="form-control">
+                    <div class="col-md-6 hiden" id="demo">
+                        <input type="text"  name="email_to" placeholder="sending to" class="form-control">
                     </div>
                 </div>
             </div>
@@ -48,6 +50,22 @@
             copyText.select();
             document.execCommand("Copy");
         } 
+</script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// $(document).ready(function() {    
+    function myFunction() {
+      var x = document.getElementById("mySelect").value;
+      if ( x == 1)
+      {
+        $("#demo").removeClass("hiden");
+      } else 
+      {
+         $("#demo").addClass("hiden");
+      }
+
+  
+}
 </script>            
                 
 @endsection

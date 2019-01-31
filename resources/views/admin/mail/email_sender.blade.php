@@ -12,7 +12,7 @@
 	<table align="center" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #eee;">
  		<tr>
   			<td align="center" bgcolor="#ffffff" style="padding: 20px 0 30px 0; border-bottom: 5px solid #eee;">
- 				<img src="{{asset('frontend/logo-fix.png')}}" alt="Editeg" style="display: block; width: 150px;"/>
+ 				<img src="{{asset('frontend/logo-fix.png')}}" alt="GreenPlaza" style="display: block; width: 150px;"/>
 			</td>
  		</tr>
  		<tr>

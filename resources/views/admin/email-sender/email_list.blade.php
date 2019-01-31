@@ -62,8 +62,8 @@
                                     <td>Sudah Pernah</td>
                                     @endif
                                     <td>
-                                    	<a href="{{route('admin.delete_email', $e->id)}}"><button type="" class="btn btn-danger btn-rounded">Delete</button></a>
-                                    	<a href="{{route('admin.resend_email', $e->id)}}"><button type="" class="btn btn-info btn-rounded">Resend</button></a>
+                                    	<a href="{{route('admin.delete_email', $e->id)}}"><button type="" class="btn btn-danger btn-xs">Delete</button></a>
+                                    	<a href="{{route('admin.resend_email', $e->id)}}"><button type="" class="btn btn-info btn-xs">Resend</button></a>
 
                                     </td>
                                 </tr>
