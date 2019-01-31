@@ -109,7 +109,7 @@ class FrontController extends Controller
     */
     public function category(Request $request)
     {
-        $perPage = 8;
+        $perPage = 12;
         $order = "rand()";
         $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
