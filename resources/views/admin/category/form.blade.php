@@ -36,7 +36,7 @@
     {!! $errors->first('category_name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
-@if(str_contains(Request::url(), ['create']))
+<!-- @if(str_contains(Request::url(), ['create']))
 @elseif(str_contains(Request::url(), ['edit']))
 <div class="form-group">
     {!! Form::label('image', ' ', ['class' => 'col-md-3 control-label']) !!}
@@ -75,7 +75,7 @@
         ])!!}
         {!! $errors->first('category_image', '<p class="help-block">:message</p>') !!}
     </div>
-</div>
+</div> -->
 <div class="form-group mx-sm-3 mb-2 {{ $errors->has('category_slug') ? 'has-error' : ''}}">
     {!! Form::label('category_slug', 'Slug : ', ['class' => 'col-md-3 control-label']) !!}
     <div class="col-md-9">

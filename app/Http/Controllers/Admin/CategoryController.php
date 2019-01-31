@@ -63,8 +63,8 @@ class CategoryController extends Controller
         
         $requestData = $request->all();
         $this->validate($request, [
-            'category_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'category_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'category_icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'category_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'category_name' => 'required',
         ]);
         
@@ -75,7 +75,7 @@ class CategoryController extends Controller
         if ($request->hasFile('category_icon')){
             $icon = $request->file('category_icon');
             // $imaget = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
-            $uploadPath = public_path('assets/images/category_image');
+            $uploadPath = public_path('img_category_icon');
             // $uploadPath2 = public_path('assets/images/brand/thumb');
             $iconname = FunctionLib::str_rand(5).'.'.$icon->getClientOriginalExtension();
             $iconsize = $icon->getClientSize();
