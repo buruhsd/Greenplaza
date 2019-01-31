@@ -116,7 +116,9 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                 </ul> --}}
+                                                @if($item->user->seller_active())
                                                 <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$item->user->user_store}}</button></a></center>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
