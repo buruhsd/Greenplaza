@@ -1135,13 +1135,13 @@
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
                                                     @if ($item->review)
-                                                    <i class="fa fa-comments"></i> {{ str_limit($item->review->count(), 15)}} Comments
+                                                    <i class="fa fa-comments"></i> {{ $item->review->count()}} Comments
                                                     @else
                                                     <i class="fa fa-comments"></i> 0 Comments
                                                     @endif
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
-                                                    {{$item->produk_note}}
+                                                    {{str_limit($item->produk_note, 25)}}
                                                 </ul>
                                                 <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
                                             </div>
