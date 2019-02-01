@@ -1,11 +1,11 @@
 
 function modal_get(e){
+    var val = (typeof e.val() && e.val() != null && e.val() != '')?e.val():e.html();
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         beforeSend:function(){
-            e.html("loading");
-            e.val("loading");
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val("loading"):e.html("loading");
         },
         success: function(data) {
             if (data) {
@@ -24,8 +24,7 @@ function modal_get(e){
             } else {
                 alert(data);
             }
-            e.val(val);
-            e.html(val);
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
@@ -33,13 +32,13 @@ function modal_get(e){
     });
 }
 function modal_post(e, data=''){
-    var val = e.val();
+    var val = (typeof e.val() && e.val() != null && e.val() != '')?e.val():e.html();
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         data: data, // change as needed
         beforeSend:function(){
-            e.val("loading");
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
         },
         success: function(data) {
             if (data) {
@@ -58,7 +57,7 @@ function modal_post(e, data=''){
             } else {
                 alert(data);
             }
-            e.val(val);
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
