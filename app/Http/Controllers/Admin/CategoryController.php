@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\User;
+use Auth;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
@@ -103,7 +104,20 @@ class CategoryController extends Controller
             // $imaget->save($uploadPath2.'/'.$imagename,80);
             $res->category_image = $imagename;
         }
-        $res->category_slug = str_slug($request->category_name);
+
+        if ($request->category_name)
+        {
+            $category = Category::where('category_name', $request->category_name)->first();
+            if ($category){
+                $res->category_slug = str_slug($request->category_name)."-".Auth::User()->name;
+                $res->save();
+            } else{
+                $res->category_slug = str_slug($request->category_name);
+                $res->save();
+            }
+        }
+        
+        
         $res->category_note = $request->category_note;
         $res->save();
         if(!$res){
