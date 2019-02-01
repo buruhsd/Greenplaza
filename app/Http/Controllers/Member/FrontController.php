@@ -129,7 +129,7 @@ class FrontController extends Controller
             $data['produk'] = Produk::whereRaw($where)->orderByRaw($order)->paginate($perPage);
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
-        $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->limit(25)->get();
+        $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
         return view('frontend.category', $data, compact('category'));
     }
 
