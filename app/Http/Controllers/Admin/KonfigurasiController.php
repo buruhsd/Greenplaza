@@ -300,8 +300,8 @@ class KonfigurasiController extends Controller
         $page->page_status = 1;
         $page->save();
         Session::flash("flash_notification", [
-                        "level"=>"success",
-                        "message"=>"Page Status Aktif."
+                        "level"=>"danger",
+                        "message"=>"Page Status non Aktif."
             ]);
         return redirect()->back();
     }
@@ -311,8 +311,8 @@ class KonfigurasiController extends Controller
         $page->page_status = 0;
         $page->save();
         Session::flash("flash_notification", [
-                        "level"=>"danger",
-                        "message"=>"Page Status Non Aktif."
+                        "level"=>"success",
+                        "message"=>"Page Status Aktif."
             ]);
         return redirect()->back();
     }

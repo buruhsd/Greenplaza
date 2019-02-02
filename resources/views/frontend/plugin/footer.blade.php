@@ -3,7 +3,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-contact">
                             <h2 class="section-title">Contact us</h2>
                             <ul>
@@ -25,7 +25,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Member</h2>
                             <ul>
@@ -48,7 +48,7 @@
                             </ul>
                         </div>
                     </div> -->
-                    <div class="col-lg-4 col-sm-6 col-12">
+                    <div class="col-lg-3 col-sm-6 col-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Greenplaza</h2>
                             <ul>
@@ -56,6 +56,18 @@
                                 @foreach(FunctionLib::page('greenplaza')->get() as $item)
                                     <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
                                 @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="footer-widget footer-menu">
+                            <h2 class="section-title">About Us</h2>
+                            <ul>
+                                @foreach(FunctionLib::page('aboutus')->get() as $item)
+                                    <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
+                                @endforeach
+                                <li><a href="{{ url('faq') }}">FAQ</a></li>
+                                <li><a href="{{ url('about') }}">About US</a></li>
                             </ul>
                         </div>
                     </div>

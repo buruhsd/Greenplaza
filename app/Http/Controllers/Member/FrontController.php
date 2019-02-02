@@ -46,6 +46,11 @@ class FrontController extends Controller
     * @param
     * @return
     */
+    public function faq ()
+    {
+        
+        return view('frontend.faq');
+    }
     public function page(Request $request, $page)
     {
         // if(Auth::guest())

@@ -691,6 +691,18 @@ class FunctionLib
                         ->where('page_kategori', 'greenplaza');
                 }
             break;
+            case 'aboutus':
+                if(Auth::guest())
+                {
+                    $return = App\Models\Page::where('page_role_id', 0)
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'aboutus');
+                }else{
+                    $return = App\Models\Page::whereIn('page_role_id', [0, Auth::user()->role])
+                        ->where('page_status', 1)
+                        ->where('page_kategori', 'aboutus');
+                }
+            break;
             default:
                 $page = [];
                 break;
