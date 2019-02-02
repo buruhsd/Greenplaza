@@ -24,16 +24,16 @@
                               <input type="text" class="form-control" id="input-Default" style="color: #A9A9A9" name="page_judul">
                           </div>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="input-Default" class="col-sm-2 control-label">Page Role_id</label>
                         <div class="col-sm-10">
                             <select id="" type="text" name="page_role_id" class="form-control">
                               <option value="">--Select Role--</option>
-                              <option value="2">Admin</option>
+                              <option value="0">Admin</option>
                               <option value="3">Member</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                       <div class="form-group">
                           <label for="input-Default" class="col-sm-2 control-label">Kategori</label>
                           <div class="col-sm-10">
@@ -41,6 +41,7 @@
                                 <option value="seller">Seller</option>
                                 <option value="member">Member</option>
                                 <option value="greenplaza">Greenplaza</option>
+                                <option value="aboutus">About Us</option>
                                 <option value="" selected>Select Category Roles</option>
                               </select>
                           </div>

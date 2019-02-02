@@ -283,7 +283,7 @@ class KonfigurasiController extends Controller
     {
         $page = new Page;
         $page->page_judul = $request->page_judul;
-        $page->page_role_id = $request->page_role_id;
+        $page->page_role_id = 0;
         $page->page_kategori = $request->page_kategori;
         $page->page_text = $request->page_text;
         $page->page_slug = str_slug($request->page_judul);
