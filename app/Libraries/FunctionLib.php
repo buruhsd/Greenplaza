@@ -2,6 +2,24 @@
 class FunctionLib
 {
 
+    /**
+    * @param
+    * @return
+    **/
+    public static function masedi_payment($data = []){
+        $req = [
+            'data' => [
+                'username' => 'greenplaza',
+                'password' => 1,
+                'note' => $data['note'],
+                'price' => $data['price'],
+            ]
+        ];
+        $payment = MasEdi::payment($req);
+        $payment = json_decode($payment, true);
+        return $payment;
+    }
+
     public static function trans_arr($key){
         $arr = [
             0 => 'Chart',
@@ -71,7 +89,7 @@ class FunctionLib
     * @param $data [order_id, transaction_status]
     * @return
     **/
-    public static function done_order($data=[]){
+    public static function done_masedi($data=[]){
         if(!empty($data)){
             $response['status'] = 200;
             $response['message'] = 'Transfer Berhasil!';
@@ -80,12 +98,21 @@ class FunctionLib
             $response['message'] = 'Transfer Gagal!';
             return $response;
         }
+        $date = date('Y-m-d H:i:s');
+        return $data;
         extract($data);
         switch ($transaction_status) {
-            case 'settlement':
+            case 'done':
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
+                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->get();
+                    foreach ($trans as $item) {
+                        $item->trans_paid_date = $date;
+                        $item->trans_paid_note = 'pembayaran dengan Masedi selesai.';
+                        $item->trans_note = 'pembayaran dengan Masedi telah selesai.';
+                        $item->save();
+                    }
                     foreach ($trans_detail as $item) {
                         $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
                         // to transfer
@@ -136,6 +163,118 @@ class FunctionLib
                             $response['data'][] = $trans_detail;
                         break;
                         case 'iklan':
+                            $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_iklan_status = 3;
+                            $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
+                            $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(4);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_iklan_amount + $trans_detail->paket->paket_iklan_bonus;
+                                $saldo->wallet_note = 'Update wallet iklan dengan pembelian paket '.$trans_detail->paket->paket_iklan_name.'.';
+                                $saldo->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        default:
+                            $response['status'] = 500;
+                            $response['message'] = 'Transfer Gagal!';
+                            $response['data'][] = "";
+                        break;
+                    }
+                }
+                return $response;
+            break;
+            default:
+                return $response;
+            break;
+        }
+    }
+
+    /**
+    * @param $data [order_id, transaction_status]
+    * @return
+    **/
+    public static function done_order($data=[]){
+        if(!empty($data)){
+            $response['status'] = 200;
+            $response['message'] = 'Transfer Berhasil!';
+        }else{
+            $response['status'] = 500;
+            $response['message'] = 'Transfer Gagal!';
+            return $response;
+        }
+        extract($data);
+        switch ($transaction_status) {
+            case 'settlement':
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
+                    // update sys_trans
+                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->get();
+                    foreach ($trans as $item) {
+                        $item->trans_paid_date = $date;
+                        $item->trans_paid_note = 'pembayaran dengan Masedi selesai.';
+                        $item->trans_note = 'pembayaran dengan Masedi telah selesai.';
+                        $item->save();
+                    }
+                    // update sys_trans_detail
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
+                        $trans_detail->save();
+                        $response['data'][] = $trans_detail;
+                    }
+                }else{
+                    $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
+                        :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
+                        :((str_contains(strtolower($order_id), 'pc-'))?'pincode':'')));
+                    switch ($type) {
+                        case 'hotlist':
+                            // update sys_trans_hotlist
+                            $trans_detail = App\Models\Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_hotlist_status = 3;
+                            $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(6);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_hotlist_amount + $trans_detail->paket->paket_hotlist_bonus;
+                                $saldo->wallet_note = 'Update wallet hotlist dengan pembelian paket '.$trans_detail->paket->paket_hotlist_name.'.';
+                                $saldo->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        case 'pincode':
+                            // update sys_trans_pincode
+                            $trans_detail = App\Models\Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
+                            $trans_detail->trans_pincode_status = 3;
+                            $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
+                            $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
+                            $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
+                            $trans_detail->save();
+                                // update saldo hotlist
+                                $where = 'wallet_user_id='.$trans_detail->trans_hotlist_user_id;
+                                $where .= ' AND wallet_type='.(5);
+                                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                                $saldo->wallet_ballance = $saldo->wallet_ballance + $trans_detail->paket->paket_pincode_amount + $trans_detail->paket->paket_pincode_bonus;
+                                $saldo->wallet_note = 'Update wallet pincode dengan pembelian paket '.$trans_detail->paket->paket_pincode_name.'.';
+                                $saldo->save();
+                            $response['data'][] = $trans_detail;
+                        break;
+                        case 'iklan':
+                            // update sys_trans_iklan
                             $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
                             $trans_detail->trans_iklan_status = 3;
                             $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');

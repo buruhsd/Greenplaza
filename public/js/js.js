@@ -66,15 +66,31 @@ function modal_post(e, data=''){
 }
 
 function modal_get2(e){
+    var val = (typeof e.val() && e.val() != null && e.val() != '')?e.val():e.html();
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
+        beforeSend:function(){
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val("loading"):e.html("loading");
+        },
         success: function(data) {
             if (data) {
-                $('#ajax-modal2').empty().append(data).modal();
+                if(typeof data.status !== 'undefined' && data.status == 500){
+                    swal({   
+                        type: "error",
+                        title: "failed",   
+                        text: data.message,   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
+                }else{
+                    $('#ajax-modal2').empty().append(data).modal();
+                }
             } else {
                 alert(data);
             }
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
@@ -82,16 +98,32 @@ function modal_get2(e){
     });
 }
 function modal_post2(e, data=''){
+    var val = (typeof e.val() && e.val() != null && e.val() != '')?e.val():e.html();
     $.ajax({
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         data: data, // change as needed
+        beforeSend:function(){
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+        },
         success: function(data) {
             if (data) {
-                $('#ajax-modal2').empty().append(data).modal();
+                if(typeof data.status !== 'undefined' && data.status == 500){
+                    swal({   
+                        type: "error",
+                        title: "failed",   
+                        text: data.message,   
+                        showConfirmButton: false ,
+                        showCloseButton: true,
+                        footer: ''
+                    });
+                }else{
+                    $('#ajax-modal2').empty().append(data).modal();
+                }
             } else {
                 alert(data);
             }
+            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);

@@ -28,6 +28,37 @@ class TransactionController extends Controller
      * @param
      * @return
      */
+    public function done_masedi(Request $request){
+        $status = 200;
+        $message = 'Transfer Berhasil';
+        // $this->validate($request, [
+        //     'order_id' => 'required',
+        //     'transaction_status' => 'required',
+        // ]);
+        $requestData = $request->all();
+        $order_id = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->pluck('trans_code')[0];
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => $requestData['transaction_status']
+        ];
+        $response = FunctionLib::done_masedi($data);
+        if($response['status'] == 500){
+            $status = $response['status'];
+            $message = $response['message'];
+        }
+        $data = $response['data'];
+        if($request->ajax()){
+            return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        }
+        return view('admin.transaction.done-order', compact('data'))
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+    
+    /**
+     * 
+     * @param
+     * @return
+     */
     public function done_order(Request $request){
         $status = 200;
         $message = 'Transfer Berhasil';

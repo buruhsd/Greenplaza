@@ -29,8 +29,17 @@
                         ?>
                     </div>
                     <hr>
+                    @switch($trans->first()->trans_payment_id)
+                        @case(1)
+                        @break
+                        @case(2)
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                        @break
+                        @case(3)
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.qr", $trans->first()->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                        @break
+                    @endswitch
                     {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
-                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
                     {{-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment_id", $trans->id)}} value="Pay" class="btn btn-success" id="btn-pick-address" /> --}}
                 </div>
             </div>

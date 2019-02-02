@@ -106,7 +106,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div> {!! $transaction->appends(['search' => Request::get('search')])->render() !!} </div>
+                    <div> {!! $transaction->appends(['search' => Request::get('search'), 'code' => Request::get('code'), 'status' => Request::get('status')])->render() !!} </div>
                 </div>
             </div>
             </div>

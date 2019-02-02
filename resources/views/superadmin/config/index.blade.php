@@ -73,9 +73,10 @@
                                         <div class="col-md-12 m-b-xs">
                                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('configs_value') ? 'has-error' : ''}}">
                                                 <div class="col-md-9">
-                                                    {!! Form::text('configs_value', $item->configs_value, [
+                                                    {!! Form::textarea('configs_value', $item->configs_value, [
                                                         'class' => 'form-control', 
-                                                        'placeholder' => 'Unit',  
+                                                        'placeholder' => 'Unit',
+                                                        'rows' => '3',  
                                                         'required'
                                                     ])!!}
                                                 {!! $errors->first('configs_value', '<p class="help-block">:message</p>') !!}
