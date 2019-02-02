@@ -66,7 +66,7 @@
                                 @foreach(FunctionLib::page('aboutus')->get() as $item)
                                     <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
                                 @endforeach
-                                <li><a href="{{ url('faq') }}">FAQ</a></li>
+                                <li><a href="{{ url('greenplaza_faq') }}">FAQ</a></li>
                                 <li><a href="{{ url('about') }}">About US</a></li>
                             </ul>
                         </div>

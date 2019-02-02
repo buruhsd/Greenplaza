@@ -676,7 +676,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 
 Route::get('/page/{page}', 'Member\\FrontController@page')->name('.page');
 Route::get('/about', 'Member\\FrontController@about')->name('about');
-Route::get('/faq', 'Member\\FrontController@faq')->name('faq');
+Route::get('/greenplaza_faq', 'Member\\FrontController@faq')->name('faq');
 // helper
 Route::group(['prefix' => 'helper', 'as' => 'helper'], function(){
 	Route::get('/{function}/{admin}', function($function, $admin) {
