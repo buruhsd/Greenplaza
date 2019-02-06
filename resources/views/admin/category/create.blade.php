@@ -13,11 +13,13 @@
             <div class="panel panel-white">
                 <div class="panel-body">
                 <a href="{{ url('/admin/category') }}" title="Back">
-                    <button class="btn btn-warning btn-xs">
+                    <button class="btn btn-warning btn-xs" style="margin-bottom: 2%">
                         <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
                     </button>
                 </a>
-                <br />
+                <div class="alert alert-success" role="alert">
+                    Jika Urutan Position Tidak di Isi, Maka Akan Terisi Otomatis.
+                </div>
                 <br />
                 {!! Form::open(['url' => '/admin/category/store', 'class' => 'form-horizontal', 'files' => true]) !!}
                     @include ('admin.category.form')

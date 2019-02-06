@@ -34,7 +34,7 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Configuration Category</h4>
+                    <h4 class="panel-title">Category List</h4>
                     <a href="{{ url('admin/category/create') }}" class="btn btn-success btn-sm pull-right">Add New</a>
                 </div>
                 <div class="panel-body">
