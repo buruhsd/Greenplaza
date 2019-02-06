@@ -73,19 +73,35 @@ class MasediController extends Controller
                 $trans->trans_user_id = Auth::id();
                 $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 3;
-                $trans->trans_amount = FunctionLib::array_sum_key($value, 'trans_detail_amount');
-                $trans->trans_amount_ship = FunctionLib::array_sum_key($value, 'trans_detail_amount_ship');
-                $trans->trans_amount_total = FunctionLib::array_sum_key($value, 'trans_detail_amount_total');
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
                 $trans->save();
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['trans_detail_produk_id']);
+                    $price = ($produk['produk_price']*$item['trans_detail_qty']); //harga produk
+                    // check grosir dan diskon
                     if($produk->grosir()->exists()){
                         foreach ($produk->grosir()->get() as $grosir) {
                             if($item['trans_detail_qty'] >= $grosir->produk_grosir_start && $item['trans_detail_qty'] <= $grosir->produk_grosir_end){
-                                $item['trans_detail_amount'] = ($grosir->produk_grosir_price * $item['trans_detail_qty']);
+                                // update grosir
+                                $price = ($grosir->produk_grosir_price * $item['trans_detail_qty']);
+                                // update diskon
+                                $item['trans_detail_amount'] = ($produk['produk_discount'] > 0)
+                                    ?$price-($price*$produk['produk_discount']/100)
+                                    :$price;
+                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
+                            }else{
+                                // update diskon
+                                $item['trans_detail_amount'] = ($produk['produk_discount'] > 0)
+                                    ?$price-($price*$produk['produk_discount']/100)
+                                    :$price;
                                 $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
                             }
+                        }
+                    }else{
+                        // check diskon
+                        if($produk['produk_discount'] > 0){
+                            $item['trans_detail_amount'] = $price-($price*$produk['produk_discount']/100);
+                            $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
                         }
                     }
                     $transDetail = new Trans_detail;
@@ -107,6 +123,11 @@ class MasediController extends Controller
                     $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
                     $produk->save();
                 }
+                // update amount trans
+                $trans->trans_amount = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount');
+                $trans->trans_amount_ship = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_ship');
+                $trans->trans_amount_total = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_total');
+                $trans->save();
             }
             Session::forget('chart');
             if(isset($trans->pembeli->email)){

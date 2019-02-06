@@ -49,10 +49,7 @@ class ChartController extends Controller
         if($courier == null || $courier == "" || $courier == 0){
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
         }
-        $price = $produk['produk_price'];
-        if($produk['produk_discount'] > 0){
-            $price = ($produk['produk_price'] - ($produk['produk_price'] * $produk['produk_discount'] / 100)) * $request->qty;
-        }
+        $price = $produk['produk_price'] * $request->qty;
     	$transaction = [
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],

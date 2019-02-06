@@ -208,7 +208,11 @@ class WalletController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        $data['user'] = User::all();
+        // $data['user'] = User::all();
+        $data['user'] = User::whereHas('roles', function($query){
+                $query->whereRaw('name IN ("member", "admin")');
+                return $query;
+            })->get();
         $data['type'] = Wallet_type::whereRaw('id IN (1, 3)')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.transfer_cw', $data);
@@ -286,8 +290,11 @@ class WalletController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        $data['user'] = User::all();
-        $data['type'] = Wallet_type::whereRaw('id IN (1, 3)')->get();
+        // $data['user'] = User::all();
+        $data['user'] = User::whereHas('roles', function($query){
+                $query->whereRaw('name IN ("member", "admin")');
+                return $query;
+            })->get();        $data['type'] = Wallet_type::whereRaw('id IN (1, 3)')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.transfer_rw', $data);
     }

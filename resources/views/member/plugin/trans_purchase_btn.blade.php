@@ -22,7 +22,7 @@
     		<div class="row">
 		    	<div class="col-md-12 text-center">
 		    		<a href="{{route('member.transaction.konfirmasi', $detail->trans->id)}}">
-			    		<button class="btn btn-success btn-xs">Racun</button>
+			    		<button class="btn btn-success btn-xs">Konfirmasi</button>
 		    		</a>
 		    	</div>
 		    </div>
@@ -180,15 +180,18 @@
 		    	@if($type == 'buyer')
 		    		<div class="row">
 				    	<div class="col-md-12 text-center">
-				    		<button class="btn btn-success btn-xs">Konfirmasi</button>
+				    		<a href="{{route('member.transaction.konfirmasi', $detail->trans->id)}}">
+					    		<button class="btn btn-success btn-xs">Konfirmasi</button>
+				    		</a>
+				    		{{-- <button class="btn btn-success btn-xs">Konfirmasi</button> --}}
 				    	</div>
 				    </div>
 		    	@elseif($type == 'seller')
-		    		<div class="row">
+		    		{{-- <div class="row">
 				    	<div class="col-md-12 text-center">
 				    		<button class="btn btn-success btn-xs">Konfirmasi</button>
 				    	</div>
-				    </div>
+				    </div> --}}
 		    	@endif
 		    @break
 			{{-- Transfer --}}

@@ -71,7 +71,7 @@ class TransactionController extends Controller
             'order_id' => $requestData['order_id'],
             'transaction_status' => $requestData['transaction_status']
         ];
-        $response = FunctionLib::done_order($data);
+        $response = FunctionLib::done_payment($data);
         if($response['status'] == 500){
             $status = $response['status'];
             $message = $response['message'];
@@ -117,50 +117,6 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-// "id" => $id,
-// "trans_code" => $trans_code,
-// "trans_user_id" => $trans_user_id,
-// "trans_user_bank_id" => $trans_user_bank_id,
-// "trans_is_paid" => $trans_is_paid,
-// "trans_payment_id" => $trans_payment_id,
-// "trans_paid_image" => $trans_paid_image,
-// "trans_paid_date" => $trans_paid_date,
-// "trans_paid_note" => $trans_paid_note,
-// "trans_amount" => $trans_amount,
-// "trans_amount_ship" => $trans_amount_ship,
-// "trans_amount_total" => $trans_amount_total,
-// "trans_note" => $trans_note,
-
-// "id" => $id,
-// "trans_code" => $trans_code,
-// "trans_detail_trans_id" => $trans_detail_trans_id,
-// "trans_detail_produk_id" => $trans_detail_produk_id,
-// "trans_detail_shipment_id" => $trans_detail_shipment_id,
-// "trans_detail_user_address_id" => $trans_detail_user_address_id,
-// "trans_detail_no_resi" => $trans_detail_no_resi,
-// "trans_detail_qty" => $trans_detail_qty,
-// "trans_detail_size" => $trans_detail_size,
-// "trans_detail_color" => $trans_detail_color,
-// "trans_detail_amount" => $trans_detail_amount,
-// "trans_detail_amount_ship" => $trans_detail_amount_ship,
-// "trans_detail_amount_total" => $trans_detail_amount_total,
-// "trans_detail_status" => $trans_detail_status,
-// "trans_detail_transfer" => $trans_detail_transfer,
-// "trans_detail_transfer_date" => $trans_detail_transfer_date,
-// "trans_detail_transfer_note" => $trans_detail_transfer_note,
-// "trans_detail_able" => $trans_detail_able,
-// "trans_detail_able_date" => $trans_detail_able_date,
-// "trans_detail_able_note" => $trans_detail_able_note,
-// "trans_detail_packing" => $trans_detail_packing,
-// "trans_detail_packing_date" => $trans_detail_packing_date,
-// "trans_detail_packing_note" => $trans_detail_packing_note,
-// "trans_detail_send" => $trans_detail_send,
-// "trans_detail_send_date" => $trans_detail_send_date,
-// "trans_detail_send_note" => $trans_detail_send_note,
-// "trans_detail_drop" => $trans_detail_drop,
-// "trans_detail_drop_date" => $trans_detail_drop_date,
-// "trans_detail_drop_note" => $trans_detail_drop_note,
-// "trans_detail_note" => $trans_detail_note,
         $arr = [
             "0" =>'chart',
             "1" =>'order',
@@ -387,23 +343,6 @@ class TransactionController extends Controller
 
         return redirect('admin/transaction')
             ->with(['flash_status' => $status,'flash_message' => $message]);
-    }
-
-    /**
-    * @param $where
-    * @return
-    */
-    public function get_one_row($where='1', $join=array()){
-        $qry = 'SELECT * FROM '.$this->mainTable;
-        if(!empty($join)){
-            foreach ($join as $value) {
-                $qry .= $value;
-            }
-        }
-        $qry .= ' WHERE '.$where.' Limit 1';
-        $produk = DB::query($qry);
-
-        return $produk;
     }
 
     /**

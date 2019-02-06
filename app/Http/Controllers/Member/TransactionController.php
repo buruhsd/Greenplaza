@@ -39,6 +39,15 @@ class TransactionController extends Controller
             $trans_detail->trans_detail_drop_date = date('y-m-d h:i:s');
             $trans_detail->trans_detail_drop_note = "Transaction be dropping by buyer";
             $trans_detail->save();
+
+            // update saldo transaksi
+            $update_wallet = [
+                'user_id'=>$trans_detail->produk->produk_seller_id,
+                'wallet_type'=>6,
+                'amount'=>$trans_detail->trans_detail_amount_total,
+                'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+            ];
+            $saldo = FunctionLib::update_wallet($update_wallet);
         }
         if(!$trans_detail){
             $status = 500;
@@ -221,13 +230,13 @@ class TransactionController extends Controller
             $message = 'Transfer unapproved!';
         }else{
             // send email
-            $status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [
                     'trans_code' => $trans->trans_code,
                     'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $status,
+                    'status' => $email_status,
                 ]
             ];
             $send_notif = FunctionLib::transaction_notif($config);
@@ -288,7 +297,7 @@ class TransactionController extends Controller
     }
 
     /**
-     * #buyer
+     * #buyer status 2
      * process buyer mengkonfirmasi pembayaran
      * @param
      * @return
