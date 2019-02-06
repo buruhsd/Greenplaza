@@ -52,7 +52,6 @@
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Greenplaza</h2>
                             <ul>
-                                <li><a href="#">Tentang Greenplaza</a></li>
                                 @foreach(FunctionLib::page('greenplaza')->get() as $item)
                                     <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
                                 @endforeach
