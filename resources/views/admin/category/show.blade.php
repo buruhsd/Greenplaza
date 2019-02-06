@@ -55,6 +55,10 @@
 	                                <th>Category Note</th>
 	                                <td>: {{$category->category_note}}</td>
 	                            </tr>
+	                            <tr>
+	                                <th>Category Position</th>
+	                                <td>: {{$category->position}}</td>
+	                            </tr>
 	                        </tbody>
 	                    </table>
 	                </div>

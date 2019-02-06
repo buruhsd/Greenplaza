@@ -205,7 +205,7 @@ class CategoryController extends Controller
     {
         $data['category_par'] = Category::all();
         $data['category'] = Category::findOrFail($id);
-
+        
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.category.edit', $data);
     }
