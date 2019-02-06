@@ -120,7 +120,7 @@
                         <div class="cetagory-wrap">
                             <span>Semua Kategori</span>
                             <ul class="cetagory-items">
-                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
+                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->orderBy('updated_at', 'DESC')->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
                                     <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>

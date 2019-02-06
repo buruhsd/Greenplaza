@@ -36,6 +36,16 @@
     {!! $errors->first('category_name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
+<div class="form-group mx-sm-3 mb-2 {{ $errors->has('position') ? 'has-error' : ''}}" id="containment-wrapper">
+    {!! Form::label('position', 'Position : ', ['class' => 'col-md-3 control-label']) !!}
+    <div class="col-md-9" id="draggable3">
+        {!! Form::text('position', null, [
+            'class' => 'form-control', 
+            'placeholder' => 'Position'
+        ])!!}
+    {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
 <!-- @if(str_contains(Request::url(), ['create']))
 @elseif(str_contains(Request::url(), ['edit']))
 <div class="form-group">
@@ -98,3 +108,5 @@
     </div>
 </div>
 <button type="submit" class="btn btn-primary mb-2">Save</button>
+
+

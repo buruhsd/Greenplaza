@@ -38,6 +38,47 @@ class CategoryController extends Controller
         return view('admin.category.index', $data);
     }
 
+    // public function try (Request $request, $id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->category_parent_id = $request->category_parent_id;
+    //     $category->category_name = $request->category_name;
+    //     $category->category_note = $request->category_note;
+    //     $category->save();
+    //     if ($request->position){
+    //         // Determine if the user is moving the item up or down in the listing
+    //         $move = $category->position > $request->position ? 'down' : 'up';
+    //         // Set the display_order for the dragged item to be 0 so we can update this record later by display_order = 0
+    //         $category = "UPDATE todos
+    //                   SET $category->position = 0
+    //                   WHERE $category->position = :$category->position
+    //                   AND $category->position = :$category->position";
+    //         // Move down: Update the items between the current position and the desired position, decreasing each item by 1 to make space for the new item
+    //         if ($move == 'down') {
+    //             $category = "UPDATE todos
+    //                       SET $category->position = ($category->position - 1)
+    //                       WHERE $category->position > :$category->position
+    //                       AND $category->position <= :$request->position
+    //                       AND $category->position = :$category->position";
+    //         }
+    //         // Move up: Update the items between the desired position and the current position, increasing each item by 1 to make space for the new item
+    //         elseif ($move == 'up') {
+    //             $category = "UPDATE todos
+    //                       SET $category->position = ($category->position + 1)
+    //                       WHERE $category->position >= :$request->position
+    //                       AND $category->position < :$category->position
+    //                       AND $category->position = :$category->position";
+    //         }
+    //         // Update the item that was dragged and set it to be the desired position now that the slot is opend up
+    //         $category = "UPDATE todos
+    //                   SET $category->position = :$request->position
+    //                   WHERE $category->position = 0
+    //                   AND $category->position = :$category->position";
+    //     }
+    //     $category->save();
+    //     return redirect()->back(); 
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -103,6 +144,16 @@ class CategoryController extends Controller
             $image->move($uploadPath, $imagename);
             // $imaget->save($uploadPath2.'/'.$imagename,80);
             $res->category_image = $imagename;
+        }
+
+        if ($request->position)
+        {
+            $res->position = $request->position;
+            $res->save();
+        } else {
+            $category = Category::orderBy('position', 'DESC')->first();
+            $res->position = ($category->position) + 1;
+            $res->save();
         }
 
         if ($request->category_name)
@@ -178,6 +229,7 @@ class CategoryController extends Controller
         $category->category_parent_id = $request->category_parent_id;
         $category->category_name = $request->category_name;
         $category->category_note = $request->category_note;
+        $category->position = $request->position;
         $category->save();
         $res = $category->update($requestData);
         if(!$res){

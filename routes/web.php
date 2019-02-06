@@ -147,6 +147,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/edit/{id}', 'Admin\\CategoryController@edit')->name('.edit');
 			Route::patch('/update/{id}', 'Admin\\CategoryController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\CategoryController@destroy')->name('.destroy');
+			// Route::post('/try/{id}', 'Admin\\CategoryController@try')->name('.try');
 		});
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
 			Route::get('/', 'Admin\\UserController@index')->name('.index');

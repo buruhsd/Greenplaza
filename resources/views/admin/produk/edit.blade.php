@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Produk</h3>
+    <h3 class="breadcrumb-header">Edit Produk</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">

@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Category</h3>
+    <h3 class="breadcrumb-header">Edit Category</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -13,9 +13,9 @@
             <div class="panel panel-white">
                 <div class="panel-body">
                 <a href="{{ url('/admin/category') }}" title="Back">
-                	<button class="btn btn-warning btn-xs">
-                		<i class="fa fa-arrow-left" aria-hidden="true"></i> Back
-                	</button>
+                    <button class="btn btn-warning btn-xs">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                    </button>
                 </a>
                 <br />
                 <br />
@@ -33,5 +33,7 @@
         </section>
         </div><!-- Row -->
     </div>
+
 @endsection
+
         
