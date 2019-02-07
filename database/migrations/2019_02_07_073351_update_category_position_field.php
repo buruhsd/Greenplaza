@@ -14,7 +14,7 @@ class UpdateCategoryPositionField extends Migration
     public function up()
     {
         Schema::table('sys_category', function ($table) {
-            $table->integer('position')->unsigned();
+            $table->integer('position')->unsigned()->after('category_status');
         });
     }
 
