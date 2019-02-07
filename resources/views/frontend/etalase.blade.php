@@ -178,7 +178,6 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="grid">
                                 <div class="row">
-                                                                {{dd('x')}}
                                         @foreach ($produk as $p)
                                     <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
@@ -274,6 +273,7 @@
                                         <div class="col-12">
                                             {!! $produk->appends(['order' => Request::get('order')])->render() !!}
                                         </div>
+                                                                {{dd('x')}}
                                     </div>
                                 </div>
                             </div>
