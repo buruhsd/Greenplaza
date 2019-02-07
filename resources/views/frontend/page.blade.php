@@ -48,7 +48,7 @@
                                             <a href="{{route('detail', $item->produk_slug)}}"><img class="h100 w100" style="border-radius: 50%;" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="" /></a>
                                         </div>
                                         <div class="product-sedebar-content fix">
-                                            <h4><a href="shop.html">{{$item->produk_name}}</a></h4>
+                                            <h4><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a></h4>
                                             <ul class="rating">
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>

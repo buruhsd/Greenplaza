@@ -17,6 +17,7 @@ use App\User;
 use App\Role;
 use Auth;
 use FunctionLib;
+use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -118,7 +119,17 @@ class FrontController extends Controller
         $order = "rand()";
         $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
-            $order = $request->input("order").' ASC';
+            $check = ['populer','ulasan']; 
+            $arr = [
+                'populer'=>'COUNT(sys_trans_detail.id) ',
+                'ulasan'=>'COUNT(sys_review.id)',
+            ];
+            $order = explode ("-", $request->input("order"));//$request->input("order").' ASC';
+            // $order = $order[0].' '.$order[1];
+            // $order = (str_contains(strtolower($order_id), 'populer'))
+            $order = (in_array($order[0], $check))
+                ?$arr[$order[0]].' '.$order[1]
+                :$order[0].' '.$order[1];
         }
         $where = "1";
         if($request->input("src") != ""){
@@ -126,12 +137,30 @@ class FrontController extends Controller
         }
         if($request->input("cat") != ""){
             $id_cat = Category::whereCategory_slug($request->input("cat"))->pluck('id')->first();
-            $data['produk'] = Produk::whereRaw('FALSE')->orderByRaw($order)->paginate($perPage);
+            $data['produk'] = Produk::whereRaw('FALSE')->orderByRaw($order)
+                    ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                    ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                    // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                    ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
+                    ->groupBy('sys_produk.id')
+                ->paginate($perPage);
             if($id_cat !== null){
-                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where, $order)->paginate($perPage);
+                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where, $order)
+                        ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                        ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                        // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                        ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
+                        ->groupBy('sys_produk.id')
+                    ->paginate($perPage);
             }
         }else{
-            $data['produk'] = Produk::whereRaw($where)->orderByRaw($order)->paginate($perPage);
+            $data['produk'] = Produk::whereRaw($where)->orderByRaw($order)
+                    ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                    ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                    // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                    ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
+                    ->groupBy('sys_produk.id')
+                ->paginate($perPage);
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();

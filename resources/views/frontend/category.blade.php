@@ -45,8 +45,12 @@
                                 <input type="hidden" name="src" value="{{(isset($_GET['src'])?$_GET['src']:'')}}">
                                 <select name="order" class="select-style" id="order">
                                     <option disabled selected>Order by</option>
-                                    <option value="produk_name">Nama</option>
-                                    <option value="produk_price">Harga</option>
+                                    <option value="produk_name-ASC">Nama</option>
+                                    <option value="created_at-DESC">Terbaru</option>
+                                    <option value="populer-DESC">Populer</option>
+                                    <option value="ulasan-DESC">Ulasan Terbanyak</option>
+                                    <option value="produk_price-DESC">Harga Tertinggi</option>
+                                    <option value="produk_price-ASC">Harga Terendah</option>
                                 </select>
                             {!! Form::close() !!}
                             </div>
@@ -85,7 +89,7 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 <span class="new sale">Sale</span>
-                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
+                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt=""> --}}
                                                 <!-- <div class="shop-icon">

@@ -97,7 +97,7 @@
                                                         <ul class="list-group list-group-flush">
                                                             <li class="review-items">
                                                                 <div class="review-img" style="border:none">
-                                                                    <img style="" src="{{asset("assets/images/profil/".$user->user_detail->user_detail_image)}}">
+                                                                    <img style="" src="{{asset("assets/images/profil/".$user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" />
                                                                 </div>
                                                                 <div class="review-content">
                                                                     <i>
