@@ -26,7 +26,7 @@ class UpdateCategoryPositionField extends Migration
     public function down()
     {
         Schema::table('sys_category', function ($table) {
-            $table->string('position');
+            $table->dropColumn('position');
         });
     }
 }
