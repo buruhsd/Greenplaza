@@ -99,7 +99,6 @@
                                                                 <div class="review-img" style="border:none">
                                                                     <img style="" src="{{asset("assets/images/profil/".$user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" />
                                                                 </div>
-                                                                {{dd('x')}}
                                                                 <div class="review-content">
                                                                     <i>
                                                                         Alamat : {{FunctionLib::user_address($user->id)}}<br/>
@@ -123,6 +122,7 @@
                                             <div class="card-header">
                                                 Transaksi
                                             </div>
+                                                                {{dd('x')}}
                                             <div class="card-body">
                                                 <h5 class="card-title">Penjualan Toko {{$user->user_store}}</h5>
                                                 <div class="row">
