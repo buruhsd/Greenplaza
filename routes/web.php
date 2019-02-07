@@ -141,6 +141,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		});
 		Route::group(['prefix' => 'category', 'as' => '.category'], function () {
 			Route::get('/', 'Admin\\CategoryController@index')->name('.index');
+			Route::get('/parent', 'Admin\\CategoryController@indexparent')->name('.indexparent');
+			Route::get('/child', 'Admin\\CategoryController@indexchild')->name('.indexchild');
 			Route::get('/create', 'Admin\\CategoryController@create')->name('.create');
 			Route::post('/store', 'Admin\\CategoryController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\CategoryController@show')->name('.show');
