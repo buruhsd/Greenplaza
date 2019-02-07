@@ -273,7 +273,6 @@
                                         <div class="col-12">
                                             {!! $produk->appends(['order' => Request::get('order')])->render() !!}
                                         </div>
-                                                                {{dd('x')}}
                                     </div>
                                 </div>
                             </div>
@@ -529,6 +528,7 @@
     </div>
     </div> -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+                                                                {{dd('x')}}
 @endsection
 @section('script')
     <script type="text/javascript">
