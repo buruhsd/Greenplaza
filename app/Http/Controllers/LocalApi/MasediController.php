@@ -39,7 +39,7 @@ class MasediController extends Controller
                 $trans[$seller_id][] = $item;
             });
             $trans_code = FunctionLib::str_rand(7);
-            $gross_amount = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+            $gross_amount = 0;
             foreach ($trans as $value) {
                 // dd(Session::get('chart'));
                 foreach ($value as $key => $item) {
@@ -127,6 +127,7 @@ class MasediController extends Controller
                 $trans->trans_amount = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount');
                 $trans->trans_amount_ship = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_ship');
                 $trans->trans_amount_total = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_total');
+                $gross_amount += $trans->trans_amount_total;
                 $trans->save();
             }
             Session::forget('chart');
@@ -154,6 +155,7 @@ class MasediController extends Controller
               'note' => $trans_code,
               'price' => $gross_amount, // no decimal allowed for creditcard
             );
+            dd($transaction_details);
             try{
                 // $masedi = FunctionLib::masedi_payment($transaction_details);
                 $masedi = [

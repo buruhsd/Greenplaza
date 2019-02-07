@@ -29,7 +29,7 @@ class TransactionController extends Controller
      */
     public function dropping($id){
         $status = 200;
-        $message = 'Transfer approved!';
+        $message = 'Barang Sudah sampai dan diterima!';
         $trans = Trans::findOrFail($id);
         foreach ($trans->trans_detail as $item) {
             $trans_detail = Trans_detail::findOrFail($item->id);
@@ -51,16 +51,16 @@ class TransactionController extends Controller
         }
         if(!$trans_detail){
             $status = 500;
-            $message = 'Transfer unapproved!';
+            $message = 'Barang Belum sampai!';
         }else{
             // send email
-            $status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [
                     'trans_code' => $trans->trans_code,
                     'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $status,
+                    'status' => $send_status,
                 ]
             ];
             $send_notif = FunctionLib::transaction_notif($config);
@@ -113,13 +113,22 @@ class TransactionController extends Controller
                 // to shipping true
                 if($trans_detail->trans_detail_status == 4){
                     $trans_detail->trans_detail_packing_date = $date;
-                    if(!empty($request->note)){
+                    if($request->has('note')){
                         $trans_detail->trans_detail_is_cancel = 1;
                         $trans_detail->trans_detail_status = 4;
                         $trans_detail->trans_detail_packing = 2;
                         $trans_detail->trans_detail_packing_note = "Transaction be Cancel by seller";
                         $trans_detail->trans_detail_note = $request->note;
                         $message = 'Shipment cancelled!';
+
+                            // update saldo transaksi
+                            $update_wallet = [
+                                'user_id'=>$trans_detail->produk->produk_seller_id,
+                                'wallet_type'=>3,
+                                'amount'=>$trans_detail->trans_detail_amount_total,
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
                     }else{
                         $trans_detail->trans_detail_status = 5;
                         $trans_detail->trans_detail_packing = 1;
@@ -131,12 +140,21 @@ class TransactionController extends Controller
                 }elseif($trans_detail->trans_detail_status == 5){
                     $trans_detail->trans_detail_status = 5;
                     $trans_detail->trans_detail_send_date = $date;
-                    if(!empty($request->note)){
+                    if($request->has('note')){
                         $trans_detail->trans_detail_is_cancel = 1;
                         $trans_detail->trans_detail_send = 2;
                         $trans_detail->trans_detail_send_note = "Transaction be Cancel by seller";
                         $trans_detail->trans_detail_note = $request->note;
                         $message = 'Shipment cancelled!';
+
+                            // update saldo transaksi
+                            $update_wallet = [
+                                'user_id'=>$trans_detail->produk->produk_seller_id,
+                                'wallet_type'=>3,
+                                'amount'=>$trans_detail->trans_detail_amount_total,
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
                     }else{
                         $trans_detail->trans_detail_send = 0;
                         $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
@@ -187,13 +205,13 @@ class TransactionController extends Controller
             $message = 'Transfer unapproved!';
         }else{
             // send email
-            $status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [
                     'trans_code' => $trans->trans_code,
                     'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $status,
+                    'status' => $send_status,
                 ]
             ];
             $send_notif = FunctionLib::transaction_notif($config);
@@ -379,6 +397,7 @@ class TransactionController extends Controller
                 $where .= ' AND sys_komplain.id IS NOT NULL';
             }else{
                 $status = array_search($status,$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
                 $where .= ' AND trans_detail_status IN ('.$status.')';
                 $where .= ' AND sys_komplain.id IS NULL';
             }
@@ -418,8 +437,10 @@ class TransactionController extends Controller
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
+        // $where = "1 
+        //     AND trans_detail_is_cancel != 1
+        //     AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
         $where = "1 
-            AND trans_detail_is_cancel != 1
             AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
         $having = "1";
         // $where .= " AND count_detail > 0";
@@ -429,15 +450,26 @@ class TransactionController extends Controller
         }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            if($request->has('type')){
+            // update
+            if($status == 'cancel'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 'komplain'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }
+            // sampai sini
+            elseif($request->has('type')){
                 $arr = [
                     "3" =>'wait',
                     "4" =>'approve'
                 ];
                 $status = array_search($request->get('type'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }else{
                 $status = array_search($request->get('status'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }
         }
@@ -446,6 +478,7 @@ class TransactionController extends Controller
             $data['transaction'] = Trans::whereRaw($where)
                 // ->havingRaw($having)
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')
@@ -453,6 +486,7 @@ class TransactionController extends Controller
         } else {
             $data['transaction'] = Trans::paginate($this->perPage);
         }
+        // dd($data['transaction']);
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('member.transaction.index', $data);

@@ -77,6 +77,16 @@ class ConfBankTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            6 => 
+            array (
+                'id' => 7,
+                'bank_kode' => 'BI',
+                'bank_name' => 'Bank Indonesia',
+                'bank_status' => 1,
+                'bank_note' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

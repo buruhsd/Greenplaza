@@ -49,7 +49,7 @@
                                 <ul>
                                     <li>Name : {{$item->produk->produk_name}}</li>
                                     <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
-                                    <li>Status : <button class="btn btn-info btn-xs">{{$item->trans_detail_status}}</button></li>
+                                    <li>Status : <button class="btn btn-info btn-xs">{{FunctionLib::trans_arr($item->trans_detail_status)}}</button></li>
                                 </ul>
                             </td>
                             <td>

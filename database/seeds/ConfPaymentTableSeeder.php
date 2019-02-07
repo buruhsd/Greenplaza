@@ -37,6 +37,16 @@ class ConfPaymentTableSeeder extends Seeder
                 'created_at' => NULL,
                 'updated_at' => NULL,
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'payment_kode' => 'Me',
+                'payment_name' => 'Masedi',
+                'payment_status' => 1,
+                'payment_note' => NULL,
+                'created_at' => NULL,
+                'updated_at' => NULL,
+            ),
         ));
         
         

@@ -17,6 +17,5 @@ class MigrationsTableSeeder extends Seeder
         \DB::table('migrations')->delete();
         
         
-        
     }
 }

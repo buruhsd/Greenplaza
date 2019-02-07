@@ -21,7 +21,7 @@ class ConfConfigsTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'configs_name' => 'profil_address',
-                'configs_value' => 'jl.meranti no 314 Semarang',
+                'configs_value' => 'jl. Raya Wiguna Tengah no 20 Gunung Anyar, Surabaya Jawa Timur.',
                 'configs_status' => 1,
                 'configs_note' => NULL,
                 'created_at' => NULL,

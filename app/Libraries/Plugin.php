@@ -162,11 +162,15 @@ class Plugin
         extract($param);
         $data['type'] = $type;
         $data['status'] = $status;
+        $where = '1';
+        if(isset($trans_status)){
+            $where .= ($trans_status == 'cancel' || $trans_status == 'komplain')?" AND trans_detail_is_cancel = 1":" AND trans_detail_is_cancel != 1";
+        }
         if($status !== 'detail'){
-            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->orderBy('trans_detail_status')->first();
+            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->whereRaw($where)->orderBy('trans_detail_status')->first();
         }else{
             // $data['detail'] = App\Models\Trans_detail::whereId($id)->first();
-            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->first();
+            $data['detail'] = App\Models\Trans_detail::where('trans_detail_trans_id', $id)->whereRaw($where)->first();
         }
         $data['status_shipment'] = FunctionLib::get_waybill($data['detail']->id);
         return view('member.plugin.trans_purchase_btn', $data);
