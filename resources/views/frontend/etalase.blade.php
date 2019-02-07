@@ -122,7 +122,6 @@
                                             <div class="card-header">
                                                 Transaksi
                                             </div>
-                                                                {{dd('x')}}
                                             <div class="card-body">
                                                 <h5 class="card-title">Penjualan Toko {{$user->user_store}}</h5>
                                                 <div class="row">
@@ -179,6 +178,7 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="grid">
                                 <div class="row">
+                                                                {{dd('x')}}
                                         @foreach ($produk as $p)
                                     <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
