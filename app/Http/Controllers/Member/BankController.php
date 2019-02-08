@@ -88,13 +88,13 @@ class BankController extends Controller
             'user_bank_no' => 'required|numeric',
         ]);
         
-        $status = (Auth::user()->user_bank()->exists())?0:1;
+        $bank_status = (Auth::user()->user_bank()->exists())?0:1;
         $res = new User_bank;
         $res->user_bank_user_id = Auth::id();
         $res->user_bank_bank_id = $request->user_bank_bank_id;
         $res->user_bank_name = Bank::whereId($request->user_bank_bank_id)->pluck('bank_kode')[0];
         $res->user_bank_owner = $request->user_bank_owner;
-        $res->user_bank_status = $status;
+        $res->user_bank_status = $bank_status;
         $res->user_bank_no = $request->user_bank_no;
         $res->user_bank_note = 'User '.Auth::user()->username.' mengubah data bank.';
         $res->save();
