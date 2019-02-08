@@ -11,42 +11,106 @@ class Plugin
     }
 
     /**
-    * @param
-    * @return
+    * untuk category terkait dan produk terkait (ada di kiri seperti di detail produk front)
+    * @param 
+    * optional category_id
+    * @return view
     */
-    public static function banner1($param=[]){
+    public static function side_left($param=[]){
         extract($param);
-        return view('frontend.plugin.banner-1');
+        $id = (isset($id))?$id:0;
+        $data['side_cat'] = FunctionLib::category_by_parent($id)->limit(6)->get();
+        $data['side_related'] = FunctionLib::produk_by('category', $id)->orderBy('created_at', 'DESC')->limit(5)->get();
+        return view('frontend.plugin.side-left', $data);
     }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function banner2($param=[]){
-        extract($param);
-        return view('frontend.plugin.banner-2');
-    }
 
     /**
-    * @param
-    * @return
+    * untuk menampilkan iklan front
+    * @param conf_iklan id, conf_iklan iklan_type, conf_iklan iklan_name
+    * optional 
+    * @return view
     */
-    public static function banner3($param=[]){
+        /*
+        * iklan type
+        * 1 = banner, 2 = slider, 3 = baris
+        */
+    public static function iklan($param=[]){
+        // slider punya 1 - (>1) slider
+        // banner punya fixed 11
+        // baris belum ada
+        $date = date('Y-m-d H-i-s');
+        $arr_view=[
+            'baris'=>'frontend.plugin.iklan-baris',
+            'slider'=>'frontend.plugin.iklan-slider',
+            'banner1'=>'frontend.plugin.iklan-banner-1',
+            'banner2'=>'frontend.plugin.iklan-banner-2',
+            'banner3'=>'frontend.plugin.iklan-banner-3',
+            'banner4'=>'frontend.plugin.iklan-banner-4',
+            'banner5'=>'frontend.plugin.iklan-banner-5',
+            'banner6'=>'frontend.plugin.iklan-banner-6',
+            'banner7'=>'frontend.plugin.iklan-banner-7',
+            'banner8'=>'frontend.plugin.iklan-banner-8',
+            'banner9'=>'frontend.plugin.iklan-banner-9',
+            'banner10'=>'frontend.plugin.iklan-banner-10',
+            'banner11'=>'frontend.plugin.iklan-banner-11',
+        ];
         extract($param);
-        return view('frontend.plugin.banner-3');
+        $view = $arr_view[$name];
+        $where = 'id = '.$id;
+        $where = 'iklan_type = '.$type;
+        $where = 'iklan_name = '.$name;
+        $config = App\Models\Conf_iklan::where('id', $id)->first();
+        if($type != 1){
+            $where = 'iklan_status = 1';
+            $where .= ' AND '.$date.' >= iklan_use AND '.$date.' <= iklan_done';
+            $data['iklan'] = $config->iklan()->where('iklan_iklan_id', $config->id)->get();
+        }else{
+            $where = 'iklan_status = 1';
+            $where .= ' AND '.$date.' >= iklan_use AND '.$date.' <= iklan_done';
+            $data['iklan'] = $config->iklan()->where('iklan_iklan_id', $config->id)->first();
+        }
+        return view($view, $data);
     }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function banner4($param=[]){
-        extract($param);
-        return view('frontend.plugin.banner-4');
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function banner1($param=[]){
+    //     extract($param);
+    //     return view('frontend.plugin.banner-1');
+    // }
+
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function banner2($param=[]){
+    //     extract($param);
+    //     return view('frontend.plugin.banner-2');
+    // }
+
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function banner3($param=[]){
+    //     extract($param);
+    //     return view('frontend.plugin.banner-3');
+    // }
+
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function banner4($param=[]){
+    //     extract($param);
+    //     return view('frontend.plugin.banner-4');
+    // }
 
     /**
+    * halaman footer frontend
     * @param
     * @return
     */

@@ -7,107 +7,57 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-4">
                     <div class="slider-active owl-carousel next-prev-btn">
-                        <div class="slider-item black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image)}}" style="height: 
-                            310px">
-                            <div class="slider-content">
-                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
-                                <h3><span>35% </span> Discount</h3>
-                                <ul>
-                                    <li><a href="shop.html">Comming Soon</a></li>
-                                </ul> -->
-                            </div>
-                        </div>
-                        <div class="slider-item black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider2->iklan_image)}}" style="height: 
-                            310px">
-                            <div class="slider-content text-right">
-                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
-                                <h3><span>25% </span> Discount</h3>
-                                <ul>
-                                    <li><a href="shop.html">Comming Soon</a></li>
-                                </ul> -->
-                            </div>
-                        </div>
-                         <div class="slider-item black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider3->iklan_image)}}" style="height: 
-                            310px">
-                            <div class="slider-content text-right">
-                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
-                                <h3><span>25% </span> Discount</h3>
-                                <ul>
-                                    <li><a href="shop.html">Comming Soon</a></li>
-                                </ul> -->
-                            </div>
-                        </div>
-                        <div class="slider-item black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider4->iklan_image)}}" style="height: 
-                            310px">
-                            <div class="slider-content text-right">
-                                <!-- <h2>Shop Our <span> DrakShop</span></h2>
-                                <h3><span>25% </span> Discount</h3>
-                                <ul>
-                                    <li><a href="shop.html">Comming Soon</a></li>
-                                </ul> -->
-                            </div>
-                        </div>
+                        {!!Plugin::view('iklan', [
+                                'id'=>1,
+                                'type'=>'2',
+                                'name'=>'slider',
+                            ])
+                        !!}
                     </div>
                     <div class="info-wrap">
                         <div class="row">
                             <div class="col-sm-6 col-xs-15">
-                                <div class="banner-wrap">
-                                    <div class="banner-img">
-                                        <!-- <span class="discount">50% Off</span> -->
-                                        <img src="{{asset('assets/images/iklan/'.$slider6->iklan_image)}}" style="height: 
-                                        100px">
-                                    </div>
-                                </div>
+                                {!!Plugin::view('iklan', [
+                                        'id'=>2,
+                                        'type'=>'1',
+                                        'name'=>'banner1',
+                                    ])
+                                !!}
                             </div>
                             <div class="col-sm-6">
-                                <div class="banner-wrap">
-                                    <div class="banner-img">
-                                        <!-- <span class="discount">50% Off</span> -->
-                                        <img src="{{asset('assets/images/iklan/'.$slider7->iklan_image)}}" style="height: 
-                                        100px">
-                                    </div>
-                                </div>
+                                {!!Plugin::view('iklan', [
+                                        'id'=>3,
+                                        'type'=>'1',
+                                        'name'=>'banner2',
+                                    ])
+                                !!}
                             </div>
                         </div>
                     </div>
                 </div>
-                @if (\Auth::check())
                 <div class="col-lg-3 d-none d-lg-block">
-                    <div class="author-wrap">
-                        @if (Auth::user()->user_detail->user_detail_image != null)
-                        <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
-                        @else
-                        <img src="{{ asset('frontend/images/author.png') }}" alt="">
-                        @endif
-                        <h4>{{Auth::user()->name}}</h4>
-                    </div>
-                    <div class="banner-wrap">
-                        <div class="banner-img">
-                            <!-- <span class="discount">%20 Off</span> -->
-                            <img src="{{asset('assets/images/iklan/'.$banner1->iklan_image)}}" style="height: 
-                            270px">
+                    @if (\Auth::check())
+                        <div class="author-wrap">
+                            @if (Auth::user()->user_detail->user_detail_image != null)
+                            <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
+                            @else
+                            <img src="{{ asset('frontend/images/author.png') }}" alt="">
+                            @endif
+                            <h4>{{Auth::user()->name}}</h4>
                         </div>
-                    </div>
-                </div>
-                @else
-                <div class="col-lg-3 d-none d-lg-block">
-                    <div class="author-wrap">
-                        <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image)}}" style="height: 
-                            130px">
-                    </div>
-                    <div class="banner-wrap">
-                        <div class="banner-img">
-                            <!-- <span class="discount">%20 Off</span> -->
-                            <img src="{{asset('assets/images/iklan/'.$banner1->iklan_image)}}" style="height: 
-                            270px">
+                    @else
+                        <div class="author-wrap">
+                            <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image)}}" style="height: 
+                                130px">
                         </div>
-                    </div>
+                    @endif
+                    {!!Plugin::view('iklan', [
+                            'id'=>4,
+                            'type'=>'1',
+                            'name'=>'banner3',
+                        ])
+                    !!}
                 </div>
-                @endif
             </div>
         </div>
     </div>
@@ -117,49 +67,28 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 d-none d-lg-block">
-                    <div class="featured-wrap">
-                        <div class="featured-img black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$banner2->iklan_image) }}" alt="" style="height: 
-                            260px">
-                            <div class="featured-content">
-                                <!-- <h2>Minilam Chair</h2>
-                                <p>consectetur adipisicing elit to Tempora, similique!</p> -->
-                                <ul>
-                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {!!Plugin::view('iklan', [
+                            'id'=>5,
+                            'type'=>'1',
+                            'name'=>'banner4',
+                        ])
+                    !!}
                 </div>
                 <div class="col-lg-6 col-md-8">
-                    <div class="featured-wrap">
-                        <div class="featured-img black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider1->iklan_image) }}" alt="" style="height: 
-                            260px">
-                            <div class="featured-content text-center">
-                                <!-- <h2>Dual Handle Cardio Ball</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p> -->
-                                <ul>
-                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {!!Plugin::view('iklan', [
+                            'id'=>6,
+                            'type'=>'1',
+                            'name'=>'banner5',
+                        ])
+                    !!}
                 </div>
                 <div class="col-lg-3 col-md-4">
-                    <div class="featured-wrap">
-                        <div class="featured-img  black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image) }}" alt="" style="height: 
-                            260px">
-                            <div class="featured-content text-right">
-                                <!-- <h2>Minilam Chair</h2>
-                                <p>consectetur adipisicing elit to Tempora, similique!</p> -->
-                                <ul>
-                                    <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {!!Plugin::view('iklan', [
+                            'id'=>7,
+                            'type'=>'1',
+                            'name'=>'banner6',
+                        ])
+                    !!}
                 </div>
             </div>
         </div>
@@ -437,16 +366,12 @@
                         </div>
                     </div>
                     <div class="banner-wrap mb-30">
-                        <div class="banner-img black-opacity">
-                            <img src="{{asset('assets/images/iklan/'.$slider5->iklan_image)}}" style="height: 
-                            410px">
-                            <div class="banner-content">
-                                <div class="banner-info">
-                                    <!-- <h2>Sale <span>50%</span> off</h2> -->
-                                    <h3><a href="{{url("/comming-soon")}}">Comming Soon</a></h3>
-                                </div>
-                            </div>
-                        </div>
+                        {!!Plugin::view('iklan', [
+                                'id'=>8,
+                                'type'=>'1',
+                                'name'=>'banner7',
+                            ])
+                        !!}
                     </div>
                     <div class="shop-area">
                         <div class="row">
@@ -570,30 +495,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 d-none d-lg-block">
-                    <div class="banner-wrap">
-                        <div class="banner-img">
-                            <img src="{{asset('assets/images/iklan/'.$banner4->iklan_image)}}" style="height: 
-                            210px">
-                        </div>
-                    </div>
+                    {!!Plugin::view('iklan', [
+                            'id'=>9,
+                            'type'=>'1',
+                            'name'=>'banner8',
+                        ])
+                    !!}
                 </div>
                 <div class="col-lg-9 col-12">
                     <div class="row">
                         <div class="col-md-6 sm-mb-30 col-12">
-                            <div class="banner-wrap">
-                                <div class="banner-img">
-                                    <img src="{{asset('assets/images/iklan/'.$slider2->iklan_image)}}" style="height: 
-                            210px">
-                                </div>
-                            </div>
+                            {!!Plugin::view('iklan', [
+                                    'id'=>10,
+                                    'type'=>'1',
+                                    'name'=>'banner9',
+                                ])
+                            !!}
                         </div>
                         <div class="col-md-6 col-12">
-                            <div class="banner-wrap">
-                                <div class="banner-img">
-                                    <img src="{{asset('assets/images/iklan/'.$slider3->iklan_image)}}" style="height: 
-                            210px">
-                                </div>
-                            </div>
+                            {!!Plugin::view('iklan', [
+                                    'id'=>11,
+                                    'type'=>'1',
+                                    'name'=>'banner10',
+                                ])
+                            !!}
                         </div>
                     </div>
                 </div>
@@ -733,12 +658,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12 sm-mb-30">
-                    <div class="banner-wrap">
-                        <div class="banner-img">
-                            <img src="{{asset('assets/images/iklan/'.$banner5->iklan_image)}}" style="height: 
-                            250px">
-                        </div>
-                    </div>
+                    {!!Plugin::view('iklan', [
+                            'id'=>12,
+                            'type'=>'1',
+                            'name'=>'banner11',
+                        ])
+                    !!}
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="testmonial-wrap">

@@ -19,11 +19,13 @@
                 </a>
                 <br />
                 <br />
-                @if(!Auth::user()->user_shipment()->exists())
                     <div class="col-md-12 text-center">
+                @if(!Auth::user()->user_shipment()->exists())
                         <a href="{{route('member.user.set_shipment')}}" class="btn btn-sm btn-success">Update Jasa pengiriman</a>
-                    </div>
+                @elseif(!Auth::user()->user_bank()->exists())
+                        <a href="{{route('member.bank.index')}}" class="btn btn-sm btn-success">Tambah Bank</a>
                 @else
+                    </div>
                     {!! Form::open(['url' => '/member/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}
                         @include ('member.produk.form')
                     {!! Form::close() !!}

@@ -68,8 +68,6 @@ class FrontController extends Controller
         // $data['side_related'] = FunctionLib::produk_by('category', 'all')->orderBy('created_at', 'DESC')->limit(5)->get();
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['page'] = Page::wherePage_slug($page)->first();
-        $data['side_cat'] = Category::limit(6)->get();
-        $data['side_related'] = Produk::orderByRaw("RAND(), created_at DESC")->limit(5)->get();
         return view('frontend.page', $data, compact('category'));
     }
 
@@ -179,8 +177,6 @@ class FrontController extends Controller
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
-        $data['side_cat'] = FunctionLib::category_by_parent(0)->limit(6)->get();
-        $data['side_related'] = FunctionLib::produk_by('category', $data['detail']->category->id)->orderBy('created_at', 'DESC')->limit(5)->get();
         return view('frontend.new.detail2', $data);
     }
 
