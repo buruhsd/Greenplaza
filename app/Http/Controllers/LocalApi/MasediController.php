@@ -155,7 +155,6 @@ class MasediController extends Controller
               'note' => $trans_code,
               'price' => $gross_amount, // no decimal allowed for creditcard
             );
-            dd($transaction_details);
             try{
                 $masedi = FunctionLib::masedi_payment($transaction_details);
                 // $masedi = [

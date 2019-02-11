@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Models\Payment;
 use App\Models\Trans;
 use App\Models\Trans_detail;
 use Illuminate\Http\Request;
@@ -402,10 +403,15 @@ class TransactionController extends Controller
                 $where .= ' AND sys_komplain.id IS NULL';
             }
         }
+        if(!empty($request->get('payment'))){
+            $payment = $request->get('payment');
+            $where .= ' AND conf_payment.payment_kode LIKE "%'.$payment.'%"';
+        }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
                 // ->havingRaw($having)
+                ->leftJoin('conf_payment', 'sys_trans.trans_payment_id', '=', 'conf_payment.id')
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
                 ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
@@ -415,6 +421,7 @@ class TransactionController extends Controller
         } else {
             $data['transaction'] = Trans::paginate($this->perPage);
         }
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('member.transaction.purchase', $data);
@@ -473,10 +480,15 @@ class TransactionController extends Controller
                 $where .= ' AND trans_detail_status IN ('.$status.')';
             }
         }
+        if(!empty($request->get('payment'))){
+            $payment = $request->get('payment');
+            $where .= ' AND conf_payment.payment_kode LIKE "%'.$payment.'%"';
+        }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
                 // ->havingRaw($having)
+                ->leftJoin('conf_payment', 'sys_trans.trans_payment_id', '=', 'conf_payment.id')
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
                 ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
@@ -486,6 +498,7 @@ class TransactionController extends Controller
         } else {
             $data['transaction'] = Trans::paginate($this->perPage);
         }
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         // dd($data['transaction']);
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 

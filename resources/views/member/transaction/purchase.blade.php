@@ -14,25 +14,34 @@
                 </div>
                 
                 <form action="" method="GET" id="src" class="form-inline">
-                  <div class="form-group mx-sm-3 mb-2">
-                    <label for="code" class="sr-only">Code</label>
-                    <input type="text" class="form-control" placeholder="Search" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <label for="status" class="sr-only">Status</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
-                        <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option>
-                        <option value="order" {!! (!empty($_GET['status']) && $_GET['status'] == "order")?"selected":"" !!}>Konfirmasi Pembayaran</option>
-                        <option value="transfer" {!! (!empty($_GET['status']) && $_GET['status'] == "transfer")?"selected":"" !!}>Menunggu Validasi</option>
-                        <option value="seller" {!! (!empty($_GET['status']) && $_GET['status'] == "seller")?"selected":"" !!}>Tunggu Seller</option>
-                        <option value="packing" {!! (!empty($_GET['status']) && $_GET['status'] == "packing")?"selected":"" !!}>Packing</option>
-                        <option value="shipping" {!! (!empty($_GET['status']) && $_GET['status'] == "shipping")?"selected":"" !!}>Shipping</option>
-                        <option value="dropping" {!! (!empty($_GET['status']) && $_GET['status'] == "dropping")?"selected":"" !!}>Dropping</option>
-                        <option value="cancel" {!! (!empty($_GET['status']) && $_GET['status'] == "cancel")?"selected":"" !!}>Cancel</option>
-                        <option value="komplain" {!! (!empty($_GET['status']) && $_GET['status'] == "komplain")?"selected":"" !!}>Komplain</option>
-                    </select>
-                  </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="code" class="sr-only">Code</label>
+                        <input type="text" class="form-control" placeholder="Search" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="status" class="sr-only">Status</label>
+                        <select class="form-control" id="status" name="status">
+                            <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
+                            <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option>
+                            <option value="order" {!! (!empty($_GET['status']) && $_GET['status'] == "order")?"selected":"" !!}>Konfirmasi Pembayaran</option>
+                            <option value="transfer" {!! (!empty($_GET['status']) && $_GET['status'] == "transfer")?"selected":"" !!}>Menunggu Validasi</option>
+                            <option value="seller" {!! (!empty($_GET['status']) && $_GET['status'] == "seller")?"selected":"" !!}>Tunggu Seller</option>
+                            <option value="packing" {!! (!empty($_GET['status']) && $_GET['status'] == "packing")?"selected":"" !!}>Packing</option>
+                            <option value="shipping" {!! (!empty($_GET['status']) && $_GET['status'] == "shipping")?"selected":"" !!}>Shipping</option>
+                            <option value="dropping" {!! (!empty($_GET['status']) && $_GET['status'] == "dropping")?"selected":"" !!}>Dropping</option>
+                            <option value="cancel" {!! (!empty($_GET['status']) && $_GET['status'] == "cancel")?"selected":"" !!}>Cancel</option>
+                            <option value="komplain" {!! (!empty($_GET['status']) && $_GET['status'] == "komplain")?"selected":"" !!}>Komplain</option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="status" class="sr-only">Pembayaran</label>
+                        <select class="form-control" id="payment" name="payment">
+                            <option value="" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>All</option>
+                            @foreach($payment as $item)
+                                <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                   <button type="submit" class="btn btn-primary mb-2">Cari</button>
                 </form>
                         
@@ -112,7 +121,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div> {!! $transaction->appends(['search' => Request::get('search'), 'code' => Request::get('code'), 'status' => Request::get('status')])->render() !!} </div>
+                    <div> {!! $transaction->appends(['search' => Request::get('search'), 'code' => Request::get('code'), 'status' => Request::get('status'), 'payment' => Request::get('payment')])->render() !!} </div>
                 </div>
             </div>
         </div>
