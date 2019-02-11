@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use App\Models\Produk;
 use App\Models\Shipment;
+use App\Models\Payment;
 use Session;
 use Auth;
 use FunctionLib;
@@ -20,7 +21,8 @@ class ChartController extends Controller
 
     public function checkout()
     {
-        return view('frontend.checkout');
+        $data['payment'] = Payment::where('payment_status', 1)->get();
+        return view('frontend.checkout', $data);
     }
 
     /**

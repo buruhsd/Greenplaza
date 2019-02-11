@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <hr> --}}
+                            <!-- <hr> -->
                             <div class="row" hidden>
                                 <div class="col-12">
                                     <div class="row">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <hr>
-                            {{-- <div class="form-group mx-sm-3 mb-2">
+                            <!-- <div class="form-group mx-sm-3 mb-2">
                                 <div class="row" data-toggle="buttons">
                                     <div class="col-md-6">
                                         <label class="btn btn-info btn-block" data-toggle="collapse" data-target="#midtrans" aria-expanded="true" aria-controls="midtrans">
@@ -106,16 +106,41 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div> --}}
-                            {{-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" /> --}}
-                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
-                            {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}
-                            {{-- <div id="midtrans" class="collapse">
+                            </div> -->
+                            <!-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" /> -->
+                            <!-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" /> -->
+                            <!-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> -->
+                            <!-- <div id="midtrans" class="collapse">
                                 <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
                             </div>
                             <div id="masedi" class="collapse">
                                 <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
-                            </div> --}}
+                            </div> -->
+                            <div class="form-group mx-sm-3 mb-2">
+                                <label for="payment" class="sr-only">Pembayaran</label>
+                                <select class="form-control" id="payment">
+                                    <option value="">Pilih Pembayaran</option>
+                                    @foreach($payment as $item)
+                                        <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="payment_hide payment_Me collapse">
+                                <hr/>
+                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
+                            </div>
+                            <div class="payment_hide payment_Mt collapse">
+                                <hr/>
+                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
+                            </div>
+                            <div class="payment_hide payment_Tf collapse">
+                                <hr/>
+                                Cooming Soon.
+                            </div>
+                            <div class="payment_hide payment_Gln collapse">
+                                <hr/>
+                                Cooming Soon.
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -158,6 +183,19 @@
                 });
                 $("#btn-choose-shipment").val(text);
             }
+        });
+    }
+    window.onload = function() {
+        //on change hide all divs linked to select and show only linked to selected option
+        $('#payment').change(function(){
+            //Saves in a variable the wanted div
+            var selector = '.payment_' + $(this).val();
+
+            //hide all elements
+            $('.payment_hide').collapse('hide');
+
+            //show only element connected to selected option
+            $(selector).collapse('show');
         });
     }
 </script>
