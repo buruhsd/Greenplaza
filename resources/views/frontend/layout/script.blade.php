@@ -65,3 +65,4 @@
         //   dots[slideIndex-1].className += " w3-white";
         // }
     </script>
+    

@@ -226,6 +226,14 @@ a#scrollUp:hover {
 
 /*----------header-area start----------*/
 
+.header-req{
+     z-index: 997;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+}
+
 .header-tor-area {
     border-bottom: 1px solid #eee;
 }
@@ -327,8 +335,14 @@ a#scrollUp:hover {
 }
 
 .header-middle-area {
-    padding: 30px 0px;
+    padding: 0px 0px;
+    /*z-index: 997;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;*/
     border-bottom: 1px solid #eee;
+    /*transition: height .5s ease-in-out;*/
 }
 
 .logo a {
