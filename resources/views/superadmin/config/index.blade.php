@@ -86,9 +86,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                        {!! Form::label('produk_unit', ' ', ['class' => 'col-md-3 control-label']) !!}
+                                        @if($item->configs_note !== null)
+                                        <div class="col-md-12 m-b-xs">
+                                            <hr/>
+                                            <p class="small">
+                                                {!!$item->configs_note!!}
+                                            </p>
                                         </div>
+                                        @endif
                                     </div>
                                 {!! Form::close() !!}
                                 </div>

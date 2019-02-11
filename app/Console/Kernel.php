@@ -24,6 +24,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        // $schedule->command('trans:checkout')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:packing')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:able')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:shipping')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:hotlist')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:pincode')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:iklan')
+        //     ->dailyAt('20:00');
+        // $schedule->command('trans:name')
+        //     ->dailyAt('20:00');
         // $schedule->command('inspire')
         //          ->hourly();
     }
