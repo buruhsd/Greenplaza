@@ -118,7 +118,7 @@ class RegisterController extends Controller
             $user_detail = User_address::create([
                 'user_address_user_id' => $user->id,
                 'user_address_label' => 'Saya',
-                'user_address_owner' => 'Saya',
+                'user_address_owner' => $data['name'],
                 'user_address_address' => " ",
                 'user_address_phone' => $data['user_detail_phone'],
                 'user_address_province' => $data['user_detail_province'],

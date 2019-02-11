@@ -49,4 +49,11 @@
 </div>
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
-        
+@section('script')
+<script type="text/javascript">
+    $('#ajax-modal').on('hidden.bs.modal', function () {
+        var dataurl = "{{ route('member.transaction.purchase',['status'=>'order'])}}";
+        window.location = dataurl;
+    });
+</script>
+@endsection

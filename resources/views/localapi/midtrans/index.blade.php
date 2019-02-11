@@ -123,7 +123,7 @@
     </div>
 </div>
 <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-VW0M7fvdvfNeIrYt"></script>
-{{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-sz_BX2RyDwvXRpix"></script> --}}
+<!-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-sz_BX2RyDwvXRpix"></script> -->
 <script type="text/javascript">
     // <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
     document.getElementById('pay-button').onclick = function(){

@@ -23,79 +23,7 @@
     <div class="shop-single-area">
         <div class="container">
             <div class="row revarce-wrap">
-                <div class="col-lg-3 col-sm-6 col-12">
-                    <aside class="sidebar-area bg-1">
-                        <div class="widget widget_search">
-                            <h2 class="section-title">Cari Produk</h2>
-                            <form action="#" class="searchform">
-                                <input type="text" name="s" placeholder="Search Product...">
-                                <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                        <div class="widget widget_categories">
-                            <h2 class="section-title">Categories</h2>
-                            <ul>
-                                @foreach($side_cat as $item)
-                                    <li><a href="{{url('category?cat='.$item->category_slug)}}">{{ucfirst(strtolower($item->category_name))}}</a></li>
-                                @endforeach
-                                {{-- <li><a href="#">Furniture</a></li>
-                                <li><a href="#">Chair & Table</a></li>
-                                <li><a href="#">Comfortable Sofa</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">House Decoration</a></li>
-                                <li><a href="#">Kitchen</a></li> --}}
-                            </ul>
-                        </div>
-                        <div class="product-sidebar">
-                            <h2 class="section-title">Produk Terkait</h2>
-                            <div class="slidebar-product-wrap">
-                                @foreach($side_related as $item)
-                                    <div class="product-sidebar-items fix">
-                                        <div class="product-sidebar-img">
-                                            <a href="{{route('detail', $item->produk_slug)}}"><img class="h100 w100" style="border-radius: 50%;" src="{{ asset('assets/images/product/'.$item->produk_image) }}" alt="" /></a>
-                                        </div>
-                                        <div class="product-sedebar-content fix">
-                                            <h4><a href="{{route('detail', $item->produk_slug)}}">{{$item->produk_name}}</a></h4>
-                                            <!-- <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul> -->
-                                            <p>
-                                                @if($item->produk_discount > 0)
-                                                    Rp. {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}&nbsp;/&nbsp;
-                                                    <del class="text-danger">Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del>
-                                                @else
-                                                    Rp. {{FunctionLib::number_to_text($item->produk_price)}}
-                                                @endif
-                                            </p>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        {{-- <div class="tag-wrap">
-                            <h2 class="section-title">Propular Tags</h2>
-                            <ul>
-                                <li><a href="#">ecommerce</a></li>
-                                <li><a href="#">product</a></li>
-                                <li><a href="#">man</a></li>
-                                <li><a href="#">fan</a></li>
-                                <li><a href="#">woman</a></li>
-                                <li><a href="#">kids</a></li>
-                                <li><a href="#">babys</a></li>
-                                <li><a href="#">pant</a></li>
-                                <li><a href="#">kids</a></li>
-                                <li><a href="#">babys</a></li>
-                                <li><a href="#">pant</a></li>
-                                <li><a href="#">chair</a></li>
-                                <li><a href="#">table</a></li>
-                            </ul>
-                        </div> --}}
-                    </aside>
-                </div>
+                {!!Plugin::view('side_left', ['id'=>$detail->category->id])!!}
                 <div class="col-12 col-lg-9 col-12">
                     <div class="shop-area">
                         <div class="row mb-30">
@@ -463,6 +391,27 @@
                                     </div>
                                     <div class="tab-pane" id="diskusi">
                                         <div class="faq-wrap" id="accordion">
+                                            <div class="card">
+                                                <div class="collapse show">
+                                                    <br/>
+                                                    {!! Form::open(['url' => route('member.produk.discuss.store'), 'method' => 'POST', 'id' => 'form-produk-discuss']) !!}
+                                                    <ul class="ml-2">
+                                                        <input type="hidden" class="btn btn-success" name="produk_id" value="{{$detail->id}}">
+                                                        <li>
+                                                            <div class="col-md-12">
+                                                                <textarea name="discuss_text" class="form-control" id="massage" cols="2" rows="2" placeholder="Tulis disini..."></textarea>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="col-md-12 mt-2">
+                                                                <input type="submit" class="btn btn-success" name="" value="kirim">
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <br/>
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
                                             @foreach($discuss as $item)
                                                 <div class="card">
                                                     <div class="card-header" id="headdiscuss{{$item->id}}">
@@ -477,25 +426,40 @@
                                                                 </div>
                                                                 <div class="review-content">
                                                                     <h3><a href="#">{{$item->user['name']}}</a></h3>
-                                                                    <span>{{$item->created_at}}</span>
+                                                                    <span>{{FunctionLib::date_indo($item->created_at, true, 'full')}}</span>
                                                                     <p>{{$item->produk_discuss_text}}</p>
                                                                 </div>
                                                                 <hr/>
-                                                                    @foreach($item->reply as $item2)
-                                                                        <ul class="ml-5">
-                                                                            <li class="review-items">
-                                                                                <div class="review-img">
-                                                                                    <img src="{{asset('assets/images/profil/'.$item2->user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
-                                                                                </div>
-                                                                                <div class="review-content">
-                                                                                    <h3><a href="#">{{$item2->user['name']}}</a></h3>
-                                                                                    <span>{{$item2->created_at}}</span>
-                                                                                    <p>{{$item2->produk_discuss_reply_text}}</p>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-                                                                    @endforeach
+                                                                @foreach($item->reply as $item2)
+                                                                    <ul class="ml-5">
+                                                                        <li class="review-items">
+                                                                            <div class="review-img">
+                                                                                <img src="{{asset('assets/images/profil/'.$item2->user->user_detail->user_detail_image)}}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
+                                                                            </div>
+                                                                            <div class="review-content">
+                                                                                <h3><a href="#">{{$item2->user['name']}}</a></h3>
+                                                                                <span>{{FunctionLib::date_indo($item2->created_at, true, 'full')}}</span>
+                                                                                <p>{{$item2->produk_discuss_reply_text}}</p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                @endforeach
                                                                 <hr/>
+                                                                {!! Form::open(['url' => route('member.produk.discuss.reply.store'), 'method' => 'POST', 'id' => 'form-produk-discuss-reply']) !!}
+                                                                <ul class="ml-5">
+                                                                    <input type="hidden" class="btn btn-success" name="discuss_id" value="{{$item->id}}">
+                                                                    <li>
+                                                                        <div class="col-md-12">
+                                                                            <textarea name="discuss_reply_text" class="form-control" id="massage" cols="2" rows="2" placeholder="balas disini..."></textarea>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="col-md-12 mt-2">
+                                                                            <input type="submit" class="btn btn-success" name="" value="balas">
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                                {!! Form::close() !!}
                                                             </li>
                                                         </ul>
                                                         <br/>

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Produk_discuss;
+use App\Models\Produk_discuss_reply;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -42,6 +43,48 @@ class Produk_discussController extends Controller
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('member.produk_discuss.index', $data);
+    }
+
+    /**
+    * @param $request
+    * @return redirect
+    */
+    public function store(Request $request){
+        $status = 200;
+        $message = 'diskusi produk berhasil ditambahkan.';
+        $discuss = new Produk_discuss;
+        $discuss->produk_discuss_produk_id = $request->produk_id;
+        $discuss->produk_discuss_user_id = Auth::id();
+        $discuss->produk_discuss_text = $request->discuss_text;
+        $discuss->save();
+        if(!$discuss){
+            $status = 500;
+            $message = 'diskusi produk gagal ditambahkan.';
+        }
+
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * @param $request
+    * @return redirect
+    */
+    public function reply_store(Request $request){
+        $status = 200;
+        $message = 'balasan terkirim.';
+        $discuss = new Produk_discuss_reply;
+        $discuss->produk_discuss_reply_discuss_id = $request->discuss_id;
+        $discuss->produk_discuss_reply_user_id = Auth::id();
+        $discuss->produk_discuss_reply_text = $request->discuss_reply_text;
+        $discuss->save();
+        if(!$discuss){
+            $status = 500;
+            $message = 'balasan tidak terkirim.';
+        }
+
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

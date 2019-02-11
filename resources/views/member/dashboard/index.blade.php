@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <div class="pull-right">
-        <p class="stats-info">Total Transaksi :
+        <p class="stats-info hidden">Total Transaksi :
             <span class="stats-number">
                 Rp. {{FunctionLib::number_to_text(
                     FunctionLib::sum_trans("", Auth::id())
@@ -136,7 +136,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 hidden">
                     <a href="{{route('member.transaction.sales', ['status' => 'order'])}}">
                         <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                             <div class="panel-body">
@@ -297,7 +297,7 @@
                     </a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 hidden">
                     <a href="{{route('member.transaction.purchase')}}">
                         <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                             <div class="panel-body">
