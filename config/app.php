@@ -165,6 +165,7 @@ return [
         App\Providers\RajaOngkirServiceProvider::class,
         App\Providers\SendEmailServiceProvider::class,
         App\Providers\MasEdiServiceProvider::class,
+        App\Providers\GlnServiceProvider::class,
 
         Unisharp\Ckeditor\ServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
@@ -225,6 +226,7 @@ return [
         'MasEdi' => App\Facades\MasEdiFacade::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'Gln' => App\Facades\GlnFacade::class,
 
     ],
 

@@ -172,7 +172,7 @@ class MasediController extends Controller
             return view('localapi.masedi.index', $data);
         }else{
             $status = 500;
-            $message = 'Total Amount must more then 0.01';
+            $message = 'Barang yang anda masukkan ke keranjang kosong.';
             return ['status' => $status, 'message' => $message];
         }
     }
