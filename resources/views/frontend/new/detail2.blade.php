@@ -391,6 +391,8 @@
                                     </div>
                                     <div class="tab-pane" id="diskusi">
                                         <div class="faq-wrap" id="accordion">
+                                            @guest
+                                            @else
                                             <div class="card">
                                                 <div class="collapse show">
                                                     <br/>
@@ -412,6 +414,7 @@
                                                     {!! Form::close() !!}
                                                 </div>
                                             </div>
+                                            @endguest
                                             @foreach($discuss as $item)
                                                 <div class="card">
                                                     <div class="card-header" id="headdiscuss{{$item->id}}">
@@ -444,6 +447,8 @@
                                                                         </li>
                                                                     </ul>
                                                                 @endforeach
+                                                            @guest
+                                                            @else
                                                                 <hr/>
                                                                 {!! Form::open(['url' => route('member.produk.discuss.reply.store'), 'method' => 'POST', 'id' => 'form-produk-discuss-reply']) !!}
                                                                 <ul class="ml-5">
@@ -460,6 +465,7 @@
                                                                     </li>
                                                                 </ul>
                                                                 {!! Form::close() !!}
+                                                            @endguest
                                                             </li>
                                                         </ul>
                                                         <br/>
