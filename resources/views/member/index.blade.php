@@ -115,7 +115,7 @@
                         </div>
                         @if(Auth::user()->is_verify())
                             @if(!Auth::user()->is_gln())
-                                <div class="col-md-2">
+                                <div class="col-md-2 hidden">
                                     <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                         <div class="panel-body">
                                             <p class="stats-info">Buat akun Gln : <br/>
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="col-md-2">
+                                <div class="col-md-2 hidden">
                                     <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                         <div class="panel-body">
                                             <p class="stats-info">Saldo Gln : <br/>
