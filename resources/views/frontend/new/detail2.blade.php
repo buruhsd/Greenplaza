@@ -104,7 +104,7 @@
                                             <input type="text" name="qty" value="1" />
                                         </li>
                                         <li>
-                                            <a href="#" onclick="$('#form-shipment').submit();">Add to Cart</a>
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Tambah ke Wishlist" class="btn btn-info btn-sm btn-block" />
                                         </li>
                                     </ul>
                                     <div class="col-md-12 " style="margin-bottom: 2%">
@@ -205,7 +205,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-bottom: 2%">
-                                        <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-info btn-sm btn-block" />
+                                        <input type="button" onclick="$('#form-shipment').submit();" value="Tambah ke Keranjang" class="btn btn-danger btn-sm btn-block" />
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
