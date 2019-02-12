@@ -1,8 +1,15 @@
+<style type="text/css">
+    .hiden{
+        display: none;
+    }
+</style>
+
 @if(str_contains(Request::url(), ['create']))
 <div class="form-group {{ $errors->has('category_parent_id') ? 'has-error' : ''}}">
     {!! Form::label('category_parent_id', 'Parent : ', ['class' => 'col-md-3 control-label']) !!}
     <div class="col-md-9">
-        <select name='category_parent_id' class="form-control">
+        <select name='category_parent_id' class="form-control" id="mySelect" onchange="myFunction()">
+            <option value=""> -->Select Option Parent<-- </option>
             <option value='0'>No Parent</option>
             @foreach($category_par as $item)
             <option value='{{$item->id}}'>{{$item->category_name}}</option>
@@ -39,7 +46,7 @@
 @if(str_contains(Request::url(), ['create']))
 <div class="form-group mx-sm-3 mb-2 {{ $errors->has('position') ? 'has-error' : ''}}" id="containment-wrapper">
     {!! Form::label('position', 'Position : ', ['class' => 'col-md-3 control-label']) !!}
-    <div class="col-md-9" id="draggable3">
+    <div class="col-md-9 hiden" id="demo">
         {!! Form::text('position', null, [
             'class' => 'form-control', 
             'placeholder' => 'Position'
@@ -123,5 +130,22 @@
     </div>
 </div>
 <button type="submit" class="btn btn-primary mb-2">Save</button>
+
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+// $(document).ready(function() {    
+    function myFunction() {
+      var x = document.getElementById("mySelect").value;
+      if ( x == 0)
+      {
+        $("#demo").removeClass("hiden");
+      } else 
+      {
+         $("#demo").addClass("hiden");
+      }
+
+  
+}
+</script>       
 
 

@@ -29,9 +29,9 @@ class CategoryController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         } else {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
@@ -42,9 +42,9 @@ class CategoryController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '=', 0)->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '=', 0)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         } else {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '=', 0)->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '=', 0)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
@@ -55,9 +55,9 @@ class CategoryController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '!=', 0)->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '!=', 0)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         } else {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '!=', 0)->paginate($this->perPage);
+            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->where('category_parent_id', '!=', 0)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
