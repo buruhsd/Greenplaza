@@ -113,6 +113,41 @@
                                 </div>
                             </div>
                         </div>
+                        @if(Auth::user()->is_verify())
+                            @if(!Auth::user()->is_gln())
+                                <div class="col-md-2">
+                                    <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                        <div class="panel-body">
+                                            <p class="stats-info">Buat akun Gln : <br/>
+                                            <a id="saldo_gln" class="btn btn-info btn-xs" href="{{route('member.wallet.create_gln')}}">
+                                                Buat
+                                            </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="col-md-2">
+                                    <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                        <div class="panel-body">
+                                            <p class="stats-info">Saldo Gln : <br/>
+                                                <b>GLN.&nbsp;</b>
+                                                <b id="saldo_gln">
+                                                    <?php
+                                                    $response = FunctionLib::gln('ballance', ['address'=>Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address]);
+                                                    if($response['status'] == 200){
+                                                        echo $response['data']['ballance'];
+                                                    }else{
+                                                        echo "0,00";
+                                                    }
+                                                    ?>
+                                                </b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                     @yield('content')
                     </div><!-- Main Wrapper -->

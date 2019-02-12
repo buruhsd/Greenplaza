@@ -32,6 +32,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    /*****/
+    public function is_gln(){
+        if((bool)$this->wallet()->where('wallet_type',7)->first()){
+            return true;
+        }
+        return false;
+    }
+
     /**
     * 
     * 

@@ -419,6 +419,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 		// Get Penjual
 		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
+			Route::get('/create_gln', 'WalletController@create_gln')->name('.create_gln');
 			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
 			Route::post('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
 			Route::get('/transfer_cw', 'WalletController@transfer_cw')->name('.transfer_cw');
@@ -632,6 +633,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::group(['middleware' => ['is_active']], function () {
 			Route::post('choose-shipment/{id}', 'ContentController@choose_shipment')->name('.choose_shipment');
 			Route::get('get_solusi/{id}', 'ContentController@get_solusi')->name('.get_solusi');
+			Route::get('ballance_gln/{address}', 'ContentController@ballance_gln')->name('.ballance_gln');
 		});
 		Route::get('get_province/{id}', 'ContentController@get_province')->name('.get_province');
 		Route::get('get_city/{id}', 'ContentController@get_city')->name('.get_city');

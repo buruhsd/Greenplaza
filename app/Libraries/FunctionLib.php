@@ -3,12 +3,14 @@ class FunctionLib
 {
 
     public static function gln($type, $param=[]){
+        $status = 500;
+        $message = 'Server tidak merespon.';
         extract($param);
         switch ($type) {
             case 'create':
                 $response = Gln::create(['data'=>['label'=>$label]]);
                 $response = json_decode($response, true);
-                if(isset($response['status']) && $response['status'] == true){
+                if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
@@ -16,7 +18,8 @@ class FunctionLib
             break;
             case 'transfer':
                 $response = Gln::transfer(['data'=>['to_address' =>$to_address,'amount'=>$amount],'address'=>$address]);
-                if(isset($response['status']) && $response['status'] == true){
+                $response = json_decode($response, true);
+                if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
@@ -24,14 +27,16 @@ class FunctionLib
             break;
             case 'ballance':
                 $response = Gln::ballance(['address'=>$address]);
-                if(isset($response['status']) && $response['status'] == true){
+                $response = json_decode($response, true);
+                if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
             break;
             case 'list':
                 $response = Gln::list([]);
-                if(isset($response['status']) && $response['status'] == true){
+                $response = json_decode($response, true);
+                if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
@@ -39,7 +44,8 @@ class FunctionLib
             break;
             case 'compare':
                 $response = Gln::compare([]);
-                if(isset($response['status']) && $response['status'] == true){
+                $response = json_decode($response, true);
+                if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
@@ -51,7 +57,9 @@ class FunctionLib
             break;
         }
 
-        return $response['data'];
+        $data = (isset($response['data']))?$response['data']:[];
+        $return = ['status'=>$status, 'message'=>$message, 'data'=>$data];
+        return $return;
     }
 
     /**

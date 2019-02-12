@@ -32,3 +32,23 @@
         });
     </script>
     @endif
+    @if(Auth::user()->is_gln())
+    <script type="text/javascript">
+    	console.log('tes');
+	    function get_gln(address) {
+	        $.ajax({
+	            type: 'get', // or post?
+	            url: '{{url('localapi/content/ballance_gln')}}/'+address, // change as needed
+	            success: function(data) {
+	                $('#saldo_gln').html(parseFloat(data).toFixed(2).toString().replace(".", ","));
+	                // $('#produk_hotlist').val(data);
+	            }
+	        });
+		}
+        function run_gln(address){
+        	var fungsi = function(){get_gln(address);};
+			var interval = setInterval(fungsi, 60*100);
+        }
+        run_gln('{{Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address}}');
+    </script>
+    @endif

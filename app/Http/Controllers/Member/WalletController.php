@@ -29,6 +29,33 @@ class WalletController extends Controller
      * @param
      * @return \Illuminate\View\View
      */
+    public function create_gln(Request $request)
+    {
+        $status = 500;
+        $message = 'Gagal membuat wallet gln.';
+        $response = FunctionLib::gln('create', ['label'=>Auth::user()->username]);
+        if($response['status'] == 200){
+            $wallet = new Wallet;
+            $wallet->wallet_user_id = Auth::id();
+            $wallet->wallet_type = 7;
+            $wallet->wallet_ballance_before = 0;
+            $wallet->wallet_ballance = 0;
+            $wallet->wallet_address = $response['data']['address'];
+            $wallet->wallet_public = $response['data']['public'];
+            $wallet->wallet_private = $response['data']['private'];
+            $wallet->wallet_note = json_encode($response['data']);
+            $wallet->save();
+                $status = 200;
+                $message = 'Wallet berhasil dibuat.';
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+    /**
+     * 
+     * @param
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $data['wallet'] = Wallet::where('wallet_user_id', Auth::id())->get();

@@ -25,6 +25,21 @@ class ContentController extends Controller
     * @param id komplain type
     * @return
     */
+    public static function ballance_gln($address = ""){
+        $address = ($address !== "")?$address:Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
+        $response = FunctionLib::gln('ballance', ['address'=>$address]);
+        if($response['status'] == 200){
+            $return = $response['data']['ballance'];
+        }else{
+            $return = 0;
+        }
+        return $return;
+    }
+
+    /**
+    * @param id komplain type
+    * @return
+    */
     public static function get_hotlist($id = 0){
         $data = FunctionLib::get_hotlist($id);
         return $data;
