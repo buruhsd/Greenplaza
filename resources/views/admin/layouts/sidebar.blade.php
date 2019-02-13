@@ -32,6 +32,15 @@
                                     <i class="menu-icon icon-flash_on"></i><span>Email Sender</span>
                                 </a>
                             </li>
+                            <li class="@yield('masedi')">
+                                <a href="">
+                                    <i class="menu-icon icon-layers"></i><span>Log Masedi</span><i class="accordion-icon fa fa-angle-left"></i>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="{{FunctionLib::setActive('admin/list_transaction')}}"><a href="{{route('admin.list_masedi')}}">List Transaksi</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/listsaldo_masedi')}}"><a href="{{route('admin.list_masedi_saldo')}}">List Saldo User</a></li> -->
+                                </ul>
+                            </li>
                             <li class="{{FunctionLib::setActive('admin/res_kom')}}">
                                 <a href="{{route('admin.res_kom.index')}}">
                                     <i class="menu-icon icon-inbox"></i><span>Resolusi Komplain</span>
@@ -87,7 +96,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="{{FunctionLib::setActive('admin/category')}}">
-                                        <h4 class="m-l-sm text-danger">Setting Produk</h4>
+                                        <h5 class="m-l-sm text-danger">Setting Produk</h5>
                                         <li><a href="{{route('admin.category.index')}}">Kategori Produk</a></li>
                                     </li>
                                     <!-- <li>
@@ -103,7 +112,7 @@
                                         </ul> --}}
                                     </li> -->
                                     <li class="{{FunctionLib::setActive('admin/konfigurasi/iklan')}}">
-                                        <h4 class="m-l-sm text-danger">Setting Iklan</h4>
+                                        <h5 class="m-l-sm text-danger">Setting Iklan</h5>
                                         <!-- <li><a href="{{route('admin.konfigurasi.iklanslider')}}">Iklan Slider</a></li> -->
                                         <li><a href="{{route('admin.konfigurasi.iklanbanner')}}">Iklan Banner dan Slider</a></li>
                                         {{-- <a href="#">Setting Iklan</a>
@@ -113,7 +122,7 @@
                                         </ul> --}}
                                     </li>
                                     <li class="{{FunctionLib::setActive('admin/config/transaction')}}">
-                                        <h4 class="m-l-sm text-danger">Setting Transaksi</h4>
+                                        <h5 class="m-l-sm text-danger">Setting Transaksi</h5>
                                         <li><a href="{{route('admin.config.transaction')}}">Jeda Waktu Transaksi</a></li>
                                         <!-- <li><a href="#">Fee Transaksi</a></li>
                                         <li><a href="#">Pajak</a></li> -->
@@ -125,7 +134,7 @@
                                         </ul> --}}
                                     </li>
                                     <li>
-                                        <h4 class="m-l-sm text-danger">Profil Greenplaza</h4>
+                                        <h5 class="m-l-sm text-danger">Profil Greenplaza</h5>
                                         <li class="{{FunctionLib::setActive('admin/config/profil')}}"><a href="{{route('admin.config.profil')}}">Profil Greenplaza</a></li>
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/officialemail')}}"><a href="{{route('admin.konfigurasi.officialemail')}}">Official Email</a></li>
                                         <li class="{{FunctionLib::setActive('admin/bank')}}"><a href="{{route('admin.bank.index')}}">Bank</a></li>
@@ -137,7 +146,7 @@
                                         </ul> --}}
                                     </li>
                                     <li>
-                                        <h4 class="m-l-sm text-danger">Setting Akun</h4>
+                                        <h5 class="m-l-sm text-danger">Setting Akun</h5>
                                         @if(Auth::user()->is_superadmin())
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/tambah_akunadmin')}}"><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
                                         @endif
