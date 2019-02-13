@@ -47,11 +47,11 @@ class TransactionController extends Controller
             $message = $response['message'];
         }
         $data = $response['data'];
-        if($request->ajax()){
-            return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
-        }
-        return view('admin.transaction.done-order', compact('data'))
-            ->with(['flash_status' => $status,'flash_message' => $message]);
+        return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        // if($request->ajax()){
+        // }
+        // return view('admin.transaction.done-order', compact('data'))
+        //     ->with(['flash_status' => $status,'flash_message' => $message]);
     }
     
     /**
@@ -77,11 +77,11 @@ class TransactionController extends Controller
             $message = $response['message'];
         }
         $data = $response['data'];
-        if($request->ajax()){
-            return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
-        }
-        return view('admin.transaction.done-order', compact('data'))
-            ->with(['flash_status' => $status,'flash_message' => $message]);
+        return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        // if($request->ajax()){
+        // }
+        // return view('admin.transaction.done-order', compact('data'))
+        //     ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

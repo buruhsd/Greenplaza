@@ -15,6 +15,7 @@ use FunctionLib;
 use App\Models\Paket_pincode;
 use App\Models\Trans_pincode;
 use App\Models\Pincode;
+use App\Models\Payment;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -165,6 +166,7 @@ class PincodeController extends Controller
             $where .= ' AND trans_pincode_status IN ('.$status.')';
         }
         $data['pincode'] = Trans_pincode::whereRaw($where)->paginate();
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         return view('member.pincode.tagihan', $data);
     }
 }

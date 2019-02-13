@@ -127,11 +127,11 @@
                             </div>
                             <div class="payment_hide payment_Me collapse">
                                 <hr/>
-                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
+                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
                             </div>
                             <div class="payment_hide payment_Mt collapse">
                                 <hr/>
-                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
+                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" />
                             </div>
                             <div class="payment_hide payment_Tf collapse">
                                 <hr/>
@@ -140,6 +140,7 @@
                             <div class="payment_hide payment_Gln collapse">
                                 <hr/>
                                 Cooming Soon.
+                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
                             </div>
                         </form>
                     </div>

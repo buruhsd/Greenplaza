@@ -25,6 +25,7 @@
                         <br>
                         <label>Jumlah yang harus ditransfer</label>
                         <h2 style="">Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')).'</h2>
+                        <h2 style="">Gln '.(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']).'</h2>
                         ';
                         ?>
                     </div>
@@ -33,10 +34,13 @@
                         @case(1)
                         @break
                         @case(2)
-                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
                         @break
                         @case(3)
-                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.qr", $trans->first()->trans_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.qr", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
+                        @break
+                        @case(4)
+                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.re_payment", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
                         @break
                     @endswitch
                     {{-- <input type="submit" name="save_order" id="save_order" class="btn btn-success" value="Place Order" /> --}}

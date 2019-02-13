@@ -15,6 +15,7 @@ use FunctionLib;
 use App\Models\Paket_hotlist;
 use App\Models\Trans_hotlist;
 use App\Models\Produk;
+use App\Models\Payment;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,6 +45,7 @@ class HotlistController extends Controller
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
             $data['trans'] = $trans;
+            $data['payment'] = Payment::where('payment_status', 1)->get();
             return view('member.hot-list.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
         }
     }
@@ -163,6 +165,7 @@ class HotlistController extends Controller
             $where .= ' AND trans_hotlist_status IN ('.$status.')';
         }
         $data['hotlist'] = Trans_hotlist::whereRaw($where)->paginate();
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         return view('member.hot-list.tagihan', $data);
     }
 

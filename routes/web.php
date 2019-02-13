@@ -628,6 +628,14 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		});
 		// Route::post('done', 'MidtransController@done')->name('.done');
 	});
+	Route::group(['prefix' => 'gln', 'as' => '.gln'], function () {
+		// need email active
+		Route::group(['middleware' => ['is_active']], function () {
+			Route::get('payment', 'GlnController@payment')->name('.payment');
+			Route::get('re_payment/{code}', 'GlnController@re_payment')->name('.re_payment');
+		});
+		// Route::post('done', 'MidtransController@done')->name('.done');
+	});
 	Route::group(['prefix' => 'content', 'as' => '.content'], function () {
 		// need email active
 		Route::group(['middleware' => ['is_active']], function () {

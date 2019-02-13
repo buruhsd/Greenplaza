@@ -23,7 +23,7 @@
                         ?>
                     </div>
                     <hr>
-                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.hotlist_payment", $trans->trans_hotlist_code)}} value="Pay" class="btn btn-success" id="btn-pick-address" />
+                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href='{{route("localapi.midtrans.hotlist_payment", $trans->trans_hotlist_code)}}' value="Pay" class="btn btn-success" id="btn-pick-address" />
                 </div>
             </div>
         </div>

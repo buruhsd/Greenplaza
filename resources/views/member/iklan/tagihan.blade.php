@@ -26,6 +26,15 @@
                 <option value="ditolak" {!! (!empty($_GET['status']) && $_GET['status'] == "ditolak")?"selected":"" !!}>Ditolak</option>
             </select>
           </div>
+          <!-- <div class="form-group mx-sm-3 mb-2">
+            <label for="status" class="sr-only">Pembayaran</label>
+            <select class="form-control" id="payment" name="payment">
+                <option value="" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>All</option>
+                @foreach($payment as $item)
+                    <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                @endforeach
+            </select>
+          </div> -->
           <button type="submit" class="btn btn-primary mb-2">Cari</button>
         </form>
     </div>

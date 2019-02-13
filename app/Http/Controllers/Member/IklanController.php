@@ -14,6 +14,7 @@ use App\Models\Paket_iklan;
 use App\Models\Trans_iklan;
 use App\Models\Iklan;
 use App\Models\Category;
+use App\Models\Payment;
 use App\User;
 use Session;
 use Auth;
@@ -363,6 +364,7 @@ class IklanController extends Controller
             $where .= ' AND trans_iklan_status IN ('.$status.')';
         }
         $data['iklan'] = Trans_iklan::whereRaw($where)->paginate();
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         return view('member.iklan.tagihan', $data);
     }
 

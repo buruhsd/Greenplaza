@@ -45,9 +45,11 @@ class FunctionLib
             case 'compare':
                 $response = Gln::compare([]);
                 $response = json_decode($response, true);
-                if(isset($response['success']) && $response['success'] == true){
+                if(isset($response['price'])){
                     $status = 200;
-                    $message = 'Wallet berhasil dibuat';
+                    $message = 'berhasil mendapat compare gln to rupiah.';
+                    $return = ['status'=>$status, 'message'=>$message, 'data'=>$response['price']];
+                    return $return;
                 }
                 // "{"price":35685}"
             break;
