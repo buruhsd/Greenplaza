@@ -50,7 +50,7 @@
                                         <li class="{{FunctionLib::setActive('member/wallet')}}"><a href="{{route('member.wallet.index')}}">History Saldo</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/withdrawal')}}"><a href="{{route('member.wallet.withdrawal')}}">Withdrawal</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/transfer_cw')}}"><a href="{{route('member.wallet.transfer_cw')}}">Transfer CW</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/transfer_rw')}}"><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/transfer_rw')}}"><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li> -->
                                     </ul>
                                 </li>
                                 <li class="@yield('pengaturan profil')">
@@ -148,9 +148,9 @@
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/wallet/type/transaksi')}}"><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/type/cw')}}"><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/type/rw')}}"><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/type/iklan')}}"><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/type/pincode')}}"><a href="{{route('member.wallet.type', 'pin_code')}}">Log Pincode</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/type/rw')}}"><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li> -->
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/type/iklan')}}"><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>
+                                        <li class="{{FunctionLib::setActive('member/wallet/type/pincode')}}"><a href="{{route('member.wallet.type', 'pin_code')}}">Log Pincode</a></li> -->
                                         <li class="{{FunctionLib::setActive('member')}} hidden"><a href="{{-- {{route('member.wallet.type', 'transaksi')}} --}}">Log Aktifitas</a></li>
                                     </ul>
                                 </li>
