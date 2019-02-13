@@ -84,7 +84,7 @@ class TransactionController extends Controller
                 'amount'=>$trans_detail->trans_detail_amount_total,
                 'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
             ];
-            $saldo = FunctionLib::update_wallet($update_wallet);
+            $saldo = FunctionLib::update_wallet($update_wallet, 'transaction');
         }
         if(!$trans_detail){
             $status = 500;

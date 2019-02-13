@@ -211,7 +211,7 @@ class FunctionLib
     * @param user_id, wallet_type, amount, note
     * @return
     **/
-    public static function update_wallet($param=[]){
+    public static function update_wallet($param=[], $type='non'){
         $date = date('Y-m-d H:i:s');
         $status = 200;
         $message = 'Wallet berhasi diubah.';
@@ -219,11 +219,23 @@ class FunctionLib
         // update saldo hotlist
         $where = 'wallet_user_id='.$user_id;
         $where .= ' AND wallet_type='.$wallet_type;
-        $saldo = App\Models\Wallet::whereRaw($where)->first();
-        $saldo->wallet_ballance_before = $saldo->wallet_ballance;
-        $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
-        $saldo->wallet_note = $note;
-        $saldo->save();
+        switch ($type) {
+            case 'non':
+                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+                $saldo->wallet_note = $note;
+                $saldo->save();
+            break;
+            case 'transaction':
+                $amount = $amount-($amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                $saldo = App\Models\Wallet::whereRaw($where)->first();
+                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+                $saldo->wallet_note = $note;
+                $saldo->save();
+            break;
+        }
 
         $return = ['status'=>$status, 'message'=>$message];
         return $return;
