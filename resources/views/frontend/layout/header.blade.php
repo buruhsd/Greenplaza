@@ -1,4 +1,4 @@
-    <header class="header-area header-req" id="myHeader">
+    <header class="header-area">
         {{-- <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
@@ -118,8 +118,8 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
                         <div class="cetagory-wrap">
-                            <!-- <span>Semua kategori</span> -->
-                            <!-- <ul class="cetagory-items">
+                            <span>Semua kategori</span>
+                            <ul class="cetagory-items">
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->orderBy('updated_at', 'DESC')->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
@@ -159,7 +159,7 @@
                                     </li>
                                 @endforeach
                                 <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
-                            </ul> -->
+                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
@@ -198,12 +198,8 @@
                             </ul>
                             @endguest
                             <li><a href="{{url('/')}}">Home </a></li>
-                            {{-- <li><a href="about.html">About</a></li> --}}
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                 <ul>
-                                    {{-- <li><a href="shop.html">Shop Page</a></li> --}}
-                                    {{-- <li><a href="shop-sidebar.html">Shop Sidebar</a></li> --}}
-                                    {{-- <li><a href="single-product.html">Product Details</a></li> --}}
                                     <li><a href="{{route('chart')}}">Shopping cart</a></li>
                                     @guest
                                     @else
@@ -212,13 +208,6 @@
                                     @endguest
                                 </ul>
                             </li>
-                            {{-- <li class="sidemenu-items"><a href="javascript:void(0);">Blog <i class="fa fa-angle-down"></i></a>
-                                <ul>
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li> --}}
-                            {{-- <li><a href="contact.html">Contact</a></li> --}}
                         </ul>
                     </div>
                     <div class="col-sm-6 d-md-none d-block col-2">
@@ -274,21 +263,5 @@
             <!-- responsive-menu area start -->
         </div>
     </header>
-    <script type="text/javascript">
-    
-        window.onscroll = function() {myFunction()};
-
-        var header = document.getElementById("myHeader");
-        var sticky = header.offsetTop;
-
-        function myFunction() {
-          if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-          } else {
-            header.classList.remove("sticky");
-          }
-        }
-
-    </script>
     <!-- header-area end -->
     <!-- slider-area start -->

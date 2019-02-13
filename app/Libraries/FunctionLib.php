@@ -191,11 +191,20 @@ class FunctionLib
     * @param date1, date2
     * @return
     **/
-    public static function daysBetween($date1, $date2) {
-        return date_diff(
+    public static function daysBetween($date1, $date2, $type='d') {
+        $diff = date_diff(
             date_create($date2),  
             date_create($date1)
-        )->format('%a');
+        );
+        switch ($type) {
+            case 'd':
+                $selisih = $diff->$type;
+            break;
+            case 'h':
+                $selisih = $diff->h + ($diff->days*24);
+            break;
+        }
+        return $selisih;
     }
 
     /**

@@ -198,12 +198,8 @@
                             </ul>
                             @endguest
                             <li><a href="{{url('/')}}">Home </a></li>
-                            {{-- <li><a href="about.html">About</a></li> --}}
                             <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                 <ul>
-                                    {{-- <li><a href="shop.html">Shop Page</a></li> --}}
-                                    {{-- <li><a href="shop-sidebar.html">Shop Sidebar</a></li> --}}
-                                    {{-- <li><a href="single-product.html">Product Details</a></li> --}}
                                     <li><a href="{{route('chart')}}">Keranjang</a></li>
                                     @guest
                                     @else

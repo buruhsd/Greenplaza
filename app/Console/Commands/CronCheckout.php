@@ -54,7 +54,7 @@ class CronCheckout extends Command
         if($trans_detail->first()->exists()){
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
-                $difference = FunctionLib::daysBetween($item->trans->created_at, $date);
+                $difference = FunctionLib::daysBetween($item->trans->created_at, $date, 'h');
                 $this->info('Transaksi detail '.$item->trans_code.' ordered at '.$item->trans->created_at);
                 $batas = FunctionLib::get_config('transaksi_durasi_checkout');
                 if($difference >= $batas){

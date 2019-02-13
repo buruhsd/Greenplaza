@@ -80,7 +80,7 @@ class TransactionController extends Controller
             // update saldo transaksi
             $update_wallet = [
                 'user_id'=>$trans_detail->produk->produk_seller_id,
-                'wallet_type'=>6,
+                'wallet_type'=>3,
                 'amount'=>$trans_detail->trans_detail_amount_total,
                 'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
             ];
@@ -412,6 +412,7 @@ class TransactionController extends Controller
      */
     public function purchase(Request $request)
     {
+        dd(FunctionLib::daysBetween(date('Y-m-d H:i:s'), Trans::first()->created_at, 'h'));
         $arr = [
             "0" =>'chart',
             "1" =>'order',
