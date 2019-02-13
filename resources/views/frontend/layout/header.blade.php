@@ -1,4 +1,4 @@
-    <header class="header-area">
+    <header class="header-area header-req">
         {{-- <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
@@ -118,7 +118,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
                         <div class="cetagory-wrap">
-                            <span>Semua kategori</span>
+                            <!-- <span>Semua kategori</span>
                             <ul class="cetagory-items">
                                 <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->orderBy('updated_at', 'DESC')->get();?>
                                 {{-- {{dd($cat)}} --}}
@@ -159,7 +159,7 @@
                                     </li>
                                 @endforeach
                                 <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
