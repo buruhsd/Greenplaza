@@ -69,7 +69,7 @@
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" id="close-button">
-            <input type="submit" class="btn btn-success" value="Bayar" id="pay-button">
+            <a href="{{route('member.transaction.done_gln', $item->trans->trans_code)}}" class="btn btn-success" id="pay-button">Bayar</a>
         </div>
     </div>
 </div>

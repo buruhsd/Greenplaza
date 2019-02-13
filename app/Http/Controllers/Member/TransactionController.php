@@ -22,6 +22,42 @@ class TransactionController extends Controller
     private $perPage = 5;
     private $mainTable = 'sys_trans';
 
+    /******/
+    public function done_gln($order_id){
+        $status = 200;
+        $message = 'Transaksi berhasil dibayar.';
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => 'done'
+        ];
+        $address_gln = Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
+        $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
+        if($response['status'] == 500){
+            $status = 500;
+            $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+            return redirect()->back()
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"')->get();
+        $to_address = FunctionLib::get_config('profil_gln_address');
+        $amount = (FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']);
+        $amount = (round($amount,8, PHP_ROUND_HALF_DOWN) + 0.00000001);
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount,'address'=>$address_gln]);
+        if($transfer['status'] == 500){
+            $status = 500;
+            $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+            return redirect()->back()
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $response = FunctionLib::done_gln($data);
+        if($response['status'] == 500){
+            $status = $response['status'];
+            $message = $response['message'];
+        }
+        $data = $response['data'];
+        return response()->json(['status'=>$status, 'message'=>$message, 'data' => $data]);
+    }
+
     /**
      * #member
      * process brang diambil oleh buyer
@@ -323,7 +359,7 @@ class TransactionController extends Controller
      */
     public function konfirmasi($id){
         $status = 200;
-        $message = 'Transfer confirmed!';
+        $message = 'Transaksi sudah dibayar!';
         $trans = Trans::findOrFail($id);
         $m_status = FunctionLib::midtrans_status($trans->trans_code);
         if($m_status){
@@ -336,9 +372,10 @@ class TransactionController extends Controller
                 $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
                 $trans_detail->save();
             }
+            $message = 'Transaksi sudah dikonfirmasi!, silahkan lakukan pembayaran.';
             if(!$trans_detail){
                 $status = 500;
-                $message = 'Transfer unconfirmed!';
+                $message = 'Transaksi belum dibayar!';
             }else{
                 // send email
                 $status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
@@ -358,8 +395,13 @@ class TransactionController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
-            $data['trans'] = Trans::where('trans_code', $trans->trans_code)->get();
-            return view('member.transaction.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+            $trans = Trans::where('trans_code', $trans->trans_code)->first();
+            if($trans->trans_is_paid !== 1){
+                $data['trans'] = Trans::where('trans_code', $trans->trans_code)->get();
+                return view('member.transaction.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
     }
 

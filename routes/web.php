@@ -400,6 +400,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/konfirmasi/{id}', 'TransactionController@konfirmasi')->name('.konfirmasi');
 			Route::get('/konfirmasi_all/{id}', 'TransactionController@konfirmasi_all')->name('.konfirmasi_all');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
+			Route::get('/done_gln/{order_id}', 'TransactionController@done_gln')->name('.done_gln');
 		});
 		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
 			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');

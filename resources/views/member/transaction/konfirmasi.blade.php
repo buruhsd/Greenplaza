@@ -16,6 +16,7 @@
                         <h2></h2>
                     </div>
                     <div class="large-6 medium-6 small-12 columns">
+                        <p><b>#note</b> : jika anda sudah melakukan transfer dan status transaksi anda masih belum berubah, tinggu <b>1 X 24 jam</b>. jika status transaksi anda masih belum berubah silahkan hubungi admin greenplaza di <b>admin@greenplaza.me</b></p>
                         <?php 
                         echo '
                         Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount')).' <br>
@@ -24,10 +25,13 @@
                         <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transfer anda.</label>
                         <br>
                         <label>Jumlah yang harus ditransfer</label>
-                        <h2 style="">Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')).'</h2>
-                        <h2 style="">Gln '.(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']).'</h2>
                         ';
                         ?>
+                        <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
+                        @if($trans->first()->trans_payment_id == 4)
+                            / Gln. {{FunctionLib::number_to_text((FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']), 8)}} <small>#bisa berubah setiap saat.</small>
+                        @endif
+                        </h2>
                     </div>
                     <hr>
                     @switch($trans->first()->trans_payment_id)

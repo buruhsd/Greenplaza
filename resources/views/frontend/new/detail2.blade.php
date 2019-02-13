@@ -53,7 +53,7 @@
                                     <center>Toko {{$detail->user->user_store}}</center></a></h5>
                                     @endif
                                     <div class="rating-wrap fix">
-                                        {{-- <span class="pull-left">$219.56</span> --}}
+                                        <!-- <span class="pull-left">$219.56</span> -->
                                         @if($detail->produk_discount > 0)
                                             <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
                                             <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del>
@@ -78,7 +78,6 @@
                                         <li>Categories:</li>
                                         <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
                                     </ul>
-                                    {{-- <p>On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.</p> --}}
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
                                     @guest
@@ -145,7 +144,7 @@
                                             </center>
                                         </div>
                                     @endif
-                                    {{-- color and size --}}
+                                    <!-- color and size -->
                                     <?php $size = explode(',', $detail->produk_size);?>
                                     <?php 
                                         $color_arr = [
@@ -209,14 +208,14 @@
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
-                                    {{-- <ul class="socil-icon">
+                                    <!-- <ul class="socil-icon">
                                         <li>Share :</li>
                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                                         <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul> --}}
+                                    </ul> -->
                                 </div>
                             </div>
                         </div>
@@ -225,7 +224,7 @@
                                 <div class="single-product-menu">
                                     <ul class="nav">
                                         <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
-                                        {{-- <li><a data-toggle="tab" href="#tag">Faq</a></li> --}}
+                                        <!-- <li><a data-toggle="tab" href="#tag">Faq</a></li> -->
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
                                         <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
                                     </ul>
@@ -238,7 +237,7 @@
                                             {{$detail->produk_note}}
                                         </div>
                                     </div>
-                                    {{-- <div class="tab-pane" id="tag">
+                                    <!-- <div class="tab-pane" id="tag">
                                         <div class="faq-wrap" id="accordion">
                                             <div class="card">
                                                 <div class="card-header" id="headingOne">
@@ -261,7 +260,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div> -->
                                     <div class="tab-pane" id="review">
                                         <div class="review-wrap">
                                             <ul>
@@ -269,7 +268,7 @@
                                                 <li class="review-items">
                                                     <div class="review-img">
                                                         <img src="{{ asset('assets/images/profil/'.$item->user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'">
-                                                        {{-- <img src="assets/images/comment/1.png" alt=""> --}}
+                                                        <!-- <img src="assets/images/comment/1.png" alt=""> -->
                                                     </div>
                                                     <div class="review-content">
                                                         <h3><a href="#">{{$item->user->name}}</a></h3>
@@ -288,7 +287,7 @@
                                             </ul>
                                         </div>
                                         <div class="add-review">
-                                            {{-- <h4>Add A Review</h4>
+                                            <!-- <h4>Add A Review</h4>
                                             <div class="ratting-wrap">
                                                 <table>
                                                     <thead>
@@ -347,7 +346,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div> --}}
+                                            </div> -->
                                             @guest
                                             @else
                                                 @if(!Auth::user()->is_superadmin())

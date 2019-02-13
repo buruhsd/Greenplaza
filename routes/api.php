@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('done_order', 'Admin\\TransactionController@done_order');
 Route::post('done_masedi', 'Admin\\TransactionController@done_masedi');
+Route::post('done_masedi', 'Admin\\TransactionController@done_gln');
 Route::get('index', 'AdminApi\PermissionsController@index');
 
 //Bank
