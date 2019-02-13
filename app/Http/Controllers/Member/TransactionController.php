@@ -412,7 +412,6 @@ class TransactionController extends Controller
      */
     public function purchase(Request $request)
     {
-        dd(FunctionLib::daysBetween(date('Y-m-d H:i:s'), Trans::first()->created_at, 'h'));
         $arr = [
             "0" =>'chart',
             "1" =>'order',
