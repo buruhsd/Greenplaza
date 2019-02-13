@@ -200,8 +200,16 @@ class FunctionLib
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
+                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans->trans_is_paid == 1){
+                        $response['status'] = 500;
+                        $response['message'] = 'Transaksi sudah dibayar.';
+                        $response['data'][] = "";
+                        return $response;
+                    }
                     $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->get();
                     foreach ($trans as $item) {
+                        $item->trans_is_paid = 1;
                         $item->trans_paid_date = $date;
                         $item->trans_paid_note = 'pembayaran dengan Masedi selesai.';
                         $item->trans_note = 'pembayaran dengan Masedi telah selesai.';
@@ -311,8 +319,16 @@ class FunctionLib
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
                     // update sys_trans
+                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans->trans_is_paid == 1){
+                        $response['status'] = 500;
+                        $response['message'] = 'Transaksi sudah dibayar.';
+                        $response['data'][] = "";
+                        return $response;
+                    }
                     $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->get();
                     foreach ($trans as $item) {
+                        $item->trans_is_paid = 1;
                         $item->trans_paid_date = $date;
                         $item->trans_paid_note = 'pembayaran dengan Midtrans selesai.';
                         $item->trans_note = 'pembayaran dengan Midtrans telah selesai.';

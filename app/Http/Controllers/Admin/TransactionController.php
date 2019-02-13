@@ -47,7 +47,7 @@ class TransactionController extends Controller
             $message = $response['message'];
         }
         $data = $response['data'];
-        return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        return response()->json(['status'=>$status, 'message'=>$message, 'data' => $data]);
         // if($request->ajax()){
         // }
         // return view('admin.transaction.done-order', compact('data'))
@@ -77,7 +77,7 @@ class TransactionController extends Controller
             $message = $response['message'];
         }
         $data = $response['data'];
-        return response()->json(['message'=>$message, 'status'=>$status, 'data' => $data]);
+        return response()->json(['status'=>$status, 'message'=>$message, 'data' => $data]);
         // if($request->ajax()){
         // }
         // return view('admin.transaction.done-order', compact('data'))
