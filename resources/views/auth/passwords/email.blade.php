@@ -41,8 +41,8 @@
                     <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" id="email" type="text" placeholder="Email" name="email" value="{{ old('email') }}" required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
-                {{ __('Send Password Reset Link') }}
+            <button type="submit" class="btn btn-primary btn-block" style="background-color: #4caf50;">
+                <!-- {{ __('Send Password Reset Link') }} --> Kirim Link Password
             </button>
             <p><a href="{{url('/login')}}">Login</a>.</p>
         </div>

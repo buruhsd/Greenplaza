@@ -204,7 +204,7 @@
         <div class="form-group row">
             <label class="col-md-12" for="email"><b>Email</b></label>
             <div class="col-md-12">
-                <input class="form-control" id="email" type="text" placeholder="Enter Email" name="email" required>
+                <input class="form-control" id="email" type="text" placeholder="Masukkan Email" name="email" required>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -216,7 +216,7 @@
         <div class="form-group row">
             <label class="col-md-12" for="password"><b>Password</b></label>
             <div class="col-md-12">
-                <input class="form-control" id="password" type="password" placeholder="Enter Password" name="password" required>
+                <input class="form-control" id="password" type="password" placeholder="Masukkan Password" name="password" required>
                 @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -228,7 +228,7 @@
         <div class="form-group row">
             <label class="col-md-12" for="password_confirmation"><b>Repeat Password</b></label>
             <div class="col-md-12">
-                <input class="form-control" id="password_confirmation" type="password" placeholder="Repeat Password" name="password_confirmation" required>
+                <input class="form-control" id="password_confirmation" type="password" placeholder="Masukkan Ulang Password" name="password_confirmation" required>
                 @if ($errors->has('password_confirmation'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('password_confirmation') }}</strong>
@@ -239,7 +239,7 @@
         <hr>
         <p>Dengan membuat akun Anda setuju dengan <a href="{{url('about')}}" target="_blank">Ketentuan & Privasi kami</a>.</p>
 
-        <button type="submit" class="btn btn-success btn-block">Register</button>
+        <button type="submit" class="btn btn-success btn-block">Daftar</button>
         {{-- <button type="submit" class="registerbtn">Register</button> --}}
         <p>Sudah punya akun? <a href="{{url('/login')}}">Login</a>.</p>
     </div>

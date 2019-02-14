@@ -1280,6 +1280,7 @@ ul.rating li {
 }
 
 .tombol-product {
+    width: 90%;
     bottom: 0;
     padding-bottom: 10px;
     position: absolute;

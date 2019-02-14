@@ -90,7 +90,7 @@
         </div> --}}
         <hr>
 
-        <button type="submit" class="btn btn-success btn-block">Login</button>
+        <button type="submit" class="btn btn-success btn-block">Masuk</button>
         <br/>
         <p><a href="{{route('password.request')}}">Lupa Password</a>.</p>
     </div>
