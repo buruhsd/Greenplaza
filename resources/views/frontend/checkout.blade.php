@@ -143,7 +143,7 @@
                             </div> -->
                             <div class="payment_hide payment_Gln collapse">
                                 <hr/>
-                                @if(Auth::user->wallet()->where('wallet_type', 7)->exists())
+                                @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
                                 @else
                                     Anda belum memiliki akun gln.
