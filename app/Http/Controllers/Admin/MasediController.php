@@ -10,7 +10,7 @@ class MasediController extends Controller
 {
     public function list ()
     {
-    	$masedi = Trans::where('trans_is_paid', '=s', 1)->where('trans_payment_id', '=', 3)->orderBy('created_at', 'DESC')->paginate(10);
+    	$masedi = Trans::where('trans_is_paid', '=', 1)->where('trans_payment_id', '=', 3)->orderBy('created_at', 'DESC')->paginate(10);
     	// dd($masedi);
     	return view('admin.masedi.list_masedi', compact('masedi'));
     }
