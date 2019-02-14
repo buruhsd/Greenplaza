@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\Trans;
 use App\Models\Trans_detail;
+use App\Models\Trans_gln;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -32,30 +33,95 @@ class TransactionController extends Controller
         ];
         $address_gln = Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
-        if($response['status'] == 500){
-            $status = 500;
-            $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
-            return redirect()->back()
-               ->with(['flash_status' => $status,'flash_message' => $message]);
-        }
+        // if($response['status'] == 500){
+        //     $status = 500;
+        //     $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+        //     return redirect()->back()
+        //        ->with(['flash_status' => $status,'flash_message' => $message]);
+        // }
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"')->get();
         $to_address = FunctionLib::get_config('profil_gln_address');
-        $amount = (FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']);
-        $amount = (round($amount,8, PHP_ROUND_HALF_DOWN) + 0.00000001);
-        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount,'address'=>$address_gln]);
+        
+        $amount_total = 0;
+        $amount = 0;
+        $fee = 0;
+        $no = 0;
+        if(!Trans::whereRaw('trans_code="'.$order_id.'"')->first()->trans_gln()->exists()){            
+            foreach ($trans as $item) {
+                foreach ($item->trans_detail as $item2) {
+                    // rupiah
+                    $detail_amount = $item2->trans_detail_amount;
+                    $detail_amount_ship = $item2->trans_detail_amount_ship;
+                    $detail_fee = ($detail_amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                    // gln
+                    $detail_amount = $detail_amount / FunctionLib::gln('compare',[])['data'];
+                    $detail_amount = round($detail_amount,8, PHP_ROUND_HALF_DOWN);
+                    $detail_amount_ship = $detail_amount_ship / FunctionLib::gln('compare',[])['data'];
+                    $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
+                    $detail_fee = $detail_fee / FunctionLib::gln('compare',[])['data'];
+                    $detail_fee = (round($detail_fee,8, PHP_ROUND_HALF_DOWN) + 0.00000001);
+                    $detail_amount_total = $detail_amount+$detail_fee+$detail_amount_ship;
+                    // untuk insert
+                    $wallet_to = ($item2->produk->user->wallet()->where('wallet_type', 7)->exists())
+                        ?$item2->produk->user->wallet()->where('wallet_type', 7)->first()->wallet_address
+                        :$item2->produk->user->id;
+                    $detail[$no]['trans_gln_form']=$address_gln;
+                    $detail[$no]['trans_gln_admin']=$to_address;
+                    $detail[$no]['trans_gln_to']=$wallet_to;
+                    $detail[$no]['trans_gln_trans_id']=$item2->trans->id;
+                    $detail[$no]['trans_gln_trans_code']=$item2->trans->trans_code;
+                    $detail[$no]['trans_gln_detail_id']=$item2->id;
+                    $detail[$no]['trans_gln_detail_code']=$item2->trans_code;
+                    $detail[$no]['trans_gln_amount']=$detail_amount+$detail_amount_ship;
+                    $detail[$no]['trans_gln_amount_fee']=$detail_fee;
+                    $detail[$no]['trans_gln_amount_total']=$detail_amount_total;
+                    $detail[$no]['trans_gln_note']='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
+                    $amount_total = $amount_total + $detail_amount_total;
+                    $no++;
+                }
+            }
+            foreach ($detail as $item) {
+                $gln = new Trans_gln;
+                $gln->trans_gln_form=$item['trans_gln_form'];
+                $gln->trans_gln_admin=$item['trans_gln_admin'];
+                $gln->trans_gln_to=$item['trans_gln_to'];
+                $gln->trans_gln_trans_id=$item['trans_gln_trans_id'];
+                $gln->trans_gln_trans_code=$item['trans_gln_trans_code'];
+                $gln->trans_gln_detail_id=$item['trans_gln_detail_id'];
+                $gln->trans_gln_detail_code=$item['trans_gln_detail_code'];
+                $gln->trans_gln_amount=$item['trans_gln_amount'];
+                $gln->trans_gln_amount_fee=$item['trans_gln_amount_fee'];
+                $gln->trans_gln_amount_total=$item['trans_gln_amount_total'];
+                $gln->trans_gln_note=$item['trans_gln_note'];
+                $gln->save();
+            }
+        }else{
+            foreach ($trans as $item) {
+                $amount_total = $amount_total + FunctionLib::array_sum_key($item->trans_gln()->get()->toArray(), 'trans_gln_amount_total');
+            }
+        }
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
         if($transfer['status'] == 500){
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
             return redirect()->back()
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
+        foreach ($trans as $item) {
+            $gln = $item->gln->get();
+            foreach ($gln as $item) {
+                $item->trans_gln_status=1;
+                $item->save();
+            }
+        }
+
         $response = FunctionLib::done_gln($data);
         if($response['status'] == 500){
             $status = $response['status'];
             $message = $response['message'];
         }
-        $data = $response['data'];
-        return response()->json(['status'=>$status, 'message'=>$message, 'data' => $data]);
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     /**

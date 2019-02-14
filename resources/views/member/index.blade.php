@@ -37,6 +37,14 @@
                             <strong>Data User!</strong> Ingin jadi penjual? Isikan nama toko anda <a href="{{route('member.profil')}}">disini</a>.
                         </div>
                     @endif
+                    @if(Session::has('flash_message'))
+                        <?php $status = (Session::get('flash_status') == 200)?'success':'danger';?>
+                        <?php $status_type = (Session::get('flash_status') == 200)?'Berhasil':'Gagal';?>
+                        <div class="alert alert-{{$status}} alert-dismissible fade in">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{$status_type}}!</strong> {{Session::get('flash_message')}}
+                        </div>
+                    @endif
                     <div class="col-md-12">
                         <div class="col-md-2">
                             <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">

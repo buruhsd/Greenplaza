@@ -22,6 +22,16 @@ class Trans_detail extends Model
     * @return
     * 
     */
+    public function gln()
+    {
+        return $this->hasOne('App\Models\Trans_gln', 'trans_gln_detail_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function trans()
     {
         return $this->belongsTo('App\Models\Trans', 'trans_detail_trans_id');

@@ -34,7 +34,6 @@
     @endif
     @if(Auth::user()->is_gln())
     <script type="text/javascript">
-    	console.log('tes');
 	    function get_gln(address) {
 	        $.ajax({
 	            type: 'get', // or post?

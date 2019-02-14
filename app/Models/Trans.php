@@ -37,6 +37,16 @@ class Trans extends Model
     * @return
     * 
     */
+    public function trans_gln()
+    {
+        return $this->hasMany('App\Models\Trans_gln', 'trans_gln_trans_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function trans_detail()
     {
         return $this->hasMany('App\Models\Trans_detail', 'trans_detail_trans_id');

@@ -29,7 +29,13 @@
                         ?>
                         <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
                         @if($trans->first()->trans_payment_id == 4)
-                            / Gln. {{FunctionLib::number_to_text((FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total') / FunctionLib::gln('compare',[])['data']), 8)}} <small>#bisa berubah setiap saat.</small>
+                            <?php 
+                            $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
+                            $amount = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount');
+                            $fee = ($amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                            $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
+                            ?>
+                            / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small>#bisa berubah setiap saat.</small>
                         @endif
                         </h2>
                     </div>
