@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        App\Console\Commands\CronCheckout::class,
     ];
 
     /**
@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('trans:checkout')
-            ->hourly();
+            ->everyFiveMinutes();
         // $schedule->command('trans:packing')
         //     ->dailyAt('20:00');
         // $schedule->command('trans:able')
