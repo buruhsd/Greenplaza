@@ -33,12 +33,12 @@ class TransactionController extends Controller
         ];
         $address_gln = Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
-        // if($response['status'] == 500){
-        //     $status = 500;
-        //     $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
-        //     return redirect()->back()
-        //        ->with(['flash_status' => $status,'flash_message' => $message]);
-        // }
+        if($response['status'] == 500){
+            $status = 500;
+            $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+            return redirect()->back()
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"')->get();
         $to_address = FunctionLib::get_config('profil_gln_address');
         
