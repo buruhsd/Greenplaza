@@ -40,6 +40,16 @@ class CronCheckout extends Command
      */
     public function handle()
     {
+        // log cron
+        $data_cron = [
+            'cron_job_method' => 'trans:checkout',
+            'cron_job_type' => 'start',
+            'cron_job_status' => 1,
+            'cron_job_title' => 'Transaksi Checkout',
+            'cron_job_note' => 'memulai mengecek transaksi member melakukan transfer.'
+        ];
+        FunctionLib::add_cron($data_cron);
+
         $date = date('Y-m-d H:i:s');
         $where = '1';
         $where .= ' AND trans_detail_status IN (1,2)';
@@ -52,6 +62,16 @@ class CronCheckout extends Command
         $no = 0;
 
         if($trans_detail->first()->exists()){
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:checkout',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_note' => 'transaksi dengan status menunggu transfer tersedia.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
                 $difference = FunctionLib::daysBetween($item->trans->created_at, $date, 'h');
@@ -76,9 +96,39 @@ class CronCheckout extends Command
                     $this->info('stok produk '.$item->produk->produk_name.' ditambah '.$item->trans_detail_qty.'.');
                 }
             }
+
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:checkout',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_note' => $no.' transaksi berhasil dirubah menjadi expired.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
         }else{
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:checkout',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_note' => 'Tidak ada transaksi yang dirubah.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
             $this->info("Data tidak ada.");
         }
+        // log cron
+        $data_cron = [
+            'cron_job_method' => 'trans:checkout',
+            'cron_job_type' => 'end',
+            'cron_job_status' => 1,
+            'cron_job_title' => 'Transaksi Checkout',
+            'cron_job_note' => 'mengecek transaksi member melakukan transfer berakhir.'
+        ];
+        FunctionLib::add_cron($data_cron);
         $this->info($no." Transaksi Expired.");
     }
 }

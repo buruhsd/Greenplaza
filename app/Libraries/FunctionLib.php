@@ -2,6 +2,17 @@
 class FunctionLib
 {
 
+    /**/
+    public static function add_cron($param=[]){
+        extract($param);
+        $log = new App\Models\Log_cron_job;
+        $log->cron_job_method = $cron_job_method;
+        $log->cron_job_type = $cron_job_type;
+        $log->cron_job_status = $cron_job_status;
+        $log->cron_job_title = $cron_job_title;
+        $log->cron_job_note = $cron_job_note;
+        $log->save();
+    }
     /**
     * @param $data [order_id, transaction_status]
     * @return
