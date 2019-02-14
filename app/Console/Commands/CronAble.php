@@ -39,8 +39,9 @@ class CronAble extends Command
     {
         $date = date('Y-m-d H:i:s');
         $where = '1';
-        $where .= ' AND trans_detail_status IN (1,2)';
-        $where .= ' AND sys_trans.trans_is_paid = 0';
+        $where .= ' AND trans_detail_status IN (3)';
+        $where .= ' AND trans_detail_able = 0';
+        $where .= ' AND trans_detail_packing = 0';
         $where .= ' AND trans_detail_is_cancel = 0';
         $trans_detail = Trans_detail::whereRaw($where)
             ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
@@ -51,17 +52,17 @@ class CronAble extends Command
         if($trans_detail->first()->exists()){
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
-                $difference = FunctionLib::daysBetween($item->trans->created_at, $date);
+                $difference = FunctionLib::daysBetween($item->trans_detail_transfer_date, $date, 'h');
                 $this->info('Transaksi detail '.$item->trans_code.' ordered at '.$item->trans->created_at);
-                $batas = FunctionLib::get_config('transaksi_durasi_checkout');
+                $batas = FunctionLib::get_config('transaksi_durasi_seller_tunggu');
                 if($difference >= $batas){
                     // update trans detail
                     // $update = Trans_detail::findOrFail($item->id);
                     $item->trans_detail_is_cancel = 1;
-                    $item->trans_detail_status = 2;
-                    $item->trans_detail_transfer = 2;
-                    $item->trans_detail_transfer_date = $date;
-                    $item->trans_detail_transfer_note = 'Transaktion cancel by system.';
+                    $item->trans_detail_status = 3;
+                    $item->trans_detail_able = 2;
+                    $item->trans_detail_able_date = $date;
+                    $item->trans_detail_able_note = 'Transaksi dibatalkan oleh sistem.';
                     $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Checkout transaksi Expired at '.$date.'.';
                     $item->save();
                     $no++;

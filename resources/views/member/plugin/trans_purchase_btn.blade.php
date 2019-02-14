@@ -63,7 +63,7 @@
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
 				    		<a href="{{route('member.transaction.able', $detail->trans->id)}}">
-			    				<button class="btn btn-success btn-xs">Move to Packing</button>
+			    				<button class="btn btn-success btn-xs">Memulai Packing</button>
 				    		</a>
 				    	</div>
 				    </div>
@@ -82,7 +82,7 @@
 				    	<div class="row">
 				    		<div class="col-md-12 text-center">
 					    		<a href="{{route('member.transaction.packing', $detail->trans->id)}}">
-				    				<button class="btn btn-info btn-xs">Wait Shipping</button>
+				    				<button class="btn btn-info btn-xs">Packing selesai</button>
 					    		</a>
 					    	</div>
 					    </div>

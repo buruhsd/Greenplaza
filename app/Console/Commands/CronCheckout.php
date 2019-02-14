@@ -64,7 +64,7 @@ class CronCheckout extends Command
                     $item->trans_detail_status = 2;
                     $item->trans_detail_transfer = 2;
                     $item->trans_detail_transfer_date = $date;
-                    $item->trans_detail_transfer_note = 'Transaktion cancel by system.';
+                    $item->trans_detail_transfer_note = 'Transaksi dibatalkan oleh sistem.';
                     $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Checkout transaksi Expired at '.$date.'.';
                     $item->save();
                     $no++;

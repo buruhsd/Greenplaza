@@ -76,7 +76,7 @@ class ReviewController extends Controller
         $res = new Review;
         $res->review_produk_id = $request->review_produk_id;
         $res->review_user_id = $request->review_user_id;
-        // $res->review_stars = $request->stars;
+        $res->review_stars = $request->stars;
         $res->review_text = $request->review_text;
         $res->save();
         if(!$res){

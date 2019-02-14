@@ -51,3 +51,8 @@
         run_gln('{{Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address}}');
     </script>
     @endif
+    <script type="text/javascript">
+    	$(function () {
+		  $('[data-toggle="popover"]').popover()
+		})
+    </script>

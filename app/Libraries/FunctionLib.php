@@ -47,6 +47,20 @@ class FunctionLib
                         $trans_detail->save();
                         $response['data'][] = $trans_detail;
                     }
+                    // send email
+                    $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+                    $config = [
+                        'to' => $trans_one->pembeli->email,
+                        'data' => [
+                            'trans_code' => $trans_one->trans_code,
+                            'trans_amount_total' => $trans_one->trans_amount_total,
+                            'status' => $email_status,
+                        ]
+                    ];
+                    $send_notif = FunctionLib::transaction_notif($config);
+                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                        $response['message'] .= ' ,'.$send_notif['message'];
+                    }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
                         :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'
@@ -344,8 +358,8 @@ class FunctionLib
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
-                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
-                    if($trans->trans_is_paid == 1){
+                    $trans_one = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans_one->trans_is_paid == 1){
                         $response['status'] = 500;
                         $response['message'] = 'Transaksi sudah dibayar.';
                         $response['data'][] = "";
@@ -368,6 +382,20 @@ class FunctionLib
                         $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
                         $trans_detail->save();
                         $response['data'][] = $trans_detail;
+                    }
+                    // send email
+                    $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+                    $config = [
+                        'to' => $trans_one->pembeli->email,
+                        'data' => [
+                            'trans_code' => $trans_one->trans_code,
+                            'trans_amount_total' => $trans_one->trans_amount_total,
+                            'status' => $email_status,
+                        ]
+                    ];
+                    $send_notif = FunctionLib::transaction_notif($config);
+                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                        $response['message'] .= ' ,'.$send_notif['message'];
                     }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
@@ -463,8 +491,8 @@ class FunctionLib
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
                     // update sys_trans
-                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
-                    if($trans->trans_is_paid == 1){
+                    $trans_one = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans_one->trans_is_paid == 1){
                         $response['status'] = 500;
                         $response['message'] = 'Transaksi sudah dibayar.';
                         $response['data'][] = "";
@@ -488,6 +516,20 @@ class FunctionLib
                         $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Successfully.';
                         $trans_detail->save();
                         $response['data'][] = $trans_detail;
+                    }
+                    // send email
+                    $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+                    $config = [
+                        'to' => $trans_one->pembeli->email,
+                        'data' => [
+                            'trans_code' => $trans_one->trans_code,
+                            'trans_amount_total' => $trans_one->trans_amount_total,
+                            'status' => $email_status,
+                        ]
+                    ];
+                    $send_notif = FunctionLib::transaction_notif($config);
+                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                        $response['message'] .= ' ,'.$send_notif['message'];
                     }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'

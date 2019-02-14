@@ -146,7 +146,9 @@
                                 @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
                                 @else
-                                    Anda belum memiliki akun gln.
+                                    Anda belum memiliki akun gln. buat akun gln disini : <a id="saldo_gln" class="btn btn-info btn-xs" href="{{route('member.wallet.create_gln')}}">
+                                                Buat
+                                            </a>
                                 @endif
                             </div>
                         </form>
