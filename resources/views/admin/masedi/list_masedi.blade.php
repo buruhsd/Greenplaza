@@ -31,12 +31,16 @@
                                 @if(count($masedi) != 0)
                                 @foreach ($masedi as $key => $m)
                                 <tr>
-                                    <td>{{$key ++}}</td>
-                                    <td>{{$m->pembeli->username}}</td>
-                                    <td>{{$m->trans_code}}</td>
-                                    <td>Payment By Masedi</td>
-                                    <td>{{$m->trans_paid_date}}</td>
-                                    <td>{{$m->transaksi_amount_total}}</td>
+                                    <td><center>{{$key ++}}</center></td>
+                                    <td><center>{{$m->pembeli->username}}</center></td>
+                                    <td><center>{{$m->trans_code}}</center></td>
+                                    <td><center>Payment By Masedi</center></td>
+                                    @if ($m->trans_paid_date == null)
+                                    <td><center> - </center></td>
+                                    @else 
+                                    <td><center>{{$m->trans_paid_date}}</center></td>
+                                    @endif
+                                    <td><center>{{$m->trans_amount_total}}</center></td>
                                 </tr>
                                 @endforeach 
                                 @else
