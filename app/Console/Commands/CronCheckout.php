@@ -61,7 +61,7 @@ class CronCheckout extends Command
             ->get();
         $no = 0;
 
-        if($trans_detail->first()->exists()){
+        if($trans_detail->count()){
             // log cron
             $data_cron = [
                 'cron_job_method' => 'trans:checkout',
