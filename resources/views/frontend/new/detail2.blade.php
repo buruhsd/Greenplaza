@@ -273,14 +273,39 @@
                                                     <div class="review-content">
                                                         <h3><a href="#">{{$item->user->name}}</a></h3>
                                                         <span>{{$item->created_at}}</span>
+                                                        @if($item->review_stars == 1)
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                            @elseif($item->review_stars ==2)
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                            @elseif($item->review_stars == 3)
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                            @elseif($item->review_stars == 4)
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                            @elseif($item->review_stars == 5)
+                                                            <ul class="rating">
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                                <li><i class="fa fa-star"></i></li>
+                                                            </ul>
+                                                        @else
+                                                        @endif
                                                         <p>{{$item->review_text}}</p>
-                                                        <!-- <ul class="rating">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul> -->
                                                     </div>
                                                 </li>
                                                 @endforeach

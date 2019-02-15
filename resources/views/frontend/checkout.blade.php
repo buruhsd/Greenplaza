@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1">
-                        <div class="breadcumb-content black-opacity">
+                        <div class="breadcumb-content black-opacity" style="background-image: url('../frontend/images/banner/checkout.png'); width:100%;">
                             <h2>Checkout</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
