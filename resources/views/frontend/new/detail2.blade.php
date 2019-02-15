@@ -100,7 +100,7 @@
                                     <input type="text" name="width" value="{{$detail->produk_wide}}" hidden/>
                                     <ul class="input-style">
                                         <li class="quantity cart-plus-minus">
-                                            <input type="text" name="qty" value="1" />
+                                            <input type="text" name="qty" value="1" id="qty" />
                                         </li>
                                         <li>
                                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Tambah ke Wishlist" class="btn btn-info btn-sm btn-block" />
@@ -121,7 +121,7 @@
                                     @if($detail->user->user_shipment()->exists())
                                         <div class="col-md-12">
                                             <center>
-                                                <select name="courier" class="form-control">
+                                                <select name="courier" class="form-control" id="courier">
                                                     @foreach($detail->user->user_shipment()->get() as $item)
                                                         <option value="{{ strtolower($item->shipment->shipment_name) }}">{{$item->shipment->shipment_name}}</option>
                                                     @endforeach
@@ -525,17 +525,28 @@
             $("#shipment-price").empty();
             $("#ship-cost").empty().append(html);
             $('#ship_cost').attr('value', ongkir);
-            console.log(service, ongkir);
+            // console.log(service, ongkir);
+            $('#qty').on('change', function(){
+                empty_ongkir();
+            });
+            $('#courier').on('change', function(){
+                empty_ongkir();
+            });
         }
         function use_address(id, address_name, city, subdistrict){
             $("#ajax-modal").modal("hide")
-            console.log(city, subdistrict);
+            // console.log(city, subdistrict);
             $('#address_id').attr('value', id);
             $('#address_id').attr('value', id);
             $('#destinationType').attr('value', 'subdistrict');
             $('#destination').attr('value', subdistrict);
             var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
             $("#address-info").empty().append(html);
+            empty_ongkir();
+        }
+        function empty_ongkir(){
+            $("#ship-cost").empty();
+            $('#ship_cost').attr('value', 0);
         }
     </script>
 @endsection
