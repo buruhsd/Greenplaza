@@ -24,15 +24,114 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\View\View
      */
+
+    public function index_json (Request $request)
+    {
+        $columns = array( 
+            0 => 'id',
+            1 => 'id2',
+            2 => 'category_name',
+            3 => 'id3',
+            4 => 'id4',
+            5 => 'position',
+            6 => 'category_note',
+            7 => 'id5',
+        );
+    
+        $arr_order = [
+            'id'=> 'id',
+            'id2'=> 'id',
+            'category_name'=> 'category_name',
+            'id3'=> 'id',
+            'id4'=> 'id',
+            'position'=> 'position',
+            'category_note'=> 'category_note',
+            'id5'=> 'id',
+        ];
+
+        $totalData = Category::count();
+            
+        $totalFiltered = $totalData; 
+
+        $limit = $request->input('length');
+        $start = $request->input('start');
+        $order = $arr_order[$columns[$request->input('order.0.column')]];
+        // $order = ($columns[$request->input('order.0.column')] == 'no')
+        //     ?'sys_trans.id'
+        //     :($columns[$request->input('order.0.column')] == 'option')
+        //         ?'sys_trans.id'
+        //         :$columns[$request->input('order.0.column')];
+        $dir = $request->input('order.0.dir');
+        
+        $from = date('Y-m-d'. ' 00:00:00',strtotime("-7 days"));
+        $to = date('Y-m-d'. ' 23:59:59');
+        $search = empty($request->input('search.value'))?null:$request->input('search.value'); 
+        $from = empty($request->input('dt_from'))?$from:date($request->input('dt_from'). ' 00:00:00', time());
+        $to = empty($request->input('dt_to'))?$to:date($request->input('dt_to'). ' 23:59:59', time());
+        $voucher = empty($request->input('dt_voucher'))?'':$request->input('dt_voucher');
+        $status = empty($request->input('dt_status'))?0:$request->input('dt_status'); 
+        $method = empty($request->input('dt_method'))?0:$request->input('dt_method'); 
+
+        $posts =  Category::offset($start)
+                        ->limit($limit)
+                        ->orderBy($order,$dir)
+                        ->get();
+                    // dd($posts);
+        $totalFiltered = Category::count();
+
+        $data = array();
+        if(!empty($posts))
+        {
+            $no = 1;
+            foreach ($posts as $post)
+            {
+                // $nestedData['no'] = $no++;
+                $nestedData['id'] = $post->id;
+                $nestedData['id2'] = ($post->par['category_name'])
+                                    ?$post->par['category_name']
+                                    :"<button class='btn btn-danger btn-xs'>On Top</button>";
+                $nestedData['category_name'] = $post->category_name;
+                $nestedData['id3'] = ($post->category_parent_id == 0)
+                                    ?"Parent Category"
+                                    :"Child Category";
+                $nestedData['id4'] = ($post->category_status == 1)
+                                    ?"<button class='btn btn-success btn-xs'>Active</button>"
+                                    :"<button class='btn btn-danger btn-xs'>Not Active</button>";
+                $nestedData['position'] = $post->position;
+                $nestedData['category_note'] = $post->category_note;
+                $nestedData['id5'] = "<a href='".url('/admin/category/show', ['id' => $post->id])."'>
+                                        <button class='btn btn-info btn-xs'>
+                                                <i class='fa fa-eye' aria-hidden='true'></i>View
+                                        </button></a>
+                                        <a href='".url('/admin/category/edit', ['id' => $post->id])."'>
+                                        <button class='btn btn-warning btn-xs'>
+                                            <i class='fa fa-edit' aria-hidden='true'></i>Edit
+                                        </button></a>
+                                        <button class='btn btn-danger btn-xs' onclick='modal_get($(this));dts.ajax.reload();Swal.fire(".'"Delete Success"'.");' data-href='".route('admin.category.destroy', ['id' => $post->id])."' data-toggle='modal' data-method='get'>
+                                            <i class='fa fa-edit' aria-hidden='true'></i>Delete
+                                        </button>";
+                $data[] = $nestedData;
+            }
+        }
+          
+        $json_data = array(
+                "draw"            => intval($request->input('draw')),  
+                "recordsTotal"    => intval($totalData),  
+                "recordsFiltered" => intval($totalFiltered), 
+                "data"            => $data   
+            );
+            
+        echo json_encode($json_data);
+    }
     public function index(Request $request)
     {
-        $keyword = $request->get('search');
+        // $keyword = $request->get('search');
 
-        if (!empty($keyword)) {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
-        } else {
-            $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
-        }
+        // if (!empty($keyword)) {
+        //     $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
+        // } else {
+        //     $data['category'] = Category::where('position', 'like', '%'.$keyword.'%')->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->paginate($this->perPage);
+        // }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('admin.category.index', $data);
@@ -345,28 +444,23 @@ class CategoryController extends Controller
                                 "<'row'<'col-sm-12 text-center'tr>>" +
                                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                         "ajax":{
-                            "url": "<?php echo route("admin.category.index") ?>",
+                            "url": "<?php echo route("admin.category.index_json") ?>",
                             "dataType": "json",
                             "type": "POST",
                             "data":function(d){
                                 d._token = "<?php echo csrf_token()?>";
-                                d.dt_from = $('input[name=dt_from]').val();
-                                d.dt_to = $('input[name=dt_to]').val();
-                                d.dt_position = $('input[name=dt_position]').val();
 
                             }
                         },
                         "columns": [
-                            { "data": "id" },
-                            { "data": "category_parent_id" },
-                            { "data": "category_name" },
-                            { "data": "category_icon" },
-                            { "data": "category_slug" },
-                            { "data": "category_image" },
-                            { "data": "category_status" },
-                            { "data": "position" },
-                            { "data": "category_note" },
-                            { "data": "created_at" }
+                            { "data": 'id' },
+                            { "data": 'id2' },
+                            { "data": 'category_name' },
+                            { "data": 'id3' },
+                            { "data": 'id4' },
+                            { "data": 'position' },
+                            { "data": 'category_note' },
+                            { "data": 'id5' },
                         ]
                     });
                     </script>

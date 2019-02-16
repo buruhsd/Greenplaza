@@ -51,61 +51,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($category as $item)
-                                    <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>
-                                            {!! 
-                                                ($item->par['category_name'])
-                                                ?$item->par['category_name']
-                                                :"<button class='btn btn-danger btn-xs'>On Top</button>"
-                                            !!}
-                                        </td>
-                                        <td>{{ $item->category_name }}</td>
-                                            
-                                        @if ($item->category_parent_id == 0)
-                                            <td style="color: red">Parent Category</td>
-                                        @else 
-                                            <td style="color: blue">Child Category</td>
-                                        @endif
-                                        <!-- <td>{!! ($item->category_is_usable == 1)
-                                            ?"<button class='btn btn-success btn-xs'>Use</button>"
-                                            :"<button class='btn btn-danger btn-xs'>Not Use</button>" !!}</td> -->
-                                        <td>{!! ($item->category_status == 1)
-                                            ?"<button class='btn btn-success btn-xs'>Active</button>"
-                                            :"<button class='btn btn-danger btn-xs'>Not Active</button>" !!}</td>
-                                        <td><center>{{$item->position}}</center></td>
-                                        <td>{{ $item->category_note }}</td>
-                                        <td>
-                                            <a href="{{ url('/admin/category/show/' . $item->id) }}">
-                                                <button class="btn btn-info btn-xs">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>View
-                                                </button>
-                                            </a>
-                                            <a href="{{ url('/admin/category/edit/' . $item->id) }}">
-                                                <button class="btn btn-warning btn-xs">
-                                                    <i class="fa fa-edit" aria-hidden="true"></i>Edit
-                                                </button>
-                                            </a>
-                                            {!! Form::open([
-                                                'method'=>'DELETE',
-                                                'url' => ['/admin/category/destroy', $item->id],
-                                                'style' => 'display:inline'
-                                            ]) !!}
-                                                {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
-                                                        'class' => 'btn btn-danger btn-xs',
-                                                        'type' => 'submit',
-                                                        'title' => 'Delete blog',
-                                                        'onclick'=>'return confirm("Confirm delete?")'
-                                                )) !!}
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                
                             </tbody>
                         </table>
                     </div>
-                    <div> {!! $category->appends(['search' => Request::get('search')])->render() !!} </div>
+                    
                 </div>
             </div>
         </div>
@@ -117,7 +67,5 @@
         $('.input-tanggal').datepicker();       
     });
 </script>
-@endsection
-@section('scripts')
 @endsection
         

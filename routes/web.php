@@ -146,6 +146,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		});
 		Route::group(['prefix' => 'category', 'as' => '.category'], function () {
 			Route::get('/', 'Admin\\CategoryController@index')->name('.index');
+			Route::post('/', 'Admin\\CategoryController@index_json')->name('.index_json');
 			Route::get('/parent', 'Admin\\CategoryController@indexparent')->name('.indexparent');
 			Route::get('/child', 'Admin\\CategoryController@indexchild')->name('.indexchild');
 			Route::get('/create', 'Admin\\CategoryController@create')->name('.create');
@@ -153,7 +154,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/show/{id}', 'Admin\\CategoryController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\CategoryController@edit')->name('.edit');
 			Route::patch('/update/{id}', 'Admin\\CategoryController@update')->name('.update');
-			Route::delete('/destroy/{id}', 'Admin\\CategoryController@destroy')->name('.destroy');
+			Route::get('/destroy/{id}', 'Admin\\CategoryController@destroy')->name('.destroy');
 			// Route::post('/try/{id}', 'Admin\\CategoryController@try')->name('.try');
 		});
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
