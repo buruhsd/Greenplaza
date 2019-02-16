@@ -34,11 +34,11 @@
                             </li>
                             <li class="@yield('masedi')">
                                 <a href="">
-                                    <i class="menu-icon icon-layers"></i><span>Log Masedi</span><i class="accordion-icon fa fa-angle-left"></i>
+                                    <i class="menu-icon icon-layers"></i><span>Log Transaksi</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{FunctionLib::setActive('admin/list_transaction')}}"><a href="{{route('admin.list_masedi')}}">List Transaksi</a></li>
-                                    <!-- <li class="{{FunctionLib::setActive('admin/listsaldo_masedi')}}"><a href="{{route('admin.list_masedi_saldo')}}">List Saldo User</a></li> -->
+                                    <li class="{{FunctionLib::setActive('admin/list_transaction_masedi')}}"><a href="{{route('admin.list_masedi')}}">Transaksi Masedi</a></li>
+                                    <li class="{{FunctionLib::setActive('admin/list_transaction_gln')}}"><a href="{{route('admin.list_gln')}}">Transaksi Gln</a></li>
                                 </ul>
                             </li>
                             <li class="{{FunctionLib::setActive('admin/res_kom')}}">

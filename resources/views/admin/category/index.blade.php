@@ -36,7 +36,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="scroll_hor">
                             <thead>
                                 <tr>
                                     <th><center>ID</center></th>
@@ -117,5 +117,7 @@
         $('.input-tanggal').datepicker();       
     });
 </script>
+@endsection
+@section('scripts')
 @endsection
         

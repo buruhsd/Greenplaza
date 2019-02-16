@@ -8,7 +8,7 @@
             @include('layouts._flash')
             
             <div class="page-title">
-			    <h4 class="breadcrumb-header"><center>Laporan Transaksi Masedi</center></h3>
+			    <h4 class="breadcrumb-header"><center>Laporan Transaksi Greenline</center></h3>
 			</div>
 			<div class="panel panel-white">
                 <div class="panel-heading clearfix">
@@ -34,13 +34,13 @@
                             </thead>
                             
                             <tbody>
-                                @if(count($masedi) != 0)
-                                @foreach ($masedi as $key => $m)
+                                @if(count($gln) != 0)
+                                @foreach ($gln as $key => $m)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$m->pembeli->username}}</center></td>
                                     <td><center>{{$m->trans_code}}</center></td>
-                                    <td><center>Payment By Masedi</center></td>
+                                    <td><center>Payment By GLN</center></td>
                                     @if ($m->trans_paid_date == null)
                                     <td><center> - </center></td>
                                     @else 

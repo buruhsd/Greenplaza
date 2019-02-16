@@ -331,7 +331,45 @@ class CategoryController extends Controller
         switch ($method) {
             case 'index':
                 ?>
-                    <script type="text/javascript"></script>
+                    <link href="<?php echo asset('admin/datatables/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') ?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/datatables/extra-libs/DataTables/datatables.min.js') ?>"></script>
+                    <script type="text/javascript">
+
+                    var dts = $('#scroll_hor').DataTable({
+                        "processing": true,
+                        "serverSide": true,
+                        "filter": false,
+                        "dom": "<'row'<'col-sm-12 col-md-6'f>"+
+                                    "<'col-sm-12 col-md-6 justify-content-end'"+
+                                            "<'d-flex no-block justify-content-end align-items-center'l>>>" +
+                                "<'row'<'col-sm-12 text-center'tr>>" +
+                                "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                        "ajax":{
+                            "url": "<?php echo route("admin.category.index") ?>",
+                            "dataType": "json",
+                            "type": "POST",
+                            "data":function(d){
+                                d._token = "<?php echo csrf_token()?>";
+                                d.dt_from = $('input[name=dt_from]').val();
+                                d.dt_to = $('input[name=dt_to]').val();
+                                d.dt_position = $('input[name=dt_position]').val();
+
+                            }
+                        },
+                        "columns": [
+                            { "data": "id" },
+                            { "data": "category_parent_id" },
+                            { "data": "category_name" },
+                            { "data": "category_icon" },
+                            { "data": "category_slug" },
+                            { "data": "category_image" },
+                            { "data": "category_status" },
+                            { "data": "position" },
+                            { "data": "category_note" },
+                            { "data": "created_at" }
+                        ]
+                    });
+                    </script>
                 <?php
                 break;
             case 'create':

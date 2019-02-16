@@ -94,7 +94,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/resend_email/{id}', 'Admin\\EmailController@resend')->name('.resend_email');
 
 		//MasediController
-		Route::get('/list_transaction', 'Admin\\MasediController@list')->name('.list_masedi');
+		Route::get('/list_transaction_masedi', 'Admin\\MasediController@list')->name('.list_masedi');
+		Route::get('/list_transaction_gln', 'Admin\\MasediController@list_gln')->name('.list_gln');
 		Route::get('/listsaldo_masedi', 'Admin\\MasediController@listsaldo')->name('.list_masedi_saldo');
 
 		//PageController
