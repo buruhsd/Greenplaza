@@ -1622,4 +1622,41 @@ class FunctionLib
         return $total;
     }
 
+    /******/
+    public static function createXML($param=[]) {
+        extract($param);
+        $title = $title;
+        $rowCount = count($data);
+        
+        //create the xml document
+        $xmlDoc = new DOMDocument();
+        
+        $root = $xmlDoc->appendChild($xmlDoc->createElement("data_info"));
+        $root->appendChild($xmlDoc->createElement("title",$title));
+        $root->appendChild($xmlDoc->createElement("totalRows",$rowCount));
+        $tabUsers = $root->appendChild($xmlDoc->createElement('rows'));
+        
+        foreach($data as $item){
+            if(!empty($item)){
+                $tabData = $tabUsers->appendChild($xmlDoc->createElement('data'));
+                foreach($item as $key=>$value){
+                    $tabData->appendChild($xmlDoc->createElement($key, $value));
+                }
+            }
+        }
+        
+        header("Content-Type: text/plain");
+        
+        //make the output pretty
+        $xmlDoc->formatOutput = true;
+
+        //save xml file
+        $file_name = str_replace(' ', '_',$title).'_'.time().'.xml';
+        $public_path = public_path('assets/xml/');
+        $xmlDoc->save($public_path . $file_name);
+        
+        //return xml file name
+        return $file_name;
+    }
+
 }
