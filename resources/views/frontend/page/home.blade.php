@@ -85,15 +85,15 @@
                     @if (\Auth::check())
                         <div class="author-wrap">
                             @if (Auth::user()->user_detail->user_detail_image != null)
-                            <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px">
+                            <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px" onerror="this.src='{{ asset('assets/images/profil/nopic.png') }}'">
                             @else
-                            <img src="{{ asset('frontend/images/author.png') }}" alt="">
+                            <img src="{{ asset('assets/images/profil/nopic.png') }}" alt="">
                             @endif
                             <h4>{{Auth::user()->name}}</h4>
                         </div>
                     @else
                         <div class="author-wrap">
-                            <img src="{{asset('assets/images/iklan/'.$banner3->iklan_image)}}" style="height: 
+                            <img src="{{ asset('assets/images/profil/nopic.png') }}" style="height: 
                                 130px">
                         </div>
                     @endif
