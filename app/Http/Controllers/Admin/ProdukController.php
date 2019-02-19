@@ -273,7 +273,7 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Produk added!';
+        $message = 'Produk berhasil diubah!';
         
         $requestData = $request->all();
         
@@ -293,7 +293,7 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         if($produk->produk_seller_id !== Auth::user()->id || $produk->produk_user_status !== Auth::user()->roles->first()->id){
             $status = 500;
-            $message = 'Produk Not updated!';
+            $message = 'Produk gagal diubah!';
             return redirect('admin/needapproval/produkadmin')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
 
@@ -346,7 +346,7 @@ class ProdukController extends Controller
         // $res = $produk->update($requestData);
         if(!$produk){
             $status = 500;
-            $message = 'Produk Not Updated!';
+            $message = 'Produk gagal diubah!';
             return redirect('admin/needapproval/produkadmin')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
@@ -360,7 +360,7 @@ class ProdukController extends Controller
                 }
                 if(!$produk_image){
                     $status = 500;
-                    $message = 'Produk Image Not added!';
+                    $message = 'Produk Image gagal diubah!';
                     return redirect('admin/needapproval/produkadmin')
                         ->with(['flash_status' => $status,'flash_message' => $message]);
                 }
