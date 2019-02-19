@@ -243,17 +243,19 @@ class ProdukController extends Controller
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }else{
             // add produk image
-            foreach ($produk_image_image as $item) {
-                $produk_image = new Produk_image;
-                $produk_image->produk_image_produk_id = $res->id;
-                $produk_image->produk_image_image = $item;
-                $produk_image->save();
-            }
-            if(!$produk_image){
-                $status = 500;
-                $message = 'Produk Image Not added!';
-                return redirect('admin/produk')
-                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            if ($request->hasFile('input_file_preview')){
+                foreach ($produk_image_image as $item) {
+                    $produk_image = new Produk_image;
+                    $produk_image->produk_image_produk_id = $res->id;
+                    $produk_image->produk_image_image = $item;
+                    $produk_image->save();
+                }
+                if(!$produk_image){
+                    $status = 500;
+                    $message = 'Produk Image Not added!';
+                    return redirect('admin/produk')
+                        ->with(['flash_status' => $status,'flash_message' => $message]);
+                }
             }
             // add grosir
             if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
@@ -385,7 +387,7 @@ class ProdukController extends Controller
                 $produk_image_image[] = $imagename;
                 // $imaget->save($uploadPath2.'/'.$imagename,80);
                 if($produk->images->count() == 0 && $key == 0){
-                    $res->produk_image = $imagename;
+                    $produk->produk_image = $imagename;
                 }
             }
         }
@@ -402,7 +404,7 @@ class ProdukController extends Controller
             if ($request->hasFile('input_file_preview')){
                 foreach ($produk_image_image as $item) {
                     $produk_image = new Produk_image;
-                    $produk_image->produk_image_produk_id = $res->id;
+                    $produk_image->produk_image_produk_id = $produk->id;
                     $produk_image->produk_image_image = $item;
                     $produk_image->save();
                 }
