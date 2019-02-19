@@ -685,7 +685,7 @@
                                     </p>
                                     @endif
                                     <div class="tombol-product">
-                                    @if($n->user->seller_active())
+                                    @if($f->user->seller_active())
                                     <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$f->user->user_store}}</button></a></center>
                                     @endif
                                     </div>
