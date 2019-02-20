@@ -1285,6 +1285,9 @@ ul.rating li {
     padding-bottom: 10px;
     position: absolute;
 }
+.req-all{
+    padding-top: 150px;
+}
 
 .product-wrap:hover .product-content {
     border-color: #4caf50;

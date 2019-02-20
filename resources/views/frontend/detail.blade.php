@@ -4,7 +4,7 @@
 
 
 <!-- .shop-page-area start -->
-    <div class="shop-single-area">
+    <div class="shop-single-area req-all">
         <div class="container">
             <div class="row">
                 @include('layouts._flash')

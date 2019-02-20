@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- .shop-page-area start -->
-    <div class="shop-page-area">
+    <div class="shop-page-area req-all">
         <div class="container">
             <div class="row">
                 <div class="col-12">

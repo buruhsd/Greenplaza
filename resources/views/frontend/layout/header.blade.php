@@ -187,7 +187,7 @@
                                     @endif
                                 @endif
                                 <li>
-                                    <a onclick="event.preventDefault();
+                                    <a style="cursor: pointer;" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>

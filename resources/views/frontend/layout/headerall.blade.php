@@ -1,4 +1,4 @@
-    <header class="header-area">
+    <header class="header-area header-req">
         {{-- <div class="header-tor-area bg-1">
             <div class="container">
                 <div class="row">
@@ -187,7 +187,7 @@
                                     @endif
                                 @endif
                                 <li>
-                                    <a onclick="event.preventDefault();
+                                    <a style="cursor: pointer;" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>

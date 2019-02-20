@@ -39,7 +39,7 @@
         </div>
     </div> -->
     <!-- breadcumb-area start -->
-    <div class="breadcumb-area">
+    <div class="breadcumb-area req-all">
         <div class="container">
             <div class="row">
                 <div class="col-12">

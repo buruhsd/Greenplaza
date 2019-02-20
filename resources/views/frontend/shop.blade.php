@@ -2,7 +2,7 @@
 @section('title', 'Page Title')
 @section('content')
 <!-- breadcumb-area end -->
-    <div class="about-area mb-30">
+    <div class="about-area mb-30 req-all">
         <div class="container">
             <div class="row">
                 <div class="col-12">
