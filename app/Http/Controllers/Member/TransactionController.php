@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
-
+use RajaOngkir;
 
 class TransactionController extends Controller
 {
@@ -226,7 +226,7 @@ class TransactionController extends Controller
 
                             // update saldo transaksi
                             $update_wallet = [
-                                'user_id'=>$trans_detail->produk->produk_seller_id,
+                                'user_id'=>$trans_detail->trans->trans_user_id,
                                 'wallet_type'=>3,
                                 'amount'=>$trans_detail->trans_detail_amount_total,
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
@@ -252,7 +252,7 @@ class TransactionController extends Controller
 
                             // update saldo transaksi
                             $update_wallet = [
-                                'user_id'=>$trans_detail->produk->produk_seller_id,
+                                'user_id'=>$trans_detail->trans->trans_user_id,
                                 'wallet_type'=>3,
                                 'amount'=>$trans_detail->trans_detail_amount_total,
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
@@ -542,6 +542,16 @@ class TransactionController extends Controller
      */
     public function sales(Request $request)
     {
+        // $req = [
+        //     'data' => [
+        //         'waybill' => "17120066412",
+        //         'courier' => 'pos',
+        //     ]
+        // ];
+
+        // $shipment = RajaOngkir::waybill($req);
+        // $shipment = json_decode($shipment, true);
+        // dd($shipment);
         $arr = [
             "0" =>'chart',
             "1" =>'order',
