@@ -232,7 +232,8 @@ class TransactionController extends Controller
                         $trans_detail->trans_detail_note = $request->note;
                         $message = 'Shipment cancelled!';
 
-                            // update saldo transaksi
+                        // update saldo transaksi
+                        if($trans_detail->trans->trans_payment_id !== 4){
                             $update_wallet = [
                                 'user_id'=>$trans_detail->trans->trans_user_id,
                                 'wallet_type'=>3,
@@ -240,6 +241,7 @@ class TransactionController extends Controller
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
+                        }
                     }else{
                         $trans_detail->trans_detail_status = 5;
                         $trans_detail->trans_detail_packing = 1;
@@ -258,7 +260,8 @@ class TransactionController extends Controller
                         $trans_detail->trans_detail_note = $request->note;
                         $message = 'Shipment cancelled!';
 
-                            // update saldo transaksi
+                        // update saldo transaksi
+                        if($trans_detail->trans->trans_payment_id !== 4){
                             $update_wallet = [
                                 'user_id'=>$trans_detail->trans->trans_user_id,
                                 'wallet_type'=>3,
@@ -266,6 +269,7 @@ class TransactionController extends Controller
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
+                        }
                     }else{
                         $trans_detail->trans_detail_send = 0;
                         $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
