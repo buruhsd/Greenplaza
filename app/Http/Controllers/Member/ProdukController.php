@@ -188,6 +188,7 @@ class ProdukController extends Controller
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
+            'produk_height' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
             'produk_weight' => 'required|numeric',
@@ -207,6 +208,7 @@ class ProdukController extends Controller
         $res->produk_size = implode (",", $request->produk_size);
         $res->produk_length = $request->produk_length;
         $res->produk_wide = $request->produk_wide;
+        $res->produk_height = $request->produk_height;
         $res->produk_color = implode (",", $request->produk_color);
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
@@ -334,6 +336,7 @@ class ProdukController extends Controller
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
+            'produk_height' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
             'produk_weight' => 'required|numeric',
@@ -357,6 +360,7 @@ class ProdukController extends Controller
         $produk->produk_size = implode (",", $request->produk_size);
         $produk->produk_length = $request->produk_length;
         $produk->produk_wide = $request->produk_wide;
+        $produk->produk_height = $request->produk_height;
         $produk->produk_color = implode (",", $request->produk_color);
         $produk->produk_stock = $request->produk_stock;
         $produk->produk_weight = $request->produk_weight;
