@@ -144,10 +144,18 @@ class TransactionController extends Controller
             $trans_detail->save();
 
             // update saldo transaksi
+            $detail_amount = $trans_detail->trans_detail_amount;
+            $detail_amount_ship = $trans_detail->trans_detail_amount_ship;
+            $detail_fee = ($detail_amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+
+            $detail_amount = round($detail_amount,8, PHP_ROUND_HALF_DOWN);
+            $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
+            $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
+            $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
             $update_wallet = [
                 'user_id'=>$trans_detail->produk->produk_seller_id,
                 'wallet_type'=>3,
-                'amount'=>$trans_detail->trans_detail_amount_total,
+                'amount'=>$detail_amount_total,
                 'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
             ];
             $saldo = FunctionLib::update_wallet($update_wallet, 'transaction');
