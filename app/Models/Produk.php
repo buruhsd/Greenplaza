@@ -14,7 +14,7 @@ class Produk extends Model
      * @var array
      */
     protected $fillable = [
-		'produk_seller_id','produk_category_id','produk_brand_id','produk_name','produk_slug','produk_unit','produk_price','produk_size','produk_length','produk_wide','produk_color','produk_stock','produk_weight','produk_discount','produk_location','produk_image','produk_viewer','produk_status','produk_user_status','produk_is_best','produk_is_hot', 'produk_hotlist','produk_note',
+		'produk_seller_id','produk_category_id','produk_brand_id','produk_name','produk_slug','produk_unit','produk_price','produk_size','produk_length','produk_wide','produk_height','produk_color','produk_stock','produk_weight','produk_discount','produk_location','produk_image','produk_viewer','produk_status','produk_user_status','produk_is_best','produk_is_hot', 'produk_hotlist','produk_note',
     ];
 
     /**

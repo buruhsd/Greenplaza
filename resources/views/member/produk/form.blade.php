@@ -360,6 +360,20 @@
                 </div>
             {!! $errors->first('produk_wide', '<p class="help-block">:message</p>') !!}
             </div>
+        </div><div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_height') ? 'has-error' : ''}}">
+            {!! Form::label('produk_height', 'Tinggi : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                <div class="input-group">
+                    {!! Form::number('produk_height', null, [
+                        'min' => '0',
+                        'class' => 'form-control', 
+                        'placeholder' => 'Tinggi', 
+                        'required'
+                    ])!!}
+                    <span class="input-group-addon">mm</span>
+                </div>
+            {!! $errors->first('produk_height', '<p class="help-block">:message</p>') !!}
+            </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_color') ? 'has-error' : ''}}">
             {!! Form::label('produk_color', 'Warna : ', ['class' => 'col-md-3 control-label']) !!}
