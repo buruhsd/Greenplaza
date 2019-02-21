@@ -87,6 +87,8 @@
                                                 <li>Amount Ship : {{$item->trans_amount_ship}}</li>
                                                 <li>Amount Total : {{$item->trans_amount_total}}</li>
                                                 <li>Date : {{$item->created_at}}</li>
+                                                <li>Jasa Pengiriman : {{$item->trans_detail->first()->shipment->shipment_name}}</li>
+                                                <li><b>&nbsp;&nbsp;-> {{$item->trans_detail->first()->trans_detail_shipment_service}}</b></li>
                                                 <li>Total Transaksi : <button class="btn btn-warning btn-xs">{{$item->count_detail}}</button></li>
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
@@ -110,7 +112,7 @@
                                                 :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
                                         </td>
                                         <td scope="row">
-                                            {!!Plugin::trans_purchase_btn(['id'=>$item->id, 'type'=>'seller', 'trans_status'=>isset($_GET['status'])?$_GET['status']:'all'])!!}
+                                            {!!Plugin::trans_purchase_btn(['id'=>$item->id, 'type'=>'seller'])!!}
                                             {{-- <a href="{{route('member.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
                                             <a href="{{route('member.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a> --}}
                                             {{-- <a href="{{route('member.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a> --}}

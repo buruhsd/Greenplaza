@@ -56,6 +56,7 @@ class ChartController extends Controller
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],
 			'trans_detail_shipment_id' => $courier,
+            'trans_detail_shipment_service' => $request->ship_service,
 			'trans_detail_user_address_id' => intval($request->address_id),
 			'trans_detail_no_resi' => "",
 			'trans_detail_qty' => $request->qty,

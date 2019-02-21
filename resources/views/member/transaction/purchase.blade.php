@@ -88,6 +88,8 @@
                                                 <li>Amount Ship : {{$item->trans_amount_ship}}</li>
                                                 <li>Amount Total : {{$item->trans_amount_total}}</li>
                                                 <li>Date : {{$item->created_at}}</li>
+                                                <li>Jasa Pengiriman : {{$item->trans_detail->first()->shipment->shipment_name}}</li>
+                                                <li><b>&nbsp;&nbsp;-> {{$item->trans_detail->first()->trans_detail_shipment_service}}</b></li>
                                                 <li>Total Transaksi : <button class="btn btn-warning btn-xs">{{$item->count_detail}}</button></li>
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}

@@ -19,6 +19,7 @@
                             </div>
                         @else
                             <input type="text" name="address_id" id="address_id" value="{{Auth::user()->user_address()->first()['id']}}" hidden/>
+                            <input type="text" name="ship_service" id="ship_service" value="none" hidden/>
                             <input type="text" name="ship_cost" id="ship_cost" value="0" hidden/>
                             <input type="text" name="origin" id="origin" value="{{$detail->user->user_address()->first()['user_address_subdist']}}" hidden/>
                             <input type="text" name="originType" id="originType" value="subdistrict" hidden/>
@@ -34,6 +35,7 @@
                                     {!! Form::text('qty', 1, [
                                         'class' => 'form-control', 
                                         'placeholder' => 'Label', 
+                                        'id' => 'qty', 
                                         'required'
                                     ])!!}
                                     {!! $errors->first('address_label', '<p class="help-block">:message</p>') !!}
@@ -46,7 +48,7 @@
                                 <b>To Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b>
                             </div>
                             <div class="col-md-12">
-                                <select name="courier" class="form-control">
+                                <select name="courier" id="courier" class="form-control">
                                     @foreach($shipment_type as $item)
                                         <option value="{{ strtolower($item->shipment_name) }}">{{$item->shipment_name}}</option>
                                     @endforeach
@@ -81,7 +83,7 @@
                             <div class="col-md-6 {{ $errors->has('size') ? 'has-error' : ''}}">
                                 {!! Form::label('size', 'Size : ', ['class' => 'col-md-12 control-label']) !!}
                                 <div class="col-md-12">
-                                    <div class="btn-group" data-toggle="buttons">
+                                    <div class="" data-toggle="buttons">
                                         @foreach($size as $item)
                                             @if ($loop->first)
                                                 <label class="border1 btn btn-default active">
@@ -128,7 +130,7 @@
             <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close">
             @guest
             @else
-                <input type="submit" onclick="$('#form-chart').submit();" class="btn btn-success" value="Save">
+                <input type="submit" onclick="$('#form-chart').submit();" class="btn btn-success" value="Tambah ke Keranjang">
             @endguest
         </div>
         {!! Form::close() !!}
@@ -177,6 +179,7 @@
         html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
         $("#shipment-price").empty();
         $("#ship-cost").empty().append(html);
+        $('#ship_service').attr('value', ongkir);
         $('#ship_cost').attr('value', ongkir);
         console.log(service, ongkir);
     }
@@ -188,7 +191,24 @@
         $('#destination').attr('value', subdistrict);
         var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
         $("#address-info").empty().append(html);
+        empty_ongkir();
     }
+    function empty_ongkir(){
+        $("#ship-cost").empty();
+        $('#ship_cost').attr('value', 0);
+    }
+    function changed(){
+            console.log('tes2');
+        $('#qty').on('change', function(){
+            console.log('tes3');
+            empty_ongkir();
+        });
+        $('#courier').on('change', function(){
+            console.log('tes4');
+            empty_ongkir();
+        });
+    }
+    changed();
     function modal_get2(e){
         $.ajax({
             type: e.data('method'), // or post?

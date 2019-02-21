@@ -226,23 +226,27 @@ class ModalController extends Controller
      */
     public function transDetail(Request $request, $id)
     {
+        $where = "1";
         if($request->has('type') && $request->type == 'seller' && $request->has('trans_status')){
             $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
-            if($request->trans_status == 'cancel' || $request->trans_status == 'komplain'){
-                $where .= " AND trans_detail_is_cancel = 1";
-            }else{
-                $where .= " AND trans_detail_is_cancel != 1";
+            if($request->trans_status !== 'all'){
+                if($request->trans_status == 'cancel' || $request->trans_status == 'komplain'){
+                    $where .= " AND trans_detail_is_cancel = 1";
+                }else{
+                    $where .= " AND trans_detail_is_cancel != 1";
+                }
             }
             $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
                 ->whereRaw($where)
                 ->get();
             $data['type'] = 'seller';
         }elseif($request->has('type') && $request->type == 'buyer' && $request->has('trans_status')){
-            $where = "1";
-            if($request->trans_status == 'cancel' || $request->trans_status == 'komplain'){
-                $where .= " AND trans_detail_is_cancel = 1";
-            }else{
-                $where .= " AND trans_detail_is_cancel != 1";
+            if($request->trans_status !== 'all'){
+                if($request->trans_status == 'cancel' || $request->trans_status == 'komplain'){
+                    $where .= " AND trans_detail_is_cancel = 1";
+                }else{
+                    $where .= " AND trans_detail_is_cancel != 1";
+                }
             }
             $trans = Trans::whereId($id)->first();
             $data['trans_detail'] = $trans->trans_detail()->whereRaw($where)->get();

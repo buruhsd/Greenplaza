@@ -139,6 +139,7 @@
                                     <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                         <div class="panel-body">
                                             <p class="stats-info">Saldo Gln : 
+                                                {{-- <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : <button onclick=copyToClipboard($('#saldo_gln'));><i class='fa fa-copy'></i></button>" data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button> --}}
                                                 <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : " data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button>
                                                 <br/>
                                                 <b>GLN.&nbsp;</b>

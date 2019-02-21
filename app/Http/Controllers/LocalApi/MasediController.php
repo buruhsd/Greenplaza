@@ -109,6 +109,7 @@ class MasediController extends Controller
                     $transDetail->trans_code = $item['trans_code'];
                     $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
                     $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
+                    $transDetail->trans_detail_shipment_service = $item['trans_detail_shipment_service'];
                     $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
                     $transDetail->trans_detail_qty = $item['trans_detail_qty'];
                     $transDetail->trans_detail_size = $item['trans_detail_size'];//'s,m,l,xl';

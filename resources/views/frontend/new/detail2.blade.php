@@ -90,6 +90,7 @@
                                         </div>
                                     @else
                                     <input type="text" name="address_id" id="address_id" value="{{Auth::user()->user_address()->first()['id']}}" hidden/>
+                                    <input type="text" name="ship_service" id="ship_service" value="none" hidden/>
                                     <input type="text" name="ship_cost" id="ship_cost" value="0" hidden/>
                                     <input type="text" name="origin" id="origin" value="{{$detail->user->user_address()->first()['user_address_subdist']}}" hidden/>
                                     <input type="text" name="originType" id="originType" value="subdistrict" hidden/>
@@ -186,7 +187,7 @@
                                     <div class="product-size {{ $errors->has('size') ? 'has-error' : ''}}">
                                         {!! Form::label('size', 'Size : ', ['class' => 'col-md-12 control-label']) !!}
                                         <div class="col-md-12">
-                                            <div class="btn-group" data-toggle="buttons">
+                                            <div class="" data-toggle="buttons">
                                                 @foreach($size as $item)
                                                     @if ($loop->first)
                                                         <label class="border1 btn btn-default active">
@@ -549,14 +550,9 @@
             html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
             $("#shipment-price").empty();
             $("#ship-cost").empty().append(html);
+            $('#ship_service').attr('value', service);
             $('#ship_cost').attr('value', ongkir);
             // console.log(service, ongkir);
-            $('#qty').on('change', function(){
-                empty_ongkir();
-            });
-            $('#courier').on('change', function(){
-                empty_ongkir();
-            });
         }
         function use_address(id, address_name, city, subdistrict){
             $("#ajax-modal").modal("hide")
@@ -573,5 +569,14 @@
             $("#ship-cost").empty();
             $('#ship_cost').attr('value', 0);
         }
+        function changed(){
+            $('#qty').on('change', function(){
+                empty_ongkir();
+            });
+            $('#courier').on('change', function(){
+                empty_ongkir();
+            });
+        }
+        changed();
     </script>
 @endsection
