@@ -178,7 +178,7 @@ class FunctionLib
                 $response = json_decode($response, true);
                 if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
-                    $message = 'Wallet berhasil dibuat';
+                    $message = 'Wallet berhasil didapat';
                 }
             break;
             case 'list':

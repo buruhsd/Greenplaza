@@ -29,7 +29,7 @@ class ContentController extends Controller
         $address = ($address !== "")?$address:Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
         $response = FunctionLib::gln('ballance', ['address'=>$address]);
         if($response['status'] == 200){
-            $return = $response['data']['ballance'];
+            $return = $response['data']['balance'];
         }else{
             $return = 0;
         }

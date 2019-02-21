@@ -147,7 +147,7 @@
                                                     <?php
                                                     $response = FunctionLib::gln('ballance', ['address'=>Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address]);
                                                     if($response['status'] == 200){
-                                                        echo $response['data']['ballance'];
+                                                        echo $response['data']['balance'];
                                                     }else{
                                                         echo "0,00";
                                                     }

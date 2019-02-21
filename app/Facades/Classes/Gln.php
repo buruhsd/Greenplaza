@@ -93,7 +93,7 @@ class Gln extends Controller
     */
     public function ballance($param= []){
         extract($param);
-        $url = $this->__api_server.'/ballance/'.$this->__api_key.'/'.$address;
+        $url = $this->__api_server.'/balance/'.$this->__api_key.'/'.$address;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
