@@ -39,7 +39,7 @@
 	            type: 'get', // or post?
 	            url: '{{url('localapi/content/ballance_gln')}}/'+address, // change as needed
 	            success: function(data) {
-	                $('#saldo_gln').html(parseFloat(data).toFixed(2).toString().replace(".", ","));
+	                $('#saldo_gln').html(parseFloat(data).toFixed(8).toString().replace(".", ","));
 	                // $('#produk_hotlist').val(data);
 	            }
 	        });

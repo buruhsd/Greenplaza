@@ -142,17 +142,17 @@
                                                 {{-- <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : <button onclick=copyToClipboard($('#saldo_gln'));><i class='fa fa-copy'></i></button>" data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button> --}}
                                                 <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : " data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button>
                                                 <br/>
-                                                <b>GLN.&nbsp;</b>
+                                                <b><small>GLN.&nbsp;</b>
                                                 <b id="saldo_gln">
                                                     <?php
                                                     $response = FunctionLib::gln('ballance', ['address'=>Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address]);
                                                     if($response['status'] == 200){
-                                                        echo $response['data']['balance'];
+                                                        echo FunctionLib::number_to_text($response['data']['balance'], 8);
                                                     }else{
                                                         echo "0,00";
                                                     }
                                                     ?>
-                                                </b>
+                                                </small></b>
                                             </p>
                                         </div>
                                     </div>
