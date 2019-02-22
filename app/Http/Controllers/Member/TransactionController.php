@@ -46,6 +46,7 @@ class TransactionController extends Controller
         $amount = 0;
         $fee = 0;
         $no = 0;
+        print_r(1);
         if(!Trans::whereRaw('trans_code="'.$order_id.'"')->first()->trans_gln()->exists()){            
             foreach ($trans as $item) {
                 foreach ($item->trans_detail as $item2) {
@@ -78,6 +79,7 @@ class TransactionController extends Controller
                     $detail[$no]['trans_gln_note']='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
                     $amount_total = $amount_total + $detail_amount_total;
                     $no++;
+                    print_r(2);
                 }
             }
             foreach ($detail as $item) {
@@ -94,18 +96,22 @@ class TransactionController extends Controller
                 $gln->trans_gln_amount_total=$item['trans_gln_amount_total'];
                 $gln->trans_gln_note=$item['trans_gln_note'];
                 $gln->save();
+                print_r(3);
             }
         }else{
             foreach ($trans as $item) {
                 $amount_total = $amount_total + FunctionLib::array_sum_key($item->trans_gln()->get()->toArray(), 'trans_gln_amount_total');
+                print_r(4);
             }
         }
         $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        print_r(5);
         if($transfer['status'] == 500){
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
             return redirect('member.transaction.purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
+            print_r(6);
         }
         foreach ($trans as $item) {
             $gln = $item->trans_gln()->get();
@@ -113,13 +119,16 @@ class TransactionController extends Controller
                 $item->trans_gln_status=1;
                 $item->save();
             }
+            print_r(7);
         }
 
         $response = FunctionLib::done_gln($data);
         if($response['status'] == 500){
             $status = $response['status'];
             $message = $response['message'];
+            print_r(8);
         }
+        print_r(9);
         return redirect('member.transaction.purchase')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
