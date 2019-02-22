@@ -32,7 +32,7 @@
                             <?php 
                             $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
                             $amount = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount');
-                            $fee = ($amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                            $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
                             $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
                             ?>
                             / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small>#bisa berubah setiap saat.</small>

@@ -52,7 +52,7 @@ class TransactionController extends Controller
                     // rupiah
                     $detail_amount = $item2->trans_detail_amount;
                     $detail_amount_ship = $item2->trans_detail_amount_ship;
-                    $detail_fee = ($detail_amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                    $detail_fee = ($detail_amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
                     // gln
                     $detail_amount = $detail_amount / FunctionLib::gln('compare',[])['data'];
                     $detail_amount = round($detail_amount,8, PHP_ROUND_HALF_DOWN);
@@ -108,7 +108,7 @@ class TransactionController extends Controller
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         foreach ($trans as $item) {
-            $gln = $item->gln->get();
+            $gln = $item->trans_gln()->get();
             foreach ($gln as $item) {
                 $item->trans_gln_status=1;
                 $item->save();
@@ -152,13 +152,15 @@ class TransactionController extends Controller
             $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
             $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
             $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
-            $update_wallet = [
-                'user_id'=>$trans_detail->produk->produk_seller_id,
-                'wallet_type'=>3,
-                'amount'=>$detail_amount_total,
-                'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-            ];
-            $saldo = FunctionLib::update_wallet($update_wallet, 'transaction');
+            if($trans_detail->trans->trans_payment_id !== 4){
+                $update_wallet = [
+                    'user_id'=>$trans_detail->produk->produk_seller_id,
+                    'wallet_type'=>3,
+                    'amount'=>$detail_amount_total,
+                    'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet, 'transaction');
+            }
         }
         if(!$trans_detail){
             $status = 500;

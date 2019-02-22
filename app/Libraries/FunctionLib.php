@@ -169,7 +169,7 @@ class FunctionLib
                 $response = json_decode($response, true);
                 if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
-                    $message = 'Wallet berhasil dibuat';
+                    $message = 'Transfer Wallet berhasil.';
                 }
                 // "{"success":false,"data":{"message":"failed ! please check your password and addres wallet"}}"
             break;
@@ -186,7 +186,7 @@ class FunctionLib
                 $response = json_decode($response, true);
                 if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
-                    $message = 'Wallet berhasil dibuat';
+                    $message = 'List Wallet berhasil didapatkan.';
                 }
                 // "{"success":true,"data":[{"id":1579,"user_id":218,"label":"coba","address":"49uM7bUnHkkFBroa9L4iI3RpDuaQkNUcH","private":"4f5a7fd80a6455911f0bb108e7dbf96fa31c385a1b3bf6608df9080f931c82c10db6b3f089db3b6d8e01ac2b45c86c7d45f9aaac716461c8504b1920f2a8cabb","public":"121607ceaf31e67274eda92fbc1976a077d42a05529b4d1d22ed8d48227816a4341bbb9a3b57a4a02d8c28f419188815ca713503817b543188ab745605eaed2a","password":"eyJpdiI6IkhCenRTSkhhQVMyM2FjTXB4S0FvV1E9PSIsInZhbHVlIjoiMUVGVFE3Y2VieUxOUkt1bzVJQnJlZz09IiwibWFjIjoiZWZmYmJjODRlM2MzZDJiNzY3MmNmY2Y0M2IwY2FhMDg3MTg1MDRiYWI3NTMxZGM3NDU2NWMzNWYyNTdmYmE4NiJ9","created_at":"2019-02-11 17:06:58","updated_at":"2019-02-11 17:06:58"}]}
             break;
