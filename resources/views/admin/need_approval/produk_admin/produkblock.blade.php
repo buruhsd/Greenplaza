@@ -23,8 +23,8 @@
                         <a href="{{ url('admin/produk/create') }}" class="btn btn-primary btn-sm pull-right">Add New Produk</a>
                     </div>
                     <div class="col-md-12 pull-right" style="margin-top: 2%">
-                        <a href="{{url('admin/needapproval/produkadmin')}}"><button class='btn btn-info'>Active<span class="label label-default pull-right">{{$produk->count()}}</span></button></a>
-                        <a href="{{url('admin/needapproval/produkadmin_block')}}"><button class='btn btn-info'>Block<span class="label label-default pull-right">{{$produk1->count()}}</span></button></a>
+                        <a href="{{url('admin/needapproval/produkadmin')}}"><button class='btn btn-info'>Active<span class="label label-default pull-right">{{$produk1->count()}}</span></button></a>
+                        <a href="{{url('admin/needapproval/produkadmin_block')}}"><button class='btn btn-info'>Block<span class="label label-default pull-right">{{$produk->count()}}</span></button></a>
                     </div>
                 </div>
                 <div class="panel-body">

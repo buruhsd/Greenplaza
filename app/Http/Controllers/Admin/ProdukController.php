@@ -100,6 +100,29 @@ class ProdukController extends Controller
         return view('admin.produk.index', $data);
     }
 
+    public function block (Request $request, $id)
+    {
+        $status = 500;
+        $message = 'Produk Blocked!';
+        $produk = Produk::find($id);
+        $produk->produk_status = 2;
+        $produk->save();
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+
+    }
+    public function active (Request $request, $id)
+    {
+        $status = 200;
+        $message = 'Produk Actived!';
+        $produk = Produk::find($id);
+        $produk->produk_status = 1;
+        $produk->save();
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *

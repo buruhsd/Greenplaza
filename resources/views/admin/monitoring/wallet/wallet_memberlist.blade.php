@@ -46,6 +46,12 @@
                                         Saldo Transaksi :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '3')->first()->wallet_ballance}} <br/>
                                         Saldo Iklan :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '4')->first()->wallet_ballance}} <br/>
                                         Saldo Pincode :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '5')->first()->wallet_ballance}} <br/>
+                                    @if (App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '6')->first())
+                                        Saldo Masedi :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '6')->first()->wallet_ballance}} <br/>
+                                    @endif
+                                    @if (App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first())
+                                        Saldo Greenline :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_ballance}} <br/>
+                                    @endif
                                     </center></td>
                                     <td><center>
                                         CW <br/>

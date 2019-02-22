@@ -386,8 +386,20 @@ class NeedApprovalController extends Controller
                 return $query;
             })
            ->pluck('id')->toArray();
-        $produk = Produk::whereIn('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
-        return view('admin.need_approval.produk_admin.produkadmin', compact('users', 'produk'));
+        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC')->get();
+        $produk1 = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC')->get();
+        return view('admin.need_approval.produk_admin.produkadmin', compact('users', 'produk', 'produk1'));
+    }
+    public function produkadmin_block ()
+    {
+        $users = User::whereHas('roles', function($query){
+                $query->where('name','=','admin');
+                return $query;
+            })
+           ->pluck('id')->toArray();
+        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC')->get();
+        $produk1 = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC')->get();
+        return view('admin.need_approval.produk_admin.produkblock', compact('users', 'produk', 'produk1'));
     }
     public function create_produk ()
     {
@@ -399,5 +411,28 @@ class NeedApprovalController extends Controller
         $data['brand'] = Brand::all();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.need_approval.produk_admin.create', $data);
+    }
+
+    public function block (Request $request, $id)
+    {
+        $status = 500;
+        $message = 'Produk Blocked!';
+        $produk = Produk::find($id);
+        $produk->produk_status = 2;
+        $produk->save();
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+
+    }
+    public function active (Request $request, $id)
+    {
+        $status = 200;
+        $message = 'Produk Actived!';
+        $produk = Produk::find($id);
+        $produk->produk_status = 1;
+        $produk->save();
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+
     }
 }

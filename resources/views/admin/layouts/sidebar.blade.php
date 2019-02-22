@@ -150,6 +150,7 @@
                                         @if(Auth::user()->is_superadmin())
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/tambah_akunadmin')}}"><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
                                         @endif
+                                        <li class="{{FunctionLib::setActive('admin/konfigurasi/set_shipment_admin')}}"><a href="{{route('admin.konfigurasi.set_shipment_admin')}}">Atur Kurir</a></li>
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/grademember')}}"><a href="{{route('admin.konfigurasi.grademember')}}">Grade</a></li>
                                         <!-- <li><a href="#">Grade Seller</a></li> -->
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/pagelist')}}"><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>

@@ -50,8 +50,8 @@
                                     <th>Foto Produk</th>
                                     <th>Detail Produk</th>
                                     <th>Detail Seller</th>
-                                    <th>Status</th><!-- 
-                                    <th>Action</th> -->
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -82,6 +82,14 @@
                                                 ?"<button class='btn btn-success btn-xs'>Active</button>"
                                                 :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
                                         </td>
+                                        <td scope="row">
+                                            @if ($item->produk_status == 1)
+                                                <a href="{{route('admin.produk.block', $item->id)}}" class='btn btn-danger btn-xs'>BLock</a>
+                                            @else 
+                                                <a href="{{route('admin.produk.active', $item->id)}}" class='btn btn-success btn-xs'>Active</a>
+                                            @endif
+                                        </td>
+
                                         <!-- <td scope="row">
                                             <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
                                             <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>

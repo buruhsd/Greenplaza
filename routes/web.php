@@ -172,6 +172,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/', 'Admin\\ProdukController@index')->name('.index');
 			Route::get('/create', 'Admin\\ProdukController@create')->name('.create');
 			Route::post('/store', 'Admin\\ProdukController@store')->name('.store');
+			Route::get('/block/{id}', 'Admin\\ProdukController@block')->name('.block');
+			Route::get('/active/{id}', 'Admin\\ProdukController@active')->name('.active');
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
 			Route::patch('update/{id}', 'Admin\\ProdukController@update')->name('.update');
@@ -248,7 +250,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('changepassword_seller/{id}', 'Admin\\NeedApprovalController@changepassword_seller')->name('.changepassword_seller');
 			//PRODUK ADMIN
 			Route::get('produkadmin', 'Admin\\NeedApprovalController@produkadmin')->name('.produkadmin');
+			Route::get('produkadmin_block', 'Admin\\NeedApprovalController@produkadmin_block')->name('.produkadmin_block');
 			Route::get('create_produkadmin', 'Admin\\NeedApprovalController@create_produk')->name('.create_produk');
+			Route::get('/block_product/{id}', 'Admin\\ProdukController@block')->name('.block');
+			Route::get('/active_product/{id}', 'Admin\\ProdukController@active')->name('.active');
 
 
 			//TRANSAKSI HOTLIST
@@ -335,6 +340,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			//UPDATE PASS
 			Route::get('updatepassword', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
 			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
+
+			//ATURKURIR
+			Route::get('/set_shipment_admin', 'Admin\\KonfigurasiController@set_shipment')->name('.set_shipment_admin');
+			Route::post('/set_shipment_update_admin', 'Admin\\KonfigurasiController@set_shipment_update')->name('.set_shipment_update_admin');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
