@@ -39,16 +39,14 @@ class TransactionController extends Controller
             return redirect('member.transaction.purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        $trans = Trans::whereRaw('trans_code="'.$order_id.'"')->get();
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = FunctionLib::get_config('profil_gln_address');
         
         $amount_total = 0;
         $amount = 0;
         $fee = 0;
-        $no = 0;
-        print_r(1);
-        if(!Trans::whereRaw('trans_code="'.$order_id.'"')->first()->trans_gln()->exists()){            
-            foreach ($trans as $item) {
+        if(!$trans->first()->trans_gln()->exists()){            
+            foreach ($trans->get() as $item) {
                 foreach ($item->trans_detail as $item2) {
                     // rupiah
                     $detail_amount = $item2->trans_detail_amount;
@@ -66,69 +64,49 @@ class TransactionController extends Controller
                     $wallet_to = ($item2->produk->user->wallet()->where('wallet_type', 7)->exists())
                         ?$item2->produk->user->wallet()->where('wallet_type', 7)->first()->wallet_address
                         :$item2->produk->user->id;
-                    $detail[$no]['trans_gln_form']=$address_gln;
-                    $detail[$no]['trans_gln_admin']=$to_address;
-                    $detail[$no]['trans_gln_to']=$wallet_to;
-                    $detail[$no]['trans_gln_trans_id']=$item2->trans->id;
-                    $detail[$no]['trans_gln_trans_code']=$item2->trans->trans_code;
-                    $detail[$no]['trans_gln_detail_id']=$item2->id;
-                    $detail[$no]['trans_gln_detail_code']=$item2->trans_code;
-                    $detail[$no]['trans_gln_amount']=$detail_amount+$detail_amount_ship;
-                    $detail[$no]['trans_gln_amount_fee']=$detail_fee;
-                    $detail[$no]['trans_gln_amount_total']=$detail_amount_total;
-                    $detail[$no]['trans_gln_note']='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
+
+                    // simpan trans gln 
+                    $gln = new Trans_gln;
+                    $gln->trans_gln_form=$address_gln;
+                    $gln->trans_gln_admin=$to_address;
+                    $gln->trans_gln_to=$wallet_to;
+                    $gln->trans_gln_trans_id=$item2->trans->id;
+                    $gln->trans_gln_trans_code=$item2->trans->trans_code;
+                    $gln->trans_gln_detail_id=$item2->id;
+                    $gln->trans_gln_detail_code=$item2->trans_code;
+                    $gln->trans_gln_amount=$detail_amount+$detail_amount_ship;
+                    $gln->trans_gln_amount_fee=$detail_fee;
+                    $gln->trans_gln_amount_total=$detail_amount_total;
+                    $gln->trans_gln_note='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
+                    $gln->save();
+
                     $amount_total = $amount_total + $detail_amount_total;
-                    $no++;
-                    print_r(2);
                 }
             }
-            foreach ($detail as $item) {
-                $gln = new Trans_gln;
-                $gln->trans_gln_form=$item['trans_gln_form'];
-                $gln->trans_gln_admin=$item['trans_gln_admin'];
-                $gln->trans_gln_to=$item['trans_gln_to'];
-                $gln->trans_gln_trans_id=$item['trans_gln_trans_id'];
-                $gln->trans_gln_trans_code=$item['trans_gln_trans_code'];
-                $gln->trans_gln_detail_id=$item['trans_gln_detail_id'];
-                $gln->trans_gln_detail_code=$item['trans_gln_detail_code'];
-                $gln->trans_gln_amount=$item['trans_gln_amount'];
-                $gln->trans_gln_amount_fee=$item['trans_gln_amount_fee'];
-                $gln->trans_gln_amount_total=$item['trans_gln_amount_total'];
-                $gln->trans_gln_note=$item['trans_gln_note'];
-                $gln->save();
-                print_r(3);
-            }
         }else{
-            foreach ($trans as $item) {
+            foreach ($trans->get() as $item) {
                 $amount_total = $amount_total + FunctionLib::array_sum_key($item->trans_gln()->get()->toArray(), 'trans_gln_amount_total');
-                print_r(4);
             }
         }
         $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
-        print_r(5);
-        if($transfer['status'] == 500){
+        if($transfer['status'] == 200){
+            foreach ($trans->get() as $item) {
+                $gln = $item->trans_gln()->get();
+                foreach ($gln as $item) {
+                    $item->trans_gln_status=1;
+                    $item->save();
+                }
+            }
+
+            $response = FunctionLib::done_gln($data);
+            if($response['status'] == 500){
+                $status = $response['status'];
+                $message = $response['message'];
+            }
+        }else{
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
-            return redirect('member.transaction.purchase')
-               ->with(['flash_status' => $status,'flash_message' => $message]);
-            print_r(6);
         }
-        foreach ($trans as $item) {
-            $gln = $item->trans_gln()->get();
-            foreach ($gln as $item) {
-                $item->trans_gln_status=1;
-                $item->save();
-            }
-            print_r(7);
-        }
-
-        $response = FunctionLib::done_gln($data);
-        if($response['status'] == 500){
-            $status = $response['status'];
-            $message = $response['message'];
-            print_r(8);
-        }
-        print_r(9);
         return redirect('member.transaction.purchase')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
