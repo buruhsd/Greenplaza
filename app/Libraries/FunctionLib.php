@@ -33,8 +33,8 @@ class FunctionLib
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
-                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
-                    if($trans->trans_is_paid == 1){
+                    $trans_one = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans_one->trans_is_paid == 1){
                         $response['status'] = 500;
                         $response['message'] = 'Transaksi sudah dibayar.';
                         $response['data'][] = "";
@@ -170,6 +170,19 @@ class FunctionLib
                 if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
                     $message = 'Transfer Wallet berhasil.';
+                    $wallet = App\Models\Wallet::where('wallet_address', $address)->first();
+                    $log = [
+                        'wallet_type_log'=> 'transfer gln', 
+                        'wallet_type'=> 7, 
+                        'wallet_user_id'=> $wallet->wallet_user_id, 
+                        'wallet_user_name'=> $wallet->user->username, 
+                        'wallet_ballance_before'=> 0, 
+                        'wallet_ballance_after'=> $amount*(-1), 
+                        'wallet_cash_in'=> 0, 
+                        'wallet_cash_out'=> $amount, 
+                        'wallet_note'=> "pengurangan saldo ".$wallet->type->wallet_type_name." sebesar ".$amount, 
+                    ];
+                    App\Models\Log_wallet::create($log);
                 }
                 // "{"success":false,"data":{"message":"failed ! please check your password and addres wallet"}}"
             break;

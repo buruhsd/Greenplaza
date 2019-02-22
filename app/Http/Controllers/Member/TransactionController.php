@@ -36,7 +36,7 @@ class TransactionController extends Controller
         if($response['status'] == 500){
             $status = 500;
             $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
-            return redirect('member.transaction.purchase')
+            return redirect('member/transaction/purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
@@ -107,7 +107,7 @@ class TransactionController extends Controller
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
         }
-        return redirect('member.transaction.purchase')
+        return redirect('member/transaction/purchase')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -467,7 +467,7 @@ class TransactionController extends Controller
                 $data['trans'] = Trans::where('trans_code', $trans->trans_code)->get();
                 return view('member.transaction.konfirmasi', $data)->with(['flash_status' => $status,'flash_message' => $message]);
             }
-            return redirect('member.transaction.purchase')
+            return redirect('member/transaction/purchase')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
     }
