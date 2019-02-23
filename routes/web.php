@@ -95,7 +95,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 
 		//MasediController
 		Route::get('/list_transaction_masedi', 'Admin\\MasediController@list')->name('.list_masedi');
-		Route::get('/list_transaction_gln', 'Admin\\MasediController@list_gln')->name('.list_gln');
+		Route::get('/list_transaction_gln_paid', 'Admin\\MasediController@list_gln_paid')->name('.list_gln');
+		Route::get('/list_transaction_gln_notpaid', 'Admin\\MasediController@list_gln_notpaid')->name('.list_gln_notpaid');
 		Route::get('/listsaldo_masedi', 'Admin\\MasediController@listsaldo')->name('.list_masedi_saldo');
 
 		//PageController
@@ -183,6 +184,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		});
 		Route::group(['prefix' => 'transaction', 'as' => '.transaction'], function () {
 			Route::get('/', 'Admin\\TransactionController@index')->name('.index');
+			Route::get('/paid', 'Admin\\TransactionController@paid')->name('.paid');
+			Route::get('/not_paid', 'Admin\\TransactionController@notyet')->name('.notyet');
 			Route::get('/create', 'Admin\\TransactionController@create')->name('.create');
 			Route::post('/store', 'Admin\\TransactionController@store')->name('.store');
 			Route::get('/show/{id}', 'Admin\\TransactionController@show')->name('.show');

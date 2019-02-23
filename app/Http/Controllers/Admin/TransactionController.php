@@ -160,6 +160,98 @@ class TransactionController extends Controller
 
         return view('admin.transaction.index', $data);
     }
+    public function paid(Request $request)
+    {
+        $arr = [
+            "0" =>'chart',
+            "1" =>'order',
+            "2" =>'transfer',
+            "3" =>'seller',
+            "4" =>'packing',
+            "5" =>'shipping',
+            "6" =>'dropping',
+            "0,1,2,3,4,5,6" =>'',
+        ];
+        $where = "1";
+        $having = "1";
+        // $where .= " AND count_detail > 0";
+        if(!empty($request->get('code'))){
+            $name = $request->get('code');
+            $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
+        }
+        // if(!empty($request->get('status'))){
+        //     $status = $request->get('status');
+        //     $status = array_search($status,$arr);
+        //     $having .= ' AND trans_detail_status IN ('.$status.')';
+        // }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND trans_detail_status IN ('.$status.')';
+        }
+
+        if (!empty($where)) {
+            $data['transaction'] = Trans::whereRaw($where)
+                // ->havingRaw($having)
+                ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
+                ->groupBy('sys_trans.id')
+                ->where('trans_is_paid', 1)
+                ->paginate($this->perPage);
+        } else {
+            $data['transaction'] = Trans::paginate($this->perPage);
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+
+        return view('admin.transaction.paid', $data);
+    }
+    public function notyet(Request $request)
+    {
+        $arr = [
+            "0" =>'chart',
+            "1" =>'order',
+            "2" =>'transfer',
+            "3" =>'seller',
+            "4" =>'packing',
+            "5" =>'shipping',
+            "6" =>'dropping',
+            "0,1,2,3,4,5,6" =>'',
+        ];
+        $where = "1";
+        $having = "1";
+        // $where .= " AND count_detail > 0";
+        if(!empty($request->get('code'))){
+            $name = $request->get('code');
+            $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
+        }
+        // if(!empty($request->get('status'))){
+        //     $status = $request->get('status');
+        //     $status = array_search($status,$arr);
+        //     $having .= ' AND trans_detail_status IN ('.$status.')';
+        // }
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            $status = array_search($status,$arr);
+            $where .= ' AND trans_detail_status IN ('.$status.')';
+        }
+
+        if (!empty($where)) {
+            $data['transaction'] = Trans::whereRaw($where)
+                // ->havingRaw($having)
+                ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
+                ->groupBy('sys_trans.id')
+                ->where('trans_is_paid', 0)
+                ->paginate($this->perPage);
+        } else {
+            $data['transaction'] = Trans::paginate($this->perPage);
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+
+        return view('admin.transaction.notyet', $data);
+    }
 
     /**
      * Show the form for creating a new resource.
