@@ -1,7 +1,7 @@
 @extends('frontend.layout.indexall')
 @section('content')
     <!-- breadcumb-area start -->
-    <div class="breadcumb-area">
+    <div class="breadcumb-area req-all">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -32,7 +32,7 @@
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
                                             <div class="item black-opacity zoom">
-                                                <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
+                                                <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
                                             </div>
                                         @endforeach
                                     </div>

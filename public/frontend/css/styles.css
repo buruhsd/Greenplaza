@@ -1296,6 +1296,10 @@ ul.rating li {
 .product-content h3 {
     font-size: 15px;
 }
+
+.product-content h4 {
+    font-size: 12px;
+}
 .product-content p del {
     font-size: 13px;
     font-weight: 400;
@@ -2402,6 +2406,15 @@ ul.rating li {
     float: left;
     margin-right: 20px;
     height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid #4caf50;
+}
+
+.review-img img{
+    float: left;
+    margin-right: 20px;
+    height: 66px;
     width: 70px;
     border-radius: 50%;
     border: 2px solid #4caf50;
