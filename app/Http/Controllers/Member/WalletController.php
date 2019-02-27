@@ -158,7 +158,7 @@ class WalletController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        $data['type'] = Wallet_type::whereRaw('id IN (1, 3)')->get();
+        $data['type'] = Wallet_type::whereRaw('id IN (1)')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.withdrawal', $data);
     }

@@ -4,6 +4,7 @@ namespace App\Facades\Classes;
 
 use App\Http\Controllers\Controller;
 use Session;
+use App\Models\Email;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -43,6 +44,13 @@ class SendEmail extends Controller
 			$message->to($to)
 				->subject($subject);
 		});
+		$html = view($view, $data)->render();
+		$email = new Email;
+		$email->email_to = $to;
+		$email->email_from = $from;
+		$email->email_subject = $subject;
+		$email->email_text = $html;
+		$email->save();
    }
 
    public function attach($param=[]) {

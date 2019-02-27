@@ -35,7 +35,7 @@
                             {!! $errors->first('user_shipment_shipment_id', '<p class="help-block">Pengiriman dibutuhkan</p>') !!}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 {!! Form::close() !!}
             </div>
         </div>

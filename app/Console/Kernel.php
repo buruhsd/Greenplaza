@@ -30,8 +30,8 @@ class Kernel extends ConsoleKernel
         //     ->dailyAt('20:00');
         // $schedule->command('trans:able')
         //     ->dailyAt('20:00');
-        // $schedule->command('trans:shipping')
-        //     ->dailyAt('20:00');
+        $schedule->command('trans:shipping')
+            ->hourly();
         // $schedule->command('trans:hotlist')
         //     ->dailyAt('20:00');
         // $schedule->command('trans:pincode')

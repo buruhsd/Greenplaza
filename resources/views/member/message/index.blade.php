@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Message</h3>
+    <h3 class="breadcrumb-header">Pesan</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -34,7 +34,7 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Produk</h4>
+                    <h4 class="panel-title">Pesan</h4>
                     <button type="button" onclick="search('from');" class="btn btn-danger">
                         <i class="fa fa-arrow-down"></i> Inbox
                         <span class="label label-default pull-right"></span>

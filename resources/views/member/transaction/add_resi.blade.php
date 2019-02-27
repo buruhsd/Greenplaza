@@ -44,22 +44,28 @@
 			                                    <li>From : 
 			                                        {{
 			                                            FunctionLib::address_info($item->produk->user->user_address->first()->id)
+			                                        }}, 
+			                                        {{
+			                                            $item->produk->user->user_address->first()->user_address_phone
 			                                        }}
 			                                    </li>
 			                                    <li>To : 
 			                                        {{
 			                                            FunctionLib::address_info($item->user_address->id)
+			                                        }}, 
+			                                        {{
+			                                            $item->user_address->user_address_phone
 			                                        }}
 			                                    </li>
 			                                    {{-- @if($item->trans_detail_status == 5) --}}
 			                                    <?php $ship_status = FunctionLib::get_waybill($item->id);?>
-			                                    <li>
-			                                    	Sent Status : <b>
+			                                    <li>Sent Status : 
 			                                        {{
 			                                            $ship_status
 			                                        }}
-			                                    	</b>
 			                                    </li>
+			                                    <li>Jasa Pengiriman : {{$item->shipment->shipment_name}}</li>
+			                                    <li><b>&nbsp;&nbsp;-> {{$item->trans_detail_shipment_service}}</b></li>
 			                                    {{-- @endif --}}
 			                                </ul>
 			                            </td>

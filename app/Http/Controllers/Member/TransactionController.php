@@ -142,11 +142,11 @@ class TransactionController extends Controller
             if($trans_detail->trans->trans_payment_id !== 4){
                 $update_wallet = [
                     'user_id'=>$trans_detail->produk->produk_seller_id,
-                    'wallet_type'=>3,
+                    'wallet_type'=>1,
                     'amount'=>$detail_amount_total,
-                    'note'=>'Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                    'note'=>'Update wallet CW dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                 ];
-                $saldo = FunctionLib::update_wallet($update_wallet, 'transaction');
+                $saldo = FunctionLib::update_wallet($update_wallet);
             }
         }
         if(!$trans_detail){
