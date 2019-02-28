@@ -38,7 +38,7 @@
                         <select class="form-control" id="payment" name="payment">
                             <option value="" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>All</option>
                             @foreach($payment as $item)
-                                <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == $item->payment_kode)?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
                             @endforeach
                         </select>
                     </div>

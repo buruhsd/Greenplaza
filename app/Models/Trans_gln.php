@@ -13,7 +13,7 @@ class Trans_gln extends Model
      *
      * @var array
      */
-    protected $fillable = ['trans_gln_trans_id', 'trans_gln_detail_id', 'trans_gln_amount', 'trans_gln_amount_fee', 'trans_gln_amount_total', 'trans_gln_status', 'trans_gln_note'
+    protected $fillable = ['trans_gln_trans_id', 'trans_gln_detail_id', 'trans_gln_amount', 'trans_gln_amount_fee', 'trans_gln_amount_total', 'trans_gln_compare', 'trans_gln_status', 'trans_gln_note'
     ];
 
     /**

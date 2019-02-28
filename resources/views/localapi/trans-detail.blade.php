@@ -53,7 +53,10 @@
                                         }}, 
                                         {{
                                             $item->produk->user->user_address->first()->user_address_phone
-                                        }}
+                                        }}, 
+                                        <b>{{
+                                            $item->produk->user->user_address->first()->user_address_owner
+                                        }}</b>
                                     </li>
                                     <li>To : 
                                         {{
@@ -61,7 +64,10 @@
                                         }}, 
                                         {{
                                             $item->user_address->user_address_phone
-                                        }}
+                                        }}, 
+                                        <b>{{
+                                            $item->user_address->user_address_owner
+                                        }}</b>
                                     </li>
                                     {{-- @if($item->trans_detail_status == 5) --}}
                                     <?php $ship_status = FunctionLib::get_waybill($item->id);?>

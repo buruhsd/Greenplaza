@@ -58,7 +58,7 @@ class TransactionController extends Controller
                     $detail_amount_ship = $detail_amount_ship / FunctionLib::gln('compare',[])['data'];
                     $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
                     $detail_fee = $detail_fee / FunctionLib::gln('compare',[])['data'];
-                    $detail_fee = (round($detail_fee,8, PHP_ROUND_HALF_DOWN) + 0.00000001);
+                    $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
                     $detail_amount_total = $detail_amount+$detail_fee+$detail_amount_ship;
                     // untuk insert
                     $wallet_to = ($item2->produk->user->wallet()->where('wallet_type', 7)->exists())
@@ -77,6 +77,7 @@ class TransactionController extends Controller
                     $gln->trans_gln_amount=$detail_amount+$detail_amount_ship;
                     $gln->trans_gln_amount_fee=$detail_fee;
                     $gln->trans_gln_amount_total=$detail_amount_total;
+                    $gln->trans_gln_compare=FunctionLib::gln('compare',[])['data'];
                     $gln->trans_gln_note='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
                     $gln->save();
 
