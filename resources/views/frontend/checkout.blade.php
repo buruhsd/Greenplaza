@@ -38,14 +38,18 @@
                                     </div>
                                     <div class="large-6 medium-6 small-12 columns">
                                         <?php 
+                                        $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                        $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+                                        $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
+                                        $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
                                         echo '
-                                        Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount')).' <br>
+                                        Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount')).$diskon.' <br>
                                         Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>
                                         Kode Unik :  <br>
                                         <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transfer anda.</label>
                                         <br>
                                         <label>Jumlah yang harus ditransfer</label>
-                                        <h2 style="">Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')).'</h2>
+                                        <h2 style="">'.$total.'</h2>
                                         ';
                                         ?>
                                     </div>

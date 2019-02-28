@@ -2,6 +2,27 @@
 class FunctionLib
 {
 
+    /*******/
+    public static function sum_cart_diskon($arr){
+        $sum = array_sum(array_map(
+            function($item) {
+                $diskon = App\Models\Produk::select('produk_discount')->findOrFail($item['trans_detail_produk_id']);
+                $amount = ($item['trans_detail_amount'] * $diskon['produk_discount'] / 100);
+                return $amount;
+            }, $arr)
+        );
+        return $sum;
+    }
+
+    /*******/
+    public static function sum_cart_price($arr, $key){
+        $sum = array_sum(array_map(
+            function($item) {
+                return $item[$key];
+            }, $arr)
+        );
+    }
+
     /**/
     public static function add_cron($param=[]){
         extract($param);
