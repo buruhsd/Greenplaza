@@ -62,7 +62,9 @@
             <li>
                 <a class="cd-faq-trigger" href="#0">{{$item->page_judul}}</a>
                 <div class="cd-faq-content">
+                <div class="page-about">
                     <p>{!!$item->page_text!!}</p>
+                </div>
                 </div> <!-- cd-faq-content -->
             </li>
         @endforeach<!-- cd-faq-group -->

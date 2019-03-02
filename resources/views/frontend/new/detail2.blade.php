@@ -507,6 +507,28 @@
             </div>
         </div>
     </div>
+   <!--  <div id="myModal" class="modal1">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content1">
+
+    <div class="mySlides1">
+      <div class="numbertext1"></div>
+      <img src="img_nature_wide.jpg" style="width:100%">
+    </div>
+    
+    <a class="prev1" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next1" onclick="plusSlides(1)">&#10095;</a>
+
+    <div class="caption-container1">
+      <p id="caption"></p>
+    </div>
+
+
+    <div class="column1">
+      <img class="demo cursor" src="img_nature_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
+    </div>
+  </div>
+</div> -->
     <!-- .shop-page-area enc -->
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
     <script type="text/javascript">
@@ -579,4 +601,6 @@
         }
         changed();
     </script>
+    <!-- lightbox -->
+    
 @endsection
