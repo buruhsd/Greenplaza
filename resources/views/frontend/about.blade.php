@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+      <script>
+         WebFont.load({
+                  google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]}
+                });
+              
+      </script>
 
     <link rel="stylesheet" href="{{ asset('faq/css/reset.css') }}"> <!-- CSS reset -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -14,8 +20,8 @@
     <style>
     /* Style the body */
     body {
-      font-family: Arial;
       margin: 0;
+      font-family: Poppins;
     }
 
     /* Header/Logo Title */
@@ -25,6 +31,14 @@
       background: #4caf50;
       color: white;
       font-size: 30px;
+    }
+
+    .cd-faq-content{
+      font-size: 16px;
+    }
+
+    .cd-faq-content p {
+      font-size: 14px;
     }
     </style>
     <title>GreenPlaza</title>
