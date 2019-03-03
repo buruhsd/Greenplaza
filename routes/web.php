@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/list_transaction_gln_paid', 'Admin\\MasediController@list_gln_paid')->name('.list_gln');
 		Route::get('/list_transaction_gln_notpaid', 'Admin\\MasediController@list_gln_notpaid')->name('.list_gln_notpaid');
 		Route::get('/listsaldo_masedi', 'Admin\\MasediController@listsaldo')->name('.list_masedi_saldo');
+		Route::get('/listswallet_gln', 'Admin\\MasediController@walletgln')->name('.list_gln_wallet');
 
 		//PageController
 		Route::get('/page', 'Admin\\PageController@page')->name('.page');
@@ -204,6 +205,12 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::delete('/destroy/{id}', 'Admin\\KomplainController@res_kom_destroy')->name('.destroy');
 		});
 		Route::group(['prefix' => 'needapproval', 'as' => '.needapproval'], function () {
+			//GLN
+			Route::get('/gln', 'Admin\\NeedApprovalController@gln')->name('.gln');
+			Route::get('/try', 'Admin\\NeedApprovalController@try')->name('.try');
+			Route::get('/gln_send/{order_id}/{id}', 'Admin\\NeedApprovalController@send_coin')->name('.gln_send');
+			Route::get('/gln_sendback/{order_id}/{id}', 'Admin\\NeedApprovalController@sendback_coin')->name('.gln_sendback');
+
 			//WITHDRAWAL
 			Route::get('/withdrawal_member', 'Admin\\NeedApprovalController@withdrawal_member')->name('.withdrawal_member');
 			Route::get('/withdrawal_seller', 'Admin\\NeedApprovalController@withdrawal_seller')->name('.withdrawal_seller');

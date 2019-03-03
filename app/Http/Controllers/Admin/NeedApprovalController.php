@@ -12,11 +12,101 @@ use App\Models\Trans_iklan;
 use App\Models\Trans_hotlist;
 use App\Models\Trans_pincode;
 use App\Models\User_address;
+use App\Models\Trans_gln;
+use App\Models\Trans_detail;
+use App\Models\Trans;
+use App\Models\Conf_config;
+use FunctionLib;
 use Session;
 use Mail;
+use Auth;
 
 class NeedApprovalController extends Controller
 {
+
+    public function gln () 
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($gln);
+        return view('admin.need_approval.transaksi_gln.index', compact('gln'));
+    }
+    // public function try () 
+    // {
+    //     $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
+    //     $gln = Trans_detail::whereIn('trans_detail_trans_id', $trans)->orderBy('created_at', 'DESC')->paginate(10);
+    //     // dd($gln);
+    //     return view('admin.need_approval.transaksi_gln.try', compact('gln'));
+    // }
+    public function send_coin (Request $request, $order_id, $id)
+    {
+        $detail = Trans_detail::find($id);
+        $amount_total = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_amount_total;
+        // dd($amount_total);
+        $fee = 0;
+        $status = 200;
+        $message = 'Coin Berhasil di Transfer ke Seller.';
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => 'done'
+        ];
+        $address_gln = FunctionLib::get_config('profil_gln_address');;
+        $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+        $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_to;
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        // var_dump($transfer); die();
+        if($transfer['status'] == 200){
+            foreach ($trans->get() as $item) {
+                $gln = $item->trans_gln()->get();
+                foreach ($gln as $item) {
+                    $item->trans_gln_status=2;
+                    $item->save();
+                }
+            }
+        }else{
+            $status = 500;
+            $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+        }
+        return redirect('admin/needapproval/gln')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+    public function sendback_coin (Request $request, $order_id, $id)
+    {
+        $detail = Trans_detail::find($id);
+        $amount_total = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_amount_total;
+        $fee = 0;
+        $status = 200;
+        $message = 'Coin Berhasil di Transfer ke Member.';
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => 'done'
+        ];
+        $address_gln = FunctionLib::get_config('profil_gln_address');;
+        $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+        $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_form;
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        // var_dump($transfer); die();
+        if($transfer['status'] == 200){
+            foreach ($trans->get() as $item) {
+                $gln = $item->trans_gln()->get();
+                foreach ($gln as $item) {
+                    $item->trans_gln_status=2;
+                    $item->save();
+                }
+            }
+        }else{
+            $status = 500;
+            $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+        }
+        return redirect('admin/needapproval/gln')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
 //WITHDRAWAL
     public function withdrawal_member ()
     {

@@ -20,15 +20,11 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-6">
+                    <!-- <div class="col-md-6">
                         <div class="input-group pull-right">
-                            <select id="select-list" type="text" class="form-control">
-                                <option value="">--Choose Paid Option--</option>
-                                <option value="/admin/list_transaction_gln_paid">Is Paid</option>
-                                <option value="/admin/list_transaction_gln_notpaid">Not Paid</option>
-                            </select>
+                            <a href="{{route('admin.list_gln_wallet')}}"><button class="btn btn-info btn-xs pull-right" style="margin-bottom: 2%">List Wallet Gln</button></a>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="panel-body" style="margin-top: 2%">
                     <div class="table-responsive">
