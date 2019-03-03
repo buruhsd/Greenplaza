@@ -168,6 +168,18 @@ class TransactionController extends Controller
             if(isset($send_notif['status']) && $send_notif['status'] == 200){
                 $message .= ' ,'.$send_notif['message'];
             }
+            $config = [
+                'to' => $trans->trans_detail->first()->produk->user->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
         }
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -323,6 +335,18 @@ class TransactionController extends Controller
             if(isset($send_notif['status']) && $send_notif['status'] == 200){
                 $message .= ' ,'.$send_notif['message'];
             }
+            $config = [
+                'to' => $trans->trans_detail->first()->produk->user->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
         }
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
@@ -353,13 +377,25 @@ class TransactionController extends Controller
             $message = 'Transfer unapproved!';
         }else{
             // send email
-            $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [
                     'trans_code' => $trans->trans_code,
                     'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $email_status,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
+            $config = [
+                'to' => $trans->trans_detail->first()->produk->user->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
                 ]
             ];
             $send_notif = FunctionLib::transaction_notif($config);

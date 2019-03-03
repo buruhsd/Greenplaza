@@ -118,17 +118,33 @@ class GlnController extends Controller
                 $trans->trans_amount_total = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_total');
                 $gross_amount += $trans->trans_amount_total;
                 $trans->save();
+                // send email seller
+                if($trans->trans_detail->first()->exists()){
+                    $send_status = FunctionLib::trans_arr(1);
+                    $config = [
+                        'to' => $trans->trans_detail->first()->produk->user->email,
+                        'data' => [
+                            'trans_code' => $trans->trans_code,
+                            'trans_amount_total' => $trans->trans_amount_total,
+                            'status' => $send_status,
+                        ]
+                    ];
+                    $send_notif = FunctionLib::transaction_notif($config);
+                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                        $message .= ' ,'.$send_notif['message'];
+                    }
+                }
             }
             Session::forget('chart');
             if(isset($trans->pembeli->email)){
                 // send email
-                $status = FunctionLib::trans_arr(1);
+                $send_status = FunctionLib::trans_arr(1);
                 $config = [
                     'to' => $trans->pembeli->email,
                     'data' => [
                         'trans_code' => $trans_code,
                         'trans_amount_total' => $gross_amount,
-                        'status' => $status,
+                        'status' => $send_status,
                     ]
                 ];
                 $send_notif = FunctionLib::transaction_notif($config);

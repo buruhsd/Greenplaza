@@ -41,19 +41,40 @@
                             <tbody>
                                 @if(Session::has('chart'))
                                     @foreach(Session::get('chart') as $key => $item)
-                                        <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
+                                        <?php 
+                                            $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 
+                                            $diskon = ($produk['produk_discount'] > 0)?true:false;
+                                        ?>
                                         <tr>
                                             <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
                                             <td class="product"><a href="#">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
+                                            <td class="ptice">
+                                                <?php if($diskon){ ?>
+                                                    Rp.{{FunctionLib::number_to_text($item['trans_detail_amount']-($item['trans_detail_amount']*$produk['produk_discount']/100))}}
+                                                    <del class="text-danger">
+                                                       Rp.{{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                    </del>
+                                                <?php }else{ ?>
+                                                    Rp.{{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                <?php } ?>
+                                            </td>
+                                            <td class="ptice">Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">
                                                 <div class="cart-plus-minus">
                                                     <input type="text" value="1" />
                                                 </div>
                                             </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                            <td class="total">
+                                                <?php if($diskon){ ?>
+                                                    Rp.{{FunctionLib::number_to_text($item['trans_detail_amount']-($item['trans_detail_amount']*$produk['produk_discount']/100)+$item['trans_detail_amount_ship'])}}
+                                                    <del class="text-danger">
+                                                        Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                    </del>
+                                                <?php }else{ ?>
+                                                    Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                <?php } ?>
+                                            </td>
                                             <td class="remove">
                                                 {!! Form::open([
                                                     'method'=>'GET',
@@ -90,6 +111,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php 
+                                $diskon = "";
+                                $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                if(Session::has('chart')){
+                                    $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                    $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+                                    $total = ($diskon > 0)
+                                        ?'Rp '.FunctionLib::number_to_text($total-$diskon)
+                                        :'Rp '.FunctionLib::number_to_text($total);
+                                    $diskon = ($diskon > 0)
+                                        ?"<li><span class='pull-left text-danger'>Diskon </span><span class='text-danger'>Rp.".FunctionLib::number_to_text($diskon)."</span></li><h3></h3>"
+                                        :"";
+                                }
+                            ?>
                             <div class=" col-lg-4 offset-lg-3 col-md-6">
                                 <div class="cart-total text-right">
                                     <h3>Total Belanjaan</h3>
@@ -98,9 +133,10 @@
                                             <span class="pull-left">Subtotal </span>
                                             Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount'))}}
                                         </li>
+                                        {!!$diskon!!}
                                         <li>
                                             <span class="pull-left"> Total </span> 
-                                            Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                                            {!!$total!!}
                                         </li>
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>

@@ -41,6 +41,16 @@ class CronShipping extends Command
      */
     public function handle()
     {
+        // log cron
+        $data_cron = [
+            'cron_job_method' => 'trans:shipping',
+            'cron_job_type' => 'start',
+            'cron_job_status' => 1,
+            'cron_job_title' => 'Transaksi Shipping',
+            'cron_job_note' => 'memulai mengecek transaksi member melakukan dropping.'
+        ];
+        FunctionLib::add_cron($data_cron);
+
         $date = date('Y-m-d H:i:s');
         $where = '1';
         $where .= ' AND sys_trans_detail.trans_detail_status IN (5)';
@@ -54,6 +64,16 @@ class CronShipping extends Command
         $no = 0;
 
         if($trans_detail->count()){
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:shipping',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Shipping',
+                'cron_job_note' => 'transaksi dengan status shipping tersedia.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
             $trans = Trans::whereRaw($where)
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
                 ->select('sys_trans.*')
@@ -100,6 +120,16 @@ class CronShipping extends Command
                     }
                 }
             }
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:shipping',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Shipping',
+                'cron_job_note' => $no.' transaksi berhasil dirubah menjadi done.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
             if($trans->count()){
                 $this->info("mengirim email ke seller.");
                 foreach ($trans as $items) {
@@ -119,8 +149,27 @@ class CronShipping extends Command
                 }
             }
         }else{
+            // log cron
+            $data_cron = [
+                'cron_job_method' => 'trans:shipping',
+                'cron_job_type' => 'process',
+                'cron_job_status' => 1,
+                'cron_job_title' => 'Transaksi Shipping',
+                'cron_job_note' => 'Tidak ada transaksi yang dirubah.'
+            ];
+            FunctionLib::add_cron($data_cron);
+
             $this->info("Data tidak ada.");
         }
+        // log cron
+        $data_cron = [
+            'cron_job_method' => 'trans:shipping',
+            'cron_job_type' => 'end',
+            'cron_job_status' => 1,
+            'cron_job_title' => 'Transaksi Shipping',
+            'cron_job_note' => 'mengecek transaksi member melakukan dropping berakhir.'
+        ];
+        FunctionLib::add_cron($data_cron);
         $this->info($no." Transaksi Expired.");
     }
 }

@@ -54,8 +54,8 @@ class FunctionLib
                 $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
                 $trans_detail = App\Models\Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
-                    $trans = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
-                    if($trans->trans_is_paid == 1){
+                    $trans_one = App\Models\Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans_one->trans_is_paid == 1){
                         $response['status'] = 500;
                         $response['message'] = 'Transaksi sudah dibayar.';
                         $response['data'][] = "";
@@ -92,6 +92,21 @@ class FunctionLib
                     $send_notif = FunctionLib::transaction_notif($config);
                     if(isset($send_notif['status']) && $send_notif['status'] == 200){
                         $response['message'] .= ' ,'.$send_notif['message'];
+                    }
+                    // send email seller
+                    foreach ($trans as $item) {
+                        $config = [
+                            'to' => $item->trans_detail->first()->produk->user->email,
+                            'data' => [
+                                'trans_code' => $item->trans_code,
+                                'trans_amount_total' => $item->trans_amount_total,
+                                'status' => $email_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                            $response['message'] .= ' ,'.$send_notif['message'];
+                        }
                     }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
@@ -314,6 +329,10 @@ class FunctionLib
             4 => 'Pengepakan',
             5 => 'Dikirim',
             6 => 'Diambil',
+            7 => 'Komplain',
+            8 => 'Cancel',
+            9 => 'Order Cancel',
+            10 => 'Seller Cancel',
         ];
         return $arr[$key];
     } 
@@ -428,6 +447,21 @@ class FunctionLib
                     $send_notif = FunctionLib::transaction_notif($config);
                     if(isset($send_notif['status']) && $send_notif['status'] == 200){
                         $response['message'] .= ' ,'.$send_notif['message'];
+                    }
+                    // send email seller
+                    foreach ($trans as $item) {
+                        $config = [
+                            'to' => $item->trans_detail->first()->produk->user->email,
+                            'data' => [
+                                'trans_code' => $item->trans_code,
+                                'trans_amount_total' => $item->trans_amount_total,
+                                'status' => $email_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                            $response['message'] .= ' ,'.$send_notif['message'];
+                        }
                     }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'

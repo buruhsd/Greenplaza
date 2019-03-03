@@ -38,10 +38,14 @@
                                     </div>
                                     <div class="large-6 medium-6 small-12 columns">
                                         <?php 
-                                        $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
-                                        $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
-                                        $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
-                                        $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
+                                        $diskon = "";
+                                        $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                        if(Session::has('chart')){
+                                            $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                            $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+                                            $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
+                                            $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
+                                        }
                                         echo '
                                         Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount')).$diskon.' <br>
                                         Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>
