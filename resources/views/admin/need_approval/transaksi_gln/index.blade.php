@@ -72,7 +72,7 @@
                                         </a></center></td>
                                     @elseif ($g->trans_detail_status == 4 && $g->trans_detail_is_cancel == 1)
                                         <td><center><a href="{{route('admin.needapproval.gln_sendback', [$g->trans_code, $g->id])}}">
-                                            <button class="btn btn-success btn-xs">send coin back to member</button>
+                                            <button class="btn btn-warning btn-xs">send coin back to member</button>
                                         </a></center></td>
                                     @else 
                                         <td><center>Menunggu kesanggupan seller</center></td>
