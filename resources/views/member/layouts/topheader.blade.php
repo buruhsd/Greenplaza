@@ -73,8 +73,10 @@
                             </li>
                         </ul>
                     </li> --}}
+                    <li style="margin-right: -30px"><a href="">{{Auth::user()->name}}</a></li>
                     <li class="dropdown user-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="text-transform: capitalize;"> &nbsp;&nbsp;</span><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{route('member.profil')}}">Profil</a></li>
                             {{-- <li><a href="#">Calendar</a></li>
@@ -97,3 +99,8 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div><!-- /Page Header -->
+<script type="text/javascript">
+    $.get( "{{url('member/getuser')}}", function( data ) {
+  alert( "Load was performed." );
+});
+</script>

@@ -26,19 +26,21 @@
             @elseif(str_contains(Request::url(), ['edit']))
             {!! Form::label('produk_user_status', 'Pilih Gambar Utama : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10">
-                <div class="form-group">
+                <div class="roup">
                 @foreach($produk->images->all() as $item)
                     @if ($loop->first)
                         <div class="col-md-2">
                             <label class="btn btn-primary">
                                 <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check img-checked">
+
                                 <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
                             </label>
                         </div>
                     @else
                         <div class="col-md-2">
+                         
                             <label class="btn btn-primary">
-                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check">
+                               <a onclick="removeasdf(3)"><img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check"></a>
                                 <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
                             </label>
                         </div>
@@ -606,3 +608,9 @@
         <button type="submit" class="btn btn-primary mb-2">Save</button>
     </div>
 </div>
+
+<script type="text/javascript">
+    function removeasdf(argument) {
+        console.log("test");
+    }
+</script>

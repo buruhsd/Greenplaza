@@ -123,10 +123,6 @@ class UserController extends Controller
         return view('member.user.index', $data);
     }
 
-    /**
-     * alamat kirim.
-     *
-     */
     public function buyer_address(Request $request)
     {
         $data['user'] = User::findOrFail(Auth::id());
