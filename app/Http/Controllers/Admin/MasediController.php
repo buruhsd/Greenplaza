@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Trans;
+use App\Models\Trans_detail;
+use App\Models\Trans_gln;
 use App\Http\Controllers\Controller;
 use App\User;
 
@@ -27,8 +29,12 @@ class MasediController extends Controller
     public function list_gln_paid ()
     {
         $search = \Request::get('search');
-        $gln = Trans::where('trans_code', 'like', '%'.$search.'%')->where('trans_is_paid', '=', 1)->where('trans_payment_id', '=', 4)->orderBy('created_at', 'DESC')->paginate(10);
-        // dd($masedi);
+        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($gln);
         return view('admin.masedi.list_gln', compact('gln'));
     }
     public function list_gln_notpaid ()

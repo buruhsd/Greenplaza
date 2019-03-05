@@ -283,6 +283,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		});
 
 		Route::group(['prefix' => 'konfigurasi', 'as' => '.konfigurasi'], function () {
+		//ATUR ALAMAT
+			Route::get('/admin_address', 'Admin\\KonfigurasiController@seller_address')->name('.admin_address');
+			Route::post('/admin_address_update', 'Admin\\KonfigurasiController@seller_address_update')->name('.seller_address_update');
 		//SETTING HARGA
 			//REG SELLER
 			Route::get('regseller', 'Admin\\KonfigurasiController@regseller')->name('.regseller');

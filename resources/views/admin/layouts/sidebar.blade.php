@@ -10,6 +10,21 @@
                 <div class="page-sidebar-inner">
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
+                            <li>
+                                <a href=""><center>
+                                <span>Saldo Gln Admin</span> <br>
+                                    <?php
+                                    $response = FunctionLib::gln('ballance', ['address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
+                                    if($response['status'] == 200){
+                                        echo FunctionLib::number_to_text($response['data']['balance'], 8);
+                                    }else{
+                                        echo "0,00";
+                                    }
+                                    ?>
+                                </center></a>
+                            </li>
+
+                            <li class="menu-divider"></li>
                             @if(Auth::user()->is_superadmin())
                             <li class="{{FunctionLib::setActive('admin/config')}}" >
                                 <a href="{{route('admin.config.index')}}">
@@ -152,6 +167,7 @@
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/tambah_akunadmin')}}"><a href="{{route('admin.konfigurasi.akunadmin')}}">Tambah Akun Admin</a></li>
                                         @endif
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/set_shipment_admin')}}"><a href="{{route('admin.konfigurasi.set_shipment_admin')}}">Atur Kurir</a></li>
+                                        <li class="{{FunctionLib::setActive('admin/konfigurasi/admin_address')}}"><a href="{{route('admin.konfigurasi.admin_address')}}">Atur Alamat</a></li>
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/grademember')}}"><a href="{{route('admin.konfigurasi.grademember')}}">Grade</a></li>
                                         <!-- <li><a href="#">Grade Seller</a></li> -->
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/pagelist')}}"><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>

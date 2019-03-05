@@ -36,6 +36,7 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
+                                    <th><center>Username</center></th>
                                     <th><center>Transaksi Code</center></th>
                                     <th><center>Transaksi id</center></th>
                                     <th><center>Detail id</center></th>
@@ -48,6 +49,7 @@
                                 @foreach ($gln as $key => $g)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
+                                    <td><center>{{$g->trans->pembeli->username}}</center></td>
                                     <td><center>{{$g->trans_code}}</center></td>
                                     <td><center>{{$g->trans_detail_trans_id}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
@@ -81,11 +83,9 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td colspan="6" class="text-center">KOSONG</td>
+                                    <td colspan="8" class="text-center">KOSONG</td>
                                 </tr>
-                            @endif    
-                            <tbody>               
-                            </tbody>
+                            @endif  
                         </table>
                         {{$gln->render()}}
                     </div>

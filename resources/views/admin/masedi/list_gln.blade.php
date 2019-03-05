@@ -32,44 +32,44 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
-                                    <th><center>Trans User</center></th>
+                                    <th><center>Username</center></th>
                                     <th><center>Trans Code</center></th>
-                                    <th><center>Trans Payment</center></th>
-                                    <th><center>Trans Paid Date</center></th>
-                                    <th><center>Trans Amount Total</center></th>
+                                    <th><center>Trans Id</center></th>
+                                    <th><center>Detail Id</center></th>
+                                    <th><center>Detail Produk</center></th>
+                                    <th><center>Status</center></th>
                                 </tr>
                             </thead>
                             
                             <tbody>
-                                @if(count($gln) != 0)
-                                @foreach ($gln as $key => $m)
+                            @if(count($gln) != 0)
+                                @foreach ($gln as $key => $g)
+                                @if($g->gln['trans_gln_status'] == 2)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
-                                    <td><center>{{$m->pembeli->username}}</center></td>
-                                    <td><center>{{$m->trans_code}}</center></td>
-                                    <td><center>Payment By GLN</center></td>
-                                    @if ($m->trans_paid_date == null)
-                                    <td><center> - </center></td>
-                                    @else 
-                                    <td><center>{{$m->trans_paid_date}}</center></td>
-                                    @endif
-                                    <td><center>{{$m->trans_amount_total}}</center></td>
+                                    <td><center>{{$g->trans->pembeli->username}}</center></td>
+                                    <td><center>{{$g->trans_code}}</center></td>
+                                    <td><center>{{$g->trans_detail_trans_id}}</center></td>
+                                    <td><center>{{$g->id}}</center></td>
+                                    <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
+                                    <td><center>Sudah kirim ke seller</center></td>
                                 </tr>
-                                @endforeach 
-                                @else
+                                @endif
+                                @endforeach
+                            @else
                                 <tr>
-                                    <td colspan="6" class="text-center">KOSONG</td>
+                                    <td colspan="8" class="text-center">KOSONG</td>
                                 </tr>
-                            @endif                               
-                            </tbody>
+                            @endif  
                         </table>
+                        {{$gln->render()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+@include('admin.masedi.detailgln')
 @endsection
 @section('script')
 <script type="text/javascript">

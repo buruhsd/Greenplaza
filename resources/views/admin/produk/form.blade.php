@@ -2,6 +2,9 @@
     <div class="panel-body">
         <div class="row">
             @if(str_contains(Request::url(), ['create']))
+            <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+                <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+            </div><br/><br/>
             {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
@@ -43,6 +46,9 @@
                 @endforeach
                 </div>
             </div>
+            <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+                <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+            </div><br/><br/>
             {!! Form::label('produk_user_status', 'Gambar : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
@@ -243,42 +249,74 @@
             <div class="col-md-9">
                 <div class="btn-group" data-toggle="buttons">
                     @if(str_contains(Request::url(), ['create']))
-                        <label class="btn btn-default">
+                        <label class="btn btn-default btn-xs">
+                            <input type="checkbox" name="produk_size[]" value="xs" autocomplete="off">
+                            XS <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default btn-xs">
                             <input type="checkbox" name="produk_size[]" value="s" autocomplete="off">
                             S <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default btn-xs">
                             <input type="checkbox" name="produk_size[]" value="m" autocomplete="off">
                             M <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default btn-xs">
                             <input type="checkbox" name="produk_size[]" value="l" autocomplete="off">
                             L <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default">
+                        <label class="btn btn-default btn-xs">
                             <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off">
                             XL <span class="check glyphicon glyphicon-ok"></span>
                         </label>
+                        <label class="btn btn-default btn-xs">
+                            <input type="checkbox" name="produk_size[]" value="xxl" autocomplete="off">
+                            XXL <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <br/>
+                        <hr/>
+                        @for($i=35;$i<=45;$i++)
+                        <label class="btn btn-default btn-xs">
+                            <input type="checkbox" name="produk_size[]" value="{{$i}}" autocomplete="off">
+                            {{$i}} <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        @endfor
                     @elseif(str_contains(Request::url(), ['edit']))
                         <?php 
                             $array = explode (",", $produk->produk_size);
                         ?>
-                        <label class="btn btn-default {{(in_array("s", $array))?'active':''}}">
+                        <label class="btn btn-default btn-xs {{(in_array("xs", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="s" autocomplete="off" {{(in_array("s", $array))?"checked":""}}>
+                            XS <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <label class="btn btn-default btn-xs {{(in_array("s", $array))?'active':''}}">
                             <input type="checkbox" name="produk_size[]" value="s" autocomplete="off" {{(in_array("s", $array))?"checked":""}}>
                             S <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default {{(in_array("m", $array))?'active':''}}">
+                        <label class="btn btn-default btn-xs {{(in_array("m", $array))?'active':''}}">
                             <input type="checkbox" name="produk_size[]" value="m" autocomplete="off" {{(in_array("m", $array))?"checked":""}}>
                             M <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default {{(in_array("l", $array))?'active':''}}">
+                        <label class="btn btn-default btn-xs {{(in_array("l", $array))?'active':''}}">
                             <input type="checkbox" name="produk_size[]" value="l" autocomplete="off" {{(in_array("l", $array))?"checked":""}}>
                             L <span class="check glyphicon glyphicon-ok"></span>
                         </label>
-                        <label class="btn btn-default {{(in_array("xl", $array))?'active':''}}">
+                        <label class="btn btn-default btn-xs {{(in_array("xl", $array))?'active':''}}">
                             <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off" {{(in_array("xl", $array))?"checked":""}}>
                             XL <span class="check glyphicon glyphicon-ok"></span>
                         </label>
+                        <label class="btn btn-default btn-xs {{(in_array("Xxl", $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="xl" autocomplete="off" {{(in_array("xl", $array))?"checked":""}}>
+                            XXL <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        <br/>
+                        <hr/>
+                        @for($i=35;$i<=45;$i++)
+                        <label class="btn btn-default btn-xs {{(in_array($i, $array))?'active':''}}">
+                            <input type="checkbox" name="produk_size[]" value="{{$i}}" autocomplete="off" {{(in_array($i, $array))?"checked":""}}>
+                            {{$i}} <span class="check glyphicon glyphicon-ok"></span>
+                        </label>
+                        @endfor
                     @endif
                     {{-- <label class="btn btn-default">
                         <input type="checkbox" name="produk_size[]" value="other" autocomplete="off">
@@ -321,6 +359,20 @@
                     <span class="input-group-addon">mm</span>
                 </div>
             {!! $errors->first('produk_wide', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div><div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_height') ? 'has-error' : ''}}">
+            {!! Form::label('produk_height', 'Tinggi : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                <div class="input-group">
+                    {!! Form::number('produk_height', null, [
+                        'min' => '0',
+                        'class' => 'form-control', 
+                        'placeholder' => 'Tinggi', 
+                        'required'
+                    ])!!}
+                    <span class="input-group-addon">mm</span>
+                </div>
+            {!! $errors->first('produk_height', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_color') ? 'has-error' : ''}}">

@@ -1,4 +1,5 @@
 @extends('admin.index')
+@section('konfigurasi', 'active-page')
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">

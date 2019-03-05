@@ -96,7 +96,7 @@ class NeedApprovalController extends Controller
             foreach ($trans->get() as $item) {
                 $gln = $item->trans_gln()->get();
                 foreach ($gln as $item) {
-                    $item->trans_gln_status=2;
+                    $item->trans_gln_status=3;
                     $item->save();
                 }
             }

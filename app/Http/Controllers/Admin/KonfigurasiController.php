@@ -22,6 +22,51 @@ use FunctionLib;
 
 class KonfigurasiController extends Controller
 {
+    //SETTING AKUN -> Ubah Alamat
+    public function seller_address(Request $request)
+    {
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.konfigurasi.aturaddress.index', $data);
+    }
+
+    /**
+     * update password process
+     * $request
+     */
+    public function seller_address_update(Request $request)
+    {
+        $status = 200;
+        $message = 'Alamat penjual berhasil dirubah!';
+        
+        $requestData = $request->all();
+        
+        $this->validate($request, [
+            'user_detail_province' => 'required',
+            'user_detail_city' => 'required',
+            'user_detail_subdist' => 'required',
+            'user_detail_pos' => 'required',
+            'user_detail_address' => 'required',
+        ]);
+
+        $user = User::findOrFail(Auth::id());
+        $userdetail = $user->user_detail()->first();
+        $user->user_detail->user_detail_province = $request->user_detail_province;
+        $user->user_detail->user_detail_city = $request->user_detail_city;
+        $user->user_detail->user_detail_subdist = $request->user_detail_subdist;
+        $user->user_detail->user_detail_pos = $request->user_detail_pos;
+        $user->user_detail->user_detail_address = $request->user_detail_address;
+        $userdetail = $user->user_detail;
+        $userdetail->save();
+        if(!$userdetail){
+            $status = 500;
+            $message = 'Alamat penjual gagal dirubah!';
+        }
+        return redirect('admin/konfigurasi/admin_address')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+
     //SETTING HARGA
 	//REG SELLER
     public function regseller ()
