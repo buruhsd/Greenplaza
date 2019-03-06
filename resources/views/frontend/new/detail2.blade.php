@@ -618,6 +618,7 @@
                                  <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" class="hover-shadow cursor">
                             @endforeach
                           </div>
+      </div>
                   
               
           
