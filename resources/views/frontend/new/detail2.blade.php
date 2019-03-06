@@ -1,5 +1,99 @@
 @extends('frontend.layout.indexall')
 @section('content')
+<style>
+/* Slideshow container */
+.slideshow-container11 {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev11, .next11 {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next11 {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev11:hover, .next11:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text11 {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext11 {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot11 {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active11, .dot11:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade11 {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev11, .next11,.text11 {font-size: 11px}
+}
+</style>
     <!-- breadcumb-area start -->
     <div class="breadcumb-area req-all">
         <div class="container">
@@ -29,11 +123,13 @@
                         <div class="row mb-30">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="product-single-img">
+                               
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
-                                            <div class="item black-opacity zoom">
-                                                <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+                                            <a onclick="modalasdf()"> <div class="item black-opacity zoom">
+                                                 <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt=""  class="hover-shadow cursor">
                                             </div>
+                                            </a>                                        
                                         @endforeach
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
@@ -507,28 +603,30 @@
             </div>
         </div>
     </div>
-   <!--  <div id="myModal" class="modal1">
-  <span class="close cursor" onclick="closeModal()">&times;</span>
-  <div class="modal-content1">
-
-    <div class="mySlides1">
-      <div class="numbertext1"></div>
-      <img src="img_nature_wide.jpg" style="width:100%">
     </div>
-    
-    <a class="prev1" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next1" onclick="plusSlides(1)">&#10095;</a>
+<div class="modal fade11" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+      <div class="slideshow-container11">
+       
+          
+              
+                      
+                          <div class="slider-active owl-carousel next-prev-btn">
+                            @foreach($detail->images as $image)                                       
+                                 <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" class="hover-shadow cursor">
+                            @endforeach
+                          </div>
+                  
+              
+          
+   
 
-    <div class="caption-container1">
-      <p id="caption"></p>
-    </div>
-
-
-    <div class="column1">
-      <img class="demo cursor" src="img_nature_wide.jpg" style="width:100%" onclick="currentSlide(1)" alt="Nature and sunrise">
+      </div>
     </div>
   </div>
-</div> -->
+</div>
     <!-- .shop-page-area enc -->
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
     <script type="text/javascript">
@@ -600,7 +698,49 @@
             });
         }
         changed();
-    </script>
+
+        function modalasdf(){
+            $('#myModal').modal('show');
+            $.ajax({
+                url : '{{url('detail_image_image')}}',
+                type: "GET",
+                dataType: "JSON",
+                success: function(data){
+                  console.log(data);
+                    data.forEach(function(entry) {
+                        $('#myasdef').append('<div class="mySlides11 fade11"><div class="numbertext"></div><img src="/assets/images/product/'+entry.produk_image_image+'" style="width:100%"><div class="text11">Caption Text</div></div>');
+                });
+
+                }
+            })
+        }
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides11");
+          var dots = document.getElementsByClassName("dot11");
+          if (n > slides.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+        }
+            </script>
     <!-- lightbox -->
     
 @endsection

@@ -52,6 +52,12 @@ class FrontController extends Controller
         
         return view('frontend.faq');
     }
+    public function detail_image_image()
+    {
+        $id = Auth::user()->id;
+        $image = Produk_image::where('produk_image_produk_id', $id)->get();
+        echo json_encode($image);
+    }
     public function page(Request $request, $page)
     {
         // if(Auth::guest())
