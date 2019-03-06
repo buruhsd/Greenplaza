@@ -314,6 +314,18 @@ class ProdukController extends Controller
         return view('member.produk.edit', $data);
     }
 
+     public function edit_get($id)
+    {
+        $data = Produk_image::findOrFail($id);;
+        echo $data;
+    }
+         public function edit_get_post(Request $request){
+    
+                Produk_image::where('produk_image_image', $request->message)->delete();
+                  return response(['status' => 'success'])
+          ->header('Content-Type', 'application/json');
+        }
+
     /**
      * Update the specified resource in storage.
      *
@@ -379,11 +391,11 @@ class ProdukController extends Controller
                 $imagesize = $image->getClientSize();
                 $imagetmp = $image->getPathName();
                 // exist on db delete image path
-                if(Produk::where('id', '=', "$id")->pluck('produk_image')[0] != ''){
-                    if(file_exists($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0])){
-                        File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
-                    }
-                }
+                // if(Produk::where('id', '=', "$id")->pluck('produk_image')[0] != ''){
+                //     if(file_exists($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0])){
+                //         File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
+                //     }
+                // }
                 if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }

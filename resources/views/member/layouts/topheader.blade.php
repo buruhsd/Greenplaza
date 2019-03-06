@@ -99,8 +99,3 @@
         </div><!-- /.container-fluid -->
     </nav>
 </div><!-- /Page Header -->
-<script type="text/javascript">
-    $.get( "{{url('member/getuser')}}", function( data ) {
-  alert( "Load was performed." );
-});
-</script>

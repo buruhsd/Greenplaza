@@ -1,3 +1,32 @@
+<style type="text/css">
+#myloading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: blue;
+  animation: spin 0.8s ease-in-out infinite;
+  -webkit-animation: spin 0.5s ease-in-out infinite;
+}
+#myloading2 {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: blue;
+  animation: spin 0.8s ease-in-out infinite;
+  -webkit-animation: spin 0.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+</style>
 <div class="panel panel-white col-md-12">
     <div class="panel-body">
         <div class="row">
@@ -28,27 +57,20 @@
             <div class="col-xs-10 col-md-8 col-sm-10">
                 <div class="roup">
                 @foreach($produk->images->all() as $item)
-                    @if ($loop->first)
-                        <div class="col-md-2">
-                            <label class="btn btn-primary">
-                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check img-checked">
-
-                                <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
-                            </label>
-                        </div>
-                    @else
+                
                         <div class="col-md-2">
                          
                             <label class="btn btn-primary">
-                               <a onclick="removeasdf(3)"><img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check"></a>
+                               <a onclick="removeasdf('{{$item['id']}}')"><img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check"></a>
                                 <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
                             </label>
                         </div>
-                    @endif
+
                 @endforeach
                 </div>
             </div>
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+
                 <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
             </div><br/><br/>
             {!! Form::label('produk_user_status', 'Gambar : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
@@ -609,8 +631,69 @@
     </div>
 </div>
 
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-body">
+<center><div class="getimage uloader"></div></center>
+</div>
+ <form action="#" id="formUpdate" class="form-horizontal">
+               @csrf
+             <!--  <input  name="_token"> -->
+              <input value="" type="hidden" name="id_image"/>
+            </form>
+<div class="modal-footer">
+      <button type="button" id="btnSave" onclick="save()" class="btn m-btn--pill m-btn--air btn-danger uloader2">delete</button>
+<button type="button" class="btn btn-metal btn-sm" data-dismiss="modal">batal</button>
+</div>
+</div>
+</div>
+
 <script type="text/javascript">
-    function removeasdf(argument) {
-        console.log("test");
-    }
+
+   function removeasdf(id){
+     $('.bs-example-modal-sm').modal('show');
+     $('.getimage').html('');
+     $('.uloader').html('<br><br><br><br><div id="myloading"></div>');
+         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('[name="_token"]').val(CSRF_TOKEN);
+    $.ajax({
+        url : '{{ url('member/produk/edit_get') }}' + '/' + id,
+        type: "GET",
+        dataType: "JSON",
+         success: function(data){
+            setTimeout(function(){ 
+              $('.uloader').html('');
+               $("[name='id_image']").val(data.produk_image_image);
+              $('.getimage').html('<br><br><image style="min-height: 100px;max-height: 200px;height: 100%; min-width:100; max-width:200px; width:100%" src="/assets/images/product/'+data.produk_image_image+'"/>')
+             }, 500);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error get data from ajax');
+        }
+    });
+}
+function save(){
+   $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');
+   $('#btnSave').removeClass('btn-danger').addClass('btn-metal');
+     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url : "{{ url('member/produk/edit_get/post') }}",
+        type: "POST",
+        data: {_token: CSRF_TOKEN, message:$("[name='id_image']").val()},
+        dataType: "JSON",
+        success: function(data){
+            setTimeout(function(){
+
+             window.location.reload();
+            }, 500)
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error adding / update data');
+               $('#btnSave').removeClass('btn-metal').addClass('btn-danger');
+               $('.uloader2').html('delete');
+        }
+    });
+}
 </script>

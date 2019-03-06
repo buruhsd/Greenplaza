@@ -528,6 +528,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::post('/store', 'ProdukController@store')->name('.store');
 			Route::get('/show/{id}', 'ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'ProdukController@edit')->name('.edit');
+			Route::get('/edit_get/{id}', 'ProdukController@edit_get')->name('.edit_get');
+		    Route::post('/edit_get/post', 'ProdukController@edit_get_post')->name('.edit_get_post');
 			Route::patch('/update/{id}', 'ProdukController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'ProdukController@destroy')->name('.destroy');
 			Route::get('/disabled/{id}', 'ProdukController@disabled')->name('.disabled');
