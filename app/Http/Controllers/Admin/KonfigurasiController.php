@@ -22,6 +22,14 @@ use FunctionLib;
 
 class KonfigurasiController extends Controller
 {
+
+    public function buyer_address(Request $request)
+    {
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.konfigurasi.aturaddress.index', $data);
+    }
+    
     //SETTING AKUN -> Ubah Alamat
     public function seller_address(Request $request)
     {

@@ -11,10 +11,114 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use Auth;
+use App\User;
 
 
 class User_addressController extends Controller
 {
+    public function set_default($id){
+        $status = 200;
+        $message = "Update alamat berhasil";
+        $user = User::findOrFail(Auth::id());
+        $user_id = Auth::id();
+        $useraddress = $user->user_address()->pluck('id')->toArray();
+        // delete if uncheck
+        array_walk($useraddress, function($value) use ($user_id, $id) {
+            if($value == (integer)$id){
+                $user_address = User_address::where('id', $value)->first();
+                $user_address->user_address_status = 1;
+                $user_address->save();
+            }else{
+                $user_address = User_address::where('id', $value)->first();
+                $user_address->user_address_status = 0;
+                $user_address->save();
+            }
+        });
+        return redirect('admin/konfigurasi/address_admin')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    public function update_address(Request $request, $id)
+    {
+        $status = 200;
+        $message = 'Alamat berhasil di ubah!';
+        
+        $requestData = $request->all();
+        
+        $this->validate($request, [
+            'user_address_label' => 'required',
+            'user_address_owner' => 'required',
+            'user_address_phone' => 'required',
+            'user_address_tlp' => 'required',
+            'user_address_province' => 'required|numeric',
+            'user_address_city' => 'required|numeric',
+            'user_address_subdist' => 'required|numeric',
+            'user_address_pos' => 'required',
+        ]);
+
+        $user_address = User_address::findOrFail($id);
+        $user_address->user_address_user_id = Auth::id();
+        $user_address->user_address_label = $request->user_address_label;
+        $user_address->user_address_owner = $request->user_address_owner;
+        $user_address->user_address_address = $request->user_address_address;
+        $user_address->user_address_phone = $request->user_address_phone;
+        $user_address->user_address_tlp = $request->user_address_tlp;
+        $user_address->user_address_province = $request->user_address_province;
+        $user_address->user_address_city = $request->user_address_city;
+        $user_address->user_address_subdist = $request->user_address_subdist;
+        $user_address->user_address_pos = $request->user_address_pos;
+        $user_address->user_address_note = $request->user_address_note;
+        $user_address->save();
+        // $res = $user_address->update($requestData);
+        if(!$user_address){
+            $status = 500;
+            $message = 'Alamat gagal diubah!';
+        }
+
+        return redirect('admin/konfigurasi/address_admin')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    public function store_address(Request $request)
+    {
+        $status = 200;
+        $message = 'Alamat berhasil ditambahkan!';
+        
+        $requestData = $request->all();
+        $this->validate($request, [
+            'address_label' => 'required',
+            'address_owner' => 'required',
+            'address_phone' => 'required',
+            'address_tlp' => 'required',
+            'address_province' => 'required|numeric',
+            'address_city' => 'required|numeric',
+            'address_subdist' => 'required|numeric',
+            'address_pos' => 'required',
+            'address_address' => 'required',
+        ]);
+
+        $res = new User_address;
+        $res->user_address_user_id = Auth::id();
+        $res->user_address_label = $request->address_label;
+        $res->user_address_owner = $request->address_owner;
+        $res->user_address_address = $request->address_address;
+        $res->user_address_phone = $request->address_phone;
+        $res->user_address_tlp = $request->address_tlp;
+        $res->user_address_province = $request->address_province;
+        $res->user_address_city = $request->address_city;
+        $res->user_address_subdist = $request->address_subdist;
+        $res->user_address_pos = $request->address_pos;
+        $res->user_address_note = $request->address_note;
+        $res->save();
+        if(!$res){
+            $status = 500;
+            $message = 'Alamat gagal ditambahkan!';
+        }
+        return redirect()->back()//('member/user_address')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
     private $perPage = 25;
     private $mainTable = 'sys_user_address';
     /**

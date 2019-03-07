@@ -284,9 +284,16 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/approve_adminpincode/{id}', 'Admin\\NeedApprovalController@approve_adminpincode')->name('.approve_adminpincode');
 			Route::get('/tolakpincode/{id}', 'Admin\\NeedApprovalController@tolakpincode')->name('.tolakpincode');
 		});
+		
+		Route::group(['prefix' => 'user_address', 'as' => '.user_address'], function () {
+			Route::get('/set_default/{id}', 'Admin\\User_addressController@set_default')->name('.set_default');
+			Route::post('/update/{id}', 'Admin\\User_addressController@update_address')->name('admin.user_address.update');
+			Route::post('/store', 'Admin\\User_addressController@store_address')->name('admin.user_address.store');
+		});
 
 		Route::group(['prefix' => 'konfigurasi', 'as' => '.konfigurasi'], function () {
 		//ATUR ALAMAT
+			Route::get('/address_admin', 'Admin\\KonfigurasiController@buyer_address')->name('.address_admin');
 			Route::get('/admin_address', 'Admin\\KonfigurasiController@seller_address')->name('.admin_address');
 			Route::post('/admin_address_update', 'Admin\\KonfigurasiController@seller_address_update')->name('.seller_address_update');
 		//SETTING HARGA
@@ -710,7 +717,9 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('addwishlist/{id}', 'ModalController@addwishlist')->name('.addwishlist');
 		Route::get('pickaddress', 'ModalController@pickAddress')->name('.pickaddress');
 		Route::get('addaddress', 'ModalController@addAddress')->name('.addaddress');
+		Route::get('addaddressadmin', 'ModalController@addAddressadmin')->name('.addaddressadmin');
 		Route::get('editaddress/{id}', 'ModalController@editaddress')->name('.editaddress');
+		Route::get('editaddressadmin/{id}', 'ModalController@editaddressadmin')->name('.editaddressadmin');
 		Route::get('addbank', 'ModalController@addbank')->name('.addbank');
 		Route::get('editbank/{id}', 'ModalController@editbank')->name('.editbank');
 	});

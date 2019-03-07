@@ -200,6 +200,11 @@ class ModalController extends Controller
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.address-form', $data);
     }
+    public function addAddressadmin()
+    {
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.address-formadmin', $data);
+    }
 
     /**
      * 
@@ -217,6 +222,19 @@ class ModalController extends Controller
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.address-form-edit', $data);
+    }
+
+     public function editAddressadmin ($id=0)
+    {
+        $data['user_address'] = User_address::where('user_address_user_id', Auth::id())->first();
+        if(!empty($id) && $id !== 0){
+            $where = '1';
+            $where .= ' AND user_address_user_id='.Auth::id();
+            $where .= ' AND id='.$id;
+            $data['user_address'] = User_address::whereRaw($where)->first();
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.address-form-editadmin', $data);
     }
 
     /**
