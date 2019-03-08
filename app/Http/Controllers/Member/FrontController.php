@@ -185,6 +185,15 @@ class FrontController extends Controller
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
         return view('frontend.new.detail2', $data);
     }
+     public function detail_asdf(Request $request, $slug){
+        $data['shipment_type'] = Shipment::where('shipment_is_usable', 1)
+            ->where('shipment_parent_id', 0)
+            ->get();
+        $data['detail'] = Produk::where('produk_slug', $slug)->first();
+        $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
+        $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
+        return view('frontend.new.detail2', $data);
+    }
 
     /**
     * @param
@@ -253,10 +262,13 @@ class FrontController extends Controller
 //HOME 
     public function index ()
     {
+
         $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
         // dd($users);
+
         $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
         $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
+        $product_asdf = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
@@ -314,7 +326,8 @@ class FrontController extends Controller
                 'brandall',
                 'users',
                 'relatedproduk',
-                'relatedprodukk'
+                'relatedprodukk',
+                'product_asdf'
             ));
     }
 

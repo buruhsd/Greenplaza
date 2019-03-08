@@ -619,9 +619,10 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 	});
 });
-
+	
 // tanpa auth #frontController
 Route::get('/detail/{slug}', 'Member\\FrontController@detail')->name('detail');
+Route::get('/detail_asdf/{slug}', 'Member\\FrontController@detail_asdf')->name('detail_asdf');
 Route::get('/etalase/{user_store}', 'Member\\FrontController@etalase')->name('etalase');
 Route::get('/category', 'Member\\FrontController@category')->name('category');
 Route::get('/brand', 'Member\\FrontController@brand')->name('brand');
