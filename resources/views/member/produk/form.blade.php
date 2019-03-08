@@ -57,6 +57,8 @@
             <div class="col-xs-10 col-md-8 col-sm-10">
                 <div class="roup">
                 @foreach($produk->images->all() as $item)
+              
+                
                 
                         <div class="col-md-2">
                          
@@ -67,9 +69,11 @@
                         </div>
 
                 @endforeach
+               
                 </div>
             </div>
-            <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+            @if($asdfku < 5)
+    <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
 
                 <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
             </div><br/><br/>
@@ -91,10 +95,24 @@
                     </div>
                 </div>
             </div>
-            @endif
-            <button type="button" class="btn btn-success col-sm-1 col-xs-1" id="add-file-field">
+            @if($asdfku < 4)
+            <div id="maxlima">
+            <button type="button" class="btn btn-success col-sm-1 col-xs-1 clickkurang" id="add-file-field" onclick="asdfkurang()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
+            </div>
+            @else
+
+            @endif
+@else
+     <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+                <span class="text-danger">hapus salah gambar untuk mengunggah foto</span>
+            </div>
+@endif
+            
+            @endif
+
+            
         </div>
     </div>
 </div>
@@ -673,6 +691,18 @@
             alert('Error get data from ajax');
         }
     });
+}
+
+function asdfkurang(){
+    var eee = 4 - <?php echo $asdfku ?>;
+    var counter = 0;
+    $(".clickkurang").click(function() {
+    counter++;
+    if(counter == eee){
+        alert('max gmabar lima');
+        $("#maxlima").html("");
+    }
+});
 }
 function save(){
    $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');

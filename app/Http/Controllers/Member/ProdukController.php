@@ -310,13 +310,14 @@ class ProdukController extends Controller
         $data['brand'] = Brand::all();
         $data['produk'] = Produk::findOrFail($id);
 
+        $data['asdfku'] = Produk_image::all()->where("produk_image_produk_id", $id)->count();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.produk.edit', $data);
     }
 
      public function edit_get($id)
     {
-        $data = Produk_image::findOrFail($id);;
+        $data = Produk_image::findOrFail($id);
         echo $data;
     }
          public function edit_get_post(Request $request){

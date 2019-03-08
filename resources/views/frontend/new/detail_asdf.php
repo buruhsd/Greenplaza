@@ -1,5 +1,99 @@
 @extends('frontend.layout.indexall')
 @section('content')
+<style>
+/* Slideshow container */
+.slideshow-container11 {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev11, .next11 {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next11 {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev11:hover, .next11:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text11 {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext11 {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot11 {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active11, .dot11:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade11 {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev11, .next11,.text11 {font-size: 11px}
+}
+</style>
     <!-- breadcumb-area start -->
     <div class="breadcumb-area req-all">
         <div class="container">
@@ -29,11 +123,13 @@
                         <div class="row mb-30">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="product-single-img">
+                               
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
-                                            <div class="item black-opacity zoom">
-                                                <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+                                            <a onclick="modalasdf()"> <div class="item black-opacity zoom">
+                                                 <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt=""  class="hover-shadow cursor">
                                             </div>
+                                            </a>                                        
                                         @endforeach
                                     </div>
                                     <div class="product-thumbnil-active  owl-carousel">
@@ -507,79 +603,136 @@
             </div>
         </div>
     </div>
-</div> -->
+    </div>
+    <div class="modal fade11" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="slideshow-container11">
+              <div class="slider-active owl-carousel next-prev-btn">
+                @foreach($detail->images as $image)                                       
+                     <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" class="hover-shadow cursor">
+                @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- .shop-page-area enc -->
-<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
-    <script type="text/javascript">
-        function get_ongkir(){
-            var text = $("#btn-choose-shipment").val();
-            $("#btn-choose-shipment").val("Loading");
-            $.ajax({
-                type: "POST", // or post?
-                url: "{{route("localapi.content.choose_shipment", $detail->id)}}", // change as needed
-                data: $("#form-shipment").serialize(), // change as needed
-                success: function(data) {
-                    if (data) {
-                        $('#shipment-price').empty().append(data);
-                    } else {
-                        swal({   
-                            type: "error",
-                            title: "failed",   
-                            text: "Layanan Tidak Tersedia",   
-                            showConfirmButton: false ,
-                            showCloseButton: true,
-                            footer: ''
-                        });
-                    }
-                    $("#btn-choose-shipment").val(text);
-                },
-                error: function(xhr, textStatus) {
-                    swal({
-                        type: "error",
-                        title: "failed",   
-                        text: "Layanan Tidak Tersedia",   
-                        showConfirmButton: false ,
-                        showCloseButton: true,
-                        footer: ''
-                    });
-                    $("#btn-choose-shipment").val(text);
-                }
-            });
-        }
-        function change_ongkir(service, ongkir){
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
-            html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
-            $("#shipment-price").empty();
-            $("#ship-cost").empty().append(html);
-            $('#ship_service').attr('value', service);
-            $('#ship_cost').attr('value', ongkir);
-            // console.log(service, ongkir);
-        }
-        function use_address(id, address_name, city, subdistrict){
-            $("#ajax-modal").modal("hide")
-            // console.log(city, subdistrict);
-            $('#address_id').attr('value', id);
-            $('#address_id').attr('value', id);
-            $('#destinationType').attr('value', 'subdistrict');
-            $('#destination').attr('value', subdistrict);
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
-            $("#address-info").empty().append(html);
-            empty_ongkir();
-        }
-        function empty_ongkir(){
-            $("#ship-cost").empty();
-            $('#ship_cost').attr('value', 0);
-        }
-        function changed(){
-            $('#qty').on('change', function(){
-                empty_ongkir();
-            });
-            $('#courier').on('change', function(){
-                empty_ongkir();
-            });
-        }
-        changed();
-    </script>
-    <!-- lightbox -->
+    <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+      <script type="text/javascript">
+          function get_ongkir(){
+              var text = $("#btn-choose-shipment").val();
+              $("#btn-choose-shipment").val("Loading");
+              $.ajax({
+                  type: "POST", // or post?
+                  url: "{{route("localapi.content.choose_shipment", $detail->id)}}", // change as needed
+                  data: $("#form-shipment").serialize(), // change as needed
+                  success: function(data) {
+                      if (data) {
+                          $('#shipment-price').empty().append(data);
+                      } else {
+                          swal({   
+                              type: "error",
+                              title: "failed",   
+                              text: "Layanan Tidak Tersedia",   
+                              showConfirmButton: false ,
+                              showCloseButton: true,
+                              footer: ''
+                          });
+                      }
+                      $("#btn-choose-shipment").val(text);
+                  },
+                  error: function(xhr, textStatus) {
+                      swal({
+                          type: "error",
+                          title: "failed",   
+                          text: "Layanan Tidak Tersedia",   
+                          showConfirmButton: false ,
+                          showCloseButton: true,
+                          footer: ''
+                      });
+                      $("#btn-choose-shipment").val(text);
+                  }
+              });
+          }
+          function change_ongkir(service, ongkir){
+              var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
+              html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
+              $("#shipment-price").empty();
+              $("#ship-cost").empty().append(html);
+              $('#ship_service').attr('value', service);
+              $('#ship_cost').attr('value', ongkir);
+              // console.log(service, ongkir);
+          }
+          function use_address(id, address_name, city, subdistrict){
+              $("#ajax-modal").modal("hide")
+              // console.log(city, subdistrict);
+              $('#address_id').attr('value', id);
+              $('#address_id').attr('value', id);
+              $('#destinationType').attr('value', 'subdistrict');
+              $('#destination').attr('value', subdistrict);
+              var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
+              $("#address-info").empty().append(html);
+              empty_ongkir();
+          }
+          function empty_ongkir(){
+              $("#ship-cost").empty();
+              $('#ship_cost').attr('value', 0);
+          }
+          function changed(){
+              $('#qty').on('change', function(){
+                  empty_ongkir();
+              });
+              $('#courier').on('change', function(){
+                  empty_ongkir();
+              });
+          }
+          changed();
+
+          function modalasdf(){
+              $('#myModal').modal('show');
+              $.ajax({
+                  url : '{{url('detail_image_image')}}',
+                  type: "GET",
+                  dataType: "JSON",
+                  success: function(data){
+                    console.log(data);
+                      data.forEach(function(entry) {
+                          $('#myasdef').append('<div class="mySlides11 fade11"><div class="numbertext"></div><img src="/assets/images/product/'+entry.produk_image_image+'" style="width:100%"><div class="text11">Caption Text</div></div>');
+                  });
+
+                  }
+              })
+          }
+          var slideIndex = 1;
+          showSlides(slideIndex);
+
+          function plusSlides(n) {
+            showSlides(slideIndex += n);
+          }
+
+          function currentSlide(n) {
+            showSlides(slideIndex = n);
+          }
+
+          function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides11");
+            var dots = document.getElementsByClassName("dot11");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+          }
+              </script>
+      <!-- lightbox -->
     
 @endsection
