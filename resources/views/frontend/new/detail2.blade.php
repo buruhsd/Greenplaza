@@ -604,144 +604,135 @@
         </div>
     </div>
     </div>
-<div class="modal fade11" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-      <div class="slideshow-container11">
-       
-          
-              
-                      
-                          <div class="slider-active owl-carousel next-prev-btn">
-                            @foreach($detail->images as $image)                                       
-                                 <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" class="hover-shadow cursor">
-                            @endforeach
-                          </div>
-      </div>
-                  
-              
-          
-   
-
+    <div class="modal fade11" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="slideshow-container11">
+              <div class="slider-active owl-carousel next-prev-btn">
+                @foreach($detail->images as $image)                                       
+                     <img src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" class="hover-shadow cursor">
+                @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
     <!-- .shop-page-area enc -->
-<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
-    <script type="text/javascript">
-        function get_ongkir(){
-            var text = $("#btn-choose-shipment").val();
-            $("#btn-choose-shipment").val("Loading");
-            $.ajax({
-                type: "POST", // or post?
-                url: "{{route("localapi.content.choose_shipment", $detail->id)}}", // change as needed
-                data: $("#form-shipment").serialize(), // change as needed
-                success: function(data) {
-                    if (data) {
-                        $('#shipment-price').empty().append(data);
-                    } else {
-                        swal({   
-                            type: "error",
-                            title: "failed",   
-                            text: "Layanan Tidak Tersedia",   
-                            showConfirmButton: false ,
-                            showCloseButton: true,
-                            footer: ''
-                        });
-                    }
-                    $("#btn-choose-shipment").val(text);
-                },
-                error: function(xhr, textStatus) {
-                    swal({
-                        type: "error",
-                        title: "failed",   
-                        text: "Layanan Tidak Tersedia",   
-                        showConfirmButton: false ,
-                        showCloseButton: true,
-                        footer: ''
-                    });
-                    $("#btn-choose-shipment").val(text);
-                }
-            });
-        }
-        function change_ongkir(service, ongkir){
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
-            html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
-            $("#shipment-price").empty();
-            $("#ship-cost").empty().append(html);
-            $('#ship_service').attr('value', service);
-            $('#ship_cost').attr('value', ongkir);
-            // console.log(service, ongkir);
-        }
-        function use_address(id, address_name, city, subdistrict){
-            $("#ajax-modal").modal("hide")
-            // console.log(city, subdistrict);
-            $('#address_id').attr('value', id);
-            $('#address_id').attr('value', id);
-            $('#destinationType').attr('value', 'subdistrict');
-            $('#destination').attr('value', subdistrict);
-            var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
-            $("#address-info").empty().append(html);
-            empty_ongkir();
-        }
-        function empty_ongkir(){
-            $("#ship-cost").empty();
-            $('#ship_cost').attr('value', 0);
-        }
-        function changed(){
-            $('#qty').on('change', function(){
-                empty_ongkir();
-            });
-            $('#courier').on('change', function(){
-                empty_ongkir();
-            });
-        }
-        changed();
-
-        function modalasdf(){
-            $('#myModal').modal('show');
-            $.ajax({
-                url : '{{url('detail_image_image')}}',
-                type: "GET",
-                dataType: "JSON",
-                success: function(data){
-                  console.log(data);
-                    data.forEach(function(entry) {
-                        $('#myasdef').append('<div class="mySlides11 fade11"><div class="numbertext"></div><img src="/assets/images/product/'+entry.produk_image_image+'" style="width:100%"><div class="text11">Caption Text</div></div>');
-                });
-
-                }
-            })
-        }
-        var slideIndex = 1;
-        showSlides(slideIndex);
-
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("mySlides11");
-          var dots = document.getElementsByClassName("dot11");
-          if (n > slides.length) {slideIndex = 1}    
-          if (n < 1) {slideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";  
+    <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+      <script type="text/javascript">
+          function get_ongkir(){
+              var text = $("#btn-choose-shipment").val();
+              $("#btn-choose-shipment").val("Loading");
+              $.ajax({
+                  type: "POST", // or post?
+                  url: "{{route("localapi.content.choose_shipment", $detail->id)}}", // change as needed
+                  data: $("#form-shipment").serialize(), // change as needed
+                  success: function(data) {
+                      if (data) {
+                          $('#shipment-price').empty().append(data);
+                      } else {
+                          swal({   
+                              type: "error",
+                              title: "failed",   
+                              text: "Layanan Tidak Tersedia",   
+                              showConfirmButton: false ,
+                              showCloseButton: true,
+                              footer: ''
+                          });
+                      }
+                      $("#btn-choose-shipment").val(text);
+                  },
+                  error: function(xhr, textStatus) {
+                      swal({
+                          type: "error",
+                          title: "failed",   
+                          text: "Layanan Tidak Tersedia",   
+                          showConfirmButton: false ,
+                          showCloseButton: true,
+                          footer: ''
+                      });
+                      $("#btn-choose-shipment").val(text);
+                  }
+              });
           }
-          for (i = 0; i < dots.length; i++) {
-              dots[i].className = dots[i].className.replace(" active", "");
+          function change_ongkir(service, ongkir){
+              var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping : "+service+"</b></div></ul>";
+              html += "<ul><div class='col-lg-12 col-sm-12 col-md-12'><b>Shipping Cost : "+ongkir+"</b></div></ul>";
+              $("#shipment-price").empty();
+              $("#ship-cost").empty().append(html);
+              $('#ship_service').attr('value', service);
+              $('#ship_cost').attr('value', ongkir);
+              // console.log(service, ongkir);
           }
-          slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
-        }
-            </script>
-    <!-- lightbox -->
+          function use_address(id, address_name, city, subdistrict){
+              $("#ajax-modal").modal("hide")
+              // console.log(city, subdistrict);
+              $('#address_id').attr('value', id);
+              $('#address_id').attr('value', id);
+              $('#destinationType').attr('value', 'subdistrict');
+              $('#destination').attr('value', subdistrict);
+              var html = "<ul style='width: 100%; margin-bottom: 2%'><div class='col-lg-12 col-sm-12 col-md-12'><b>To Address : "+address_name+"</b></div></ul>";
+              $("#address-info").empty().append(html);
+              empty_ongkir();
+          }
+          function empty_ongkir(){
+              $("#ship-cost").empty();
+              $('#ship_cost').attr('value', 0);
+          }
+          function changed(){
+              $('#qty').on('change', function(){
+                  empty_ongkir();
+              });
+              $('#courier').on('change', function(){
+                  empty_ongkir();
+              });
+          }
+          changed();
+
+          function modalasdf(){
+              $('#myModal').modal('show');
+              $.ajax({
+                  url : '{{url('detail_image_image')}}',
+                  type: "GET",
+                  dataType: "JSON",
+                  success: function(data){
+                    console.log(data);
+                      data.forEach(function(entry) {
+                          $('#myasdef').append('<div class="mySlides11 fade11"><div class="numbertext"></div><img src="/assets/images/product/'+entry.produk_image_image+'" style="width:100%"><div class="text11">Caption Text</div></div>');
+                  });
+
+                  }
+              })
+          }
+          var slideIndex = 1;
+          showSlides(slideIndex);
+
+          function plusSlides(n) {
+            showSlides(slideIndex += n);
+          }
+
+          function currentSlide(n) {
+            showSlides(slideIndex = n);
+          }
+
+          function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides11");
+            var dots = document.getElementsByClassName("dot11");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+          }
+              </script>
+      <!-- lightbox -->
     
 @endsection
