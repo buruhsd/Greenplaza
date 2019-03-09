@@ -38,6 +38,7 @@ class HomeController extends Controller
         // dd($users);
         $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->get();
         $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
+        $product_asdf = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
@@ -95,7 +96,8 @@ class HomeController extends Controller
                 'brandall',
                 'users',
                 'relatedproduk',
-                'relatedprodukk'
+                'relatedprodukk',
+                'product_asdf'
             ));
     }
 }

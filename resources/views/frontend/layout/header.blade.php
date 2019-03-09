@@ -28,15 +28,11 @@
                                         <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
                                         <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                     @endif
-                                    <li>
-                                        <a onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </li>
+                                    <li><a href="javascript(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
                                 </ul>
                                 @endguest
                             </li> 
@@ -186,11 +182,7 @@
                                         <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
                                     @endif
                                 @endif
-                                <li>
-                                    <a style="cursor: pointer;" onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <li><a href="javascript(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
