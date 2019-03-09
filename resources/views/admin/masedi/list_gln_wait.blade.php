@@ -20,11 +20,11 @@
                             </div>
                             <div class="pull-right form-group mx-sm-3 mb-2">
                             <label for="status" class="sr-only">Status</label>
-                            <select class="form-control" id="status" name="status">
+                            <select class="form-control" id="status" name="status" onchange = "location=this.value;">
                                 <option value="">Status</option>
-                                <option value="wait" >Menunggu</option>
-                                <option value="transfer">Di Transfer</option>
-                                <option value="cancel">Batal</option>
+                                <option value="/admin/list_transaction_gln_approve" >Seller Sanggup</option>
+                                <option value="/admin/list_transaction_gln_paid">Kirim Seller</option>
+                                <option value="/admin/list_transaction_gln_paid">Expired</option>
                             </select>
                           </div>
                         </form>
@@ -55,7 +55,7 @@
                             <tbody>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if($g->gln['trans_gln_status'] == 2)
+                                @if($g->gln['trans_gln_status'] == 1)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
@@ -68,12 +68,12 @@
                                     <td><center>{{$g->trans_detail_trans_id}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    <td><center>Sudah kirim ke seller</center></td>
                                     @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
                                         <td><center>{{$g->gln->trans_gln_amount_total}}</center></td>
                                         @else
                                         <td><center> - </center></td>
                                     @endif
+                                    <td><center>Seller Sanggup</center></td>
                                 </tr>
                                 @endif
                                 @endforeach

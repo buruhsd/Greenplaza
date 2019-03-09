@@ -54,7 +54,7 @@
                                     <td><center>{{$g->trans_detail_trans_id}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    @if ($g->trans_detail_status == 3 && $g->trans_detail_is_cancle == 1)
+                                    @if ($g->trans_detail_status == 3 && $g->trans_detail_is_cancel == 1)
                                         <td><center>Seller Cancel</center></td>
                                     @elseif ($g->trans_detail_status == 4 && $g->trans_detail_is_cancel == 1)
                                         <td><center>Seller Cancel</center></td>

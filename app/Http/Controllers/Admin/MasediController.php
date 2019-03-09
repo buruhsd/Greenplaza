@@ -50,4 +50,28 @@ class MasediController extends Controller
         $user = User::where('name', 'like', '%'.$search.'%')->orderBy('created_at', 'ASC')->paginate(10);
         return view('admin.masedi.wallet_gln', compact('user'));
     }
+
+    public function list_gln_paid_appv ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($gln);
+        return view('admin.masedi.list_gln_wait', compact('gln'));
+    }
+
+    public function list_gln_cancel ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($gln);
+        return view('admin.masedi.list_gln_cancel', compact('gln'));
+    }
 }
