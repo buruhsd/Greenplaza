@@ -109,6 +109,19 @@
                 <span class="text-danger">hapus salah gambar untuk mengunggah foto</span>
             </div>
 @endif
+<script type="text/javascript">
+    function asdfkurang(){
+    var eee = 4 - <?php echo $asdfku ?>;
+    var counter = 0;
+    $(".clickkurang").click(function() {
+    counter++;
+    if(counter == eee){
+        alert('max gmabar lima');
+        $("#maxlima").html("");
+    }
+});
+}
+</script>
             
             @endif
 
@@ -648,7 +661,6 @@
         <button type="submit" class="btn btn-primary mb-2">Save</button>
     </div>
 </div>
-
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
 <div class="modal-content">
@@ -666,6 +678,8 @@
 </div>
 </div>
 </div>
+@if(str_contains(Request::url(), ['member']))
+
 
 <script type="text/javascript">
 
@@ -693,17 +707,7 @@
     });
 }
 
-function asdfkurang(){
-    var eee = 4 - <?php echo $asdfku ?>;
-    var counter = 0;
-    $(".clickkurang").click(function() {
-    counter++;
-    if(counter == eee){
-        alert('max gmabar lima');
-        $("#maxlima").html("");
-    }
-});
-}
+
 function save(){
    $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');
    $('#btnSave').removeClass('btn-danger').addClass('btn-metal');
@@ -727,3 +731,60 @@ function save(){
     });
 }
 </script>
+
+@elseif(str_contains(Request::url(), ['admin']))
+
+<script type="text/javascript">
+
+   function removeasdf(id){
+     $('.bs-example-modal-sm').modal('show');
+     $('.getimage').html('');
+     $('.uloader').html('<br><br><br><br><div id="myloading"></div>');
+         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('[name="_token"]').val(CSRF_TOKEN);
+    $.ajax({
+        url : '{{ url('admin/produk/edit_get') }}' + '/' + id,
+        type: "GET",
+        dataType: "JSON",
+         success: function(data){
+            setTimeout(function(){ 
+              $('.uloader').html('');
+               $("[name='id_image']").val(data.produk_image_image);
+              $('.getimage').html('<br><br><image style="min-height: 100px;max-height: 200px;height: 100%; min-width:100; max-width:200px; width:100%" src="/assets/images/product/'+data.produk_image_image+'"/>')
+             }, 500);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+
+function save(){
+   $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');
+   $('#btnSave').removeClass('btn-danger').addClass('btn-metal');
+     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url : "{{ url('admin/produk/edit_get/post') }}",
+        type: "POST",
+        data: {_token: CSRF_TOKEN, message:$("[name='id_image']").val()},
+        dataType: "JSON",
+        success: function(data){
+            setTimeout(function(){
+
+             window.location.reload();
+            }, 500)
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error adding / update data');
+               $('#btnSave').removeClass('btn-metal').addClass('btn-danger');
+               $('.uloader2').html('delete');
+        }
+    });
+}
+</script>
+
+@endif
+
+

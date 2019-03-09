@@ -184,6 +184,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/active/{id}', 'Admin\\ProdukController@active')->name('.active');
 			Route::get('/show/{id}', 'Admin\\ProdukController@show')->name('.show');
 			Route::get('/edit/{id}', 'Admin\\ProdukController@edit')->name('.edit');
+			Route::get('/edit_get/{id}', 'Admin\\ProdukController@edit_get')->name('.edit_get');
+		    Route::post('/edit_get/post', 'Admin\\ProdukController@edit_get_post')->name('.edit_get_post');
 			Route::patch('update/{id}', 'Admin\\ProdukController@update')->name('.update');
 			Route::get('/destroy/{id}', 'Admin\\ProdukController@destroy')->name('.destroy');
 			Route::get('delete/{id}', 'Admin\\ProdukController@delete')->name('.delete');

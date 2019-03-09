@@ -43,12 +43,21 @@
                                 </tr>
                                 <?php $no=1; ?>
                                 @foreach($log_wallet as $item)
+
+                                    <?php
+
+                                        if($item->wallet_type == "7"){
+                                            $keterangan = "transaksi by gln";
+                                        }else{
+                                            $keterangan = $item->wallet_note;
+                                        }
+                                     ?>
                                     <tr>
                                         <td>{{$no++}}</td>
                                         <td>{{FunctionLib::date_indo($item->created_at, true, 'full')}}</td>
                                         <td>{{$item->wallet_cash_in}}</td>
                                         <td>{{$item->wallet_cash_out}}</td>
-                                        <td>{{$item->wallet_note}}</td>
+                                        <td>{{$keterangan}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
