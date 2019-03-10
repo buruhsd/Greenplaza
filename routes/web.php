@@ -419,7 +419,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 	});
 });
-Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member']], function () {
+Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member', 'admin']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		// Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 		// Sales & purchase

@@ -106,6 +106,9 @@
                                                 ?"<button class='btn btn-success btn-xs'>Done</button>"
                                                 :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
                                         </td>
+                                        <td scope="row">
+                                            {!!Plugin::trans_purchase_btn(['id'=>$item->id, 'type'=>'seller'])!!}                                            
+                                        </td>
                                         <!-- <td scope="row">
                                             <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
                                             <a href="{{route('admin.transaction.edit_trans', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
