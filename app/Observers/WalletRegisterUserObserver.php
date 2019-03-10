@@ -12,7 +12,8 @@ class WalletRegisterUserObserver
     }
     private function setLog($type, $item)
     {
-        $wallet_type = Wallet_type::all();
+        $wallet_type = Wallet_type::where('id', '!=', 7)->get();
+        // dd($wallet_type);
         foreach ($wallet_type as $wallet) {
             $log = [
                 'wallet_user_id' => $item->id,
