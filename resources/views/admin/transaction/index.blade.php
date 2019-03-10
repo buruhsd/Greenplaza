@@ -107,7 +107,7 @@
                                                 :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
                                         </td>
                                         <td scope="row">
-                                            {!!Plugin::trans_purchase_btn(['id'=>$item->id, 'type'=>'seller'])!!}                                            
+                                            {!!Plugin::trans_purchase_btn_admin(['id'=>$item->id, 'type'=>'seller'])!!}                                            
                                         </td>
                                         <!-- <td scope="row">
                                             <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>

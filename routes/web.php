@@ -112,6 +112,9 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/page_list', 'Admin\\PageController@page_list')->name('.page_list');
 		Route::get('/delete_page/{id}', 'Admin\\PageController@delete')->name('.delete_page');
 
+		//test
+		Route::get('/able/{id}', 'Member\\TransactionController@able')->name('.able');
+
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
@@ -419,7 +422,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['member']], functio
 		Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 	});
 });
-Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member', 'admin']], function () {
+Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['member']], function () {
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		// Route::get('/dashboard', 'FrontController@dashboard')->name('.dashboard');
 		// Sales & purchase
