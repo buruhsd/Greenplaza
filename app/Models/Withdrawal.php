@@ -13,7 +13,7 @@ class Withdrawal extends Model
      * @var array
      */
     protected $fillable = [
-    	'withdrawal_user_id', 'withdrawal_wallet_id', 'withdrawal_wallet_type', 'withdrawal_wallet_amount', 'withdrawal_status', 'withdrawal_approval_id', 'withdrawal_response_date', 'withdrawal_response_text' 
+    	'withdrawal_user_id', 'withdrawal_wallet_id', 'withdrawal_wallet_type', 'withdrawal_ref', 'withdrawal_wallet_amount', 'withdrawal_status', 'withdrawal_approval_id', 'withdrawal_response_date', 'withdrawal_response_text' 
 	];
 
     /**

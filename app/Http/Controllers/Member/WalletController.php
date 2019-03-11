@@ -131,7 +131,7 @@ class WalletController extends Controller
             ]);
             // validasi password
             $user = User::findOrFail(Auth::id());
-            if (!Hash::check($request->user_detail_pass_trx, $user->user_detail->user_detail_pass_trx)) {
+            if (!Hash::check($request->password, $user->user_detail->user_detail_pass_trx)) {
                 $status = 500;
                 $message = 'Password does Not Match!';
                 return redirect()->back()

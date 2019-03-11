@@ -230,6 +230,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 
 			//WITHDRAWAL
 			Route::get('/withdrawal_member', 'Admin\\NeedApprovalController@withdrawal_member')->name('.withdrawal_member');
+			Route::post('/withdrawal_member_appv/{id}', 'Admin\\NeedApprovalController@approve')->name('.withdrawal_member_appv');
 			Route::get('/withdrawal_seller', 'Admin\\NeedApprovalController@withdrawal_seller')->name('.withdrawal_seller');
 			Route::post('/withdrawal_member_reject/{id}', 'Admin\\NeedApprovalController@reject')->name('.withdrawal_member_reject');
 			//SALDOIKLAN

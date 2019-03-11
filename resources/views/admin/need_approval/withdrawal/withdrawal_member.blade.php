@@ -40,8 +40,7 @@
                                     <th>Wallet_type</th>
                                     <th>Wallet_amount</th>
                                     <th>Status</th>
-                                    <th>Response_text</th>
-                                    <th>Response_date</th>
+                                    <th>Detail</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -53,14 +52,22 @@
                                     <td><center>{{++$key}}</center></td>
                                     <td><center>{{$w->user->username}}</center></td>
                                     <td><center>{{$w->withdrawal_wallet_id}}</center></td>
-                                    <td><center>{{$w->withdrawal_wallet_type}}</center></td>
-                                    <td><center>{{$w->withdrawal_amount}}</center></td>
-                                    <td><center>{{$w->withdrawal_status}}</center></td>
-                                    <td><center>{{$w->withdrawal_response_text}}</center></td>
-                                    <td><center>{{$w->withdrawal_response_date}}</center></td>
+                                    <td><center>{{$w->type->wallet_type_name}}</center></td>
+                                    <td><center>{{$w->withdrawal_wallet_amount}}</center></td>
+                                    @if($w->withdrawal_status == 0)
+                                    <td><center>Belum Approve</center></td>
+                                    @elseif($w->withdrawal_status == 1)
+                                    <td><center>Approve</center></td>
+                                    
+                                    @endif
+                                    <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$w->id}}"><i class="fa fa-edit"></i>Detail Transaksi</button></td>
                                     <td>
-                                        <a href=""><center><button type="submit" class="btn btn-success">Approve</button></a>
+                                    @if($w->withdrawal_status == 0)
+                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalappv">Approve</button>
                                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button></center>
+                                    @elseif($w->withdrawal_status == 1)
+                                    
+                                    @endif
                                          <!-- Modal -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
@@ -85,6 +92,29 @@
                                             </div>
                                           </div>
                                         </div>
+                                        <div class="modal fade" id="exampleModalappv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Masukkan Nomor Referensi</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <form action="{{route('admin.needapproval.withdrawal_member_appv', $w->id)}}" method="POST" id="usrform">
+                                                {{ csrf_field() }}
+                                              <div class="modal-body">
+                                                    <input type="text" class="form-control" name="no_ref">
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Kirim</button>
+                                              </div>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
                                     </td>
                                 </tr>
                                  @endforeach
@@ -102,7 +132,7 @@
     </div><!-- Row -->
 </div><!-- Main Wrapper -->
 </div>
-
+@include('admin.need_approval.withdrawal.detail_withdraw_appv')
 @endsection
 @section('script')
 <script type="text/javascript">

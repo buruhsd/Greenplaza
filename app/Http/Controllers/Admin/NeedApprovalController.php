@@ -132,6 +132,9 @@ class NeedApprovalController extends Controller
     {
     	$with = Withdrawal::find($id);
     	$with->withdrawal_status = 1;
+        $with->withdrawal_ref = $request->no_ref;
+        // dd($with);
+
     	$with->save();
     	Session::flash("flash_notification", [
                         "level"=>"success",
