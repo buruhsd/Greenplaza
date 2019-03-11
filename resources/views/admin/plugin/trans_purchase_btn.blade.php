@@ -62,7 +62,7 @@
 		    	@elseif($type == 'seller')
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
-				    		<a href="{{route('admin.able', $detail->trans->id)}}">
+				    		<a href="{{route('admin.transaction.able', $detail->trans->id)}}">
 			    				<button class="btn btn-success btn-xs">Memulai Packing</button>
 				    		</a>
 				    	</div>
@@ -85,7 +85,7 @@
 		    		@if($detail->trans_detail_send_date == null || $detail->trans_detail_send_date == "")
 				    	<div class="row">
 				    		<div class="col-md-12 text-center">
-					    		<a href="{{route('member.transaction.packing', $detail->trans->id)}}">
+					    		<a href="{{route('admin.transaction.packing', $detail->trans->id)}}">
 				    				<button class="btn btn-info btn-xs">Packing selesai</button>
 					    		</a>
 					    	</div>
@@ -94,11 +94,11 @@
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
 			                {!! Form::open(['id' => 'form-pick-approve', 'class' => 'col-md-6']) !!}
-			                    <input type="button" onclick='modal_post($(this), $("#form-pick-approve").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship", $detail->trans->id)}} value="Sending" class="btn btn-success btn-xs btn-block" />
+			                    <input type="button" onclick='modal_post($(this), $("#form-pick-approve").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship_admin", $detail->trans->id)}} value="Sending" class="btn btn-success btn-xs btn-block" />
 			                {!! Form::close() !!}
 			                {!! Form::open(['id' => 'form-pick-cancel', 'class' => 'col-md-6']) !!}
 			                	<input type="hidden" name="status" value="cancel"/>
-			                    <input type="button" onclick='modal_post($(this), $("#form-pick-cancel").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship", $detail->trans->id)}} value="Cancel" class="btn btn-danger btn-xs btn-block" />
+			                    <input type="button" onclick='modal_post($(this), $("#form-pick-cancel").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship_admin", $detail->trans->id)}} value="Cancel" class="btn btn-danger btn-xs btn-block" />
 			                {!! Form::close() !!}
 				    		{{-- <a href="{{route('member.transaction.sending', $detail->trans->id)}}">
 			    				<button class="btn btn-success btn-xs">Sending</button>
@@ -129,7 +129,7 @@
 		    		@if($detail->trans->trans_detail()->where('trans_detail_no_resi', 0)->exists())
 				    	<div class="row">
 				    		<div class="col-md-12 text-center">
-								<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.transaction.add_resi", $detail->trans->id)}} class='btn btn-info btn-xs'>
+								<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("admin.transaction.add_resi", $detail->trans->id)}} class='btn btn-info btn-xs'>
 		                                Shipment
 		                        </button>
 					    	</div>
@@ -246,7 +246,7 @@
 		    		@if($detail->trans_detail_send == 0)
 				    	<div class="row">
 				    		<div class="col-md-12 text-center">
-								<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.transaction.add_resi", $detail->trans->id)}} class='btn btn-info btn-xs'>
+								<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("admin.transaction.add_resi", $detail->trans->id)}} class='btn btn-info btn-xs'>
 		                                Shipment
 		                        </button>
 					    	</div>

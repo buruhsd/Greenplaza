@@ -115,9 +115,6 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/page_list', 'Admin\\PageController@page_list')->name('.page_list');
 		Route::get('/delete_page/{id}', 'Admin\\PageController@delete')->name('.delete_page');
 
-		//test
-		Route::get('/able/{id}', 'Member\\TransactionController@able')->name('.able');
-
 		// configurasi
 		Route::group(['prefix' => 'config', 'as' => '.config'], function () {
 			Route::get('/', 'Superadmin\\Conf_configController@index')->name('.index');
@@ -208,6 +205,12 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('/edit_trans/{id}', 'Admin\\TransactionController@edit_trans')->name('.edit_trans');
 			Route::patch('/update', 'Admin\\TransactionController@update')->name('.update');
 			Route::delete('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
+			//test
+			Route::get('/able/{id}', 'Admin\\TransactionController@able')->name('.able');
+			Route::get('/packing/{id}', 'Admin\\TransactionController@packing')->name('.packing');
+			Route::post('/sending', 'Admin\\TransactionController@sending')->name('.sending');
+			Route::get('/add_resi/{id}', 'Admin\\TransactionController@add_resi')->name('.add_resi');
+			Route::post('/add_resi/{id}', 'Admin\\TransactionController@add_resi')->name('.post_add_resi');
 		});
 		Route::group(['prefix' => 'res_kom', 'as' => '.res_kom'], function () {
 			Route::get('/', 'Admin\\KomplainController@res_kom')->name('.index');
@@ -721,6 +724,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 			Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
 			Route::get('update_komplain/{id}', 'ModalController@update_komplain')->name('.update_komplain');
 			Route::post('pick_produk_ship/{id}', 'ModalController@trans_pickProdukShip')->name('.pick_produk_ship');
+			Route::post('pick_produk_ship_admin/{id}', 'ModalController@trans_pickProdukShip_admin')->name('.pick_produk_ship_admin');
 			Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
 			Route::get('add_to_chart/{id}', 'ModalController@add_to_chart')->name('.add_to_chart');
 		});

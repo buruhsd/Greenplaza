@@ -132,7 +132,7 @@
                 </div>
             @endif
             <div class="col-md-2">
-                <input type="button" onclick='modal_post($(this), $("#form-pick-produk").serialize());' data-toggle='modal' data-method='post' data-href={{route("member.transaction.sending")}} value="Save" class="btn btn-success btn-xs btn-block" />
+                <input type="button" onclick='modal_post($(this), $("#form-pick-produk").serialize());' data-toggle='modal' data-method='post' data-href={{route("admin.transaction.sending")}} value="Save" class="btn btn-success btn-xs btn-block" />
             </div>
         {!! Form::close() !!}
         </div>

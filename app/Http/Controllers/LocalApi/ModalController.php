@@ -118,6 +118,24 @@ class ModalController extends Controller
     }
 
     /**
+     * pemanggil admin transaksi
+     * @param
+     * @return 
+     */
+    public function trans_pickProdukShip_admin(Request $request, $id)
+    {
+        $data['trans_status'] = $request->status;
+        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+        $where .= " AND trans_detail_is_cancel != 1";
+        $data['trans_detail'] = Trans_detail::where('trans_detail_trans_id', $id)
+            ->whereRaw($where)
+            ->get();
+        $data['status'] = 'seller';
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.pick-produk-ship-admin', $data);
+    }
+
+    /**
      * member membuat komplain ketika barang sampai
      * @param id sys_komplain
      * @return 

@@ -24,6 +24,228 @@ class TransactionController extends Controller
     private $mainTable = 'sys_trans';
 
     /**
+     * #seller status 4
+     * process sudah dikirim oleh seller wait dropping
+     * @param
+     * @return
+     */
+    public function add_resi(Request $request, $id){
+        if ($request->has('trans_detail_no_resi')) {
+            // update
+            $trans_detail = Trans_detail::findOrFail($id);
+            $trans_detail->trans_detail_no_resi = $request->trans_detail_no_resi;
+            $trans_detail->trans_detail_send_date = $request->trans_detail_send_date;
+            $trans_detail->save();
+            return redirect()->back();
+        }
+        $status = 200;
+        $message = 'Transfer approved!';
+        $data['trans'] = Trans::findOrFail($id);
+        $data['trans_detail'] = $data['trans']->trans_detail->where('trans_detail_status', 5);
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        
+        return view('admin.transaction.add_resi', $data);
+    }
+
+    /**
+     * #seller status 4
+     * process sudah dikirim oleh seller wait dropping
+     * @param
+     * @return
+     */
+    public function sending(Request $request){
+        $requestData = $request->all();
+        $status = 200;
+        $message = 'Shipment approved!';
+        $date = date('y-m-d h:i:s');
+        if(!empty($request->detail_id)){            
+            foreach ($requestData['detail_id'] as $item) {
+                $trans_detail = Trans_detail::findOrFail($item);
+                // to shipping true
+                if($trans_detail->trans_detail_status == 4){
+                    $trans_detail->trans_detail_packing_date = $date;
+                    if($request->has('note')){
+                        $trans_detail->trans_detail_is_cancel = 1;
+                        $trans_detail->trans_detail_status = 4;
+                        $trans_detail->trans_detail_packing = 2;
+                        $trans_detail->trans_detail_packing_note = "Transaction be Cancel by seller";
+                        $trans_detail->trans_detail_note = $request->note;
+                        $message = 'Shipment cancelled!';
+
+                        // update saldo transaksi
+                        if($trans_detail->trans->trans_payment_id !== 4){
+                            $update_wallet = [
+                                'user_id'=>$trans_detail->trans->trans_user_id,
+                                'wallet_type'=>3,
+                                'amount'=>$trans_detail->trans_detail_amount_total,
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
+                        }
+                    }else{
+                        $trans_detail->trans_detail_status = 5;
+                        $trans_detail->trans_detail_packing = 1;
+                        $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
+                        $trans_detail->trans_detail_send = 0;
+                        $trans_detail->trans_detail_send_date = $date;
+                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+                    }
+                }elseif($trans_detail->trans_detail_status == 5){
+                    $trans_detail->trans_detail_status = 5;
+                    $trans_detail->trans_detail_send_date = $date;
+                    if($request->has('note')){
+                        $trans_detail->trans_detail_is_cancel = 1;
+                        $trans_detail->trans_detail_send = 2;
+                        $trans_detail->trans_detail_send_note = "Transaction be Cancel by seller";
+                        $trans_detail->trans_detail_note = $request->note;
+                        $message = 'Shipment cancelled!';
+
+                        // update saldo transaksi
+                        if($trans_detail->trans->trans_payment_id !== 4){
+                            $update_wallet = [
+                                'user_id'=>$trans_detail->trans->trans_user_id,
+                                'wallet_type'=>3,
+                                'amount'=>$trans_detail->trans_detail_amount_total,
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
+                        }
+                    }else{
+                        $trans_detail->trans_detail_send = 0;
+                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+                    }
+                }
+                $trans_detail->save();
+            }
+        }
+        if(!isset($trans_detail) || !$trans_detail){
+            $status = 500;
+            $message = 'Shipment unapproved!';
+        }
+        if(empty($request->detail_id)){
+            $status = 500;
+            $message = 'Shipment unapproved!';
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        if(empty($request->note)){
+            return redirect('admin/transaction/add_resi/'.$trans_detail->trans->id)
+                ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #seller status 4
+     * process sudah packing oleh seller pindah ke wait shipping
+     * @param
+     * @return
+     */
+    public function packing($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to shipping false
+            $trans_detail->trans_detail_packing = 1;
+            $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
+            $trans_detail->trans_detail_send_date = date('y-m-d h:i:s');
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }else{
+            // send email
+            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $config = [
+                'to' => $trans->pembeli->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
+            $config = [
+                'to' => $trans->trans_detail->first()->produk->user->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+     * #seller status 3 approve admin
+     * process seller menyanggupi pengiriman
+     * @param
+     * @return
+     */
+    public function able($id){
+        $status = 200;
+        $message = 'Transfer approved!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to packing
+            $trans_detail->trans_detail_status = 4;
+            $trans_detail->trans_detail_able = 1;
+            $trans_detail->trans_detail_able_date = date('y-m-d h:i:s');
+            $trans_detail->trans_detail_able_note = "Transaction be able by seller";
+            $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Transfer unapproved!';
+        }else{
+            // send email
+            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+            $config = [
+                'to' => $trans->pembeli->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
+            $config = [
+                'to' => $trans->trans_detail->first()->produk->user->email,
+                'data' => [
+                    'trans_code' => $trans->trans_code,
+                    'trans_amount_total' => $trans->trans_amount_total,
+                    'status' => $send_status,
+                ]
+            ];
+            $send_notif = FunctionLib::transaction_notif($config);
+            if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                $message .= ' ,'.$send_notif['message'];
+            }
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
      * 
      * @param
      * @return
