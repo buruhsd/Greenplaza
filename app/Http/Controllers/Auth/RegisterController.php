@@ -100,7 +100,7 @@ class RegisterController extends Controller
         if($user){
             $user_detail = User_detail::create([
                 'user_detail_user_id' => $user->id,
-                'user_detail_pass_trx' => Hash::make($data['password']),
+                'user_detail_pass_trx' => $user->password,
                 'user_detail_jk' => $data['user_detail_jk'],
                 // 'user_detail_address' => $data['user_detail_address'],
                 'user_detail_phone' => $data['user_detail_phone'],
