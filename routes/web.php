@@ -98,12 +98,15 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 
 		//MasediController
 		Route::get('/list_transaction_masedi', 'Admin\\MasediController@list')->name('.list_masedi');
-		Route::get('/list_transaction_gln_paid', 'Admin\\MasediController@list_gln_paid')->name('.list_gln');
+		Route::get('/list_transaction_masedi_done', 'Admin\\MasediController@list_done')->name('.list_masedi_done');
+		Route::get('/list_transaction_masedi_cancel', 'Admin\\MasediController@list_cancel')->name('.list_masedi_cancel');
+		Route::get('/list_transaction_gln', 'Admin\\MasediController@list_gln_paid')->name('.list_gln');
 		Route::get('/list_transaction_gln_notpaid', 'Admin\\MasediController@list_gln_notpaid')->name('.list_gln_notpaid');
 		Route::get('/listsaldo_masedi', 'Admin\\MasediController@listsaldo')->name('.list_masedi_saldo');
 		Route::get('/listswallet_gln', 'Admin\\MasediController@walletgln')->name('.list_gln_wallet');
 		Route::get('/list_transaction_gln_approve', 'Admin\\MasediController@list_gln_paid_appv')->name('.list_gln_appv');
 		Route::get('/list_transaction_gln_cancel', 'Admin\\MasediController@list_gln_cancel')->name('.list_gln_cancel');
+		Route::get('/list_transaction_gln_done', 'Admin\\MasediController@list_gln_done')->name('.list_gln_done');
 
 
 		//PageController

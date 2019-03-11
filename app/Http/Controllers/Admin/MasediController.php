@@ -7,6 +7,7 @@ use App\Models\Trans;
 use App\Models\Trans_detail;
 use App\Models\Trans_gln;
 use App\Http\Controllers\Controller;
+use FunctionLib;
 use App\User;
 
 
@@ -16,13 +17,37 @@ class MasediController extends Controller
     public function list ()
     {
         $search = \Request::get('search');
-    	$masedi = Trans::where('trans_code', 'like', '%'.$search.'%')->where('trans_is_paid', '=', 1)->where('trans_payment_id', '=', 3)->orderBy('created_at', 'DESC')->paginate(10);
+        $trans = Trans::where('trans_payment_id', '=', 3)->pluck('id')->toArray();
+    	$masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
     	// dd($masedi);
     	return view('admin.masedi.list_masedi', compact('masedi'));
     }
-    public function listsaldo ()
+    public function list_done ()
     {
-    	return view('admin.masedi.saldo_masedi');
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 3)->pluck('id')->toArray();
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_status', 6)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('admin.masedi.list_masedi_done', compact('masedi'));
+    }
+    public function list_cancel ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 3)->pluck('id')->toArray();
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_is_cancel', 1)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('admin.masedi.list_masedi_cancel', compact('masedi'));
     }
 
 //GLN
@@ -34,33 +59,24 @@ class MasediController extends Controller
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
+        $url = FunctionLib::gln('compare',[])['data'];
         // dd($gln);
-        return view('admin.masedi.list_gln', compact('gln'));
+        return view('admin.masedi.gln.list_gln', compact('gln', 'url'));
     }
-    public function list_gln_notpaid ()
-    {
-        $search = \Request::get('search');
-        $gln = Trans::where('trans_code', 'like', '%'.$search.'%')->where('trans_is_paid', '=', 0)->where('trans_payment_id', '=', 4)->orderBy('created_at', 'DESC')->paginate(10);
-        // dd($masedi);
-        return view('admin.masedi.list_gln', compact('gln'));
-    }
-    public function walletgln ()
-    {
-        $search = \Request::get('search');
-        $user = User::where('name', 'like', '%'.$search.'%')->orderBy('created_at', 'ASC')->paginate(10);
-        return view('admin.masedi.wallet_gln', compact('user'));
-    }
-
-    public function list_gln_paid_appv ()
+    
+    public function list_gln_done ()
     {
         $search = \Request::get('search');
         $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
         $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_is_cancel', 0)
+            ->where('trans_detail_status', 6)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
+        $url = FunctionLib::gln('compare',[])['data'];
         // dd($gln);
-        return view('admin.masedi.list_gln_wait', compact('gln'));
+        return view('admin.masedi.gln.list_gln_done', compact('gln', 'url'));
     }
 
     public function list_gln_cancel ()
@@ -69,9 +85,12 @@ class MasediController extends Controller
         $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
         $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_is_cancel', 1)
+            ->where('trans_detail_status', 4)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
+        $url = FunctionLib::gln('compare',[])['data'];
         // dd($gln);
-        return view('admin.masedi.list_gln_cancel', compact('gln'));
+        return view('admin.masedi.gln.list_gln_cancel', compact('gln', 'url'));
     }
 }

@@ -32,8 +32,9 @@ class NeedApprovalController extends Controller
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-        // dd($gln);
-        return view('admin.need_approval.transaksi_gln.index', compact('gln'));
+        $url = FunctionLib::gln('compare',[])['data'];
+        // dd($url);
+        return view('admin.need_approval.transaksi_gln.index', compact('gln', 'url'));
     }
     // public function try () 
     // {
@@ -46,10 +47,9 @@ class NeedApprovalController extends Controller
     {
         $detail = Trans_detail::find($id);
         $amount_total = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_amount_total;
-        // dd($amount_total);
-        $fee = 0;
-        $status = 200;
-        $message = 'Coin Berhasil di Transfer ke Seller.';
+        $url = FunctionLib::gln('compare',[])['data'];
+        $amount_fee = (($detail->trans_detail_amount_total)-($detail->trans_detail_amount_total * 1/100)) / $url;
+        // dd($fee);
         $data = [
             'order_id' => $order_id,
             'transaction_status' => 'done'
@@ -58,16 +58,16 @@ class NeedApprovalController extends Controller
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_to;
-        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_fee,'address'=>$address_gln]);
+        $status = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->id;
+
         // var_dump($transfer); die();
         if($transfer['status'] == 200){
-            foreach ($trans->get() as $item) {
-                $gln = $item->trans_gln()->get();
-                foreach ($gln as $item) {
-                    $item->trans_gln_status=2;
-                    $item->save();
-                }
-            }
+            $item = Trans_gln::find($status);
+            $item->trans_gln_status= 2;
+            $item->save();
+            $status = 200;
+            $message = 'Coin Berhasil di Transfer ke Seller.';
         }else{
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
@@ -80,8 +80,6 @@ class NeedApprovalController extends Controller
         $detail = Trans_detail::find($id);
         $amount_total = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_amount_total;
         $fee = 0;
-        $status = 200;
-        $message = 'Coin Berhasil di Transfer ke Member.';
         $data = [
             'order_id' => $order_id,
             'transaction_status' => 'done'
@@ -91,15 +89,15 @@ class NeedApprovalController extends Controller
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_form;
         $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        $status = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->id;
+        // dd($status);
         // var_dump($transfer); die();
         if($transfer['status'] == 200){
-            foreach ($trans->get() as $item) {
-                $gln = $item->trans_gln()->get();
-                foreach ($gln as $item) {
-                    $item->trans_gln_status=3;
-                    $item->save();
-                }
-            }
+            $item = Trans_gln::find($status);
+            $item->trans_gln_status= 3;
+            $item->save();
+            $status = 200;
+            $message = 'Coin Berhasil di Transfer ke Member.';
         }else{
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';

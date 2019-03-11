@@ -8,27 +8,28 @@
             @include('layouts._flash')
             
             <div class="page-title">
-			    <h4 class="breadcrumb-header"><center>Laporan Transaksi Greenline</center></h3>
-			</div>
-			<div class="panel panel-white">
+                <h4 class="breadcrumb-header"><center>Laporan Transaksi Masedi</center></h3>
+            </div>
+            <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <div class="col-md-12">
-                        <form action="#" method="GET" class="form-inline">
-                            <div class="input-group pull-left" style="width: 225px;">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
-                            </div>
-                            <div class="pull-right form-group mx-sm-3 mb-2">
+                        <div class="col-md-6">
+                            <form action="#" method="GET" class="form-inline">
+                                <div class="input-group pull-left" style="width: 225px;">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6 pull-right">
                             <label for="status" class="sr-only">Status</label>
                             <select class="form-control" id="status" name="status" onchange = "location=this.value;">
-                                <option value="">Status</option>
-                                <option value="/admin/list_transaction_gln_approve" >Seller Sanggup</option>
-                                <option value="/admin/list_transaction_gln_paid">Kirim Seller</option>
-                                <option value="/admin/list_transaction_gln_cancel">Expired</option>
-
+                                <option value="">--> Select Transaction Option <--</option>
+                                <option value="/admin/list_transaction_masedi">All Transaction</option>
+                                <option value="/admin/list_transaction_masedi_done">Dropping Transaction</option>
+                                <option value="/admin/list_transaction_masedi_cancel">Cancel Transaction</option>
                             </select>
-                          </div>
-                        </form>
+                        </div>
                     </div>
                     <!-- <div class="col-md-6">
                         <div class="input-group pull-right">
@@ -43,40 +44,40 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
-                                    <th><center>Wallet</center></th>
-                                    <th><center>Trans Code</center></th>
-                                    <th><center>Trans Id</center></th>
-                                    <th><center>Detail Id</center></th>
+                                    <th><center>Transaksi Code</center></th>
+                                    <th><center>Transaksi id</center></th>
+                                    <th><center>Detail id</center></th>
                                     <th><center>Detail Produk</center></th>
-                                    <th><center>Saldo Gln</center></th>
                                     <th><center>Status</center></th>
                                 </tr>
                             </thead>
-                            
-                            <tbody>
-                            @if(count($gln) != 0)
-                                @foreach ($gln as $key => $g)
-                                @if($g->gln['trans_gln_status'] == 2)
+                            @if(count($masedi) != 0)
+                                @foreach ($masedi as $key => $g)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
-                                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
-                                        <td><center>{{$g->gln->trans_gln_form}}</center></td>
-                                        @else
-                                        <td><center> - </center></td>
-                                    @endif
                                     <td><center>{{$g->trans_code}}</center></td>
                                     <td><center>{{$g->trans_detail_trans_id}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
-                                        <td><center>{{$g->gln->trans_gln_amount_total}}</center></td>
-                                        @else
-                                        <td><center> - </center></td>
+                                    @if ($g->trans_detail_status == 1)
+                                        <td><center>in Chart Cancel</center></td>
+                                    @elseif ($g->trans_detail_status == 2)
+                                        <td><center>Transfer Cancel</center></td>
+                                    @elseif ($g->trans_detail_status == 3)
+                                        <td><center>Seller Cancel</center></td>
+                                    @elseif ($g->trans_detail_status == 4)
+                                        <td><center>Packing Cancel</center></td>
+                                    @elseif ($g->trans_detail_status == 5)   
+                                        <td><center>Shipping Cancel</center></td>
+                                    @elseif ($g->trans_detail_status == 6)   
+                                        <td><center>Dropping Cancel</center></td>
+                                    @elseif ($g->trans_is_cancel == 1)   
+                                        <td><center>Cancel</center></td>
+                                    @else 
+                                        <td><center>-</center></td>
                                     @endif
-                                    <td><center>Sudah kirim ke seller</center></td>
                                 </tr>
-                                @endif
                                 @endforeach
                             @else
                                 <tr>
@@ -84,14 +85,14 @@
                                 </tr>
                             @endif  
                         </table>
-                        {{$gln->render()}}
+                        {{$masedi->render()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@include('admin.masedi.detailgln')
+@include('admin.masedi.detailmasedi')
 @endsection
 @section('script')
 <script type="text/javascript">

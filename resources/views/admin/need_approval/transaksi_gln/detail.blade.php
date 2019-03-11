@@ -27,19 +27,55 @@
                 </tr>
                 <tr>
                     <th>Amount Total</th>
-                    <td> : {{$g->trans_detail_amount_total}}</td>
+                    <td> : Rp. {{$g->trans_detail_amount_total}}</td>
                 </tr>
                 <tr>
                     <th>Amount Total Gln</th>
                     @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
-                    <td> : {{$g->gln->trans_gln_amount_total}}</td>
+                    <td> : {{$g->gln->trans_gln_amount_total}} Gln</td>
                     @else
                     <td> : - </td>
                     @endif
                 </tr>
                 <tr>
+                    <th>Amount Gln - fee</th>
+                    <td> : {{(($g->trans_detail_amount_total) - ($g->trans_detail_amount_total * 1/100)) / $url}} Gln</td>
+                </tr>
+                <tr>
                     <th>Note</th>
                     <td> : {{$g->trans_detail_note}}</td>
+                </tr>
+                <tr>
+                    <th>Saldo Member</th>
+                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                    <td> : <?php
+                        $response = FunctionLib::gln('ballance', ['address'=>$g->gln->trans_gln_form]);
+                        if($response['status'] == 200){
+                            echo FunctionLib::number_to_text($response['data']['balance'], 8);
+                        }else{
+                            echo "0,00";
+                        }
+                        ?> Gln 
+                    </td>
+                    @else
+                    <td> : - </td>
+                    @endif
+                </tr>
+                <tr>
+                    <th>Saldo Seller</th>
+                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                    <td> : <?php
+                        $response = FunctionLib::gln('ballance', ['address'=>$g->gln->trans_gln_to]);
+                        if($response['status'] == 200){
+                            echo FunctionLib::number_to_text($response['data']['balance'], 8);
+                        }else{
+                            echo "0,00";
+                        }
+                        ?> Gln
+                    </td>
+                    @else
+                    <td> : - </td>
+                    @endif
                 </tr>
                 <tr>
                     <th>Wallet Member</th>
