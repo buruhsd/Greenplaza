@@ -49,7 +49,7 @@
                                         {{-- <li class="{{FunctionLib::setActive('member/sponsor/register')}}"><a href="{{route('member.sponsor.register')}}">Register Penjual</a></li> --}}
                                         <li class="{{FunctionLib::setActive('member/wallet')}}"><a href="{{route('member.wallet.index')}}">History Saldo</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/withdrawal')}}"><a href="{{route('member.wallet.withdrawal')}}">Withdrawal</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/transfer_cw')}}"><a href="{{route('member.wallet.transfer_cw')}}">Transfer CW</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/transfer_cw')}}"><a href="{{route('member.wallet.transfer_cw')}}">Transfer CW</a></li> -->
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/transfer_rw')}}"><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li> -->
                                     </ul>
                                 </li>
