@@ -12,6 +12,7 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use App\User;
 use Auth;
 
 
@@ -29,22 +30,24 @@ class Produk_discussController extends Controller
     {
         $where = "1";//.' AND produk_user_status=3';
         $andwhere = "";
+        $user = Auth::id();
         if(!empty($request->get('name'))){
             $name = $request->get('name');
             $where .= ' AND users.name LIKE "%'.$name.'%"';
         }
 
         if (!empty($where)) {
-            $data['produk_discuss'] = Produk_discuss::whereRaw($where)
+            $data['produk_discuss'] = Produk_discuss::where('produk_discuss_user_id', $user)->where('produk_discuss_status', $where)
                 ->paginate($this->perPage);
         } else {
             $data['produk_discuss'] = Produk_discuss::paginate($this->perPage);
         }
+
+
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('member.produk_discuss.index', $data);
     }
-
     /**
     * @param $request
     * @return redirect

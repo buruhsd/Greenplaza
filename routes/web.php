@@ -517,8 +517,10 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 				Route::get('arsip/{id}', 'Produk_discussController@arsip')->name('.arsip');
 				Route::group(['prefix' => 'reply', 'as' => '.reply'], function () {
 					Route::post('/store', 'Produk_discussController@reply_store')->name('.store');
-				});
-			});
+							});
+						});
+
+				
 		});
 		Route::group(['prefix' => 'message', 'as' => '.message'], function () {
 			Route::get('/', 'MessageController@index')->name('.index');

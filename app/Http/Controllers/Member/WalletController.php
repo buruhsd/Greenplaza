@@ -159,9 +159,16 @@ class WalletController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
+        $search = \Request::get('search');
+        $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
+                ->orderBy('created_at', 'DESC')->paginate(10);
+                // dd($with);
+        $data['with'] =$with;     
         $data['type'] = Wallet_type::whereRaw('id IN (1)')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.withdrawal', $data);
+
+
     }
 
     /**
