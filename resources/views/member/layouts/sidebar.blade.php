@@ -20,10 +20,36 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="@yield('sales')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-bar-chart-o"></i><span>Penjualan</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <i class="menu-icon fa fa-bar-chart-o"></i>
+                                            <span>Penjualan</span>
+                                        <i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="{{FunctionLib::setActive('member/transaction/sales')}}"><a href="{{route('member.transaction.sales')}}">Transaksi</a></li>
+                                        <li class="{{FunctionLib::setActive('member/transaction/sales')}}">
+                                            <a href="{{route('member.transaction.sales')}}">
+                                                Transaksi
+                                                <span class="label label-danger pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
+                                                data-content="<small>
+                                                    <table>
+                                                        <tr><th>{{FunctionLib::count_trans('3', Auth::id(), 'seller')}} Menunggu Seller</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('4', Auth::id(), 'seller')}} Packing</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('5', Auth::id(), 'seller')}} Shipping</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('6', Auth::id(), 'seller')}} Dropping</th></tr>
+                                                    </table>
+                                                </small>"
+                                                 data-placement="bottom" data-trigger="hover">{{FunctionLib::count_trans('3,4,5,6', Auth::id(), 'seller')}}</span>
+                                                <span class="label label-info pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
+                                                data-content="<small>
+                                                    <table>
+                                                        <tr><th>{{FunctionLib::count_trans('0', Auth::id(), 'seller')}} Order</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('1', Auth::id(), 'seller')}} Konfirmasi Pembayaran</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('2', Auth::id(), 'seller')}} Transfer</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('7', Auth::id(), 'seller')}} Cancel</th></tr>
+                                                    </table>
+                                                </small>"
+                                                 data-placement="bottom" data-trigger="hover">{{FunctionLib::count_trans('0,1,2,7', Auth::id(), 'seller')}}</span>
+                                            </a>
+                                        </li>
                                         <li class="{{FunctionLib::setActive('member/komplain')}}"><a href="{{route('member.komplain.index')}}">Resolusi Komplain</a></li>
                                     </ul>
                                 </li>
@@ -34,7 +60,35 @@
                                         <i class="menu-icon fa fa-shopping-bag"></i><span>Pembelian</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="{{FunctionLib::setActive('member/transaction/purchase')}}"><a href="{{route('member.transaction.purchase')}}">Transaksi</a></li>
+                                        <li class="{{FunctionLib::setActive('member/transaction/purchase')}}">
+                                            <a href="{{route('member.transaction.purchase')}}">
+                                                Transaksi
+                                                <span class="label label-info pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
+                                                data-content="<small>
+                                                    <table>
+                                                        <tr><th>{{FunctionLib::count_trans('3', Auth::id())}} Menunggu Seller</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('4', Auth::id())}} Packing</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('5', Auth::id())}} Shipping</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('6', Auth::id())}} Dropping</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('7', Auth::id())}} Cancel</th></tr>
+                                                    </table>
+                                                </small>"
+                                                 data-placement="bottom" data-trigger="hover">
+                                                    {{FunctionLib::count_trans('3,4,5,6', Auth::id()) + FunctionLib::count_trans('7', Auth::id())}}
+                                                </span>
+                                                <span class="label label-danger pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
+                                                data-content="<small>
+                                                    <table>
+                                                        <tr><th>{{FunctionLib::count_trans('0', Auth::id())}} Order</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('1', Auth::id())}} Konfirmasi Pembayaran</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('2', Auth::id())}} Transfer</th></tr>
+                                                    </table>
+                                                </small>"
+                                                 data-placement="bottom" data-trigger="hover">
+                                                    {{FunctionLib::count_trans('0,1,2', Auth::id())}}
+                                                </span>
+                                            </a>
+                                        </li>
                                         <li class="{{FunctionLib::setActive('member/komplain/buyer')}}"><a href="{{route('member.komplain.buyer')}}">Resolusi Komplain</a></li>
                                         <li class="{{FunctionLib::setActive('member/wishlist')}}"><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                     </ul>
