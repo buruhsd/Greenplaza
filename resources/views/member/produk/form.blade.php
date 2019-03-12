@@ -32,9 +32,9 @@
         <div class="row">
             @if(str_contains(Request::url(), ['create']))
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">300 x 320</span>
+                <span class="text-danger">Ukuran : <b>300 pixel</b> x <b>320 pixel</b></span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'Foto : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
