@@ -194,6 +194,60 @@ class FrontController extends Controller
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
         return view('frontend.new.detail2', $data);
     }
+     public function product_admin_asdf(Request $request)
+    {
+        $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
+        $perPage = 12;
+        $order = "rand()";
+        $id_cat = 0;
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $check = ['populer','ulasan']; 
+            $arr = [
+                'populer'=>'COUNT(sys_trans_detail.id) ',
+                'ulasan'=>'COUNT(sys_review.id)',
+            ];
+            $order = explode ("-", $request->input("order"));//$request->input("order").' ASC';
+            // $order = $order[0].' '.$order[1];
+            // $order = (str_contains(strtolower($order_id), 'populer'))
+            $order = (in_array($order[0], $check))
+                ?$arr[$order[0]].' '.$order[1]
+                :$order[0].' '.$order[1];
+        }
+        $where = "1";
+        if($request->input("src") != ""){
+            $where .= " AND produk_name LIKE '%".$request->input("src")."%'";
+        }
+        if($request->input("cat") != ""){
+            $id_cat = Category::whereCategory_slug($request->input("cat"))->pluck('id')->first();
+            $data['produk'] = Produk::whereRaw('FALSE')->orderByRaw($order)
+                    ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                    ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                    // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                    ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))->where('produk_seller_id', $users)
+                    ->groupBy('sys_produk.id')
+                ->paginate($perPage);
+            if($id_cat !== null){
+                $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where, $order)
+                        ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                        ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                        // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                        ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))->where('produk_seller_id', $users)
+                        ->groupBy('sys_produk.id')
+                    ->paginate($perPage);
+            }
+        }else{
+            $data['produk'] = Produk::whereRaw($where)->orderByRaw($order)
+                    ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+                    ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+                    // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
+                    ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))->where('produk_seller_id', $users)
+                    ->groupBy('sys_produk.id')
+                ->paginate($perPage);
+        }
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
+        return view('frontend.asdf_adminProduct', $data, compact('asdf_adminProduct'));
+    }
 
     /**
     * @param
@@ -266,11 +320,11 @@ class FrontController extends Controller
         $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
         // dd($users);
 
-        $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->get();
+        $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(5)->get();
         $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
         $product_asdf = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
-        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
-        $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->where('produk_seller_id', '!=', $users)->get();
+        $newproduk = Produk::orderBy('created_at', 'DESC')->where('produk_seller_id', '!=', $users)->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
         $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->get();
         $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->skip(4)->get();
@@ -281,7 +335,7 @@ class FrontController extends Controller
         $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
         $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
         $latestnewss = Produk::orderBy('created_at', 'DESC')->limit(6)->skip(6)->get();
-        $featured = Produk::orderBy('created_at', 'ASC')->limit(12)->get();
+        $featured = Produk::orderBy('created_at', 'ASC')->where('produk_seller_id', '!=', $users)->limit(12)->get();
         $banner1 = Iklan::where('iklan_iklan_id', 1)->first();
         $banner2 = Iklan::where('iklan_iklan_id', 2)->first();
         $banner3 = Iklan::where('iklan_iklan_id', 3)->first();

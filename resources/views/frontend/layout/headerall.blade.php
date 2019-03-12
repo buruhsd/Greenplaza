@@ -202,6 +202,7 @@
                                         <li><a href="{{route('checkout')}}">Checkout</a></li>
                                         <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                     @endguest
+                                     <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
                                 </ul>
                             </li>
                         </ul>
