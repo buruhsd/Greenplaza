@@ -45,7 +45,7 @@
                                         <td class="images"><img src="{{ asset('assets/images/product/'.$l->produk->produk_image) }}" alt=""></td>
                                         <td class="product"><a href="{{route('detail', $l->produk->produk_slug)}}">{{$l->produk->produk_name}}</a></td>
                                         <td class="ptice">Rp. {{FunctionLib::number_to_text($l->produk->produk_price)}}</td>
-                                        @if ($l->produk->stock != 0)
+                                        @if ($l->produk->produk_stock != 0)
                                             <td class="stock">In Stock</td>
                                         @else
                                             <td class="stock">Out Stock</td>
