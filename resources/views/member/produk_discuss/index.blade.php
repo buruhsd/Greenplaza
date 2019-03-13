@@ -110,6 +110,8 @@
                                                     <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_to_id}}</a>
                                                 @elseif(isset($_GET['status']) && $_GET['status'] !== 'arsip')
                                                     <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a>
+                                                @elseif($item->message_from_id !== Auth::id() && $item->message_to_id == Auth::id() )
+                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a>
                                                 @endif
                                                 <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
                                                 <a href="{{route('member.message.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>

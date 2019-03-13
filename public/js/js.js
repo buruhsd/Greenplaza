@@ -208,7 +208,8 @@ function showNotifications(notifications, target) {
         $(target).children("span").children("i").removeClass('faa-vertical');
         var htmlElements = makeNotification(notifications);
         var htmlMainElements = makeMainNotification();
-        $(target + '-notif').html(htmlElements);
+        $(target + '-notif').prepend(htmlElements);
+        // $(target + '-notif').html(htmlElements);
         $(target).children("span").children("i").addClass('faa-vertical');
         $(target).children("span").removeClass('hidden');
     } else {
