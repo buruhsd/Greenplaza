@@ -8,7 +8,7 @@
 <div id="main-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-white">
+            <div class="panel panel-white hidden">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Pencarian</h4>
                 </div>
@@ -71,9 +71,13 @@
                                         <th colspan="3" scope="row">
                                             <div class="col-md-12">
                                                 @if(isset($_GET['status']) && $_GET['status'] == 'to')
-                                                    <a href="{{route('member.message.create', $item->to->user_slug)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->to->name}}</a>
+                                                    @if($item->to->user_slug)
+                                                        <a href="{{route('member.message.create', $item->to->user_slug)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->to->name}}</a>
+                                                    @endif
                                                 @elseif(isset($_GET['status']) && $_GET['status'] !== 'arsip')
-                                                    <a href="{{route('member.message.create', $item->from->user_slug)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
+                                                    @if($item->from->user_slug)
+                                                        <a href="{{route('member.message.create', $item->from->user_slug)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
+                                                    @endif
                                                 @endif
                                                 <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
                                                 <a href="{{route('member.message.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
