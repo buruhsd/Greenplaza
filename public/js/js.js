@@ -207,17 +207,23 @@ function showNotifications(notifications, target) {
     if(Object.keys(notifications).length) {
         $(target).children("span").children("i").removeClass('faa-vertical');
         var htmlElements = makeNotification(notifications);
+        var htmlMainElements = makeMainNotification();
         $(target + '-notif').html(htmlElements);
         $(target).children("span").children("i").addClass('faa-vertical');
+        $(target).children("span").removeClass('hidden');
     } else {
         $(target + '-notif').html('<li class="dropdown-header">No notifications</li>');
         $(target).children("span").children("i").removeClass('faa-vertical');
+        $(target).children("span").addClass('hidden');
     }
 }
 function makeNotification(notification) {
     var to = routeNotification(notification);
     var notificationText = makeNotificationText(notification);
     return '<li><a href="' + to + '">' + notificationText + '</a></li>';
+}
+function makeMainNotification(){
+    return '<i class="fa fa-bell animated"></i><span class="text-danger"><i class="fa fa-exclamation-triangle animated"></i></span>';
 }
 function routeNotification(notification) {
     var to = notification.route;

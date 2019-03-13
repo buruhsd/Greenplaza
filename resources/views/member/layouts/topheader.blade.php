@@ -74,7 +74,7 @@
                         </ul>
                     </li> --}}
                     <li class="dropdown user-dropdown">
-                        <a href="#" id="admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell animated"></i><span class="text-danger"><i class="fa fa-exclamation-triangle animated"></i></span></a>
+                        <a href="#" id="admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell animated"></i><span class="text-danger hidden"><i class="fa fa-exclamation-triangle animated"></i></span></a>
                         <ul class="dropdown-menu list-group" id="admin-notif">
                         </ul>
                     </li>
