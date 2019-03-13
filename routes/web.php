@@ -473,6 +473,12 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 		// Get Penjual
 		Route::group(['prefix' => 'wallet', 'as' => '.wallet'], function () {
+			//MASEDI && GLN
+			Route::get('/log_masedi', 'WalletController@log_masedi')->name('.log_masedi');
+			Route::get('/log_gln', 'WalletController@log_gln')->name('.log_gln');
+			Route::get('/log_gln_done', 'WalletController@log_gln_done')->name('.log_gln_done');
+			Route::get('/log_gln_cancel', 'WalletController@log_gln_cancel')->name('.log_gln_cancel');
+
 			Route::get('/create_gln', 'WalletController@create_gln')->name('.create_gln');
 			Route::get('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');
 			Route::post('/withdrawal', 'WalletController@withdrawal')->name('.withdrawal');

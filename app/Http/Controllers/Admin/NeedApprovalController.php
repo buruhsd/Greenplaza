@@ -48,7 +48,8 @@ class NeedApprovalController extends Controller
         $detail = Trans_detail::find($id);
         $amount_total = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_amount_total;
         $url = FunctionLib::gln('compare',[])['data'];
-        $amount_fee = (($detail->trans_detail_amount_total)-($detail->trans_detail_amount_total * 1/100)) / $url;
+        $compare = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_compare;
+        $amount_fee = (($detail->trans_detail_amount_total)-($detail->trans_detail_amount_total * 1/100)) / $compare;
         // dd($fee);
         $data = [
             'order_id' => $order_id,

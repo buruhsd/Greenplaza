@@ -39,7 +39,11 @@
                 </tr>
                 <tr>
                     <th>Amount Gln - fee</th>
-                    <td> : {{(($g->trans_detail_amount_total) - ($g->trans_detail_amount_total * 1/100)) / $url}} Gln</td>
+                    <td> : {{(($g->trans_detail_amount_total) - ($g->trans_detail_amount_total * 1/100)) / $g->gln->trans_gln_compare}} Gln</td>
+                </tr>
+                <tr>
+                    <th>Harga 1 Gln</th>
+                    <td> : {{$g->gln->trans_gln_compare}}</td>
                 </tr>
                 <tr>
                     <th>Note</th>

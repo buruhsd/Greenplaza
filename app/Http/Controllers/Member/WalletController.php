@@ -16,12 +16,67 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Trans;
+use App\Models\Trans_detail;
+use App\Models\Trans_gln;
 use Auth;
 use FunctionLib;
 
 
 class WalletController extends Controller
 {
+    //MASEDI 
+    public function log_masedi ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        // dd($trans);
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_transfer', 1)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('member.wallet.log.masedi.log_masedi', compact('masedi'));
+    }
+
+    //GLN
+    public function log_gln ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('member.wallet.log.gln.log_gln', compact('gln'));
+    }
+    public function log_gln_done ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_status', 6)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('member.wallet.log.gln.log_gln_done', compact('gln'));
+    }
+    public function log_gln_cancel ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_is_cancel', 1)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('member.wallet.log.gln.log_gln_cancel', compact('gln'));
+    }
+
     private $perPage = 25;
     private $mainTable = 'sys_wallet';
 
