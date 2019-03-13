@@ -86,9 +86,11 @@
                                             </ul>
                                         </td>
                                         <td scope="row">
-                                            {!!($item->produk_status == 1)
-                                                ?"<button class='btn btn-success btn-xs'>Active</button>"
-                                                :"<button class='btn btn-danger btn-xs'>Non Active</button>"!!}
+                                            @if($item->produk_stock == 0)
+                                                <button class='btn btn-danger btn-xs'>Habis</button>
+                                            @else
+                                                <button class='btn btn-success btn-xs'>Tersedia</button>
+                                            @endif
                                         </td>
                                         <td scope="row">
                                             <div class="row">
