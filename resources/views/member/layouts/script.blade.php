@@ -66,9 +66,10 @@
 	        encrypted: true,
 	        logToConsole: true
 	    });
-		showNotifications({}, '#admin');
+		// showNotifications({}, '#admin');
 	    window.Echo.private('App.User.{{Auth::user()->id}}')
 	        .notification((notification) => {
-			    showNotifications(notification.data, '#admin');
+	        	var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
+			    showNotifications(notification.data, '#admin', url);
 	    });
     </script>

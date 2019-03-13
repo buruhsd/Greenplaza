@@ -74,8 +74,40 @@
                         </ul>
                     </li> --}}
                     <li class="dropdown user-dropdown">
-                        <a href="#" id="admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell animated"></i><span class="text-danger hidden"><i class="fa fa-exclamation-triangle animated"></i></span></a>
+                        <?php 
+                            $notif = FunctionLib::user_notif(Auth::id(), 10);
+                        ?>
+                        <a href="#" id="admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell animated"></i>
+                            <span class="text-danger {!!($notif->count())?'':'hidden'!!}">
+                                <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
+                            </span>
+                        </a>
                         <ul class="dropdown-menu list-group" id="admin-notif">
+                            @if($notif->count())
+                                @foreach($notif->get() as $item)
+                                    <?php
+                                        $data = json_decode($item->data,true);
+                                    ?>
+                                    <li>
+                                        <a href="{{route('member.notification.is_read', $item->id)}}">
+                                            @if($item->read_at)
+                                                <small class="text-sm text-success">
+                                                    <i class="fa fa-check animated"></i>
+                                                </small>
+                                            @endif
+                                            <strong>{{$data['data']['title']}}</strong>  <small>{{$data['data']['message']}}</small>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            @else
+                                <li class="dropdown-header">
+                                    <small class="text-sm text-success">
+                                        <i class="fa fa-check animated"></i>
+                                    </small>
+                                    No notifications
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     <li style="margin-right: -30px"><a href="">{{Auth::user()->name}}</a></li>

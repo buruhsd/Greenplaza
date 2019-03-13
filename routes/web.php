@@ -417,7 +417,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin']], function
 
 // auth admin & member
 Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']], function () {
-	Route::group(['prefix' => 'member', 'as' => 'member'], function () {
+	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
+		Route::group(['prefix' => 'notification', 'as' => '.notification'], function () {
+			Route::get('/is_read/{id}', 'NotificationController@is_read')->name('.is_read');
+		});
 	});
 });
 

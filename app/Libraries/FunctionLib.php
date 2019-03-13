@@ -2,6 +2,19 @@
 class FunctionLib
 {
 
+    public static function user_notif($id, $limit=10, $type=""){
+        $where = '1';
+        $where .= ($type == "")
+            ?' AND read_at IS NULL'
+            :' AND read_at IS NOT NULL';
+        $read_order = ($type == "")
+            ?'ASC'
+            :'DESC';
+        $orderBy = 'read_at '.$read_order.', updated_at DESC';
+        $data = App\User::findOrFail($id)->notifikasi()->whereRaw($where)->limit($limit)->orderByRaw($orderBy);
+        return $data;
+    }
+
     /*******/
     public static function sum_cart_diskon($arr){
         $sum = array_sum(array_map(

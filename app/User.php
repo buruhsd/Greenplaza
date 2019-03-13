@@ -32,6 +32,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function notifikasi()
+    {
+        return $this->hasMany('App\Models\Notification', 'notifiable_id');
+    }
+
     /*****/
     public function is_gln(){
         if((bool)$this->wallet()->where('wallet_type',7)->first()){
