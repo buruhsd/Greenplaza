@@ -124,56 +124,58 @@
                             <div id="masedi" class="collapse">
                                 <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" id="btn-pick-address" />
                             </div> -->
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label for="payment" class="sr-only">Pembayaran</label>
-                                <select class="form-control" id="payment">
-                                    <option value="">Pilih Pembayaran</option>
-                                    @foreach($payment as $item)
-                                        <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                            @if(Session::has('chart'))
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="payment" class="sr-only">Pembayaran</label>
+                                    <select class="form-control" id="payment">
+                                        <option value="">Pilih Pembayaran</option>
+                                        @foreach($payment as $item)
+                                            <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="payment_hide payment_Me collapse">
+                                    <hr/>
+                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
+                                </div>
+                                <div class="payment_hide payment_Mt collapse">
+                                    <hr/>
+                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" />
+                                </div>
+                                <div class="payment_hide payment_Tf collapse">
+                                    <hr/>
+                                    Cooming Soon.
+                                </div>
+                                <!-- <div class="payment_hide payment_Gln collapse">
+                                    <hr/>
+                                    Cooming Soon.
+                                </div> -->
+                                <div class="payment_hide payment_Gln collapse">
+                                    <hr/>
+                                    @foreach(Session::get('chart') as $item)
+                                        <?php
+                                            $seller_gln = true;
+                                            $where = 'id ='.$item['trans_detail_produk_id'];
+                                            $seller_produk = App\Models\Produk::whereRaw($where)->first();
+                                            $seller_gln = $seller_gln && $seller_produk->user->is_gln();
+                                            if(!$seller_gln){
+                                                $seller[$seller_produk->user->id] = $seller_produk->user->user_store;
+                                            }
+                                        ?>
                                     @endforeach
-                                </select>
-                            </div>
-                            <div class="payment_hide payment_Me collapse">
-                                <hr/>
-                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
-                            </div>
-                            <div class="payment_hide payment_Mt collapse">
-                                <hr/>
-                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" />
-                            </div>
-                            <div class="payment_hide payment_Tf collapse">
-                                <hr/>
-                                Cooming Soon.
-                            </div>
-                            <!-- <div class="payment_hide payment_Gln collapse">
-                                <hr/>
-                                Cooming Soon.
-                            </div> -->
-                            <div class="payment_hide payment_Gln collapse">
-                                <hr/>
-                                @foreach(Session::get('chart') as $item)
-                                    <?php
-                                        $seller_gln = true;
-                                        $where = 'id ='.$item['trans_detail_produk_id'];
-                                        $seller_produk = App\Models\Produk::whereRaw($where)->first();
-                                        $seller_gln = $seller_gln && $seller_produk->user->is_gln();
-                                        if(!$seller_gln){
-                                            $seller[$seller_produk->user->id] = $seller_produk->user->user_store;
-                                        }
-                                    ?>
-                                @endforeach
-                                @if(!$seller_gln)
-                                    <span>Toko <b>{{(rtrim(implode(',', $seller), ','))}}</b> tidak menyediakan pembayaran melalui GLN.</span>
-                                @else
-                                    @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
-                                        <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
+                                    @if(!$seller_gln)
+                                        <span>Toko <b>{{(rtrim(implode(',', $seller), ','))}}</b> tidak menyediakan pembayaran melalui GLN.</span>
                                     @else
-                                        Anda belum memiliki akun gln. buat akun gln disini : <a id="saldo_gln" class="btn btn-info btn-xs" href="{{route('member.wallet.create_gln')}}">
-                                                    Buat
-                                                </a>
+                                        @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
+                                        @else
+                                            Anda belum memiliki akun gln. buat akun gln disini : <a id="saldo_gln" class="btn btn-info btn-xs" href="{{route('member.wallet.create_gln')}}">
+                                                        Buat
+                                                    </a>
+                                        @endif
                                     @endif
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>

@@ -107,9 +107,9 @@
                                         <th colspan="3" scope="row">
                                             <div class="col-md-12">
                                                 @if(isset($_GET['status']) && $_GET['status'] == 'to')
-                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->message_to_id}}</a>
+                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_to_id}}</a>
                                                 @elseif(isset($_GET['status']) && $_GET['status'] !== 'arsip')
-                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->message_from_id}}</a>
+                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a>
                                                 @endif
                                                 <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
                                                 <a href="{{route('member.message.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>

@@ -202,7 +202,7 @@ class ProdukController extends Controller
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
-        $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
+        $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name.' '.FunctionLib::str_rand(5));
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
         $res->produk_size = implode (",", $request->produk_size);

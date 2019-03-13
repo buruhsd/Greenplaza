@@ -203,3 +203,30 @@ function checkDecimal(el){
         el.value = el.value.substring(0,el.value.length - 1);
     }
 }
+function showNotifications(notifications, target) {
+    if(Object.keys(notifications).length) {
+        $(target).children("span").children("i").removeClass('faa-vertical');
+        var htmlElements = makeNotification(notifications);
+        $(target + '-notif').html(htmlElements);
+        $(target).children("span").children("i").addClass('faa-vertical');
+    } else {
+        $(target + '-notif').html('<li class="dropdown-header">No notifications</li>');
+        $(target).children("span").children("i").removeClass('faa-vertical');
+    }
+}
+function makeNotification(notification) {
+    var to = routeNotification(notification);
+    var notificationText = makeNotificationText(notification);
+    return '<li><a href="' + to + '">' + notificationText + '</a></li>';
+}
+function routeNotification(notification) {
+    var to = notification.route;
+    return to;
+}
+function makeNotificationText(notification) {
+    var text = '';
+    const title = notification.title;
+    const message = notification.message;
+    text += '<strong>' + title + '</strong>  <small>' + message + '</small>';
+    return text;
+}

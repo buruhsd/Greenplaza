@@ -15,6 +15,8 @@
 	<script src="{{ asset('admin/plugins/chartjs/chart.min.js') }}"></script>
 	<script src="{{ asset('admin/js/space.min.js') }}"></script>
 	<script src="{{ asset('admin/js/pages/dashboard.js') }}"></script>
+	<script src="{{ asset('js/pusher.js') }}"></script>
+	<script src="{{ asset('js/echo.js') }}"></script>
 	<script src="{{ asset('js/js.js') }}"></script>
     <script src="{{ asset('plugin/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
 	<script src="{{asset('/plugin/ckeditor_standar/ckeditor.js')}}"></script>
@@ -55,4 +57,17 @@
     	$(function () {
 		  $('[data-toggle="popover"]').popover()
 		})
+	    Pusher.logToConsole = true;
+	    window.Echo = new Echo({
+	        broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
+	        key: '{!!env("PUSHER_APP_KEY")!!}',
+	        cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
+	        encrypted: true,
+	        logToConsole: true
+	    });
+		showNotifications({}, '#admin');
+	    window.Echo.private('App.User.{{Auth::user()->id}}')
+	        .notification((notification) => {
+			    showNotifications(notification.data, '#admin');
+	    });
     </script>

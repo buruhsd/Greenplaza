@@ -68,13 +68,12 @@
                                                     <table>
                                                         <tr><th>{{FunctionLib::count_trans('3', Auth::id())}} Menunggu Seller</th></tr>
                                                         <tr><th>{{FunctionLib::count_trans('4', Auth::id())}} Packing</th></tr>
-                                                        <tr><th>{{FunctionLib::count_trans('5', Auth::id())}} Shipping</th></tr>
                                                         <tr><th>{{FunctionLib::count_trans('6', Auth::id())}} Dropping</th></tr>
                                                         <tr><th>{{FunctionLib::count_trans('7', Auth::id())}} Cancel</th></tr>
                                                     </table>
                                                 </small>"
                                                  data-placement="bottom" data-trigger="hover">
-                                                    {{FunctionLib::count_trans('3,4,5,6', Auth::id()) + FunctionLib::count_trans('7', Auth::id())}}
+                                                    {{FunctionLib::count_trans('3,4,6', Auth::id()) + FunctionLib::count_trans('7', Auth::id())}}
                                                 </span>
                                                 <span class="label label-danger pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
                                                 data-content="<small>
@@ -82,10 +81,11 @@
                                                         <tr><th>{{FunctionLib::count_trans('0', Auth::id())}} Order</th></tr>
                                                         <tr><th>{{FunctionLib::count_trans('1', Auth::id())}} Konfirmasi Pembayaran</th></tr>
                                                         <tr><th>{{FunctionLib::count_trans('2', Auth::id())}} Transfer</th></tr>
+                                                        <tr><th>{{FunctionLib::count_trans('5', Auth::id())}} Shipping</th></tr>
                                                     </table>
                                                 </small>"
                                                  data-placement="bottom" data-trigger="hover">
-                                                    {{FunctionLib::count_trans('0,1,2', Auth::id())}}
+                                                    {{FunctionLib::count_trans('0,1,2,5', Auth::id())}}
                                                 </span>
                                             </a>
                                         </li>

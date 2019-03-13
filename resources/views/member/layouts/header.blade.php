@@ -24,6 +24,7 @@
         <link href="{{ asset('admin/css/space.min.css') }}" rel="stylesheet">
         <link href="{{ asset('admin/css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.8/font-awesome-animation.min.css">
 
         <script type="text/javascript"></script>
 
