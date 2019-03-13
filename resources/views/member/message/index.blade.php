@@ -78,6 +78,10 @@
                                                     @if($item->from->username)
                                                         <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
                                                     @endif
+                                                @elseif($item->message_from_id !== Auth::id())
+                                                    @if($item->to->username)
+                                                        <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
+                                                    @endif
                                                 @endif
                                                 <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
                                                 <a href="{{route('member.message.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
