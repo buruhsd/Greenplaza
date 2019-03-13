@@ -101,7 +101,7 @@
                                     </li>
                                 @endforeach
                             @else
-                                <li class="dropdown-header">
+                                <li class="dropdown-header" id="no-notif">
                                     <small class="text-sm text-success">
                                         <i class="fa fa-check animated"></i>
                                     </small>

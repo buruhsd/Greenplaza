@@ -206,6 +206,7 @@ function checkDecimal(el){
 function showNotifications(notifications, target, url) {
     if(Object.keys(notifications).length) {
         $(target).children("span").children("i").removeClass('faa-vertical');
+        $(target + '-notif').children("li#no-notif").remove();
         var htmlElements = makeNotification(notifications, url);
         var htmlMainElements = makeMainNotification();
         $(target + '-notif').prepend(htmlElements);
