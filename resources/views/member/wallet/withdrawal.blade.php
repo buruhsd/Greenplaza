@@ -67,9 +67,9 @@
                                 <td><center>{{$w->type->wallet_type_name}}</center></td>
                                 <td><center>{{$w->withdrawal_wallet_amount}}</center></td>
                                 @if($w->withdrawal_status == 0)
-                                <td><center>Approve</center></td>
-                                @elseif($w->withdrawal_status == 1)
                                 <td><center>Belum Approve</center></td>
+                                @elseif($w->withdrawal_status == 1)
+                                <td><center>Approve</center></td>
                                 
                                 @endif
                                 <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$w->id}}"><i class="fa fa-edit"></i>Detail Transaksi</button></td>

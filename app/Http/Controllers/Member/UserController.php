@@ -278,7 +278,7 @@ class UserController extends Controller
             $status = 500;
             $message = 'NPWP gagal dirubah!';
         }
-        return redirect('member/upload_scan_npwp')
+        return redirect('member/user/upload_scan_npwp')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -324,7 +324,7 @@ class UserController extends Controller
             $status = 500;
             $message = 'SIUP gagal dirubah!';
         }
-        return redirect('member/upload_siup')
+        return redirect('member/user/upload_siup')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
