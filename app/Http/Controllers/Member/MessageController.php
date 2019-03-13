@@ -30,7 +30,7 @@ class MessageController extends Controller
 
     /******/
     public function create($store_slug){
-        $data['user'] = User::where('user_slug', $store_slug)->firstOrFail();
+        $data['user'] = User::where('username', $store_slug)->firstOrFail();
         return view('member.message.create', $data);
     }
 
