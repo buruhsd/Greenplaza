@@ -59,6 +59,7 @@
 		})
 	    Pusher.logToConsole = true;
 	    window.Echo = new Echo({
+	    	"authEndpoint": "/greenplaza/public/broadcasting/auth",
 	        broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
 	        key: '{!!env("PUSHER_APP_KEY")!!}',
 	        cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
