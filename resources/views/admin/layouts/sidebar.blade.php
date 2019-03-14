@@ -172,7 +172,7 @@
                                         <!-- <li><a href="#">Grade Seller</a></li> -->
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/pagelist')}}"><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>
                                         <!-- <li><a href="{{route('admin.page')}}">Page List</a></li> -->
-                                        <li class="{{FunctionLib::setActive('admin/konfigurasi/updatepassword')}}"><a href="{{route('admin.konfigurasi.updatepass')}}">Update Password Admin</a></li>
+                                        <li class="{{FunctionLib::setActive('admin/konfigurasi/updatepassword')}}"><a href="{{route('admin.konfigurasi.change_password_admin')}}">Update Password Admin</a></li>
                                         {{-- <a href="#">Setting Akun</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Tambah Akun Admin</a></li>

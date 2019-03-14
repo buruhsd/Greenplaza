@@ -378,6 +378,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			//UPDATE PASS
 			Route::get('updatepassword', 'Admin\\KonfigurasiController@updatepass')->name('.updatepass');
 			Route::post('changepassword/{id}', 'Admin\\KonfigurasiController@changepass')->name('.changepass');
+			Route::get('/change_password_admin', 'Admin\\KonfigurasiController@change_password_admin')->name('.change_password_admin');
+			Route::post('/change_password_update_admin', 'Admin\\KonfigurasiController@change_password_update_admin')->name('.change_password_update_admin');
 
 			//ATURKURIR
 			Route::get('/set_shipment_admin', 'Admin\\KonfigurasiController@set_shipment')->name('.set_shipment_admin');

@@ -16,6 +16,7 @@ use App\Role;
 use App\User;
 use App\Models\Shipment;
 use App\Models\User_shipment;
+use Illuminate\Support\Str;
 use Auth;
 use Session;
 use FunctionLib;
@@ -505,40 +506,88 @@ class KonfigurasiController extends Controller
     }
 
     //UPDATEPASS
-    public function updatepass (Request $request)
+    // public function updatepass (Request $request)
+    // {
+    // 	$users = User::find(FunctionLib::get_config('konfigurasi_superadmin_id'));
+    // 	return view('admin.konfigurasi.settingakun.updatepass.updatepass', compact('users'));
+    // }
+    // public function changepass (Request $request, $id)
+    // {
+    //     $this->validate($request, [
+    //         'old_password' => 'required',
+    //         'password' => 'required',
+    //         're_password' => 'required',
+    //     ]);
+    //     $users = User::find($id);
+    //     if (!Hash::check($request->old_password, $users->password)) {
+    //         Session::flash("flash_notification", [
+    //             "level"=>"danger",
+    //             "message"=>"Password salah."
+    //         ]);
+    //         return redirect()->back();
+    //     }
+    //     if ($request->password !== $request->re_password) {
+    //         Session::flash("flash_notification", [
+    //             "level"=>"danger",
+    //             "message"=>"Password tidak sama."
+    //         ]);
+    //     } else {
+    //         $users->password = bcrypt($request->password);
+    //         $users->save();
+    //         Session::flash("flash_notification", [
+    //             "level"=>"success",
+    //             "message"=>"Password Berhasil Diubah."
+    //         ]);
+    //     }
+    //     return redirect()->back();
+    // }
+
+    public function change_password_admin(Request $request)
     {
-    	$users = User::find(FunctionLib::get_config('konfigurasi_superadmin_id'));
-    	return view('admin.konfigurasi.settingakun.updatepass.updatepass', compact('users'));
+        $data['user'] = User::findOrFail(Auth::id());
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.konfigurasi.settingakun.updatepass.updatepass', $data);
     }
-    public function changepass (Request $request, $id)
+
+    /**
+     * update password process
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function change_password_update_admin(Request $request)
     {
+        $status = 200;
+        $message = 'Password berhasil dirubah!';
+        
+        $requestData = $request->all();
+        
         $this->validate($request, [
             'old_password' => 'required',
-            'password' => 'required',
-            're_password' => 'required',
+            'new_password' => 'required',
         ]);
-        $users = User::find($id);
-        if (!Hash::check($request->old_password, $users->password)) {
-            Session::flash("flash_notification", [
-                "level"=>"danger",
-                "message"=>"Password salah."
-            ]);
-            return redirect()->back();
+
+        $user = User::findOrFail(Auth::id());
+        if (!Hash::check($request->old_password, $user->password)) {
+            $status = 500;
+            $message = 'Password gagal dirubah!, masukkan password dengan benar!';
+            return redirect('admin/konfigurasi/change_password_admin')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        if ($request->password !== $request->re_password) {
-            Session::flash("flash_notification", [
-                "level"=>"danger",
-                "message"=>"Password tidak sama."
-            ]);
-        } else {
-            $users->password = bcrypt($request->password);
-            $users->save();
-            Session::flash("flash_notification", [
-                "level"=>"success",
-                "message"=>"Password Berhasil Diubah."
-            ]);
+        if ($request->new_password !== $request->re_new_password) {
+            $status = 500;
+            $message = 'Password gagal dirubah!, masukkan konfirmasi password baru dengan benar';
+            return redirect('admin/konfigurasi/change_password_admin')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        return redirect()->back();
+        $password = $request->new_password;
+        $user->password = Hash::make($password);
+        $user->setRememberToken(Str::random(60));
+        $user->save();
+        if(!$user){
+            $status = 500;
+            $message = 'Password gagal dirubah!';
+        }
+        return redirect('admin/konfigurasi/change_password_admin')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
     public function set_shipment(Request $request)
