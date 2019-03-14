@@ -13,7 +13,7 @@ class Solusi extends Model
      *
      * @var array
      */
-    protected $fillable = ['id', 'solusi_komplain_id', 'solusi_solusi_id', 'solusi_user_id', 'solusi_value', 'solusi_status', 'solusi_buyer_resi', 'solusi_buyer_shipment', 'solusi_buyer_accept', 'solusi_buyer_date', 'solusi_seller_resi', 'solusi_seller_shipment', 'solusi_seller_accept', 'solusi_seller_date', 'solusi_note'];
+    protected $fillable = ['id', 'solusi_komplain_id', 'solusi_solusi_id', 'solusi_user_id', 'solusi_value', 'solusi_status', 'solusi_buyer_resi', 'solusi_buyer_shipment', 'solusi_buyer_accept', 'solusi_buyer_date', 'solusi_buyer_without_resi', 'solusi_seller_resi', 'solusi_seller_shipment', 'solusi_seller_accept', 'solusi_seller_date', 'solusi_seller_without_resi', 'solusi_note'];
 
     /**
     * @param

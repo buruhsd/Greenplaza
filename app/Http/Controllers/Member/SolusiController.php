@@ -45,6 +45,27 @@ class SolusiController extends Controller
     }
 
     /**
+    * #seller
+    * @param $request, $id solusi
+    * @return
+    **/
+    public function add_buyer_without_resi(Request $request, $id){
+        $status = 200;
+        $message = "Solusi has been updated.";
+        try{
+            $solusi = Solusi::findOrFail($id);
+            $solusi->solusi_buyer_without_resi = 1;
+            $solusi->solusi_buyer_accept = 0;
+            $solusi->save();
+        } catch (\Exception $e) {
+            $status = 500;
+            $message = "Komplain cannot added.";
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
     * #buyer
     * @param $request, $id solusi
     * @return
@@ -93,6 +114,27 @@ class SolusiController extends Controller
     * @param $request, $id solusi
     * @return
     **/
+    public function add_seller_without_resi(Request $request, $id){
+        $status = 200;
+        $message = "Solusi has been updated.";
+        try{
+            $solusi = Solusi::findOrFail($id);
+            $solusi->solusi_seller_without_resi = 1;
+            $solusi->solusi_seller_accept = 0;
+            $solusi->save();
+        } catch (\Exception $e) {
+            $status = 500;
+            $message = "Konfirmasi gagal.";
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * #seller
+    * @param $request, $id solusi
+    * @return
+    **/
     public function add_shipment_seller(Request $request, $id){
         $status = 200;
         $message = "Solusi has been updated.";
@@ -104,7 +146,7 @@ class SolusiController extends Controller
             $solusi->save();
         } catch (\Exception $e) {
             $status = 500;
-            $message = "Komplain cannot added.";
+            $message = "Konfirmasi gagal.";
         }
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);

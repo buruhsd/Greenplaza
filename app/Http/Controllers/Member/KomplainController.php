@@ -200,39 +200,42 @@ class KomplainController extends Controller
             ->where('trans_detail_is_cancel', 0)
             ->get();
         if($trans_detail){
-            foreach ($trans_detail as $item) {
-                $trans_detail_to_cancel = Trans_detail::whereId($item->id)->first();
-                $trans_detail_to_cancel->trans_detail_drop = 1;
-                $trans_detail_to_cancel->trans_detail_drop_date = date("Y-m-d H:i:s");
-                $trans_detail_to_cancel->trans_detail_drop_note = "Barang sudah diterima member dan member mengajukan komplain";
-                $trans_detail_to_cancel->trans_detail_is_cancel = 1;
-                $trans_detail_to_cancel->save();
-                $komplain = new Komplain;
-                $komplain->komplain_trans_id = $item->id;;
-                $komplain->komplain_komplain_id = $request->komplain_komplain_id;
-                $komplain->save();
-                if($komplain){
-                    // pic bukti komplain
-                    $komplain_pic = new Komplain_pic;
-                    $komplain_pic->komplain_pic_komplain_id = $komplain->id;
-                    // upload
-                    if ($request->hasFile('komplain_pic_image')){
-                        $file = $request->file('komplain_pic_image');
-                        $path = public_path('assets/images/komplain_pic');
-                        $field = "";
-                        $imagename = FunctionLib::doUpload($file, $path, $field);
-                        $komplain_pic->komplain_pic_image = $imagename;
+            if($request->exists('komplain_komplain_id') && $request->exists('solusi_solusi_id')){                
+                foreach ($trans_detail as $item) {
+                    $trans_detail_to_cancel = Trans_detail::whereId($item->id)->first();
+                    $trans_detail_to_cancel->trans_detail_drop = 1;
+                    $trans_detail_to_cancel->trans_detail_drop_date = date("Y-m-d H:i:s");
+                    $trans_detail_to_cancel->trans_detail_drop_note = "Barang sudah diterima member dan member mengajukan komplain";
+                    $trans_detail_to_cancel->trans_detail_is_cancel = 1;
+                    $trans_detail_to_cancel->save();
+                    $komplain = new Komplain;
+                    $komplain->komplain_trans_id = $item->id;;
+                    $komplain->komplain_komplain_id = $request->komplain_komplain_id;
+                    $komplain->save();
+                    if($komplain){
+                        // pic bukti komplain
+                        $komplain_pic = new Komplain_pic;
+                        $komplain_pic->komplain_pic_komplain_id = $komplain->id;
+                        // upload
+                        if ($request->hasFile('komplain_pic_image')){
+                            $file = $request->file('komplain_pic_image');
+                            $path = public_path('assets/images/komplain_pic');
+                            $field = "";
+                            $imagename = FunctionLib::doUpload($file, $path, $field);
+                            $komplain_pic->komplain_pic_image = $imagename;
+                        }
+                        $komplain_pic->save();
+                        // solusi
+                        $solusi = new Solusi;
+                        $solusi->solusi_komplain_id = $komplain->id;
+                        $solusi->solusi_solusi_id = $request->solusi_solusi_id;
+                        $solusi->solusi_user_id = Auth::id();
+                        $solusi->solusi_value = $request->solusi_value;
+                        $solusi->save();
                     }
-                    $komplain_pic->save();
-                    // solusi
-                    $solusi = new Solusi;
-                    $solusi->solusi_komplain_id = $komplain->id;
-                    $solusi->solusi_solusi_id = $request->solusi_solusi_id;
-                    $solusi->solusi_user_id = Auth::id();
-                    $solusi->solusi_value = $request->solusi_value;
-                    $solusi->save();
                 }
             }
+                
             if(!isset($komplain) || empty($komplain) || $komplain == null || $komplain == ""){
                 $status = 500;
                 $message = "Komplain cannot added.";

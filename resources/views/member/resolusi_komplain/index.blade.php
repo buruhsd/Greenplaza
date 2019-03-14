@@ -131,11 +131,20 @@
                                                     Terima Solusi Tawaran Pembeli
                                                 </button><br/>
                                             {{-- jika ada komplain status 2 nomor resi pembeli null --}}
-                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_seller_resi == null)
-                                                <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_seller", $item->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
+                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_seller_resi == null && $item->solusi->solusi_seller_without_resi == 0)
+                                                @switch($item->solusi->solusi_type->id)
+                                                    @case(1)
+                                                    @case(4)
+                                                        <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.add_seller_without_resi", $item->solusi->id)}} value="konfirmasi kembalikan dana" class="btn btn-danger btn-xs" />
+                                                    @break
+                                                    @case(2)
+                                                    @case(3)
+                                                        <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_seller", $item->id)}} value="Konfirmasi Kirim Barang" class="btn btn-danger btn-xs" />
+                                                    @break
+                                                @endswitch
                                             @endif
                                             {{-- jika ada komplain status 2 nomor resi pembeli bukan null dan buyer accept 0 --}}
-                                            @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi !== null && $item->solusi->solusi_buyer_accept == 0)
+                                            @if($item->solusi->solusi_status == 2 && ($item->solusi->solusi_buyer_resi !== null || $item->solusi->solusi_buyer_without_resi !== 0) && $item->solusi->solusi_buyer_accept == 0)
                                             <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_buyer", $item->solusi->id)}} class='btn btn-info btn-xs'>
                                                 Menerima Barang Kembalian
                                             </button><br/>

@@ -470,6 +470,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/buyer', 'KomplainController@buyer')->name('.buyer');
 		});
 		Route::group(['prefix' => 'solusi', 'as' => '.solusi'], function () {
+			Route::get('/add_buyer_without_resi/{id}', 'SolusiController@add_buyer_without_resi')->name('.add_buyer_without_resi');
+			Route::get('/add_seller_without_resi/{id}', 'SolusiController@add_seller_without_resi')->name('.add_seller_without_resi');
 			Route::get('/approve_solusi/{id}', 'SolusiController@approve_solusi')->name('.approve_solusi');
 			Route::post('/add_shipment_buyer/{id}', 'SolusiController@add_shipment_buyer')->name('.add_shipment_buyer');
 			Route::get('/approve_shipment_buyer/{id}', 'SolusiController@approve_shipment_buyer')->name('.approve_shipment_buyer');

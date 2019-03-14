@@ -134,15 +134,26 @@
                                             <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.komplain.done_komplain", $item->id)}} class='btn btn-danger btn-xs'>
                                                 Komplain Selesai
                                             </button><br/>
-                                            @elseif($item->solusi->solusi_status == 2 && $item->solusi->solusi_seller_resi !== null && $item->solusi->solusi_seller_accept == 0)
+                                            @elseif($item->solusi->solusi_status == 2 && ($item->solusi->solusi_seller_resi !== null || $item->solusi->solusi_seller_without_resi !== 0) && $item->solusi->solusi_seller_accept == 0)
                                                 <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_seller", $item->solusi->id)}} class='btn btn-info btn-xs'>
                                                     Menerima Barang baru
                                                 </button><br/>
                                             @endif
-                                            @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi == null)
-                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_buyer", $item->id)}} class='btn btn-danger btn-xs'>
-                                                Konfirmasi Kirim Barang
-                                            </button><br/>
+                                            @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi == null && $item->solusi->solusi_buyer_without_resi == 0)
+                                                @switch($item->solusi->solusi_type->id)
+                                                    @case(1)
+                                                    @case(2)
+                                                    @case(4)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.komplain.add_shipment_buyer", $item->id)}} class='btn btn-danger btn-xs'>
+                                                            Konfirmasi Kirim Barang
+                                                        </button><br/>
+                                                    @break
+                                                    @case(3)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.add_buyer_without_resi", $item->solusi->id)}} class='btn btn-danger btn-xs'>
+                                                            Konfirmasi meminta barang yang kurang
+                                                        </button><br/>
+                                                    @break
+                                                @endswitch
                                             @endif
                                             <ul>
                                                 <li>
