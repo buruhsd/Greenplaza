@@ -407,6 +407,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('wallet_memberlist', 'Admin\\MonitoringController@wallet_memberlist')->name('.wallet_memberlist');
 			//Log_activity
 			Route::get('log_activity', 'Admin\\MonitoringController@log')->name('.activity');
+			Route::get('log_withdrawal_member', 'Admin\\MonitoringController@log_wd')->name('.activity_wd');
 		});
 	});
 });

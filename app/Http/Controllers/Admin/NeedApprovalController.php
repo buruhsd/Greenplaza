@@ -132,11 +132,15 @@ class NeedApprovalController extends Controller
     public function approve (Request $request, $id) 
     {
     	$with = Withdrawal::find($id);
+        // dd($id);
     	$with->withdrawal_status = 1;
         $with->withdrawal_ref = $request->no_ref;
+        $with->wallet->save();
+        $with->wallet->wallet_ballance = $with->wallet->wallet_ballance - $with->withdrawal_wallet_amount;
+        $with->save();
+        // dd($with);
         // dd($with);
 
-    	$with->save();
     	Session::flash("flash_notification", [
                         "level"=>"success",
                         "message"=>"Withdraw Approved"
@@ -149,7 +153,7 @@ class NeedApprovalController extends Controller
     	$with = Withdrawal::find($id);
     	$with->withdrawal_status = 2;
     	$with->save();
-    	$users = User::where('id', $with->withdrawal_user_id)->first();
+    	$users = $with->user;
     	Mail::send('admin.mail.withdrawal_ditolak', compact('users', 'comment'), function ($m) use ($users, $comment) {
                 $m->to($users->email, $users->name)->subject('Withdrawal Member Ditolak');
                 Session::flash("flash_notification", [

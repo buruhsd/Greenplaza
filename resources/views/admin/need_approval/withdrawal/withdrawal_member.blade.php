@@ -58,7 +58,8 @@
                                     <td><center>Belum Approve</center></td>
                                     @elseif($w->withdrawal_status == 1)
                                     <td><center>Approve</center></td>
-                                    
+                                    @elseif($w->withdrawal_status == 2)
+                                    <td><center>Reject</center></td>
                                     @endif
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$w->id}}"><i class="fa fa-edit"></i>Detail Transaksi</button></td>
                                     <td>
@@ -69,7 +70,7 @@
                                     
                                     @endif
                                          <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModal{{$w->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                               <div class="modal-header">
@@ -92,7 +93,7 @@
                                             </div>
                                           </div>
                                         </div>
-                                        <div class="modal fade" id="exampleModalappv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="exampleModalappv{{$w->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                               <div class="modal-header">

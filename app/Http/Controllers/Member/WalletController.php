@@ -201,12 +201,21 @@ class WalletController extends Controller
                 $wd->withdrawal_wallet_id = $wallet->id;
                 $wd->withdrawal_wallet_type = $request->withdrawal_wallet_type;
                 $wd->withdrawal_wallet_amount = $request->withdrawal_wallet_amount;
+                    if($request->withdrawal_wallet_amount < 50000){
+                        $status = 500;
+                        $message = 'Withdrawal minimal 50.000';
+                        return redirect()->back()
+                            ->with(['flash_status' => $status,'flash_message' => $message]);
+                    }else{
+                        $wd->save();
+                        
+                    }
+
                 // $wd->withdrawal_status = $request->withdrawal_status;
                 // $wd->withdrawal_approval_id = $request->withdrawal_approval_id;
                 // $wd->withdrawal_response_date = $request->withdrawal_response_date;
                 // $wd->withdrawal_response_text = $request->withdrawal_response_text;
                 // $iklan->iklan_note = 'Pembelian iklan baris oleh '.Auth::user()->username.' pada '.date('Y-m-d H:i:s');
-                $wd->save();
             }else{
                 $status = 500;
                 $message = 'Withdrawal Failed.';
@@ -215,10 +224,10 @@ class WalletController extends Controller
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $search = \Request::get('search');
-        $with = Withdrawal::where('withdrawal_user_id', 'like', '%'.$search.'%')
+        $with = Withdrawal::where('withdrawal_user_id', Auth::id())
                 ->orderBy('created_at', 'DESC')->paginate(10);
                 // dd($with);
-        $data['with'] =$with;     
+        $data['with'] = $with;     
         $data['type'] = Wallet_type::whereRaw('id IN (1)')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.withdrawal', $data);

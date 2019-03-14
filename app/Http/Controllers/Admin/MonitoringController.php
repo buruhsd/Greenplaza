@@ -8,6 +8,7 @@ use App\Models\Trans_detail;
 use App\Models\Produk;
 use App\Models\Activity;
 use App\Models\Wallet;
+use App\Models\Withdrawal;
 use App\User;
 use App\Role;
 use Session;
@@ -251,6 +252,12 @@ class MonitoringController extends Controller
     {
         $log = Activity::orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.monitoring.log_activity.activity', compact('log'));
+    }
+
+    public function log_wd ()
+    {
+        $log_wd = Withdrawal::where('withdrawal_wallet_type', 1)->paginate(10);
+        return view('admin.monitoring.withdrawal.log_wd', compact('log_wd'));
     }
 
 

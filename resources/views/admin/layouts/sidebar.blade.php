@@ -77,6 +77,7 @@
                                     <!-- <li><a href="#">Wallet Pin Code</a></li>
                                     <li><a href="#">Wallet Saldo Iklan</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/monitoring/log_activity')}}"><a href="{{route('admin.monitoring.activity')}}">Log Aktivitas</a></li>
+                                    <li class="{{FunctionLib::setActive('admin/monitoring/log_withdrawal_member')}}"><a href="{{route('admin.monitoring.activity_wd')}}">Log Withdrawal</a></li>
                                 </ul>
                             </li>
                             {{-- need actived --}}
