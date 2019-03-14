@@ -100,4 +100,8 @@ class Produk extends Model
     {
         return $this->hasOne('App\Models\Review', 'review_user_id', 'produk_seller_id');
     }
+
+    public function count_review($data){
+        return Review::where('review_produk_id',$data->id)->count();
+    }
 }

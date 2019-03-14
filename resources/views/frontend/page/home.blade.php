@@ -1184,11 +1184,9 @@
                                                     <i class="fa fa-user"></i> {{$item->user->name}}
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
-                                                    @if ($item->review)
-                                                    <i class="fa fa-comments"></i> {{ $item->review->count()}} Comments
-                                                    @else
-                                                    <i class="fa fa-comments"></i> 0 Comments
-                                                    @endif
+                                                    
+                                                    <i class="fa fa-comments"></i> {{ $item->count_review($item)}} Comments
+                                                   
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{str_limit($item->produk_note, 25)}}
