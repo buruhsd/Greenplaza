@@ -162,6 +162,7 @@ class ProdukController extends Controller
         $data['produk_unit'] = Produk_unit::all();
         $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
+        $id_product = Auth::id();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.produk.create', $data);
     }
@@ -321,10 +322,9 @@ class ProdukController extends Controller
         echo $data;
     }
          public function edit_get_post(Request $request){
-    
-                Produk_image::where('produk_image_image', $request->message)->delete();
-                  return response(['status' => 'success'])
-          ->header('Content-Type', 'application/json');
+        Produk_image::where('produk_image_image', $request->message)->delete();
+          return response(['status' => 'success'])
+        ->header('Content-Type', 'application/json');
         }
 
     /**

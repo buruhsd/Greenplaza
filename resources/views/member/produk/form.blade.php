@@ -34,24 +34,42 @@
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
                 <span class="text-danger">Ukuran : <b>300 pixel</b> x <b>320 pixel</b></span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Foto : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'gambar: ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="gambar utama">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
                             </button>
-                            <div class="btn btn-default image-preview-input">
+                            <div class="btn btn-default image-preview-input" >
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>
+                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/ placeholder="asdadas">
                             </div>
                         </span>
                     </div>
                 </div>
             </div>
+            <div id="maxlimaw">
+             <button type="button" class="btn btn-success col-sm-1 col-xs-1 clickkurang" id="add-file-field" onclick="asdfkurang()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            </div>
+            <script type="text/javascript">
+                function asdfkurang(){
+              
+                var counter = 0;
+                $(".clickkurang").click(function() {
+                counter++;
+                if(counter == 4){
+                    alert('max gmabar lima');
+                    $("#maxlimaw").html("");
+                }
+            });
+            }
+            </script>
             @elseif(str_contains(Request::url(), ['edit']))
             {!! Form::label('produk_user_status', 'Pilih Gambar Utama : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10">
@@ -68,14 +86,12 @@
                             </label>
                         </div>
 
-                @endforeach
-               
+                @endforeach   
                 </div>
             </div>
             @if($asdfku < 5)
-    <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-
-                <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+            <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+            <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
             </div><br/><br/>
             {!! Form::label('produk_user_status', 'Gambar : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
@@ -104,28 +120,25 @@
             @else
 
             @endif
-@else
-     <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+            @else
+            <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
                 <span class="text-danger">hapus salah gambar untuk mengunggah foto</span>
             </div>
-@endif
-<script type="text/javascript">
-    function asdfkurang(){
-    var eee = 4 - <?php echo $asdfku ?>;
-    var counter = 0;
-    $(".clickkurang").click(function() {
-    counter++;
-    if(counter == eee){
-        alert('max gmabar lima');
-        $("#maxlima").html("");
-    }
-});
-}
-</script>
-            
             @endif
-
-            
+            <script type="text/javascript">
+                function asdfkurang(){
+                var eee = 4 - <?php echo $asdfku ?>;
+                var counter = 0;
+                $(".clickkurang").click(function() {
+                counter++;
+                if(counter == eee){
+                    alert('max gmabar lima');
+                    $("#maxlima").html("");
+                }
+            });
+            }
+            </script>
+            @endif
         </div>
     </div>
 </div>

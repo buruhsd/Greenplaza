@@ -39,8 +39,8 @@ class HomeController extends Controller
         $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->get();
         $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
         $product_asdf = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
-        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
-        $newproduk = Produk::orderBy('created_at', 'DESC')->limit(12)->get();
+        $category = Produk::where('produk_seller_id', '!=', $users)->orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $newproduk = Produk::where('produk_seller_id', '!=', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
         $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->get();
         $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->skip(4)->get();
@@ -51,7 +51,7 @@ class HomeController extends Controller
         $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
         $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
         $latestnewss = Produk::orderBy('created_at', 'DESC')->limit(6)->skip(6)->get();
-        $featured = Produk::orderBy('created_at', 'ASC')->limit(12)->get();
+        $featured = Produk::where('produk_seller_id', '!=', $users)->orderBy('created_at', 'ASC')->limit(12)->get();
         $banner1 = Iklan::where('iklan_iklan_id', 1)->first();
         $banner2 = Iklan::where('iklan_iklan_id', 2)->first();
         $banner3 = Iklan::where('iklan_iklan_id', 3)->first();
