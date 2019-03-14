@@ -92,8 +92,48 @@
                     </div>
                     <div class="col-md-4 col-sm-12">
                         <ul class="cart-wishlist-wrap d-flex">
+                            @guest
+                            @else
+                                <li>
+                                    <?php 
+                                        $notif = FunctionLib::user_notif(Auth::id(), 10);
+                                    ?>
+                                    <a href="#" id="member" onclick="drop()" class="dropbtn">
+                                        <i class="fa fa-bell animated"></i>
+                                        <small class="text-danger {!!($notif->count())?'':'hide'!!}">
+                                            <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
+                                        </small>
+                                    </a>
+                                    <ul class="dropdown-content" id="member-notif">
+                                        @if($notif->count())
+                                            @foreach($notif->get() as $item)
+                                                <?php
+                                                    $data = json_decode($item->data,true);
+                                                ?>
+                                                <li>
+                                                    <a href="{{route('member.notification.is_read', $item->id)}}">
+                                                        @if($item->read_at)
+                                                            <small class="text-sm text-success">
+                                                                <i class="fa fa-check animated"></i>
+                                                            </small>
+                                                        @endif
+                                                        <strong>{{$data['data']['title']}}</strong>  <small>{{$data['data']['message']}}</small>
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        @else
+                                            <li class="dropdown-header" id="no-notif">
+                                                <small class="text-sm text-success">
+                                                    <i class="fa fa-check animated"></i>
+                                                </small>
+                                                No notifications
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endguest
                             <li>
-                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>Keranjang
+                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
                                 @if(Session::has('chart') && count(Session::get('chart')) > 0)
                                     <span>
                                         Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}

@@ -79,9 +79,9 @@
                         ?>
                         <a href="#" id="admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell animated"></i>
-                            <span class="text-danger {!!($notif->count())?'':'hidden'!!}">
+                            <small class="text-danger {!!($notif->count())?'':'hide'!!}">
                                 <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
-                            </span>
+                            </small>
                         </a>
                         <ul class="dropdown-menu list-group" id="admin-notif">
                             @if($notif->count())

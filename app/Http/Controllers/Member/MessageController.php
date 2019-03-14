@@ -95,7 +95,8 @@ class MessageController extends Controller
         $where .= ' AND '.$status.' = '.$status_val.$andwhere;
 
         if (!empty($where)) {
-            $data['message'] = Message::whereRaw($where)
+            $orderBy = 'message_is_read DESC, updated_at DESC';
+            $data['message'] = Message::whereRaw($where)->orderByRaw($orderBy)
                 ->paginate($this->perPage);
             foreach ($data['message'] as $item) {
                 $message = Message::findOrFail($item->id);

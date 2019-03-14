@@ -205,18 +205,18 @@ function checkDecimal(el){
 }
 function showNotifications(notifications, target, url) {
     if(Object.keys(notifications).length) {
-        $(target).children("span").children("i").removeClass('faa-vertical');
+        $(target).children("small").children("i").removeClass('faa-vertical');
         $(target + '-notif').children("li#no-notif").remove();
         var htmlElements = makeNotification(notifications, url);
         var htmlMainElements = makeMainNotification();
         $(target + '-notif').prepend(htmlElements);
         // $(target + '-notif').html(htmlElements);
-        $(target).children("span").children("i").addClass('faa-vertical');
-        $(target).children("span").removeClass('hidden');
+        $(target).children("small").children("i").addClass('faa-vertical');
+        $(target).children("small").removeClass('hide');
     } else {
         // $(target + '-notif').html('<li class="dropdown-header">No notifications</li>');
-        $(target).children("span").children("i").removeClass('faa-vertical');
-        $(target).children("span").addClass('hidden');
+        $(target).children("small").children("i").removeClass('faa-vertical');
+        $(target).children("small").addClass('hide');
     }
 }
 function makeNotification(notification, url) {
@@ -237,4 +237,24 @@ function makeNotificationText(notification) {
     const message = notification.message;
     text += '<strong>' + title + '</strong>  <small>' + message + '</small>';
     return text;
+}
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function drop() {
+  document.getElementById("member-notif").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }
