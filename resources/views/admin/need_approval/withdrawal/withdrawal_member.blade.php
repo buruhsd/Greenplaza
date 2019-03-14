@@ -63,8 +63,8 @@
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$w->id}}"><i class="fa fa-edit"></i>Detail Transaksi</button></td>
                                     <td>
                                     @if($w->withdrawal_status == 0)
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalappv">Approve</button>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Reject</button></center>
+                                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#exampleModalappv">Approve</button>
+                                        <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#exampleModal">Reject</button></center>
                                     @elseif($w->withdrawal_status == 1)
                                     
                                     @endif
