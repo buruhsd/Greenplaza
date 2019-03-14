@@ -25,9 +25,9 @@
                             <label for="status" class="sr-only">Status</label>
                             <select class="form-control" id="status" name="status" onchange = "location=this.value;">
                                 <option value="">--> Select Transaction Option <--</option>
-                                <option value="/admin/list_transaction_gln">All Transaction</option>
-                                <option value="/admin/list_transaction_gln_done">Send Transaction</option>
-                                <option value="/admin/list_transaction_gln_cancel">Cancel Transaction</option>
+                                <option value="{{route('admin.list_gln')}}">All Transaction</option>
+                                <option value="{{route('admin.list_gln_done')}}">Send Transaction</option>
+                                <option value="{{route('admin.list_gln_cancel')}}">Cancel Transaction</option>
                             </select>
                         </div>
                         <div class="col-md-4">
