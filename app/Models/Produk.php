@@ -68,6 +68,14 @@ class Produk extends Model
     }
 
     /**
+    * 
+    * 
+    **/
+    public function is_grosir(){
+        return (bool)$this->grosir->count();
+    }
+
+    /**
     * @param
     * @return
     * 

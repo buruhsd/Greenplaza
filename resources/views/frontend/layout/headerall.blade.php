@@ -137,7 +137,7 @@
                                 </li>
                             @endguest
                             <li>
-                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>Keranjang
+                                <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
                                 @if(Session::has('chart') && count(Session::get('chart')) > 0)
                                     <span>
                                         Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
