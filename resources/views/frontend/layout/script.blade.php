@@ -65,23 +65,26 @@
         //   dots[slideIndex-1].className += " w3-white";
         // }
     </script>
-    <script src="{{ asset('js/pusher.js') }}"></script>
-    <script src="{{ asset('js/echo.js') }}"></script>
-    <script type="text/javascript">
-        Pusher.logToConsole = true;
-        window.Echo = new Echo({
-            "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
-            broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
-            key: '{!!env("PUSHER_APP_KEY")!!}',
-            cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
-            encrypted: true,
-            logToConsole: true
-        });
-        // showNotifications({}, '#admin');
-        console.log('{{Auth::user()->id}}');
-        window.Echo.private('App.User.{{Auth::user()->id}}')
-            .notification((notification) => {
-                var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
-                showNotifications(notification.data, '#member', url);
-        });
-    </script>
+    @guest
+    @else
+        <script src="{{ asset('js/pusher.js') }}"></script>
+        <script src="{{ asset('js/echo.js') }}"></script>
+        <script type="text/javascript">
+            Pusher.logToConsole = true;
+            window.Echo = new Echo({
+                "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
+                broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
+                key: '{!!env("PUSHER_APP_KEY")!!}',
+                cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
+                encrypted: true,
+                logToConsole: true
+            });
+            // showNotifications({}, '#admin');
+            console.log('{{Auth::user()->id}}');
+            window.Echo.private('App.User.{{Auth::user()->id}}')
+                .notification((notification) => {
+                    var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
+                    showNotifications(notification.data, '#member', url);
+            });
+        </script>
+    @endguest
