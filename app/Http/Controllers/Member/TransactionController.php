@@ -25,16 +25,13 @@ class TransactionController extends Controller
 
     /******/
     public function done_gln($order_id){
-            $status = 500;
-            $message = 'Seller tidak melayani pembayaran menggunakan GLN.';
-            return redirect('member/transaction/purchase')
-               ->with(['flash_status' => $status,'flash_message' => $message]);
         $status = 200;
         $message = 'Transaksi berhasil dibayar.';
         $data = [
             'order_id' => $order_id,
             'transaction_status' => 'done'
         ];
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $address_gln = Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address;
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
         if($response['status'] == 500){
@@ -43,10 +40,12 @@ class TransactionController extends Controller
             return redirect('member/transaction/purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = FunctionLib::get_config('profil_gln_address');
+        $seller_address = ($trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists())
+            ?$trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists()
+            :false;
 
-        if(!$to_address || $to_address == null || $to_address == ""){
+        if(!$seller_address || $seller_address == null || $seller_address == ""){
             $status = 500;
             $message = 'Seller tidak melayani pembayaran menggunakan GLN.';
             return redirect('member/transaction/purchase')

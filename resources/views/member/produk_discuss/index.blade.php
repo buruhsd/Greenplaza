@@ -98,6 +98,17 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
+                                                        @if(isset($_GET['status']) && $_GET['status'] !== 'arsip')
+                                                            {!! Form::open(['url' => route('member.produk.discuss.reply.store'), 'method' => 'POST', 'id' => 'form-produk-discuss-reply']) !!}
+                                                                <input type="hidden" class="btn btn-success" name="discuss_id" value="{{$item->id}}">
+                                                                <div class="col-md-12">
+                                                                    <textarea name="discuss_reply_text" class="form-control" id="massage" cols="2" rows="2" placeholder="balas disini..."></textarea>
+                                                                </div>
+                                                                <div class="col-md-12 mt-2">
+                                                                    <input type="submit" class="btn btn-success" name="" value="balas">
+                                                                </div>
+                                                            {!! Form::close() !!}
+                                                        @endif
                                                     </div>
                                                </div>
                                             </div>
@@ -107,14 +118,14 @@
                                         <th colspan="3" scope="row">
                                             <div class="col-md-12">
                                                 @if(isset($_GET['status']) && $_GET['status'] == 'to')
-                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_to_id}}</a>
-                                                @elseif(isset($_GET['status']) && $_GET['status'] !== 'arsip')
-                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a>
-                                                @elseif($item->message_from_id !== Auth::id() && $item->message_to_id == Auth::id() )
-                                                    <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a>
+                                                    <!-- <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_to_id}}</a> -->
+                                                @elseif(isset($_GET['status']) && $_GET['status'] == 'arsip')
+                                                    <!-- <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a> -->
+                                                @else($item->produk->produk_seller_id == Auth::id())
+                                                    <!-- <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Balas {{$item->message_from_id}}</a> -->
+                                                    <a href="{{route('member.produk.discuss.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
+                                                    <a href="{{route('member.produk.discuss.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
                                                 @endif
-                                                <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>
-                                                <a href="{{route('member.message.destroy', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
                                             </div>
                                         </th>
                                     </tr>

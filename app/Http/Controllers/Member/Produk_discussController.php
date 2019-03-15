@@ -22,12 +22,14 @@ class Produk_discussController extends Controller
     private $mainTable = 'sys_produk_discuss';
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
+        $arr = [
+            "sys_produk.produk_seller_id" =>'from',
+            "produk_discuss_user_id" =>'to',
+            "produk_discuss_status" =>'arsip',
+        ];
         $where = "1";//.' AND produk_user_status=3';
         $andwhere = "";
         $user = Auth::id();
@@ -36,8 +38,27 @@ class Produk_discussController extends Controller
             $where .= ' AND users.name LIKE "%'.$name.'%"';
         }
 
+        // status from / to
+        $status = 'sys_produk.produk_seller_id';
+        $status_val = Auth::id();
+        if(!empty($request->get('status'))){
+            $status = $request->get('status');
+            if($status !== 'arsip'){
+                $andwhere = ' AND produk_discuss_status = 1';
+            }
+            $status_val = ($status !== 'arsip')?Auth::id():0;
+            // $status_val = Auth::id();
+            $status = array_search($status,$arr);
+        }
+        $where .= ' AND '.$status.' = '.$status_val.$andwhere;
+
         if (!empty($where)) {
-            $data['produk_discuss'] = Produk_discuss::where('produk_discuss_user_id', $user)->where('produk_discuss_status', $where)
+            $data['produk_discuss'] = Produk_discuss::where('produk_discuss_user_id', $user)
+                // ->where('produk_discuss_status', $where)
+                ->whereRaw($where)
+                ->SELECT('sys_produk_discuss.*', 'sys_produk.produk_seller_id')
+                ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_produk_discuss.produk_discuss_produk_id')
+                ->orderBy('updated_at', 'DESC')
                 ->paginate($this->perPage);
         } else {
             $data['produk_discuss'] = Produk_discuss::paginate($this->perPage);
@@ -91,18 +112,13 @@ class Produk_discussController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function arsip($id)
     {
         $status = 200;
         $message = 'Diskusi Produk Moving to arsip!';
         $res = Produk_discuss::findOrFail($id);
-        $res->message_is_arsip = 1;
+        $res->produk_discuss_status = 0;
         $res->save();
         if(!$res){
             $status = 500;
@@ -114,11 +130,6 @@ class Produk_discussController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {

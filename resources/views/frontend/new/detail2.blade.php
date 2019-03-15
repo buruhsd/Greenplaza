@@ -332,7 +332,60 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="description">
                                         <div class="description-wrap">
-                                            {{$detail->produk_note}}
+                                            <table class="table-responsive cart-wrap">
+                                                <thead>
+                                                </thead>
+                                                <tbody>
+                                                    @if($detail->is_grosir())
+                                                        <tr class="accordion" id="accordiongrosir">
+                                                            <td colspan="3">
+                                                            @foreach($detail->grosir as $grosir)
+                                                                <button class="btn btn-success btn-block btn-sm" type="button" data-toggle="collapse" data-target="#grosir{{$grosir->id}}" aria-expanded="false" aria-controls="grosir{{$grosir->id}}">Grosir {{$grosir->produk_grosir_start}} {{$detail->unit->produk_unit_name}}</button>
+                                                            @endforeach
+                                                            </td>
+                                                            <td colspan="4">
+                                                            @foreach($detail->grosir as $grosir)
+                                                                <div class="collapse multi-collapse {!!($loop->first)?'show':''!!}" data-parent="#accordiongrosir" id="grosir{{$grosir->id}}">
+                                                                    <div class="card card-body">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <th><b>Dari</b></th>
+                                                                                <th><b>sampai</b></th>
+                                                                                <th><b>harga</b></th>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>{{$grosir->produk_grosir_start}}</td>
+                                                                                <td>{{$grosir->produk_grosir_end}}</td>
+                                                                                <td>Rp. {{FunctionLib::number_to_text($grosir->produk_grosir_price)}}</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                </tbody>
+                                            </table>
+                                            <table class="table-responsive cart-wrap">
+                                                <tr>
+                                                    <td class="text-left">
+                                                        <ul>
+                                                            <li class="no-list-style">
+                                                                Tinggi : {{$detail->produk_height}} cm
+                                                            </li>
+                                                            <li class="no-list-style">
+                                                                Berat : {{$detail->produk_weight}} Gram
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">
+                                                        {{$detail->produk_note}}
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                     <!-- <div class="tab-pane" id="tag">

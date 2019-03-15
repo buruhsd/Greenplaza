@@ -18,6 +18,9 @@ use App\Observers\NotifTransaksiObserver;
 
 use App\Models\Message; 
 use App\Observers\NotifMessageObserver;
+
+use App\Models\Produk_discuss; 
+use App\Observers\NotifDiskusiProdukObserver;
 // use \Illuminate\Support\Facades\URL; 
 
 class AppServiceProvider extends ServiceProvider
@@ -39,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         Trans_detail::observe(NotifTransaksiObserver::class);
         // ketika ada pesan baru
         Message::observe(NotifMessageObserver::class);
+        // ketika ada pesan baru
+        Produk_discuss::observe(NotifDiskusiProdukObserver::class);
     }
 
     /**

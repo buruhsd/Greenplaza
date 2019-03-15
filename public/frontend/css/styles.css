@@ -3356,3 +3356,6 @@ img.hover-shadow1 {
 }
 
 /*--------team-area end--------*/
+.no-list-style{
+    list-style: none;
+}

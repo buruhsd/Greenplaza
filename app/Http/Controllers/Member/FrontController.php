@@ -181,7 +181,7 @@ class FrontController extends Controller
             ->where('shipment_parent_id', 0)
             ->get();
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
-        $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
+        $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->orderBy('updated_at', 'DESC')->get();
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
         return view('frontend.new.detail2', $data);
     }
