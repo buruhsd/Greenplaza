@@ -206,12 +206,21 @@
             {!! Form::label('produk_stock', 'Stok : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
-                    {!! Form::number('produk_stock', null, [
-                        'min' => '0',
+                    @if(str_contains(Request::url(), ['create']))
+                        {!! Form::number('produk_stock', 1, [
+                        'min' => '1',
                         'class' => 'form-control', 
                         'placeholder' => 'Stok', 
                         'required'
                     ])!!}
+                    @elseif(str_contains(Request::url(), ['edit']))
+                     {!! Form::number('produk_stock', null, [
+                        'min' => '0',
+                        'class' => 'form-control', 
+                        'placeholder' => 'Stok', 
+                        'required'
+                     ])!!}
+                    @endif
                     <span class="input-group-btn">
                         @if(str_contains(Request::url(), ['create']))
                             <select name='produk_unit' class="btn btn-info">

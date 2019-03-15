@@ -134,7 +134,6 @@ class ProdukController extends Controller
         $data['user'] = User::all();
         $data['category'] = Category::all();
         $data['brand'] = Brand::all();
-            $data['asdfku'] = Produk_image::all()->where("produk_image_produk_id", $id)->count();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.hot_promo.create', $data);
     }
@@ -448,7 +447,6 @@ class ProdukController extends Controller
         $data['produk_unit'] = Produk_unit::all();
         $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
-        $data['asdfku'] = Produk_image::all()->where("produk_image_produk_id", $id)->count();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.produk.create', $data);
     }

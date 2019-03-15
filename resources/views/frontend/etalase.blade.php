@@ -1,44 +1,6 @@
 @extends('frontend.layout.indexall', ['active' => 'home'])
 @section('title', 'etalase')
 @section('content')
-<!-- breadcumb-area end -->
-<!--     <div class="about-area mb-30">
-        <div class="container">
-            <div class="row">
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="breadcumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 ">
-                    <div class="author-wrap-etalase">
-                        <img class="h100" src="{{ asset('/assets/images/profil/'.$user->user_detail->user_detail_image.'') }}" onerror="this.src='http://placehold.it/700x400'" alt="">
-
-                        <h4>{{$user->name}}</h4>
-                        <p>{{$user->user_slogan}}</p>
-                        <ul>
-                        <a href="{{route('member.message.create', $user->user_slug)}}"><li class="btn-chat"> Chat </li></a>
-                        </ul>
-                    </div>  
-                </div>
-                <div class="col-9">
-                    <div class="breadcumb-wrap-etalase bg-1" src="">
-                        <div class="breadcumb-content-etalase black-opacity" style="background: url('{{ asset('/assets/images/bg_etalase/'.$user->user_store_image.'')}}') no-repeat center center/ cover; " onerror="this.src='http://placehold.it/700x400'">
-                            <h2></h2>
-                            <ul>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- breadcumb-area start -->
     <div class="breadcumb-area req-all">
         <div class="container">
             <div class="row">

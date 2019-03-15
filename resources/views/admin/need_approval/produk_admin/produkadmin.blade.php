@@ -51,7 +51,7 @@
                                         <ul>
                                             <li>Name : {{$h->produk_name}}</li>
                                             <li>Brand : {{$h->brand->brand_name}}</li>
-                                            <li>Category : {{$h->category->category_name}}</li>
+                                            <li>Category : {{$h->category_name}}</li>
                                             <li>Price : {{$h->produk_price}}</li>
                                             <li>Stock : {{$h->produk_stock}}</li>
                                         </ul>
