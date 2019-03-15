@@ -45,8 +45,8 @@
                                 </tr>
                             </thead>
                             @if(count($gln) != 0)
+                            @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
                                 @foreach ($gln as $key => $g)
-                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
                                 @if ($g->gln->trans_gln_status == 1)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
@@ -60,12 +60,12 @@
                                     <td colspan="8" class="text-center">KOSONG</td>
                                 </tr>
                                 @endif
-                                @else
+                                @endforeach
+                            @else
                                 <tr>
                                     <td colspan="8" class="text-center">KOSONG</td>
                                 </tr>
                                 @endif
-                                @endforeach
                             @else
                                 <tr>
                                     <td colspan="8" class="text-center">KOSONG</td>
