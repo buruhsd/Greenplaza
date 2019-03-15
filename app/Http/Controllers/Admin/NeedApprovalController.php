@@ -135,8 +135,8 @@ class NeedApprovalController extends Controller
         // dd($id);
     	$with->withdrawal_status = 1;
         $with->withdrawal_ref = $request->no_ref;
-        $with->wallet->save();
         $with->wallet->wallet_ballance = $with->wallet->wallet_ballance - $with->withdrawal_wallet_amount;
+        $with->wallet->save();
         $with->save();
         // dd($with);
         // dd($with);
