@@ -54,10 +54,6 @@
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
                                     <td><center>Pending</center></td>
                                 </tr>
-                                @else
-                                <tr>
-                                    <td colspan="8" class="text-center">KOSONG</td>
-                                </tr>
                                 @endif
                                 @endforeach
                             @else
