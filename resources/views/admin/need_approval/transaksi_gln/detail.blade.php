@@ -39,11 +39,19 @@
                 </tr>
                 <tr>
                     <th>Amount Gln - fee</th>
-                        <td> : {{((bool)$g->gln)?(($g->trans_detail_amount_total) - ($g->trans_detail_amount_total * 1/100)) / $g->gln->trans_gln_compare:0}} Gln</td>
+                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                    <td> : {{(($g->trans_detail_amount_total) - ($g->trans_detail_amount_total * 1/100)) / $g->gln->trans_gln_compare}} Gln</td>
+                    @else
+                    <td> : - </td>
+                    @endif   
                 </tr>
                 <tr>
                     <th>Harga 1 Gln</th>
-                    <td> : {{((bool)$g->gln)?$g->gln->trans_gln_compare:0}}</td>
+                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                    <td> : {{$g->gln->trans_gln_compare}}</td>
+                    @else
+                    <td> : - </td>
+                    @endif 
                 </tr>
                 <tr>
                     <th>Note</th>

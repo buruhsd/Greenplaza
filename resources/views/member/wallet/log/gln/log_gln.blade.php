@@ -46,7 +46,7 @@
                             </thead>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if ($g->gln->trans_gln_status == 1)
+                                @if ($g->gln->trans_gln_status == 1 && count($g->gln->trans_gln_status == 1) != 0)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
