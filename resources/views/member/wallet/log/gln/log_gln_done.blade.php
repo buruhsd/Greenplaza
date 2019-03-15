@@ -32,8 +32,8 @@
                         @if (Auth::user()->user_store != null)
                             <select class="form-control" id="status" name="status" onchange = "location=this.value;" style="margin-top: 1%">
                                 <option value=""><-- Select Success Transaction Option --></option>
-                                <option value="/member/wallet/log_gln_done">Receiver</option>
-                                <option value="/member/wallet/log_gln_done_receiver">Sender</option>
+                                <option value="/member/wallet/log_gln_done_receiver">Receiver</option>
+                                <option value="/member/wallet/log_gln_done">Sender</option>
                             </select>
                         @endif
                         </div>

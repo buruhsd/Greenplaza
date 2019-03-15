@@ -14,12 +14,12 @@
                 <div class="panel-heading clearfix">
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <form action="#" method="GET" class="form-inline">
+                            <!-- <form action="#" method="GET" class="form-inline">
                                 <div class="input-group pull-left" style="width: 225px;">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                     <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
                                 </div>
-                            </form>
+                            </form> -->
                         </div>
                         <div class="col-md-6">
                             <label for="status" class="sr-only">Status</label>
@@ -32,8 +32,8 @@
                         @if (Auth::user()->user_store != null)
                             <select class="form-control" id="status" name="status" onchange = "location=this.value;" style="margin-top: 1%">
                                 <option value=""><-- Select Success Transaction Option --></option>
-                                <option value="/member/wallet/log_gln_done">Receiver</option>
-                                <option value="/member/wallet/log_gln_done_receiver">Sender</option>
+                                <option value="/member/wallet/log_gln_done_receiver">Receiver</option>
+                                <option value="/member/wallet/log_gln_done">Sender</option>
                             </select>
                         @endif
                         </div>
@@ -47,21 +47,21 @@
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
                                     <th><center>Transaksi Code</center></th>
-                                    <th><center>Detail Produk</center></th>
+                                    <th><center>Payment</center></th>
+                                    <th><center>Amount Total</center></th>
                                     <th><center>Status</center></th>
                                 </tr>
                             </thead>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $gln->id)->count() > 0 && $g->gln->trans_gln_status == 3 && $g->gln->trans_gln_to == App\Models\Wallet::where('wallet_user_id', Auth::user()->id)->where('wallet_type', 7)->first()->wallet_address)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
-                                    <td><center>{{$g->trans_code}}</center></td>
-                                    <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
+                                    <td><center>{{$g->trans->trans_code}}</center></td>
+                                    <td><center>Greenline</center></td>
+                                    <td><center>{{$g->trans_gln_amount_total}}</center></td>
                                     <td><center>Receiver Success</center></td>
                                 </tr>
-                                @endif
                                 @endforeach
                         
                             @else
@@ -77,7 +77,7 @@
         </div>
     </div>
 </div>
-@include('member.wallet.log.gln.detailgln')
+
 @endsection
 <!-- @section('script')
 <script type="text/javascript">

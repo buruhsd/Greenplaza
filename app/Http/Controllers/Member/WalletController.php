@@ -45,11 +45,12 @@ class WalletController extends Controller
     {
         $search = \Request::get('search');
         $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        // dd($trans);
         $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-        // dd($masedi);
+        // dd($gln);
         return view('member.wallet.log.gln.log_gln', compact('gln'));
     }
     public function log_gln_done ()
@@ -67,13 +68,14 @@ class WalletController extends Controller
     public function log_gln_done_receiver ()
     {
         $search = \Request::get('search');
+        $wallet = Wallet::where('wallet_user_id', Auth::id())->where('wallet_type', 7)->first();
+        // dd($wallet);
         $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
-        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
-            ->whereIn('trans_detail_trans_id', $trans)
-            ->where('trans_detail_status', 6)
+        $gln = Trans_gln::where('trans_gln_to', $wallet->wallet_address)
+            ->where('trans_gln_status', 2)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
-        // dd($masedi);
+        // dd($gln);
         return view('member.wallet.log.gln.log_gln_done_receiver', compact('gln'));
     }
     public function log_gln_cancel ()
