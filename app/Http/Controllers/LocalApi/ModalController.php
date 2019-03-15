@@ -146,9 +146,7 @@ class ModalController extends Controller
         $data['type'] = ($request->has('type'))?$request->type:$type;
         $data['komplain'] = Komplain::whereId($id)->first();
         $data['solusi_type'] = Conf_solusi::where('solusi_status', 1)
-            ->whereRaw('solusi_komplain_id LIKE "'.$id.',%"')
-            ->orWhereRaw('solusi_komplain_id LIKE "%,'.$id.'"')
-            ->orWhereRaw('solusi_komplain_id = "'.$id.'"')->get();
+            ->whereRaw('CONCAT(",", solusi_komplain_id, ",") like "%'.$id.'%"')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.update-komplain', $data);
     }

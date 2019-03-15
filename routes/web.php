@@ -213,6 +213,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::post('/add_resi/{id}', 'Admin\\TransactionController@add_resi')->name('.post_add_resi');
 		});
 		Route::group(['prefix' => 'res_kom', 'as' => '.res_kom'], function () {
+			Route::get('/done_komplain/{id}', 'Admin\\KomplainController@done_komplain')->name('.done_komplain');
 			Route::get('/', 'Admin\\KomplainController@res_kom')->name('.index');
 			Route::get('/create', 'Admin\\KomplainController@res_kom_create')->name('.create');
 			Route::post('/store', 'Admin\\KomplainController@res_kom_store')->name('.store');

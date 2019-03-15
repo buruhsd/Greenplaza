@@ -32,14 +32,50 @@ class KomplainController extends Controller
     public function done_komplain(Request $request, $id){
         $status = 200;
         $message = "Solusi has been updated.";
+        $arr = [
+            'member' => [1,4],
+            'seller' => [2,3]
+        ];
         try{
             $komplain = Komplain::findOrFail($id);
-            $komplain->komplain_status = 3;
-            $komplain->save();
-            if($komplain){
-                $solusi = $komplain->solusi;
-                $solusi->solusi_status = 3;
-                $solusi->save();
+            // wallet ke member (pengermbalian dana) approved admin
+            if(in_array($komplain->solusi->solusi_solusi_id,$arr['member'])){
+                $komplain->komplain_status = 2;
+                $komplain->save();
+                if($komplain){
+                    $solusi = $komplain->solusi;
+                    $solusi->solusi_status = 3;
+                    $solusi->save();
+                }
+            }
+            // wallet ke seller (lanjutkan)
+            elseif(in_array($komplain->solusi->solusi_solusi_id,$arr['seller'])){
+                $komplain->komplain_status = 3;
+                $komplain->save();
+                if($komplain){
+                    $solusi = $komplain->solusi;
+                    $solusi->solusi_status = 3;
+                    $solusi->save();
+                }
+                // kembalikan wallet ke member
+                if($komplain->trans_detail->trans->trans_payment_id !== 4){
+                    $update_wallet = [
+                        'user_id'=>$komplain->trans_detail->produk->produk_seller_id,
+                        'wallet_type'=>1,
+                        'amount'=>$komplain->trans_detail->trans->trans_amount_total,
+                        'note'=>'Transaksi Success by admin. Update wallet transaksi dikembalikan ke member dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
+                    ];
+                    $saldo = FunctionLib::update_wallet($update_wallet);
+                }
+                // update transaksi menjadi dropping
+                foreach ($komplain->trans_detail->trans->trans_detail as $item) {
+                    $item->trans_detail_status = 6;
+                    $item->trans_detail_is_cancel = 0;
+                    $item->trans_detail_drop = 1;
+                    $item->trans_detail_drop_date = $date;
+                    $item->trans_detail_drop_note = $item->trans_detail_drop_note.", Komplain sudah selesai dan dana di kembalikan ke member";
+                    $item->save();
+                }
             }
         } catch (\Exception $e) {
             $status = 500;
@@ -235,7 +271,7 @@ class KomplainController extends Controller
                     }
                 }
             }
-                
+
             if(!isset($komplain) || empty($komplain) || $komplain == null || $komplain == ""){
                 $status = 500;
                 $message = "Komplain cannot added.";

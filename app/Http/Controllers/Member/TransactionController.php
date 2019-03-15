@@ -25,6 +25,10 @@ class TransactionController extends Controller
 
     /******/
     public function done_gln($order_id){
+            $status = 500;
+            $message = 'Seller tidak melayani pembayaran menggunakan GLN.';
+            return redirect('member/transaction/purchase')
+               ->with(['flash_status' => $status,'flash_message' => $message]);
         $status = 200;
         $message = 'Transaksi berhasil dibayar.';
         $data = [
@@ -41,6 +45,13 @@ class TransactionController extends Controller
         }
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = FunctionLib::get_config('profil_gln_address');
+
+        if(!$to_address || $to_address == null || $to_address == ""){
+            $status = 500;
+            $message = 'Seller tidak melayani pembayaran menggunakan GLN.';
+            return redirect('member/transaction/purchase')
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
         
         $amount_total = 0;
         $amount = 0;

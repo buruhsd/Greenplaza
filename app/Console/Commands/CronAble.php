@@ -43,10 +43,10 @@ class CronAble extends Command
     {
         // log cron
         $data_cron = [
-            'cron_job_method' => 'trans:checkout',
+            'cron_job_method' => 'trans:able',
             'cron_job_type' => 'start',
             'cron_job_status' => 1,
-            'cron_job_title' => 'Transaksi Checkout',
+            'cron_job_title' => 'Transaksi Tunggu Seller',
             'cron_job_note' => 'memulai mengecek transaksi menunggu kesanggupan seller.'
         ];
         FunctionLib::add_cron($data_cron);
@@ -67,10 +67,10 @@ class CronAble extends Command
         if($trans_detail->count()){
             // log cron
             $data_cron = [
-                'cron_job_method' => 'trans:checkout',
+                'cron_job_method' => 'trans:able',
                 'cron_job_type' => 'process',
                 'cron_job_status' => 1,
-                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_title' => 'Transaksi Tunggu Seller',
                 'cron_job_note' => 'transaksi dengan status menunggu kesanggupan seller tersedia.'
             ];
             FunctionLib::add_cron($data_cron);
@@ -82,7 +82,7 @@ class CronAble extends Command
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
                 $difference = FunctionLib::daysBetween($item->trans_detail_transfer_date, $date, 'h');
-                $this->info('Transaksi detail '.$item->trans_code.' ordered at '.$item->trans->created_at);
+                $this->info('Transaksi detail '.$item->trans_code.' disanggupi seller pada '.$item->trans->created_at);
                 $batas = FunctionLib::get_config('transaksi_durasi_seller_tunggu');
                 if($difference >= $batas){
                     // update trans detail
@@ -92,7 +92,7 @@ class CronAble extends Command
                     $item->trans_detail_able = 2;
                     $item->trans_detail_able_date = $date;
                     $item->trans_detail_able_note = 'Transaksi dibatalkan oleh sistem.';
-                    $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Checkout transaksi Expired at '.$date.'.';
+                    $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Durasi tunggu seller transaksi Expired at '.$date.'.';
                     $item->save();
                     $no++;
                     $this->info('transaksi '.$item->trans->trans_code.' dengan kode detail '.$item->trans_code.' expired at '.$date);
@@ -127,10 +127,10 @@ class CronAble extends Command
             }
             // log cron
             $data_cron = [
-                'cron_job_method' => 'trans:checkout',
+                'cron_job_method' => 'trans:able',
                 'cron_job_type' => 'process',
                 'cron_job_status' => 1,
-                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_title' => 'Transaksi Tunggu Seller',
                 'cron_job_note' => $no.' transaksi berhasil dirubah menjadi expired.'
             ];
             FunctionLib::add_cron($data_cron);
@@ -163,10 +163,10 @@ class CronAble extends Command
         }else{
             // log cron
             $data_cron = [
-                'cron_job_method' => 'trans:checkout',
+                'cron_job_method' => 'trans:able',
                 'cron_job_type' => 'process',
                 'cron_job_status' => 1,
-                'cron_job_title' => 'Transaksi Checkout',
+                'cron_job_title' => 'Transaksi Tunggu Seller',
                 'cron_job_note' => 'Tidak ada transaksi yang dirubah.'
             ];
             FunctionLib::add_cron($data_cron);
@@ -175,10 +175,10 @@ class CronAble extends Command
         }
         // log cron
         $data_cron = [
-            'cron_job_method' => 'trans:checkout',
+            'cron_job_method' => 'trans:able',
             'cron_job_type' => 'end',
             'cron_job_status' => 1,
-            'cron_job_title' => 'Transaksi Checkout',
+            'cron_job_title' => 'Transaksi Tunggu Seller',
             'cron_job_note' => 'mengecek transaksi menunggu kesanggupan seller berakhir.'
         ];
         FunctionLib::add_cron($data_cron);

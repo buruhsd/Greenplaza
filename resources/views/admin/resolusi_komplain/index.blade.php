@@ -36,7 +36,7 @@
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Resolusi Komplain</h4>
                     <button type="button" onclick="search('new');" class="btn btn-info">New<span class="label label-default pull-right">{{FunctionLib::count_res_kom(1)}}</span></button>
-                    <!-- <button type="button" onclick="search('help');" class="btn btn-warning">Admin Help<span class="label label-default pull-right">{{FunctionLib::count_res_kom(2)}}</span></button> -->
+                    <button type="button" onclick="search('help');" class="btn btn-warning">Admin Help<span class="label label-default pull-right">{{FunctionLib::count_res_kom(2)}}</span></button>
                     <button type="button" onclick="search('done');" class="btn btn-success">Done<span class="label label-default pull-right">{{FunctionLib::count_res_kom(3)}}</span></button>
                     <!-- <a href="{{ url('admin/produk/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> -->
                 </div>
@@ -84,9 +84,13 @@
                                             </ul>
                                         </td>
                                         <td scope="row">
-                                            <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
-                                            <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
-                                            <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
+                                            @if($item->komplain_status == 1)
+                                                <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-info btn-xs'>Proses</a>
+                                            @elseif($item->komplain_status == 2 && $item->solusi->solusi_status == 3 && $item->solusi->solusi_seller_accept == 1 && ($item->solusi->solusi_solusi_id == 1 || $item->solusi->solusi_solusi_id == 4))
+                                                <a href="{{route('admin.res_kom.done_komplain', $item->id)}}" class='btn btn-danger btn-xs'>Transfer ke member</a>
+                                            @else
+                                                <a href="javascript:;" class='btn btn-success btn-xs'>Done</a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

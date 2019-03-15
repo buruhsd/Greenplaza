@@ -130,7 +130,7 @@
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
-                                            @if($item->solusi->solusi_status == 2  && $item->solusi->solusi_seller_resi !== null && $item->solusi->solusi_seller_accept == 1)
+                                            @if($item->solusi->solusi_status == 2  && ($item->solusi->solusi_seller_resi !== null || $item->solusi->solusi_seller_without_resi !== 0) && $item->solusi->solusi_seller_accept == 1)
                                             <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.komplain.done_komplain", $item->id)}} class='btn btn-danger btn-xs'>
                                                 Komplain Selesai
                                             </button><br/>

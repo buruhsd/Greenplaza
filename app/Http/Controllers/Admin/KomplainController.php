@@ -15,12 +15,50 @@ use Session;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
+use FunctionLib;
 
 
 class KomplainController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'sys_komplain';
+
+    /*******/
+    public function done_komplain(Request $request, $id){
+        $date = date('Y-m-d H:i:s');
+        $status = 200;
+        $message = "Komplain selesai, wallet kembali ke member.";
+        try{
+            $komplain = Komplain::findOrFail($id);
+            $komplain->komplain_status = 3;
+            $komplain->komplain_clear_date = $date;
+            $komplain->save();
+                // kembalikan wallet ke member
+                if($komplain->trans_detail->trans->trans_payment_id !== 4){
+                    $update_wallet = [
+                        'user_id'=>$komplain->trans_detail->trans->trans_user_id,
+                        'wallet_type'=>3,
+                        'amount'=>$komplain->trans_detail->trans->trans_amount_total,
+                        'note'=>'Transaksi Success by admin. Update wallet transaksi dikembalikan ke member dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
+                    ];
+                    $saldo = FunctionLib::update_wallet($update_wallet);
+                }
+                // update transaksi menjadi dropping
+                foreach ($komplain->trans_detail->trans->trans_detail as $item) {
+                    $item->trans_detail_status = 6;
+                    $item->trans_detail_is_cancel = 0;
+                    $item->trans_detail_drop = 1;
+                    $item->trans_detail_drop_date = $date;
+                    $item->trans_detail_drop_note = $item->trans_detail_drop_note.", Komplain sudah selesai dan dana di kembalikan ke member";
+                    $item->save();
+                }
+        } catch (\Exception $e) {
+            $status = 500;
+            $message = "eksekusi data gagal karena alasan tertentu.";
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
 
     /**
      * Display a listing of the resource.
