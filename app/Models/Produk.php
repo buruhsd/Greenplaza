@@ -112,4 +112,8 @@ class Produk extends Model
     public function count_review($data){
         return Review::where('review_produk_id',$data->id)->count();
     }
+
+    public function count_discuss($data){
+        return Produk_discuss::where('produk_discuss_produk_id',$data->id)->count();
+    }
 }

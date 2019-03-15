@@ -34,14 +34,14 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>User_id</th>
-                                    <th>Wallet_id</th>
-                                    <th>Wallet_type</th>
-                                    <th>Wallet_amount</th>
-                                    <th>Status</th>
-                                    <th>Detail</th>
-                                    <th>Action</th>
+                                    <th><center>No</center></th>
+                                    <th><center>User_id</center></th>
+                                    <th><center>Wallet_id</center></th>
+                                    <th><center>Wallet_type</center></th>
+                                    <th><center>Wallet_amount</center></th>
+                                    <th><center>Status</center></th>
+                                    <th><center>Detail</center></th>
+                                    <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             

@@ -349,6 +349,7 @@ class FrontController extends Controller
         $slider6 = Iklan::where('iklan_iklan_id', 11)->first();
         $slider7 = Iklan::where('iklan_iklan_id', 12)->first();
         $brandall = Brand::orderBy('created_at', 'ASC')->get();
+        
         // dd($sliderall);
         return view('frontend.page.home', 
             compact(

@@ -25,6 +25,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                <div class="single-product-menu">
+                                    <ul class="nav">
+                                        <li><a class="active" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
+                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
+                                    </ul>
+                                </div>
                     <div class="checkout-form p-10 border">
                         <h2 class="section-title">Detail Belanjaan</h2>
                         <form action="checkout">

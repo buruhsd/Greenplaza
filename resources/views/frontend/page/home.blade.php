@@ -1241,7 +1241,7 @@
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
                                                     
-                                                    <i class="fa fa-comments"></i> {{ $item->count_review($item)}} Comments
+                                                    <i class="fa fa-comments"></i> {{ $item->count_discuss($item)}} Comments
                                                    
                                                 </ul>
                                                 <ul style="color: #999; font-size: 11px">
