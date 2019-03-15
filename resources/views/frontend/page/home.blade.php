@@ -763,7 +763,7 @@
                             @foreach ($featured as $f)
                             <div class="product-wrap">
                                 <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $f->produk_slug)}}'">
-                                     @if ($n->produk_stock == 0)
+                                     @if ($f->produk_stock == 0)
                                     <div class="featured-content text-center">
                                         <ul>
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
@@ -1156,7 +1156,7 @@
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
-                                                 @if ($n->produk_stock == 0)
+                                                 @if ($item->produk_stock == 0)
                                     <div class="featured-content text-center">
                                         <ul>
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
@@ -1209,7 +1209,15 @@
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
-                                                <span class="new sale">Sale</span>
+                                                 @if ($item->produk_stock == 0)
+                                                <div class="featured-content text-center">
+                                                    <ul>
+                                                        <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
+                                                    </ul>
+                                                </div>
+                                                @else
+                                                   <span class="new sale">Sale</span>
+                                                @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt=""> --}}
