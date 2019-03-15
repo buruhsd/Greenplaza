@@ -16,7 +16,7 @@
                         <form action="#" method="GET">
                             <div class="input-group pull-left" style="width: 225px;">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
+                                <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Transaction Id ..."></a>
                             </div>
                         </form>
                     </div>
@@ -46,7 +46,7 @@
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
-                                    <td><center>{{$g->trans_code}}</center></td>
+                                    <td><center>{{$g->trans->trans_code}}</center></td>
                                     <td><center>{{$g->trans_detail_trans_id}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
@@ -86,7 +86,7 @@
                                         <td><center>Menunggu kesanggupan seller</center></td>
                                     @endif
                                 </tr>
-                                @endforeach
+                                @endforeach                            
                             @else
                                 <tr>
                                     <td colspan="8" class="text-center">KOSONG</td>

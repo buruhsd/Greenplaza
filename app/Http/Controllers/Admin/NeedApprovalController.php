@@ -27,8 +27,8 @@ class NeedApprovalController extends Controller
     public function gln () 
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
-        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);

@@ -485,6 +485,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/log_masedi', 'WalletController@log_masedi')->name('.log_masedi');
 			Route::get('/log_gln', 'WalletController@log_gln')->name('.log_gln');
 			Route::get('/log_gln_done', 'WalletController@log_gln_done')->name('.log_gln_done');
+			Route::get('/log_gln_done_receiver', 'WalletController@log_gln_done_receiver')->name('.log_gln_done_receiver');
 			Route::get('/log_gln_cancel', 'WalletController@log_gln_cancel')->name('.log_gln_cancel');
 
 			Route::get('/create_gln', 'WalletController@create_gln')->name('.create_gln');

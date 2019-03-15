@@ -54,8 +54,8 @@ class MasediController extends Controller
     public function list_gln_paid ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
-        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
@@ -67,8 +67,8 @@ class MasediController extends Controller
     public function list_gln_done ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
-        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->where('trans_detail_is_cancel', 0)
             ->where('trans_detail_status', 6)
@@ -82,8 +82,8 @@ class MasediController extends Controller
     public function list_gln_cancel ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->pluck('id')->toArray();
-        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->where('trans_detail_is_cancel', 1)
             ->where('trans_detail_status', 4)

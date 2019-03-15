@@ -64,6 +64,18 @@ class WalletController extends Controller
         // dd($masedi);
         return view('member.wallet.log.gln.log_gln_done', compact('gln'));
     }
+    public function log_gln_done_receiver ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_user_id', Auth::id())->pluck('id')->toArray();
+        $gln = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereIn('trans_detail_trans_id', $trans)
+            ->where('trans_detail_status', 6)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        // dd($masedi);
+        return view('member.wallet.log.gln.log_gln_done_receiver', compact('gln'));
+    }
     public function log_gln_cancel ()
     {
         $search = \Request::get('search');
