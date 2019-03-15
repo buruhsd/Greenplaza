@@ -38,7 +38,13 @@
                                     <td><center>
                                         <p>Id :{{$u->id}}</p>
                                         <p>Level : Seller</p>
-                                        <p>Nama :{{$u->username}}</p></center>
+                                        <p>Nama :{{$u->username}}</p>
+                                    @if ((App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()) != null)
+                                        <p>Alamat Wallet : {{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_address}}</p>
+                                    @else
+                                        <p>Alamat Wallet : - </p>
+                                    @endif
+                                    </center>
                                     </td>
                                     <td><center>
                                         Saldo CW :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '1')->first()->wallet_ballance}} <br/>
@@ -50,7 +56,15 @@
                                         Saldo Masedi :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '6')->first()->wallet_ballance}} <br/>
                                     @endif
                                     @if (App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first())
-                                        Saldo Greenline :{{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_ballance}} <br/>
+                                        Saldo Greenline :
+                                        <?php
+                                        $response = FunctionLib::gln('ballance', ['address'=>App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_address]);
+                                        if($response['status'] == 200){
+                                            echo FunctionLib::number_to_text($response['data']['balance'], 8);
+                                        }else{
+                                            echo "0,00";
+                                        }
+                                        ?> <br/>
                                     @endif
                                     </center></td>
                                     <td><center>
