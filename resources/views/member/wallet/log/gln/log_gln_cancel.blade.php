@@ -46,7 +46,8 @@
                             </thead>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if ($g->gln->trans_gln_status == 3 && count($g->gln->trans_gln_status == 3) != 0)
+                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                                @if ($g->gln->trans_gln_status == 3)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
@@ -54,6 +55,11 @@
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
                                     <td><center>Pending</center></td>
                                 </tr>
+                                @else
+                                <tr>
+                                    <td colspan="8" class="text-center">KOSONG</td>
+                                </tr>
+                                @endif
                                 @else
                                 <tr>
                                     <td colspan="8" class="text-center">KOSONG</td>
