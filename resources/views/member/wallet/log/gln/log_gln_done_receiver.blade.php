@@ -53,11 +53,11 @@
                             </thead>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $gln->id)->count() > 0 && $g->gln->trans_gln_status == 3 && $g->gln->trans_gln_form == App\Models\Wallet::where('wallet_user_id', Auth::user()->id)->where('wallet_type', 7)->first()->wallet_address)
+                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $gln->id)->count() > 0 && $g->gln->trans_gln_status == 3 && $g->gln->trans_gln_to == App\Models\Wallet::where('wallet_user_id', Auth::user()->id)->where('wallet_type', 7)->first()->wallet_address)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
-                                    <td><center>{{$g->trans->trans_code}}</center></td>
+                                    <td><center>{{$g->trans_code}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
                                     <td><center>Receiver Success</center></td>
                                 </tr>
