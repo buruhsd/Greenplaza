@@ -52,7 +52,7 @@
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
                                     <td><center>{{$g->trans_code}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    <td><center>Pending</center></td>
+                                    <td><center>Cancel</center></td>
                                 </tr>
                                 @endif
                                 @endforeach
