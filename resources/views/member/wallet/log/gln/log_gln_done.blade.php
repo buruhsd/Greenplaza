@@ -45,7 +45,7 @@
                                 </tr>
                             </thead>
                             @if(count($gln) != 0)
-                            @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0)
+                            @if (App\Models\Trans_gln::where('trans_gln_detail_id', $gln->id)->count() > 0)
                                 @foreach ($gln as $key => $g)
                                 @if ($g->gln->trans_gln_status == 2)
                                 <tr>
