@@ -55,7 +55,7 @@ class NeedApprovalController extends Controller
             'order_id' => $order_id,
             'transaction_status' => 'done'
         ];
-        $address_gln = FunctionLib::get_config('profil_gln_address');;
+        $address_gln = FunctionLib::get_config('profil_gln_address');
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_to;
@@ -85,7 +85,7 @@ class NeedApprovalController extends Controller
             'order_id' => $order_id,
             'transaction_status' => 'done'
         ];
-        $address_gln = FunctionLib::get_config('profil_gln_address');;
+        $address_gln = FunctionLib::get_config('profil_gln_address');
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $to_address = Trans_gln::where('trans_gln_detail_id', $detail->id)->first()->trans_gln_form;

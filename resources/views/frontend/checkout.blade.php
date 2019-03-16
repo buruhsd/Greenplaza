@@ -95,9 +95,6 @@
                                             <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
                                             <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir).'</span><br>
                                             Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>
-                                            Kode Unik :  <br>
-                                            <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transfer anda.</label>
-                                            <br>
                                             <label>Jumlah yang harus ditransfer</label>
                                             <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
                                             ';

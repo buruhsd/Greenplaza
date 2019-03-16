@@ -2,6 +2,64 @@
 class FunctionLib
 {
 
+    /**
+    * create wallet user #user wallet yang belum tersedia
+    * @param
+    * @return
+    **/
+    public static function create_wallet_user($id = 0){
+        $data['status'] = 500;
+        $data['message'] = "Tidak ada Wallet user yang dibuat oleh system.";
+        $data['total'] = 0;
+        if($id == 'admin'){
+            $user = App\User::findOrFail(2);
+            $data['status'] = 200;
+            $data['message'] = "Wallet user telah dibuat oleh system.";
+            $wallet_type = App\Models\Wallet_type::all();
+            foreach ($wallet_type as $wallet) {
+                if(!$user->wallet()->whereRaw('wallet_type='.$wallet->id)->exists()){
+                    $log = [
+                        'wallet_user_id' => 2,
+                        'wallet_type' => $wallet->id, 
+                        'wallet_ballance_before' => 0,
+                        'wallet_ballance' => 0,
+                        // 'wallet_address' => $item->wallet_address,
+                        // 'wallet_public' => $item->wallet_public,
+                        // 'wallet_private' => $item->wallet_private,
+                        'wallet_note' => "Created by system."
+                    ];
+                    if($wallet->id == 7){
+                        $log['wallet_address'] = FunctionLib::get_config('profil_gln_address');
+                    }
+                    App\Models\Wallet::create($log);
+                    $data['total'] = $data['total'] + 1;
+                }
+            }
+        }elseif($id !== 0){
+            $user = App\User::findOrFail($id);
+            $data['status'] = 200;
+            $data['message'] = "Wallet user telah dibuat oleh system.";
+            $wallet_type = App\Models\Wallet_type::where('id', '!=', 7)->get();
+            foreach ($wallet_type as $wallet) {
+                if(!$user->wallet()->whereRaw('wallet_type='.$wallet->id)->exists()){
+                    $log = [
+                        'wallet_user_id' => $id,
+                        'wallet_type' => $wallet->id, 
+                        'wallet_ballance_before' => 0,
+                        'wallet_ballance' => 0,
+                        // 'wallet_address' => $item->wallet_address,
+                        // 'wallet_public' => $item->wallet_public,
+                        // 'wallet_private' => $item->wallet_private,
+                        'wallet_note' => "Created by system."
+                    ];
+                    App\Models\Wallet::create($log);
+                    $data['total'] = $data['total'] + 1;
+                }
+            }
+        }
+        return $data;
+    }
+
     public static function user_notif($id, $limit=10, $type=""){
         $where = '1';
         $where .= ($type == "")
@@ -217,6 +275,21 @@ class FunctionLib
                 $response = Gln::transfer(['data'=>['to_address' =>$to_address,'amount'=>$amount],'address'=>$address]);
                 $response = json_decode($response, true);
                 if(isset($response['success']) && $response['success'] == true){
+                    // insert log transfer gln
+                    $log_transfer = new App\Models\Log_transfer;
+                        $from = App\Models\Wallet::where('wallet_address', $address)->first();
+                        $log_transfer->transfer_user_id = $from->wallet_user_id;
+                        $log_transfer->transfer_from = $response['data']['block']['sender'];
+                        $to = App\Models\Wallet::where('wallet_address', $to_address)->first();
+                        $log_transfer->transfer_to_user_id = $to->wallet_user_id;
+                        $log_transfer->transfer_to = $response['data']['block']['receiver'];
+                        $log_transfer->transfer_code_reff = $response['data']['block']['txid'];
+                        $log_transfer->transfer_type = 'gln';
+                        $log_transfer->transfer_nominal = $response['data']['block']['value'];
+                        $log_transfer->transfer_response = json_encode($response);
+                        $log_transfer->transfer_note = "transfer Gln";
+                    $log_transfer->save();
+
                     $status = 200;
                     $message = 'Wallet berhasil dibuat';
                 }
@@ -380,9 +453,10 @@ class FunctionLib
     public static function create_wallet(){
         $data['status'] = 200;
         $data['message'] = "Wallet user telah dibuat oleh system.";
+        $data['total'] = 0;
         $user = App\User::orderBy('id')->get();
         foreach ($user as $item) {
-            $wallet_type = App\Models\Wallet_type::all();
+            $wallet_type = App\Models\Wallet_type::where('id', '!=', 7)->get();
             foreach ($wallet_type as $wallet) {
                 if(!$item->wallet()->whereRaw('wallet_type='.$wallet->id)->exists()){
                     $log = [
@@ -396,6 +470,7 @@ class FunctionLib
                         'wallet_note' => "Created by system."
                     ];
                     App\Models\Wallet::create($log);
+                    $data['total'] = $data['total'] + 1;
                 }
             }
         }

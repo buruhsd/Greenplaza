@@ -14,6 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         '\App\Console\Commands\CronCheckout',
+        '\App\Console\Commands\CronAble',
+        '\App\Console\Commands\CronPacking',
+        '\App\Console\Commands\CronShipping',
     ];
 
     /**

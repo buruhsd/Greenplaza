@@ -16,13 +16,13 @@
                 <form action="" method="GET" id="src" class="form-inline">
                     <div class="form-group mx-sm-3 mb-2">
                         <label for="code" class="sr-only">Code</label>
-                        <input type="text" class="form-control" placeholder="Search" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
+                        <input type="text" class="form-control" placeholder="Code" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
                         <label for="status" class="sr-only">Status</label>
                         <select class="form-control" id="status" name="status">
                             <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
-                            <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option>
+                            {{-- <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option> --}}
                             <option value="order" {!! (!empty($_GET['status']) && $_GET['status'] == "order")?"selected":"" !!}>Konfirmasi Pembayaran</option>
                             <option value="transfer" {!! (!empty($_GET['status']) && $_GET['status'] == "transfer")?"selected":"" !!}>Menunggu Validasi</option>
                             <option value="seller" {!! (!empty($_GET['status']) && $_GET['status'] == "seller")?"selected":"" !!}>Tunggu Seller</option>
@@ -51,7 +51,7 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Transaction</h4>
-                    <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id())}}</span></button>
+                    {{-- <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id())}}</span></button> --}}
                     <button type="button" onclick="search('order');" class="btn btn-info">Konfirmasi Pembayaran<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id())}}</span></button>
                     <button type="button" onclick="search('transfer');" class="btn btn-info">Menunggu Validasi<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id())}}</span></button>
                     <button type="button" onclick="search('seller');" class="btn btn-info">Tunggu Seller<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id())}}</span></button>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use FunctionLib;
+use App\Models\Log_transfer;
 
 
 class TransactionController extends Controller
@@ -258,9 +259,24 @@ class TransactionController extends Controller
         //     'transaction_status' => 'required',
         // ]);
         $requestData = $request->all();
-        $order_id = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->pluck('trans_code')[0];
+        $trans = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->first();
+        if($requestData['transaction_status'] == 'done'){
+            // insert log transfer masedi
+            $log_transfer = new Log_transfer;
+                $log_transfer->transfer_user_id = $trans->trans_user_id;
+                $log_transfer->transfer_from = $trans->trans_detail->first()->produk->user->username;
+                $log_transfer->transfer_to_user_id = $trans->trans_user_id;
+                $log_transfer->transfer_to = $trans->pembeli->username;
+                $log_transfer->transfer_code_reff = $requestData['va'];
+                $log_transfer->transfer_type = 'idr';
+                $log_transfer->transfer_nominal = $trans->trans_amount_total;
+                $log_transfer->transfer_response = json_encode($requestData);
+                $log_transfer->transfer_note = "Transfer Masedi transaksi.";
+            $log_transfer->save();
+        }
+
         $data = [
-            'order_id' => $order_id,
+            'order_id' => $trans->trans_code,
             'transaction_status' => $requestData['transaction_status']
         ];
         $response = FunctionLib::done_masedi($data);
@@ -339,6 +355,7 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        $transfer = FunctionLib::gln('transfer', ['to_address' =>'xoMZ8gpwM2EmAGj5Jr6TWfZdUf1jBI2ec','amount'=>1,'address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
         $arr = [
             "0" =>'chart',
             "1" =>'order',

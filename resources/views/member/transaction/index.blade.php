@@ -16,13 +16,13 @@
                 <form action="" method="GET" id="src" class="form-inline">
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="code" class="sr-only">Code</label>
-                    <input type="text" class="form-control" placeholder="Search" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
+                    <input type="text" class="form-control" placeholder="Code" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="status" class="sr-only">Status</label>
                     <select class="form-control" id="status" name="status">
                         <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
-                        <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option>
+                        {{-- <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option> --}}
                         <option value="order" {!! (!empty($_GET['status']) && $_GET['status'] == "order")?"selected":"" !!}>Order</option>
                         <option value="transfer" {!! (!empty($_GET['status']) && $_GET['status'] == "transfer")?"selected":"" !!}>Transfer</option>
                         <option value="packing" {!! (!empty($_GET['status']) && $_GET['status'] == "packing")?"selected":"" !!}>Packing</option>
@@ -50,7 +50,7 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Transaction</h4>
-                    <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id(), 'seller')}}</span></button>
+                    {{-- <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id(), 'seller')}}</span></button> --}}
                     <button type="button" onclick="search('order');" class="btn btn-info">Order<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id(), 'seller')}}</span></button>
                     <button type="button" onclick="search('transfer');" class="btn btn-info">Transfer<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id(), 'seller')}}</span></button>
                     {{-- <button type="button" onclick="search('seller');" class="btn btn-info">Seller<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id())}}</span></button> --}}
