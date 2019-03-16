@@ -145,7 +145,7 @@
                                 <div class="product-single-content">
                                     <h3>{{ucfirst(strtolower($detail->produk_name))}}</h3>
                                     @if($detail->user->seller_active())
-                                    <h5><a href="{{route('etalase', $detail->user->user_store)}}">
+                                    <h5><a href="{{route('etalase', $detail->user->user_slug)}}">
                                     <center>Toko {{$detail->user->user_store}}</center></a></h5>
                                     @endif
                                     <div class="rating-wrap fix">

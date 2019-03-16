@@ -41,7 +41,8 @@
                                                 Informasi
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title">{{$user->user_store}} Etalase</h5>
+                                                 <?php $user  ?>
+                                                
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <ul class="list-group list-group-flush">
