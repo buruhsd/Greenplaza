@@ -36,7 +36,7 @@ class ModalController extends Controller
      */
     public function review_produk($id)
     {
-        $data['item'] = Komplain::whereId($id)->first();
+        $data['item'] = Trans::whereId($id)->first();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('localapi.review_produk', $data);
     }

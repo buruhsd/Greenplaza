@@ -145,6 +145,13 @@
 			    			<button class="btn btn-info btn-xs">Sampai</button>
 				    	</div>
 				    </div>
+			    	<div class="row">
+			    		<div class="col-md-12 text-center">
+							<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.review_produk", $detail->trans->id)}} class='btn btn-danger btn-xs'>
+	                               Review Produk
+	                        </button>
+				    	</div>
+				    </div>
 		    	@elseif($type == 'seller')
 		    	@endif
 		    @break

@@ -461,6 +461,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/konfirmasi_all/{id}', 'TransactionController@konfirmasi_all')->name('.konfirmasi_all');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 			Route::get('/done_gln/{order_id}', 'TransactionController@done_gln')->name('.done_gln');
+			// review produk
+			Route::post('/review_produk/{id}', 'TransactionController@review_produk')->name('.review_produk');
 		});
 		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
 			Route::post('/review_komplain/{id}', 'KomplainController@review_komplain')->name('.review_komplain');

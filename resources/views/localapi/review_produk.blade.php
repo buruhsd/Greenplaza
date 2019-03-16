@@ -1,9 +1,9 @@
 <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="modal-title">Tambah no resi</h4>
+            <h4 class="modal-title" id="modal-title">Review Produk</h4>
         </div>
-        {!! Form::open(['url' => route('member.solusi.add_shipment_buyer', $item->solusi->id), 'method' => 'POST', 'id' => 'addaddress']) !!}
+        {!! Form::open(['url' => route('member.transaction.review_produk', $item->id), 'method' => 'POST', 'id' => 'addaddress']) !!}
         @csrf
         <div class="modal-body">
             <div class="row">
@@ -11,7 +11,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <input name="review_user_id" type="text" value="{{Auth::id()}}" placeholder="user" hidden />
-                            <input name="komplain_id" type="text" value="{{$item->id}}" placeholder="komplain" hidden />
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('size') ? 'has-error' : ''}}">
                                 {!! Form::label('review_stars', ' : ', ['class' => 'col-md-12 control-label']) !!}
                                 <div class="col-md-12">

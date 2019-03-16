@@ -523,7 +523,7 @@
                                                     </tbody>
                                                 </table>
                                             </div> -->
-                                            @guest
+                                            <!-- @guest
                                             @else
                                                 @if(!Auth::user()->is_superadmin())
                                                     <div class="row">
@@ -561,7 +561,7 @@
                                                         </div>
                                                     </div>
                                                 @endif
-                                            @endguest
+                                            @endguest -->
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="diskusi">

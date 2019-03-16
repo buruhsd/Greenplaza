@@ -17,12 +17,28 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
 use RajaOngkir;
+use App\Models\Review;
 
 class TransactionController extends Controller
 {
     private $perPage = 5;
     private $mainTable = 'sys_trans';
 
+    public function review_produk(Request $request, $id){
+        $status = 200;
+        $message = 'Review produk berhasil disimpan';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $res = new Review;
+            $res->review_produk_id = $item->trans_detail_produk_id;
+            $res->review_user_id = $request->review_user_id;
+            $res->review_stars = $request->review_stars;
+            $res->review_text = $request->review_text;
+            $res->save();
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
     /******/
     public function done_gln($order_id){
         $status = 200;

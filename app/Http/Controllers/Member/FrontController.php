@@ -182,7 +182,9 @@ class FrontController extends Controller
             ->get();
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->orderBy('updated_at', 'DESC')->get();
-        $data['review'] = Review::where('review_produk_id', $data['detail']['id'])->get();
+        $data['review'] = Review::where('review_produk_id', $data['detail']['id'])
+            ->orderBy('updated_at', 'DESC')
+            ->get();
         return view('frontend.new.detail2', $data);
     }
      public function detail_asdf(Request $request, $slug){
