@@ -1,1 +1,13 @@
 /* Write your custom CSS here */
+.img-round {
+	display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  
+}
+
+.img-round img {
+max-width: 100%
+}

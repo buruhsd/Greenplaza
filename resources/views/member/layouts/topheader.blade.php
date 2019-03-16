@@ -112,8 +112,15 @@
                     </li>
                     <li style="margin-right: -30px"><a href="">{{Auth::user()->name}}</a></li>
                     <li class="dropdown user-dropdown">
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="text-transform: capitalize;"> &nbsp;&nbsp;</span><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+                        @if (\Auth::check())
+                            @if (Auth::user()->user_detail->user_detail_image != null)
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="text-transform: capitalize;"> &nbsp;&nbsp;</span>
+                            <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}"" class="img-round" onerror="this.src='{{ asset('assets/images/profil/nopic.png') }}'"></a>
+                            @else
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="text-transform: capitalize;"> &nbsp;&nbsp;</span><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+                            @endif
+                        @else
+                        @endif
                         <ul class="dropdown-menu">
                             <li><a href="{{route('member.profil')}}">Profil</a></li>
                             {{-- <li><a href="#">Calendar</a></li>
