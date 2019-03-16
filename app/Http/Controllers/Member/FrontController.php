@@ -185,6 +185,8 @@ class FrontController extends Controller
         $data['review'] = Review::where('review_produk_id', $data['detail']['id'])
             ->orderBy('updated_at', 'DESC')
             ->get();
+
+            
         return view('frontend.new.detail2', $data);
     }
      public function detail_asdf(Request $request, $slug){
