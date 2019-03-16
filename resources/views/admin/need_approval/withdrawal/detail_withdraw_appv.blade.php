@@ -36,6 +36,12 @@
                     </td>
                 </tr>
                 <tr>
+                    <th>Waktu Approve</th>
+                    <td> : {{$w->withdrawal_response_date}}
+                          
+                    </td>
+                </tr>
+                <tr>
                     <!-- <th>Note</th>
                     <td> : {{$w->trans_detail_note}}</td> -->
                 </tr>

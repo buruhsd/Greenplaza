@@ -165,7 +165,8 @@
                                             <li class="text-info">({{$review->count()}} Customar Review)</li>
                                         </ul>
                                     </div>
-                                        {{$detail->produk_note}}
+                                        Berat   : {{$detail->produk_wight}} gg <br>
+                                        Tinggi  : {{$detail->produk_wide}}  mm 
                                     <ul class="stock">
                                         <li>Stok : </li>
                                         <li>{{$detail->produk_stock}} <b>{{$detail->unit->produk_unit_name}}</b></li>
