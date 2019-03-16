@@ -153,7 +153,7 @@
                                             @endif
                                             <ul>
                                                 <li>
-                                                    {{$item->solusi->solusi_note}}
+                                                    {!!$item->solusi->solusi_note!!}
                                                 </li>
                                             </ul>
                                         </td>

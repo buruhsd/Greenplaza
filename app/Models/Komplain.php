@@ -40,6 +40,16 @@ class Komplain extends Model
     * @return
     * 
     */
+    public function pic()
+    {
+        return $this->hasOne('App\Models\Komplain_pic', 'komplain_pic_komplain_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function trans_detail()
     {
         return $this->belongsTo('App\Models\Trans_detail', 'komplain_trans_id');

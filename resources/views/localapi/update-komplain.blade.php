@@ -15,7 +15,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center">Pilih Solusi</th>
-                                        <th width="200">Dana yang ingin diminta kembali dari penjual - Foto Bukti</th>
+                                        <!-- <th width="200">Dana yang ingin diminta kembali dari penjual - Foto Bukti</th> -->
+                                        <th width="200">Foto Bukti</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,9 +41,10 @@
                                             </div>
                                         </td>
                                         <td style="width: 30%">
-                                            <input class="form-control" type="number" name="solusi_value" value="{{$komplain->solusi->solusi_value}}">
-                                            <i class='btn-block bg-danger m-t-xs'>Sisanya akan masuk ke saldo penjual</i>
-                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                            <input class="form-control hidden" type="number" name="solusi_value" value="{{$komplain->solusi->solusi_value}}">
+                                            <img class="h100" src="{{asset('assets/images/komplain_pic/'.$komplain->pic->komplain_pic_image)}}">
+                                            <!-- <i class='btn-block bg-danger m-t-xs'>Sisanya akan masuk ke saldo penjual</i> -->
+                                            <!-- <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i> -->
                                         </td>
                                     </tr>
                                     <tr>
@@ -51,8 +53,9 @@
                                                 <i class='btn-block bg-danger m-t-xs'>Gambar Bukti</i>
                                                 <input class="form-control" type="file" name="komplain_pic_image" >
                                             @endif
+                                            {!!$komplain->solusi->solusi_note!!}
                                             <i class='btn-block bg-danger m-t-xs'>Diskusi solusi dengan Pembeli</i>
-                                            {!! Form::textarea('solusi_note', $komplain->solusi->solusi_note, [
+                                            {!! Form::textarea('solusi_note', null, [
                                               'class' => 'form-control', 
                                               'placeholder' => 'Note', 
                                               'required',

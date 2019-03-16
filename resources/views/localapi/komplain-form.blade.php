@@ -30,7 +30,8 @@
                                 <thead>
                                     <tr>
                                         <th>Pilih Solusi</th>
-                                        <th width="200">Dana yang ingin diminta kembali dari penjual - Foto Bukti</th>
+                                        <!-- <th width="200">Dana yang ingin diminta kembali dari penjual - Foto Bukti</th> -->
+                                        <th width="200">Foto Bukti</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,9 +52,9 @@
                                             </div>
                                         </td>
                                         <td style="width: 30%">
-                                            <input class="form-control" type="number" name="solusi_value" >
-                                            <i class='btn-block bg-danger m-t-xs'>Sisanya akan masuk ke saldo penjual</i>
-                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                            <input class="form-control hidden" type="number" name="solusi_value" value="0">
+                                            {{-- <i class='btn-block bg-danger m-t-xs'>Sisanya akan masuk ke saldo penjual</i> --}}
+                                            {{-- <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i> --}}
                                             <hr/>
                                             <input class="form-control" type="file" name="komplain_pic_image" >
                                         </td>
