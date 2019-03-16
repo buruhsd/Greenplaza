@@ -463,6 +463,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/done_gln/{order_id}', 'TransactionController@done_gln')->name('.done_gln');
 		});
 		Route::group(['prefix' => 'komplain', 'as' => '.komplain'], function () {
+			Route::post('/review_komplain/{id}', 'KomplainController@review_komplain')->name('.review_komplain');
 			Route::post('/store_komplain', 'KomplainController@store_komplain')->name('.store_komplain');
 			Route::post('/update_komplain/{id}', 'KomplainController@update_komplain')->name('.update_komplain');
 			Route::get('/done_komplain/{id}', 'KomplainController@done_komplain')->name('.done_komplain');
@@ -747,6 +748,8 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 			Route::post('pick_produk_ship_admin/{id}', 'ModalController@trans_pickProdukShip_admin')->name('.pick_produk_ship_admin');
 			Route::get('add_resi/{id}', 'ModalController@add_resi')->name('.add_resi');
 			Route::get('add_to_chart/{id}', 'ModalController@add_to_chart')->name('.add_to_chart');
+			Route::get('review_komplain/{id}', 'ModalController@review_komplain')->name('.review_komplain');
+			Route::get('review_produk/{id}', 'ModalController@review_produk')->name('.review_produk');
 		});
 		Route::get('login', function(){return view('localapi.login');})->name('.login');
 		Route::get('form_config', 'ModalController@formConfig')->name('.form_config');

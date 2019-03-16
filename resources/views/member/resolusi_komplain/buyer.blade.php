@@ -58,7 +58,9 @@
                                                     <b>
                                                         Komplain&nbsp;
                                                         {{$item->trans_detail->produk->produk_name}}&nbsp;
-                                                        dengan kode&nbsp;
+                                                        dengan kode transaksi&nbsp;
+                                                        {{$item->trans_detail->trans->trans_code}}
+                                                        dan kode transaksi detail&nbsp;
                                                         {{$item->trans_detail->trans_code}}
                                                     </b>
                                                 </li>
@@ -71,11 +73,6 @@
                                                 <li>Komplain : {{$item->komplain_type->komplain_name}}</li>
                                                 <li>Date Create : {{FunctionLib::datetime_indo($item->created_at, true, 'full')}}</li>
                                                 {{-- <li>Date Clear : {{FunctionLib::datetime_indo($item->komplain_clear_date, true, 'full')}}</li> --}}
-                                                <li>
-                                                    <a href="{{route('admin.produk.disabled', $item->id)}}" class='btn btn-warning btn-xs'>Disabled</a>
-                                                    <a href="{{route('admin.produk.edit', $item->id)}}" class='btn btn-info btn-xs'>Edit</a>
-                                                    <a href="{{route('admin.produk.delete', $item->id)}}" class='btn btn-danger btn-xs'>Delete</a>
-                                                </li>
                                             </ul>
                                         </td>
                                         <td scope="row" width="50%">
@@ -98,9 +95,16 @@
                                                     <b>
                                                         Solusi yang ditawarkan.
                                                     </b>
-                                                    <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.update_komplain", $item->id)}} class='btn btn-info btn-xs'>
-                                                        Ubah Solusi
-                                                    </button>
+                                                    @if($item->solusi->solusi_status !== 3)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.update_komplain", $item->id)}} class='btn btn-info btn-xs'>
+                                                            Ubah Solusi
+                                                        </button>
+                                                    @endif
+                                                    @if($item->solusi->solusi_status == 3)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.review_komplain", $item->id)}} class='btn btn-danger btn-xs'>
+                                                            Review Produk
+                                                        </button>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </td>

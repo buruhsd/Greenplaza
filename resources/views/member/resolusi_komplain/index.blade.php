@@ -93,9 +93,11 @@
                                                     <b>
                                                         Solusi yang ditawarkan.
                                                     </b>
-                                                    <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.update_komplain", $item->id)}} class='btn btn-info btn-xs'>
-                                                        Ubah Solusi
-                                                    </button>
+                                                    @if($item->solusi->solusi_status !== 3)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.update_komplain", $item->id)}} class='btn btn-info btn-xs'>
+                                                            Ubah Solusi
+                                                        </button>
+                                                    @endif
                                                 </li>
                                             </ul>
                                         </td>
