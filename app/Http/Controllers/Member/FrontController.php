@@ -397,6 +397,12 @@ class FrontController extends Controller
         return view('comming-soon');
     }
 
+     public function cs()
+    {
+
+        return view('frontend/detail-cs');
+    }
+
     //  public function ketentuan()
     // {
 

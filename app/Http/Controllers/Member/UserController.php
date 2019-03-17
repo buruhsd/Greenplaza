@@ -232,7 +232,7 @@ class UserController extends Controller
             $status = 500;
             $message = 'Foto profil gagal dirubah!';
         }
-        return redirect('member/user/upload_foto_profil')
+        return redirect('member/profil')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 

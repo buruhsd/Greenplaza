@@ -39,7 +39,7 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
-                                    <th><center>Transaksi Code</center></th>
+                                    <th><center>Transaction Code</center></th>
                                     <th><center>Detail Produk</center></th>
                                     <th><center>Status</center></th>
                                 </tr>

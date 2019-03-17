@@ -19,6 +19,8 @@ Route::get('/change/language/{id}',function($lang){
 });
 
 Route::get('/comming-soon', 'Member\\FrontController@comming');
+Route::get('/cs', 'Member\\FrontController@cs');
+
 
 // ganti password transaksi
 Route::get('password/reset_trx', 'Member\\UserController@pass_trx_reset')->name('password.request_trx');

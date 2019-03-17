@@ -104,7 +104,7 @@
                                         <td scope="row">
                                             {!!($item->trans_is_paid == 1)
                                                 ?"<button class='btn btn-success btn-xs'>Done</button>"
-                                                :"<button class='btn btn-danger btn-xs'>Not yet</button>"!!}
+                                                :"<button class='btn btn-danger btn-xs'>Unpaid</button>"!!}
                                         </td>
                                         <td scope="row">
                                             {!!Plugin::trans_purchase_btn_admin(['id'=>$item->id, 'type'=>'seller'])!!}                                            

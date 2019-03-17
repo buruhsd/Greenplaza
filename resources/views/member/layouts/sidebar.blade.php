@@ -117,7 +117,7 @@
                                         <li class="{{FunctionLib::setActive('member/user/change_password')}}"><a href="{{route('member.user.change_password')}}">Ubah Password Login</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/pass_trx')}}"><a href="{{route('member.user.pass_trx')}}">Ubah Password Transaksi</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/seller_address')}}"><a href="{{route('member.user.seller_address')}}">Alamat Seller</a></li>
-                                        <li class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}"><a href="{{route('member.user.upload_foto_profil')}}">Upload Foto Profil</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}"><a href="{{route('member.user.upload_foto_profil')}}">Upload Foto Profil</a></li> -->
                                         <li class="{{FunctionLib::setActive('member/user/upload_scan_npwp')}}"><a href="{{route('member.user.upload_scan_npwp')}}">Upload Scan NPWP</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/upload_siup')}}"><a href="{{route('member.user.upload_siup')}}">Upload Scan SIUP/TDP</a></li>
 

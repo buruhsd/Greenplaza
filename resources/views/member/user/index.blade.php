@@ -15,6 +15,7 @@
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
                     <hr>
+                    <a href="{{route('member.user.upload_foto_profil')}}" class="btn btn-info" class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}" role="button">Ganti Foto Profil</a>
                         {{-- <div class="col-md-12">
                             {!! Form::file('user_detail_image', null, [
                                 'class' => 'form-control', 
