@@ -640,6 +640,35 @@
                                         </tr>
                                     </thead>
                                     <tbody id="grosir_row">
+                                        @if(str_contains(Request::url(), ['edit']))
+                                            @if($produk->is_grosir())
+                                                @foreach($produk->grosir as $item_grosir)
+                                                    <tr>
+                                                        <td style="width: 20%">
+                                                            <input class="form-control hidden" type="number" name="produk_grosir_id[]" placeholder="id" value="{{$item_grosir->id}}">
+                                                            <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" value="{{$item_grosir->produk_grosir_start}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td style="width: 20%">
+                                                            <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" value="{{$item_grosir->produk_grosir_end}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td style="width: 50%">
+                                                            <input class="form-control" type="number" name="produk_grosir_price[]" value="{{$item_grosir->produk_grosir_price}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <!-- <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a> -->
+                                                            <a class="btn btn-xs btn-danger remove_grosir">
+                                                                <i class="fa fa-minus"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        @endif
                                         <tr>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" >

@@ -338,7 +338,7 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Produk added!';
+        $message = 'Produk updated!';
         
         $requestData = $request->all();
         
@@ -445,6 +445,37 @@ class ProdukController extends Controller
                     $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
                     $produk_grosir->save();
                 }
+            }
+            if ($request->has('produk_grosir_start') && $request->has('produk_grosir_end') && $request->has('produk_grosir_price')){
+                foreach ($request->produk_grosir_start as $key => $item) {
+                    if($request->produk_grosir_start[$key] == null){
+                            break;
+                    }
+                    if(isset($request->produk_grosir_id[$key])){
+                        $produk_grosir = Produk_grosir::findOrFail($request->produk_grosir_id[$key]);
+                        $produk_grosir->produk_grosir_produk_id = $produk->id;
+                        $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                        $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                        $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                        $produk_grosir->save();
+                        $grosir_id[]=$request->produk_grosir_id[$key];
+                    }else{
+                        $produk_grosir = new Produk_grosir;
+                        $produk_grosir->produk_grosir_produk_id = $produk->id;
+                        $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                        $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                        $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                        $produk_grosir->save();
+                        $grosir_id[]=$produk_grosir->id;
+                    }
+                }
+                $user_id = Auth::id();
+                $delete_grosir = Produk_grosir::whereNotIn('id', $grosir_id)
+                    ->whereHas('produk', function($query) use ($user_id){
+                        $query->where('sys_produk.produk_seller_id', $user_id);
+                            return $query;
+                        })
+                    ->delete();
             }
         }
         return redirect('member/produk')
@@ -963,6 +994,46 @@ class ProdukController extends Controller
                             $(this).addClass('img-checked')
                                 .siblings('input').prop('checked',true);
                         });
+                        var clicks = 0;
+                        $(".remove_grosir").on("click", function(){
+                            clicks -= 1;
+                            $(this).parents("tr").remove();
+                            $(".add_grosir_row").show();
+                        })
+                        function add_grosir_row() {
+                            clicks += 1;
+                            if (clicks < 6) {
+                                $("#grosir_row").append(
+                                    '<tr id="row_"' + clicks + '>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_start[]" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 20%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_end[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td style="width: 50%">'+
+                                    '<input class="form-control" type="number" name="produk_grosir_price[]" class="radius" >'+
+                                    '<i class="btn-block bg-danger m-t-xs">Harus berupa angka</i>'+
+                                    '</td>'+
+                                    '<td class="text-center">'+
+                                    '<a class="btn btn-xs btn-danger remove_grosir">'+
+                                    '<i class="fa fa-minus"></i>'+
+                                    '</a>'+
+                                    '</td>'+
+                                    '</tr>'
+                                );
+                            } else {
+                                clicks -= 1;
+                                $(".add_grosir_row").hide();
+                            }
+                            $(".remove_grosir").on("click", function(){
+                                clicks -= 1;
+                                $(this).parents("tr").remove();
+                                $(".add_grosir_row").show();
+                            })
+                        }
                     </script>
                 <?php
                 break;
