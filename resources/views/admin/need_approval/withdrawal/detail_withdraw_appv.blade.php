@@ -28,16 +28,16 @@
                 <tr>
                     <th>Status</th>
                     <td> : @if($w->withdrawal_status == 0)
-                          <td>Belum Approve</td>
+                          Belum Approve
                           @elseif($w->withdrawal_status == 1)
-                          <td>Approve</td>
+                          Approve
                           
                           @endif
                     </td>
                 </tr>
                 <tr>
                     <th>Waktu Approve</th>
-                    <td> : {{$w->withdrawal_response_date}}
+                    <td> : {{$w->updated_at}}
                           
                     </td>
                 </tr>

@@ -18,6 +18,16 @@
                             <option value="/admin/monitoring/wallet_sellerlist">List Seller</option>
                         </select>
                     </div>
+                    <div class="col-md-3">
+                    
+                            <form action="#" method="GET">
+                                <div class="input-group pull-right" style="width: 225px;">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <a href="javascript:void(0)"><input type="text" name="nama" class="form-control search-input" placeholder="Nama Member ..."></a>
+                                </div>
+                            </form>
+                        
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">

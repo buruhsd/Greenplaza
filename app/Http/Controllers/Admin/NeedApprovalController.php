@@ -16,6 +16,7 @@ use App\Models\Trans_gln;
 use App\Models\Trans_detail;
 use App\Models\Trans;
 use App\Models\Conf_config;
+use Carbon\Carbon;
 use FunctionLib;
 use Session;
 use Mail;
@@ -135,6 +136,7 @@ class NeedApprovalController extends Controller
         // dd($id);
     	$with->withdrawal_status = 1;
         $with->withdrawal_ref = $request->no_ref;
+        $with->updated_at = Carbon::now();
         $with->wallet->wallet_ballance = $with->wallet->wallet_ballance - $with->withdrawal_wallet_amount;
         $with->wallet->save();
         $with->save();

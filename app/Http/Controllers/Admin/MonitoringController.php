@@ -235,12 +235,17 @@ class MonitoringController extends Controller
 
     }
 
-    public function wallet_memberlist ()
+    public function wallet_memberlist (Request $request)
     {
+        $where = 1;
+        if(!empty($request->get('nama'))){
+            $name = $request->get('nama');
+            $where .= ' AND users.name LIKE "%'.$name.'%"';
+        }
         $users = User::whereHas('roles', function($query){
             $query->where('name','=','member');
             return $query;
-        })->get();
+        })->whereRaw($where)->get();
         // dd($users);
         // $users = Role::where('name', 'member')->first()->users;
         // dd($users); die();
