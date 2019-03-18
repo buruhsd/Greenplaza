@@ -94,12 +94,13 @@
                                     </ul>
                                 </li>
                                 {{-- need actived --}}
+                                @if(Auth::user()->seller_active())
                                 <li class="@yield('get penjual')">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>Get Penjual</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li class="{{FunctionLib::setActive('member/user/sponsor')}}"><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
+                                        <li class="{{FunctionLib::setActive('member/user/sponsor')}} hidden"><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
                                         {{-- <li class="{{FunctionLib::setActive('member/sponsor/register')}}"><a href="{{route('member.sponsor.register')}}">Register Penjual</a></li> --}}
                                         <li class="{{FunctionLib::setActive('member/wallet')}}"><a href="{{route('member.wallet.index')}}">History Saldo</a></li>
                                         <li class="{{FunctionLib::setActive('member/wallet/withdrawal')}}"><a href="{{route('member.wallet.withdrawal')}}">Withdrawal</a></li>
@@ -107,6 +108,7 @@
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/transfer_rw')}}"><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li> -->
                                     </ul>
                                 </li>
+                                @endif
                                 <li class="@yield('pengaturan profil')">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>Pengaturan Profil</span><i class="ion-android-arrow-dropdown-circle right"></i>

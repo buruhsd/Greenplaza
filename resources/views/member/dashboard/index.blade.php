@@ -119,22 +119,31 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-md-6">
+                    <a href="javascript:;">
                     <div class="panel stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                         <div class="panel-body">
                             <div class="pull-left">
                                 <span class="stats-number">Rp. 
                                     {{
                                         FunctionLib::number_to_text(
+                                            FunctionLib::sum_wd(Auth::id())
+                                        )
+                                    }}
+                                </span>
+                                <!-- <span class="stats-number">Rp. 
+                                    {{
+                                        FunctionLib::number_to_text(
                                             FunctionLib::sum_trans(7, Auth::id(), 'seller')+
                                             FunctionLib::sum_trans(8, Auth::id(), 'seller')
                                         )
                                     }}
-                                </span>
-                                <p class="stats-info">Penarikan</p>
+                                </span> -->
+                                <p class="stats-info">Penarikan CW</p>
                             </div>
                             
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-md-6 hidden">
                     <a href="{{route('member.transaction.sales', ['status' => 'order'])}}">
@@ -277,7 +286,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <!-- <div class="col-lg-4 col-md-6">
                     <a href="{{route('member.transaction.purchase', ['status' => 'order'])}}">
                         <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                             <div class="panel-body">
@@ -294,9 +303,9 @@
                                 </div>
                                 
                             </div>
+                        </div>
                     </a>
-                    </div>
-                </div>
+                </div> -->
                 <div class="col-lg-4 col-md-6 hidden">
                     <a href="{{route('member.transaction.purchase')}}">
                         <div class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">

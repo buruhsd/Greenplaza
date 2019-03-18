@@ -227,7 +227,7 @@ class TransactionController extends Controller
             return redirect()->back();
         }
         $status = 200;
-        $message = 'Transfer approved!';
+        $message = 'Tambah nomor resi berhasil!';
         $data['trans'] = Trans::findOrFail($id);
         $data['trans_detail'] = $data['trans']->trans_detail->where('trans_detail_status', 5);
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
@@ -244,7 +244,7 @@ class TransactionController extends Controller
     public function sending(Request $request){
         $requestData = $request->all();
         $status = 200;
-        $message = 'Shipment approved!';
+        $message = 'barang siap dikirim!';
         $date = date('y-m-d h:i:s');
         if(!empty($request->detail_id)){            
             foreach ($requestData['detail_id'] as $item) {
@@ -332,7 +332,7 @@ class TransactionController extends Controller
      */
     public function packing($id){
         $status = 200;
-        $message = 'Transfer approved!';
+        $message = 'Packing Selesai!';
         $trans = Trans::findOrFail($id);
         foreach ($trans->trans_detail as $item) {
             $trans_detail = Trans_detail::findOrFail($item->id);
@@ -345,7 +345,7 @@ class TransactionController extends Controller
         }
         if(!$trans_detail){
             $status = 500;
-            $message = 'Transfer unapproved!';
+            $message = 'Gagal merubah data!';
         }else{
             // send email
             $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
@@ -386,7 +386,7 @@ class TransactionController extends Controller
      */
     public function able($id){
         $status = 200;
-        $message = 'Transfer approved!';
+        $message = 'anda telah menyanggupi transaksi!';
         $trans = Trans::findOrFail($id);
         foreach ($trans->trans_detail as $item) {
             $trans_detail = Trans_detail::findOrFail($item->id);
@@ -400,7 +400,7 @@ class TransactionController extends Controller
         }
         if(!$trans_detail){
             $status = 500;
-            $message = 'Transfer unapproved!';
+            $message = 'Gagal merubah data!';
         }else{
             // send email
             $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);

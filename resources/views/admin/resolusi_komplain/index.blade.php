@@ -69,7 +69,7 @@
                                                 </li>
                                                 <li>Date Create : {{$item->created_at}}</li>
                                                 <li>Date Clear : {{$item->komplain_clear_date}}</li>
-                                                <li><button class='btn btn-info btn-xs'>More</button></li>
+                                                <!-- <li><button class='btn btn-info btn-xs'>More</button></li> -->
                                             </ul>
                                         </td>
                                         <td scope="row">

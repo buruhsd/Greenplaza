@@ -22,11 +22,12 @@
                         Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount')).' <br>
                         Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_ship')).' <br>
                         Kode Unik :  <b>'.$trans->first()->trans_code.'</b><br>
-                        <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transfer anda.</label>
+                        <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transaksi anda.</label>
                         <br>
                         <label>Jumlah yang harus ditransfer</label>
                         ';
                         ?>
+
                         <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
                         @if($trans->first()->trans_payment_id == 4)
                             <?php 
@@ -35,10 +36,14 @@
                             $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
                             $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
                             ?>
-                            / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small>#bisa berubah setiap saat.</small>
+                            / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small class="text-danger">(Bisa Berubah Setiap Saat)</small>
                         @endif
                         </h2>
                     </div>
+                        @if($trans->first()->trans_payment_id == 4)
+                            <hr/>
+                            <span class="text-danger">Harga sudah termasuk fee 10% dari harga produk.</span>
+                        @endif
                     <hr>
                     @switch($trans->first()->trans_payment_id)
                         @case(1)

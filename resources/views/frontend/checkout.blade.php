@@ -26,11 +26,6 @@
             <div class="row">
                 <div class="col-lg-12">
                 <div class="single-product-menu">
-                                    <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
-                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
-                                    </ul>
-                                </div>
                     <div class="checkout-form p-10 border">
                         <h2 class="section-title">Detail Belanjaan</h2>
                         <form action="checkout">
@@ -196,6 +191,11 @@
                                 </div> -->
                                 <div class="payment_hide payment_Gln collapse">
                                     <hr/>
+                                    <ul class="nav">
+                                        <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
+                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
+                                    </ul>
+                                    <hr/>
                                     @foreach(Session::get('chart') as $item)
                                         <?php
                                             $seller_gln = true;
@@ -208,7 +208,7 @@
                                         ?>
                                     @endforeach
                                     @if(!$seller_gln)
-                                        <span>Toko <b>{{(rtrim(implode(',', $seller), ','))}}</b> tidak menyediakan pembayaran melalui GLN.</span>
+                                        <span class="text-danger">Toko <b>{{(rtrim(implode(',', $seller), ','))}}</b> tidak menyediakan pembayaran melalui GLN.</span>
                                     @else
                                         @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
                                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />

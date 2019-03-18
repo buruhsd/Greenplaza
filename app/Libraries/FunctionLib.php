@@ -2,6 +2,19 @@
 class FunctionLib
 {
 
+    public static function sum_wd($id, $type=""){
+        $total = 0;
+        if($type !== ""){
+            $total = 0;
+        }else{
+            $where = "withdrawal_user_id =".$id;
+            $where .= " AND withdrawal_status =1";
+            $qry = App\Models\Withdrawal::whereRaw($where)->select(DB::raw("SUM(withdrawal_wallet_amount) as total"))->first();
+            $total = $qry->total;
+        }
+        return $total;
+    }
+
     /**
     * create wallet user #user wallet yang belum tersedia
     * @param
