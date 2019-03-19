@@ -91,7 +91,7 @@
                                     <li class="{{FunctionLib::setActive('admin/needapproval/hotlist')}}"><a href="{{route('admin.needapproval.hotlist')}}">Transaksi Hot List</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/pincode')}}"><a href="{{route('admin.needapproval.pincode')}}">Transaksi Pin Code</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/listmember')}}"><a href="{{route('admin.needapproval.listmember')}}">Akun Member</a></li>
-                                    <li class="{{FunctionLib::setActive('admin/brand')}}"><a href="{{route('admin.brand.index')}}">Brand</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/brand')}}"><a href="{{route('admin.brand.index')}}">Brand</a></li> -->
                                     
                                     <!-- <li class="{{FunctionLib::setActive('admin/needapproval/banner_khusus')}}"><a href="{{route('admin.needapproval.banner_khusus')}}">Iklan Banner dan Baris</a></li> -->
 

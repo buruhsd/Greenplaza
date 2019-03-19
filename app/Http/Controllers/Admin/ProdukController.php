@@ -443,7 +443,7 @@ class ProdukController extends Controller
     {
         $data['role'] = Role::all();
         $data['user'] = User::all();
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('id', 1)->get();
         $data['produk_unit'] = Produk_unit::all();
         $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
