@@ -164,11 +164,9 @@
             {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
-                    <option value=''>-- Pilih Kategori --</option>
+                    <!-- <option selected>{{$produk->category->category_name}} </option> -->
                     @foreach($category as $item)
-                    @if ($item->category_name != 'Green Productions')
                         <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{ucfirst(strtolower($item->category_name))}}</option>
-                    @endif
                     @endforeach
                 </select>
                 {!! $errors->first('produk_category_id', '<p class="help-block">:message</p>') !!}
