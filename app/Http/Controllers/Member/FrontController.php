@@ -403,6 +403,12 @@ class FrontController extends Controller
         return view('frontend/detail-cs');
     }
 
+     public function maintenance()
+    {
+
+        return view('maintenance');
+    }
+
     //  public function ketentuan()
     // {
 
