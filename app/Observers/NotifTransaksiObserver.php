@@ -12,7 +12,16 @@ class NotifTransaksiObserver
     }
     public function updated(Trans_detail $item)
     {
-        $this->setLog("updated", $item);
+        if((!$item->isDirty('trans_detail_status') || $item->isDirty('trans_detail_packing')) 
+                && !$item->is_komplain() 
+                && !$item->isDirty('trans_detail_is_cancel')
+            ){
+            $this->setLog("updated", $item);
+        }elseif($item->is_komplain()){
+            $this->setLog_komplain("updated", $item);
+        }else{
+            $this->setLog_cancel("updated", $item);
+        }
     }
     public function deleted(Trans_detail $item)
     {
@@ -87,6 +96,55 @@ class NotifTransaksiObserver
             break;
             default:
             break;
+        }
+    }
+    // log jika status tidak berubah
+    private function setLog_komplain($type, $item){
+        $is_cancel = false;
+        if($item->trans_detail_is_cancel = 1){
+            $is_cancel = true;
+        }
+        $notif = ($is_cancel)
+            ?"terjadi komplain transaksi"
+            :"komplain transaksi selesai";
+        $data['title'] = 'Order Komplain';
+        $data['route'] = route('member.komplain.index', ['status'=>'new']);
+        $data['status'] = 200;
+        $data['message'] = $notif.", untuk transaksi ".$item->trans->trans_code;
+        $author = $item->trans->pembeli;
+        if($is_cancel){
+            $item->produk->user->notify(new Transaksi($item,$author,$data));
+        }else{
+            $data['route'] = route('member.komplain.index', ['status'=>'done']);
+            $item->produk->user->notify(new Transaksi($item,$author,$data));
+            $author = User::find(2);
+            $data['route'] = route('member.komplain.buyer', ['status'=>'done']);
+            $item->trans->pembeli->notify(new Transaksi($item,$author,$data));
+        }
+    }
+
+    // log jika status tidak berubah
+    private function setLog_cancel($type, $item){
+        $is_system = ($item->isDirty('trans_detail_packing') || $item->isDirty('trans_detail_send'))
+            ?false
+            :true;
+        $notif = ($is_system)
+            ?"transaksi ".$item->trans->trans_code." telah dicancel oleh system."
+            :"transaksi ".$item->trans->trans_code." telah dicancel oleh seller.";
+        $data['title'] = 'Order Cancelled';
+        $data['route'] = route('member.transaction.purchase', ['status'=>'cancel']);
+        $data['status'] = 200;
+        $data['message'] = $notif;
+        if($is_system){
+            $author = User::find(2);
+            $user_get_notif = [$item->trans->pembeli->id, $item->produk->user->id];
+            $item->trans->pembeli->notify(new Transaksi($item,$author,$data));
+            $data['route'] = route('member.transaction.index', ['status'=>'cancel']);
+            $item->produk->user->notify(new Transaksi($item,$author,$data));
+        }else{
+            $author = $item->produk->user;
+            $user = $item->trans->pembeli;
+            $user->notify(new Transaksi($item,$author,$data));
         }
     }
 }

@@ -18,6 +18,16 @@ class Trans_detail extends Model
 	];
 
     /**
+    * check jika transaksi mempunyai komplain
+    **/
+    public function is_komplain(){
+        if($this->komplain !== null){
+            return (bool)$this->komplain->count();
+        }
+        return false;
+    }
+
+    /**
     * @param
     * @return
     * 
