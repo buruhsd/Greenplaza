@@ -1787,7 +1787,7 @@ class FunctionLib
         if($status !== ""){
             $where .= " AND komplain_status = ".$status;
         }
-        $total = App\Models\Komplain::whereRaw($where)
+        $total = App\Models\Komplain::whereRaw($where);
         if($type == "seller"){
             $total = $total->whereHas('trans_detail', function ($query) {
                 $query->whereHas('produk', function ($query2) {
