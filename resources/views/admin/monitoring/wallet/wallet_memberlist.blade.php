@@ -11,14 +11,14 @@
 			</div>
 			<div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <div class="col-md-3"> 
+                    <div class="col-md-6"> 
                         <select id="select-list" type="text" class="form-control pull_right">
                             <option value="">--Choose Option List--</option>
                             <option value="/admin/monitoring/wallet_memberlist">List Member</option>
                             <option value="/admin/monitoring/wallet_sellerlist">List Seller</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                     
                             <form action="#" method="GET">
                                 <div class="input-group pull-right" style="width: 225px;">

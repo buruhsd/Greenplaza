@@ -11,12 +11,22 @@
 			</div>
 			<div class="panel panel-white pull_right">
                 <div class="panel-heading clearfix">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <select id="select-list" type="text" class="form-control">
                             <option value="">--Choose Option List--</option>
                             <option value="/admin/monitoring/wallet_memberlist">List Member</option>
                             <option value="/admin/monitoring/wallet_sellerlist">List Seller</option>
                         </select>
+                    </div>
+                    <div class="col-md-6">
+                    
+                            <form action="#" method="GET">
+                                <div class="input-group pull-right" style="width: 225px;">
+                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                    <a href="javascript:void(0)"><input type="text" name="nama" class="form-control search-input" placeholder="Nama Member ..."></a>
+                                </div>
+                            </form>
+                        
                     </div>
                 </div>
                 <div class="panel-body">
@@ -24,7 +34,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th><center>Id</center></th>
+                                    <th><center>No</center></th>
+                                    <th><center>Username</center></th>
                                     <th><center>Detail Seller</center></th>
                                     <th><center>Saldo</center></th>
                                     <th><center>Wallet Type</center></th>
@@ -32,13 +43,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $u)
+                                @foreach ($users as $key => $u)
                                 <tr>
-                                    <td><center>{{$u->id}}</center></td>
+                                    <td><center>{{++$key}}</center></td>
+                                    <td><center>{{$u->username}}</center></td>
                                     <td><center>
                                         <p>Id :{{$u->id}}</p>
                                         <p>Level : Seller</p>
-                                        <p>Nama :{{$u->username}}</p>
                                     @if ((App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()) != null)
                                         <p>Alamat Wallet : {{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_address}}</p>
                                     @else
