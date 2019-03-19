@@ -21,6 +21,12 @@ use App\Observers\NotifMessageObserver;
 
 use App\Models\Produk_discuss; 
 use App\Observers\NotifDiskusiProdukObserver;
+
+use App\Models\Komplain; 
+use App\Observers\NotifKomplainObserver;
+
+use App\Models\Solusi; 
+use App\Observers\NotifSolusiObserver;
 // use \Illuminate\Support\Facades\URL; 
 
 class AppServiceProvider extends ServiceProvider
@@ -44,6 +50,10 @@ class AppServiceProvider extends ServiceProvider
         Message::observe(NotifMessageObserver::class);
         // ketika ada pesan baru
         Produk_discuss::observe(NotifDiskusiProdukObserver::class);
+        // ketika komplain member seller
+        Komplain::observe(NotifKomplainObserver::class);
+        // ketika solusi member seller
+        Solusi::observe(NotifSolusiObserver::class);
     }
 
     /**

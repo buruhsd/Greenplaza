@@ -139,9 +139,20 @@
                                                 Komplain Selesai
                                             </button><br/>
                                             @elseif($item->solusi->solusi_status == 2 && ($item->solusi->solusi_seller_resi !== null || $item->solusi->solusi_seller_without_resi !== 0) && $item->solusi->solusi_seller_accept == 0)
-                                                <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_seller", $item->solusi->id)}} class='btn btn-info btn-xs'>
-                                                    Menerima Barang baru
-                                                </button><br/>
+                                                @switch($item->solusi->solusi_type->id)
+                                                    @case(1)
+                                                    @case(4)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_seller", $item->solusi->id)}} class='btn btn-info btn-xs'>
+                                                            Setuju menerima uang kembali.
+                                                        </button><br/>
+                                                    @break
+                                                    @case(2)
+                                                    @case(3)
+                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("member.solusi.approve_shipment_seller", $item->solusi->id)}} class='btn btn-info btn-xs'>
+                                                            Menerima Barang baru
+                                                        </button><br/>
+                                                    @break
+                                                @endswitch
                                             @endif
                                             @if($item->solusi->solusi_status == 2 && $item->solusi->solusi_buyer_resi == null && $item->solusi->solusi_buyer_without_resi == 0)
                                                 @switch($item->solusi->solusi_type->id)

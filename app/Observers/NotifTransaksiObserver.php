@@ -12,16 +12,13 @@ class NotifTransaksiObserver
     }
     public function updated(Trans_detail $item)
     {
-        if((!$item->isDirty('trans_detail_status') || $item->isDirty('trans_detail_packing')) 
-                && !$item->is_komplain() 
-                && !$item->isDirty('trans_detail_is_cancel')
+        if(($item->isDirty('trans_detail_status') || $item->isDirty('trans_detail_packing')) 
+                && (!$item->is_komplain()) 
+                && (!$item->isDirty('trans_detail_is_cancel'))
             ){
             $this->setLog("updated", $item);
-        }elseif($item->is_komplain()){
-            $this->setLog_komplain("updated", $item);
-        }else{
-            $this->setLog_cancel("updated", $item);
         }
+        // $this->setLog_cancel("updated", $item);
     }
     public function deleted(Trans_detail $item)
     {
