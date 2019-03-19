@@ -137,14 +137,18 @@ class KomplainController extends Controller
                 ->whereHas('trans_detail', function ($query) {
                     $query->whereHas('trans', function ($query2) {
                         $query2->where('trans_user_id', '=', Auth::id());
+                        return $query2;
                     });
+                    return $query;
                 })
                 ->paginate($this->perPage);
         } else {
             $data['komplain'] = Komplain::whereHas('trans_detail', function ($query) {
                     $query->whereHas('trans', function ($query2) {
                         $query2->where('trans_user_id', '=', Auth::id());
+                        return $query2;
                     });
+                    return $query;
                 })
                 ->paginate($this->perPage);
         }
@@ -185,14 +189,18 @@ class KomplainController extends Controller
                 ->whereHas('trans_detail', function ($query) {
                     $query->whereHas('produk', function ($query2) {
                         $query2->where('produk_seller_id', '=', Auth::id());
+                        return $query2;
                     });
+                    return $query;
                 })
                 ->paginate($this->perPage);
         } else {
             $data['komplain'] = Komplain::whereHas('trans_detail', function ($query) {
                     $query->whereHas('produk', function ($query2) {
                         $query2->where('produk_seller_id', '=', Auth::id());
+                        return $query2;
                     });
+                    return $query;
                 })
                 ->paginate($this->perPage);
         }
