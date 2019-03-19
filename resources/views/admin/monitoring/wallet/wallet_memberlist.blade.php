@@ -34,7 +34,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th><center>Id</center></th>
+                                    <th><center>No</center></th>
+                                    <th><center>Username</center></th>
                                     <th><center>Detail Member</center></th>
                                     <th><center>Saldo</center></th>
                                     <th><center>Wallet Type</center></th>
@@ -42,13 +43,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $u)
+                                @foreach ($users as $key => $u)
                                 <tr>
-                                    <td><center>{{$u->id}}</center></td>
+                                    <td><center>{{++$key}}</center></td>
+                                    <td><center>{{$u->username}}</center></td>
                                     <td><center>
                                         <p>Id :{{$u->id}}</p>
                                         <p>Level : Member</p>
-                                        <p>Nama :{{$u->username}}</p>
                                     @if ((App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()) != null)
                                         <p>Alamat Wallet : {{App\Models\Wallet::where('wallet_user_id', $u->id)->where('wallet_type', '=', '7')->first()->wallet_address}}</p>
                                     @else
@@ -83,6 +84,8 @@
                                         Transaksi <br/>
                                         Iklan <br/>
                                         Pincode <br/>
+                                        Masedi <br/>
+                                        Greenline
                                     </center></td>
                                     <td>
                                         <center><a href="{{route('admin.monitoring.editsaldomember', $u->id)}}"><button class="btn btn-success btn-xs">Edit Saldo</button></a></center>
