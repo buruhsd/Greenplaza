@@ -606,7 +606,6 @@ class TransactionController extends Controller
      */
     public function sales(Request $request)
     {
-        dd(Trans_detail::all()->last()->is_komplain());
         // $req = [
         //     'data' => [
         //         'waybill' => "17120066412",
