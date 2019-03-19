@@ -36,9 +36,9 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <h4 class="panel-title">Resolusi Komplain</h4>
-                    <button type="button" onclick="search('new');" class="btn btn-info">New<span class="label label-default pull-right">{{FunctionLib::count_res_kom(1)}}</span></button>
-                    <button type="button" onclick="search('help');" class="btn btn-warning">Admin Help<span class="label label-default pull-right">{{FunctionLib::count_res_kom(2)}}</span></button>
-                    <button type="button" onclick="search('done');" class="btn btn-success">Done<span class="label label-default pull-right">{{FunctionLib::count_res_kom(3)}}</span></button>
+                    <button type="button" onclick="search('new');" class="btn btn-info">New<span class="label label-default pull-right">{{FunctionLib::count_res_kom(1, "buyer")}}</span></button>
+                    <button type="button" onclick="search('help');" class="btn btn-warning">Admin Help<span class="label label-default pull-right">{{FunctionLib::count_res_kom(2, "buyer")}}</span></button>
+                    <button type="button" onclick="search('done');" class="btn btn-success">Done<span class="label label-default pull-right">{{FunctionLib::count_res_kom(3, "buyer")}}</span></button>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">

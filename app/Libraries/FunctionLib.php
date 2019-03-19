@@ -1782,12 +1782,31 @@ class FunctionLib
     * @param
     * @return
     **/
-    public static function count_res_kom($status = ""){
+    public static function count_res_kom($status = "", $type=""){
         $where = 1;
         if($status !== ""){
             $where .= " AND komplain_status = ".$status;
         }
-        $total = App\Models\Komplain::whereRaw($where)->count();
+        $total = App\Models\Komplain::whereRaw($where)
+        if($type == "seller"){
+            $total = $total->whereHas('trans_detail', function ($query) {
+                $query->whereHas('produk', function ($query2) {
+                    $query2->where('produk_seller_id', '=', Auth::id());
+                    return $query2;
+                });
+                return $query;
+            })
+        }elseif($type == "buyer"){
+            $total = $total->whereHas('trans_detail', function ($query) {
+                $query->whereHas('trans', function ($query2) {
+                    $query2->where('trans_user_id', '=', Auth::id());
+                    return $query2;
+                });
+                return $query;
+            })
+        }
+        $total = $total->count();
+
         return $total;
     }
 
