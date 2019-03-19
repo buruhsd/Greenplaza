@@ -58,7 +58,9 @@
                                                     <b>
                                                         Komplain&nbsp;
                                                         {{$item->trans_detail->produk->produk_name}}&nbsp;
-                                                        dengan kode&nbsp;
+                                                        dengan kode transaksi&nbsp;
+                                                        {{$item->trans_detail->trans->trans_code}}
+                                                        dan kode transaksi detail&nbsp;
                                                         {{$item->trans_detail->trans_code}}
                                                     </b>
                                                 </li>

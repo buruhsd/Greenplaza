@@ -46,7 +46,7 @@ class KomplainController extends Controller
                 // update transaksi menjadi dropping
                 foreach ($komplain->trans_detail->trans->trans_detail as $item) {
                     $item->trans_detail_status = 6;
-                    $item->trans_detail_is_cancel = 0;
+                    $item->trans_detail_is_cancel = 1;
                     $item->trans_detail_drop = 1;
                     $item->trans_detail_drop_date = $date;
                     $item->trans_detail_drop_note = $item->trans_detail_drop_note.", Komplain sudah selesai dan dana di kembalikan ke member";

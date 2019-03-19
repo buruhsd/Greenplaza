@@ -53,6 +53,7 @@ class KomplainController extends Controller
             'member' => [1,4],
             'seller' => [2,3]
         ];
+        $date = date("Y-m-d H:i:s");
         try{
             $komplain = Komplain::findOrFail($id);
             // wallet ke member (pengermbalian dana) approved admin
@@ -68,6 +69,7 @@ class KomplainController extends Controller
             // wallet ke seller (lanjutkan)
             elseif(in_array($komplain->solusi->solusi_solusi_id,$arr['seller'])){
                 $komplain->komplain_status = 3;
+                $komplain->komplain_clear_date = $date;
                 $komplain->save();
                 if($komplain){
                     $solusi = $komplain->solusi;
