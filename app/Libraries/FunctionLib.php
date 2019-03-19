@@ -1795,7 +1795,7 @@ class FunctionLib
                     return $query2;
                 });
                 return $query;
-            })
+            });
         }elseif($type == "buyer"){
             $total = $total->whereHas('trans_detail', function ($query) {
                 $query->whereHas('trans', function ($query2) {
@@ -1803,7 +1803,7 @@ class FunctionLib
                     return $query2;
                 });
                 return $query;
-            })
+            });
         }
         $total = $total->count();
 
