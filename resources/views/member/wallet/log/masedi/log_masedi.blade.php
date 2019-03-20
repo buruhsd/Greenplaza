@@ -35,6 +35,7 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
+                                    <th><center>Tanggal</center></th>
                                     <th><center>Transaksi</center></th>
                                     <th><center>Detail Produk</center></th>
                                     <th><center>Status</center></th>
@@ -45,6 +46,7 @@
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
+                                    <td><center>{{$g->created_at}}</center></td>
                                     <td>
                                         <ul>
                                             <li>Transaksi Kode : {{$g->trans_code}}</li>

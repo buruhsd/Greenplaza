@@ -39,6 +39,7 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
+                                    <th><center>Tanggal</center></th>
                                     <th><center>Transaksi Code</center></th>
                                     <th><center>Detail Produk</center></th>
                                     <th><center>Status</center></th>
@@ -50,6 +51,7 @@
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
+                                    <td><center>{{$g->created_at}}</center></td>
                                     <td><center>{{$g->trans_code}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
                                     <td><center>Cancel</center></td>

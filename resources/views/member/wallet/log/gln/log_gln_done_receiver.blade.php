@@ -46,6 +46,7 @@
                                 <tr>
                                     <th><center>No</center></th>
                                     <th><center>Username</center></th>
+                                    <th><center>Tanggal</center></th>
                                     <th><center>Transaksi Code</center></th>
                                     <th><center>Payment</center></th>
                                     <th><center>Amount Total</center></th>
@@ -57,6 +58,7 @@
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
+                                    <td><center>{{$g->created_at}}</center></td>
                                     <td><center>{{$g->trans->trans_code}}</center></td>
                                     <td><center>Greenline</center></td>
                                     <td><center>{{$g->trans_gln_amount_total}}</center></td>
