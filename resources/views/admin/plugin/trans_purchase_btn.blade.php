@@ -3,7 +3,7 @@
 		@if($detail->has('komplain'))
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
-			    		<a href="{{route('admin.resolusi_komplain.index')}}">
+			    		<a href="{{route('admin.res_kom.index')}}">
 				    		<button class="btn btn-info btn-xs">Resolusi Komplain</button>
 			    		</a>
 			    	</div>
