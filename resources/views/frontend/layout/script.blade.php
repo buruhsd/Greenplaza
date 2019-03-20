@@ -77,7 +77,6 @@
                 broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
                 key: '{!!env("PUSHER_APP_KEY")!!}',
                 cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
-                scheme: '{!!env("PUSHER_APP_SCHEME")!!}',
                 encrypted: true,
                 logToConsole: true
             });
