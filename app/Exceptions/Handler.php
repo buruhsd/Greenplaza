@@ -46,6 +46,27 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $response = [];
+
+        $response['exception'] = get_class($exception);
+        $response['status_code'] = $exception->getCode();
+
+        switch($response['status_code'])
+        {
+            case 403:
+                $response['message'] = "You are not authorized to view that page!";
+                break;
+            case 404:
+                $response['message'] = "Page not found!";
+                break;
+            default:
+                $response['message'] = "Something went wrong!";
+                break;
+        }
+
+        if($this->isHttpException($exception) && env('APP_DEBUG') == false){
+            return response()->view('web_errors.maintenance', compact('response'));
+        }
         return parent::render($request, $exception);
     }
 }
