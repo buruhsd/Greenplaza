@@ -45,8 +45,9 @@
                             @if($produk->count() > 0)
                             @foreach ($produk as $key => $h)
                                 <tr>
+
                                     <td><center>{{++$key}}</center></td>
-                                    <td><center><img class="h100" src="{{asset("assets/images/product/".$h->produk_image)}}"></center></td>
+                                    <td><center><img class="h100" src="{{asset("assets/images/product/".$h->images->first()['produk_image_image'])}}"></center></td>
                                     <td scope="row">
                                         <ul>
                                             <li>Name : {{$h->produk_name}}</li>
