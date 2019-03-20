@@ -405,12 +405,23 @@ class ProdukController extends Controller
                     if($request->produk_grosir_start[$key] == null){
                             break;
                     }
-                    $produk_grosir = new Produk_grosir;
-                    $produk_grosir->produk_grosir_produk_id = $produk->id;
-                    $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
-                    $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
-                    $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
-                    $produk_grosir->save();
+                    if(isset($request->produk_grosir_id[$key])){
+                        $produk_grosir = Produk_grosir::findOrFail($request->produk_grosir_id[$key]);
+                        $produk_grosir->produk_grosir_produk_id = $produk->id;
+                        $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                        $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                        $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                        $produk_grosir->save();
+                        $grosir_id[]=$request->produk_grosir_id[$key];
+                    }else{
+                        $produk_grosir = new Produk_grosir;
+                        $produk_grosir->produk_grosir_produk_id = $produk->id;
+                        $produk_grosir->produk_grosir_start = $request->produk_grosir_start[$key];
+                        $produk_grosir->produk_grosir_end = $request->produk_grosir_end[$key];
+                        $produk_grosir->produk_grosir_price = $request->produk_grosir_price[$key];
+                        $produk_grosir->save();
+                        $grosir_id[]=$produk_grosir->id;
+                    }
                 }
             }
         }
