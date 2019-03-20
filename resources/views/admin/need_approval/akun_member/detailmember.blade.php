@@ -10,7 +10,7 @@
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <a href="{{route('admin.needapproval.listmember')}}"><button type="" class="btn btn-default pull-right" style="margin-bottom: 2%">Kembali</button></a>
-                    <h4 class="panel-title">Detail Member GreenPlaza</h4>
+                    <h4 class="panel-title">Detail Member GreenPlaza </h4>
                     <!-- <div class="col-md-6">
                         <div class="input-group pull-left">
                             <select id="select-list" type="text" class="form-control">
