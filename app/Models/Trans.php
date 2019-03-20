@@ -14,7 +14,7 @@ class Trans extends Model
      * @var array
      */
     protected $fillable = [
-    	'trans_code', 'trans_qr', 'trans_user_id', 'trans_user_bank_id', 'trans_is_paid', 'trans_payment_id', 'trans_paid_image', 'trans_paid_date', 'trans_paid_note', 'trans_amount', 'trans_amount_ship', 'trans_amount_total', 'trans_note', 
+    	'trans_code', 'trans_qr', 'trans_user_id', 'trans_user_bank_id', 'trans_is_paid', 'trans_payment_id', 'trans_paid_image', 'trans_paid_date', 'trans_paid_note', 'trans_amount', 'trans_amount_ship', 'trans_amount_total', 'trans_is_review', 'trans_note', 
 	];
 
     /**

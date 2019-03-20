@@ -36,6 +36,8 @@ class TransactionController extends Controller
             $res->review_text = $request->review_text;
             $res->save();
         }
+        $trans->trans_is_review = 1;
+        $trans->save();
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
