@@ -79,7 +79,7 @@
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
                                                     <input type="hidden" name="type" value="buyer"/>
-                                                    <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->komplain_trans_id)}} value="More" class="btn btn-info btn-xs" />
+                                                    <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail_admin", $item->komplain_trans_id)}} value="More" class="btn btn-info btn-xs" />
                                                     {!! Form::close() !!}
                                                 </li>
                                             </ul>

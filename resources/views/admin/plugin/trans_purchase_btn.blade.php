@@ -1,27 +1,17 @@
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
-		    @if($type == 'buyer')
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
-			    		<a href="{{route('member.komplain.buyer')}}">
+			    		<a href="{{route('admin.resolusi_komplain.index')}}">
 				    		<button class="btn btn-info btn-xs">Resolusi Komplain</button>
 			    		</a>
 			    	</div>
 			    </div>
-			@else
-	    		<div class="row">
-			    	<div class="col-md-12 text-center">
-			    		<a href="{{route('member.komplain.index')}}">
-				    		<button class="btn btn-info btn-xs">Resolusi Komplain</button>
-			    		</a>
-			    	</div>
-			    </div>
-			@endif
 		@else
     		<div class="row">
 		    	<div class="col-md-12 text-center">
-		    		<a href="{{route('member.transaction.konfirmasi', $detail->trans->id)}}">
+		    		<a href="{{route('admin.transaction.konfirmasi', $detail->trans->id)}}">
 			    		<button class="btn btn-success btn-xs">Konfirmasi</button>
 		    		</a>
 		    	</div>
@@ -37,7 +27,7 @@
 		    	@if($type == 'buyer')
 		    		<div class="row">
 				    	<div class="col-md-12 text-center">
-				    		<a href="{{route('member.transaction.konfirmasi', $detail->trans->id)}}">
+				    		<a href="{{route('admin.transaction.konfirmasi', $detail->trans->id)}}">
 					    		<button class="btn btn-success btn-xs">Konfirmasi</button>
 				    		</a>
 				    	</div>

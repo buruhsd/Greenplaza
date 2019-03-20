@@ -105,33 +105,48 @@ class KomplainController extends Controller
     public function index(Request $request)
     {
         $arr = [
-            "0" =>'wait',
-            "1" =>'active',
-            "2" =>'block',
-            "0,1,2" =>'',
+            "1" =>'new',
+            "2" =>'help',
+            "3" =>'done',
+            "1,2,3" =>'',
         ];
         $where = "1";
-        if(!empty($request->get('name'))){
-            $name = $request->get('name');
-            $where .= ' AND produk_name LIKE "%'.$name.'%"';
+        if(!empty($request->get('komplain'))){
+            $komplain = $request->get('komplain');
+            $where .= ' AND conf_komplain.komplain_name LIKE "%'.$komplain.'%"';
         }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
             $status = array_search($status,$arr);
-            $where .= ' AND produk_status IN ('.$status.')';
+            $where .= ' AND sys_komplain.komplain_status IN ('.$status.')';
         }
 
         if (!empty($where)) {
-            $data['produk'] = Komplain::where("produk_is_hot", 0)
-                ->whereRaw($where)
+            $data['komplain'] = Komplain::whereRaw($where)
+                ->leftJoin('conf_komplain', 'sys_komplain.komplain_komplain_id', '=', 'conf_komplain.id')
+                ->select('sys_komplain.*', 'conf_komplain.komplain_name')
+                ->groupBy('sys_komplain.id')
+                ->orderBy('sys_komplain.updated_at', 'DESC')
+                ->whereHas('trans_detail', function ($query) {
+                    $query->whereHas('produk', function ($query2) {
+                        $query2->where('produk_seller_id', '=', Auth::id());
+                        return $query2;
+                    });
+                    return $query;
+                })
                 ->paginate($this->perPage);
         } else {
-            $data['produk'] = Komplain::where("produk_is_hot", 0)
+            $data['komplain'] = Komplain::whereHas('trans_detail', function ($query) {
+                    $query->whereHas('produk', function ($query2) {
+                        $query2->where('produk_seller_id', '=', Auth::id());
+                        return $query2;
+                    });
+                    return $query;
+                })
                 ->paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
-
-        return view('admin.resolusi_komplain.index', $data);
+        return view('admin.resolusi_komplain.detail', $data);
     }
 
     /**

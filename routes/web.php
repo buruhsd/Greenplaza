@@ -745,6 +745,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 				Route::get('add_shipment_seller/{id}', 'ModalController@komplain_resi_seller')->name('.add_shipment_seller');
 			});
 			Route::post('res_kom_transDetail/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail');
+			Route::post('res_kom_transDetail_admin/{id}', 'ModalController@res_kom_transDetail_admin')->name('.res_kom_transDetail_admin');
 			Route::post('res_kom_transDetail_post/{id}', 'ModalController@res_kom_transDetail')->name('.res_kom_transDetail_post');
 			Route::get('brand_detail/{id}', 'ModalController@brand_detail')->name('.brand_detail');
 			Route::get('add_komplain/{id}', 'ModalController@add_komplain')->name('.add_komplain');
