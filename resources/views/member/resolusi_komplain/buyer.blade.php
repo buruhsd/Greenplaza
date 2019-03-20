@@ -101,9 +101,11 @@
                                                         </button>
                                                     @endif
                                                     @if($item->solusi->solusi_status == 3)
-                                                        <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.review_komplain", $item->id)}} class='btn btn-danger btn-xs'>
-                                                            Review Produk
-                                                        </button>
+                                                        @if($item->trans_detail->trans->trans_is_review == 0)
+                                                            <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.review_komplain", $item->id)}} class='btn btn-danger btn-xs'>
+                                                                Review Produk
+                                                            </button>
+                                                        @endif
                                                     @endif
                                                 </li>
                                             </ul>
