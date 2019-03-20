@@ -1,53 +1,97 @@
+<style type="text/css">
+#myloading {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: blue;
+  animation: spin 0.8s ease-in-out infinite;
+  -webkit-animation: spin 0.5s ease-in-out infinite;
+}
+#myloading2 {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: blue;
+  animation: spin 0.8s ease-in-out infinite;
+  -webkit-animation: spin 0.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+</style>
 <div class="panel panel-white col-md-12">
     <div class="panel-body">
         <div class="row">
             @if(str_contains(Request::url(), ['create']))
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+                <span class="text-danger">Ukuran : <b>300 pixel</b> x <b>320 pixel</b></span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'gambar: ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="gambar utama">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
                             </button>
-                            <div class="btn btn-default image-preview-input">
+                            <div class="btn btn-default image-preview-input" >
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>
+                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/ placeholder="asdadas">
                             </div>
                         </span>
                     </div>
                 </div>
             </div>
+            <div id="maxlimaw">
+             <button type="button" class="btn btn-success col-sm-1 col-xs-1 clickkurang" id="add-file-field" onclick="asdfkurang()">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            </div>
+            <script type="text/javascript">
+                function asdfkurang(){
+              
+                var counter = 0;
+                $(".clickkurang").click(function() {
+                counter++;
+                if(counter == 4){
+                    alert('max gambar lima');
+                    $("#maxlimaw").html("");
+                }
+            });
+            }
+            </script>
             @elseif(str_contains(Request::url(), ['edit']))
             {!! Form::label('produk_user_status', 'Pilih Gambar Utama : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10">
-                <div class="form-group">
+                <div class="roup">
                 @foreach($produk->images->all() as $item)
-                    @if ($loop->first)
+              
+                
+                
                         <div class="col-md-2">
+                         
                             <label class="btn btn-primary">
-                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check img-checked">
+                               <a onclick="removeasdf('{{$item['id']}}')"><img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check"></a>
                                 <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
                             </label>
                         </div>
-                    @else
-                        <div class="col-md-2">
-                            <label class="btn btn-primary">
-                                <img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check">
-                                <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
-                            </label>
-                        </div>
-                    @endif
-                @endforeach
+
+                @endforeach   
                 </div>
             </div>
+            @if($asdfku < 5)
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+            <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
             </div><br/><br/>
             {!! Form::label('produk_user_status', 'Gambar : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
@@ -67,10 +111,34 @@
                     </div>
                 </div>
             </div>
-            @endif
-            <button type="button" class="btn btn-success col-sm-1 col-xs-1" id="add-file-field">
+            @if($asdfku < 4)
+            <div id="maxlima">
+            <button type="button" class="btn btn-success col-sm-1 col-xs-1 clickkurang" id="add-file-field" onclick="asdfkurang()">
                 <span class="glyphicon glyphicon-plus"></span>
             </button>
+            </div>
+            @else
+
+            @endif
+            @else
+            <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
+                <span class="text-danger">hapus salah gambar untuk mengunggah foto</span>
+            </div>
+            @endif
+            <script type="text/javascript">
+                function asdfkurang(){
+                var eee = 4 - <?php echo $asdfku ?>;
+                var counter = 0;
+                $(".clickkurang").click(function() {
+                counter++;
+                if(counter == eee){
+                    alert('max gambar lima');
+                    $("#maxlima").html("");
+                }
+            });
+            }
+            </script>
+            @endif
         </div>
     </div>
 </div>
@@ -81,6 +149,7 @@
             {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
+                    <option value=''>-- Pilih Kategori --</option>
                     @foreach($category as $item)
                     <option value='{{$item->id}}'>{{ucfirst(strtolower($item->category_name))}}</option>
                     @endforeach
@@ -93,6 +162,7 @@
             {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
+                    <!-- <option selected>{{$produk->category->category_name}} </option> -->
                     @foreach($category as $item)
                         <option value='{{$item->id}}' <?php if($produk->produk_category_id == $item->id){echo "selected";}?> >{{ucfirst(strtolower($item->category_name))}}</option>
                     @endforeach
@@ -206,7 +276,7 @@
             {!! Form::label('produk_stock', 'Stok : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
-                    @if(str_contains(Request::url(), ['create']))
+                     @if(str_contains(Request::url(), ['create']))
                         {!! Form::number('produk_stock', 1, [
                         'min' => '1',
                         'class' => 'form-control', 
@@ -566,6 +636,35 @@
                                         </tr>
                                     </thead>
                                     <tbody id="grosir_row">
+                                        @if(str_contains(Request::url(), ['edit']))
+                                            @if($produk->is_grosir())
+                                                @foreach($produk->grosir as $item_grosir)
+                                                    <tr>
+                                                        <td style="width: 20%">
+                                                            <input class="form-control hidden" type="number" name="produk_grosir_id[]" placeholder="id" value="{{$item_grosir->id}}">
+                                                            <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" value="{{$item_grosir->produk_grosir_start}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td style="width: 20%">
+                                                            <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" value="{{$item_grosir->produk_grosir_end}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td style="width: 50%">
+                                                            <input class="form-control" type="number" name="produk_grosir_price[]" value="{{$item_grosir->produk_grosir_price}}">
+                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <!-- <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
+                                                                <i class="fa fa-plus"></i>
+                                                            </a> -->
+                                                            <a class="btn btn-xs btn-danger remove_grosir">
+                                                                <i class="fa fa-minus"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        @endif
                                         <tr>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" >
@@ -615,3 +714,130 @@
         <button type="submit" class="btn btn-primary mb-2">Save</button>
     </div>
 </div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+<div class="modal-body">
+<center><div class="getimage uloader"></div></center>
+</div>
+ <form action="#" id="formUpdate" class="form-horizontal">
+               @csrf
+             <!--  <input  name="_token"> -->
+              <input value="" type="hidden" name="id_image"/>
+            </form>
+<div class="modal-footer">
+      <button type="button" id="btnSave" onclick="save()" class="btn m-btn--pill m-btn--air btn-danger uloader2">delete</button>
+<button type="button" class="btn btn-metal btn-sm" data-dismiss="modal">batal</button>
+</div>
+</div>
+</div>
+@if(str_contains(Request::url(), ['member']))
+
+
+<script type="text/javascript">
+
+   function removeasdf(id){
+     $('.bs-example-modal-sm').modal('show');
+     $('.getimage').html('');
+     $('.uloader').html('<br><br><br><br><div id="myloading"></div>');
+         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('[name="_token"]').val(CSRF_TOKEN);
+    $.ajax({
+        url : '{{ url('member/produk/edit_get') }}' + '/' + id,
+        type: "GET",
+        dataType: "JSON",
+         success: function(data){
+            setTimeout(function(){ 
+              $('.uloader').html('');
+               $("[name='id_image']").val(data.produk_image_image);
+              $('.getimage').html('<br><br><image style="min-height: 100px;max-height: 200px;height: 100%; min-width:100; max-width:200px; width:100%" src="/assets/images/product/'+data.produk_image_image+'"/>')
+             }, 500);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+
+function save(){
+   $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');
+   $('#btnSave').removeClass('btn-danger').addClass('btn-metal');
+     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url : "{{ url('member/produk/edit_get/post') }}",
+        type: "POST",
+        data: {_token: CSRF_TOKEN, message:$("[name='id_image']").val()},
+        dataType: "JSON",
+        success: function(data){
+            setTimeout(function(){
+
+             window.location.reload();
+            }, 500)
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error adding / update data');
+               $('#btnSave').removeClass('btn-metal').addClass('btn-danger');
+               $('.uloader2').html('delete');
+        }
+    });
+}
+</script>
+
+@elseif(str_contains(Request::url(), ['admin']))
+
+<script type="text/javascript">
+
+   function removeasdf(id){
+     $('.bs-example-modal-sm').modal('show');
+     $('.getimage').html('');
+     $('.uloader').html('<br><br><br><br><div id="myloading"></div>');
+         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $('[name="_token"]').val(CSRF_TOKEN);
+    $.ajax({
+        url : '{{ url('admin/produk/edit_get') }}' + '/' + id,
+        type: "GET",
+        dataType: "JSON",
+         success: function(data){
+            setTimeout(function(){ 
+              $('.uloader').html('');
+               $("[name='id_image']").val(data.produk_image_image);
+              $('.getimage').html('<br><br><image style="min-height: 100px;max-height: 200px;height: 100%; min-width:100; max-width:200px; width:100%" src="/assets/images/product/'+data.produk_image_image+'"/>')
+             }, 500);
+
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error get data from ajax');
+        }
+    });
+}
+
+
+function save(){
+   $('.uloader2').html('&nbsp;&nbsp;<div id="myloading2"></div>&nbsp;&nbsp;');
+   $('#btnSave').removeClass('btn-danger').addClass('btn-metal');
+     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url : "{{ url('admin/produk/edit_get/post') }}",
+        type: "POST",
+        data: {_token: CSRF_TOKEN, message:$("[name='id_image']").val()},
+        dataType: "JSON",
+        success: function(data){
+            setTimeout(function(){
+
+             window.location.reload();
+            }, 500)
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error adding / update data');
+               $('#btnSave').removeClass('btn-metal').addClass('btn-danger');
+               $('.uloader2').html('delete');
+        }
+    });
+}
+</script>
+
+@endif
+
+
