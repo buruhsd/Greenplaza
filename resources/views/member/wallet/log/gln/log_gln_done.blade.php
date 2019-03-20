@@ -54,7 +54,7 @@
                             </thead>
                             @if(count($gln) != 0)
                                 @foreach ($gln as $key => $g)
-                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $gln->id)->count() > 0 && $g->gln->trans_gln_status == 2)
+                                @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0 && $g->gln->trans_gln_status == 2)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>

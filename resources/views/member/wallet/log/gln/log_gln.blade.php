@@ -54,7 +54,13 @@
                                     <td><center>{{$g->created_at}}</center></td>
                                     <td><center>{{$g->trans_code}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    <td><center>Pending</center></td>
+                                    @if (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0 && $g->gln->trans_gln_status == 3)
+                                        <td><center>Cancel</center></td>
+                                    @elseif (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0 && $g->gln->trans_gln_status == 2)
+                                        <td><center>Success</center></td>
+                                    @elseif (App\Models\Trans_gln::where('trans_gln_detail_id', $g->id)->count() > 0 && $g->gln->trans_gln_status == 1)
+                                        <td><center>Pending</center></td>
+                                    @endif
                                 </tr>
                                 @endif
                                 @endforeach
