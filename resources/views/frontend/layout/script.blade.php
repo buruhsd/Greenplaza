@@ -73,6 +73,7 @@
             Pusher.logToConsole = true;
             window.Echo = new Echo({
                 "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
+                host: '{!!env("APP_URL")!!}',
                 broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
                 key: '{!!env("PUSHER_APP_KEY")!!}',
                 cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
