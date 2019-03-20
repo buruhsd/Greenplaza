@@ -71,7 +71,7 @@
                                     <th>No</th>
                                     <th>Code</th>
                                     <th>Detail Transaction</th>
-                                    <th>Detail Pembeli</th>
+                                    <th>Detail Penjual</th>
                                     <th>Paid</th>
                                     <th>Action</th>
                                 </tr>
@@ -102,9 +102,9 @@
                                         </td>
                                         <td scope="row">
                                             <ul>
-                                                <li>Username : {{$item->pembeli->username}}</li>
-                                                <li>Name : {{$item->pembeli->name}}</li>
-                                                <li>Email : {{$item->pembeli->email}}</li>
+                                                <li>Username : {{$item->trans_detail->first()->produk->user->username}}</li>
+                                                <li>Name : {{$item->trans_detail->first()->produk->user->name}}</li>
+                                                <li>Email : {{$item->trans_detail->first()->produk->user->email}}</li>
                                             </ul>
                                         </td>
                                         <td scope="row">

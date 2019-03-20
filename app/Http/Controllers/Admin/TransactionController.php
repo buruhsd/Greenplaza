@@ -264,9 +264,9 @@ class TransactionController extends Controller
             // insert log transfer masedi
             $log_transfer = new Log_transfer;
                 $log_transfer->transfer_user_id = $trans->trans_user_id;
-                $log_transfer->transfer_from = $trans->trans_detail->first()->produk->user->username;
-                $log_transfer->transfer_to_user_id = $trans->trans_user_id;
-                $log_transfer->transfer_to = $trans->pembeli->username;
+                $log_transfer->transfer_from = $trans->pembeli->username;
+                $log_transfer->transfer_to_user_id = $trans->trans_detail->first()->produk->produk_seller_id;
+                $log_transfer->transfer_to = $trans->trans_detail->first()->produk->user->username;
                 $log_transfer->transfer_code_reff = $requestData['va'];
                 $log_transfer->transfer_type = 'idr';
                 $log_transfer->transfer_nominal = $trans->trans_amount_total;
