@@ -305,7 +305,7 @@ class ProdukController extends Controller
     {
         $data['role'] = Role::all();
         $data['user'] = User::all();
-        $data['category'] = Category::all();
+        $data['category'] = Category::where('category_name','!=','Green Productions')->get();
         $data['produk_unit'] = Produk_unit::all();
         $data['produk_location'] = Produk_location::all();
         $data['brand'] = Brand::all();
@@ -469,13 +469,15 @@ class ProdukController extends Controller
                         $grosir_id[]=$produk_grosir->id;
                     }
                 }
-                $user_id = Auth::id();
-                $delete_grosir = Produk_grosir::whereNotIn('id', $grosir_id)
-                    ->whereHas('produk', function($query) use ($user_id){
-                        $query->where('sys_produk.produk_seller_id', $user_id);
-                            return $query;
-                        })
-                    ->delete();
+                if(isset($grosir_id)){
+                    $user_id = Auth::id();
+                    $delete_grosir = Produk_grosir::whereNotIn('id', $grosir_id)
+                        ->whereHas('produk', function($query) use ($user_id){
+                            $query->where('sys_produk.produk_seller_id', $user_id);
+                                return $query;
+                            })
+                        ->delete();
+                }
             }
         }
         return redirect('member/produk')
