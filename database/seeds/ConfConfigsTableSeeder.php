@@ -110,7 +110,7 @@ class ConfConfigsTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 10,
-                'configs_name' => 'transaksi_durasi_checkout',
+                'configs_name' => 'transaksi_durasi_pembayaran',
                 'configs_value' => '2',
                 'configs_status' => 1,
                 'configs_note' => NULL,
