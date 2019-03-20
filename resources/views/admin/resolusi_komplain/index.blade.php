@@ -77,9 +77,10 @@
                                                 <li>Code : {{$item->trans_detail->trans_code}}</li>
                                                 <li>Amount : {{$item->trans_detail->trans_detail_amount_total}}</li>
                                                 <li>
-                                                    <button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href= "{{route('localapi.modal.res_kom_transDetail', $item->komplain_trans_id)}}" value="Choose Address" class='btn btn-info btn-xs'>
-                                                        More
-                                                    </button>
+                                                    {!! Form::open(['id' => 'form-transDetail']) !!}
+                                                    <input type="hidden" name="type" value="buyer"/>
+                                                    <input type="button" onclick='modal_post($(this), $("#form-transDetail").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.res_kom_transDetail", $item->komplain_trans_id)}} value="More" class="btn btn-info btn-xs" />
+                                                    {!! Form::close() !!}
                                                 </li>
                                             </ul>
                                         </td>

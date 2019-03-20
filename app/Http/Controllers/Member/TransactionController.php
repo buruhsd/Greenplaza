@@ -185,13 +185,13 @@ class TransactionController extends Controller
             // send email
             $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
             if ($trans->trans_payment_id == 1){
-                $trans = 'Transfer'
+                $trans = 'Transfer';
             }elseif ($trans->trans_payment_id == 2){
-                $trans = 'Midtrans'
+                $trans = 'Midtrans';
             }elseif ($trans->trans_payment_id == 3){
-                $trans = 'Masedi'
+                $trans = 'Masedi';
             }else ($trans->trans_payment_id == 4){
-                $trans = 'Greenline'
+                $trans = 'Greenline';
             }
             $config = [
                 'to' => $trans->pembeli->email,
