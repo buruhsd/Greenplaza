@@ -27,7 +27,7 @@ use App\Observers\NotifKomplainObserver;
 
 use App\Models\Solusi; 
 use App\Observers\NotifSolusiObserver;
-// use \Illuminate\Support\Facades\URL; 
+use \Illuminate\Support\Facades\URL; 
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // URL::forceScheme('https');
+        URL::forceScheme('https');
         Schema::defaultStringLength(191);
         // ketika ada aktifitas wallet
         Wallet::observe(WalletLogObserver::class);
