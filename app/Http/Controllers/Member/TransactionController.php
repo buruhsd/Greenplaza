@@ -190,7 +190,7 @@ class TransactionController extends Controller
                 $trans = 'Midtrans';
             }elseif ($trans->trans_payment_id == 3){
                 $trans = 'Masedi';
-            }else ($trans->trans_payment_id == 4){
+            }elseif ($trans->trans_payment_id == 4){
                 $trans = 'Greenline';
             }
             $config = [
