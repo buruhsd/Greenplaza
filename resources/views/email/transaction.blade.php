@@ -35,6 +35,11 @@
 	  						<th>:</th>
 	  						<th style="text-align: left;">{{$status}}</th>
   						</tr>
+  						<tr>
+	  						<th style="text-align: left;">Tipe Pembayaran </th>
+	  						<th>:</th>
+	  						<th style="text-align: left;">{{$trans}}</th>
+  						</tr>
   					</tbody>
   				</table>
 				<p>Silahkan login ke akun anda untuk mengecek kembali transaksi anda <a href="http://greenplaza.me/login">disini</a>. <br></p>
