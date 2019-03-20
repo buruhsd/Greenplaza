@@ -14,12 +14,12 @@
                 <div class="panel-heading clearfix">
                     <div class="col-md-12">
                         <div class="col-md-6">
-                            <form action="#" method="GET" class="form-inline">
+                            <!-- <form action="#" method="GET" class="form-inline">
                                 <div class="input-group pull-left" style="width: 225px;">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                                     <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
                                 </div>
-                            </form>
+                            </form> -->
                         </div>
                     </div>
                     <!-- <div class="col-md-6">
@@ -49,7 +49,7 @@
                                     <td><center>{{$g->created_at}}</center></td>
                                     <td>
                                         <ul>
-                                            <li>Transaksi Kode : {{$g->trans_code}}</li>
+                                            <li>Transaksi Kode : {{$g->trans->trans_code}}</li>
                                             <li>Tanggal : {{$g->trans->created_at}}</li>
                                         </ul>
                                     </td>
