@@ -70,6 +70,17 @@
         <script src="{{ asset('js/pusher.js') }}"></script>
         <script src="{{ asset('js/echo.js') }}"></script>
         <script type="text/javascript">
+            // var pusher = new Pusher('{!!env("PUSHER_APP_KEY")!!}', {
+            //     cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
+            //     forceTLS: true
+            // });
+
+            // var channel = pusher.subscribe('App.User.{{Auth::id()}}');
+            // channel.bind('pusher:subscription_error', function(data) {
+            //     console.log(data);
+            //     var url = '{!!url('member/notification/is_read')!!}/' + data.id;
+            //     showNotifications(data.data, '#member', url);
+            // });
             Pusher.logToConsole = true;
             window.Echo = new Echo({
                 "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
@@ -77,12 +88,13 @@
                 broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
                 key: '{!!env("PUSHER_APP_KEY")!!}',
                 cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
-                encrypted: true,
+                forceTLS: true,
+                // encrypted: true,
                 logToConsole: true
             });
+            console.log(window.Echo);
             // showNotifications({}, '#admin');
-            console.log('{{Auth::user()->id}}');
-            window.Echo.private('App.User.{{Auth::user()->id}}')
+            window.Echo.private('App.User.{{Auth::id()}}')
                 .notification((notification) => {
                     var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
                     showNotifications(notification.data, '#member', url);
