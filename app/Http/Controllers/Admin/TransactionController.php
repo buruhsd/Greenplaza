@@ -355,7 +355,6 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
-        $transfer = FunctionLib::gln('transfer', ['to_address' =>'xoMZ8gpwM2EmAGj5Jr6TWfZdUf1jBI2ec','amount'=>1,'address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
         $arr = [
             "0" =>'chart',
             "1" =>'order',
