@@ -37,6 +37,8 @@ class KomplainController extends Controller
             $res->review_text = $request->review_text;
             $res->save();
         }
+        $komplain->trans_detail->trans->trans_is_review = 1;
+        $komplain->trans_detail->trans->save();
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }

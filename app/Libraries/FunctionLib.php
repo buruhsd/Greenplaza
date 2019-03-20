@@ -1,6 +1,20 @@
 <?php
 class FunctionLib
 {
+    public static function add_saldo_admin($type, $amount, $note=""){
+        $where = 1;
+        $where .= " AND wallet_type=".$type;
+        $where .= " AND wallet_user_id=2";
+        $saldo = App\Models\Wallet::whereRaw($where)->first();
+        $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+        $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+        $saldo->wallet_note = $note;
+        $saldo->save();
+
+        $status = 200;
+        $message = "Update saldo admin berhasil";
+        return ['status'=>$status,'message'=>$message];
+    }
 
     public static function sum_wd($id, $type=""){
         $total = 0;
