@@ -216,9 +216,9 @@
                                 <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                     <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
                                         <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" ></a>
-                                    <div class="discount-wrap">
+                                    <!-- <div class="discount-wrap">
                                         <div data-countdown="2017/10/03"></div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="shop-icon">
                                         <ul>
                                             <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart"></i></a></li>
