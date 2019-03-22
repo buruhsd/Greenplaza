@@ -62,27 +62,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($hotsellerbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$hotsellerbaru->trans_hotlist_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$hotsellerbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotsellerkonf->trans_hotlist_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotsellerkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$hotsellerbatal->trans_hotlist_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$hotsellerbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$hotsellerapprove->trans_hotlist_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$hotsellerapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotsellerditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$hotsellerditolak->trans_hotlist_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$hotsellerditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
@@ -94,27 +94,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($iklansellerbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$iklansellerbaru->trans_iklan_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$iklansellerbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($iklansellerkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$iklansellerkonf->trans_iklan_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$iklansellerkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($iklansellerbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$iklansellerbatal->trans_iklan_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$iklansellerbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($iklansellerapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$iklansellerapprove->trans_iklan_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$iklansellerapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($iklansellerditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$iklansellerditolak->trans_iklan_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$iklansellerditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
@@ -126,27 +126,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($pinsellerbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$pinsellerbaru->trans_pincode_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$pinsellerbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($pinsellerkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$pinsellerkonf->trans_pincode_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$pinsellerkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($pinsellerbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$pinsellerbatal->trans_pincode_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$pinsellerbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($pinsellerapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$iklansellerapprove->trans_pincode_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$iklansellerapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($pinsellerditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$pinsellerditolak->trans_pincode_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$pinsellerditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
@@ -204,27 +204,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($hotmemberbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$hotmemberbaru->trans_hotlist_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$hotmemberbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotmemberkonf->trans_hotlist_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$hotmemberkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$hotmemberbatal->trans_hotlist_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$hotmemberbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$hotmemberapprove->trans_hotlist_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$hotmemberapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($hotmemberditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$hotmemberditolak->trans_hotlist_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$hotmemberditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
@@ -236,27 +236,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($iklanmemberbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$iklanmemberbaru->trans_iklan_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$iklanmemberbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($iklanmemberkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$iklanmemberkonf->trans_iklan_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$iklanmemberkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($iklanmemberbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$iklanmemberbatal->trans_iklan_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$iklanmemberbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($iklanmemberapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$iklanmemberapprove->trans_iklan_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$iklanmemberapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($iklanmemberditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$iklanmemberditolak->trans_iklan_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$iklanmemberditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
@@ -268,27 +268,27 @@
                                     <div class="project-stats">
                                         <ul class="list-unstyled">
                                         @if ($pinmemberbaru->count() > 0)
-                                            <li>Baru<span class="label label-default pull-right">{{$pinmemberbaru->trans_pincode_status->count()}}</span></li>
+                                            <li>Baru<span class="label label-default pull-right">{{$pinmemberbaru->count()}}</span></li>
                                         @else
                                             <li>Baru<span class="label label-default pull-right">0</span></li>
                                         @endif
                                         @if ($pinmemberkonf->count() > 0)
-                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$pinmemberkonf->trans_pincode_status->count()}}</span></li>
+                                            <li>Konfirmasi (paid)<span class="label label-danger pull-right">{{$pinmemberkonf->count()}}</span></li>
                                         @else
                                             <li>Konfirmasi (paid)<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($pinmemberbatal->count() > 0)
-                                            <li>Batal<span class="label label-success pull-right">{{$pinmemberbatal->trans_pincode_status->count()}}</span></li>
+                                            <li>Batal<span class="label label-success pull-right">{{$pinmemberbatal->count()}}</span></li>
                                         @else
                                             <li>Batal<span class="label label-success pull-right">0</span></li>
                                         @endif
                                         @if ($pinmemberapprove->count() > 0)
-                                            <li>Approve<span class="label label-danger pull-right">{{$pinmemberapprove->trans_pincode_status->count()}}</span></li>
+                                            <li>Approve<span class="label label-danger pull-right">{{$pinmemberapprove->count()}}</span></li>
                                         @else
                                             <li>Approve<span class="label label-danger pull-right">0</span></li>
                                         @endif
                                         @if ($pinmemberditolak->count() > 0)
-                                            <li>Ditolak<span class="label label-default pull-right">{{$pinmemberditolak->trans_pincode_status->count()}}</span></li>
+                                            <li>Ditolak<span class="label label-default pull-right">{{$pinmemberditolak->count()}}</span></li>
                                         @else
                                             <li>Ditolak<span class="label label-default pull-right">0</span></li>
                                         @endif
