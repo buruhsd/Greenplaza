@@ -130,7 +130,7 @@
                                 {!! $errors->first('user_store', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 {!! Form::label('image', ' ', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     <img class="h100" src="{{asset('assets/images/bg_etalase/'.$user->user_store_image) }}" onerror="this.src='http://placehold.it/700x400'" alt="">
@@ -146,7 +146,7 @@
                                     ])!!}
                                     {!! $errors->first('user_store_image', '<p class="help-block">:message</p>') !!}
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-12 m-t-sm">
                             {!! Form::label('user_slogan', 'Slogan', ['class' => 'col-md-12']) !!}

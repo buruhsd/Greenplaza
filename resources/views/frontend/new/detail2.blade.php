@@ -367,7 +367,7 @@
                                             </table>
                                             <table class="table-responsive cart-wrap">
                                                 <tr>
-                                                    <td class="text-left">
+                                                    <!-- <td class="text-left">
                                                         <ul>
                                                             <li class="no-list-style">
                                                                 Tinggi : {{$detail->produk_height}} mm
@@ -382,7 +382,7 @@
                                                                 Berat : {{$detail->produk_weight}} Gram
                                                             </li>
                                                         </ul>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                                 <tr>
                                                     <td class="text-left">
