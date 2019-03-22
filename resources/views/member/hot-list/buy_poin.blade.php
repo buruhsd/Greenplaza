@@ -18,8 +18,11 @@
                     <div class="row m-b-lg">
                         <div class="col-md-12">
                             <div class="row">
+                                <div class="form-group col-md-12">
+                                    <a href="{{route('member.hotlist.tagihan')}}" class="btn btn-xs btn-info pull">Tagihan</a>
+                                </div>
                                 <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail">Paket Hot List</label>
+                                    <label for="trans_hotlist_paket_id">Paket Hot List</label>
                                     <select class="form-control" id="trans_hotlist_paket_id" name="trans_hotlist_paket_id">
                                         @foreach($paket as $item)
                                             <option value="{{$item->id}}">
@@ -32,8 +35,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="exampleInputEmail">Password Transaksi</label>
-                                    <input type="user_detail_pass_trx" class="form-control col-md-6" name="user_detail_pass_trx" id="user_detail_pass_trx" >
+                                    <label for="trans_hotlist_payment_id">Pembayaran</label>
+                                    <select class="form-control" id="trans_hotlist_payment_id" name="trans_hotlist_payment_id">
+                                        @foreach($payment as $item)
+                                            <option value="{{$item->id}}">
+                                                {{ucfirst($item->payment_name)}} 
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password">Password Transaksi</label>
+                                    <input type="password" class="form-control col-md-6" name="user_detail_pass_trx" id="user_detail_pass_trx" >
                                 </div>
                             </div>
                         </div>

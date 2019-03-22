@@ -95,13 +95,16 @@
                                             <li>
                                                 Tagihan : Rp. {{FunctionLib::number_to_text($item->trans_hotlist_amount)}}
                                             </li>
+                                            <li>
+                                                Pembayaran : {{Ucfirst($item->payment->payment_name)}}
+                                            </li>
                                         </ul>
                                     </td>
                                     {{-- <td>{{$item->trans_hotlist_status}}</td> --}}
                                     <td>
                                         @if($item->trans_hotlist_status == 0)
                                             <a href="{{route('member.hotlist.konfirmasi', $item->id)}}" class="btn btn-xs btn-success">Konfirmasi</a>
-                                            <button class="btn btn-xs btn-danger">Batal</button>
+                                            <a href="{{route('member.hotlist.to_cancel', $item->id)}}" class="btn btn-xs btn-danger">Batal</a>
                                         @else
                                             <button class="btn btn-xs btn-success">Detail</button>
                                         @endif

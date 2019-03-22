@@ -22,7 +22,7 @@ class CronCreateWalletById extends Command
      *
      * @var string
      */
-    protected $description = 'membuat wallet user yang belum tersedia.';
+    protected $description = 'membuat wallet user yang belum tersedia berdasarkan id user {user_id=}.';
 
     /**
      * Create a new command instance.

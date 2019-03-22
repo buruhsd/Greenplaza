@@ -165,8 +165,6 @@
                                             <li class="text-info">({{$review->count()}} Customar Review)</li>
                                         </ul>
                                     </div>
-                                        Berat   : {{$detail->produk_weight}} gg <br>
-                                        Tinggi  : {{$detail->produk_wide}}  mm 
                                     <ul class="stock">
                                         <li>Stok : </li>
                                         <li>{{$detail->produk_stock}} <b>{{$detail->unit->produk_unit_name}}</b></li>
@@ -372,7 +370,13 @@
                                                     <td class="text-left">
                                                         <ul>
                                                             <li class="no-list-style">
-                                                                Tinggi : {{$detail->produk_height}} cm
+                                                                Tinggi : {{$detail->produk_height}} mm
+                                                            </li>
+                                                            <li class="no-list-style">
+                                                                Lebar : {{$detail->produk_wide}} mm
+                                                            </li>
+                                                            <li class="no-list-style">
+                                                                Panjang : {{$detail->produk_length}} mm
                                                             </li>
                                                             <li class="no-list-style">
                                                                 Berat : {{$detail->produk_weight}} Gram

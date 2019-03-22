@@ -64,6 +64,7 @@ class PincodeController extends Controller
     * @return add main footer script / in spesific method
     */
     public function list(){
+        return view('web_errors.maintenance');
         $data['pincode'] = Pincode::whereRaw('pincode_user_id ='.Auth::id())->paginate($this->perPage);
         return view('member.pincode.history', $data);
     }
@@ -73,6 +74,7 @@ class PincodeController extends Controller
     * @return view
     */
     public function buy_pincode(){
+        return view('web_errors.maintenance');
         $data['paket'] = Paket_pincode::all();
         return view('member.pincode.buy_pincode', $data);
     }
@@ -147,6 +149,7 @@ class PincodeController extends Controller
     * @return add main footer script / in spesific method
     */
     public function tagihan(Request $request){
+        return view('web_errors.maintenance');
         $arr = [
             "0" =>'new',
             "1" =>'wait',

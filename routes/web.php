@@ -553,11 +553,12 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 		// Hot List
 		Route::group(['prefix' => 'hotlist', 'as' => '.hotlist'], function () {
+			Route::get('/generate_qr/{id}', 'HotlistController@generate_qr')->name('.generate_qr');
 			Route::get('/buy_poin', 'HotlistController@buy_poin')->name('.buy_poin');
 			Route::post('/buy_poin_store', 'HotlistController@buy_poin_store')->name('.buy_poin_store');
 			Route::get('/konfirmasi/{id}', 'HotlistController@konfirmasi')->name('.konfirmasi');
-			Route::post('/to_confirm/{$id}', 'HotlistController@to_confirm')->name('.to_confirm');
-			Route::post('/to_cancel/{$id}', 'HotlistController@to_cancel')->name('.to_cancel');
+			Route::post('/to_confirm/{id}', 'HotlistController@to_confirm')->name('.to_confirm');
+			Route::get('/to_cancel/{id}', 'HotlistController@to_cancel')->name('.to_cancel');
 			Route::get('/tagihan', 'HotlistController@tagihan')->name('.tagihan');
 			Route::get('/history', 'HotlistController@history')->name('.history');
 		});
@@ -707,6 +708,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::group(['middleware' => ['is_active']], function () {
 			Route::get('payment', 'MasediController@payment')->name('.payment');
 			Route::get('qr/{code}', 'MasediController@qr')->name('.qr');
+			Route::get('qr_hotlist/{code}', 'MasediController@qr_hotlist')->name('.qr_hotlist');
 		});
 		// Route::post('done', 'MidtransController@done')->name('.done');
 	});

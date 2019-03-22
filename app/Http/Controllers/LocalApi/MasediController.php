@@ -185,6 +185,13 @@ class MasediController extends Controller
         return view('localapi.masedi.qr', $data);
     }
 
+    public function qr_hotlist($code){
+        $trans = Trans_hotlist::whereRaw('trans_hotlist_code = "'.$code.'"')->first();
+        $data['qr'] = $trans->trans_hotlist_qr;
+
+        return view('localapi.masedi.qr', $data);
+    }
+
     /**
     * @param
     * @return
