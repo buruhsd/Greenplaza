@@ -30,8 +30,26 @@
                     <td> : {{$g->trans_detail_size}}</td>
                 </tr>
                 <tr>
-                    <th>Size</th>
+                    <th>Jumlah</th>
                     <td> : {{$g->trans_detail_amount_total}}</td>
+                </tr>
+                <tr>
+                    <th>Jumlah Gln</th>
+                    
+                    <td> : {{ $g->gln['trans_gln_amount'] }}</td>    
+                    
+                </tr>
+                <tr>
+                    <th>Fee Gln</th>
+                    
+                    <td> : {{ $g->gln['trans_gln_amount_fee'] }}</td>    
+                    
+                </tr>
+                <tr>
+                    <th>Total Transaksi Gln</th>
+                    
+                    <td> : {{ $g->gln['trans_gln_amount_total'] }}</td>    
+                    
                 </tr>
             </thead>
           </table>

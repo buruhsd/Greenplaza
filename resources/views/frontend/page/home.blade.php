@@ -349,7 +349,7 @@
                                         </ul>
                                     </div>
                                     @else
-                                       <span class="new">new</span>
+                                       <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}

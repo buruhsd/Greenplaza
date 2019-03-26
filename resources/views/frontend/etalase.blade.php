@@ -145,7 +145,15 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                                <span class="new sale">Sale</span>
+                                                @if ($p->produk_stock == 0)
+                                                <div class="featured-content text-center">
+                                                    <ul>
+                                                        <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
+                                                    </ul>
+                                                </div>
+                                                @else
+                                                   <span class="new">new</span>
+                                                @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
                                                 {{-- <img class="second second2" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}
                                                 <!-- <div class="shop-icon">
