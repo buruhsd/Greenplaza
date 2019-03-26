@@ -1,6 +1,61 @@
 <?php
 class FunctionLib
 {
+
+    public static function hotlist_status($id, $type='normal'){
+        $arr = [
+            0 => ['danger','Belum Lunas'],
+            1 => ['warning','Menunggu Admin'],
+            2 => ['danger','Batal'],
+            3 => ['success','Selesai'],
+            4 => ['danger','Ditolak']
+        ];
+
+        $respon = ($type == 'normal')
+            ?$arr[$id][1]
+            :$arr[$id][0];
+        return $respon;
+    }
+
+    /**
+    * pindahkan saldo user ke user
+    * @param from_id, to_id, wallet_type, amount, note
+    * @return status / message
+    **/
+    public static function transfer_wallet($param=[]){
+        $note = "transfer wallet";
+        $date = date('Y-m-d H:i:s');
+        extract($param);
+        try{
+            // update saldo from
+            $where = 'wallet_user_id='.$from_id;
+            $where .= ' AND wallet_type='.$wallet_type;
+            $saldo = App\Models\Wallet::whereRaw($where)->first();
+            $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+            $saldo->wallet_ballance = $saldo->wallet_ballance - $amount;
+            $saldo->wallet_note = $note;
+            $saldo->save();
+
+            // update saldo to
+            $where = 'wallet_user_id='.$to_id;
+            $where .= ' AND wallet_type='.$wallet_type;
+            $saldo = App\Models\Wallet::whereRaw($where)->first();
+            $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+            $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+            $saldo->wallet_note = $note;
+            $saldo->save();
+
+            $status = 200;
+            $message = 'Transfer wallet berhasil.';
+        }catch(Exception $e){
+            $status = 500;
+            $message = 'Transfer wallet gagal.';
+        }
+
+        $return = ['status'=>$status, 'message'=>$message];
+        return $return;
+    }
+
     public static function add_saldo_admin($type, $amount, $note=""){
         $where = 1;
         $where .= " AND wallet_type=".$type;
@@ -386,29 +441,35 @@ class FunctionLib
     * @return
     **/
     public static function update_wallet($param=[], $type='non'){
+        $note = "update wallet";
         $date = date('Y-m-d H:i:s');
-        $status = 200;
-        $message = 'Wallet berhasi diubah.';
         extract($param);
-        // update saldo hotlist
-        $where = 'wallet_user_id='.$user_id;
-        $where .= ' AND wallet_type='.$wallet_type;
-        switch ($type) {
-            case 'non':
-                $saldo = App\Models\Wallet::whereRaw($where)->first();
-                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
-                $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
-                $saldo->wallet_note = $note;
-                $saldo->save();
-            break;
-            case 'transaction':
-                $amount = $amount-($amount*(FunctionLib::get_config('price_pajak_admin'))/100);
-                $saldo = App\Models\Wallet::whereRaw($where)->first();
-                $saldo->wallet_ballance_before = $saldo->wallet_ballance;
-                $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
-                $saldo->wallet_note = $note;
-                $saldo->save();
-            break;
+        try{
+            // update saldo hotlist
+            $where = 'wallet_user_id='.$user_id;
+            $where .= ' AND wallet_type='.$wallet_type;
+            switch ($type) {
+                case 'non':
+                    $saldo = App\Models\Wallet::whereRaw($where)->first();
+                    $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                    $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+                    $saldo->wallet_note = $note;
+                    $saldo->save();
+                break;
+                case 'transaction':
+                    $amount = $amount-($amount*(FunctionLib::get_config('price_pajak_admin'))/100);
+                    $saldo = App\Models\Wallet::whereRaw($where)->first();
+                    $saldo->wallet_ballance_before = $saldo->wallet_ballance;
+                    $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
+                    $saldo->wallet_note = $note;
+                    $saldo->save();
+                break;
+            }
+            $status = 200;
+            $message = 'Wallet berhasi diubah.';
+        }catch(Exception $e){
+            $status = 500;
+            $message = 'Wallet gagal diubah.';
         }
 
         $return = ['status'=>$status, 'message'=>$message];

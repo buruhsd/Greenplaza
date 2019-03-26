@@ -27,8 +27,9 @@
                         </h2>
                     </div>
                     <hr>
-                    <button class="btn btn-info btn-xs" id="swalls">check swall</button>
-                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href='{{route("localapi.midtrans.hotlist_payment", $trans->trans_hotlist_code)}}' value="Pay" class="btn btn-success" id="btn-pick-address" />
+                    <button class="btn btn-success" id="pay" data-href='{{route("member.hotlist.bayar_gln", $trans->trans_hotlist_code)}}'>Bayar</button>
+                    <a class="btn btn-warning hide" id="back" href='{{route("member.hotlist.tagihan")}}'><i class="fa fa-arrow-left"></i> Kembali ke halaman tagihan</a>
+                    <!-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href='{{route("member.hotlist.bayar_gln", $trans->trans_hotlist_code)}}' value="Pay" class="btn btn-success" id="btn-pick-address" /> -->
                 </div>
             </div>
         </div>
@@ -39,7 +40,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    $('#swalls').click(function(e){
+    $('#pay').click(function(e){
         swal({
             title: 'Ingin lanjut membayar?',
             text: "Klik Bayar untuk lanjut membayar!",
@@ -51,9 +52,16 @@
             confirmButtonText: 'Bayar!'
         }).then((isConfirm) => {
             if (isConfirm.value){
-                swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+                $.post($('#pay').data('href'), {"_token": "{{ csrf_token() }}"}, function( data ) {
+                    var status = (data.status == 200)?'success':'error';
+                    if((data.status == 200)){
+                        $('#pay').hide();
+                        $('#back').removeClass('hide');
+                    }
+                    swal("notifikasi!", data.message, status);
+                });
             } else {
-                swal("Cancelled", "Your imaginary file is safe :)", "error");
+                swal("Batal", "Pembayaran dibatalkan", "error");
                 e.preventDefault();
             }
         });

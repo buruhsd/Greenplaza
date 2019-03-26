@@ -16,6 +16,7 @@ use App\Models\Paket_hotlist;
 use App\Models\Trans_hotlist;
 use App\Models\Produk;
 use App\Models\Payment;
+use App\Models\Wallet_type;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +25,108 @@ class HotlistController extends Controller
     private $perPage = 5;
     private $mainTable = 'sys_produk';
 
+    /**
+    * pembayaran pembelian hotlist menggunakan saldo
+    * @param code
+    * @return status / message
+    **/
+    public function bayar_saldo(Request $request, $code){
+        $date = date('Y-m-d H:i:s');
+        try{
+            $trans = Trans_hotlist::whereTrans_hotlist_code($code)->first();
+            // transfer wallet 
+            $wallet_type = Wallet_type::findOrFail($request->wallet_type);
+            $update_wallet = [
+                'from_id'=>$trans->trans_hotlist_user_id,
+                'to_id'=>2,
+                'wallet_type'=>$request->wallet_type, //1/3
+                'amount'=>$trans->trans_hotlist_amount,
+                'note'=>'Transfer saldo '.$wallet_type->wallet_type_name.' pembelian paket hotlist '.$trans->paket->paket_hotlist_name.'.',
+            ];
+            $transfer = FunctionLib::transfer_wallet($update_wallet);
+            $check_transfer = ($transfer['status'] == 200)?true:false;
+            // $check_transfer = true;
 
+            // // update saldo hotlist 
+            // if($check_transfer){
+            //     $update_wallet = [
+            //         'user_id'=>$trans->trans_hotlist_user_id,
+            //         'wallet_type'=>4,
+            //         'amount'=>$trans->trans_hotlist_amount,
+            //         'note'=>'Update wallet hotlist dengan pembelian paket '.$trans->paket->paket_hotlist_name.'.',
+            //     ];
+            //     $saldo = FunctionLib::update_wallet($update_wallet);
+            //     $check_saldo = ($saldo['status'] == 200)?true:false;
+            //     // $check_saldo = true;
+            // }
+
+            if($check_transfer){
+                $trans->trans_hotlist_status = 1;
+                $trans->trans_hotlist_paid_date = $date;
+                $trans->trans_hotlist_note = $trans->trans_hotlist_note." Transaksi telah di bayar oleh member.";
+                $trans->save();
+                $status = 200;
+                $message = "Transfer Saldo berhasil.";
+            }else{
+                $status = 500;
+                $message = "transfer gagal, 
+                    silahkan ulangi transfer atau check saldo anda. 
+                    jika ada masalh dilahkan hubungi admin greenplaza.";
+            }
+        }catch(\Exception $e){
+            $status = 500;
+            $message = "transfer gagal, 
+                silahkan ulangi transfer atau check saldo anda. 
+                jika ada masalh dilahkan hubungi admin greenplaza.";
+        }
+        if($request->ajax())
+        {
+            return response()->json(['status'=>$status,'message' => $message]);
+        }
+        return redirect('member/hotlist/tagihan')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /**
+    * pembayaran pembelian hotlist menggunakan GLN
+    * @param code
+    * @return status / message
+    **/
+    public function bayar_gln(Request $request, $code){
+        $date = date('Y-m-d H:i:s');
+        $status = 500;
+        $message = "transfer gagal, 
+            silahkan ulangi transfer atau check saldo gln anda. 
+            jika ada masalh dilahkan hubungi admin greenplaza.";
+        try{
+            $trans = Trans_hotlist::whereTrans_hotlist_code($code)->first();
+            $from = $trans->user->wallet->where('wallet_type', 7)->first()->wallet_address;
+            $to = FunctionLib::get_config('profil_gln_address');
+            $amount = $trans->trans_hotlist_amount / FunctionLib::gln('compare',[])['data'];
+            $amount = round($amount,8, PHP_ROUND_HALF_UP);
+            $transfer = FunctionLib::gln('transfer', [
+                'to_address' =>$to,
+                'amount'=>$amount,
+                'address'=>$from
+            ]);
+            if($transfer['status'] == 200){
+                $trans->trans_hotlist_status = 1;
+                $trans->trans_hotlist_paid_date = $date;
+                $trans->trans_hotlist_note = $trans->trans_hotlist_note." Transaksi telah di bayar oleh member.";
+                $trans->save();
+                $status = 200;
+                $message = "Transfer GLN berhasil.";
+            }
+        }catch(\Exception $e){
+            // buat log error
+        }
+        if($request->ajax())
+        {
+            return response()->json(['status'=>$status,'message' => $message]);
+        }
+        return redirect('member/hotlist/tagihan')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
 
     /**
     * @param $request, $id
@@ -99,7 +201,7 @@ class HotlistController extends Controller
                 break;                
             }
         }
-        return redirect()->back()
+        return redirect('member/hotlist/tagihan')
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
@@ -108,7 +210,7 @@ class HotlistController extends Controller
     * @return view
     */
     public function history(Request $request){
-        return view('web_errors.maintenance');
+        // return view('web_errors.maintenance');
         $where = 1;
         $where .= ' AND produk_seller_id ='.Auth::id();
         $where .= ' AND produk_is_hot = 1';
@@ -125,7 +227,7 @@ class HotlistController extends Controller
     * @return view
     */
     public function buy_poin(){
-        return view('web_errors.maintenance');
+        // return view('web_errors.maintenance');
         $data['paket'] = Paket_hotlist::all();
         $data['payment'] = Payment::where('payment_status', 1)->get();
         return view('member.hot-list.buy_poin', $data);
@@ -204,7 +306,7 @@ class HotlistController extends Controller
     * @return View
     */
     public function tagihan(Request $request){
-        return view('web_errors.maintenance');
+        // return view('web_errors.maintenance');
         $arr = [
             "0" =>'new',
             "1" =>'wait',

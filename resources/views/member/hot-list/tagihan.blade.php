@@ -86,11 +86,7 @@
                                     <td>
                                         <ul>
                                             <li>
-                                                Status : {!!
-                                                    ($item->trans_hotlist_status == 3)
-                                                    ?'<button class="btn btn-xs btn-success">Lunas</button>'
-                                                    :'<button class="btn btn-xs btn-danger">Belum Lunas</button>'
-                                                !!}
+                                                Status : <button class="btn btn-xs btn-{!!FunctionLib::hotlist_status($item->trans_hotlist_status, 'btn')!!}">{!!FunctionLib::hotlist_status($item->trans_hotlist_status)!!}</button>
                                             </li>
                                             <li>
                                                 Tagihan : Rp. {{FunctionLib::number_to_text($item->trans_hotlist_amount)}}

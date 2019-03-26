@@ -553,6 +553,8 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 		// Hot List
 		Route::group(['prefix' => 'hotlist', 'as' => '.hotlist'], function () {
+			Route::post('/bayar_saldo/{code}', 'HotlistController@bayar_saldo')->name('.bayar_saldo');
+			Route::post('/bayar_gln/{code}', 'HotlistController@bayar_gln')->name('.bayar_gln');
 			Route::get('/generate_qr/{id}', 'HotlistController@generate_qr')->name('.generate_qr');
 			Route::get('/buy_poin', 'HotlistController@buy_poin')->name('.buy_poin');
 			Route::post('/buy_poin_store', 'HotlistController@buy_poin_store')->name('.buy_poin_store');
