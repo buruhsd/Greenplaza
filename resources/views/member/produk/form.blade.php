@@ -315,7 +315,7 @@
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_price') ? 'has-error' : ''}}">
             {!! Form::label('produk_price', 'Harga : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
-                {!! Form::number('produk_price', null, [
+                {!! Form::number('produk_price', number_format($produk->produk_price, 0, ',', ''), [
                     'min' => '0',
                     'class' => 'form-control', 
                     'placeholder' => 'Harga', 
