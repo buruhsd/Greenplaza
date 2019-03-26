@@ -1,6 +1,8 @@
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
+			@if($detail->trans_detail_status != 5)
+			@else
 		    @if($type == 'buyer')
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
@@ -17,6 +19,7 @@
 			    		</a>
 			    	</div>
 			    </div>
+			@endif
 			@endif
 		@else
     		<div class="row">
@@ -164,6 +167,8 @@
 @else
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
+		@if($detail->trans_detail_status != 5)
+		@else
 		    @if($type == 'buyer')
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
@@ -181,6 +186,7 @@
 			    	</div>
 			    </div>
 			@endif
+		@endif
 		@else
 		@endif
 	@else
