@@ -102,7 +102,7 @@ class ProdukController extends Controller
 
     public function block (Request $request, $id)
     {
-        $status = 500;
+        $status = 200;
         $message = 'Produk Blocked!';
         $produk = Produk::find($id);
         $produk->produk_status = 2;

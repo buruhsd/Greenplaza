@@ -147,6 +147,7 @@ class FrontController extends Controller
                     // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                     ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
                     ->groupBy('sys_produk.id')
+                    ->where('produk_status', '!=', 2)
                 ->paginate($perPage);
             if($id_cat !== null){
                 $data['produk'] = FunctionLib::produk_by('category', $id_cat, "all", $where, $order)
@@ -155,6 +156,7 @@ class FrontController extends Controller
                         // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                         ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
                         ->groupBy('sys_produk.id')
+                        ->where('produk_status', '!=', 2)
                     ->paginate($perPage);
             }
         }else{
@@ -164,9 +166,10 @@ class FrontController extends Controller
                     // ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                     ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'))
                     ->groupBy('sys_produk.id')
+                    ->where('produk_status', '!=', 2)
                 ->paginate($perPage);
         }
-        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_category_id', '!=', null)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
         return view('frontend.category', $data, compact('category'));
     }
@@ -324,22 +327,22 @@ class FrontController extends Controller
         $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
         // dd($users);
 
-        $relatedproduk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(5)->get();
-        $relatedprodukk = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
-        $product_asdf = Produk::where('produk_seller_id', $users)->orderBy('created_at', 'DESC')->limit(12)->get();
-        $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->where('produk_seller_id', '!=', $users)->get();
-        $newproduk = Produk::orderBy('created_at', 'DESC')->where('produk_seller_id', '!=', $users)->limit(12)->get();
-        $discountprice = Produk::where('produk_discount', '!=', 0)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
-        $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->get();
-        $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->limit(4)->skip(4)->get();
+        $relatedproduk = Produk::where('produk_seller_id', $users)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->limit(5)->get();
+        $relatedprodukk = Produk::where('produk_seller_id', $users)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
+        $product_asdf = Produk::where('produk_seller_id', $users)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->limit(12)->get();
+        $category = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_category_id', '!=', null)->where('produk_seller_id', '!=', $users)->get();
+        $newproduk = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_seller_id', '!=', $users)->limit(12)->get();
+        $discountprice = Produk::where('produk_discount', '!=', 0)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
+        $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->where('produk_status', '!=', 2)->limit(4)->get();
+        $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->where('produk_status', '!=', 2)->limit(4)->skip(4)->get();
         $review = Review::orderBy('created_at', 'DESC')->limit(3)->get();
-        $toprate = Produk::orderBy('produk_hotlist', 'DESC')->limit(4)->get();
-        $topratee = Produk::orderBy('produk_hotlist', 'DESC')->limit(4)->skip(4)->get();
-        $discountproduk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->get();
-        $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
-        $latestnews = Produk::orderBy('created_at', 'DESC')->limit(6)->get();
-        $latestnewss = Produk::orderBy('created_at', 'DESC')->limit(6)->skip(6)->get();
-        $featured = Produk::orderBy('created_at', 'ASC')->where('produk_seller_id', '!=', $users)->limit(12)->get();
+        $toprate = Produk::orderBy('produk_hotlist', 'DESC')->where('produk_status', '!=', 2)->limit(4)->get();
+        $topratee = Produk::orderBy('produk_hotlist', 'DESC')->where('produk_status', '!=', 2)->limit(4)->skip(4)->get();
+        $discountproduk = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_discount', '>', 0)->limit(4)->get();
+        $discountprodukk = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_discount', '>', 0)->limit(4)->skip(4)->get();
+        $latestnews = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->limit(6)->get();
+        $latestnewss = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->limit(6)->skip(6)->get();
+        $featured = Produk::orderBy('created_at', 'ASC')->where('produk_status', '!=', 2)->where('produk_seller_id', '!=', $users)->limit(12)->get();
         $banner1 = Iklan::where('iklan_iklan_id', 1)->first();
         $banner2 = Iklan::where('iklan_iklan_id', 2)->first();
         $banner3 = Iklan::where('iklan_iklan_id', 3)->first();
