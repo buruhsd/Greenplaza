@@ -29,16 +29,16 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('trans:checkout')
             ->hourly();
-        // $schedule->command('trans:packing')
-        //     ->dailyAt('20:00');
-        // $schedule->command('trans:able')
-        //     ->dailyAt('20:00');
+        $schedule->command('trans:packing')
+            ->dailyAt('20:00');
+        $schedule->command('trans:able')
+            ->dailyAt('20:00');
         $schedule->command('trans:shipping')
             ->hourly();
-        // $schedule->command('trans:hotlist')
-        //     ->dailyAt('20:00');
-        // $schedule->command('trans:pincode')
-        //     ->dailyAt('20:00');
+        $schedule->command('trans:hotlist')
+            ->dailyAt('20:00');
+        $schedule->command('trans:pincode')
+            ->dailyAt('20:00');
         // $schedule->command('trans:iklan')
         //     ->dailyAt('20:00');
         // $schedule->command('trans:name')
