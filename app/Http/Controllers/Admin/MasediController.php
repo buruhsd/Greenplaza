@@ -86,7 +86,7 @@ class MasediController extends Controller
         $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->where('trans_detail_is_cancel', 1)
-            ->where('trans_detail_status', 4)
+            ->where('trans_detail_status', 3, 4)
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
         $url = FunctionLib::gln('compare',[])['data'];
