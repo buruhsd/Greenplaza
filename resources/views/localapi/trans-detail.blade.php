@@ -13,7 +13,7 @@
                 <table class="table table-bordered m-t-xs">
                     <thead>
                         <th class="text-center">Code</th>
-                        <th class="text-center"></th>
+                        <th class="text-center">Gambar</th>
                         <th class="text-center">Produk Detail</th>
                         <th class="text-center">Seller Detail</th>
                         <th class="text-center">Shipment Detail</th>
@@ -35,7 +35,11 @@
                                 <ul>
                                     <li>Name : {{$item->produk->produk_name}}</li>
                                     <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
+                                @if ($item->trans_detail_is_cancel == 0)
                                     <li>Status : <button class="btn btn-info btn-xs">{{FunctionLib::trans_arr($item->trans_detail_status)}}</button></li>
+                                @else
+                                    <li>Status : <button class="btn btn-info btn-xs">Cancel</button></li>
+                                @endif
                                 </ul>
                             </td>
                             <td>

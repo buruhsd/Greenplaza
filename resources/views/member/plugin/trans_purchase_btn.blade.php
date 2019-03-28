@@ -77,8 +77,8 @@
 		    	@if($type == 'buyer')
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
-			    			<!-- <button class="btn btn-success btn-xs">Packing</button>
-			    			{!! Form::open(['id' => 'form-pick-cancel', 'class' => 'col-md-6']) !!}
+			    			<!-- <button class="btn btn-success btn-xs">Packing</button> -->
+			    			<!-- {!! Form::open(['id' => 'form-pick-cancel', 'class' => 'col-md-6']) !!}
 			                	<input type="hidden" name="status" value="cancel"/>
 			                    <input type="button" onclick='modal_post($(this), $("#form-pick-cancel").serialize());' data-toggle='modal' data-method='post' data-href={{route("localapi.modal.pick_produk_ship", $detail->trans->id)}} value="Cancel" class="btn btn-danger btn-xs btn-block" />
 			                {!! Form::close() !!} -->
