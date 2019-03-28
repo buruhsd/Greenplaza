@@ -30,7 +30,7 @@
                     <td> : {{$g->trans_detail_size}}</td>
                 </tr>
                 <tr>
-                    <th>Size</th>
+                    <th>Amount Total</th>
                     <td> : {{$g->trans_detail_amount_total}}</td>
                 </tr>
             </thead>

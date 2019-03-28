@@ -73,8 +73,12 @@
                                             <td><center><button class="btn btn-success btn-xs">success send to seller</button></center></td>
                                         @endif
 
-                                    @elseif ($g->trans_detail_status == 4 && $g->trans_detail_is_cancel == 1)
+                                    @elseif (($g->trans_detail_status == 4 || $g->trans_detail_status == 3) && $g->trans_detail_is_cancel == 1)
                                         @if ($g->gln->trans_gln_status == 2)
+                                            <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_sendback', [$g->trans_code, $g->id])}}">
+                                                <button class="btn btn-warning btn-xs">send coin back to member</button>
+                                            </a></center></td>
+                                        @elseif ($g->gln->trans_gln_status == 1)
                                             <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_sendback', [$g->trans_code, $g->id])}}">
                                                 <button class="btn btn-warning btn-xs">send coin back to member</button>
                                             </a></center></td>
