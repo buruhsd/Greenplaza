@@ -19,6 +19,7 @@
     </div>
 </div>
 <div id="main-wrapper">
+@if(Auth::user()->seller_active())
     <div class="panel panel-white stats-widget bg-info">
         <h3 class="breadcrumb-header">Penjualan</h3>
         <div class="panel-body">
@@ -167,6 +168,7 @@
             </div><!-- Row -->
         </div>
     </div>
+@endif
     <div class="panel panel-white stats-widget bg-info">
         <h3 class="breadcrumb-header">Pembelian</h3>
         <div class="panel-body">

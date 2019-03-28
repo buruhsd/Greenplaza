@@ -190,11 +190,13 @@
                                         <li class="{{FunctionLib::setActive('member/iklan/history')}}"><a href="{{route('member.iklan.history')}}">History Iklan</a></li>
                                     </ul>
                                 </li>
+                                @if(Auth::user()->seller_active())
                                 <li class="{{FunctionLib::setActive('member/user/set_shipment')}}">
                                     <a href="{{route('member.user.set_shipment')}}">
                                         <i class="menu-icon icon-layers"></i><span>Atur Kurir</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                 </li>
+                                @endif
                                 {{-- need actived --}}
                                 {{-- pembeli --}}
                                 <li class="@yield('log')">
