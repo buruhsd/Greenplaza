@@ -35,11 +35,9 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
-                                    <th><center>Kode_Order</center></th>
-                                    <th><center>Nama_Seller</center></th>
-                                    <th><center>Jumlah_Transfer</center></th>
-                                    <th><center>Bank_Tujuan</center></th>
-                                    <th><center>Status</center></th>
+                                    <th><center>Kode Order</center></th>
+                                    <th><center>Pembelian</center></th>
+                                    <th><center>Tagihan</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
@@ -49,11 +47,33 @@
                                 <tr>
                                     <td><center>{{++$key}}</center></td>
                                     <td><center>{{$h->trans_hotlist_code}}</center></td>
-                                    <td><center>{{App\User::where('id', $h->trans_hotlist_user_id)->first()->name}}</center></td>
-                                    <td><center>{{$h->trans_hotlist_amount}}</center></td>
-                                    <td><center>{{App\Models\Bank::where('id', $h->trans_hotlist_bank_id)->first()->bank_kode}}</center></td>
-                                    </center></td>
-                                    @if ($h->trans_hotlist_status == 1)
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Pembeli : {{$h->user->name}}
+                                            </li>
+                                            <li>
+                                                Paket : {{$h->paket->paket_hotlist_name}}
+                                            </li>
+                                            <li>
+                                                Poin : {{$h->trans_hotlist_jml}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Status : <button class="btn btn-xs btn-{!!FunctionLib::hotlist_status($h->trans_hotlist_status, 'btn')!!}">{!!FunctionLib::hotlist_status($h->trans_hotlist_status)!!}</button>
+                                            </li>
+                                            <li>
+                                                Tagihan : Rp. {{FunctionLib::number_to_text($h->trans_hotlist_amount)}}
+                                            </li>
+                                            <li>
+                                                Pembayaran : {{Ucfirst($h->payment->payment_name)}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    {{-- @if ($h->trans_hotlist_status == 1)
                                     <td><center>Belum Konfirmasi</center></td>
                                     @elseif ($h->trans_hotlist_status == 2)
                                     <td><center>Sudah Konfirmasi</center></td>
@@ -61,10 +81,20 @@
                                     <td><center>Approved</center></td>
                                     @elseif ($h->trans_hotlist_status == 4)
                                     <td><center>Ditolak</center></td>
-                                    @endif
+                                    @endif --}}
                                     </td>
                                     <td>
                                         @if ($h->trans_hotlist_status == 1)
+                                        <center>
+                                            <a href="{{route('admin.needapproval.approve_adminhotlist', $h->id)}}"><button type="submit" class="btn btn-success">Approve</button></a>
+                                            <a href="{{route('admin.needapproval.tolakhotlist', $h->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
+                                        </center>
+                                        @elseif ($h->trans_hotlist_status == 4)
+                                        <center>
+                                            <p style="color: red">IKLAN DITOLAK</p>
+                                        </center>
+                                        @endif
+                                        {{-- @if ($h->trans_hotlist_status == 1)
                                         <center>
                                             <a href="{{route('admin.needapproval.konfirmasi_hotlist', $h->id)}}"><button type="submit" class="btn btn-info">Konfirmasi</button></a>
                                             <a href="{{route('admin.needapproval.tolakhotlist', $h->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
@@ -82,7 +112,7 @@
                                         <center>
                                             <p style="color: red">IKLAN DITOLAK</p>
                                         </center>
-                                        @endif
+                                        @endif --}}
                                 </tr>
                                 @endforeach
                             @else

@@ -16,4 +16,8 @@ class Wallet_type extends Model
     protected $fillable = [
         'wallet_type_kode', 'wallet_type_name', 'wallet_type_note'
     ];
+
+    public function log(){
+        return $this->hasMany('App\Models\Log_wallet', 'wallet_type');
+    }
 }

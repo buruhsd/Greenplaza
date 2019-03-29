@@ -31,7 +31,7 @@
                                     <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
                                         {!! Form::label('id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
                                         <div class="col-md-9">
-                                            <select name='id' class="form-control" id="id" onchange="get_hotlist();">
+                                            <select name='id' class="form-control" id="id" onchange="get_hotlist(this);">
                                                 @foreach($produk as $item)
                                                 <option value='{{$item->id}}'>{{$item->produk_name}}</option>
                                                 @endforeach
@@ -80,14 +80,10 @@
             get_hotlist($id);
         });
         function get_hotlist(e){
-            id = e.val();
-            $.ajax({
-                type: 'get', // or post?
-                url: '{{url('localapi/content/get_hotlist')}}/'+id, // change as needed
-                success: function(data) {
-                    $('#total-hotlist').html(data+' Click');
-                    // $('#produk_hotlist').val(data);
-                }
+            console.log($(e).children("option:selected").val());
+            id = $(e).val();
+            $.get( '{{url('localapi/content/get_hotlist')}}/'+id, function( data ) {
+                $('#total-hotlist').html(data+' Click');
             });
         }
     </script>

@@ -17,8 +17,11 @@ class NotifTransaksiObserver
                 && (!$item->isDirty('trans_detail_is_cancel'))
             ){
             $this->setLog("updated", $item);
+        }elseif((!$item->is_komplain()) 
+                && ($item->isDirty('trans_detail_is_cancel'))
+            ){
+            $this->setLog_cancel("updated", $item);
         }
-        // $this->setLog_cancel("updated", $item);
     }
     public function deleted(Trans_detail $item)
     {
@@ -132,16 +135,30 @@ class NotifTransaksiObserver
         $data['route'] = route('member.transaction.purchase', ['status'=>'cancel']);
         $data['status'] = 200;
         $data['message'] = $notif;
-        if($is_system){
-            $author = User::find(2);
-            $user_get_notif = [$item->trans->pembeli->id, $item->produk->user->id];
-            $item->trans->pembeli->notify(new Transaksi($item,$author,$data));
-            $data['route'] = route('member.transaction.index', ['status'=>'cancel']);
-            $item->produk->user->notify(new Transaksi($item,$author,$data));
-        }else{
-            $author = $item->produk->user;
-            $user = $item->trans->pembeli;
-            $user->notify(new Transaksi($item,$author,$data));
+
+        switch ($type) {
+            case 'created':
+            break;
+            case 'updated':
+                switch ($item->trans_detail_status) {
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                        if($is_system){
+                            $author = User::find(2);
+                            $user_get_notif = [$item->trans->pembeli->id, $item->produk->user->id];
+                            $item->trans->pembeli->notify(new Transaksi($item,$author,$data));
+                            $data['route'] = route('member.transaction.index', ['status'=>'cancel']);
+                            $item->produk->user->notify(new Transaksi($item,$author,$data));
+                        }else{
+                            $author = $item->produk->user;
+                            $user = $item->trans->pembeli;
+                            $user->notify(new Transaksi($item,$author,$data));
+                        }
+                    break;
+                }
+            break;
         }
     }
 }

@@ -63,6 +63,7 @@ class CronAble extends Command
             ->select('sys_trans_detail.*')
             ->get();
         $no = 0;
+        $mail_send = [];
 
         if($trans_detail->count()){
             // log cron
@@ -95,6 +96,8 @@ class CronAble extends Command
                     $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Durasi tunggu seller transaksi Expired at '.$date.'.';
                     $item->save();
                     $no++;
+                    $mail_send[] = $item->trans->id;
+
                     $this->info('transaksi '.$item->trans->trans_code.' dengan kode detail '.$item->trans_code.' expired at '.$date);
                     // update stok produk
                     $this->info("prosses mengembalikan stok produk.");
@@ -115,7 +118,7 @@ class CronAble extends Command
                     $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
                     if($item->trans->trans_payment_id !== 4){
                         $update_wallet = [
-                            'user_id'=>$item->trans->pembeli->email,
+                            'user_id'=>$item->trans->pembeli->id,
                             'wallet_type'=>3,
                             'amount'=>$item->trans_detail_amount_total,
                             'note'=>'Update wallet CW dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
@@ -137,27 +140,31 @@ class CronAble extends Command
             if($trans->count()){
                 $this->info("mengirim email ke seller dan member.");
                 foreach ($trans as $items) {
-                    $send_status = FunctionLib::trans_arr($items->trans_detail->first()->trans_detail_status);
-                    $config = [
-                        'to' => $items->trans_detail->first()->produk->user->email,
-                        'data' => [
-                            'trans_code' => $items->trans_code,
-                            'trans_amount_total' => $items->trans_amount_total,
-                            'status' => $send_status,
-                        ]
-                    ];
-                    $send_notif = FunctionLib::transaction_notif($config);
-                    $this->info("berhasil mengirim email ke ".$items->trans_detail->first()->produk->user->email.".");
-                    $config = [
-                        'to' => $items->pembeli->email,
-                        'data' => [
-                            'trans_code' => $items->trans_code,
-                            'trans_amount_total' => $items->trans_amount_total,
-                            'status' => $send_status,
-                        ]
-                    ];
-                    $send_notif = FunctionLib::transaction_notif($config);
-                    $this->info("berhasil mengirim email ke ".$items->pembeli->email.".");
+                    if (in_array($items->id, $mail_send, TRUE)){
+                        $send_status = FunctionLib::trans_arr($items->trans_detail->first()->trans_detail_status);
+                        $config = [
+                            'to' => $items->trans_detail->first()->produk->user->email,
+                            'data' => [
+                                'trans_code' => $items->trans_code,
+                                'trans_amount_total' => $items->trans_amount_total,
+                                'status' => $send_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        $this->info("berhasil mengirim email ke ".$items->trans_detail->first()->produk->user->email.".");
+                        $config = [
+                            'to' => $items->pembeli->email,
+                            'data' => [
+                                'trans_code' => $items->trans_code,
+                                'trans_amount_total' => $items->trans_amount_total,
+                                'status' => $send_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        $this->info("berhasil mengirim email ke ".$items->pembeli->email.".");
+                    }else{
+                        $this->info("Tidak ada email yang dikirim.");
+                    }
                 }
             }
         }else{

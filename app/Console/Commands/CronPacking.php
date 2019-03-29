@@ -63,6 +63,7 @@ class CronPacking extends Command
             ->select('sys_trans_detail.*')
             ->get();
         $no = 0;
+        $mail_send = [];
 
         if($trans_detail->count()){
             // log cron
@@ -81,20 +82,22 @@ class CronPacking extends Command
                 ->get();
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
-                $difference = FunctionLib::daysBetween($item->trans_detail_transfer_date, $date, 'h');
+                $difference = FunctionLib::daysBetween($item->trans_detail_able_date, $date, 'h');
                 $this->info('Transaksi detail '.$item->trans_code.' ordered at '.$item->trans->created_at);
-                $batas = FunctionLib::get_config('transaksi_durasi_seller_tunggu');
+                $batas = FunctionLib::get_config('transaksi_durasi_seller_sanggup');
                 if($difference >= $batas){
                     // update trans detail
                     // $update = Trans_detail::findOrFail($item->id);
                     $item->trans_detail_is_cancel = 1;
-                    $item->trans_detail_status = 3;
-                    $item->trans_detail_able = 2;
-                    $item->trans_detail_able_date = $date;
-                    $item->trans_detail_able_note = 'Transaksi dibatalkan oleh sistem.';
+                    $item->trans_detail_status = 4;
+                    $item->trans_detail_packing = 2;
+                    $item->trans_detail_packing_date = $date;
+                    $item->trans_detail_packing_note = 'Transaksi dibatalkan oleh sistem.';
                     $item->trans_detail_note = 'Transaksi Dibatalkan oleh sistem. Checkout transaksi Expired at '.$date.'.';
                     $item->save();
                     $no++;
+                    $mail_send[] = $item->trans->id;
+
                     $this->info('transaksi '.$item->trans->trans_code.' dengan kode detail '.$item->trans_code.' expired at '.$date);
                     // update stok produk
                     $this->info("prosses mengembalikan stok produk.");
@@ -115,7 +118,7 @@ class CronPacking extends Command
                     $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
                     if($item->trans->trans_payment_id !== 4){
                         $update_wallet = [
-                            'user_id'=>$item->trans->pembeli->email,
+                            'user_id'=>$item->trans->pembeli->id,
                             'wallet_type'=>3,
                             'amount'=>$item->trans_detail_amount_total,
                             'note'=>'Update wallet CW dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
@@ -137,27 +140,31 @@ class CronPacking extends Command
             if($trans->count()){
                 $this->info("mengirim email ke seller dan member.");
                 foreach ($trans as $items) {
-                    $send_status = FunctionLib::trans_arr($items->trans_detail->first()->trans_detail_status);
-                    $config = [
-                        'to' => $items->trans_detail->first()->produk->user->email,
-                        'data' => [
-                            'trans_code' => $items->trans_code,
-                            'trans_amount_total' => $items->trans_amount_total,
-                            'status' => $send_status,
-                        ]
-                    ];
-                    $send_notif = FunctionLib::transaction_notif($config);
-                    $this->info("berhasil mengirim email ke ".$items->trans_detail->first()->produk->user->email.".");
-                    $config = [
-                        'to' => $items->pembeli->email,
-                        'data' => [
-                            'trans_code' => $items->trans_code,
-                            'trans_amount_total' => $items->trans_amount_total,
-                            'status' => $send_status,
-                        ]
-                    ];
-                    $send_notif = FunctionLib::transaction_notif($config);
-                    $this->info("berhasil mengirim email ke ".$items->pembeli->email.".");
+                    if (in_array($items->id, $mail_send, TRUE)){
+                        $send_status = FunctionLib::trans_arr($items->trans_detail->first()->trans_detail_status);
+                        $config = [
+                            'to' => $items->trans_detail->first()->produk->user->email,
+                            'data' => [
+                                'trans_code' => $items->trans_code,
+                                'trans_amount_total' => $items->trans_amount_total,
+                                'status' => $send_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        $this->info("berhasil mengirim email ke ".$items->trans_detail->first()->produk->user->email.".");
+                        $config = [
+                            'to' => $items->pembeli->email,
+                            'data' => [
+                                'trans_code' => $items->trans_code,
+                                'trans_amount_total' => $items->trans_amount_total,
+                                'status' => $send_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        $this->info("berhasil mengirim email ke ".$items->pembeli->email.".");
+                    }else{
+                        $this->info("Tidak ada email yang dikirim.");
+                    }
                 }
             }
         }else{

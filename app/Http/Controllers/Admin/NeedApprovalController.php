@@ -424,7 +424,26 @@ class NeedApprovalController extends Controller
 
     public function approve_adminhotlist (Request $request, $id) 
     {
+        $status = 500;
+        $message = "Approve gagal.";
         $hot = Trans_hotlist::find($id);
+
+        // update saldo hotlist 
+        $update_wallet = [
+            'user_id'=>$hot->trans_hotlist_user_id,
+            'wallet_type'=>6,
+            'amount'=>$hot->trans_hotlist_amount,
+            'note'=>'Update wallet hotlist dengan pembelian paket '.$hot->paket->paket_hotlist_name.'.',
+        ];
+        $saldo = FunctionLib::update_wallet($update_wallet);
+        $check_saldo = ($saldo['status'] == 200)?true:false;
+        // $check_saldo = true;
+
+        if($check_saldo){
+            $status = 200;
+            $message = "Berhasil approve pembelian Hotlist.";
+        }
+
         $hot->trans_hotlist_status = 3;
         $hot->save();
         return redirect()->back(); 

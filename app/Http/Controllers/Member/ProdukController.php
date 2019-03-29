@@ -41,20 +41,31 @@ class ProdukController extends Controller
                 'produk_hotlist' => 'required|numeric',
             ]);
             // check wallet and update
-            if(FunctionLib::get_hotlist($request->id) >= $request->produk_hotlist){
+            if(FunctionLib::get_saldo(6,Auth::id()) >= $request->produk_hotlist){
+                
                 // update wallet
-                $where = 'wallet_user_id='.Auth::id();
-                $where = ' AND wallet_type=6';
-                $wallet = Wallet::whereRaw($where)->first();
-                $wallet->wallet_ballance_before = $wallet->wallet_ballance;
-                $wallet->wallet_ballance = $wallet->wallet_ballance - $request->produk_hotlist;
-                $wallet->wallet_note = 'pengurangan saldo hotlist, saldo hotlist telah dipindahkan ke produk.';
-                $wallet->save();
+                // $where = 'wallet_user_id='.Auth::id();
+                // $where = ' AND wallet_type=6';
+                // $wallet = Wallet::whereRaw($where)->first();
+                // $wallet->wallet_ballance_before = $wallet->wallet_ballance;
+                // $wallet->wallet_ballance = $wallet->wallet_ballance - $request->produk_hotlist;
+                // $wallet->wallet_note = 'pengurangan saldo hotlist, saldo hotlist telah dipindahkan ke produk.';
+                // $wallet->save();
+
+                // update saldo hotlist 
+                $update_wallet = [
+                    'user_id'=>Auth::id(),
+                    'wallet_type'=>6,
+                    'amount'=>($request->produk_hotlist * -1),
+                    'note'=>'pengurangan saldo hotlist, saldo hotlist telah dipindahkan ke produk.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+                $check_saldo = ($saldo['status'] == 200)?true:false;
 
                 // update produk
                 $produk = Produk::whereId($request->id)->first();
                 $produk->produk_is_hot = 1;
-                $produk->produk_hotlist = $request->produk_hotlist;
+                $produk->produk_hotlist = $produk->produk_hotlist + $request->produk_hotlist;
                 $produk->save();
                 $status = 200;
                 $message = 'hotlist produk '.$produk->produk_name.' berhasil di tambahkan.';
@@ -70,7 +81,7 @@ class ProdukController extends Controller
         $where = 1;
         $where .= ' AND produk_status=1';
         $where .= ' AND produk_seller_id='.Auth::id();
-        if($id != 0){
+        if($id !== 0){
             $where .= ' AND id='.$id;
         }
         $data['produk'] = Produk::whereRaw($where)->get();
