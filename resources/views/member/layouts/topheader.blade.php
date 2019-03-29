@@ -127,7 +127,7 @@
                             <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Account Settings</a></li> --}}
-                            <li>
+                            <li style="cursor:pointer;">
                                 <a onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

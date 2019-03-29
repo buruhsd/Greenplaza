@@ -1,3 +1,4 @@
+@if($detail->produk->user['Auth::id()'])
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
@@ -259,4 +260,5 @@
 		        Default case...
 		@endswitch
 	@endif
+@endif
 @endif
