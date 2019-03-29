@@ -80,26 +80,30 @@
                                         <td><center>-</center></td>
                                     @endif
 
-                                    @if ($g->trans_detail_status == 6 && $g->trans_detail_is_cancel == 0)
-                                        @if ($g->gln->trans_gln_status == 1)
-                                            <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_send', [$g->trans_code, $g->id])}}">
-                                                <button class="btn btn-info btn-xs">send coin to seller</button>
-                                            </a></center></td>
-                                        @elseif ($g->gln->trans_gln_status == 2)
-                                            <td><center><button class="btn btn-success btn-xs">success send to seller</button></center></td>
-                                        @endif
+                                    @if ($g->produk->produk_seller_id != 2)
+                                        @if ($g->trans_detail_status == 6 && $g->trans_detail_is_cancel == 0)
+                                            @if ($g->gln->trans_gln_status == 1)
+                                                <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_send', [$g->trans_code, $g->id])}}">
+                                                    <button class="btn btn-info btn-xs">send coin to seller</button>
+                                                </a></center></td>
+                                            @elseif ($g->gln->trans_gln_status == 2)
+                                                <td><center><button class="btn btn-success btn-xs">success send to seller</button></center></td>
+                                            @endif
 
-                                    @elseif ($g->trans_detail_status == 4 && $g->trans_detail_is_cancel == 1)
-                                        @if ($g->gln->trans_gln_status == 2)
-                                            <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_sendback', [$g->trans_code, $g->id])}}">
-                                                <button class="btn btn-warning btn-xs">send coin back to member</button>
-                                            </a></center></td>
-                                        @elseif ($g->gln->trans_gln_status == 3)
-                                            <td><center><button class="btn btn-success btn-xs">success send to member</button></center></td>
-                                        @endif
+                                        @elseif ($g->trans_detail_status == 4 && $g->trans_detail_is_cancel == 1)
+                                            @if ($g->gln->trans_gln_status == 2)
+                                                <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.gln_sendback', [$g->trans_code, $g->id])}}">
+                                                    <button class="btn btn-warning btn-xs">send coin back to member</button>
+                                                </a></center></td>
+                                            @elseif ($g->gln->trans_gln_status == 3)
+                                                <td><center><button class="btn btn-success btn-xs">success send to member</button></center></td>
+                                            @endif
 
+                                        @else 
+                                            <td><center>Pending</center></td>
+                                        @endif
                                     @else 
-                                        <td><center>Pending</center></td>
+                                        <td><center><button class="btn btn-danger btn-xs">product admin</button></center></td>
                                     @endif
                                 </tr>
                                 @endforeach
