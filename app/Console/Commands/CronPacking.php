@@ -56,7 +56,7 @@ class CronPacking extends Command
         $where .= ' AND trans_detail_status IN (4)';
         $where .= ' AND sys_trans.trans_is_paid = 1';
         $where .= ' AND trans_detail_able = 1';
-        $where .= ' AND trans_detail_packing = 0';
+        // $where .= ' AND trans_detail_packing = 0';
         $where .= ' AND trans_detail_is_cancel = 0';
         $trans_detail = Trans_detail::whereRaw($where)
             ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')

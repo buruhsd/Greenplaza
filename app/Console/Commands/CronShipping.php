@@ -62,6 +62,7 @@ class CronShipping extends Command
             ->select('sys_trans_detail.*')
             ->get();
         $no = 0;
+        $mail_send = [];
 
         if($trans_detail->count()){
             // log cron
@@ -95,6 +96,8 @@ class CronShipping extends Command
                         $item->trans_detail_note = 'Transaksi di drop oleh sistem pada '.$date.'.';
                         $item->save();
                         $no++;
+                        $mail_send[] = $item->trans->id;
+                        
                         $this->info('transaksi '.$item->trans->trans_code.' dengan kode detail '.$item->trans_code.' expired at '.$date);
                         // update wallet
                         $this->info("prosses update wallet seller.");
@@ -133,7 +136,7 @@ class CronShipping extends Command
             if($trans->count()){
                 $this->info("mengirim email ke seller.");
                 foreach ($trans as $items) {
-                    if($items->trans_detail->first()->trans_detail_status == 6){                        
+                    if (in_array($items->id, $mail_send, TRUE)){
                         $send_status = FunctionLib::trans_arr($items->trans_detail->first()->trans_detail_status);
                         $config = [
                             'to' => $items->trans_detail->first()->produk->user->email,
