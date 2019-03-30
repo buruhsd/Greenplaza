@@ -1,3 +1,4 @@
+@if($detail->produk->user->is_admin())
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
@@ -44,21 +45,23 @@
 			{{-- Seller --}}
 		    @case(3)
 		    	@if($type == 'buyer')
+		    	
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
 			    			<button class="btn btn-success btn-xs">Packing</button>
 				    	</div>
 				    </div>
+				    
 		    	@elseif($type == 'seller')
-		    	@if($detail->produk->user['Auth::id(2)'])
-			    	<div class="row">
-			    		<div class="col-md-12 text-center">
-				    		<a href="{{route('admin.transaction.able', $detail->trans->id)}}">
-			    				<button class="btn btn-success btn-xs">Memulai Packing</button>
-				    		</a>
-				    	</div>
-				    </div>
-				@endif
+				    	
+					    	<div class="row">
+					    		<div class="col-md-12 text-center">
+						    		<a href="{{route('admin.transaction.able', $detail->trans->id)}}">
+					    				<button class="btn btn-success btn-xs">Memulai Packing</button>
+						    		</a>
+						    	</div>
+						    </div>
+						 
 		    	@endif
 		    @break
 			{{-- Packing --}}
@@ -261,4 +264,5 @@
 		        Default case...
 		@endswitch
 	@endif
+@endif
 @endif
