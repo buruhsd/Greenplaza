@@ -146,7 +146,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Produk popular saat ini</h2>
+                        <h2 class="section-title">Produk populer saat ini</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedproduk as $r)
@@ -689,7 +689,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Produk popular saat ini</h2>
+                        <h2 class="section-title">Produk populer saat ini</h2>
                         <div class="propuler-product-active next-prev-style owl-carousel">
                             <div class="slidebar-product-wrap">
                                 @foreach ($relatedproduk as $r)

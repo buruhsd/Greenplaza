@@ -40,6 +40,10 @@
                                 @else
                                     <li>Status : <button class="btn btn-info btn-xs">Cancel</button></li>
                                 @endif
+                                @if ($item->trans_detail_is_cancel == 1)
+                                    <li>Deskripsi : {{$item->trans_detail_note}}</li>
+                                    @else
+                                    @endif
                                 </ul>
                             </td>
                             <td>
