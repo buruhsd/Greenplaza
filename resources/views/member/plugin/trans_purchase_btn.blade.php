@@ -64,9 +64,14 @@
 				    </div>
 		    	@elseif($type == 'seller')
 			    	<div class="row">
-			    		<div class="col-md-12 text-center">
+			    		<div class="col-md-6 text-center">
 				    		<a href="{{route('member.transaction.able', $detail->trans->id)}}">
 			    				<button class="btn btn-success btn-xs">Memulai Packing</button>
+				    		</a>
+				    	</div>
+			    		<div class="col-md-6 text-center">
+				    		<a href="{{route('member.transaction.able_cancel', $detail->trans->id)}}">
+			    				<button class="btn btn-danger btn-xs">cancel</button>
 				    		</a>
 				    	</div>
 				    </div>

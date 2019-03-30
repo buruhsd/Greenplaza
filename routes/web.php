@@ -454,6 +454,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			// sales
 			Route::get('/sales', 'TransactionController@sales')->name('.sales');
 			Route::get('/able/{id}', 'TransactionController@able')->name('.able');
+			Route::get('/able_cancel/{id}', 'TransactionController@able_cancel')->name('.able_cancel');
 			Route::get('/packing/{id}', 'TransactionController@packing')->name('.packing');
 			Route::post('/sending', 'TransactionController@sending')->name('.sending');
 			Route::get('/add_resi/{id}', 'TransactionController@add_resi')->name('.add_resi');

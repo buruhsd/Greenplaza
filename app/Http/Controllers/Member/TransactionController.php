@@ -390,6 +390,41 @@ class TransactionController extends Controller
             ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 
+    /********/
+    public function able_cancel($id){
+        $date = date('Y-m-d H:i:s');
+        $status = 200;
+        $message = 'transaksi telah di cancel!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            $trans_detail = Trans_detail::findOrFail($item->id);
+            // to packing
+            $trans_detail->trans_detail_is_cancel = 1;
+            $trans_detail->trans_detail_status = 3;
+            $trans_detail->trans_detail_able = 2;
+            $item->trans_detail_able_date = $date;
+            $item->trans_detail_able_note = 'Transaksi dibatalkan oleh sellet.';
+            $item->trans_detail_note = 'Transaksi Dibatalkan oleh seller.';
+            $trans_detail->save();
+        }
+        if(!$trans_detail){
+            $status = 500;
+            $message = 'Gagal merubah data!';
+        }else{
+            if($trans->trans_payment_id !== 4){
+                $update_wallet = [
+                    'user_id'=>$trans->pembeli->id,
+                    'wallet_type'=>3,
+                    'amount'=>$trans->trans_amount_total,
+                    'note'=>'pengembalian wallet transaksi dengan transaksi kode '.$trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+            }
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
     /**
      * #seller status 3 approve admin
      * process seller menyanggupi pengiriman
