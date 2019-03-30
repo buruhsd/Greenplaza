@@ -1,5 +1,4 @@
 @if($status == 'trans')
-@if($detail->produk->user['Auth::id(2)'])
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
 	    		<div class="row">
@@ -51,6 +50,7 @@
 				    	</div>
 				    </div>
 		    	@elseif($type == 'seller')
+		    	@if($detail->produk->user['Auth::id(2)'])
 			    	<div class="row">
 			    		<div class="col-md-12 text-center">
 				    		<a href="{{route('admin.transaction.able', $detail->trans->id)}}">
@@ -58,6 +58,7 @@
 				    		</a>
 				    	</div>
 				    </div>
+				@endif
 		    	@endif
 		    @break
 			{{-- Packing --}}
@@ -260,5 +261,4 @@
 		        Default case...
 		@endswitch
 	@endif
-@endif
 @endif
