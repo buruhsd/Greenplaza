@@ -1,5 +1,5 @@
 @if($status == 'trans')
-@if($detail->produk->user['Auth::id()'])
+@if($detail->produk->user['Auth::id(2)'])
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
 	    		<div class="row">
