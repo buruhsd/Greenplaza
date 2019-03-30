@@ -91,7 +91,7 @@
                                         </center>
                                         @elseif ($h->trans_hotlist_status == 4)
                                         <center>
-                                            <p style="color: red">IKLAN DITOLAK</p>
+                                            <p style="color: red">HOTLIST DITOLAK</p>
                                         </center>
                                         @endif
                                         {{-- @if ($h->trans_hotlist_status == 1)

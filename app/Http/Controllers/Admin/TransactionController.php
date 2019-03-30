@@ -10,6 +10,9 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Trans;
 use App\Models\Trans_detail;
+use App\Models\Trans_hotlist;
+use App\Models\Trans_iklan;
+use App\Models\Trans_pincode;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -17,6 +20,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use FunctionLib;
 use App\Models\Log_transfer;
+use Exception;
 
 
 class TransactionController extends Controller
@@ -259,32 +263,139 @@ class TransactionController extends Controller
         //     'transaction_status' => 'required',
         // ]);
         $requestData = $request->all();
-        $trans = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->first();
-        if($requestData['transaction_status'] == 'done'){
-            // insert log transfer masedi
-            $log_transfer = new Log_transfer;
-                $log_transfer->transfer_user_id = $trans->trans_user_id;
-                $log_transfer->transfer_from = $trans->pembeli->username;
-                $log_transfer->transfer_to_user_id = $trans->trans_detail->first()->produk->produk_seller_id;
-                $log_transfer->transfer_to = $trans->trans_detail->first()->produk->user->username;
-                $log_transfer->transfer_code_reff = $requestData['va'];
-                $log_transfer->transfer_type = 'idr';
-                $log_transfer->transfer_nominal = $trans->trans_amount_total;
-                $log_transfer->transfer_response = json_encode($requestData);
-                $log_transfer->transfer_note = "Transfer Masedi transaksi.";
-            $log_transfer->save();
-        }
+        // transaksi produk
+        try{
+            $trans = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->first();
+            if($trans == null){
+                throw new Exception;
+            }
+            if($requestData['transaction_status'] == 'done'){
+                // insert log transfer masedi
+                $log_transfer = new Log_transfer;
+                    $log_transfer->transfer_user_id = $trans->trans_user_id;
+                    $log_transfer->transfer_from = $trans->pembeli->username;
+                    $log_transfer->transfer_to_user_id = $trans->trans_detail->first()->produk->produk_seller_id;
+                    $log_transfer->transfer_to = $trans->trans_detail->first()->produk->user->username;
+                    $log_transfer->transfer_code_reff = $requestData['va'];
+                    $log_transfer->transfer_type = 'idr';
+                    $log_transfer->transfer_nominal = $trans->trans_amount_total;
+                    $log_transfer->transfer_response = json_encode($requestData);
+                    $log_transfer->transfer_note = "Transfer Masedi transaksi.";
+                $log_transfer->save();
+            }
 
-        $data = [
-            'order_id' => $trans->trans_code,
-            'transaction_status' => $requestData['transaction_status']
-        ];
-        $response = FunctionLib::done_masedi($data);
-        if($response['status'] == 500){
-            $status = $response['status'];
-            $message = $response['message'];
+            $data = [
+                'order_id' => $trans->trans_code,
+                'transaction_status' => $requestData['transaction_status']
+            ];
+            $response = FunctionLib::done_masedi($data);
+            if($response['status'] == 500){
+                $status = $response['status'];
+                $message = $response['message'];
+            }
+            $data = $response['data'];
+        }catch(Exception $e){
+            // transaksi hotlist
+            try{
+                $trans = Trans_hotlist::whereRaw('trans_hotlist_qr="'.$requestData['va'].'"')->first();
+                if($trans == null){
+                    throw new Exception;
+                }
+                if($requestData['transaction_status'] == 'done'){
+                    // insert log transfer masedi
+                    $log_transfer = new Log_transfer;
+                        $log_transfer->transfer_user_id = $trans->trans_hotlist_user_id;
+                        $log_transfer->transfer_from = $trans->user->username;
+                        $log_transfer->transfer_to_user_id = 2;
+                        $log_transfer->transfer_to = User::find(2)->username;
+                        $log_transfer->transfer_code_reff = $requestData['va'];
+                        $log_transfer->transfer_type = 'idr';
+                        $log_transfer->transfer_nominal = $trans->trans_hotlist_amount;
+                        $log_transfer->transfer_response = json_encode($requestData);
+                        $log_transfer->transfer_note = "Transfer Masedi transaksi hotlist.";
+                    $log_transfer->save();
+                }
+
+                $data = [
+                    'order_id' => $trans->trans_hotlist_code,
+                    'transaction_status' => $requestData['transaction_status']
+                ];
+                $response = FunctionLib::done_masedi($data);
+                if($response['status'] == 500){
+                    $status = $response['status'];
+                    $message = $response['message'];
+                }
+                $data = $response['data'];
+            }catch(Exception $e){
+                // transaksi iklan
+                try{
+                    $trans = Trans_iklan::whereRaw('trans_iklan_qr="'.$requestData['va'].'"')->first();
+                    if($trans == null){
+                        throw new Exception;
+                    }
+                    if($requestData['transaction_status'] == 'done'){
+                        // insert log transfer masedi
+                        $log_transfer = new Log_transfer;
+                            $log_transfer->transfer_user_id = $trans->trans_iklan_user_id;
+                            $log_transfer->transfer_from = $trans->user->username;
+                            $log_transfer->transfer_to_user_id = 2;
+                            $log_transfer->transfer_to = User::find(2)->username;
+                            $log_transfer->transfer_code_reff = $requestData['va'];
+                            $log_transfer->transfer_type = 'idr';
+                            $log_transfer->transfer_nominal = $trans->trans_iklan_amount;
+                            $log_transfer->transfer_response = json_encode($requestData);
+                            $log_transfer->transfer_note = "Transfer Masedi transaksi iklan.";
+                        $log_transfer->save();
+                    }
+
+                    $data = [
+                        'order_id' => $trans->trans_iklan_code,
+                        'transaction_status' => $requestData['transaction_status']
+                    ];
+                    $response = FunctionLib::done_masedi($data);
+                    if($response['status'] == 500){
+                        $status = $response['status'];
+                        $message = $response['message'];
+                    }
+                    $data = $response['data'];
+                }catch(Exception $e){
+                    // transaksi pincode
+                    try{
+                        $trans = Trans_pincode::whereRaw('trans_pincode_qr="'.$requestData['va'].'"')->first();
+                        if($trans == null){
+                            throw new Exception;
+                        }
+                        if($requestData['transaction_status'] == 'done'){
+                            // insert log transfer masedi
+                            $log_transfer = new Log_transfer;
+                                $log_transfer->transfer_user_id = $trans->trans_pincode_user_id;
+                                $log_transfer->transfer_from = $trans->user->username;
+                                $log_transfer->transfer_to_user_id = 2;
+                                $log_transfer->transfer_to = User::find(2)->username;
+                                $log_transfer->transfer_code_reff = $requestData['va'];
+                                $log_transfer->transfer_type = 'idr';
+                                $log_transfer->transfer_nominal = $trans->trans_pincode_amount;
+                                $log_transfer->transfer_response = json_encode($requestData);
+                                $log_transfer->transfer_note = "Transfer Masedi transaksi hotlist.";
+                            $log_transfer->save();
+                        }
+
+                        $data = [
+                            'order_id' => $trans->trans_pincode_code,
+                            'transaction_status' => $requestData['transaction_status']
+                        ];
+                        $response = FunctionLib::done_masedi($data);
+                        if($response['status'] == 500){
+                            $status = $response['status'];
+                            $message = $response['message'];
+                        }
+                        $data = $response['data'];
+                    }catch(Exception $e){
+                        // tidak ada transaksi yang dieksekusi
+                    }
+                }
+            }
         }
-        $data = $response['data'];
         return response()->json(['status'=>$status, 'message'=>$message, 'data' => $data]);
         // if($request->ajax()){
         // }

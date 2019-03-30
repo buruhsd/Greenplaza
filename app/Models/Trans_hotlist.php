@@ -14,7 +14,7 @@ class Trans_hotlist extends Model
      * @var array
      */
     protected $fillable = [
-        'trans_hotlist_code', 'trans_hotlist_user_id', 'trans_hotlist_paket_id', 'trans_hotlist_bank_id', 'trans_hotlist_status', 'trans_hotlist_payment_id', 'trans_hotlist_paid_image', 'trans_hotlist_paid_date', 'trans_hotlist_amount', 'trans_hotlist_jml', 'trans_hotlist_user_response', 'trans_hotlist_date_response', 'trans_hotlist_response_note', 'trans_hotlist_note'
+        'trans_hotlist_code', 'trans_hotlist_qr', 'trans_hotlist_user_id', 'trans_hotlist_paket_id', 'trans_hotlist_bank_id', 'trans_hotlist_status', 'trans_hotlist_payment_id', 'trans_hotlist_paid_image', 'trans_hotlist_paid_date', 'trans_hotlist_amount', 'trans_hotlist_jml', 'trans_hotlist_user_response', 'trans_hotlist_date_response', 'trans_hotlist_response_note', 'trans_hotlist_note'
     ];
 
     /**

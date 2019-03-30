@@ -17,10 +17,9 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
-                                    <th><center>Kode_tagihan</center></th>
-                                    <th><center>Pemesan</center></th>
-                                    <th><center>Jumlah_tagihan</center></th>
-                                    <th><center>Status</center></th>
+                                    <th><center>Kode Order</center></th>
+                                    <th><center>Pembelian</center></th>
+                                    <th><center>Tagihan</center></th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
@@ -29,10 +28,34 @@
                             @foreach ($iklan as $key => $i)
                                 <tr>
                                     <td>{{++$key}}</td>
-                                    <td><center>{{$i->trans_code}}</center></td>
-                                    <td><center>{{$i->user->username}}</center></td>
-                                    <td></td>
-                                    @if ($i->trans_iklan_status == 1)
+                                    <td><center>{{$i->trans_iklan_code}}</center></td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Pembeli : {{$i->user->name}}
+                                            </li>
+                                            <li>
+                                                Paket : {{$i->paket->paket_iklan_name}}
+                                            </li>
+                                            <li>
+                                                Poin : {{$i->trans_iklan_amount}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Status : <button class="btn btn-xs btn-{!!FunctionLib::iklan_status($i->trans_iklan_status, 'btn')!!}">{!!FunctionLib::iklan_status($i->trans_iklan_status)!!}</button>
+                                            </li>
+                                            <li>
+                                                Tagihan : Rp. {{FunctionLib::number_to_text($i->trans_iklan_amount)}}
+                                            </li>
+                                            <li>
+                                                Pembayaran : {{Ucfirst($i->payment->payment_name)}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    {{-- @if ($i->trans_iklan_status == 1)
                                     <td><center>Belum Konfirmasi</center></td>
                                     @elseif ($i->trans_iklan_status == 2)
                                     <td><center>Sudah Konfirmasi</center></td>
@@ -40,9 +63,20 @@
                                     <td><center>Approved</center></td>
                                     @elseif ($i->trans_iklan_status == 4)
                                     <td><center>Ditolak</center></td>
-                                    @endif
+                                    @endif --}}
                                     <td>
                                         @if ($i->trans_iklan_status == 1)
+                                        <center>
+                                            <a href="{{route('admin.needapproval.approve_admin', $i->id)}}"><button type="submit" class="btn btn-success">Approve</button></a>
+                                            <a href="{{route('admin.needapproval.tolak', $i->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
+                                        </center>
+                                        @elseif ($i->trans_hotlist_status == 4)
+                                        <center>
+                                            <p style="color: red">IKLAN DITOLAK</p>
+                                        </center>
+                                        @endif
+
+                                        {{-- @if ($i->trans_iklan_status == 1)
                                         <center>
                                             <a href="{{route('admin.needapproval.konfirmasi_iklan', $i->id)}}"><button type="submit" class="btn btn-info">Konfirmasi</button></a>
                                             <a href="{{route('admin.needapproval.tolak', $i->id)}}"><button type="submit" class="btn btn-danger">Tolak</button></a>
@@ -60,7 +94,7 @@
                                         <center>
                                             <p style="color: red">IKLAN DITOLAK</p>
                                         </center>
-                                        @endif
+                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach

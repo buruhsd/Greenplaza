@@ -185,7 +185,26 @@ class NeedApprovalController extends Controller
 
     public function approve_admin (Request $request, $id) 
     {
+        $status = 500;
+        $message = "Approve gagal.";
         $iklan = Trans_iklan::find($id);
+
+        // update saldo iklan 
+        $update_wallet = [
+            'user_id'=>$iklan->trans_iklan_user_id,
+            'wallet_type'=>4,
+            'amount'=>$iklan->trans_iklan_amount,
+            'note'=>'Update wallet iklan dengan pembelian paket '.$iklan->paket->paket_iklan_name.'.',
+        ];
+        $saldo = FunctionLib::update_wallet($update_wallet);
+        $check_saldo = ($saldo['status'] == 200)?true:false;
+        // $check_saldo = true;
+
+        if($check_saldo){
+            $status = 200;
+            $message = "Berhasil approve pembelian Iklan.";
+        }
+
         $iklan->trans_iklan_status = 3;
         $iklan->save();
         return redirect()->back(); 
@@ -194,6 +213,23 @@ class NeedApprovalController extends Controller
     public function tolak (Request $request, $id) 
     {
         $iklan = Trans_iklan::find($id);
+
+            // update saldo iklan 
+            $update_wallet = [
+                'user_id'=>$iklan->trans_iklan_user_id,
+                'wallet_type'=>3,
+                'amount'=>$iklan->trans_iklan_amount,
+                'note'=>'Update saldo transaksi dengan pembelian paket '.$iklan->paket->paket_iklan_name.'.',
+            ];
+            $saldo = FunctionLib::update_wallet($update_wallet);
+            $check_saldo = ($saldo['status'] == 200)?true:false;
+            // $check_saldo = true;
+
+            if($check_saldo){
+                $status = 200;
+                $message = "Berhasil tolak pembelian Iklan.";
+            }
+
         $iklan->trans_iklan_status = 4;
         $iklan->save();
         return redirect()->back(); 
@@ -432,7 +468,7 @@ class NeedApprovalController extends Controller
         $update_wallet = [
             'user_id'=>$hot->trans_hotlist_user_id,
             'wallet_type'=>6,
-            'amount'=>$hot->trans_hotlist_amount,
+            'amount'=>$hot->trans_hotlist_jml,
             'note'=>'Update wallet hotlist dengan pembelian paket '.$hot->paket->paket_hotlist_name.'.',
         ];
         $saldo = FunctionLib::update_wallet($update_wallet);
@@ -452,6 +488,23 @@ class NeedApprovalController extends Controller
     public function tolakhotlist (Request $request, $id) 
     {
         $hot = Trans_hotlist::find($id);
+
+            // update saldo transaksi 
+            $update_wallet = [
+                'user_id'=>$hot->trans_hotlist_user_id,
+                'wallet_type'=>3,
+                'amount'=>$hot->trans_hotlist_amount,
+                'note'=>'Update wallet hotlist dengan pembelian paket '.$hot->paket->paket_hotlist_name.'.',
+            ];
+            $saldo = FunctionLib::update_wallet($update_wallet);
+            $check_saldo = ($saldo['status'] == 200)?true:false;
+            // $check_saldo = true;
+
+            if($check_saldo){
+                $status = 200;
+                $message = "Berhasil tolak pembelian Hotlist.";
+            }
+
         $hot->trans_hotlist_status = 4;
         $hot->save();
         return redirect()->back(); 

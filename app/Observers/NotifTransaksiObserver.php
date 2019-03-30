@@ -155,6 +155,17 @@ class NotifTransaksiObserver
                             $author = $item->produk->user;
                             $user = $item->trans->pembeli;
                             $user->notify(new Transaksi($item,$author,$data));
+                            // send email
+                            $config = [
+                                'to' => $item->trans->pembeli->email,
+                                'data' => [
+                                    'trans_code' => $item->trans->trans_code,
+                                    'trans_amount_total' => $item->trans->trans_amount_total,
+                                    'user_cancel' => strtoupper($item->produk->user->user_store),
+                                    'note' => $item->trans_detail_note,
+                                ]
+                            ];
+                            $send_notif = FunctionLib::trans_cancel_notif($config);
                         }
                     break;
                 }

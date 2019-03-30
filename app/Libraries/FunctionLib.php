@@ -2,6 +2,37 @@
 class FunctionLib
 {
 
+    /******/
+    public static function trans_cancel_notif($param=[]){
+        $data['status'] = 200;
+        $data['message'] = 'Notifikasi telah dikirim';
+        extract($param);
+        // send email
+        $config = [
+            'to' => $to,
+            'subject' => 'Status Transaksi',
+            'view' => 'email.trans_cancel',
+            'data' => $data
+        ];
+        SendEmail::html($config);
+        return $data;
+    }
+
+    public static function iklan_status($id, $type='normal'){
+        $arr = [
+            0 => ['danger','Belum Lunas'],
+            1 => ['warning','Menunggu Admin'],
+            2 => ['danger','Batal'],
+            3 => ['success','Selesai'],
+            4 => ['danger','Ditolak']
+        ];
+
+        $respon = ($type == 'normal')
+            ?$arr[$id][1]
+            :$arr[$id][0];
+        return $respon;
+    }
+
     public static function hotlist_status($id, $type='normal'){
         $arr = [
             0 => ['danger','Belum Lunas'],
@@ -646,7 +677,7 @@ class FunctionLib
                     switch ($type) {
                         case 'hotlist':
                             $trans_detail = App\Models\Trans_hotlist::whereRaw('trans_hotlist_code = "'.$order_id.'"')->first();
-                            $trans_detail->trans_hotlist_status = 3;
+                            $trans_detail->trans_hotlist_status = 1;
                             $trans_detail->trans_hotlist_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_hotlist_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_hotlist_note = $trans_detail->trans_hotlist_note.' Transfer Successfully. approved by system.';
@@ -663,7 +694,7 @@ class FunctionLib
                         break;
                         case 'pincode':
                             $trans_detail = App\Models\Trans_pincode::whereRaw('trans_pincode_code = "'.$order_id.'"')->first();
-                            $trans_detail->trans_pincode_status = 3;
+                            $trans_detail->trans_pincode_status = 1;
                             $trans_detail->trans_pincode_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_pincode_response_note = 'Transfer Successfully. approved by system.';
                             $trans_detail->trans_pincode_note = $trans_detail->trans_detail_note.' Transfer Successfully. approved by system.';
@@ -680,7 +711,7 @@ class FunctionLib
                         break;
                         case 'iklan':
                             $trans_detail = App\Models\Trans_iklan::whereRaw('trans_iklan_code = "'.$order_id.'"')->first();
-                            $trans_detail->trans_iklan_status = 3;
+                            $trans_detail->trans_iklan_status = 1;
                             $trans_detail->trans_iklan_paid_date = date('y-m-d h:i:s');
                             $trans_detail->trans_iklan_response_note = ' Transfer Successfully. approved by system.';
                             $trans_detail->trans_iklan_note = $trans_detail->trans_iklan_note.' Transfer Successfully. approved by system.';

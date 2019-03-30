@@ -82,7 +82,8 @@
                                     <td scope="row">{{$no++}}</td>
                                     <td>{{$item->trans_hotlist_code}}</td>
                                     <td>{{FunctionLib::datetime_indo($item->created_at, true, 'full')}}</td>
-                                    <td><ul>
+                                    <td>
+                                        <ul>
                                             <li>
                                                 {{$item->paket->paket_hotlist_name}}
                                             </li>

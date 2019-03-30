@@ -19,8 +19,18 @@
                                             <option value="{{$item->id}}">
                                                 {{$item->paket_iklan_name}} 
                                                 | Rp. {{FunctionLib::number_to_text($item->paket_iklan_price)}}
-                                                {{-- | {{intval($item->paket_hotlist_amount)}} Poin
-                                                | Bonus {{intval($item->paket_hotlist_bonus)}} Poin --}}
+                                                {{-- | {{intval($item->paket_iklan_amount)}} Poin
+                                                | Bonus {{intval($item->paket_iklan_bonus)}} Poin --}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="trans_iklan_payment_id">Pembayaran</label>
+                                    <select class="form-control" id="trans_iklan_payment_id" name="trans_iklan_payment_id">
+                                        @foreach($payment as $item)
+                                            <option value="{{$item->id}}">
+                                                {{ucfirst($item->payment_name)}} 
                                             </option>
                                         @endforeach
                                     </select>

@@ -192,6 +192,13 @@ class MasediController extends Controller
         return view('localapi.masedi.qr', $data);
     }
 
+    public function qr_iklan($code){
+        $trans = Trans_iklan::whereRaw('trans_iklan_code = "'.$code.'"')->first();
+        $data['qr'] = $trans->trans_iklan_qr;
+
+        return view('localapi.masedi.qr', $data);
+    }
+
     /**
     * @param
     * @return

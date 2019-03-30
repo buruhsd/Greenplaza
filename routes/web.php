@@ -601,9 +601,14 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		});
 		// Pasang Iklan
 		Route::group(['prefix' => 'iklan', 'as' => '.iklan'], function () {
+			Route::post('/bayar_saldo/{code}', 'IklanController@bayar_saldo')->name('.bayar_saldo');
+			Route::post('/bayar_gln/{code}', 'IklanController@bayar_gln')->name('.bayar_gln');
+			Route::get('/generate_qr/{id}', 'IklanController@generate_qr')->name('.generate_qr');
 			Route::get('/beli_saldo', 'IklanController@beli_saldo')->name('.beli_saldo');
 			Route::post('/beli_saldo_store', 'IklanController@beli_saldo_store')->name('.beli_saldo_store');
 			Route::get('/konfirmasi/{id}', 'IklanController@konfirmasi')->name('.konfirmasi');
+			Route::post('/to_confirm/{id}', 'IklanController@to_confirm')->name('.to_confirm');
+			Route::get('/to_cancel/{id}', 'IklanController@to_cancel')->name('.to_cancel');
 			Route::get('/history', function(){return view('member.iklan.history');})->name('.history');
 			Route::get('/baris', 'IklanController@baris')->name('.baris');
 			Route::get('/add_baris', 'IklanController@add_baris')->name('.add_baris');
@@ -711,6 +716,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 			Route::get('payment', 'MasediController@payment')->name('.payment');
 			Route::get('qr/{code}', 'MasediController@qr')->name('.qr');
 			Route::get('qr_hotlist/{code}', 'MasediController@qr_hotlist')->name('.qr_hotlist');
+			Route::get('qr_iklan/{code}', 'MasediController@qr_iklan')->name('.qr_iklan');
 		});
 		// Route::post('done', 'MidtransController@done')->name('.done');
 	});

@@ -81,26 +81,34 @@
                                     <th scope="row">{{$no++}}</th>
                                     <td>{{$item->trans_iklan_code}}</td>
                                     <td>{{FunctionLib::datetime_indo($item->created_at, true, 'full')}}</td>
-                                    <td>{{$item->paket->paket_iklan_name}}</td>
                                     <td>
                                         <ul>
                                             <li>
-                                                Status : {!!
-                                                    ($item->trans_iklan_status == 3)
-                                                    ?'<button class="btn btn-xs btn-success">Lunas</button>'
-                                                    :'<button class="btn btn-xs btn-danger">Belum Lunas</button>'
-                                                !!}
+                                                {{$item->paket->paket_iklan_name}}
+                                            </li>
+                                            <li>
+                                                Saldo : {{$item->paket->paket_iklan_amount}}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                Status : <button class="btn btn-xs btn-{!!FunctionLib::iklan_status($item->trans_iklan_status, 'btn')!!}">{!!FunctionLib::iklan_status($item->trans_iklan_status)!!}</button>
                                             </li>
                                             <li>
                                                 Tagihan : Rp. {{FunctionLib::number_to_text($item->trans_iklan_amount)}}
+                                            </li>
+                                            <li>
+                                                Pembayaran : {{Ucfirst($item->payment->payment_name)}}
                                             </li>
                                         </ul>
                                     </td>
                                     {{-- <td>{{$item->trans_iklan_status}}</td> --}}
                                     <td>
-                                        @if($item->trans_iklan_status == 1)
-                                            <button class="btn btn-xs btn-success">Konfirmasi</button>
-                                            <button class="btn btn-xs btn-danger">Batal</button>
+                                        @if($item->trans_iklan_status == 0)
+                                            <a href="{{route('member.iklan.konfirmasi', $item->id)}}" class="btn btn-xs btn-success">Konfirmasi</a>
+                                            <a href="{{route('member.iklan.to_cancel', $item->id)}}" class="btn btn-xs btn-danger">Batal</a>
                                         @else
                                             <button class="btn btn-xs btn-success">Detail</button>
                                         @endif

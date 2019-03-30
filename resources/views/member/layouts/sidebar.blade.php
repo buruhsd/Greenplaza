@@ -155,7 +155,7 @@
                                 </li>
                                 @endif
                                 {{-- need actived --}}
-                                <li class="@yield('hot list')">
+                                <li class="@yield('hot list') hidden">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>Hot List</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
@@ -166,7 +166,7 @@
                                     </ul>
                                 </li>
                                 {{-- need actived --}}
-                                <li class="@yield('pin code')">
+                                <li class="@yield('pin code') hidden">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>PIN Code</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>

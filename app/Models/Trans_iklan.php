@@ -14,7 +14,7 @@ class Trans_iklan extends Model
      * @var array
      */
     protected $fillable = [
-        'trans_iklan_code', 'trans_iklan_user_id', 'trans_iklan_paket_id', 'trans_iklan_bank_id', 'trans_iklan_status', 'trans_iklan_payment_id', 'trans_iklan_paid_image', 'trans_iklan_paid_date', 'trans_iklan_amount', 'trans_iklan_user_response', 'trans_iklan_date_response', 'trans_iklan_response_note', 'trans_iklan_note'
+        'trans_iklan_code', 'trans_iklan_qr', 'trans_iklan_user_id', 'trans_iklan_paket_id', 'trans_iklan_bank_id', 'trans_iklan_status', 'trans_iklan_payment_id', 'trans_iklan_paid_image', 'trans_iklan_paid_date', 'trans_iklan_amount', 'trans_iklan_user_response', 'trans_iklan_date_response', 'trans_iklan_response_note', 'trans_iklan_note'
     ];
 
     /**
