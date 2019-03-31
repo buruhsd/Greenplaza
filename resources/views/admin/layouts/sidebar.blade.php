@@ -12,15 +12,15 @@
                         <ul class="accordion-menu">
                             <li>
                                 <a href=""><center>
-                                <span>Saldo Gln Admin</span> <br>
-                                    <?php
+                                <!-- <span>Saldo Gln Admin</span> --> <br>
+                                    <!-- <?php
                                     $response = FunctionLib::gln('ballance', ['address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
                                     if($response['status'] == 200){
                                         echo FunctionLib::number_to_text($response['data']['balance'], 8);
                                     }else{
                                         echo "0,00";
                                     }
-                                    ?>
+                                    ?> -->
                                 </center></a>
                             </li>
 
@@ -53,7 +53,7 @@
                                 </a>
                                 <ul class="sub-menu">
                                     <li class="{{FunctionLib::setActive('admin/list_transaction_masedi')}}"><a href="{{route('admin.list_masedi')}}">Transaksi Masedi</a></li>
-                                    <li class="{{FunctionLib::setActive('admin/list_transaction_gln')}}"><a href="{{route('admin.list_gln')}}">Transaksi Gln</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/list_transaction_gln')}}"><a href="{{route('admin.list_gln')}}">Transaksi Gln</a></li> -->
                                 </ul>
                             </li>
                             <li class="{{FunctionLib::setActive('admin/res_kom')}}">
@@ -86,7 +86,7 @@
                                     <i class="menu-icon icon-layers"></i><span>Need Approval</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{FunctionLib::setActive('admin/needapproval/gln')}}"><a href="{{route('admin.needapproval.gln')}}">Transaksi Greenline</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/needapproval/gln')}}"><a href="{{route('admin.needapproval.gln')}}">Transaksi Greenline</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/transaction')}}"><a href="{{route('admin.transaction.index')}}">Transaksi Barang</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/hotlist')}}"><a href="{{route('admin.needapproval.hotlist')}}">Transaksi Hot List</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/pincode')}}"><a href="{{route('admin.needapproval.pincode')}}">Transaksi Pin Code</a></li>
