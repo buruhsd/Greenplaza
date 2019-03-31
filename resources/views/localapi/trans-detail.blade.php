@@ -40,10 +40,6 @@
                                 @else
                                     <li>Status : <button class="btn btn-info btn-xs">Cancel</button></li>
                                 @endif
-                                @if ($item->trans_detail_is_cancel == 1)
-                                    <li>Deskripsi : {{$item->trans_detail_note}}</li>
-                                    @else
-                                    @endif
                                 </ul>
                             </td>
                             <td>
@@ -91,9 +87,20 @@
                             </td>
                             <td>
                                 <ul>
+                                
+                                @if($item->trans->trans_payment_id == 4 )
+                                    <li>Fee Gln : {{ $item->gln->trans_gln_amount_fee }} </li>
+                                    <li>Jumlah Gln : {{ $item->gln->trans_gln_amount }} </li>
+                                    <li>Total Gln : {{ $item->gln->trans_gln_amount_total }} </li>
+                                @else
+                                @endif
                                     <li>Amount : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount)}}</li>
                                     <li>Amount Ship : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_ship)}}</li>
                                     <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
+                                    @if ($item->trans_detail_is_cancel == 1)
+                                    <li><button class="btn btn-info btn-xs">Deskripsi </button>: {{$item->trans_detail_note}}</li>
+                                    @else
+                                    @endif
                                 </ul>
                             </td>
                             <td>
@@ -103,10 +110,11 @@
                     @endforeach
                         <tr>
                             <td class="bg-info" colspan="5">
-                                Total Bayar : 
+                                Total Bayar : <br>
                             </td>
                             <td class="bg-info text-right" colspan="2">
-                                <u><b>
+                                <u>
+                                <b>
                                     Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total'))}}
                                 </b></u>
                             </td>
