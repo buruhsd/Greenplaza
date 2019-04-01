@@ -514,7 +514,7 @@ class FunctionLib
     public static function masedi_payment($data = []){
         $req = [
             'data' => [
-                'username' => 'greenplaza',
+                'username' => 'greenplazates',
                 'password' => 1,
                 'note' => $data['note'],
                 'price' => $data['price'],
