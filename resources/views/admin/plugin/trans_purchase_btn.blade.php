@@ -1,4 +1,4 @@
-@if($detail->produk->user->is_admin())
+
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
@@ -265,4 +265,4 @@
 		@endswitch
 	@endif
 @endif
-@endif
+

@@ -30,12 +30,13 @@ class MasediController extends Controller
     {
         $search = \Request::get('search');
         $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->sum('trans_amount_total');
+        // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
         // dd($trans);
         $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
             ->where('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
-
             ->paginate(10);
+            // ->sum('trans_detail_amount_total');
         // dd($masedi);
         // dd($trans);
         // die();

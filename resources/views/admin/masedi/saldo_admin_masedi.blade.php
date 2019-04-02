@@ -15,7 +15,8 @@
                            
                             <b>Rp. 
                                 {{
-                                    $trans
+                                    
+                                    $trans                                    
                                 }}
                             </b>
                             
