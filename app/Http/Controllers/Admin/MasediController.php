@@ -25,6 +25,23 @@ class MasediController extends Controller
     	// dd($masedi);
     	return view('admin.masedi.list_masedi', compact('masedi'));
     }
+
+     public function listsaldo_admin ()
+    {
+        $search = \Request::get('search');
+        $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->sum('trans_amount_total');
+        // dd($trans);
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->where('trans_detail_trans_id', $trans)
+            ->orderBy('created_at', 'DESC')
+
+            ->paginate(10);
+        // dd($masedi);
+        // dd($trans);
+        // die();
+        return view('admin.masedi.saldo_admin_masedi', compact('masedi', 'trans'));
+    }
+
     public function list_done ()
     {
         $search = \Request::get('search');
