@@ -20,12 +20,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use FunctionLib;
 use App\Models\Log_transfer;
+use App\Models\Payment;
 use Exception;
+use Auth;
 
 
 class TransactionController extends Controller
 {
-    private $perPage = 5;
+    private $perPage = 10;
     private $mainTable = 'sys_trans';
 
     /**
@@ -466,6 +468,16 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        // $arr = [
+        //     "0" =>'chart',
+        //     "1" =>'order',
+        //     "2" =>'transfer',
+        //     "3" =>'seller',
+        //     "4" =>'packing',
+        //     "5" =>'shipping',
+        //     "6" =>'dropping',
+        //     "0,1,2,3,4,5,6" =>'',
+        // ];
         $arr = [
             "0" =>'chart',
             "1" =>'order',
@@ -473,10 +485,18 @@ class TransactionController extends Controller
             "3" =>'seller',
             "4" =>'packing',
             "5" =>'shipping',
+            "5,5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
         $where = "1";
+        if(!empty($request->get('user'))){
+            if($request->get('user') == 'admin'){
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+            }else{
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id !=".Auth::id().")";
+            }
+        }
         $having = "1";
         // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
@@ -486,18 +506,52 @@ class TransactionController extends Controller
         // if(!empty($request->get('status'))){
         //     $status = $request->get('status');
         //     $status = array_search($status,$arr);
-        //     $having .= ' AND trans_detail_status IN ('.$status.')';
+        //     $where .= ' AND trans_detail_status IN ('.$status.')';
         // }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            $status = array_search($status,$arr);
-            $where .= ' AND trans_detail_status IN ('.$status.')';
+            // update
+            if($status == 'cancel'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 'komplain'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }
+            // sampai sini
+            elseif($request->has('type')){
+                $arr = [
+                    "3" =>'wait',
+                    "4" =>'approve'
+                ];
+                $status = array_search($request->get('type'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }else{
+                $status = array_search($request->get('status'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }
+        }
+        if(!empty($request->get('payment'))){
+            $payment = $request->get('payment');
+            $where .= ' AND conf_payment.payment_kode LIKE "%'.$payment.'%"';
+        }
+        if(!empty($request->get('is_paid'))){
+            $paid_arr = [
+                '0' => 'notyet',
+                '1' => 'paid',
+                '0,1' => '',
+            ];
+            $is_paid = array_search($request->get('is_paid'),$paid_arr);
+            $where .= ' AND sys_trans.trans_is_paid IN ('.$is_paid.')';
         }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
-                // ->havingRaw($having)
+                ->leftJoin('conf_payment', 'sys_trans.trans_payment_id', '=', 'conf_payment.id')
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')
@@ -505,6 +559,7 @@ class TransactionController extends Controller
         } else {
             $data['transaction'] = Trans::paginate($this->perPage);
         }
+        $data['payment'] = Payment::where('payment_status', 1)->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
         return view('admin.transaction.index', $data);
@@ -518,31 +573,54 @@ class TransactionController extends Controller
             "3" =>'seller',
             "4" =>'packing',
             "5" =>'shipping',
+            "5,5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
         $where = "1";
+        if(!empty($request->get('user'))){
+            if($request->get('user') == 'admin'){
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+            }else{
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id !=".Auth::id().")";
+            }
+        }
         $having = "1";
-        // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
             $name = $request->get('code');
             $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
         }
-        // if(!empty($request->get('status'))){
-        //     $status = $request->get('status');
-        //     $status = array_search($status,$arr);
-        //     $having .= ' AND trans_detail_status IN ('.$status.')';
-        // }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            $status = array_search($status,$arr);
-            $where .= ' AND trans_detail_status IN ('.$status.')';
+            // update
+            if($status == 'cancel'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 'komplain'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }
+            // sampai sini
+            elseif($request->has('type')){
+                $arr = [
+                    "3" =>'wait',
+                    "4" =>'approve'
+                ];
+                $status = array_search($request->get('type'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }else{
+                $status = array_search($request->get('status'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }
         }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
-                // ->havingRaw($having)
+                ->leftJoin('conf_payment', 'sys_trans.trans_payment_id', '=', 'conf_payment.id')
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')
@@ -564,34 +642,56 @@ class TransactionController extends Controller
             "3" =>'seller',
             "4" =>'packing',
             "5" =>'shipping',
+            "5,5" =>'sent',
             "6" =>'dropping',
             "0,1,2,3,4,5,6" =>'',
         ];
         $where = "1";
+        if(!empty($request->get('user'))){
+            if($request->get('user') == 'admin'){
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+            }else{
+                $where .= " AND trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id !=".Auth::id().")";
+            }
+        }
         $having = "1";
-        // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
             $name = $request->get('code');
             $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
         }
-        // if(!empty($request->get('status'))){
-        //     $status = $request->get('status');
-        //     $status = array_search($status,$arr);
-        //     $having .= ' AND trans_detail_status IN ('.$status.')';
-        // }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
-            $status = array_search($status,$arr);
-            $where .= ' AND trans_detail_status IN ('.$status.')';
+            // update
+            if($status == 'cancel'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NULL';
+            }elseif($status == 'komplain'){
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel = 1';
+                $where .= ' AND sys_komplain.id IS NOT NULL';
+            }
+            // sampai sini
+            elseif($request->has('type')){
+                $arr = [
+                    "3" =>'wait',
+                    "4" =>'approve'
+                ];
+                $status = array_search($request->get('type'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }else{
+                $status = array_search($request->get('status'),$arr);
+                $where .= ' AND sys_trans_detail.trans_detail_is_cancel != 1';
+                $where .= ' AND trans_detail_status IN ('.$status.')';
+            }
         }
 
         if (!empty($where)) {
             $data['transaction'] = Trans::whereRaw($where)
-                // ->havingRaw($having)
+                ->leftJoin('conf_payment', 'sys_trans.trans_payment_id', '=', 'conf_payment.id')
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->leftJoin('sys_komplain', 'sys_trans_detail.id', '=', 'sys_komplain.komplain_trans_id')
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
-                ->groupBy('sys_trans.id')
                 ->where('trans_is_paid', 0)
                 ->paginate($this->perPage);
         } else {

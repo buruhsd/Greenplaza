@@ -15,19 +15,46 @@
                 <form action="" method="GET" id="src" class="form-inline">
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="code" class="sr-only">Code</label>
-                    <input type="text" class="form-control" placeholder="Search" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
+                    <input type="text" class="form-control" placeholder="Code" name="code" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}" autocomplete="off">
                   </div>
                   <div class="form-group mx-sm-3 mb-2">
                     <label for="status" class="sr-only">Status</label>
                     <select class="form-control" id="status" name="status">
                         <option value="" {!! (!empty($_GET['status']) && $_GET['status'] == "")?"selected":"" !!}>All</option>
-                        <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option>
+                        {{-- <option value="chart" {!! (!empty($_GET['status']) && $_GET['status'] == "chart")?"selected":"" !!}>Chart</option> --}}
                         <option value="order" {!! (!empty($_GET['status']) && $_GET['status'] == "order")?"selected":"" !!}>Order</option>
                         <option value="transfer" {!! (!empty($_GET['status']) && $_GET['status'] == "transfer")?"selected":"" !!}>Transfer</option>
                         <option value="seller" {!! (!empty($_GET['status']) && $_GET['status'] == "seller")?"selected":"" !!}>Seller</option>
                         <option value="packing" {!! (!empty($_GET['status']) && $_GET['status'] == "packing")?"selected":"" !!}>Packing</option>
                         <option value="shipping" {!! (!empty($_GET['status']) && $_GET['status'] == "shipping")?"selected":"" !!}>Shipping</option>
                         <option value="dropping" {!! (!empty($_GET['status']) && $_GET['status'] == "dropping")?"selected":"" !!}>Dropping</option>
+                        <option value="cancel" {!! (!empty($_GET['status']) && $_GET['status'] == "cancel")?"selected":"" !!}>Cancel</option>
+                        <option value="komplain" {!! (!empty($_GET['status']) && $_GET['status'] == "komplain")?"selected":"" !!}>Komplain</option>
+                    </select>
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="user" class="sr-only">User</label>
+                    <select class="form-control" id="user" name="user">
+                        <option value="" {!! (!empty($_GET['user']) && $_GET['user'] == "")?"selected":"" !!}>All</option>
+                        <option value="admin" {!! (!empty($_GET['user']) && $_GET['user'] == "admin")?"selected":"" !!}>Admin</option>
+                        <option value="member" {!! (!empty($_GET['user']) && $_GET['user'] == "member")?"selected":"" !!}>Member</option>
+                    </select>
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="payment" class="sr-only">Pembayaran</label>
+                    <select class="form-control" id="payment" name="payment">
+                        <option value="" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>All</option>
+                        @foreach($payment as $item)
+                            <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == $item->payment_kode)?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="is_paid" class="sr-only">Status Paid</label>
+                    <select class="form-control" id="is_paid" name="is_paid">
+                        <option value="" {!! (!empty($_GET['is_paid']) && $_GET['is_paid'] == "")?"selected":"" !!}>All</option>
+                        <option value="paid" {!! (!empty($_GET['is_paid']) && $_GET['is_paid'] == "paid")?"selected":"" !!}>Paid</option>
+                        <option value="notyet" {!! (!empty($_GET['is_paid']) && $_GET['is_paid'] == "notyet")?"selected":"" !!}>Not Paid</option>
                     </select>
                   </div>
                   <button type="submit" class="btn btn-primary mb-2">Cari</button>
@@ -37,7 +64,7 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <div class="col-md-12">
+                    {{-- <div class="col-md-12">
                         <div class="col-md-6">
                             <h4 class="panel-title">Transaction</h4>
                         </div>
@@ -51,14 +78,16 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0)}}</span></button>
-                    <button type="button" onclick="search('order');" class="btn btn-info">Order<span class="label label-default pull-right">{{FunctionLib::count_trans(1)}}</span></button>
-                    <button type="button" onclick="search('transfer');" class="btn btn-info">Transfer<span class="label label-default pull-right">{{FunctionLib::count_trans(2)}}</span></button>
-                    <button type="button" onclick="search('seller');" class="btn btn-info">Seller<span class="label label-default pull-right">{{FunctionLib::count_trans(3)}}</span></button>
-                    <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4)}}</span></button>
-                    <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5)}}</span></button>
-                    <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6)}}</span></button>
+                    </div> --}}
+                    {{-- <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0)}}</span></button> --}}
+                    <button type="button" onclick="search('order');" class="btn btn-info">Order<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('transfer');" class="btn btn-info">Transfer<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('seller');" class="btn btn-info">Seller<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('shipping');" class="btn btn-info">Shipping<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('dropping');" class="btn btn-info">Dropping<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('cancel');" class="btn btn-info">Cancel<span class="label label-default pull-right">{{FunctionLib::count_trans(7, Auth::id(), 'seller')}}</span></button>
+                    <button type="button" onclick="search('komplain');" class="btn btn-info">Komplain<span class="label label-default pull-right">{{FunctionLib::count_trans(8, Auth::id(), 'seller')}}</span></button>
                     <!-- <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add Newssss</a> -->
                 </div>
                 <div class="panel-body">

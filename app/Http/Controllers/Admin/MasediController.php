@@ -9,6 +9,7 @@ use App\Models\Trans_gln;
 use App\Http\Controllers\Controller;
 use FunctionLib;
 use App\User;
+use Auth;
 
 
 class MasediController extends Controller
@@ -29,7 +30,12 @@ class MasediController extends Controller
      public function listsaldo_admin ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->sum('trans_amount_total');
+        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+        $trans = Trans::where('trans_payment_id', '=', 3)
+                ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->whereRaw($where)
+                ->where('trans_is_paid', 1)
+                ->sum('trans_amount_total');
         // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
         // dd($trans);
         $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')

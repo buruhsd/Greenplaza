@@ -38,7 +38,54 @@
                         </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{-- <li><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
+                    <!-- <li class="dropdown">
+                        <?php 
+                            $notif = FunctionLib::user_notif(Auth::id(), 10);
+                        ?>
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell"></i>
+                            <small class="text-danger {!!($notif->count())?'':'hide'!!}">
+                                <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
+                            </small>
+                        </a>
+                        <ul class="dropdown-menu dropdown-lg dropdown-content">
+                            <li class="slimscroll dropdown-notifications">
+                                <ul class="list-unstyled dropdown-oc" id="member-notif">
+                                    @if($notif->count())
+                                        @foreach($notif->get() as $item)
+                                            <?php
+                                                $data = json_decode($item->data,true);
+                                            ?>
+                                            <li>
+                                                <a href="{{route('member.notification.is_read', $item->id)}}">
+                                                    @if($item->read_at)
+                                                        <span class="notification-badge bg-primary">
+                                                            <i class="fa fa-check animated"></i>
+                                                        </span>
+                                                    @endif
+                                                    <span class="notification-info">
+                                                        <strong>{{$data['data']['title']}}</strong>  
+                                                        {{$data['data']['message']}}
+                                                        <small class="notification-date">{{FunctionLib::datetime_indo($item->updated_at, true, 'full')}}</small>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <li id="no-notif">
+                                            <a href="#">
+                                                <span class="text-sm text-success">
+                                                    <i class="fa fa-check animated"></i>
+                                                </span>
+                                                No notifications
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <!-- <li><a href="javascript:void(0)" class="right-sidebar-toggle" data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i></a>
                         <ul class="dropdown-menu dropdown-lg dropdown-content">
@@ -72,7 +119,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li> --}}
+                    </li> -->
                     <li class="dropdown user-dropdown">
                         <?php 
                             $notif = FunctionLib::user_notif(Auth::id(), 10);
