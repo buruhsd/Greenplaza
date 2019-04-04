@@ -19,11 +19,22 @@ class ChartController extends Controller
         return view('frontend.chart');
     }
 
+    public function addVoucher()
+    {
+        if(!Session::has('voucher')){
+            Session::put('voucher', []);
+        }
+        $voucher = [
+            'code' => '',
+            'amount' => 10000,
+        ];
+        Session::push('voucher', $transaction);
+    }
+
     public function checkout()
     {
         $data['payment'] = Payment::where('payment_status', 1)->where('id', 3)->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
-        // echo json_encode($data['gln']); exit();
         return view('frontend.checkout', $data);
     }
 

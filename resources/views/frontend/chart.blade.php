@@ -181,18 +181,18 @@
                         </div>
                         <div class="row mt-60">
                             <div class="col-lg-5 col-md-6 ">
-                                <div class="cartcupon-wrap" style="display: none;">
+                                <div class="cartcupon-wrap">{{--  style="display:none;"> --}}
                                     <ul class="d-flex">
                                         {{-- <li>
                                             <button>Update Cart</button>
                                         </li> --}}
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    <h3>Kupon</h3>
-                                    <p>Masukkan kode kupon jika punya</p>
+                                    <h3>Voucher Masedi</h3>
+                                    <p>Masukkan kode Voucher jika punya</p>
                                     <div class="cupon-wrap">
-                                        <input type="text" placeholder="Cupon Code">
-                                        <button>Menggunakan Kupon</button>
+                                        <input type="text" placeholder="Kode Voucher">
+                                        <button>Gunakan Voucher</button>
                                     </div>
                                 </div>
                             </div>
