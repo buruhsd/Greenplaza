@@ -64,7 +64,7 @@
                                             <ul>
                                                 <li>Name : {{$item->produk_name}}</li>
                                                 <li>Brand : {{ucfirst(strtolower($item->brand->brand_name))}}</li>
-                                                <li>Category : {{ucfirst(strtolower($item->category->category_name))}}</li>
+                                                <li>Category : {{ucfirst(strtolower($item->category['category_name']))}}</li>
                                                 <li>Price : Rp. 
                                                     @if($item->produk_discount > 0)
                                                         {{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}

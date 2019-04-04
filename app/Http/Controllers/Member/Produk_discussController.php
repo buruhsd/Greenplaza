@@ -60,7 +60,8 @@ class Produk_discussController extends Controller
                 ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_produk_discuss.produk_discuss_produk_id')
                 ->orderBy('updated_at', 'DESC')
                 ->paginate($this->perPage)
-                ->where(3);
+                ;
+                // dd($data['produk_discuss']);
         } else {
             $data['produk_discuss'] = Produk_discuss::paginate($this->perPage);
         }
