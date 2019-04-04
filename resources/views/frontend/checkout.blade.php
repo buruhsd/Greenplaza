@@ -33,20 +33,20 @@
                                 <div class="col-12">
                                     <div class="large-12 medium-12 small-12 columns">
                                     </div>
-                                    <div class="large-6 medium-6 small-12 columns">
-                                        <label>Kode Transaksi Anda</label>
-                                        <h2></h2>
-                                    </div>
-                                    <div class="large-6 medium-6 small-12 columns">
-                                        <?php 
-                                            $show_harga = 0;
-                                            $show_shipment = 0;
-                                            $show_harga_grosir_total = 0; 
-                                            $show_harga_diskon_total = 0; 
-                                            $show_harga_total = 0; 
-                                            $show_grosir = 0;
-                                        ?>
-                                        @if(Session::has('chart'))
+                                    <?php 
+                                        $show_harga = 0;
+                                        $show_shipment = 0;
+                                        $show_harga_grosir_total = 0; 
+                                        $show_harga_diskon_total = 0; 
+                                        $show_harga_total = 0; 
+                                        $show_grosir = 0;
+                                    ?>
+                                    @if(Session::has('chart'))
+                                        <div class="large-6 medium-6 small-12 columns">
+                                            <label>Kode Transaksi Anda</label>
+                                            <h2></h2>
+                                        </div>
+                                        <div class="large-6 medium-6 small-12 columns">
                                             @foreach(Session::get('chart') as $key => $item)
                                                 <?php
                                                     $harga_grosir = 0;
@@ -94,8 +94,8 @@
                                             <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
                                             ';
                                             ?>
-                                        @endif
-                                    </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <!-- <hr> -->
