@@ -146,13 +146,16 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                 @if ($p->produk_stock == 0)
-                                                <div class="featured-content text-center">
-                                                    <ul>
-                                                        <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                                    </ul>
-                                                </div>
-                                                @else
-                                                   <span class="new">new</span>
+                                                    <div class="featured-content text-center">
+                                                        <ul>
+                                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    @elseif($p->produk_discount == 0)
+                                                        <span ></span>
+                                                
+                                                @else($p->produk_discount == 1)
+                                                   <span class="new">sale</span>
                                                 @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt="">
                                                 {{-- <img class="second second2" src="{{ asset('assets/images/product/'.$p->produk_image) }}" alt=""> --}}

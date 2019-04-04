@@ -348,7 +348,9 @@
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                         </ul>
                                     </div>
-                                    @else
+                                    @elseif($n->produk_discount == 0)
+                                    <span ></span>
+                                    @else($n->produk_discount == 1)
                                        <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
@@ -434,9 +436,11 @@
                                         <ul>
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                         </ul>
-                                    </div>
-                                    @else
-                                       <span class="new">new</span>
+                                    @elseif($n->produk_discount == 0)
+                                                        <span ></span>
+                                                
+                                                @else($n->produk_discount == 1)
+                                                   <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
@@ -539,9 +543,12 @@
                                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                                         </ul>
                                                     </div>
-                                                    @else
-                                                       <span class="new">new</span>
-                                                    @endif
+                                                    @elseif($n->produk_discount == 0)
+                                                        <span ></span>
+                                                
+                                                @else($n->produk_discount == 1)
+                                                   <span class="new">sale</span>
+                                                @endif
                                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                                 <!-- <div class="shop-icon">
@@ -590,14 +597,17 @@
                                     <div class="product-wrap">
                                         <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
                                             @if ($n->produk_stock == 0)
-                                    <div class="featured-content text-center">
-                                        <ul>
-                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul>
-                                    </div>
-                                    @else
-                                       <span class="new sale">new</span>
-                                    @endif
+                                            <div class="featured-content text-center">
+                                                <ul>
+                                                    <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
+                                                </ul>
+                                            </div>
+                                            @elseif($n->produk_discount == 0)
+                                            <span ></span>
+                                                        
+                                            @else($n->produk_discount == 1)
+                                               <span class="new">sale</span>
+                                            @endif
                                                 <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                                 {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
                                             <!-- <div class="shop-icon">
@@ -769,8 +779,11 @@
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                         </ul>
                                     </div>
-                                    @else
-                                       <span class="new sale">new</span>
+                                    @elseif($f->produk_discount == 0)
+                                    <span ></span>
+                                                
+                                    @else($f->produk_discount == 1)
+                                       <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="">
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
@@ -1157,14 +1170,17 @@
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                  @if ($item->produk_stock == 0)
-                                    <div class="featured-content text-center">
-                                        <ul>
-                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul>
-                                    </div>
-                                    @else
-                                       <span class="new sale">Sale</span>
-                                    @endif
+                                                    <div class="featured-content text-center">
+                                                        <ul>
+                                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    @elseif($item->produk_discount == 0)
+                                                    <span ></span>
+                                                                
+                                                    @else($item->produk_discount == 1)
+                                                       <span class="new">sale</span>
+                                                    @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <!-- <div class="shop-icon">
                                                     <ul>

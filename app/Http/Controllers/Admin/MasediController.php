@@ -30,7 +30,7 @@ class MasediController extends Controller
      public function listsaldo_admin ()
     {
         $search = \Request::get('search');
-        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".Auth::id().")";
+        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".(2).")";
         $trans = Trans::where('trans_payment_id', '=', 3)
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
                 ->whereRaw($where)

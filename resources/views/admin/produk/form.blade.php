@@ -483,7 +483,7 @@
                         other <span class="check glyphicon glyphicon-ok"></span>
                     </label> --}}
                     @if(str_contains(Request::url(), ['create']))
-                        <div class="input-group col-md-12 multiple-form-group" data-max="3">
+                        <div class="input-group col-md-12 multiple-form-group" data-max="5">
                             <div class="form-group">
                                 <div class="cp input-group colorpicker-component">
                                     <input type="text" name="produk_color[]" value="#00AABB" class="form-control" />
@@ -496,7 +496,7 @@
                         <?php 
                             $array = explode (",", $produk->produk_color);
                         ?>
-                        <div class="input-group col-md-12 multiple-form-group" data-max="3">
+                        <div class="input-group col-md-12 multiple-form-group" data-max="5">
                             @foreach($array as $item)
                                 <div class="form-group">
                                     <div class="cp input-group colorpicker-component">
