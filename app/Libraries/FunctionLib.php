@@ -1,6 +1,9 @@
 <?php
 class FunctionLib
 {
+    public static function minus_to_zero($var){
+        return ($var < 0 ? 0 : $var);
+    }
 
     /**
     * @param $type = cek/use
@@ -38,6 +41,25 @@ class FunctionLib
                 if(isset($response['status']) && $response['status'] == true){
                     $status = 200;
                     $message = 'Voucher digunakan.';
+                }
+            break;
+            case 'pay_poin':
+                $req = [
+                    'data' => [
+                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
+                        'password' => env('MASEDI_PASSWORD', 1),
+                        'note' => $data['note'],
+                        'price' => $data['price'],
+                        'poin' => $data['poin'],
+                    ]
+                ];
+                $response = MasEdi::payment($req);
+                $response = json_decode($response, true);
+                if(isset($response['status']) && $response['status'] == true){
+                    $status = 200;
+                    $message = 'Berhasil bayar PW.';
+                }else{
+                    $message = 'Gagal bayar PW.';
                 }
             break;
         
@@ -717,6 +739,17 @@ class FunctionLib
                             $response['message'] .= ' ,'.$send_notif['message'];
                         }
                     }
+                    // if($trans->first()->voucher()){
+                    //     $model_voucher = $trans->first()->voucher();
+                    //     $voucher = [
+                    //         'voucher' => $model_voucher->trans_voucher_code
+                    //     ];
+                    //     $res_voucher = FunctionLib::masedi('use', $voucher);
+                    //     if($res_voucher['status'] == 200){
+                    //         $model_voucher->trans_voucher_status = 1;
+                    //         $model_voucher->save();
+                    //     }
+                    // }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
                         :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'

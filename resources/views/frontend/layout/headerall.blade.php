@@ -198,7 +198,7 @@
                                         @endif
                                     </li>
                                 @endforeach
-                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
+                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Semua Kategori... <i class="fa fa-angle-right pull-right"></i></a>
                             </ul>
                         </div>
                     </div>

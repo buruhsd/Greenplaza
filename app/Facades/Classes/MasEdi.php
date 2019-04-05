@@ -16,9 +16,9 @@ class MasEdi extends Controller
     private $__api_server = 'http://45.76.176.231/edisedis/index.php';
 
     /**
-    * mendapat harga ongkir
-    * @param *origin, originType, destination, destinationType, weight
-    * @param courier, lenght, width, height, diameter
+    * bayar masedi
+    * @param *username, password, note, price, poin
+    * @param username, password, note, price, poin
     * @return
     **/
     public function payment($param= []){

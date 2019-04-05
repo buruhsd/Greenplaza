@@ -260,6 +260,10 @@ class TransactionController extends Controller
     public function done_masedi(Request $request){
         $status = 200;
         $message = 'Transfer Berhasil';
+        $data = [
+            'order_id' => null,
+            'transaction_status' => null
+        ];
         // $this->validate($request, [
         //     'order_id' => 'required',
         //     'transaction_status' => 'required',

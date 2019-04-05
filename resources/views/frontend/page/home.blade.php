@@ -2,55 +2,55 @@
 @section('title', 'Home')
 @section('content')
 
-    <div class="slider-area" style="padding-top: 150px;">
+    <div class="slider-area" style="padding-top: 150px;margin-bottom: 180px;">
         <div class="container">
             <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-10">
-                        <div class="cetagory-wrap">
-                            <span>Semua kategori</span>
-                            <ul class="cetagory-items">
-                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
-                                {{-- {{dd($cat)}} --}}
-                                @foreach($cat as $item)
-                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
-                                        <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
-                                        @if($sub_cat->count() > 0)
-                                            <ul class="sub-cetagory col-md-12 col-sm-12">
-                                                <li>
-                                                    <p>{{ucfirst(strtolower($item->category_name))}}</p>
-                                                    <ul>
-                                                        @foreach($sub_cat as $item2)
-                                                            <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">
-                                                                {{ucfirst(strtolower($item2->category_name))}}</a>
-                                                                <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item2->id)->limit(10)->get();?>
-                                                                @if($sub_cat->count() > 0)
-                                                                    <ul class="sub-cetagory col-md-12 col-sm-12">
-                                                                        <li>
-                                                                            <p>{{ucfirst(strtolower($item2->category_name))}}</p>
-                                                                            <ul>
-                                                                                @foreach($sub_cat as $item3)
-                                                                                    <li><a href="{{route('category', ['cat'=>$item3->category_slug])}}">
-                                                                                        {{ucfirst(strtolower($item3->category_name))}}</a>
-                                                                                    </li>
-                                                                                @endforeach
-                                                                                <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">Lainya...</a>
-                                                                            </ul>
-                                                                        </li>
-                                                                    </ul>
-                                                                @endif
-                                                            </li>
-                                                        @endforeach
-                                                        <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">Lainya...</a>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        @endif
-                                    </li>
-                                @endforeach
-                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
-                            </ul>
-                        </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-10">
+                    <div class="cetagory-wrap">
+                        <span>Semua kategori</span>
+                        <ul class="cetagory-items">
+                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(12)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
+                            {{-- {{dd($cat)}} --}}
+                            @foreach($cat as $item)
+                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
+                                    <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
+                                    @if($sub_cat->count() > 0)
+                                        <ul class="sub-cetagory col-md-12 col-sm-12">
+                                            <li>
+                                                <p>{{ucfirst(strtolower($item->category_name))}}</p>
+                                                <ul>
+                                                    @foreach($sub_cat as $item2)
+                                                        <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">
+                                                            {{ucfirst(strtolower($item2->category_name))}}</a>
+                                                            <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item2->id)->limit(10)->get();?>
+                                                            @if($sub_cat->count() > 0)
+                                                                <ul class="sub-cetagory col-md-12 col-sm-12">
+                                                                    <li>
+                                                                        <p>{{ucfirst(strtolower($item2->category_name))}}</p>
+                                                                        <ul>
+                                                                            @foreach($sub_cat as $item3)
+                                                                                <li><a href="{{route('category', ['cat'=>$item3->category_slug])}}">
+                                                                                    {{ucfirst(strtolower($item3->category_name))}}</a>
+                                                                                </li>
+                                                                            @endforeach
+                                                                            <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">Lainya...</a>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">Lainya...</a>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                            <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Semua Kategori... <i class="fa fa-angle-right pull-right"></i></a>
+                        </ul>
                     </div>
+                </div>
                 <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-4">
                     <div class="slider-active owl-carousel next-prev-btn">
                         {!!Plugin::view('iklan', [

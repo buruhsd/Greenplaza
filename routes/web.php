@@ -720,6 +720,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 			Route::post('cek_voucher', 'MasediController@cek_voucher')->name('.cek_voucher');
 			Route::post('use_voucher', 'MasediController@use_voucher')->name('.use_voucher');
 			Route::get('payment', 'MasediController@payment')->name('.payment');
+			Route::get('payment_poin', 'MasediController@payment_poin')->name('.payment_poin');
 			Route::get('qr/{code}', 'MasediController@qr')->name('.qr');
 			Route::get('qr_hotlist/{code}', 'MasediController@qr_hotlist')->name('.qr_hotlist');
 			Route::get('qr_iklan/{code}', 'MasediController@qr_iklan')->name('.qr_iklan');

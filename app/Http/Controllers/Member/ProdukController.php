@@ -137,6 +137,7 @@ class ProdukController extends Controller
             "0,1,2" =>'',
         ];
         $where = "1 AND produk_seller_id=".Auth::id();//.' AND produk_user_status=3';
+        // $where .= " AND produk_is_hot=0";
         if(!empty($request->get('name'))){
             $name = $request->get('name');
             $where .= ' AND produk_name LIKE "%'.$name.'%"';
@@ -148,12 +149,10 @@ class ProdukController extends Controller
         }
 
         if (!empty($where)) {
-            $data['produk'] = Produk::where("produk_is_hot", 0)
-                ->whereRaw($where)
+            $data['produk'] = Produk::whereRaw($where)
                 ->paginate($this->perPage);
         } else {
-            $data['produk'] = Produk::where("produk_is_hot", 0)
-                ->paginate($this->perPage);
+            $data['produk'] = Produk::paginate($this->perPage);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
 
