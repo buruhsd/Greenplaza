@@ -156,6 +156,7 @@ class ProdukController extends Controller
         $this->validate($request, [
             'produk_name' => 'required',
             'produk_unit' => 'required',
+            'produk_category_id' => 'required',
             'produk_price' => 'required|numeric|min:0.00',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',

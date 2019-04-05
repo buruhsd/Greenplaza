@@ -198,6 +198,7 @@ class ProdukController extends Controller
             'produk_unit' => 'required',
             'produk_price' => 'required|numeric|min:0.00',
             'produk_size' => 'required',
+            'produk_category_id' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
             'produk_height' => 'required|numeric',
@@ -211,7 +212,7 @@ class ProdukController extends Controller
         // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
-        $res->produk_category_id = $request->produk_category_id;
+        $res->produk_category_id = $request->produk_category_id;         
         $res->produk_brand_id = $request->produk_brand_id;
         $res->produk_name = $request->produk_name;
         $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name.' '.FunctionLib::str_rand(5));
@@ -285,8 +286,10 @@ class ProdukController extends Controller
                     $produk_grosir->save();
                 }
             }
+
             return redirect('member/produk')
                 ->with(['flash_status' => $status,'flash_message' => $message]);
+            
         }
     }
 
