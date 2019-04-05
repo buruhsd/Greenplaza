@@ -19,16 +19,29 @@ class ChartController extends Controller
         return view('frontend.chart');
     }
 
-    public function addVoucher()
+    public function delVoucher()
     {
+        $status = 200;
+        Session::forget('voucher');
+        return ['status'=>$status];
+    }
+
+    public function addVoucher(Request $request)
+    {
+        $data = $request->all();
         if(!Session::has('voucher')){
             Session::put('voucher', []);
         }
-        $voucher = [
-            'code' => '',
-            'amount' => 10000,
-        ];
-        Session::push('voucher', $transaction);
+        if(Session::has('voucher')){
+            $voucher = [
+                'code' => $data['voucher'],
+                'amount' => $data['amount'],
+            ];
+            Session::forget('voucher');
+            Session::put('voucher', $voucher);
+            Session::save();
+        }
+        return redirect()->back();
     }
 
     public function checkout()

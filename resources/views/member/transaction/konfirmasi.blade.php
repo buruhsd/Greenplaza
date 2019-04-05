@@ -29,6 +29,11 @@
                         ?>
 
                         <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
+                        <!-- @if($trans->first()->voucher())
+                            <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')-$trans->first()->voucher()->trans_voucher_amount)}}
+                        @else
+                            <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
+                        @endif -->
                         @if($trans->first()->trans_payment_id == 4)
                             <?php 
                             $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');

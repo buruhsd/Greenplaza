@@ -2,6 +2,53 @@
 class FunctionLib
 {
 
+    /**
+    * @param $type = cek/use
+    * @return
+    **/
+    public static function masedi($type='cek', $data = []){
+        $status = 500;
+        $message = 'Kode Voucher tidak tersedia / Server tidak merespon.';
+        switch ($type) {
+            case 'cek':
+                $req = [
+                    'data' => [
+                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
+                        'password' => env('MASEDI_PASSWORD', 1),
+                        'kode_voucher' => $data['voucher'],
+                    ]
+                ];
+                $response = MasEdi::cek_voucher($req);
+                $response = json_decode($response, true);
+                if(isset($response['status']) && $response['status'] == true){
+                    $status = 200;
+                    $message = 'Voucher diaktifkan.';
+                }
+            break;
+            case 'use':
+                $req = [
+                    'data' => [
+                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
+                        'password' => env('MASEDI_PASSWORD', 1),
+                        'kode_voucher' => $data['voucher'],
+                    ]
+                ];
+                $response = MasEdi::use_voucher($req);
+                $response = json_decode($response, true);
+                if(isset($response['status']) && $response['status'] == true){
+                    $status = 200;
+                    $message = 'Voucher digunakan.';
+                }
+            break;
+        
+            default:
+            # code...
+            break;
+        }
+        $return = ['status'=>$status, 'message'=>$message, 'data'=>$response];
+        return $return;
+    }
+
     /******/
     public static function trans_cancel_notif($param=[]){
         $data['status'] = 200;

@@ -188,12 +188,14 @@
                                         </li> --}}
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    <h3>Voucher Masedi</h3>
-                                    <p>Masukkan kode Voucher jika punya</p>
-                                    <div class="cupon-wrap">
-                                        <input type="text" placeholder="Kode Voucher">
-                                        <button>Gunakan Voucher</button>
-                                    </div>
+                                    @if(!Session::has('voucher'))
+                                        <h3 class="form-voucher">Voucher Masedi</h3>
+                                        <p class="form-voucher">Masukkan kode Voucher jika punya</p>
+                                        <div class="cupon-wrap form-voucher">
+                                            <input type="text" id="code_voucher" placeholder="Kode Voucher">
+                                            <button id="voucher" data-href="{{route('localapi.masedi.cek_voucher')}}">Gunakan Voucher</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <?php 
@@ -234,6 +236,18 @@
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                             </span>
                                         </li>
+                                        <li id="voucher-info">
+                                        <!-- @if(Session::has('voucher'))
+                                            <?php 
+                                                $voucher = Session::get('voucher');
+                                            ?>
+                                                <span class="pull-left text-danger">Voucher </span>
+                                                <span class='text-danger'>
+                                                    Rp. {{FunctionLib::number_to_text($voucher['amount'])}}
+                                                    <button id="del_voucher"><i class="fa fa-times"></i></button>
+                                                </span>
+                                        @endif -->
+                                        </li>
                                         <h3></h3>
                                         <li>
                                             <span class="pull-left"> Total </span> 
@@ -252,4 +266,54 @@
     <!-- cart-area end -->
     
 
+@endsection
+@section('script')
+    <script type="text/javascript">
+        $('#voucher').click(function(e){
+            swal({
+                title: 'Ingin gunakan voucher Masedi?',
+                text: "Klik Gunakan juka setuju!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Batal',
+                confirmButtonText: 'Gunakan!'
+            }).then((isConfirm) => {
+                if (isConfirm.value){
+                    $.post($('#voucher').data('href'), {"_token": "{{ csrf_token() }}", "voucher":$('#code_voucher').val()}, function( data ) {
+                        console.log(data);
+                        if((data.status == 200)){
+                            $('.form-voucher').hide();
+                            $.post("{{route('add_voucher')}}", {"_token": "{{ csrf_token() }}", 
+                                "voucher":$('#code_voucher').val(), "amount": data.data.nilai}, function( data ) {
+                                if((data.status == 500)){
+                                    $('.form-voucher').hide();
+                                    // var html = '<span class="pull-left text-danger">Voucher </span>'+
+                                    //     '<span class="text-danger">'+
+                                    //     '</span>'+
+                                    //     data.data.nilai+
+                                    //     '<i class="fa fa-times fa-2x"></i>';
+                                    // $('#voucher-info').empty().html(html);
+                                }
+                            });
+                        }
+                        var status = (data.status == 200)?'success':'error';
+                        swal("notifikasi!", data.message, status);
+                        location.reload();
+                    });
+                } else {
+                    swal("Batal", "Batal menggunakan voucher", "error");
+                    e.preventDefault();
+                }
+            });
+        });
+        $('#del_voucher').click(function(e){
+            $.post("{{route('del_voucher')}}", {"_token": "{{ csrf_token() }}"}, function( data ) {
+                if(data.status == 200){
+                    location.reload();
+                }
+            });
+        });
+    </script>
 @endsection

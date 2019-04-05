@@ -89,10 +89,20 @@
                                             Tagihan : Rp '.FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total).' 
                                             <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
                                             <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir).'</span><br>
-                                            Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>
-                                            <label>Jumlah yang harus ditransfer</label>
-                                            <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
-                                            ';
+                                            Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>';
+                                            // if(Session::has('voucher')){
+                                            //     $voucher = Session::get('voucher');
+                                            //     echo '<span class="text-danger">Voucher : Rp.'.FunctionLib::number_to_text($voucher['amount']).'</span>'.' <br>';
+                                            //     echo '
+                                            //     <label>Jumlah yang harus ditransfer</label>
+                                            //     <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total-$voucher['amount']).'</h2>
+                                            //     ';
+                                            // }else{
+                                                echo '
+                                                <label>Jumlah yang harus ditransfer</label>
+                                                <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
+                                                ';
+                                            // }
                                             ?>
                                         </div>
                                     @endif
@@ -174,6 +184,14 @@
                                     </select>
                                 </div>
                                 <div class="payment_hide payment_Me collapse">
+                                    <hr/>
+                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
+                                </div>
+                                <div class="payment_hide payment_Saldo collapse">
+                                    <hr/>
+                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
+                                </div>
+                                <div class="payment_hide payment_Pw collapse">
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
                                 </div>

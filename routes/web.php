@@ -691,6 +691,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/member/wishlist', 'Member\\WishlistController@index')->name('member.wishlist');
 	Route::post('/member/addwishlist/{id}', 'Member\\WishlistController@addWishlist')->name('member.addwishlist');
 	//ChartController
+	Route::post('/add_voucher', 'Member\\ChartController@addVoucher')->name('add_voucher');
+	Route::post('/del_voucher', 'Member\\ChartController@delVoucher')->name('del_voucher');
 	Route::get('/chart', 'Member\\ChartController@chart')->name('chart');
 	Route::post('/addchart/{id}', 'Member\\ChartController@addChart')->name('addchart');
 	Route::get('/chart/destroy/{id}', 'Member\\ChartController@destroy')->name('chart.destroy');
@@ -715,6 +717,8 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 	Route::group(['prefix' => 'masedi', 'as' => '.masedi'], function () {
 		// need email active
 		Route::group(['middleware' => ['is_active']], function () {
+			Route::post('cek_voucher', 'MasediController@cek_voucher')->name('.cek_voucher');
+			Route::post('use_voucher', 'MasediController@use_voucher')->name('.use_voucher');
 			Route::get('payment', 'MasediController@payment')->name('.payment');
 			Route::get('qr/{code}', 'MasediController@qr')->name('.qr');
 			Route::get('qr_hotlist/{code}', 'MasediController@qr_hotlist')->name('.qr_hotlist');

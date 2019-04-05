@@ -16,6 +16,7 @@ use App\Models\Trans_pincode;
 use App\User;
 use Auth;
 use App\Models\Wallet;
+use App\Models\Trans_voucher;
 use Exception;
 
 class MasediController extends Controller
@@ -28,6 +29,16 @@ class MasediController extends Controller
      */
     public function __construct()
     {
+    }
+
+    public function cek_voucher(Request $request){
+        $data = $request->all();
+        $res = FunctionLib::masedi('cek', $data);
+        return $res;
+    }
+
+    public function use_voucher(){
+        
     }
 
     public function payment(){
@@ -131,6 +142,17 @@ class MasediController extends Controller
                 $gross_amount += $trans->trans_amount_total;
                 $trans->save();
             }
+            // if(Session::has('voucher')){
+            //     $voucher = Session::get('voucher');
+            //     $new_voucher = new Trans_voucher;
+            //     $new_voucher->trans_voucher_user = Auth::id();
+            //     $new_voucher->trans_voucher_trans = $trans_code;
+            //     $new_voucher->trans_voucher_code = $voucher['code'];
+            //     $new_voucher->trans_voucher_amount = $voucher['amount'];
+            //     // $new_voucher->trans_voucher_status = 0;
+            //     $new_voucher->save();
+            // }
+            // Session::forget('voucher');
             Session::forget('chart');
             if(isset($trans->pembeli->email)){
                 // send email

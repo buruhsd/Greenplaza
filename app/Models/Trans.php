@@ -18,6 +18,16 @@ class Trans extends Model
 	];
 
     /**
+    * @param
+    * @return
+    * 
+    */
+    public function voucher()
+    {
+        return $this->belongsTo('App\Models\Trans_voucher', 'trans_code', 'trans_voucher_trans')->first();
+    }
+
+    /**
     * 
     * 
     **/
