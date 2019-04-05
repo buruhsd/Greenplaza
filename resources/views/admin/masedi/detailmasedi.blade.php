@@ -14,6 +14,14 @@
                     <td> : {{$g->shipment->shipment_name}}</td>
                 </tr>
                 <tr>
+                    <th>Id Transaksi</th>
+                    <td>: {{$g->trans_detail_trans_id}}</td>
+                </tr>
+                <tr>
+                    <th>Id Detail</th>
+                    <td>: {{$g->id}}</td>
+                </tr>
+                <tr>
                     <th>User Address Id</th>
                     <td> : {{$g->trans_detail_user_address_id}}</td>
                 </tr>
