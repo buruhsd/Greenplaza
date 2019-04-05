@@ -89,19 +89,28 @@
                             <td>
                                 <ul>
                                 
-                                @if($item->trans->trans_payment_id == 4 )
-                                    <li>Fee Gln : {{ $item->gln->trans_gln_amount_fee }} </li>
-                                    <li>Jumlah Gln : {{ $item->gln->trans_gln_amount }} </li>
-                                    <li>Total Gln : {{ $item->gln->trans_gln_amount_total }} </li>
-                                @else
-                                @endif
-                                    <li>Amount : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount)}}</li>
-                                    <li>Amount Ship : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_ship)}}</li>
-                                    <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
-                                    @if ($item->trans_detail_is_cancel == 1)
-                                    <li><button class="btn btn-info btn-xs">Deskripsi </button>: {{$item->trans_detail_note}}</li>
+                                
+                                    @if($item->trans->trans_payment_id == 4 && $item->gln !== null )
+                                        <li>Fee Gln : {{ $item->gln->trans_gln_amount_fee }} </li>
+                                        <li>Jumlah Gln : {{ $item->gln->trans_gln_amount }} </li>
+                                        <li>Total Gln : {{ $item->gln->trans_gln_amount_total }} </li>
+                                        <li>Amount : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount)}}</li>
+                                        <li>Amount Ship : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_ship)}}</li>
+                                        <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
+                                        @if ($item->trans_detail_is_cancel == 1)
+                                            <li><button class="btn btn-info btn-xs">Deskripsi </button>: {{$item->trans_detail_note}}</li>
+                                        @else
+                                        @endif
                                     @else
+                                        <li>Amount : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount)}}</li>
+                                        <li>Amount Ship : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_ship)}}</li>
+                                        <li>Amount Total : Rp. {{FunctionLib::number_to_text($item->trans_detail_amount_total)}}</li>
+                                        @if ($item->trans_detail_is_cancel == 1)
+                                            <li><button class="btn btn-info btn-xs">Deskripsi </button>: {{$item->trans_detail_note}}</li>
+                                        @else
+                                        @endif
                                     @endif
+                                
                                 </ul>
                             </td>
                             <td>
