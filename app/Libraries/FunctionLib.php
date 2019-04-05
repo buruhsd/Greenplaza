@@ -13,7 +13,7 @@ class FunctionLib
             case 'cek':
                 $req = [
                     'data' => [
-                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
+                        'username' => env('MASEDI_USERNAME', 'greenplaza'),
                         'password' => env('MASEDI_PASSWORD', 1),
                         'kode_voucher' => $data['voucher'],
                     ]
@@ -28,7 +28,7 @@ class FunctionLib
             case 'use':
                 $req = [
                     'data' => [
-                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
+                        'username' => env('MASEDI_USERNAME', 'greenplaza'),
                         'password' => env('MASEDI_PASSWORD', 1),
                         'kode_voucher' => $data['voucher'],
                     ]
@@ -561,7 +561,7 @@ class FunctionLib
     public static function masedi_payment($data = []){
         $req = [
             'data' => [
-                'username' => 'greenplazates',
+                'username' => 'greenplaza',
                 'password' => 1,
                 'note' => $data['note'],
                 'price' => $data['price'],
