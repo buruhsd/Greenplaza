@@ -34,6 +34,7 @@
                             <td>
                                 <ul>
                                     <li>Name : {{$item->produk->produk_name}}</li>
+                                    <li>Warna : {{$item->trans_detail_color}}</li>
                                     <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
                                 @if ($item->trans_detail_is_cancel == 0)
                                     <li>Status : <button class="btn btn-info btn-xs">{{FunctionLib::trans_arr($item->trans_detail_status)}}</button></li>

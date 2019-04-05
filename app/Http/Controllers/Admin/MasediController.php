@@ -39,7 +39,15 @@ class MasediController extends Controller
         // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
         // dd($trans);
         $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
-            ->where('trans_detail_trans_id', $trans)
+            ->whereRaw($where)
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_payment_id','=',3);
+                return $query;
+            })
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_is_paid','=',1);
+                return $query;
+            })
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
             // ->sum('trans_detail_amount_total');

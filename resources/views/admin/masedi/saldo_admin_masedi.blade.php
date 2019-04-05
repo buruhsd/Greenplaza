@@ -15,8 +15,8 @@
                            
                             <b>Rp. 
                                 {{
-                                    
-                                    $trans                                    
+                                    number_format($trans,2,',','.')
+                                                                     
                                 }}
                             </b>
                             
