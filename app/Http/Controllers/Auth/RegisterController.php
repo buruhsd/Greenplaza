@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use FunctionLib;
 
 class RegisterController extends Controller
 {
@@ -62,13 +63,14 @@ class RegisterController extends Controller
             'min'       => ':attribute harus diisi minimal :min karakter ',
             'max'       => ':attribute harus diisi maksimal :max karakter ',
             'email'     =>  ':attribute harus berupa email yang valid.',
-            'unique'    =>  ':attribute sudah ada gunakan email yang lain',
+            'unique'    =>  ':attribute sudah ada gunakan :attribute yang lain',
             'confirmed'  =>  'isi :attribute dengan benar',
             'string'    =>  ':attribute harus berupa huruf',
         ];
         
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'user_detail_jk' => 'required|string|max:255',
@@ -93,8 +95,15 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'reff_code' => FunctionLib::str_rand(3).'-'.rand(0, 999999),
             'token_register'=>str_random(190)
         ]);
+
+        $sponsor = 2;
+        if($data['code_reveral'] !== null && $data['code_reveral'] !== ''){
+            $code = User::whereRaw('reff_code LIKE "%'.$data['code_reveral'].'%"');
+            $sponsor = ($code->exists())?$code->first()->id:$sponsor;
+        }
 
         // update detail user
         if($user){
@@ -113,7 +122,7 @@ class RegisterController extends Controller
             ]);
             $user_sponsor = Sponsor::create([
                 'user_tree_user_id' => $user->id,
-                'user_tree_sponsor_id' => 1,
+                'user_tree_sponsor_id' => $sponsor,
             ]);
             $user_detail = User_address::create([
                 'user_address_user_id' => $user->id,

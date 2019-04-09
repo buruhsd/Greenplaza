@@ -5,6 +5,24 @@ class FunctionLib
         return ($var < 0 ? 0 : $var);
     }
 
+    public static function ref_to_url($decode=null){
+        $encode = '';
+        if($decode !== null && $decode !== ''){
+            $encode = base64_encode($decode);
+        }
+        return $encode;
+    }
+
+    public static function get_referal($encode=null){
+        $decode = '';
+        if($encode !== null && $encode !== ''){
+            $decode = base64_decode($encode);
+            $code = App\User::whereRaw('reff_code LIKE "%'.$decode.'%"');
+            $decode = ($code->exists())?$decode:'';
+        }
+        return $decode;
+    }
+
     /**
     * @param $type = cek/use
     * @return
@@ -739,17 +757,17 @@ class FunctionLib
                             $response['message'] .= ' ,'.$send_notif['message'];
                         }
                     }
-                    // if($trans->first()->voucher()){
-                    //     $model_voucher = $trans->first()->voucher();
-                    //     $voucher = [
-                    //         'voucher' => $model_voucher->trans_voucher_code
-                    //     ];
-                    //     $res_voucher = FunctionLib::masedi('use', $voucher);
-                    //     if($res_voucher['status'] == 200){
-                    //         $model_voucher->trans_voucher_status = 1;
-                    //         $model_voucher->save();
-                    //     }
-                    // }
+                    if($trans->first()->voucher()){
+                        $model_voucher = $trans->first()->voucher();
+                        $voucher = [
+                            'voucher' => $model_voucher->trans_voucher_code
+                        ];
+                        $res_voucher = FunctionLib::masedi('use', $voucher);
+                        if($res_voucher['status'] == 200){
+                            $model_voucher->trans_voucher_status = 1;
+                            $model_voucher->save();
+                        }
+                    }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
                         :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'

@@ -121,10 +121,17 @@ class CronAble extends Command
                             'user_id'=>$item->trans->pembeli->id,
                             'wallet_type'=>3,
                             'amount'=>$item->trans_detail_amount_total,
+                            'note'=>'Update wallet transaksi dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
+                        ];
+                        $saldo = FunctionLib::update_wallet($update_wallet);
+                        $update_wallet = [
+                            'user_id'=>2,
+                            'wallet_type'=>1,
+                            'amount'=>($item->trans_detail_amount_total * -1),
                             'note'=>'Update wallet CW dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
                         ];
                         $saldo = FunctionLib::update_wallet($update_wallet);
-                        $this->info('Wallet CW '.$item->produk->produk_seller_id.' ditambah sebesar '.$detail_amount_total.'.');
+                        $this->info('Wallet transaksi '.$item->trans->pembeli->id.' ditambah sebesar '.$detail_amount_total.'.');
                     }
                 }
             }

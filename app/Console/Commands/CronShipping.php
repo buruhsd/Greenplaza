@@ -111,13 +111,21 @@ class CronShipping extends Command
                         $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
                         $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
                         if($item->trans->trans_payment_id !== 4){
+                            // $update_wallet = [
+                            //     'user_id'=>$item->produk->produk_seller_id,
+                            //     'wallet_type'=>1,
+                            //     'amount'=>$detail_amount_total,
+                            //     'note'=>'Update wallet CW dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
+                            // ];
+                            // $saldo = FunctionLib::update_wallet($update_wallet);
                             $update_wallet = [
-                                'user_id'=>$item->produk->produk_seller_id,
-                                'wallet_type'=>1,
+                                'from_id'=>2,
+                                'to_id'=>$item->produk->produk_seller_id,
+                                'wallet_type'=>1, //1/3
                                 'amount'=>$detail_amount_total,
                                 'note'=>'Update wallet CW dengan transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
                             ];
-                            $saldo = FunctionLib::update_wallet($update_wallet);
+                            $saldo = FunctionLib::transfer_wallet($update_wallet);
                         }
                         $this->info('Wallet CW '.$item->produk->produk_seller_id.' ditambah sebesar '.$detail_amount_total.'.');
                     }

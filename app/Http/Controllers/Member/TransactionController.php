@@ -170,12 +170,20 @@ class TransactionController extends Controller
             $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
             if($trans_detail->trans->trans_payment_id !== 4){
                 $update_wallet = [
-                    'user_id'=>$trans_detail->produk->produk_seller_id,
-                    'wallet_type'=>1,
+                    'from_id'=>2,
+                    'to_id'=>$trans_detail->produk->produk_seller_id,
+                    'wallet_type'=>1, //1/3
                     'amount'=>$detail_amount_total,
                     'note'=>'Update wallet CW dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                 ];
-                $saldo = FunctionLib::update_wallet($update_wallet);
+                $saldo = FunctionLib::transfer_wallet($update_wallet);
+                // $update_wallet = [
+                //     'user_id'=>$trans_detail->produk->produk_seller_id,
+                //     'wallet_type'=>1,
+                //     'amount'=>$detail_amount_total,
+                //     'note'=>'Update wallet CW dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                // ];
+                // $saldo = FunctionLib::update_wallet($update_wallet);
             }
         }
         if(!$trans_detail){
@@ -281,6 +289,13 @@ class TransactionController extends Controller
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
+                            $update_wallet = [
+                                'user_id'=>2,
+                                'wallet_type'=>1,
+                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
                         }
                     }else{
                         $trans_detail->trans_detail_status = 5;
@@ -306,6 +321,13 @@ class TransactionController extends Controller
                                 'user_id'=>$trans_detail->trans->trans_user_id,
                                 'wallet_type'=>3,
                                 'amount'=>$trans_detail->trans_detail_amount_total,
+                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
+                            $update_wallet = [
+                                'user_id'=>2,
+                                'wallet_type'=>1,
+                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
@@ -416,6 +438,13 @@ class TransactionController extends Controller
                     'user_id'=>$trans->pembeli->id,
                     'wallet_type'=>3,
                     'amount'=>$trans->trans_amount_total,
+                    'note'=>'pengembalian wallet transaksi dengan transaksi kode '.$trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+                $update_wallet = [
+                    'user_id'=>2,
+                    'wallet_type'=>1,
+                    'amount'=>($trans->trans_amount_total * -1),
                     'note'=>'pengembalian wallet transaksi dengan transaksi kode '.$trans->trans_code.'.',
                 ];
                 $saldo = FunctionLib::update_wallet($update_wallet);

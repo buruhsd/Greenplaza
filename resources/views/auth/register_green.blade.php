@@ -32,7 +32,7 @@
                           <strong></strong> {{ $errors->first('sponsor') }}.
                         </div>
                     @endif
-                    @if ($errors->has('usernamename'))
+                    @if ($errors->has('username'))
                         <div class="alert alert-info">
                             <strong>{{ $errors->first('username') }}</strong>
                         </div>
@@ -93,10 +93,22 @@
         </div> --}}
 
         <div class="form-group row">
+            <label class="col-md-12" for="code_reveral"><b>Code Reveral (Optional)</b></label>
+            <div class="col-md-12">
+                <input class="form-control" id="code_reveral" type="text" placeholder="code reveral" name="code_reveral" value="{!!isset($_GET['reff'])?FunctionLib::get_referal($_GET['reff']):''!!}" required>
+                @if ($errors->has('code_reveral'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('code_reveral') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="col-md-12" for="username"><b>Username</b></label>
             <div class="col-md-12">
                 <input class="form-control" id="username" type="text" placeholder="Username" name="username" required>
-                @if ($errors->has('usernamename'))
+                @if ($errors->has('username'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('username') }}</strong>
                     </span>

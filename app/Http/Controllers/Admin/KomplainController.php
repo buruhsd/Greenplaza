@@ -42,6 +42,14 @@ class KomplainController extends Controller
                         'note'=>'Transaksi Success by admin. Update wallet transaksi dikembalikan ke member dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
                     ];
                     $saldo = FunctionLib::update_wallet($update_wallet);
+                    // pengurangan saldo cw saldo admin
+                    $update_wallet = [
+                        'user_id'=>2,
+                        'wallet_type'=>1,
+                        'amount'=>($komplain->trans_detail->trans->trans_amount_total * -1),
+                        'note'=>'Transaksi Success by admin. Update wallet transaksi dikembalikan ke member dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
+                    ];
+                    $saldo = FunctionLib::update_wallet($update_wallet);
                 }
                 // update transaksi menjadi dropping
                 foreach ($komplain->trans_detail->trans->trans_detail as $item) {

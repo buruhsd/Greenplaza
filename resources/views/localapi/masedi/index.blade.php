@@ -17,7 +17,6 @@
                                     <th class="ptice">Shipment</th>
                                     <th class="quantity">Quantity</th>
                                     <th class="total">Total</th>
-                                    <th class="remove">Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,7 +24,7 @@
                                     @foreach(Session::get('chart') as $key => $item)
                                         <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
                                         <tr>
-                                            <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" alt=""></td>
+                                            <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
@@ -36,19 +35,6 @@
                                                 </div>
                                             </td> --}}
                                             <td class="total">{{$item['trans_detail_amount_total']}}</td>
-                                            <td class="remove">
-                                                {!! Form::open([
-                                                    'method'=>'GET',
-                                                    'url' => url('/chart/destroy/'.$key),
-                                                    'style' => 'display:inline'
-                                                ]) !!}
-                                                    {!! Form::submit('x', array(
-                                                            'class' => 'btn btn-danger btn-xs',
-                                                            'title' => 'Delete blog',
-                                                            'onclick'=>'return confirm("Confirm delete?")'
-                                                    )) !!}
-                                                {!! Form::close() !!}
-                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -56,7 +42,7 @@
                                     @foreach($trans_detail as $key => $item)
                                         <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
                                         <tr>
-                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
+                                            <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>

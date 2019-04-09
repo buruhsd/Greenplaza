@@ -96,7 +96,7 @@ class MasEdi extends Controller
     **/
     public function use_voucher($param= []){
         extract($param);
-        $url = $this->__api_server."/sadisbgt/controller_api/used_voucher";
+        $url = "http://wakanda.harmonyb12.com/edisedis/index.php/sadisbgt/controller_api/used_voucher";
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,

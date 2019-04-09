@@ -264,13 +264,10 @@ class TransactionController extends Controller
             'order_id' => null,
             'transaction_status' => null
         ];
-        // $this->validate($request, [
-        //     'order_id' => 'required',
-        //     'transaction_status' => 'required',
-        // ]);
         $requestData = $request->all();
         // transaksi produk
         try{
+            $sum_trans = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->sum('trans_amount_total');
             $trans = Trans::whereRaw('trans_qr="'.$requestData['va'].'"')->first();
             if($trans == null){
                 throw new Exception;
@@ -284,7 +281,12 @@ class TransactionController extends Controller
                     $log_transfer->transfer_to = $trans->trans_detail->first()->produk->user->username;
                     $log_transfer->transfer_code_reff = $requestData['va'];
                     $log_transfer->transfer_type = 'idr';
-                    $log_transfer->transfer_nominal = $trans->trans_amount_total;
+                        $transfer_nominal = $sum_trans;
+                        if($trans->voucher()){
+                            $model_voucher = $trans->voucher();
+                            $transfer_nominal = FunctionLib::minus_to_zero($transfer_nominal-$model_voucher->trans_voucher_amount);
+                        }
+                    $log_transfer->transfer_nominal = $transfer_nominal;
                     $log_transfer->transfer_response = json_encode($requestData);
                     $log_transfer->transfer_note = "Transfer Masedi transaksi.";
                 $log_transfer->save();
@@ -299,6 +301,20 @@ class TransactionController extends Controller
                 $status = $response['status'];
                 $message = $response['message'];
             }
+            if($trans->voucher()){
+                $sum_trans = ($model_voucher->trans_voucher_amount > $sum_trans)
+                    ?$sum_trans+($model_voucher->trans_voucher_amount-$sum_trans)
+                    :$sum_trans;
+            }
+            // update wallet admin
+            $update_wallet = [
+                'user_id'=>2,
+                'wallet_type'=>1, //update wallet masedi
+                'amount'=>$sum_trans,
+                'note'=>'Transaksi transfer '.Auth::id().'. Update wallet masedi dengan kode transaksi '.$trans->trans_code.'.',
+            ];
+            $saldo = FunctionLib::update_wallet($update_wallet);
+
             $data = $response['data'];
         }catch(Exception $e){
             // transaksi hotlist
@@ -331,6 +347,19 @@ class TransactionController extends Controller
                     $status = $response['status'];
                     $message = $response['message'];
                 }
+                // if($trans->voucher()){
+                //     $sum_trans = ($model_voucher->trans_voucher_amount > $sum_trans)
+                //         ?$sum_trans+($model_voucher->trans_voucher_amount-$sum_trans)
+                //         :$sum_trans;
+                // }
+                // update wallet admin
+                // $update_wallet = [
+                //     'user_id'=>2,
+                //     'wallet_type'=>3, //update wallet masedi
+                //     'amount'=>$sum_trans,
+                //     'note'=>'Transaksi transfer '.Auth::id().'. Update wallet masedi dengan kode transaksi '.$trans->trans_code.'.',
+                // ];
+                // $saldo = FunctionLib::update_wallet($update_wallet);
                 $data = $response['data'];
             }catch(Exception $e){
                 // transaksi iklan
@@ -363,6 +392,19 @@ class TransactionController extends Controller
                         $status = $response['status'];
                         $message = $response['message'];
                     }
+                    // if($trans->voucher()){
+                    //     $sum_trans = ($model_voucher->trans_voucher_amount > $sum_trans)
+                    //         ?$sum_trans+($model_voucher->trans_voucher_amount-$sum_trans)
+                    //         :$sum_trans;
+                    // }
+                    // update wallet admin
+                    // $update_wallet = [
+                    //     'user_id'=>2,
+                    //     'wallet_type'=>3, //update wallet masedi
+                    //     'amount'=>$sum_trans,
+                    //     'note'=>'Transaksi transfer '.Auth::id().'. Update wallet masedi dengan kode transaksi '.$trans->trans_code.'.',
+                    // ];
+                    // $saldo = FunctionLib::update_wallet($update_wallet);
                     $data = $response['data'];
                 }catch(Exception $e){
                     // transaksi pincode
@@ -395,6 +437,19 @@ class TransactionController extends Controller
                             $status = $response['status'];
                             $message = $response['message'];
                         }
+                        // if($trans->voucher()){
+                        //     $sum_trans = ($model_voucher->trans_voucher_amount > $sum_trans)
+                        //         ?$sum_trans+($model_voucher->trans_voucher_amount-$sum_trans)
+                        //         :$sum_trans;
+                        // }
+                        // update wallet admin
+                        // $update_wallet = [
+                        //     'user_id'=>2,
+                        //     'wallet_type'=>3, //update wallet masedi
+                        //     'amount'=>$sum_trans,
+                        //     'note'=>'Transaksi transfer '.Auth::id().'. Update wallet masedi dengan kode transaksi '.$trans->trans_code.'.',
+                        // ];
+                        // $saldo = FunctionLib::update_wallet($update_wallet);
                         $data = $response['data'];
                     }catch(Exception $e){
                         // tidak ada transaksi yang dieksekusi

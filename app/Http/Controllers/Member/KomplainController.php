@@ -78,15 +78,23 @@ class KomplainController extends Controller
                     $solusi->solusi_status = 3;
                     $solusi->save();
                 }
-                // kembalikan wallet ke member
+                // lanjutkan wallet ke seller dan pengurangan saldo cw admin
                 if($komplain->trans_detail->trans->trans_payment_id !== 4){
+                    // $update_wallet = [
+                    //     'user_id'=>$komplain->trans_detail->produk->produk_seller_id,
+                    //     'wallet_type'=>1,
+                    //     'amount'=>$komplain->trans_detail->trans->trans_amount_total,
+                    //     'note'=>'Transaksi Success by admin. Update wallet CW lanjutkan ke seller dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
+                    // ];
+                    // $saldo = FunctionLib::update_wallet($update_wallet);
                     $update_wallet = [
-                        'user_id'=>$komplain->trans_detail->produk->produk_seller_id,
-                        'wallet_type'=>1,
+                        'from_id'=>2,
+                        'to_id'=>$komplain->trans_detail->produk->produk_seller_id,
+                        'wallet_type'=>1, //1/3
                         'amount'=>$komplain->trans_detail->trans->trans_amount_total,
-                        'note'=>'Transaksi Success by admin. Update wallet transaksi dikembalikan ke member dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
+                        'note'=>'Transaksi Success by admin. Update wallet CW lanjutkan ke seller dengan transaksi kode '.$komplain->trans_detail->trans->trans_code.' dari toko '.$komplain->trans_detail->produk->user->user_store.'.',
                     ];
-                    $saldo = FunctionLib::update_wallet($update_wallet);
+                    $saldo = FunctionLib::transfer_wallet($update_wallet);
                 }
                 // update transaksi menjadi dropping
                 foreach ($komplain->trans_detail->trans->trans_detail as $item) {

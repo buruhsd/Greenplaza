@@ -24,16 +24,17 @@
                         Kode Unik :  <b>'.$trans->first()->trans_code.'</b><br>
                         <label style="color:#999;">Kode Unik berguna untuk memudahkan admin melakukan pengecekan transaksi anda.</label>
                         <br>
-                        <label>Jumlah yang harus ditransfer</label>
                         ';
                         ?>
 
-                        <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
-                        <!-- @if($trans->first()->voucher())
-                            <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')-$trans->first()->voucher()->trans_voucher_amount)}}
+                        @if($trans->first()->voucher())
+                            <span class="text-danger">Voucher : Rp. {{FunctionLib::number_to_text($trans->first()->voucher()->trans_voucher_amount)}}</span><br>
+                            <label>Jumlah yang harus ditransfer</label>
+                            <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')-$trans->first()->voucher()->trans_voucher_amount))}}
                         @else
+                            <label>Jumlah yang harus ditransfer</label>
                             <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
-                        @endif -->
+                        @endif
                         @if($trans->first()->trans_payment_id == 4)
                             <?php 
                             $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
