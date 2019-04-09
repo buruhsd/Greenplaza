@@ -379,6 +379,17 @@ class FunctionLib
                             $response['message'] .= ' ,'.$send_notif['message'];
                         }
                     }
+                    if($trans->first()->voucher()){
+                        $model_voucher = $trans->first()->voucher();
+                        $voucher = [
+                            'voucher' => $model_voucher->trans_voucher_code
+                        ];
+                        $res_voucher = FunctionLib::masedi('use', $voucher);
+                        if($res_voucher['status'] == 200){
+                            $model_voucher->trans_voucher_status = 1;
+                            $model_voucher->save();
+                        }
+                    }
                 }else{
                     $type = ((str_contains(strtolower($order_id), 'hl-'))?'hotlist'
                         :((str_contains(strtolower($order_id), 'ikl-'))?'iklan'

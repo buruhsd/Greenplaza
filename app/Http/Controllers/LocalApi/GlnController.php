@@ -39,6 +39,13 @@ class GlnController extends Controller
                 $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
                 $trans[$seller_id][] = $item;
             });
+            if(Session::has('voucher')){
+                if(count($trans) > 1){
+                    $status = 500;
+                    $message = 'Mohon maaf, untuk pembelian menggunakan voucher masedi dan gln hanya bisa digunakan untuk membeli dari satu toko saja.';
+                    return ['status' => $status, 'message' => $message];
+                }
+            }
             $trans_code = FunctionLib::str_rand(7);
             $gross_amount = 0;
             foreach ($trans as $value) {

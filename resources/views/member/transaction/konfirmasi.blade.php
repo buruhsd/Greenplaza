@@ -31,18 +31,40 @@
                             <span class="text-danger">Voucher : Rp. {{FunctionLib::number_to_text($trans->first()->voucher()->trans_voucher_amount)}}</span><br>
                             <label>Jumlah yang harus ditransfer</label>
                             <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')-$trans->first()->voucher()->trans_voucher_amount))}}
+                            @if($trans->first()->trans_payment_id == 4)
+                                <?php 
+                                $amount_total = FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total')-$trans->first()->voucher()->trans_voucher_amount);
+                                $amount = FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount')-$trans->first()->voucher()->trans_voucher_amount);
+                                // $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
+                                if($amount_total > 0 && $amount > 0){
+                                    $amount = FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount'-$trans->first()->voucher()->trans_voucher_amount));
+                                    // $amount = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount');
+                                    $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                                    $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
+                                }elseif($amount > 0){
+                                    $amount = FunctionLib::minus_to_zero(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount'-$trans->first()->voucher()->trans_voucher_amount));
+                                    $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                                    $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
+                                }else{
+                                    $amount = 0;
+                                    $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                                    $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
+                                }
+                                ?>
+                                / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small class="text-danger">(Bisa Berubah Setiap Saat)</small>
+                            @endif
                         @else
                             <label>Jumlah yang harus ditransfer</label>
                             <h2 style="">Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total'))}}
-                        @endif
-                        @if($trans->first()->trans_payment_id == 4)
-                            <?php 
-                            $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
-                            $amount = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount');
-                            $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
-                            $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
-                            ?>
-                            / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small class="text-danger">(Bisa Berubah Setiap Saat)</small>
+                            @if($trans->first()->trans_payment_id == 4)
+                                <?php 
+                                $amount_total = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount_total');
+                                $amount = FunctionLib::array_sum_key($trans->toArray(), 'trans_amount');
+                                $fee = ($amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                                $fix = (($amount_total+$fee) / FunctionLib::gln('compare',[])['data']);
+                                ?>
+                                / Gln. {{FunctionLib::number_to_text($fix, 8)}} <small class="text-danger">(Bisa Berubah Setiap Saat)</small>
+                            @endif
                         @endif
                         </h2>
                     </div>
