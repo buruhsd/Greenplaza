@@ -634,7 +634,7 @@ class TransactionController extends Controller
         // $where .= " AND count_detail > 0";
         if(!empty($request->get('code'))){
             $name = $request->get('code');
-            $where .= ' AND sys_trans.trans_code LIKE "%'.$name.'%"';
+            $where .= ' AND sys_trans_detail.trans_code LIKE "%'.$name.'%"';
         }
         if(!empty($request->get('status'))){
             $status = $request->get('status');
