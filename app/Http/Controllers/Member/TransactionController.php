@@ -166,6 +166,16 @@ class TransactionController extends Controller
             }else{
                 $transfer['status'] = 200;
             }
+            if($transfer['status'] == 200){
+                // update wallet admin
+                $update_wallet = [
+                    'user_id'=>2,
+                    'wallet_type'=>1, //update wallet cw
+                    'amount'=>$trans->first()->voucher()->trans_voucher_amount,
+                    'note'=>'Transaksi transfer '.Auth::id().'. Update wallet cw dengan kode transaksi '.$trans->first()->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+            }
         }else{
             $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
         }
