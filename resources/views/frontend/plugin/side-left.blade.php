@@ -1,12 +1,12 @@
 <div class="col-lg-3 col-sm-6 col-12">
     <aside class="sidebar-area bg-1">
-        <div class="widget widget_search">
+       <!--  <div class="widget widget_search">
             <h2 class="section-title">Cari Produk</h2>
             <form action="#" class="searchform">
                 <input type="text" name="s" placeholder="Search Product...">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
-        </div>
+        </div> -->
         <div class="widget widget_categories">
             <h2 class="section-title">Categories</h2>
             <ul>

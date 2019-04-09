@@ -88,7 +88,9 @@
                                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
+                                                @if($item->produk_discount > 0)      
                                                 <span class="new sale">Sale</span>
+                                                @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
                                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                                 <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt=""> --}}

@@ -1,3 +1,12 @@
+<style type="text/css">
+.dotcirlce {
+        height: 25px;
+        width: 25px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+}
+</style>
 <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -33,9 +42,10 @@
                             </td>
                             <td>
                                 <ul>
+                                    <input type="hidden" id="sendcolorid" value="{{$item->trans_detail_color}}">
                                     <li>Name : {{$item->produk->produk_name}}</li>
-                                    <!-- <li>Warna : {{$item->trans_detail_color}}</li> -->
                                     <li>Amount : Rp. {{FunctionLib::number_to_text($item->produk->produk_price - ($item->produk->produk_price * $item->produk->produk_discount / 100))}}</li>
+                                    <li>Warna:<br/> <span class="dotcirlce colornew"></span></li>
                                 @if ($item->trans_detail_is_cancel == 0)
                                     <li>Status : <button class="btn btn-info btn-xs">{{FunctionLib::trans_arr($item->trans_detail_status)}}</button></li>
                                 @else
@@ -137,3 +147,61 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+var setcolorfromview = $('#sendcolorid').val();
+var selected = setcolorfromview;
+
+function checkColor() {
+  var c = selected.substring(1);
+  var rgb = parseInt(c, 16);
+  var r = (rgb >> 16) & 0xff;
+  var g = (rgb >> 8) & 0xff;
+  var b = (rgb >> 0) & 0xff;
+
+  var luma = Math.floor(0.2126 * r + 0.7152 * g + 0.0722 * b);
+
+  if (luma < 126) {
+    return "#ffffff";
+  } else {
+    return "#000000";
+  }
+}
+
+var hex = document.createElement("div");
+hex.style.color = checkColor();
+hex.innerHTML = selected;
+
+var colorInput = document.createElement("input");
+colorInput.type = "color";
+colorInput.id = "colorpicker";
+
+function ColorPicker(element, data) {
+  this.data = data;
+  this.element = element;
+  element.value = data;
+  element.addEventListener("change", this, false);
+}
+
+ColorPicker.prototype.handleEvent = function(event) {
+  switch (event.type) {
+    case "change":
+      this.change(this.element.value);
+  }
+};
+
+ColorPicker.prototype.change = function(value) {
+  this.data = value;
+  this.element.value = value;
+  selected = value;
+  hex.innerHTML = selected;
+  hex.style.color = checkColor();
+  document.body.style.backgroundColor = selected;
+};
+// document.body.append(hex);
+// document.body.append(colorInput);
+
+// var myColorPicker = new ColorPicker(colorInput, selected);
+$(".colornew").css("background-color", selected);
+
+
+</script>

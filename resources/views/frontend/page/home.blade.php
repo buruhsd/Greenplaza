@@ -1175,10 +1175,7 @@
                                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                                         </ul>
                                                     </div>
-                                                    @elseif($item->produk_discount == 0)
-                                                    <span ></span>
-                                                                
-                                                    @else($item->produk_discount == 1)
+                                                    @elseif($item->produk_discount > 0)
                                                        <span class="new">sale</span>
                                                     @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
@@ -1231,7 +1228,7 @@
                                                         <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
                                                     </ul>
                                                 </div>
-                                                @else
+                                                @elseif($item->produk_discount > 0)
                                                    <span class="new sale">Sale</span>
                                                 @endif
                                                 <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="" >
