@@ -50,12 +50,13 @@
                             </select>
                         </div>
                     </div>
+                </div>
                     <!-- <div class="col-md-6">
                         <div class="input-group pull-right">
                             <a href="{{route('admin.list_gln_wallet')}}"><button class="btn btn-info btn-xs pull-right" style="margin-bottom: 2%">List Wallet Gln</button></a>
                         </div>
                     </div> -->
-                </div>
+            </div>
                 <div class="panel-body" style="margin-top: 2%">
                     <div class="table-responsive">
                         <table class="table table-striped">
