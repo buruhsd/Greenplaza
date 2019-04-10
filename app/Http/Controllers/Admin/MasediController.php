@@ -35,6 +35,7 @@ class MasediController extends Controller
                 ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
                 ->whereRaw($where)
                 ->where('trans_is_paid', 1)
+                ->where('trans_detail_status', 6)
                 ->sum('trans_amount_total');
         // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
         // dd($trans);
