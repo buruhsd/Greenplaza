@@ -3,6 +3,7 @@ namespace App\Observers;
 use App\Models\Trans_detail;
 use App\User;
 use App\Notifications\Transaksi;
+use FunctionLib;
 class NotifTransaksiObserver
 {
     //listen to creating config

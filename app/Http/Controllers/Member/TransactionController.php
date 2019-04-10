@@ -411,7 +411,7 @@ class TransactionController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        if(empty($request->note)){
+        if(!$request->has('note')){
             return redirect('member/transaction/add_resi/'.$trans_detail->trans->id)
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }

@@ -13,7 +13,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered m-t-xs">
                     <thead>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center hidden">Actions</th>
                         <th class="text-center">Code</th>
                         <th class="text-center"></th>
                         <th class="text-center">Produk Detail</th>
@@ -24,12 +24,12 @@
                     <tbody>
                     @foreach($trans_detail as $item)
                         <tr>
-                            <td>
+                            <td class="hidden">
                                 <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
                                     <div class="col-md-12">
                                         <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="checkbox" name="detail_id[]" value="{{$item->id}}" autocomplete="off">
+                                            <label class="btn btn-default active">
+                                                <input type="checkbox" name="detail_id[]" value="{{$item->id}}" autocomplete="off" checked>
                                                 <span class="check glyphicon glyphicon-ok"></span>
                                             </label>
                                         </div>

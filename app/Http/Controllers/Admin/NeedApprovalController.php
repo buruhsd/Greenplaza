@@ -25,10 +25,18 @@ use Auth;
 class NeedApprovalController extends Controller
 {
 
-    public function gln () 
+    public function gln ($voucher="") 
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $trans = Trans::where('trans_payment_id', '=', 4)
+            ->whereNotIn('trans_code', function ($query) {
+                $query->select('trans_voucher_trans')
+                    ->from('sys_trans_voucher');
+                return $query;
+            })
+            ->where('trans_is_paid', '=', 1)
+            ->pluck('id')
+            ->toArray();
         $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
@@ -36,6 +44,67 @@ class NeedApprovalController extends Controller
         $url = FunctionLib::gln('compare',[])['data'];
         // dd($url);
         return view('admin.need_approval.transaksi_gln.index', compact('gln', 'url'));
+    }
+
+    public function gln_voucher () 
+    {
+        $data['gln'] = Trans_gln::where('trans_gln_detail_id', 0)
+            // ->whereIn('trans_detail_trans_id', function ($query) {
+            //     $query->select('id')
+            //         ->from('sys_trans');
+            //     return $query;
+            // })
+            // ->whereIn('trans_gln_trans_code', function ($query) {
+            //     $query->select('trans_voucher_trans')
+            //         ->from('sys_trans_voucher');
+            //     return $query;
+            // })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+        $data['url'] = FunctionLib::gln('compare',[])['data'];
+        // dd($url);
+        return view('admin.need_approval.transaksi_gln.voucher', $data);
+    }
+
+    public function voucher_sendcoin ($id, $type='seller') 
+    {
+        $gln = Trans_gln::find($id);
+        $arr_id = [
+            'seller' => [
+                'address'=>$gln->trans_gln_to,
+                'amount' => $gln->trans_gln_amount
+            ],
+            'buyer' => [
+                'address'=>$gln->trans_gln_from,
+                'amount' => $gln->trans_gln_amount_total
+            ]
+        ];
+        $address_gln = FunctionLib::get_config('profil_gln_address');
+        $to_address = $arr_id[$type]['address'];
+        $amount = $arr_id[$type]['amount'];
+        if($amount > 0){
+            $transfer = FunctionLib::gln('transfer', 
+                [
+                    'to_address' =>$to_address,
+                    'amount'=>$amount,
+                    'address'=>$address_gln
+                ]
+            );
+        }else{
+            $transfer['status'] = 200;
+        }
+
+        if($transfer['status'] == 200){
+            $gln->trans_gln_status= 2;
+            $gln->save();
+            $status = 200;
+            $message = 'Coin Berhasil di Transfer ke Seller.';
+        }else{
+            $status = 500;
+            $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+        }
+        return redirect('admin/needapproval/gln_voucher')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
     }
     // public function try () 
     // {

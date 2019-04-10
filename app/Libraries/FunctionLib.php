@@ -1,6 +1,21 @@
 <?php
 class FunctionLib
 {
+    public static function admin_trans_status($status, $cancel=0){
+        $arr_status = [
+            1 => 'Member Order',
+            2 => 'Member Transfer',
+            3 => 'Kesanggupan Seller',
+            4 => 'Packing Seller',
+            5 => 'Shipping',
+            6 => 'Dropping',
+        ];
+        $arr_cancel = [
+            0 => '',
+            1 => 'Cancel'
+        ];
+        return $arr_status[$status].' '.$arr_cancel[$cancel];
+    }
     public static function minus_to_zero($var){
         return ($var < 0 ? 0 : $var);
     }
