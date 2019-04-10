@@ -129,7 +129,6 @@ class ContentController extends Controller
 
         $shipment = RajaOngkir::cost($req);
         $shipment = json_decode($shipment, true);
-        dd($shipment);
         if($shipment['rajaongkir']['status']['code'] !== 200){
             $status = 500;
             $message = $shipment['rajaongkir']['status']['code'];
