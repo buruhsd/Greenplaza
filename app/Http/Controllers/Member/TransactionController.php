@@ -1050,4 +1050,17 @@ class TransactionController extends Controller
         ob_end_clean();
         return $script;
     }
+
+    public function note_seller(Request $request){
+        $note_seller = new Trans;
+        $code = Trans::find('vkSx46q');
+        if($code){
+
+        $note_seller->trans_seller_note = $request->note_seller;
+        }else{
+            echo 'sudah ada pesan';
+        }
+        
+        $note_seller->save();
+    }
 }

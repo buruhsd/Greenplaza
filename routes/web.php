@@ -27,6 +27,7 @@ Route::get('/maintenance', 'Member\\FrontController@maintenance');
 Route::get('password/reset_trx', 'Member\\UserController@pass_trx_reset')->name('password.request_trx');
 Route::post('password/email_trx', 'Member\\UserController@pass_trx_reset_email')->name('password.email_trx');
 Route::get('password/change_trx/{token}', 'Member\\UserController@pass_trx_reset_change')->name('password.change_trx');
+Route::post('note_seller', 'Member\\TransactionController@note_seller');
 
 // Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
 Route::get('/register/{token}','Auth\VerifManualController@activating')->name('activating-account');

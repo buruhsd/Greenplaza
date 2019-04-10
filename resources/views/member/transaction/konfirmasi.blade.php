@@ -4,6 +4,25 @@
 <div class="page-title">
     <h3 class="breadcrumb-header">Konfirmasi Pembayaran</h3>
 </div>
+<!-- <div id="main-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+            <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <div class="large-6 medium-6 small-12 columns">
+                    </div>
+                    <div class="large-6 medium-6 small-12 columns">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#pesanModal">Pesan ke Seller</button>
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div> -->
 <div id="main-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -95,6 +114,7 @@
     </div><!-- Row -->
 </div>
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+@include('member.transaction.note_seller')
 @endsection
 @section('script')
 <script type="text/javascript">
