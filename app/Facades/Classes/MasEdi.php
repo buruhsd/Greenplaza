@@ -12,7 +12,7 @@ class MasEdi extends Controller
 {
     // private $__api_server='http://wallet.cavallocoin.io/api'; //api
     private $__api_key = "c6cd80e53a26df51bad3773ef6f76331";
-    private $__api_server = 'http://localhost/edisedis/index.php';
+    private $__api_server = 'http://gatotkaca.harmonyb12.com/edisedis/index.php';
     // private $__api_server = 'http://45.76.176.231/edisedis/index.php';
 
     /**
@@ -42,7 +42,6 @@ class MasEdi extends Controller
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-        dd($response, $err, $param);
         if ($err) {
             $status = 500;
             $message = 'curl error.';

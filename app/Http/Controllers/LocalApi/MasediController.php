@@ -193,11 +193,6 @@ class MasediController extends Controller
     }
 
     public function payment(){
-            $transaction_details = array(
-              'note' => 'cekkode',
-              'price' => 10000, // no decimal allowed for creditcard
-            );
-            $masedi = FunctionLib::masedi_payment($transaction_details);
         if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
             $data = Session::get('chart');
             $trans = [];
