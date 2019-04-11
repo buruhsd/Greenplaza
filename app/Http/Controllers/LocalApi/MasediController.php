@@ -354,7 +354,6 @@ class MasediController extends Controller
 
     public function qr($code){
         $trans = Trans::whereRaw('trans_code = "'.$code.'"')->get();
-        dd($trans);
         $data['qr'] = $trans->first()->trans_qr;
 
         return view('localapi.masedi.qr', $data);
