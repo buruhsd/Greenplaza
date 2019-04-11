@@ -143,8 +143,8 @@ class MasediController extends Controller
                 $new_voucher->trans_voucher_amount = $voucher['amount'];
                 // $new_voucher->trans_voucher_status = 0;
                 $new_voucher->save();
+                Session::forget('voucher');
             }
-            Session::forget('voucher');
             Session::forget('chart');
             if(isset($trans->pembeli->email)){
                 // send email
@@ -303,8 +303,8 @@ class MasediController extends Controller
                 // $new_voucher->trans_voucher_status = 0;
                 $new_voucher->save();
                 $gross_amount = FunctionLib::minus_to_zero($gross_amount - $voucher['amount']);
+                Session::forget('voucher');
             }
-            Session::forget('voucher');
             Session::forget('chart');
             if(isset($trans->pembeli->email)){
                 // send email
