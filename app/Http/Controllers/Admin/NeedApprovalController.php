@@ -72,11 +72,23 @@ class NeedApprovalController extends Controller
         $arr_id = [
             'seller' => [
                 'address'=>$gln->trans_gln_to,
-                'amount' => $gln->trans_gln_amount
+                'amount' => $gln->trans_gln_amount,
+                'user_id' => $gln->trans->trans_detail->first()->produk->produk_seller_id,
+                'wallet_type' => 1,
+                'amount_idr' => ($gln->trans->voucher->trans_voucher_amount > $gln->trans->trans_amount_total)
+                    ?$gln->trans->trans_amount_total
+                    :$gln->trans->voucher->trans_voucher_amount,
+                'note'=>'Update wallet CW dengan transaksi kode '.$gln->trans_gln_trans_code.' dilanjutkan ke seller'
             ],
             'buyer' => [
                 'address'=>$gln->trans_gln_from,
-                'amount' => $gln->trans_gln_amount_total
+                'amount' => $gln->trans_gln_amount_total,
+                'user_id' => $gln->trans->trans_user_id,
+                'wallet_type' => 3,
+                'amount_idr' => ($gln->trans->voucher->trans_voucher_amount > $gln->trans->trans_amount_total)
+                    ?$gln->trans->trans_amount_total
+                    :$gln->trans->voucher->trans_voucher_amount,
+                'note'=>'Update wallet CW dengan transaksi kode '.$gln->trans_gln_trans_code.' dikembalikan ke buyer.'
             ]
         ];
         $address_gln = FunctionLib::get_config('profil_gln_address');
@@ -98,7 +110,16 @@ class NeedApprovalController extends Controller
             $gln->trans_gln_status= 2;
             $gln->save();
             $status = 200;
-            $message = 'Coin Berhasil di Transfer ke Seller.';
+            $message = 'Coin Berhasil di Transfer ke '.ucfirst($type).'.';
+                // mengembalikan / melanjutkan amount voucher
+                $update_wallet = [
+                    'from_id'=>2,
+                    'to_id'=>$arr_id[$type]['user_id'],
+                    'wallet_type'=>$arr_id[$type]['wallet_type'], //1/3
+                    'amount'=>$arr_id[$type]['amount_idr'],
+                    'note'=>$arr_id[$type]['note'],
+                ];
+                $saldo = FunctionLib::transfer_wallet($update_wallet);
         }else{
             $status = 500;
             $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
