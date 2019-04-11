@@ -49,7 +49,7 @@ class FunctionLib
             case 'cek':
                 $req = [
                     'data' => [
-                        'username' => env('MASEDI_USERNAME', 'greenplaza'),
+                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
                         'password' => env('MASEDI_PASSWORD', 1),
                         'kode_voucher' => $data['voucher'],
                     ]
@@ -64,7 +64,7 @@ class FunctionLib
             case 'use':
                 $req = [
                     'data' => [
-                        'username' => env('MASEDI_USERNAME', 'greenplaza'),
+                        'username' => env('MASEDI_USERNAME', 'greenplazates'),
                         'password' => env('MASEDI_PASSWORD', 1),
                         'kode_voucher' => $data['voucher'],
                     ]
@@ -634,6 +634,7 @@ class FunctionLib
             ]
         ];
         $payment = MasEdi::payment($req);
+        dd($payment);
         $payment = json_decode($payment, true);
         return $payment;
     }
