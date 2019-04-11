@@ -344,7 +344,7 @@ class MasediController extends Controller
             }catch(\Exception $err){
                 
             }
-            dd($masedi, $transaction_details, $trans);
+            dd($transaction_details, $trans);
             $data['trans_detail'] = $trans_detail;
             return view('localapi.masedi.index', $data);
         }else{
