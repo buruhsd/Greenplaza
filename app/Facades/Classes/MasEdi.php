@@ -42,7 +42,6 @@ class MasEdi extends Controller
         $response = curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
-        dd($response, $err, $param);
         if ($err) {
             $status = 500;
             $message = 'curl error.';
