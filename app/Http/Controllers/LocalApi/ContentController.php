@@ -8,6 +8,7 @@ use App\Models\Conf_solusi;
 use Plugin;
 use RajaOngkir;
 use FunctionLib;
+use App\Models\Subdistrict;
 
 class ContentController extends Controller
 {
@@ -106,6 +107,10 @@ class ContentController extends Controller
         $message = "Choose shipment success.";
         $requestData = $request->all();
         extract($requestData);
+        $originType = ($courier == 'jne')?'city':$originType;
+        $origin = ($courier == 'jne')
+            ?Subdistrict::find($origin)->subdistrict_city_id
+            :$origin;
         $weight = $weight * $qty;
         $req = [
             'data' => [
