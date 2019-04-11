@@ -194,8 +194,8 @@ class MasediController extends Controller
 
     public function payment(){
             $transaction_details = array(
-              'note' => 'cekkode',
-              'price' => 10000, // no decimal allowed for creditcard
+              'note' => $trans_code,
+              'price' => $gross_amount, // no decimal allowed for creditcard
             );
             $masedi = FunctionLib::masedi_payment($transaction_details);
         if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
@@ -337,7 +337,6 @@ class MasediController extends Controller
             );
             try{
                 $masedi = FunctionLib::masedi_payment($transaction_details);
-                dd($masedi);
                 // $masedi = [
                 //       "status" => true,
                 //       "va" => "WUN2NLT4HJ"
@@ -349,7 +348,6 @@ class MasediController extends Controller
             }catch(\Exception $err){
                 
             }
-            dd($transaction_details, $trans);
             $data['trans_detail'] = $trans_detail;
             return view('localapi.masedi.index', $data);
         }else{
