@@ -5,7 +5,7 @@
         <h4 class="modal-title" id="editFee">Pesan</h4>
       </div>
       <div class="modal-body">
-      <form action="{{ URL('/note_seller') }}" method="POST">
+      <form action="{{ URL('/note_seller').'/'.$trans->first()->trans_code }}" method="POST">
       {{csrf_field() }}
         <textarea class="form-control" name="note_seller" style="min-width: 100%"></textarea>
       </div>

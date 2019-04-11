@@ -4,7 +4,8 @@
 <div class="page-title">
     <h3 class="breadcrumb-header">Konfirmasi Pembayaran</h3>
 </div>
-<!-- <div id="main-wrapper">
+@if(!$trans->first()->trans_seller_note)
+<div id="main-wrapper">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -22,7 +23,9 @@
         </div>
         </div>
     </div>
-</div> -->
+</div>
+@else($trans->first()->trans_seller_note == 1)
+@endif
 <div id="main-wrapper">
     <div class="row">
         <div class="col-md-12">

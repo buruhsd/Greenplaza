@@ -1051,16 +1051,15 @@ class TransactionController extends Controller
         return $script;
     }
 
-    public function note_seller(Request $request){
-        $note_seller = new Trans;
-        $code = Trans::find('vkSx46q');
-        if($code){
-
-        $note_seller->trans_seller_note = $request->note_seller;
-        }else{
-            echo 'sudah ada pesan';
+    public function note_seller(Request $request, $code){
+        $status = 200;
+        $message = 'Pesan sudah terkirim';
+        $trans = Trans::where('trans_code',$code)->get();
+        foreach ($trans as $t) {
+            $t->trans_seller_note = $request->note_seller;
+            $t->save();
         }
-        
-        $note_seller->save();
+            return redirect()->back()
+                ->with(['flash_status' => $status,'flash_message' => $message]);
     }
 }
