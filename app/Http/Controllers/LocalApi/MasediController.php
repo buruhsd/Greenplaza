@@ -332,6 +332,7 @@ class MasediController extends Controller
             );
             try{
                 $masedi = FunctionLib::masedi_payment($transaction_details);
+                dd($masedi);
                 // $masedi = [
                 //       "status" => true,
                 //       "va" => "WUN2NLT4HJ"
