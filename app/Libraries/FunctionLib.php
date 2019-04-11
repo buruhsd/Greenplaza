@@ -633,6 +633,7 @@ class FunctionLib
                 'price' => $data['price'],
             ]
         ];
+        dd(http_build_query($req));
         $payment = MasEdi::payment($req);
         dd($payment);
         $payment = json_decode($payment, true);
