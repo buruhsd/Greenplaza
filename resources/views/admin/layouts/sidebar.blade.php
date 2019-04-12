@@ -89,8 +89,8 @@
                                     <i class="menu-icon icon-layers"></i><span>Need Approval</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{FunctionLib::setActive('admin/needapproval/gln')}}"><a href="{{route('admin.needapproval.gln')}}">Transaksi Greenline</a></li>
-                                    <li class="{{FunctionLib::setActive('admin/needapproval/gln_voucher')}}"><a href="{{route('admin.needapproval.gln_voucher')}}">Transaksi Voucher + Gln</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/needapproval/gln')}}"><a href="{{route('admin.needapproval.gln')}}">Transaksi Greenline</a></li> -->
+                                    <!-- <li class="{{FunctionLib::setActive('admin/needapproval/gln_voucher')}}"><a href="{{route('admin.needapproval.gln_voucher')}}">Transaksi Voucher + Gln</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/transaction')}}"><a href="{{route('admin.transaction.index')}}">Transaksi Barang</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/hotlist')}}"><a href="{{route('admin.needapproval.hotlist')}}">Transaksi Hot List</a></li>
                                     <li class="{{FunctionLib::setActive('admin/needapproval/pincode')}}"><a href="{{route('admin.needapproval.pincode')}}">Transaksi Pin Code</a></li>
