@@ -127,6 +127,31 @@
                             </td>
                         </tr>
                     @endforeach
+                        @if(!$item->trans->trans_seller_note)
+                            <tr>
+                                <td colspan="2">
+                                    Pesan Pembeli : <br>
+                                </td>
+                                <td colspan="5">
+                                    
+                                    <b>
+                                      -  
+                                    </b>
+                                </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td colspan="2">
+                                    Pesan Pembeli : <br>
+                                </td>
+                                <td colspan="5">
+                                    
+                                    <b>
+                                      {{$item->trans->trans_seller_note}}
+                                    </b>
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
                             <td class="bg-info" colspan="5">
                                 Total Bayar : <br>
