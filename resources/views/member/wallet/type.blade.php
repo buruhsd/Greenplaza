@@ -12,14 +12,14 @@
     </div>
 </div>
 <div id="main-wrapper">
-    {{-- <div class="panel panel-white">
+    <div class="panel panel-white">
         <div class="panel-heading clearfix">
             <h4 class="panel-title">Pencarian</h4>
         </div>
         <form>
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search"/>
+        <input class="form-control" name="search" type="text" placeholder="Search" aria-label="Search"/>
         </form>
-    </div> --}}
+    </div>
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="panel panel-white">

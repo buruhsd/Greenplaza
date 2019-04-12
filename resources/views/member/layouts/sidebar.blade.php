@@ -204,9 +204,10 @@
                                         <i class="menu-icon fa fa-shopping-bag"></i><span>Log</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
-                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/type/transaksi')}}"><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li>
-                                        <li class="{{FunctionLib::setActive('member/wallet/type/cw')}}"><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li> -->
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/type/transaksi')}}"><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li> -->
+                                        <!-- <li class="{{FunctionLib::setActive('member/wallet/type/cw')}}"><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li> -->
                                         <li class="{{FunctionLib::setActive('member/wallet/log_masedi')}}"><a href="{{route('member.wallet.log_masedi')}}">Log Masedi Transaction</a></li>
+                                        <li><a href="{{route('member.wallet.type', 'transaksi')}}">Log Saldo Transaksi</a></li>
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/log_gln')}}"><a href="{{route('member.wallet.log_gln')}}">Log Gln Transaction</a></li> -->
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/rw')}}"><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li> -->
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/iklan')}}"><a href="{{route('member.wallet.type', 'iklan')}}">Log Saldo Iklan</a></li>

@@ -139,12 +139,13 @@ class WalletController extends Controller
      */
     public function type($slug='')
     {
+        $search = \Request::get('search');
         $wallet_type = Wallet_type::where('wallet_type_kode', $slug)->first();
         // dd($wallet_type['id']);
         $data['wallet_type'] = $wallet_type;
         // $data['log_wallet'] = Log_wallet::where('wallet_user_id', Auth::id())
         //     ->get();
-        $data['log_wallet'] = $wallet_type->log()->where('wallet_user_id', Auth::id())
+        $data['log_wallet'] = $wallet_type->log()->where('wallet_user_id', Auth::id())->where('wallet_note', 'like', '%'.$search.'%')
             ->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('member.wallet.type', $data);
