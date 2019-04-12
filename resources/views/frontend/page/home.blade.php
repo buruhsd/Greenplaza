@@ -351,7 +351,7 @@
                                     @elseif($n->produk_discount == 0)
                                     <span ></span>
                                     @else($n->produk_discount == 1)
-                                       <span class="new">sale</span>
+                                    <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
@@ -435,12 +435,11 @@
                                     <div class="featured-content text-center">
                                         <ul>
                                             <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul>
+                                        </ul></div>
                                     @elseif($n->produk_discount == 0)
-                                                        <span ></span>
-                                                
-                                                @else($n->produk_discount == 1)
-                                                   <span class="new">sale</span>
+                                        <span ></span>            
+                                    @else($n->produk_discount == 1)
+                                        <span class="new">sale</span>
                                     @endif
                                     <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt="" >
                                     {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="{{asset('assets/images/product/nopic.png')}}" alt=""> --}}
@@ -544,7 +543,7 @@
                                                         </ul>
                                                     </div>
                                                     @elseif($n->produk_discount == 0)
-                                                        <span ></span>
+                                                    <span ></span>
                                                 
                                                 @else($n->produk_discount == 1)
                                                    <span class="new">sale</span>
