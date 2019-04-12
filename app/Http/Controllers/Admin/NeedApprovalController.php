@@ -71,21 +71,23 @@ class NeedApprovalController extends Controller
         $gln = Trans_gln::find($id);
         $arr_id = [
             'seller' => [
+                'status'=>2,
                 'address'=>$gln->trans_gln_to,
                 'amount' => $gln->trans_gln_amount,
                 'user_id' => $gln->trans->trans_detail->first()->produk->produk_seller_id,
                 'wallet_type' => 1,
-                'amount_idr' => ($gln->trans->voucher->trans_voucher_amount > $gln->trans->trans_amount_total)
+                'amount_idr' => ($gln->trans->voucher()->trans_voucher_amount > $gln->trans->trans_amount_total)
                     ?$gln->trans->trans_amount_total
                     :$gln->trans->voucher->trans_voucher_amount,
                 'note'=>'Update wallet CW dengan transaksi kode '.$gln->trans_gln_trans_code.' dilanjutkan ke seller'
             ],
             'buyer' => [
+                'status'=>3,
                 'address'=>$gln->trans_gln_from,
                 'amount' => $gln->trans_gln_amount_total,
                 'user_id' => $gln->trans->trans_user_id,
                 'wallet_type' => 3,
-                'amount_idr' => ($gln->trans->voucher->trans_voucher_amount > $gln->trans->trans_amount_total)
+                'amount_idr' => ($gln->trans->voucher()->trans_voucher_amount > $gln->trans->trans_amount_total)
                     ?$gln->trans->trans_amount_total
                     :$gln->trans->voucher->trans_voucher_amount,
                 'note'=>'Update wallet CW dengan transaksi kode '.$gln->trans_gln_trans_code.' dikembalikan ke buyer.'
@@ -107,7 +109,7 @@ class NeedApprovalController extends Controller
         }
 
         if($transfer['status'] == 200){
-            $gln->trans_gln_status= 2;
+            $gln->trans_gln_status= $arr_id[$type]['status'];
             $gln->save();
             $status = 200;
             $message = 'Coin Berhasil di Transfer ke '.ucfirst($type).'.';

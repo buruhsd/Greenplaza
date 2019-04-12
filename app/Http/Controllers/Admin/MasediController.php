@@ -87,7 +87,15 @@ class MasediController extends Controller
     public function list_gln_paid ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $trans = Trans::where('trans_payment_id', '=', 4)
+            ->whereNotIn('trans_code', function ($query) {
+                $query->select('trans_voucher_trans')
+                    ->from('sys_trans_voucher');
+                return $query;
+            })
+            ->where('trans_is_paid', '=', 1)
+            ->pluck('id')
+            ->toArray();
         $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->orderBy('created_at', 'DESC')
@@ -100,7 +108,15 @@ class MasediController extends Controller
     public function list_gln_done ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $trans = Trans::where('trans_payment_id', '=', 4)
+            ->whereNotIn('trans_code', function ($query) {
+                $query->select('trans_voucher_trans')
+                    ->from('sys_trans_voucher');
+                return $query;
+            })
+            ->where('trans_is_paid', '=', 1)
+            ->pluck('id')
+            ->toArray();
         $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->where('trans_detail_is_cancel', 0)
@@ -115,7 +131,15 @@ class MasediController extends Controller
     public function list_gln_cancel ()
     {
         $search = \Request::get('search');
-        $trans = Trans::where('trans_payment_id', '=', 4)->where('trans_is_paid', '=', 1)->pluck('id')->toArray();
+        $trans = Trans::where('trans_payment_id', '=', 4)
+            ->whereNotIn('trans_code', function ($query) {
+                $query->select('trans_voucher_trans')
+                    ->from('sys_trans_voucher');
+                return $query;
+            })
+            ->where('trans_is_paid', '=', 1)
+            ->pluck('id')
+            ->toArray();
         $gln = Trans_detail::where('trans_detail_trans_id', 'like', '%'.$search.'%')
             ->whereIn('trans_detail_trans_id', $trans)
             ->where('trans_detail_is_cancel', 1)

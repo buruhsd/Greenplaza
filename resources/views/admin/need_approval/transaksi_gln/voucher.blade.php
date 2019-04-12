@@ -63,29 +63,42 @@
                                         <td><center>-</center></td>
                                     @endif --}}
                                     @if ($g->trans->trans_detail->first()->produk->produk_seller_id != 2)
-                                        @if ($g->trans->trans_detail->first()->trans_detail_status == 6 && $g->trans->trans_detail->first()->trans_detail_is_cancel == 0)
-                                            @if ($g->trans_gln_status == 1)
-                                                <td>
-                                                    <center>
-                                                        <a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.voucher_sendcoin', [$g->id, 'buyer'])}}">
-                                                            <button class="btn btn-info btn-xs">send coin to seller</button>
-                                                        </a>
-                                                    </center>
-                                                </td>
-                                            @elseif ($g->trans_gln_status == 2)
-                                                <td>
-                                                    <center>
-                                                        <button class="btn btn-success btn-xs">success send to seller</button>
-                                                    </center>
-                                                </td>
+                                        @if ($g->trans->trans_detail->first()->trans_detail_status == 6)
+                                            @if($g->trans->trans_detail->first()->trans_detail_is_cancel == 0)
+                                                @if ($g->trans_gln_status == 1)
+                                                    <td>
+                                                        <center>
+                                                            <a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.voucher_sendcoin', [$g->id, 'seller'])}}">
+                                                                <button class="btn btn-info btn-xs">send coin to seller</button>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                @elseif ($g->trans_gln_status == 2)
+                                                    <td>
+                                                        <center>
+                                                            <button class="btn btn-success btn-xs">success send to seller</button>
+                                                        </center>
+                                                    </td>
+                                                @endif
+                                            @else
+                                                @if ($g->trans_gln_status == 1)
+                                                    <td>
+                                                        <center>
+                                                            <a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.voucher_sendcoin', [$g->id, 'buyer'])}}">
+                                                                <button class="btn btn-warning btn-xs">send coin back to member</button>
+                                                            </a>
+                                                        </center>
+                                                    </td>
+                                                @elseif ($g->trans_gln_status == 3)
+                                                    <td>
+                                                        <center>
+                                                            <button class="btn btn-success btn-xs">success send to member</button>
+                                                        </center>
+                                                    </td>
+                                                @endif
                                             @endif
-
                                         @elseif (($g->trans->trans_detail->first()->trans_detail_status == 4 || $g->trans->trans_detail->first()->trans_detail_status == 3) && $g->trans->trans_detail->first()->trans_detail_is_cancel == 1)
-                                            @if ($g->trans_gln_status == 2)
-                                                <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.voucher_sendcoin', [$g->id, 'seller'])}}">
-                                                    <button class="btn btn-warning btn-xs">send coin back to member</button>
-                                                </a></center></td>
-                                            @elseif ($g->trans_gln_status == 1)
+                                            @if ($g->trans_gln_status == 1)
                                                 <td><center><a onclick="return confirm('Anda yakin ingin melanjutkan?')" href="{{route('admin.needapproval.voucher_sendcoin', [$g->id, 'buyer'])}}">
                                                     <button class="btn btn-warning btn-xs">send coin back to member</button>
                                                 </a></center></td>

@@ -726,9 +726,9 @@ class TransactionController extends Controller
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')
-                ->paginate($this->perPage);
+                ->paginate(10);
         } else {
-            $data['transaction'] = Trans::paginate($this->perPage);
+            $data['transaction'] = Trans::paginate(10);
         }
         $data['payment'] = Payment::where('payment_status', 1)->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
@@ -813,9 +813,9 @@ class TransactionController extends Controller
                 ->having(DB::raw('COUNT(sys_trans_detail.id)'), '>', 0)
                 ->select('sys_trans.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'))
                 ->groupBy('sys_trans.id')
-                ->paginate($this->perPage);
+                ->paginate(10);
         } else {
-            $data['transaction'] = Trans::paginate($this->perPage);
+            $data['transaction'] = Trans::paginate(10);
         }
         $data['payment'] = Payment::where('payment_status', 1)->get();
         // dd($data['transaction']);
