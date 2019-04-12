@@ -1,6 +1,11 @@
 <div class="banner-img black-opacity">
-    <img src="{{asset('assets/images/iklan/'.$iklan->iklan_image)}}" style="height: 
-    410px">
+    @if($iklan->iklan_link == null || $iklan->iklan_link == '')
+        <a href="{{route('etalase', 'green-production')}}">
+    @else
+        <a href="{{$iklan->iklan_link}}">
+    @endif
+	    <img src="{{asset('assets/images/iklan/'.$iklan->iklan_image)}}" style="height: 410px">
+	</a>
     <div class="banner-content">
         <div class="banner-info">
             <!-- <h2>Sale <span>50%</span> off</h2> -->
