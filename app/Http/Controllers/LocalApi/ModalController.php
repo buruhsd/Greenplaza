@@ -30,8 +30,20 @@ class ModalController extends Controller
     }
 
     /**
-     * komplain tambah resi seller
-     * @param
+     * detail produk admin voucher+gln
+     * @param $code => trans_code
+     * @return 
+     */
+    public function produk_voucher_gln($code)
+    {
+        $data['trans'] = Trans::where('trans_code', $code)->first();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('localapi.voucher.detail_produk', $data);
+    }
+
+    /**
+     * review produk done transaksi
+     * @param $id => id => sys_trans
      * @return 
      */
     public function review_produk($id)
@@ -42,7 +54,7 @@ class ModalController extends Controller
     }
 
     /**
-     * komplain tambah resi seller
+     * review produk komplain transaksi
      * @param
      * @return 
      */

@@ -787,6 +787,7 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::get('editaddressadmin/{id}', 'ModalController@editaddressadmin')->name('.editaddressadmin');
 		Route::get('addbank', 'ModalController@addbank')->name('.addbank');
 		Route::get('editbank/{id}', 'ModalController@editbank')->name('.editbank');
+		Route::get('produk_vc_gln/{code}', 'ModalController@produk_voucher_gln')->name('.produk_vc_gln');
 	});
 	Route::group(['prefix' => 'tab', 'as' => '.tab'], function () {
 	});

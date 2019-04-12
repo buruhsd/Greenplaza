@@ -47,7 +47,7 @@
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
                                     <td><center>{{$g->trans->trans_code}}</center></td>
                                     <td><center>{{$g->id}}</center></td>
-                                    <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
+                                    <td class="text-center"><button type="button" onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.produk_vc_gln", $g->trans_gln_trans_code)}} class="btn btn-sm btn-primary btn-xs"><i class="fa fa-edit"></i>Detail Produk</button></td>
                                     <td><center>{{FunctionLib::admin_trans_status($g->trans->trans_detail->first()->trans_detail_status, $g->trans->trans_detail->first()->trans_detail_is_cancel)}}</center></td>
                                     {{-- @if ($g->trans->trans_detail->first()->trans_detail_status == 3 && $g->trans->trans_detail->first()->trans_detail_is_cancel == 1)
                                         <td><center>Seller Cancel</center></td>
@@ -128,5 +128,5 @@
         </div>
     </div>
 </div>
-{{-- @include('admin.need_approval.transaksi_gln.detail') --}}
+<div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
