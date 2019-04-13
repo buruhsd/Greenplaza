@@ -198,7 +198,7 @@ class KonfigurasiController extends Controller
         $iklan->iklan_iklan_id = $request->iklan_iklan_id;
         
         if($request->iklan_user_id){
-            if($user){
+            if($request->iklan_user_id){
                 $iklan->iklan_user_id = $iklan->user->id;
                 if ($request->hasFile('iklan_image')){
                     $file = $request->file('iklan_image');
