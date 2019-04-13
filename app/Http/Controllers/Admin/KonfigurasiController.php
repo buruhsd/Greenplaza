@@ -183,7 +183,7 @@ class KonfigurasiController extends Controller
     public function edit_iklanadd (Request $request, $id)
     {
         $requestData = $request->all();
-        dd($requestData);
+        // dd($requestData);
         $this->validate($request, [
             'iklan_use' => 'required',
             'iklan_done' => 'required',
