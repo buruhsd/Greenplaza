@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
 use Auth;
 use Session;
 use FunctionLib;
+use App\Models\Conf_iklan;
 
 class KonfigurasiController extends Controller
 {
@@ -170,26 +171,48 @@ class KonfigurasiController extends Controller
     }
     public function edit_iklan (Request $request, $id)
     {
-        $iklan = Iklan::find($id);
-        return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.editiklan', compact('iklan'));
+        $data['config'] = Conf_iklan::all();
+        $data['iklan'] = Iklan::find($id);
+        $data['user'] = User::whereHas('roles', function($query){
+                $query->whereRaw('name IN ("member", "admin")');
+                return $query;
+            })->get();
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.konfigurasi.settingiklan.iklanbannerkhusus.editiklan', $data);
     }
     public function edit_iklanadd (Request $request, $id)
     {
+        $requestData = $request->all();
+        dd($requestData);
+        $this->validate($request, [
+            'iklan_use' => 'required',
+            'iklan_done' => 'required',
+            'iklan_title' => 'required',
+            'iklan_iklan_id' => 'required',
+            'iklan_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         $iklan = Iklan::find($id);
+        $iklan->iklan_use = $request->iklan_use;
+        $iklan->iklan_done = $request->iklan_done;
         $iklan->iklan_title = $request->iklan_title;
         $iklan->iklan_iklan_id = $request->iklan_iklan_id;
         
         if($request->iklan_user_id){
-            $user = User::where('name', $request->iklan_user_id)->first();
             if($user){
-                $iklan->iklan_user_id = $user->id;
-                if ($iklan->iklan_image != null && $request->iklan_image){
-                    $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
-                    $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
-                } elseif ($iklan->iklan_image == null && $request->iklan_image){
-                    $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
-                    $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+                $iklan->iklan_user_id = $iklan->user->id;
+                if ($request->hasFile('iklan_image')){
+                    $file = $request->file('iklan_image');
+                    $path = public_path('assets/images/iklan');
+                    $imagename = FunctionLib::doUpload($file, $path, $iklan->iklan_image);
+                    $iklan->iklan_image = $imagename;
                 }
+                // if ($iklan->iklan_image != null && $request->iklan_image){
+                //     $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
+                //     $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+                // } elseif ($iklan->iklan_image == null && $request->iklan_image){
+                //     $iklan->iklan_image = date("d-M-Y_H-i-s").'_'.$request->iklan_image->getClientOriginalName();
+                //     $request->iklan_image->move(public_path('assets\images\iklan'),$iklan->iklan_image);
+                // }
                 $iklan->save();
                 
             } else {
@@ -642,6 +665,22 @@ class KonfigurasiController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
+            case 'edit_iklan':
+                ?>
+                    <link href="<?php echo asset('admin/plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.css') ?>" rel="stylesheet">
+                    <script src="<?php echo asset('admin/plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js') ?>"></script>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/css/bootstrap-combobox.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-combobox/1.1.8/js/bootstrap-combobox.min.js"></script>
+                    <script type="text/javascript">
+                        $('.datepicker').datetimepicker();
+                        $(document).ready(function(){
+                            $('.combobox').combobox();
+                            // bonus: add a placeholder
+                            $('.combobox').attr('placeholder', 'Contoh, tulis "user"');
+                        });
+                    </script>
+                <?php
+                break;
             case 'sponsor':
             // case 'profil':
                 ?>
