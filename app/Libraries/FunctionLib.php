@@ -1,6 +1,37 @@
 <?php
 class FunctionLib
 {
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function UserConfigArr(){
+        $arr = [
+            'user_poin'
+        ];
+        return $arr;
+    } 
+
+    /**
+    * @param
+    * @return
+    **/
+    public static function UserConfig($type, $user_id=0, $status = 1){
+        $user_id = ($user_id == 0)
+            ?Auth::id()
+            :$user_id;
+        try {
+            $value = App\Models\User_config::where('config_user_id', '=', $user_id)
+                ->where('config_name', $type)
+                ->pluck('config_value')[0];
+        }
+        catch (\Exception $e) {
+            $value = '';
+        }
+        return $value;
+    } 
+
     public static function admin_trans_status($status, $cancel=0){
         $arr_status = [
             1 => 'Member Order',

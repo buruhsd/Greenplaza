@@ -37,6 +37,16 @@ class User extends Authenticatable implements MustVerifyEmail
     * @return
     * 
     */
+    public function config()
+    {
+        return $this->hasMany('App\Models\User_config', 'config_user_id');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function notifikasi()
     {
         return $this->hasMany('App\Models\Notification', 'notifiable_id');
