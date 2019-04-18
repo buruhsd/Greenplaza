@@ -1186,7 +1186,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content2">
                                                 <h4>
                                                     <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
@@ -1206,7 +1206,9 @@
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{str_limit($item->produk_note, 25)}}
                                                 </ul>
+                                                <div style="width: 72%; bottom: 0; padding-bottom: 40px; position: absolute;">
                                                 <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -1241,7 +1243,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content2">
                                                 <h3>
                                                     <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 10)}}</a>
                                                     <a href="{{route('detail', $item->id)}}"></a>
@@ -1259,7 +1261,9 @@
                                                 <ul style="color: #999; font-size: 11px">
                                                     {{str_limit($item->produk_note, 25)}}
                                                 </ul>
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
+                                                <div style="width: 72%; bottom: 0; padding-bottom: 40px; position: absolute;">
+                                                    <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

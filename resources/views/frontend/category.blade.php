@@ -122,9 +122,11 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
                                                 </ul> --}}
+                                                <div style="width: 72%; bottom: 0; padding-bottom: 40px; position: absolute;">
                                                 @if($item->user->seller_active())
-                                                <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$item->user->user_store}}</button></a></center>
+                                                    <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$item->user->user_store}}</button></a></center>
                                                 @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

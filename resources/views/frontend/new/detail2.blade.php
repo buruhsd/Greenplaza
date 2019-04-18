@@ -101,7 +101,7 @@
                 <div class="col-12">
                     <div class="breadcumb-wrap">
                         <div class="breadcumb-content black-opacity" style="background-image: url('{{asset('assets/images/bg_etalase/'.$detail->user->user_detail->user_detail_image)}}'), url('{{asset('assets/images/bg_etalase/nopic.jpg')}}')">
-                            <h2>HalamanfffPembelian</h2>
+                            <h2>Halaman Pembelian</h2>
                             <ul>
                                 <li><a href="{{url('/')}}">Home</a></li>
                                 <li>Produk</li>
