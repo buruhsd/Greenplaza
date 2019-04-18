@@ -3,15 +3,69 @@ class FunctionLib
 {
 
     /**
+    * @param * id, name, value
+    * @param note
+    * @return
+    **/
+    public static function CreateUserConfig($param){
+        $note = "";
+        extract($param);
+        $res['status'] = 500;
+        $res['message'] = "tidak berhasil membuat config user ".$name.".";
+        $res['total'] = 0;
+        if($id == "all"){
+            $user = App\User::all();
+            $res['status'] = 200;
+            $res['message'] = "Wallet user telah dibuat oleh system.";
+            foreach ($user as $item) {
+                if(!$item->config()->whereRaw('config_name="'.$name.'"')->exists()){
+                    $data =[
+                        'config_user_id' => $item->id,
+                        'config_name' => $name,
+                        'config_value' => $value,
+                        'config_note' => $note
+                    ];
+                    App\Models\User_config::create($data);
+                    $res['total'] = $res['total'] + 1; 
+                }
+            }
+        }elseif($id > 0){
+            $user = App\User::findOrFail($id);
+            $res['status'] = 200;
+            $res['message'] = "Wallet user telah dibuat oleh system.";
+            if(!$user->config()->whereRaw('config_name="'.$name.'"')->exists()){
+                $data =[
+                    'config_user_id' => $user->id,
+                    'config_name' => $name,
+                    'config_value' => $value,
+                    'config_note' => $note
+                ];
+                App\Models\User_config::create($data);
+                $res['total'] = $res['total'] + 1; 
+            }
+        }
+        return $res;
+    }
+
+    /**
     * @param
     * @return
     **/
     public static function UserConfigArr(){
         $arr = [
-            'user_poin'
+            'user_poin' => [
+                'name' => 'user_poin',
+                'value' => 0,
+                'note' => 'pengaturan pembayaran by poin'
+            ],
+            // 'user_poin' => [
+            //     'name' => 'user_poin',
+            //     'value' => 0,
+            //     'note' => 'pengaturan pembayaran by poin'
+            // ],
         ];
         return $arr;
-    } 
+    }
 
     /**
     * @param
@@ -124,6 +178,16 @@ class FunctionLib
                     $message = 'Berhasil bayar PW.';
                 }else{
                     $message = 'Gagal bayar PW.';
+                }
+            break;
+            case 'tukar_poin':
+                $response = MasEdi::tukar_poin();
+                $response = json_decode($response, true);
+                if(isset($response['status']) && $response['status'] == true){
+                    $status = 200;
+                    $message = 'Berhasil mendapat harga poin.';
+                }else{
+                    $message = 'Gagal mendapat harga poin.';
                 }
             break;
         

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_detail extends Model
+class User_config extends Model
 {
-	protected $table = 'sys_user_detail';
+	protected $table = 'sys_config_user';
 
     /**
      * The attributes that are mass assignable.
