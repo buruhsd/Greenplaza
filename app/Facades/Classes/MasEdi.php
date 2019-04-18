@@ -12,8 +12,8 @@ class MasEdi extends Controller
 {
     // private $__api_server='http://wallet.cavallocoin.io/api'; //api
     private $__api_key = "c6cd80e53a26df51bad3773ef6f76331";
-    // private $__api_server = 'http://192.168.169.196/edisedis/index.php';
-    private $__api_server = 'http://45.76.176.231/edisedis/index.php';
+    private $__api_server = 'http://192.168.169.196/edisedis/index.php';
+    // private $__api_server = 'http://45.76.176.231/edisedis/index.php';
 
     /**
     * bayar masedi
