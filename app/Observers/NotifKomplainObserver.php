@@ -31,6 +31,9 @@ class NotifKomplainObserver
                 $data['status'] = 200;
                 $data['message'] = "Komplain pembeli untuk transaksi ".$item->trans_detail->trans->trans_code;
                 $author = $item->trans_detail->trans->pembeli;
+                if($item->trans_detail->produk->user->is_admin()){
+                    $data['route'] = route('admin.res_kom.index', ['status'=>'new']);
+                }
                 $item->trans_detail->produk->user->notify(new Transaksi($item->trans_detail,$author,$data));
             break;
             case 'updated':
@@ -48,6 +51,9 @@ class NotifKomplainObserver
                 $author = $item->trans_detail->trans->pembeli;
                 if($is_done){
                     $data['route'] = route('member.komplain.index', ['status'=>'done']);
+                    if($item->trans_detail->produk->user->is_admin()){
+                        $data['route'] = route('admin.res_kom.index', ['status'=>'done']);
+                    }
                     $item->trans_detail->produk->user->notify(new Transaksi($item->trans_detail,$author,$data));
                     $author = User::find(2);
                     $data['route'] = route('member.komplain.buyer', ['status'=>'done']);

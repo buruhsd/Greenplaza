@@ -27,12 +27,18 @@ class NotifSolusiObserver
                 $author = $item->komplain->trans_detail->trans->pembeli;
                 if($is_done){
                     $data['route'] = route('member.komplain.index', ['status'=>'done']);
+                    if($item->komplain->trans_detail->produk->user->is_admin()){
+                        $data['route'] = route('admin.res_kom.index', ['status'=>'done']);
+                    }
                     $item->komplain->trans_detail->produk->user->notify(new Transaksi($item->komplain->trans_detail,$author,$data));
                     $author = User::find(2);
                     $data['route'] = route('member.komplain.buyer', ['status'=>'done']);
                     $item->komplain->trans_detail->trans->pembeli->notify(new Transaksi($item->komplain->trans_detail,$author,$data));
                 }else{
                     $data['route'] = route('member.komplain.index', ['status'=>'new']);
+                    if($item->komplain->trans_detail->produk->user->is_admin()){
+                        $data['route'] = route('admin.res_kom.index', ['status'=>'new']);
+                    }
                     $item->komplain->trans_detail->produk->user->notify(new Transaksi($item->komplain->trans_detail,$author,$data));
                     $data['route'] = route('member.komplain.buyer', ['status'=>'new']);
                     $item->komplain->trans_detail->trans->pembeli->notify(new Transaksi($item->komplain->trans_detail,$author,$data));

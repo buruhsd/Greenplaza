@@ -126,6 +126,9 @@ class NotifTransaksiObserver
             $item->produk->user->notify(new Transaksi($item,$author,$data));
         }else{
             $data['route'] = route('member.komplain.index', ['status'=>'done']);
+            if($item->produk->user->is_admin()){
+                $data['route'] = route('admin.res_kom.index', ['status'=>'done']);
+            }
             $item->produk->user->notify(new Transaksi($item,$author,$data));
             $author = User::find(2);
             $data['route'] = route('member.komplain.buyer', ['status'=>'done']);
