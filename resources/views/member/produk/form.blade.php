@@ -510,13 +510,23 @@
                         ?>
                         <div class="input-group col-md-12 multiple-form-group" data-max="5">
                             @foreach($array as $item)
-                                <div class="form-group">
-                                    <div class="cp input-group colorpicker-component">
-                                        <input type="text" name="produk_color[]" value="{{$item}}" class="form-control" />
-                                        <span class="input-group-addon"><i></i></span>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                                @if($loop->last)
+                                    <div class="form-group">
+                                        <div class="cp input-group colorpicker-component">
+                                            <input type="text" name="produk_color[]" value="{{$item}}" class="form-control" />
+                                            <span class="input-group-addon"><i></i></span>
+                                            <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="form-group">
+                                        <div class="cp input-group colorpicker-component">
+                                            <input type="text" name="produk_color[]" value="{{$item}}" class="form-control" />
+                                            <span class="input-group-addon"><i></i></span>
+                                            <span class="input-group-btn"><button type="button" class="btn btn-danger btn-remove">–</button></span>
+                                        </div>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     @endif

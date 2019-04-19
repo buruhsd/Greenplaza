@@ -42,6 +42,9 @@ class NotifTransaksiObserver
                 $data['message'] = $item->trans->pembeli->name." membeli produk ".$item->produk->produk_name.".";
                 $author = $item->trans->pembeli;
                 $user = $item->produk->user;
+                if($item->produk->user->is_admin()){
+                    $data['route'] = route('admin.transaction.index', ['status'=>'order']);
+                }
                 $user->notify(new Transaksi($item,$author,$data));
             break;
             case 'updated':
@@ -62,6 +65,9 @@ class NotifTransaksiObserver
                         $data['message'] = "transaksi ".$item->trans->trans_code." menunggu kesanggupan anda.";
                         $author = $item->trans->pembeli;
                         $user = $item->produk->user;
+                        if($item->produk->user->is_admin()){
+                            $data['route'] = route('admin.transaction.index', ['status'=>'seller']);
+                        }
                         $user->notify(new Transaksi($item,$author,$data));
                     break;
                     case '4':
@@ -89,6 +95,9 @@ class NotifTransaksiObserver
                         $data['message'] = "transaksi ".$item->trans->trans_code." barang sudah diambil pembeli.";
                         $author = $item->trans->pembeli;
                         $user = $item->produk->user;
+                        if($item->produk->user->is_admin()){
+                            $data['route'] = route('admin.transaction.index', ['status'=>'dropping']);
+                        }
                         $user->notify(new Transaksi($item,$author,$data));
                     break;
                     default:
@@ -151,6 +160,9 @@ class NotifTransaksiObserver
                             $user_get_notif = [$item->trans->pembeli->id, $item->produk->user->id];
                             $item->trans->pembeli->notify(new Transaksi($item,$author,$data));
                             $data['route'] = route('member.transaction.index', ['status'=>'cancel']);
+                            if($item->produk->user->is_admin()){
+                                $data['route'] = route('admin.transaction.index', ['status'=>'cancel']);
+                            }
                             $item->produk->user->notify(new Transaksi($item,$author,$data));
                         }else{
                             $author = $item->produk->user;
