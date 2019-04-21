@@ -38,7 +38,7 @@
                         <h2></h2>
                     </div>
                     <div class="large-6 medium-6 small-12 columns">
-                        <p><b>#note</b> : jika anda sudah melakukan transfer dan status transaksi anda masih belum berubah, tinggu <b>1 X 24 jam</b>. jika status transaksi anda masih belum berubah silahkan hubungi admin greenplaza di <b>admin@greenplaza.me</b></p>
+                        <p><b>#note</b> : maksimal batas pembayaran adalah <b>{{FunctionLib::get_config('transaksi_durasi_pembayaran')}} jam</b>, jika anda sudah melakukan transfer dan status transaksi anda masih belum berubah, tinggu <b>1 X 24 jam</b>. jika status transaksi anda masih belum berubah silahkan hubungi admin greenplaza di <b>admin@greenplaza.me</b></p>
                         <?php 
                         echo '
                         Tagihan : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key($trans->toArray(), 'trans_amount')).' <br>
@@ -102,6 +102,7 @@
                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
                         @break
                         @case(3)
+                        @case(6)
                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.qr", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
                         @break
                         @case(4)

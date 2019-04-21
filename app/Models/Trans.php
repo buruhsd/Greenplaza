@@ -22,6 +22,16 @@ class Trans extends Model
     * @return
     * 
     */
+    public function poin()
+    {
+        return $this->hasOne('App\Models\Trans_poin', 'trans_poin_trans_id')->first();
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function voucher()
     {
         return $this->belongsTo('App\Models\Trans_voucher', 'trans_code', 'trans_voucher_trans')->first();

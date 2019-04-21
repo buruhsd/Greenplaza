@@ -17,6 +17,7 @@ use App\User;
 use Auth;
 use App\Models\Wallet;
 use App\Models\Trans_voucher;
+use App\Models\Trans_poin;
 use Exception;
 
 class MasediController extends Controller
@@ -53,7 +54,16 @@ class MasediController extends Controller
             });
             $trans_code = FunctionLib::str_rand(7);
             $gross_amount = 0;
-            foreach ($trans as $value) {
+            $poin = 0;
+            $price_poin = FunctionLib::masedi('tukar_poin');
+            if($price_poin['status'] == 200){
+                $harga_poin = $price_poin['data']['rupiah'];
+            }else{
+                $status = 500;
+                $message = 'Gagal mendapatkan harga tukar poin. Mohon maaf server sedang mengalami masalah dengan masedi.';
+                return ['status' => $status, 'message' => $message];
+            }
+            foreach ($trans as $key1 => $value) {
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['trans_detail_produk_id']);
                     if($item['trans_detail_qty'] > $produk->produk_stock){
@@ -71,11 +81,13 @@ class MasediController extends Controller
                     return ['status' => $status, 'message' => $message];
 
                 }
+                $persen_poin = FunctionLib::UserConfig('user_poin', $key1);
+
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
                 $trans->trans_user_id = Auth::id();
                 $trans->trans_user_bank_id = $bank_id;
-                $trans->trans_payment_id = 5;//pw
+                $trans->trans_payment_id = 6;//pw
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
                 $trans->save();
                 foreach ($value as $key => $item) {
@@ -131,8 +143,20 @@ class MasediController extends Controller
                 $trans->trans_amount = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount');
                 $trans->trans_amount_ship = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_ship');
                 $trans->trans_amount_total = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_total');
-                $gross_amount += $trans->trans_amount_total;
+                $total_poin = ($trans->trans_amount_total / 100 * $persen_poin) / $harga_poin;
+                $poin += $total_poin;
+                $gross_amount += $trans->trans_amount_total - ($trans->trans_amount_total / 100 * $persen_poin);
                 $trans->save();
+
+                // insert trans_poin
+                $new_poin = new Trans_poin;
+                $new_poin->trans_poin_trans_id = $trans->id;
+                $new_poin->trans_poin_persen = $persen_poin;
+                $new_poin->trans_poin_compare = $harga_poin;
+                $new_poin->trans_poin_poin_total = $total_poin;
+                $new_poin->trans_poin_total = ($trans->trans_amount_total / 100 * $persen_poin);
+                $new_poin->trans_poin_note = 'pembayaran poin untuk transaksi '.$trans_code.'.';
+                $new_poin->save();
             }
             if(Session::has('voucher')){
                 $voucher = Session::get('voucher');
@@ -153,11 +177,11 @@ class MasediController extends Controller
                     'to' => $trans->pembeli->email,
                     'data' => [
                         'trans_code' => $trans_code,
-                        'trans_amount_total' => $gross_amount,
+                        'trans_amount_total' => FunctionLib::number_to_text($poin).' POIN + '. 'Rp.'.FunctionLib::number_to_text($gross_amount).' masedi wallet',
                         'status' => $status,
                     ]
                 ];
-                $send_notif = FunctionLib::transaction_notif($config);
+                $send_notif = FunctionLib::transaction_pw_notif($config);
                 if(isset($send_notif['status']) && $send_notif['status'] == 200){
                     $message .= ' ,'.$send_notif['message'];
                 }
@@ -169,16 +193,17 @@ class MasediController extends Controller
             $transaction_details = array(
               'note' => $trans_code,
               'price' => $gross_amount, // no decimal allowed for creditcard
+              'poin' => $poin, // no decimal allowed for creditcard
             );
             try{
-                $masedi = FunctionLib::masedi_payment($transaction_details);
+                $masedi = FunctionLib::masedi('pay_poin', $transaction_details);
+                // $masedi = FunctionLib::masedi_payment($transaction_details);
                 // $masedi = [
                 //       "status" => true,
                 //       "va" => "WUN2NLT4HJ"
                 //     ];
                 if($masedi['status'] == true){
-                    $trans->trans_qr = $masedi['va'];
-                    $trans->save();
+                    $trans = Trans::where('trans_code', $trans_code)->update(['trans_qr'=>$masedi['data']['va']]);
                 }
             }catch(\Exception $err){
                 

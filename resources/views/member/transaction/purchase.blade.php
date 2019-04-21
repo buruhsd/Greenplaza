@@ -82,7 +82,7 @@
                                     <tr>
                                         <th scope="row">{{$no++}}</th>
 
-                                        <td>{{$item->trans_detail->first()->trans_code}}</td>
+                                        <td>{{$item->trans_code}}</td>
                                         <td scope="row">
                                             <ul>
                                                 <li>Amount : {{$item->trans_amount}}</li>

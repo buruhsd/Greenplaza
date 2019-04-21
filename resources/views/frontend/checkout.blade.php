@@ -179,7 +179,14 @@
                                     <select class="form-control" id="payment">
                                         <option value="">Pilih Pembayaran</option>
                                         @foreach($payment as $item)
-                                            <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                            @if($item->id !== 3 && $item->id !== 4)
+                                                @if(Session::has('voucher')){
+                                                @else
+                                                    <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                                @endif
+                                            @else
+                                                <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment']) && $_GET['payment'] == "")?"selected":"" !!}>{{ucfirst(strtolower($item->payment_name))}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -192,6 +199,27 @@
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
                                 </div>
                                 <div class="payment_hide payment_Pw collapse">
+                                    <hr/>
+                                        <span>
+                                            metode pembayaran ini dibayar menggunakan poin + wallet, <br/>
+                                            perhitungan : <br/>
+                                            Poin x % + Wallet Masedi x % , berbeda untuk masing-masing penjual.
+                                        </span>
+                                    <hr/>
+                                    @foreach(Session::get('chart') as $item)
+                                        <?php
+                                            $seller_gln = true;
+                                            $where = 'id ='.$item['trans_detail_produk_id'];
+                                            $seller_produk = App\Models\Produk::whereRaw($where)->first();
+                                            $seller[$seller_produk->user->id]['toko'] = $seller_produk->user->user_store;
+                                            $seller[$seller_produk->user->id]['persen'] = FunctionLib::UserConfig('user_poin', $seller_produk->produk_seller_id);
+                                        ?>
+                                    @endforeach
+                                    @foreach($seller as $item)
+                                        <span class="text-danger">
+                                            Persen Poin Toko 
+                                            <b>{{$item['toko']}}</b> = {{$item['persen']}}%</span><br/>
+                                    @endforeach
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment_poin")}} value="Pesan" class="btn btn-success" />
                                 </div>

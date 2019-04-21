@@ -751,6 +751,22 @@ class FunctionLib
     } 
 
     /******/
+    public static function transaction_pw_notif($param=[]){
+        $data['status'] = 200;
+        $data['message'] = 'Notifikasi telah dikirim';
+        extract($param);
+        // send email
+        $config = [
+            'to' => $to,
+            'subject' => 'Status Transaksi',
+            'view' => 'email.transaction_pw',
+            'data' => $data
+        ];
+        SendEmail::html($config);
+        return $data;
+    }
+
+    /******/
     public static function transaction_notif($param=[]){
         $data['status'] = 200;
         $data['message'] = 'Notifikasi telah dikirim';
@@ -838,6 +854,12 @@ class FunctionLib
                         $item->trans_paid_note = 'pembayaran dengan Masedi selesai.';
                         $item->trans_note = 'pembayaran dengan Masedi telah selesai.';
                         $item->save();
+                        // update pembayaran poin
+                        if($item->poin()){
+                            $model_poin = $item->poin();
+                            $model_poin->trans_poin_status = 1;
+                            $model_poin->save();
+                        }
                     }
                     foreach ($trans_detail as $item) {
                         $trans_detail = App\Models\Trans_detail::findOrFail($item->id);
