@@ -74,12 +74,12 @@
                                     <i class="menu-icon icon-live_tv"></i><span>Monitoring</span><i class="accordion-icon fa fa-angle-left"></i>
                                 </a>
                                 <ul class="sub-menu">
-                                    <li class="{{FunctionLib::setActive('admin/monitoring/laporan')}}"><a href="{{route('admin.monitoring.laporan')}}">Laporan</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/monitoring/laporan')}}"><a href="{{route('admin.monitoring.laporan')}}">Laporan</a></li> -->
                                     <!-- <li><a href="{{route('admin.monitoring.profit')}}">Profit</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/monitoring/wallet_memberlist')}}"><a href="{{route('admin.monitoring.wallet_memberlist')}}">Wallet</a></li>
                                     <!-- <li><a href="#">Wallet Pin Code</a></li>
                                     <li><a href="#">Wallet Saldo Iklan</a></li> -->
-                                    <li class="{{FunctionLib::setActive('admin/monitoring/log_activity')}}"><a href="{{route('admin.monitoring.activity')}}">Log Aktivitas</a></li>
+                                    <!-- <li class="{{FunctionLib::setActive('admin/monitoring/log_activity')}}"><a href="{{route('admin.monitoring.activity')}}">Log Aktivitas</a></li> -->
                                     <li class="{{FunctionLib::setActive('admin/monitoring/log_withdrawal_member')}}"><a href="{{route('admin.monitoring.activity_wd')}}">Log Withdrawal</a></li>
                                 </ul>
                             </li>
@@ -158,7 +158,7 @@
                                         <h5 class="m-l-sm text-danger">Profil Greenplaza</h5>
                                         <li class="{{FunctionLib::setActive('admin/config/profil')}}"><a href="{{route('admin.config.profil')}}">Profil Greenplaza</a></li>
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/officialemail')}}"><a href="{{route('admin.konfigurasi.officialemail')}}">Official Email</a></li>
-                                        <li class="{{FunctionLib::setActive('admin/bank')}}"><a href="{{route('admin.bank.index')}}">Bank</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('admin/bank')}}"><a href="{{route('admin.bank.index')}}">Bank</a></li> -->
                                         {{-- <a href="#">Profil Greenplaza</a>
                                         <ul class="sub-menu">
                                             <li><a href="#">Profil Greenplaza</a></li>
@@ -173,7 +173,7 @@
                                         @endif
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/set_shipment_admin')}}"><a href="{{route('admin.konfigurasi.set_shipment_admin')}}">Atur Kurir</a></li>
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/admin_address')}}"><a href="{{route('admin.konfigurasi.admin_address')}}">Atur Alamat</a></li>
-                                        <li class="{{FunctionLib::setActive('admin/konfigurasi/grademember')}}"><a href="{{route('admin.konfigurasi.grademember')}}">Grade</a></li>
+                                        <!-- <li class="{{FunctionLib::setActive('admin/konfigurasi/grademember')}}"><a href="{{route('admin.konfigurasi.grademember')}}">Grade</a></li> -->
                                         <!-- <li><a href="#">Grade Seller</a></li> -->
                                         <li class="{{FunctionLib::setActive('admin/konfigurasi/pagelist')}}"><a href="{{route('admin.konfigurasi.pagelist')}}">Page List</a></li>
                                         <!-- <li><a href="{{route('admin.page')}}">Page List</a></li> -->

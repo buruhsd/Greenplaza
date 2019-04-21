@@ -203,7 +203,7 @@
                                         <span>
                                             metode pembayaran ini dibayar menggunakan poin + wallet, <br/>
                                             perhitungan : <br/>
-                                            Poin x % + Wallet Masedi x % , berbeda untuk masing-masing penjual.
+                                            Poin masedi x % + Wallet Masedi x % , berbeda untuk masing-masing penjual.
                                         </span>
                                     <hr/>
                                     @foreach(Session::get('chart') as $item)
@@ -235,7 +235,7 @@
                                     <hr/>
                                     Cooming Soon.
                                 </div> -->
-                                <div class="payment_hide payment_Gln collapse">
+                                <!-- <div class="payment_hide payment_Gln collapse">
                                     <hr/>
                                     <ul class="nav">
                                         <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
@@ -264,7 +264,7 @@
                                                     </a>
                                         @endif
                                     @endif
-                                </div>
+                                </div> -->
                             @endif
                         </form>
                     </div>
