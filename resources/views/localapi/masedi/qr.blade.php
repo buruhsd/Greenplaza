@@ -13,6 +13,7 @@
                             <div class="form-group">
                                 {!! DNS2D::getBarcodeHTML($qr, "QRCODE") !!}
                             </div>
+                            <pre>{{$qr}}</pre>
                         </div>
                         <div class="col-md-12 text-center">
                         </div>
