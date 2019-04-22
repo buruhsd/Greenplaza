@@ -35,9 +35,9 @@
                                             </a>
                                         </span>
                                         <span class="input-group-btn">
-                                            <a type="submit" class="btn btn-success image-preview-clear">
+                                            <button type="submit" class="btn btn-success image-preview-clear">
                                                 Simpan
-                                            </a>
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
