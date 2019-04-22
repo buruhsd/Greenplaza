@@ -31,9 +31,17 @@ class KonfigurasiController extends Controller
         $data['data'] = User_config::where('config_user_id', 2)
                 ->where('config_name', 'user_poin')->first();
         if($request->has('user_poin')){
+            $status = 200;
+            $message = 'Berhasil merubah settingan!';
             $conf_payment = User_config::where('config_user_id', 2)
                 ->where('config_name', 'user_poin')
                 ->update(['config_value' => $request->user_poin]);
+            if(!$conf_payment){
+                $status = 500;
+                $message = 'Gagal merubah settingan!';
+            }
+            return redirect('admin/konfigurasi/set_payment')
+                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
         return view('admin.konfigurasi.settingakun.payment.index', $data);
