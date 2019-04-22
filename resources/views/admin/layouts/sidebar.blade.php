@@ -37,11 +37,11 @@
                                     <i class="menu-icon icon-home4"></i><span>Dashboard</span>
                                 </a>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <a href="{{route('admin.live_chat')}}">
                                     <i class="menu-icon icon-voice_chat"></i><span>Live Chat</span>
                                 </a>
-                            </li> -->
+                            </li>
                             <li class="{{FunctionLib::setActive('admin/email_sender')}}">
                                 <a href="{{route('admin.email_sender')}}">
                                     <i class="menu-icon icon-flash_on"></i><span>Email Sender</span>
