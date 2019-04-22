@@ -495,7 +495,7 @@ class TransactionController extends Controller
             $item->produk->save();
 
         }
-        if(!$trans_detail){
+        if(!$item){
             $status = 500;
             $message = 'Gagal merubah data!';
         }else{
