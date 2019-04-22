@@ -78,7 +78,18 @@
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
                                     <td><center>{{$g->produk->user->username}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    @if ($g->trans_detail_status == 1)
+                                    @if($g->trans_detail_status == 6)
+                                        <td><center>Dropping</center></td>
+                                    @else
+                                    @if($g->trans_detail_is_cancel == 1)
+                                        <td><center>Cancel</center></td>
+                                        @else
+
+                                        <td><center>On Process</center></td>
+                                    @endif
+
+                                    @endif
+                                    <!-- @if ($g->trans_detail_status == 1)
                                         <td><center>in Chart</center></td>
                                     @elseif ($g->trans_detail_status == 2)
                                         <td><center>Transfer</center></td>
@@ -94,7 +105,7 @@
                                         <td><center>Cancel</center></td>
                                     @else 
                                         <td><center>-</center></td>
-                                    @endif
+                                    @endif -->
                                 </tr>
                                 @endforeach
                             @else

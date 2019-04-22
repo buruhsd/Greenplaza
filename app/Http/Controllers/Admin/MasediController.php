@@ -49,6 +49,8 @@ class MasediController extends Controller
                 $query->where('sys_trans.trans_is_paid','=',1);
                 return $query;
             })
+            ->where('trans_detail_status', '!=', 6 )
+            ->where('trans_detail_is_cancel', '!=', 1 )
             ->orderBy('created_at', 'DESC')
             ->paginate(10);
             // ->sum('trans_detail_amount_total');
