@@ -115,6 +115,9 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <h4 class="m-l-sm text-danger">Seller</h4>
+                                        @if(Auth::user()->seller_active())
+                                            <li class="{{FunctionLib::setActive('member/user/set_payment')}}"><a href="{{route('member.user.set_payment')}}">Atur Pembayaran</a></li>
+                                        @endif
                                         <li class="{{FunctionLib::setActive('member/profil')}}"><a href="{{route('member.profil')}}">Profil Anda</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/change_password')}}"><a href="{{route('member.user.change_password')}}">Ubah Password Login</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/pass_trx')}}"><a href="{{route('member.user.pass_trx')}}">Ubah Password Transaksi</a></li>

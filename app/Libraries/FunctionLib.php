@@ -61,7 +61,7 @@ class FunctionLib
             'user_poin' => [
                 'name' => 'user_poin',
                 'value' => 0,
-                'note' => 'pengaturan pembayaran by poin'
+                'note' => 'Besar % poin untuk pembayaran dengan poin masedi & saldo masedi.'
             ],
             // 'user_poin' => [
             //     'name' => 'user_poin',

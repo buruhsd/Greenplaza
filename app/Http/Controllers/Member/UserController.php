@@ -14,6 +14,7 @@ use App\Models\Brand;
 use App\Models\Bank;
 use App\Models\Shipment;
 use App\Models\User_shipment;
+use App\Models\User_config;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\File;
@@ -30,6 +31,18 @@ class UserController extends Controller
     private $perPage = 5;
     private $mainTable = 'users';
 
+    public function set_payment(Request $request){
+        $requestData = $request->all();
+        $data['data'] = User_config::where('config_user_id', Auth::id())
+                ->where('config_name', 'user_poin')->first();
+        if($request->has('user_poin')){
+            $conf_payment = User_config::where('config_user_id', Auth::id())
+                ->where('config_name', 'user_poin')
+                ->update(['config_value' => $request->user_poin]);
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('member.user.set_payment', $data);
+    }
 
     public function generate_reffcode(){
         $code = FunctionLib::generate_reffcode();

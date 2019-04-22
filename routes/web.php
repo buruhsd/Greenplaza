@@ -394,6 +394,10 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			//ATURKURIR
 			Route::get('/set_shipment_admin', 'Admin\\KonfigurasiController@set_shipment')->name('.set_shipment_admin');
 			Route::post('/set_shipment_update_admin', 'Admin\\KonfigurasiController@set_shipment_update')->name('.set_shipment_update_admin');
+
+			//ATUR PAYMENT
+			Route::get('/set_payment', 'Admin\\KonfigurasiController@set_payment')->name('.set_payment');
+			Route::post('/set_payment', 'Admin\\KonfigurasiController@set_payment')->name('.set_payment_update');
 		});
 
 		Route::group(['prefix' => 'monitoring', 'as' => '.monitoring'], function () {
@@ -535,6 +539,11 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::post('/upload_siup_update', 'UserController@upload_siup_update')->name('.upload_siup_update');
 			// pembeli
 			Route::get('/buyer_address', 'UserController@buyer_address')->name('.buyer_address');
+
+			//ATUR PAYMENT
+			Route::get('/set_payment', 'UserController@set_payment')->name('.set_payment');
+			Route::post('/set_payment', 'UserController@set_payment')->name('.set_payment_update');
+
 		});
 		Route::get('/biodata', function(){return view('member.buyer.biodata');})->name('.biodata');
 		// Pesan & Diskusi

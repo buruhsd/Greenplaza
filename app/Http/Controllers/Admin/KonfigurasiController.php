@@ -21,9 +21,23 @@ use Auth;
 use Session;
 use FunctionLib;
 use App\Models\Conf_iklan;
+use App\Models\User_config;
 
 class KonfigurasiController extends Controller
 {
+
+    public function set_payment(Request $request){
+        $requestData = $request->all();
+        $data['data'] = User_config::where('config_user_id', 2)
+                ->where('config_name', 'user_poin')->first();
+        if($request->has('user_poin')){
+            $conf_payment = User_config::where('config_user_id', 2)
+                ->where('config_name', 'user_poin')
+                ->update(['config_value' => $request->user_poin]);
+        }
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.konfigurasi.settingakun.payment.index', $data);
+    }
 
     public function buyer_address(Request $request)
     {

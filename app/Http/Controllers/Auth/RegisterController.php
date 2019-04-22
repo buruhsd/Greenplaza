@@ -124,7 +124,7 @@ class RegisterController extends Controller
                 'user_tree_user_id' => $user->id,
                 'user_tree_sponsor_id' => $sponsor,
             ]);
-            $user_detail = User_address::create([
+            $user_address = User_address::create([
                 'user_address_user_id' => $user->id,
                 'user_address_label' => 'Saya',
                 'user_address_owner' => $data['name'],
@@ -135,6 +135,18 @@ class RegisterController extends Controller
                 'user_address_subdist' => $data['user_detail_subdist'],
                 'user_address_pos' => $data['user_detail_pos'],
             ]);
+            // insert config user
+            $arr = FunctionLib::UserConfigArr();
+            foreach ($arr as $item) {
+                $param = [
+                    'id' => $user->id,
+                    'name' => $item['name'],
+                    'value' => $item['value'],
+                    'note' => $item['note'],
+                ];
+                $create = FunctionLib::CreateUserConfig($param);
+                $status = ($create['status'] == 200)?'berhasil':'gagal';
+            }
         }
 
         // get role member

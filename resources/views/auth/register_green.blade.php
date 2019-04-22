@@ -95,7 +95,7 @@
         <div class="form-group row">
             <label class="col-md-12" for="code_reveral"><b>Code Reveral (Optional)</b></label>
             <div class="col-md-12">
-                <input class="form-control" id="code_reveral" type="text" placeholder="code reveral" name="code_reveral" value="{!!isset($_GET['reff'])?FunctionLib::get_referal($_GET['reff']):''!!}" required>
+                <input class="form-control" id="code_reveral" type="text" placeholder="code reveral" name="code_reveral" value="{!!isset($_GET['reff'])?FunctionLib::get_referal($_GET['reff']):''!!}">
                 @if ($errors->has('code_reveral'))
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('code_reveral') }}</strong>

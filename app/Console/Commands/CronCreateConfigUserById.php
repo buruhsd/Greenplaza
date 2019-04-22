@@ -82,7 +82,7 @@ class CronCreateConfigUserById extends Command
                         'id' => $user_id,
                         'name' => $item['name'],
                         'value' => $item['value'],
-                        'note' => 'Besar % poin untuk pembayaran dengan poin masedi & saldo masedi.',
+                        'note' => $item['note'],
                     ];
                     $create = FunctionLib::CreateUserConfig($param);
                     $total = $total + $create['total'];
