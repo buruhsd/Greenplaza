@@ -330,6 +330,6 @@ class FrontController extends Controller
 
     public function live_chat()
     {
-        return view('admin.transaksi.laporan_transaksi');
+        return view('admin.live_chat.live_chat');
     }
 }

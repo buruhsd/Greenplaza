@@ -30,6 +30,13 @@ class UserController extends Controller
     private $perPage = 5;
     private $mainTable = 'users';
 
+
+    public function generate_reffcode(){
+        $code = FunctionLib::generate_reffcode();
+        $update = User::find(Auth::id())->update(['reff_code'=>$code]);
+        return redirect()->back();
+    }
+
     public function pass_trx_reset_change($token=null){
         $user = User::whereRaw('token_register = "'.$token.'"')->first();
         if($user){
@@ -999,6 +1006,19 @@ class UserController extends Controller
                                     });
                                     $("#btn-choose-shipment").val(text);
                                 }
+                            });
+                        }
+                        function copylink(id) {
+                            var copyText = document.getElementById(id);
+                            copyText.select();
+                            document.execCommand("copy");
+                            swal({   
+                                type: "success",
+                                title: "Success",   
+                                text: "Text "+copyText.value+" berhasil di copy",
+                                showConfirmButton: false ,
+                                showCloseButton: true,
+                                footer: ''
                             });
                         }
                     </script>

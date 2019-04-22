@@ -516,6 +516,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 		// Pengaturan Profil
 		Route::get('/profil', 'UserController@profil')->name('.profil');
 		Route::group(['prefix' => 'user', 'as' => '.user'], function () {
+			Route::get('/generate_reffcode', 'UserController@generate_reffcode')->name('.generate_reffcode');
 			Route::get('/sponsor', 'UserController@sponsor')->name('.sponsor');
 			Route::patch('/update', 'UserController@update')->name('.update');
 			Route::get('/change_password', 'UserController@change_password')->name('.change_password');

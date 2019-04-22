@@ -2,6 +2,11 @@
 class FunctionLib
 {
 
+    public static function generate_reffcode(){
+        $code = FunctionLib::str_rand(3).'-'.rand(0, 999999);
+        return $code;
+    }
+
     /**
     * @param * id, name, value
     * @param note

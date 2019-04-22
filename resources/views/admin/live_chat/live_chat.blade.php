@@ -16,13 +16,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-white">
-                                <div class="panel-heading clearfix">
-                                    <h4 class="panel-title">Live Chat</h4>
-                                </div>
                                 <div class="panel-body">
-                                    <div class="table-responsive">
-                                        Chat e belom bray
-                                    </div>
+                                    <b>username : {{FunctionLib::get_config('username_tawk')}}, Password : {{FunctionLib::get_config('password_tawk')}}</span>
+                                    <iframe name="main" style="display: block;background: #000;border: none;height: 100vh;width: 100%;" id="main" src="https://dashboard.tawk.to" frameborder="0" align="left"><FONT FACE=ARIAL SIZE=3 COLOR="RED">Your Browser doesn't Support Required Component.</FONT></iframe>
                                 </div>
                             </div>
                         </div>

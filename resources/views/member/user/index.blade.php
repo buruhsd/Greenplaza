@@ -43,6 +43,23 @@
                     'files' => true
                 ]) !!}
                     <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('link_reff') ? 'has-error' : ''}}">
+                                {!! Form::label('link_reff', 'Link refferal', ['class' => 'col-md-2 control-label']) !!}
+                                <div class="col-md-10 input-group">
+                                    {!! Form::text('link_reff', url('register?reff='.FunctionLib::ref_to_url($user->reff_code)), [
+                                        'class' => 'form-control', 
+                                        'id' => 'link_reff', 
+                                        'placeholder' => '', 
+                                    ])!!}
+                                    <span class="input-group-btn">
+                                        <button type="button" onclick="copylink('link_reff')" class="btn btn-info image-preview-clear" alt="copy link register">
+                                            <i class="fa fa-copy"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('name') ? 'has-error' : ''}}">
                                 {!! Form::label('name', 'Nama', ['class' => 'col-md-3 control-label']) !!}
@@ -107,6 +124,24 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('reff_code') ? 'has-error' : ''}}">
+                                {!! Form::label('reff_code', 'refferal', ['class' => 'col-md-3 control-label']) !!}
+                                <div class="col-md-9 input-group">
+                                    {!! Form::text('reff_code', null, [
+                                        'class' => 'form-control', 
+                                        'id' => 'reff_code', 
+                                        'placeholder' => 'Code Refferal', 
+                                        'disabled'
+                                    ])!!}
+                                    @if(!$user->reff_code)
+                                        <span class="input-group-btn">
+                                            <a type="button" href={{route("member.user.generate_reffcode")}} class="btn btn-success image-preview-clear">
+                                                Generate Code
+                                            </a>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
                             {{-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_slug') ? 'has-error' : ''}}">
                                 {!! Form::label('user_slug', 'Slug', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
