@@ -330,6 +330,42 @@ class FrontController extends Controller
 
     public function live_chat()
     {
-        return view('admin.live_chat.live_chat');
+        $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        return view('admin.live_chat.live_chat', $data);
     }
+
+    /**
+    * @param method $method
+    * @return add main footer script / in spesific method
+    */
+    public function footer_script($method=''){
+        ob_start();
+        ?>
+            <script type="text/javascript"></script>
+        <?php
+        switch ($method) {
+            case 'live_chat':
+                ?>
+                <script type="text/javascript">
+                    function openFullscreen(id) {
+                        var elem = document.getElementById(id);
+                        if (elem.requestFullscreen) {
+                        elem.requestFullscreen();
+                        } else if (elem.mozRequestFullScreen) { /* Firefox */
+                            elem.mozRequestFullScreen();
+                        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                            elem.webkitRequestFullscreen();
+                        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                            elem.msRequestFullscreen();
+                        }
+                    }
+                </script>
+            <?php
+            break;
+        }
+        $script = ob_get_contents();
+        ob_end_clean();
+        return $script;
+    }
+
 }
