@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Payment;
 use App\Models\Trans;
+use App\Models\Produk;
 use App\Models\Trans_detail;
 use App\Models\Trans_gln;
 use Illuminate\Http\Request;
@@ -480,15 +481,19 @@ class TransactionController extends Controller
         $message = 'transaksi telah di cancel!';
         $trans = Trans::findOrFail($id);
         foreach ($trans->trans_detail as $item) {
-            $trans_detail = Trans_detail::findOrFail($item->id);
             // to packing
-            $trans_detail->trans_detail_is_cancel = 1;
-            $trans_detail->trans_detail_status = 3;
-            $trans_detail->trans_detail_able = 2;
+            $item->trans_detail_is_cancel = 1;
+            $item->trans_detail_status = 3;
+            $item->trans_detail_able = 2;
             $item->trans_detail_able_date = $date;
-            $item->trans_detail_able_note = 'Transaksi dibatalkan oleh sellet.';
+            $item->trans_detail_able_note = 'Transaksi dibatalkan oleh seller.';
             $item->trans_detail_note = 'Transaksi Dibatalkan oleh seller.';
-            $trans_detail->save();
+            $item->save();
+            
+            $item->produk->produk_stock = $item->produk->produk_stock + $item->trans_detail_qty;
+            // dd($item->produk->produk_stock);
+            $item->produk->save();
+
         }
         if(!$trans_detail){
             $status = 500;

@@ -58,6 +58,71 @@ class MasediController extends Controller
         return view('admin.masedi.saldo_admin_masedi', compact('masedi', 'trans'));
     }
 
+     public function listsaldo_admin_cancel ()
+    {
+        $search = \Request::get('search');
+        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".(2).")";
+        $trans = Trans::where('trans_payment_id', '=', 3)
+                ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->whereRaw($where)
+                ->where('trans_is_paid', 1)
+                ->where('trans_detail_status', 6)
+                ->sum('trans_amount_total');
+        // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
+        // dd($trans);
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereRaw($where)
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_payment_id','=',3);
+                return $query;
+            })
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_is_paid','=',1);
+                return $query;
+            })
+            ->where('trans_detail_is_cancel', 1)
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+            // ->sum('trans_detail_amount_total');
+        // dd($masedi);
+        // dd($trans);
+        // die();
+        return view('admin.masedi.saldo_cancel_admin_masedi', compact('masedi', 'trans'));
+    }
+
+     public function listsaldo_admin_dropping ()
+    {
+        $search = \Request::get('search');
+        $where = "trans_detail_produk_id IN (SELECT id FROM sys_produk where produk_seller_id=".(2).")";
+        $trans = Trans::where('trans_payment_id', '=', 3)
+                ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_trans_id', '=', 'sys_trans.id')
+                ->whereRaw($where)
+                ->where('trans_is_paid', 1)
+                ->where('trans_detail_status', 6)
+                ->sum('trans_amount_total');
+        // $trans = Trans::where('trans_payment_id', '=', 3)->where('trans_is_paid', 1)->pluck('id')->toArray();
+        // dd($trans);
+        $masedi = Trans_detail::where('trans_code', 'like', '%'.$search.'%')
+            ->whereRaw($where)
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_payment_id','=',3);
+                return $query;
+            })
+            ->where('trans_detail_status', 6)
+            ->whereHas('trans', function($query){
+                $query->where('sys_trans.trans_is_paid','=',1);
+                return $query;
+            })
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+            // ->sum('trans_detail_amount_total');
+        // dd($masedi);
+        // dd($trans);
+        // die();
+        return view('admin.masedi.saldo_dropping_admin_masedi', compact('masedi', 'trans'));
+    }
+
+
     public function list_done ()
     {
         $search = \Request::get('search');
