@@ -263,7 +263,7 @@ class TransactionController extends Controller
             // }elseif ($trans->trans_payment_id == 4){
             //     $trans2 = 'Greenline';
             // }
-            $trans2 = $trans->payment()->payment_name;
+            $trans2 = $trans->payment->payment_name;
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [
