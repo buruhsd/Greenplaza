@@ -254,15 +254,16 @@ class TransactionController extends Controller
         }else{
             // send email
             $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
-            if ($trans->trans_payment_id == 1){
-                $trans2 = 'Transfer';
-            }elseif ($trans->trans_payment_id == 2){
-                $trans2 = 'Midtrans';
-            }elseif ($trans->trans_payment_id == 3){
-                $trans2 = 'Masedi';
-            }elseif ($trans->trans_payment_id == 4){
-                $trans2 = 'Greenline';
-            }
+            // if ($trans->trans_payment_id == 1){
+            //     $trans2 = 'Transfer';
+            // }elseif ($trans->trans_payment_id == 2){
+            //     $trans2 = 'Midtrans';
+            // }elseif ($trans->trans_payment_id == 3){
+            //     $trans2 = 'Masedi';
+            // }elseif ($trans->trans_payment_id == 4){
+            //     $trans2 = 'Greenline';
+            // }
+            $trans2 = $trans->payment()->payment_name;
             $config = [
                 'to' => $trans->pembeli->email,
                 'data' => [

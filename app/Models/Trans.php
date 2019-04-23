@@ -93,4 +93,14 @@ class Trans extends Model
     {
         return $this->belongsTo('App\User', 'trans_user_id');
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function payment()
+    {
+        return $this->belongsTo('App\Models\Payment', 'trans_payment_id');
+    }
 }
