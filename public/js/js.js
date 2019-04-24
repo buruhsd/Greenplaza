@@ -66,7 +66,13 @@ function modal_get(e){
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         beforeSend:function(){
-            (typeof e.val() && e.val() != null && e.val() != '')?e.val("loading"):e.html("loading");
+            if(typeof e.val() && e.val() != null && e.val() != ''){
+                e.val("loading");
+                e.attr('disabled','disabled');   
+            }else{
+                e.html("loading");
+                e.attr('disabled','disabled');   
+            }
         },
         success: function(data) {
             if (data) {
@@ -86,6 +92,7 @@ function modal_get(e){
                 alert(data);
             }
             (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            e.removeAttr('disabled');
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
@@ -99,7 +106,13 @@ function modal_post(e, data=''){
         url: e.data('href'), // change as needed
         data: data, // change as needed
         beforeSend:function(){
-            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            if(typeof e.val() && e.val() != null && e.val() != ''){
+                e.val("loading");
+                e.attr('disabled','disabled');   
+            }else{
+                e.html("loading");
+                e.attr('disabled','disabled');   
+            }
         },
         success: function(data) {
             if (data) {
@@ -119,6 +132,7 @@ function modal_post(e, data=''){
                 alert(data);
             }
             (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            e.removeAttr('disabled');
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
@@ -132,7 +146,13 @@ function modal_get2(e){
         type: e.data('method'), // or post?
         url: e.data('href'), // change as needed
         beforeSend:function(){
-            (typeof e.val() && e.val() != null && e.val() != '')?e.val("loading"):e.html("loading");
+            if(typeof e.val() && e.val() != null && e.val() != ''){
+                e.val("loading");
+                e.attr('disabled','disabled');   
+            }else{
+                e.html("loading");
+                e.attr('disabled','disabled');   
+            }
         },
         success: function(data) {
             if (data) {
@@ -152,6 +172,7 @@ function modal_get2(e){
                 alert(data);
             }
             (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            e.removeAttr('disabled');
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);
@@ -165,7 +186,13 @@ function modal_post2(e, data=''){
         url: e.data('href'), // change as needed
         data: data, // change as needed
         beforeSend:function(){
-            (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            if(typeof e.val() && e.val() != null && e.val() != ''){
+                e.val("loading");
+                e.attr('disabled','disabled');   
+            }else{
+                e.html("loading");
+                e.attr('disabled','disabled');   
+            }
         },
         success: function(data) {
             if (data) {
@@ -185,6 +212,7 @@ function modal_post2(e, data=''){
                 alert(data);
             }
             (typeof e.val() && e.val() != null && e.val() != '')?e.val(val):e.html(val);
+            e.removeAttr('disabled');
         },
         error: function(xhr, textStatus) {
             alert(xhr.status+'\n'+textStatus);

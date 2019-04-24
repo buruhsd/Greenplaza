@@ -65,14 +65,12 @@
 		    	@elseif($type == 'seller')
 			    	<div class="row">
 			    		<div class="col-md-6 text-center">
-				    		<a href="{{route('member.transaction.able', $detail->trans->id)}}">
-			    				<button class="btn btn-success btn-xs">Memulai Packing</button>
-				    		</a>
+		    				<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route('member.transaction.able', $detail->trans->id)}} class="btn btn-success btn-xs">Memulai Packing</button>
 				    	</div>
 			    		<div class="col-md-6 text-center">
-				    		<a href="{{route('member.transaction.able_cancel', $detail->trans->id)}}">
-			    				<button class="btn btn-danger btn-xs">cancel</button>
-				    		</a>
+			    			<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route('member.transaction.able_cancel', $detail->trans->id)}} class='btn btn-danger btn-xs'>
+	                                Cancel
+	                        </button>
 				    	</div>
 				    </div>
 		    	@endif

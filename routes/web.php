@@ -214,6 +214,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::delete('/destroy/{id}', 'Admin\\TransactionController@destroy')->name('.destroy');
 			//test
 			Route::get('/able/{id}', 'Admin\\TransactionController@able')->name('.able');
+			Route::get('/able_cancel/{id}', 'Admin\\TransactionController@able_cancel')->name('.able_cancel');
 			Route::get('/packing/{id}', 'Admin\\TransactionController@packing')->name('.packing');
 			Route::post('/sending', 'Admin\\TransactionController@sending')->name('.sending');
 			Route::get('/add_resi/{id}', 'Admin\\TransactionController@add_resi')->name('.add_resi');

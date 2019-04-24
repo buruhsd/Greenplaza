@@ -63,7 +63,7 @@ class TransactionController extends Controller
     public function sending(Request $request){
         $requestData = $request->all();
         $status = 200;
-        $message = 'Shipment approved!';
+        $message = 'barang siap dikirim!';
         $date = date('y-m-d h:i:s');
         if(!empty($request->detail_id)){            
             foreach ($requestData['detail_id'] as $item) {
@@ -86,6 +86,13 @@ class TransactionController extends Controller
                                 'wallet_type'=>3,
                                 'amount'=>$trans_detail->trans_detail_amount_total,
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
+                            $update_wallet = [
+                                'user_id'=>2,
+                                'wallet_type'=>1,
+                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                                'note'=>'Transaksi cancel by seller 2. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
                         }
@@ -116,6 +123,13 @@ class TransactionController extends Controller
                                 'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                             ];
                             $saldo = FunctionLib::update_wallet($update_wallet);
+                            $update_wallet = [
+                                'user_id'=>2,
+                                'wallet_type'=>1,
+                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                                'note'=>'Transaksi cancel by seller 2. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::update_wallet($update_wallet);
                         }
                     }else{
                         $trans_detail->trans_detail_send = 0;
@@ -135,7 +149,7 @@ class TransactionController extends Controller
             return redirect()->back()
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        if(empty($request->note)){
+        if(!$request->has('note')){
             return redirect('admin/transaction/add_resi/'.$trans_detail->trans->id)
                 ->with(['flash_status' => $status,'flash_message' => $message]);
         }
@@ -191,6 +205,52 @@ class TransactionController extends Controller
             $send_notif = FunctionLib::transaction_notif($config);
             if(isset($send_notif['status']) && $send_notif['status'] == 200){
                 $message .= ' ,'.$send_notif['message'];
+            }
+        }
+        return redirect()->back()
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
+    /********/
+    public function able_cancel($id){
+        $date = date('Y-m-d H:i:s');
+        $status = 200;
+        $message = 'transaksi telah di cancel!';
+        $trans = Trans::findOrFail($id);
+        foreach ($trans->trans_detail as $item) {
+            // to packing
+            $item->trans_detail_is_cancel = 1;
+            $item->trans_detail_status = 3;
+            $item->trans_detail_able = 2;
+            $item->trans_detail_able_date = $date;
+            $item->trans_detail_able_note = 'Transaksi dibatalkan oleh seller.';
+            $item->trans_detail_note = 'Transaksi Dibatalkan oleh seller.';
+            $item->save();
+            
+            $item->produk->produk_stock = $item->produk->produk_stock + $item->trans_detail_qty;
+            // dd($item->produk->produk_stock);
+            $item->produk->save();
+
+        }
+        if(!$item){
+            $status = 500;
+            $message = 'Gagal merubah data!';
+        }else{
+            if($trans->trans_payment_id !== 4){
+                $update_wallet = [
+                    'user_id'=>$trans->pembeli->id,
+                    'wallet_type'=>3,
+                    'amount'=>$trans->trans_amount_total,
+                    'note'=>'pengembalian wallet transaksi dengan transaksi kode '.$trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+                $update_wallet = [
+                    'user_id'=>2,
+                    'wallet_type'=>1,
+                    'amount'=>($trans->trans_amount_total * -1),
+                    'note'=>'pengembalian wallet transaksi dengan transaksi kode '.$trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
             }
         }
         return redirect()->back()

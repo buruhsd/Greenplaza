@@ -2,6 +2,8 @@
 @if($status == 'trans')
 	@if($detail->trans_detail_is_cancel == 1)
 		@if($detail->has('komplain'))
+			@if($detail->trans_detail_status != 5)
+			@else
 	    		<div class="row">
 			    	<div class="col-md-12 text-center">
 			    		<a href="{{route('admin.res_kom.index')}}">
@@ -9,6 +11,7 @@
 			    		</a>
 			    	</div>
 			    </div>
+			@endif
 		@else
     		<div class="row">
 		    	<div class="col-md-12 text-center">
@@ -53,15 +56,16 @@
 				    </div>
 				    
 		    	@elseif($type == 'seller')
-				    	
-					    	<div class="row">
-					    		<div class="col-md-12 text-center">
-						    		<a href="{{route('admin.transaction.able', $detail->trans->id)}}">
-					    				<button class="btn btn-success btn-xs">Memulai Packing</button>
-						    		</a>
-						    	</div>
-						    </div>
-						 
+			    	<div class="row">
+			    		<div class="col-md-6 text-center">
+		    				<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route('admin.transaction.able', $detail->trans->id)}} class="btn btn-success btn-xs">Memulai Packing</button>
+				    	</div>
+			    		<div class="col-md-6 text-center">
+			    			<button onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route('admin.transaction.able_cancel', $detail->trans->id)}} class='btn btn-danger btn-xs'>
+	                                Cancel
+	                        </button>
+				    	</div>
+				    </div>
 		    	@endif
 		    @break
 			{{-- Packing --}}
