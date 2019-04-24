@@ -17,7 +17,9 @@ class ChartController extends Controller
 {
     public function chart()
     {
-        dd(Session::get('voucher'));
+        if(Session::has('voucher')){
+            dd(Session::get('voucher'));
+        }
         return view('frontend.chart');
     }
 

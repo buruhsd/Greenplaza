@@ -95,11 +95,11 @@
                                                 </td>
                                                 <td class="ptice">Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                                 <td class="quantity ">{{$item['trans_detail_qty']}}</td>
-                                                {{-- <td class="quantity ">
+                                                <!-- <td class="quantity ">
                                                     <div class="cart-plus-minus">
                                                         <input type="text" value="1" />
                                                     </div>
-                                                </td> --}}
+                                                </td> -->
                                                 <td class="total">
                                                     <?php if($diskon){ ?>
                                                         @if($is_grosir)
@@ -181,21 +181,21 @@
                         </div>
                         <div class="row mt-60">
                             <div class="col-lg-5 col-md-6 ">
-                                <div class="cartcupon-wrap">{{--  style="display:none;"> --}}
+                                <div class="cartcupon-wrap"><!--  style="display:none;"> -->
                                     <ul class="d-flex">
-                                        {{-- <li>
+                                        <!-- <li>
                                             <button>Update Cart</button>
-                                        </li> --}}
+                                        </li> -->
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    {{-- @if(!Session::has('voucher'))
+                                    @if(!Session::has('voucher'))
                                         <h3 class="form-voucher">Voucher Masedi</h3>
                                         <p class="form-voucher">Masukkan kode Voucher jika punya</p>
                                         <div class="cupon-wrap form-voucher">
                                             <input type="text" id="code_voucher" placeholder="Kode Voucher">
                                             <button id="voucher" data-href="{{route('localapi.masedi.cek_voucher')}}">Gunakan Voucher</button>
                                         </div>
-                                    @endif --}}
+                                    @endif
                                 </div>
                             </div>
                             <?php 
@@ -236,7 +236,7 @@
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                             </span>
                                         </li>
-                                        {{-- <li id="voucher-info">
+                                        <li id="voucher-info">
                                         @if(Session::has('voucher'))
                                             <?php 
                                                 $voucher = Session::get('voucher');
@@ -256,7 +256,7 @@
                                             @else
                                                 Rp. {{FunctionLib::number_to_text($show_harga_total)}}
                                             @endif
-                                        </li> --}}
+                                        </li>
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>
                                 </div>
