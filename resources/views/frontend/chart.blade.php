@@ -188,14 +188,14 @@
                                         </li> --}}
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    @if(!Session::has('voucher'))
+                                    {{-- @if(!Session::has('voucher'))
                                         <h3 class="form-voucher">Voucher Masedi</h3>
                                         <p class="form-voucher">Masukkan kode Voucher jika punya</p>
                                         <div class="cupon-wrap form-voucher">
                                             <input type="text" id="code_voucher" placeholder="Kode Voucher">
                                             <button id="voucher" data-href="{{route('localapi.masedi.cek_voucher')}}">Gunakan Voucher</button>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                             <?php 
