@@ -17,6 +17,7 @@ class ChartController extends Controller
 {
     public function chart()
     {
+        dd('tes');
         return view('frontend.chart');
     }
 
