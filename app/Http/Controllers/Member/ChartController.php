@@ -45,9 +45,12 @@ class ChartController extends Controller
                 'code' => $data['voucher'],
                 'amount' => $data['amount'],
             ];
-            Session::forget('voucher');
-            Session::put('voucher', $voucher);
-            Session::save();
+        Session::forget('voucher');
+        if(!Session::has('voucher')){
+            Session::put('voucher', []);
+        }
+        Session::push('voucher', $voucher);
+        Session::save();
         // }
         return ['status' => $status];
         // return redirect()->back();
