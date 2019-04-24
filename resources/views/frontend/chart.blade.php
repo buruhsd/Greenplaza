@@ -247,6 +247,16 @@
                                                     <button id="del_voucher"><i class="fa fa-times"></i></button>
                                                 </span>
                                         @endif
+                                        </li>
+                                        <h3></h3>
+                                        <li>
+                                            <span class="pull-left"> Total </span> 
+                                            @if(Session::has('voucher'))
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount']))}}
+                                            @else
+                                                Rp. {{FunctionLib::number_to_text($show_harga_total)}}
+                                            @endif
+                                        </li>
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>
                                 </div>

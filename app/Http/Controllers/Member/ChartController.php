@@ -17,6 +17,7 @@ class ChartController extends Controller
 {
     public function chart()
     {
+        Session::forget('voucher');
         return view('frontend.chart');
     }
 
@@ -49,7 +50,7 @@ class ChartController extends Controller
         if(!Session::has('voucher')){
             Session::put('voucher', []);
         }
-        Session::push('voucher', $voucher);
+        Session::put('voucher', $voucher);
         Session::save();
         dd($voucher, Session::get('voucher'));
         // }
