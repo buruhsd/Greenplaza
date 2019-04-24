@@ -12,6 +12,60 @@
                 @include('admin.layouts.topheader')
                 <!-- Page Inner -->
                 <div class="page-inner">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo CW : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(1)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo Transaksi : <br/>
+                                    <b>Rp. 
+                                        {{
+                                            FunctionLib::number_to_text(
+                                                FunctionLib::get_saldo(3)
+                                            )
+                                        }}
+                                    </b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
+                                <div class="panel-body">
+                                    <p class="stats-info">Saldo Gln : 
+                                        {{-- <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : <button onclick=copyToClipboard($('#saldo_gln'));><i class='fa fa-copy'></i></button>" data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button> --}}
+                                        <button type="button" class="btn btn-info btn-xs" data-toggle="popover" title="Address Gln anda : " data-html="true" data-content="<small><b>{!!Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address!!}</b></small>" data-placement="bottom"><i class="fa fa-list"></i></button>
+                                        <br/>
+                                        <b><small>GLN.&nbsp;</b>
+                                        <b id="saldo_gln">
+                                            <?php
+                                            $response = FunctionLib::gln('ballance', ['address'=>Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address]);
+                                            if($response['status'] == 200){
+                                                echo FunctionLib::number_to_text($response['data']['balance'], 8);
+                                            }else{
+                                                echo "0,00";
+                                            }
+                                            ?>
+                                        </small></b>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Row -->
                     @yield('content')
                     </div><!-- Main Wrapper -->

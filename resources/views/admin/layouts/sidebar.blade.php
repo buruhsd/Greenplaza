@@ -10,19 +10,19 @@
                 <div class="page-sidebar-inner">
                     <div class="page-sidebar-menu">
                         <ul class="accordion-menu">
-                            <li>
+                            <!-- <li>
                                 <a href=""><center>
-                                <!-- <span>Saldo Gln Admin</span> --> <br>
-                                    <!-- <?php
+                                <span>Saldo Gln Admin</span> <br>
+                                    <?php
                                     $response = FunctionLib::gln('ballance', ['address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
                                     if($response['status'] == 200){
                                         echo FunctionLib::number_to_text($response['data']['balance'], 8);
                                     }else{
                                         echo "0,00";
                                     }
-                                    ?> -->
+                                    ?>
                                 </center></a>
-                            </li>
+                            </li> -->
 
                             <li class="menu-divider"></li>
                             @if(Auth::user()->is_superadmin())
