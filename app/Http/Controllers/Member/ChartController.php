@@ -51,7 +51,6 @@ class ChartController extends Controller
         }
         Session::put('voucher', $voucher);
         Session::save();
-        dd($voucher, Session::get('voucher'));
         // }
         return ['status' => $status];
         // return redirect()->back();
