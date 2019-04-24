@@ -75,17 +75,12 @@
             <div class="col-xs-10 col-md-8 col-sm-10">
                 <div class="roup">
                 @foreach($produk->images->all() as $item)
-              
-                
-                
                         <div class="col-md-2">
-                         
                             <label class="btn btn-primary">
                                <a onclick="removeasdf('{{$item['id']}}')"><img src="{{asset('assets/images/product/'.$item['produk_image_image'])}}" alt="..." class="img-thumbnail img-check"></a>
                                 <input type="radio" name="input_file_choose" value="{{$item['produk_image_image']}}" class="hidden" autocomplete="off">
                             </label>
                         </div>
-
                 @endforeach   
                 </div>
             </div>
@@ -207,6 +202,34 @@
             {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+        <!-- @if(str_contains(Request::url(), ['create']))
+            <?php 
+                $config_poin = App\User::find(2)->config->where('config_name', 'user_poin')->first()->config_value;
+            ?>
+            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
+                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                <div class="col-md-9">
+                    {!! Form::text('produk_poin', $config_poin, [
+                        'class' => 'form-control', 
+                        'placeholder' => 'Persen poin', 
+                        'required'
+                    ])!!}
+                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+        @elseif(str_contains(Request::url(), ['edit']))
+            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
+                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                <div class="col-md-9">
+                    {!! Form::text('produk_poin', null, [
+                        'class' => 'form-control', 
+                        'placeholder' => 'Persen poin', 
+                        'required'
+                    ])!!}
+                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+        @endif -->
         <!-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_status') ? 'has-error' : ''}}">
             {!! Form::label('produk_status', 'Status : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">

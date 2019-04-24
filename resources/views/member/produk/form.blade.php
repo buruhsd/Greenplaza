@@ -209,6 +209,34 @@
             {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+        <!-- @if(str_contains(Request::url(), ['create']))
+            <?php 
+                $config_poin = Auth::user()->config->where('config_name', 'user_poin')->first()->config_value;
+            ?>
+            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
+                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                <div class="col-md-9">
+                    {!! Form::text('produk_poin', $config_poin, [
+                        'class' => 'form-control', 
+                        'placeholder' => 'Persen poin', 
+                        'required'
+                    ])!!}
+                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+        @elseif(str_contains(Request::url(), ['edit']))
+            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
+                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                <div class="col-md-9">
+                    {!! Form::text('produk_poin', null, [
+                        'class' => 'form-control', 
+                        'placeholder' => 'Persen poin', 
+                        'required'
+                    ])!!}
+                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
+        @endif -->
         <!-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_status') ? 'has-error' : ''}}">
             {!! Form::label('produk_status', 'Status : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">

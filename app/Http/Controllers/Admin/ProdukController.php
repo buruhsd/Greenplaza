@@ -155,9 +155,10 @@ class ProdukController extends Controller
         
         $this->validate($request, [
             'produk_name' => 'required',
+            // 'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_category_id' => 'required',
-            'produk_price' => 'required|numeric|min:0.00',
+            'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
@@ -170,11 +171,12 @@ class ProdukController extends Controller
 
         // add produk
         $res = new Produk;
-        $res->produk_seller_id = Auth::user()->id;
+        $res->produk_seller_id = 2;
         $res->produk_category_id = $request->produk_category_id;
         $res->produk_brand_id = $request->produk_brand_id;
+        // $res->produk_poin = $request->produk_poin;
         $res->produk_name = $request->produk_name;
-        $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
+        $res->produk_slug = str_slug(User::find(2)->user_store.' '.$request->produk_name);
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
         $res->produk_size = implode (",", $request->produk_size);
@@ -184,7 +186,7 @@ class ProdukController extends Controller
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
-        $res->produk_user_status = Auth::user()->roles->first()->id;
+        $res->produk_user_status = User::find(2)->roles->first()->id;
         // upload
         if ($request->hasFile('input_file_preview')){
             foreach ($request->file('input_file_preview') as $key => $item) {
@@ -314,11 +316,13 @@ class ProdukController extends Controller
         
         $this->validate($request, [
             'produk_name' => 'required',
+            // 'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
+            'produk_height' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
             'produk_weight' => 'required|numeric',
@@ -326,7 +330,7 @@ class ProdukController extends Controller
         ]);
 
         $produk = Produk::findOrFail($id);
-        if($produk->produk_seller_id !== Auth::user()->id || $produk->produk_user_status !== Auth::user()->roles->first()->id){
+        if($produk->produk_seller_id !== 2 || $produk->produk_user_status !== User::find(2)->roles->first()->id){
             $status = 500;
             $message = 'Produk gagal diubah!';
             return redirect('admin/needapproval/produkadmin')
@@ -335,8 +339,9 @@ class ProdukController extends Controller
         }
         $produk->produk_category_id = $request->produk_category_id;
         $produk->produk_brand_id = $request->produk_brand_id;
+        // $produk->produk_poin = $request->produk_poin;
         $produk->produk_name = $request->produk_name;
-        $produk->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
+        $produk->produk_slug = str_slug(User::find(2)->user_store.' '.$request->produk_name);
         $produk->produk_unit = $request->produk_unit;
         $produk->produk_price = $request->produk_price;
         $produk->produk_size = implode (",", $request->produk_size);

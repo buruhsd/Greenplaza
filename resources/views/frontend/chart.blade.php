@@ -284,26 +284,39 @@
                 cancelButtonText: 'Batal',
                 confirmButtonText: 'Gunakan!'
             }).then((isConfirm) => {
+                var status;
+                var message;
                 if (isConfirm.value){
                     $.post($('#voucher').data('href'), {"_token": "{{ csrf_token() }}", "voucher":$('#code_voucher').val()}, function( data ) {
-                        console.log(data);
                         if((data.status == 200)){
+                            status = 200;
+                            message = data.message;
                             $('.form-voucher').hide();
-                            $.post("{{route('add_voucher')}}", {"_token": "{{ csrf_token() }}", 
-                                "voucher":$('#code_voucher').val(), "amount": data.data.nilai}, function( data ) {
-                                if((data.status == 500)){
-                                    $('.form-voucher').hide();
-                                    // var html = '<span class="pull-left text-danger">Voucher </span>'+
-                                    //     '<span class="text-danger">'+
-                                    //     '</span>'+
-                                    //     data.data.nilai+
-                                    //     '<i class="fa fa-times fa-2x"></i>';
-                                    // $('#voucher-info').empty().html(html);
+                            $.post("{{route('add_voucher')}}", 
+                                {"_token": "{{ csrf_token() }}", 
+                                "voucher":$('#code_voucher').val(), "amount": data.data.nilai}, 
+                                function( data2 ) {
+                                    if(data2.status == 200){
+                                        $('.form-voucher').hide();
+                                        var html = '<span class="pull-left text-danger">Voucher </span>'+
+                                            '<span class="text-danger">'+
+                                            data.data.nilai+
+                                            '<button id="del_voucher"><i class="fa fa-times"></i></button>'+
+                                            '</span>';
+                                            // '<i class="fa fa-times fa-2x"></i>';
+                                        $('#voucher-info').empty().html(html);
+                                    }else{
+                                        status = 500;
+                                        message = 'Voucher sudah digunakan'
+                                    }
                                 }
-                            });
+                            );
+                        }else{
+                            status = 500;
+                            message = data.message;
                         }
-                        var status = (data.status == 200)?'success':'error';
-                        swal("notifikasi!", data.message, status);
+                        var res_status = (status == 200)?'success':'error';
+                        swal("notifikasi!", message, res_status);
                         location.reload();
                     });
                 } else {

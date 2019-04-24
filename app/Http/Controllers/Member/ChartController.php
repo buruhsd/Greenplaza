@@ -11,6 +11,7 @@ use App\Models\Payment;
 use Session;
 use Auth;
 use FunctionLib;
+use App\Models\Trans_voucher;
 
 class ChartController extends Controller
 {
@@ -28,7 +29,14 @@ class ChartController extends Controller
 
     public function addVoucher(Request $request)
     {
+        $status = 200;
         $data = $request->all();
+        $vcr = Trans_voucher::where('trans_voucher_code', $data['voucher']);
+        $check = $vcr->exists();
+        if($check){
+            $status = 500;
+            return ['status' => $status];
+        }
         if(!Session::has('voucher')){
             Session::put('voucher', []);
         }
@@ -41,7 +49,8 @@ class ChartController extends Controller
             Session::put('voucher', $voucher);
             Session::save();
         }
-        return redirect()->back();
+        return ['status' => $status];
+        // return redirect()->back();
     }
 
     public function checkout()

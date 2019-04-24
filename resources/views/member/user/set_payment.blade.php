@@ -40,6 +40,10 @@
                                             </button>
                                         </span>
                                     </div>
+                                    <br/>
+                                    <span class="text-info">
+                                        <pre>{{$data->config_note}}</pre>
+                                    </span>
                                 </div>
                             </div>
                         </div>

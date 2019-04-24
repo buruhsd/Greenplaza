@@ -194,25 +194,26 @@ class ProdukController extends Controller
         
         $this->validate($request, [
             'produk_name' => 'required',
+            // 'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
-            'produk_price' => 'required|numeric|min:0.00',
-            'produk_size' => 'required',
             'produk_category_id' => 'required',
+            'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
+            'produk_size' => 'required',
+            'produk_height' => 'required|numeric',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
-            'produk_height' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
             'produk_weight' => 'required|numeric',
             'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;         
         $res->produk_brand_id = $request->produk_brand_id;
+        // $res->produk_poin = $request->produk_poin;
         $res->produk_name = $request->produk_name;
         $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name.' '.FunctionLib::str_rand(5));
         $res->produk_unit = $request->produk_unit;
@@ -351,12 +352,13 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'Produk updated!';
+        $message = 'Produk berhasil diubah!';
         
         $requestData = $request->all();
         
         $this->validate($request, [
             'produk_name' => 'required',
+            // 'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
@@ -379,6 +381,7 @@ class ProdukController extends Controller
         }
         $produk->produk_category_id = $request->produk_category_id;
         $produk->produk_brand_id = $request->produk_brand_id;
+        // $produk->produk_poin = $request->produk_poin;
         $produk->produk_name = $request->produk_name;
         $produk->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $produk->produk_unit = $request->produk_unit;

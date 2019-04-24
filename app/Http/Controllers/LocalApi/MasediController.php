@@ -35,6 +35,11 @@ class MasediController extends Controller
     public function cek_voucher(Request $request){
         $data = $request->all();
         $res = FunctionLib::masedi('cek', $data);
+        $vcr = Trans_voucher::where('trans_voucher_code', $request->voucher);
+        $check = $vcr->exists();
+        if($check){
+            return ['status' => 500, 'message'=>'Voucher sudah digunakan'];
+        }
         return $res;
     }
 
@@ -227,6 +232,16 @@ class MasediController extends Controller
             });
             $trans_code = FunctionLib::str_rand(7);
             $gross_amount = 0;
+            if(Session::has('voucher')){
+                $voucher = Session::get('voucher');
+                $vcr = Trans_voucher::where('trans_voucher_code', $voucher['code']);
+                $check = $vcr->exists();
+                if($check){
+                    $status = 500;
+                    $message = 'mohon maaf voucher yang anda gunakan sudah digunakan di transaksi lain, silahkan gunakan voucher lain atau hubungi admin greenplaza';                    
+                    return ['status' => $status, 'message' => $message];
+                }
+            }
             foreach ($trans as $value) {
                 // dd(Session::get('chart'));
                 foreach ($value as $key => $item) {

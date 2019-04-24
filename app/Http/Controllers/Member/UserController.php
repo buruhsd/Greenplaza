@@ -41,6 +41,8 @@ class UserController extends Controller
             $conf_payment = User_config::where('config_user_id', Auth::id())
                 ->where('config_name', 'user_poin')
                 ->update(['config_value' => $request->user_poin]);
+            $produk_poin = Produk::where('produk_seller_id', Auth::id())
+                ->update(['produk_poin' => $request->user_poin]);
             if(!$conf_payment){
                 $status = 500;
                 $message = 'Gagal merubah settingan!';

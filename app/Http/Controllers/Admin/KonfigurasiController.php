@@ -16,6 +16,7 @@ use App\Role;
 use App\User;
 use App\Models\Shipment;
 use App\Models\User_shipment;
+use App\Models\Produk;
 use Illuminate\Support\Str;
 use Auth;
 use Session;
@@ -36,6 +37,8 @@ class KonfigurasiController extends Controller
             $conf_payment = User_config::where('config_user_id', 2)
                 ->where('config_name', 'user_poin')
                 ->update(['config_value' => $request->user_poin]);
+            $produk_poin = Produk::where('produk_seller_id', 2)
+                ->update(['produk_poin' => $request->user_poin]);
             if(!$conf_payment){
                 $status = 500;
                 $message = 'Gagal merubah settingan!';
