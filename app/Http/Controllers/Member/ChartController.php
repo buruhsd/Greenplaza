@@ -45,6 +45,7 @@ class ChartController extends Controller
                 'code' => $data['voucher'],
                 'amount' => $data['amount'],
             ];
+            dd($voucher);
         Session::forget('voucher');
         if(!Session::has('voucher')){
             Session::put('voucher', []);
