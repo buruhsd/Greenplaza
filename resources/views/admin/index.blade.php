@@ -20,8 +20,8 @@
                                     <b>Rp. 
                                         {{
                                             FunctionLib::number_to_text(
-                                                FunctionLib::get_saldo(1)
-                                            )
+                                                App\Models\Wallet::where('wallet_user_id', 2)->where('wallet_type', 1)->first()->wallet_ballance   
+                                            )            
                                         }}
                                     </b>
                                     </p>
@@ -35,7 +35,7 @@
                                     <b>Rp. 
                                         {{
                                             FunctionLib::number_to_text(
-                                                FunctionLib::get_saldo(3)
+                                                App\Models\Wallet::where('wallet_user_id', 2)->where('wallet_type', 3)->first()->wallet_ballance
                                             )
                                         }}
                                     </b>
@@ -53,7 +53,7 @@
                                         <b><small>GLN.&nbsp;</b>
                                         <b id="saldo_gln">
                                             <?php
-                                            $response = FunctionLib::gln('ballance', ['address'=>Auth::user()->wallet()->where('wallet_type', 7)->first()->wallet_address]);
+                                            $response = FunctionLib::gln('ballance', ['address'=>'W19AIiuj8YX9tO4Gk1yZ1CCFvbb3u06me']);
                                             if($response['status'] == 200){
                                                 echo FunctionLib::number_to_text($response['data']['balance'], 8);
                                             }else{
