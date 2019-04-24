@@ -292,6 +292,7 @@
                             status = 200;
                             message = data.message;
                             $('.form-voucher').hide();
+                            console.log(data.data);
                             $.post("{{route('add_voucher')}}", 
                                 {"_token": "{{ csrf_token() }}", 
                                 "voucher":$('#code_voucher').val(), "amount": data.data.nilai}, 
@@ -317,7 +318,7 @@
                         }
                         var res_status = (status == 200)?'success':'error';
                         swal("notifikasi!", message, res_status);
-                        location.reload();
+                        // location.reload();
                     });
                 } else {
                     swal("Batal", "Batal menggunakan voucher", "error");
