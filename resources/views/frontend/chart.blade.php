@@ -236,7 +236,7 @@
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                             </span>
                                         </li>
-                                        <li id="voucher-info">
+                                        {{-- <li id="voucher-info">
                                         @if(Session::has('voucher'))
                                             <?php 
                                                 $voucher = Session::get('voucher');
@@ -256,7 +256,7 @@
                                             @else
                                                 Rp. {{FunctionLib::number_to_text($show_harga_total)}}
                                             @endif
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>
                                 </div>
