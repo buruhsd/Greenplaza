@@ -188,14 +188,6 @@
                                         </li> -->
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    @if(!Session::has('voucher'))
-                                        <h3 class="form-voucher">Voucher Masedi</h3>
-                                        <p class="form-voucher">Masukkan kode Voucher jika punya</p>
-                                        <div class="cupon-wrap form-voucher">
-                                            <input type="text" id="code_voucher" placeholder="Kode Voucher">
-                                            <button id="voucher" data-href="{{route('localapi.masedi.cek_voucher')}}">Gunakan Voucher</button>
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                             <?php 
@@ -235,27 +227,6 @@
                                             <span class='text-danger'>
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                             </span>
-                                        </li>
-                                        <li id="voucher-info">
-                                        @if(Session::has('voucher'))
-                                            <?php 
-                                                $voucher = Session::get('voucher');
-                                            ?>
-                                                <span class="pull-left text-danger">Voucher </span>
-                                                <span class='text-danger'>
-                                                    Rp. {{FunctionLib::number_to_text($voucher['amount'])}}
-                                                    <button id="del_voucher"><i class="fa fa-times"></i></button>
-                                                </span>
-                                        @endif
-                                        </li>
-                                        <h3></h3>
-                                        <li>
-                                            <span class="pull-left"> Total </span> 
-                                            @if(Session::has('voucher'))
-                                                Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount']))}}
-                                            @else
-                                                Rp. {{FunctionLib::number_to_text($show_harga_total)}}
-                                            @endif
                                         </li>
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>
