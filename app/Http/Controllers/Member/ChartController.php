@@ -17,7 +17,7 @@ class ChartController extends Controller
 {
     public function chart()
     {
-        dd('tes');
+        dd(Session::get('voucher'));
         return view('frontend.chart');
     }
 
