@@ -37,10 +37,10 @@ class ChartController extends Controller
             $status = 500;
             return ['status' => $status];
         }
-        if(!Session::has('voucher')){
-            Session::put('voucher', []);
-        }
-        if(Session::has('voucher')){
+        // if(!Session::has('voucher')){
+        //     Session::put('voucher', []);
+        // }
+        // if(Session::has('voucher')){
             $voucher = [
                 'code' => $data['voucher'],
                 'amount' => $data['amount'],
@@ -48,7 +48,7 @@ class ChartController extends Controller
             Session::forget('voucher');
             Session::put('voucher', $voucher);
             Session::save();
-        }
+        // }
         return ['status' => $status];
         // return redirect()->back();
     }
