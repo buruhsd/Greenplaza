@@ -17,7 +17,6 @@ class ChartController extends Controller
 {
     public function chart()
     {
-        Session::forget('voucher');
         return view('frontend.chart');
     }
 
