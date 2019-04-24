@@ -236,6 +236,17 @@
                                                 Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                             </span>
                                         </li>
+                                        <li id="voucher-info">
+                                        @if(Session::has('voucher'))
+                                            <?php 
+                                                $voucher = Session::get('voucher');
+                                            ?>
+                                                <span class="pull-left text-danger">Voucher </span>
+                                                <span class='text-danger'>
+                                                    Rp. {{FunctionLib::number_to_text($voucher['amount'])}}
+                                                    <button id="del_voucher"><i class="fa fa-times"></i></button>
+                                                </span>
+                                        @endif
                                     </ul>
                                     <a href="{{route('checkout')}}">Memproses ke Checkout</a>
                                 </div>
