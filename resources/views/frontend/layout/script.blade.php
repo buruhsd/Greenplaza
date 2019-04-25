@@ -114,3 +114,4 @@
             });
         </script>
     @endguest
+    {!! (isset($footer_script))? $footer_script:'' !!}

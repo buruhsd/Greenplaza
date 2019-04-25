@@ -41,5 +41,3 @@
         </div>
     </div>
 @endsection
-
-{!! (isset($footer_script))? $footer_script:'' !!}

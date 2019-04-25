@@ -1335,5 +1335,3 @@
     <!-- brand-area end -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
-
-{!! (isset($footer_script))? $footer_script:'' !!}
