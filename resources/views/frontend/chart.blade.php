@@ -317,8 +317,9 @@
                             message = data.message;
                         }
                         var res_status = (status == 200)?'success':'error';
-                        swal("notifikasi!", message, res_status);
-                        // location.reload();
+                        swal("notifikasi!", message, res_status).then(() => {
+                            location.reload();
+                        });
                     });
                 } else {
                     swal("Batal", "Batal menggunakan voucher", "error");
