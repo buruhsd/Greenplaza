@@ -276,7 +276,7 @@
         $('#voucher').click(function(e){
             swal({
                 title: 'Ingin gunakan voucher Masedi?',
-                text: "Klik Gunakan juka setuju!",
+                text: "*Voucher hanya untuk 1x/transaksi Sisa dana vocher yang masih ada tidak dapat digunakan lagi.",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
