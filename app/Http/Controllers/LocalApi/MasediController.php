@@ -87,6 +87,9 @@ class MasediController extends Controller
 
                 }
                 $persen_poin = FunctionLib::UserConfig('user_poin', $key1);
+                $total_poin = 0;
+                $total_wallet = 0;
+                $total_wallet_poin = 0;
 
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
@@ -124,6 +127,9 @@ class MasediController extends Controller
                             $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
                         }
                     }
+                    // harga persen poin per produk
+                    $persen_produk = $produk['persen_poin'];
+
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
                     $transDetail->trans_code = $item['trans_code'];
@@ -137,29 +143,38 @@ class MasediController extends Controller
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
                     $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
+                    $transDetail->trans_detail_persen_poin = $persen_poin;
+                    $transDetail->trans_detail_amount_poin = ($item['trans_detail_amount_total'] / 100 * $persen_poin) / $harga_poin;
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
                     // update stock
                     $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
                     $produk->save();
+
+                    // memasukkan poin per produk ke total untuk pembayaran masedi
+                    $total_poin += $transDetail->trans_detail_amount_poin;
+                    // wallet per produk yang harus dibayar menggunakan poin
+                    $total_wallet_poin += ($item['trans_detail_amount_total'] / 100 * $persen_poin);
+                    // memasukkan wallet per produk ke total untuk pembayaran masedi
+                    $total_wallet += $item['trans_detail_amount_total'] - $transDetail->trans_detail_amount_poin;
                 }
                 // update amount trans
                 $trans->trans_amount = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount');
                 $trans->trans_amount_ship = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_ship');
                 $trans->trans_amount_total = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount_total');
-                $total_poin = ($trans->trans_amount_total / 100 * $persen_poin) / $harga_poin;
+                // $total_poin = ($trans->trans_amount_total / 100 * $persen_poin) / $harga_poin;
                 $poin += $total_poin;
-                $gross_amount += $trans->trans_amount_total - ($trans->trans_amount_total / 100 * $persen_poin);
+                $gross_amount += $total_wallet;
                 $trans->save();
 
                 // insert trans_poin
                 $new_poin = new Trans_poin;
                 $new_poin->trans_poin_trans_id = $trans->id;
-                $new_poin->trans_poin_persen = $persen_poin;
+                $new_poin->trans_poin_persen = 0;
                 $new_poin->trans_poin_compare = $harga_poin;
                 $new_poin->trans_poin_poin_total = $total_poin;
-                $new_poin->trans_poin_total = ($trans->trans_amount_total / 100 * $persen_poin);
+                $new_poin->trans_poin_total = $total_wallet_poin;
                 $new_poin->trans_poin_note = 'pembayaran poin untuk transaksi '.$trans_code.'.';
                 $new_poin->save();
             }

@@ -16,7 +16,6 @@
 
     @include('frontend.layout.script')
     @yield('script')
-    {!! (isset($footer_script))? $footer_script:'' !!}
 </body>
 
 </html>

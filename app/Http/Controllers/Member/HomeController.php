@@ -80,71 +80,28 @@ class HomeController extends Controller
             <script type="text/javascript"></script>
         <?php
         switch ($method) {
-            case 'add_baris':
-            case 'add_banner':
-            case 'add_banner_khusus':
-            case 'add_slider':
+            case 'index':
                 ?>
                     <script type="text/javascript">
-                        $(document).on('click', '#close-preview', function(){ 
-                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
-                            // Hover befor close the preview
-                            $('.image-preview').hover(
-                                function () {
-                                   $(this).popover('show');
-                                }, 
-                                 function () {
-                                   $(this).popover('hide');
+                        //this function will work cross-browser for loading scripts asynchronously
+                        async function loadComponent(src, id, callback)
+                        {
+                            var s, r, t;
+                            r = false;
+                            s = $('#'+id).load(src);
+                            s.onload = s.onreadystatechange = function() {
+                                console.log( this.readyState ); //uncomment this line to see which ready states are called.
+                                if ( !r && (!this.readyState || this.readyState == 'complete') )
+                                {
+                                    r = true;
+                                    callback();
                                 }
-                            );    
-                        });
-
-                        $(function() {
-                            // Create the close button
-                            var closebtn = $('<button/>', {
-                                type:"button",
-                                text: 'x',
-                                id: 'close-preview',
-                                style: 'font-size: initial;',
-                            });
-                            closebtn.attr("class","close pull-right");
-                            // Set the popover default content
-                            $('.image-preview').popover({
-                                trigger:'manual',
-                                html:true,
-                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-                                content: "There's no image",
-                                placement:'bottom'
-                            });
-                            // Clear event
-                            $('.image-preview-clear').click(function(){
-                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
-                                $(this).parents(".parent-img").find('.image-preview-filename').val("");
-                                $(this).parents(".parent-img").find('.image-preview-clear').hide();
-                                $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
-                                $(this).parents(".parent-img").find(".image-preview-input-title").text("Browse"); 
-                            }); 
-                            // Create the preview image
-                            $(".image-preview-input input:file").change(function (){     
-                                var img = $('<img/>', {
-                                    id: 'dynamic',
-                                    width:250,
-                                    height:200
-                                });      
-                                var file = this.files[0];
-                                var reader = new FileReader();
-                                var x = $(this);
-                                // Set preview image into the popover data-content
-                                reader.onload = function (e) {
-                                    $(x).parents(".parent-img").find(".image-preview-input-title").text("Change");
-                                    $(x).parents(".parent-img").find(".image-preview-clear").show();
-                                    $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
-                                    img.attr('src', e.target.result);
-                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-                                }        
-                                reader.readAsDataURL(file);
-                            });  
-                        });
+                            };
+                            // t = document.getElementsByTagName('script')[0];
+                            // t.parentNode.insertBefore(s, t);
+                        }
+                        var tes = loadComponent(<?php route('localapi.masedi.payment');?>, 'a');
+                        console.log(tes);
                     </script>
                 <?php
                 break;
