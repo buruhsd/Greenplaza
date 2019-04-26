@@ -476,6 +476,7 @@ Route::group(['middleware' => ['auth', 'roles', 'is_active'], 'roles' => ['membe
 			Route::get('/konfirmasi_all/{id}', 'TransactionController@konfirmasi_all')->name('.konfirmasi_all');
 			Route::get('/dropping/{id}', 'TransactionController@dropping')->name('.dropping');
 			Route::get('/done_gln/{order_id}', 'TransactionController@done_gln')->name('.done_gln');
+			Route::post('/done_saldo/{order_id}', 'TransactionController@done_saldo')->name('.done_saldo');
 			// review produk
 			Route::post('/review_produk/{id}', 'TransactionController@review_produk')->name('.review_produk');
 		});
@@ -748,6 +749,13 @@ Route::group(['prefix' => 'localapi', 'as' => 'localapi', 'namespace' => 'LocalA
 		Route::group(['middleware' => ['is_active']], function () {
 			Route::get('payment', 'GlnController@payment')->name('.payment');
 			Route::get('re_payment/{code}', 'GlnController@re_payment')->name('.re_payment');
+		});
+		// Route::post('done', 'MidtransController@done')->name('.done');
+	});
+	Route::group(['prefix' => 'saldo', 'as' => '.saldo'], function () {
+		// need email active
+		Route::group(['middleware' => ['is_active']], function () {
+			Route::get('payment', 'SaldoController@payment')->name('.payment');
 		});
 		// Route::post('done', 'MidtransController@done')->name('.done');
 	});

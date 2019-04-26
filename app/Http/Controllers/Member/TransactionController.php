@@ -25,6 +25,151 @@ class TransactionController extends Controller
     private $perPage = 5;
     private $mainTable = 'sys_trans';
 
+    /******/
+    public function done_saldo(Request $request, $order_id){
+        $date = date('Y-m-d H:i:s');
+        $status = 200;
+        $message = 'Transfer Berhasil';
+        $requestData = $request->all();
+
+        try{
+            $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+            $sum_trans = Trans::whereRaw('trans_code="'.$order_id.'"')->sum('trans_amount_total');
+            $sum_wallet = $sum_trans;
+            $sum_transfer = $sum_trans;
+
+            // check saldo dan validasi
+            if($trans->first()->voucher()){
+                $model_voucher = $trans->first()->voucher();
+                $sum_wallet = FunctionLib::minus_to_zero($sum_trans - $model_voucher->trans_voucher_amount);
+            }
+            $wallet = Auth::user()->wallet->where('wallet_type', $request->wallet_type)->first();
+            $wallet_type = $wallet->type;
+            if($wallet->wallet_ballance < $sum_wallet){
+                $status = 500;
+                $message = 'Maaf saldo anda tidak mencukupi untuk melakukan pembayaran, silahkan cek saldo '.$wallet_type->wallet_type_name.' anda.';
+                if($request->ajax())
+                {
+                    return response()->json(['status'=>$status,'message' => $message]);
+                }
+                return redirect('member/transaction/purchase')
+                    ->with(['flash_status' => $status,'flash_message' => $message]);
+            }
+
+            $note_wallet = 'Transfer saldo '.$wallet->wallet_type_name.' untuk transaksi '.$trans->first()->trans_code;
+            if($trans->first()->voucher()){
+                if($model_voucher->trans_voucher_amount > $sum_trans){
+                    $sum_transfer = $model_voucher->trans_voucher_amount;
+                }
+                $note_wallet .= ', dan voucher masedi '.$model_voucher->trans_voucher_code.'.';
+            }
+
+            // update wallet buyer
+            $update_wallet = [
+                'user_id'=>$trans->first()->pembeli->id,
+                'wallet_type'=>$request->wallet_type,
+                'amount'=>($sum_wallet * -1),
+                'note'=>$note_wallet,
+            ];
+            $from_buyer = FunctionLib::update_wallet($update_wallet);
+            // update wallet admin
+            $update_wallet = [
+                'user_id'=>2,
+                'wallet_type'=>1,
+                'amount'=>$sum_transfer,
+                'note'=>$note_wallet,
+            ];
+            $to_admin = FunctionLib::update_wallet($update_wallet);
+            $check_transfer = ($to_admin['status'] == 200)?true:false;
+
+            if($check_transfer){
+                // update status transaksi
+                $in = 'select id from sys_trans where trans_code = "'.$order_id.'"';
+                $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
+                if($trans_detail && !empty($trans_detail) && $trans_detail !== null && count($trans_detail) > 0){
+                    $trans_one = Trans::whereRaw('trans_code="'.$order_id.'"')->first();
+                    if($trans_one->trans_is_paid == 1){
+                        $status = 500;
+                        $message = 'Transaksi sudah dibayar.';
+                        $response['data'][] = "";
+                        return $response;
+                    }
+                    $trans = Trans::whereRaw('trans_code="'.$order_id.'"')->get();
+                    foreach ($trans as $item) {
+                        $item->trans_is_paid = 1;
+                        $item->trans_paid_date = $date;
+                        $item->trans_paid_note = 'pembayaran dengan Saldo selesai.';
+                        $item->trans_note = 'pembayaran dengan Saldo telah selesai.';
+                        $item->save();
+                    }
+                    foreach ($trans_detail as $item) {
+                        $trans_detail = Trans_detail::findOrFail($item->id);
+                        // to transfer
+                        $trans_detail->trans_detail_status = 3;
+                        $trans_detail->trans_detail_transfer = 1;
+                        $trans_detail->trans_detail_transfer_date = date('y-m-d h:i:s');
+                        $trans_detail->trans_detail_note = $trans_detail->trans_detail_note.' Transfer Berhasil.';
+                        $trans_detail->save();
+                        // $response['data'][] = $trans_detail;
+                    }
+                    // send email to buyer
+                    $email_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
+                    $config = [
+                        'to' => $trans_one->pembeli->email,
+                        'data' => [
+                            'trans_code' => $trans_one->trans_code,
+                            'trans_amount_total' => $trans_one->trans_amount_total,
+                            'status' => $email_status,
+                        ]
+                    ];
+                    $send_notif = FunctionLib::transaction_notif($config);
+                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                        $message .= ' ,'.$send_notif['message'];
+                    }
+                    // send email seller
+                    foreach ($trans as $item) {
+                        $config = [
+                            'to' => $item->trans_detail->first()->produk->user->email,
+                            'data' => [
+                                'trans_code' => $item->trans_code,
+                                'trans_amount_total' => $item->trans_amount_total,
+                                'status' => $email_status,
+                            ]
+                        ];
+                        $send_notif = FunctionLib::transaction_notif($config);
+                        if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                            $message .= ' ,'.$send_notif['message'];
+                        }
+                    }
+                    if($trans->first()->voucher()){
+                        $model_voucher = $trans->first()->voucher();
+                        $voucher = [
+                            'voucher' => $model_voucher->trans_voucher_code
+                        ];
+                        $res_voucher = FunctionLib::masedi('use', $voucher);
+                        if($res_voucher['status'] == 200){
+                            $model_voucher->trans_voucher_status = 1;
+                            $model_voucher->save();
+                        }
+                    }
+                }
+            }else{
+                $status = 500;
+                $message = 'transfer gagal atau saldo anda tidak mencukupi, silahkan cek saldo anda.';
+            }
+        }catch(Exception $e){
+            $status = 500;
+            $message = 'transfer gagal atau saldo anda tidak mencukupi, silahkan cek saldo anda.';
+        }
+
+        if($request->ajax())
+        {
+            return response()->json(['status'=>$status,'message' => $message]);
+        }
+        return redirect('member/transaction/purchase')
+            ->with(['flash_status' => $status,'flash_message' => $message]);
+    }
+
     public function review_produk(Request $request, $id){
         $status = 200;
         $message = 'Review produk berhasil disimpan';

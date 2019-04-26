@@ -363,7 +363,7 @@ class TransactionController extends Controller
             }
             if($trans->voucher()){
                 $sum_trans = ($model_voucher->trans_voucher_amount > $sum_trans)
-                    ?$sum_trans+($model_voucher->trans_voucher_amount-$sum_trans)
+                    ?$model_voucher->trans_voucher_amount
                     :$sum_trans;
             }
             // update wallet admin

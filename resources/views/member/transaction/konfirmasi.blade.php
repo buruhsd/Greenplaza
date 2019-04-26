@@ -101,6 +101,21 @@
                         @case(2)
                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.re_payment", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
                         @break
+                        @case(5)
+                            <div class="col-md-6" id="form-type">
+                                {!! Form::open(['id' => 'form-pay-saldo']) !!}
+                                    @csrf
+                                    <select name="wallet_type" class="form-control">
+                                        <option value="1">Cash Wallet (CW)</option>
+                                        <option value="3">Transaksi</option>
+                                    </select>
+                                {!! Form::close() !!}
+                                <hr/>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-success" id="pay" data-href='{{route("member.transaction.done_saldo", $trans->first()->trans_code)}}'>Bayar</button>
+                            </div>
+                        @break
                         @case(3)
                         @case(6)
                             <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.qr", $trans->first()->trans_code)}} value="Bayar" class="btn btn-success" id="btn-pick-address" />
@@ -125,6 +140,35 @@
     $('#ajax-modal').on('hidden.bs.modal', function () {
         var dataurl = "{{ route('member.transaction.purchase',['status'=>'order'])}}";
         window.location = dataurl;
+    });
+    $('#pay').click(function(e){
+        swal({
+            title: 'Ingin lanjut membayar?',
+            text: "Klik Bayar untuk lanjut membayar!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Bayar!'
+        }).then((isConfirm) => {
+            if (isConfirm.value){
+                $.post($('#pay').data('href'), $("#form-pay-saldo").serialize(), function( data ) {
+                    var status = (data.status == 200)?'success':'error';
+                    if((data.status == 200)){
+                        $("#form-type").hide();
+                        $('#pay').hide();
+                        $('#back').removeClass('hide');
+                    }
+                    swal("notifikasi!", data.message, status).then(() => {
+                            location.reload();
+                    });
+                });
+            } else {
+                swal("Batal", "Pembayaran dibatalkan", "error");
+                e.preventDefault();
+            }
+        });
     });
 </script>
 @endsection

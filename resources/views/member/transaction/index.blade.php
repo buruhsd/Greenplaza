@@ -90,6 +90,7 @@
                                                 <li>Jasa Pengiriman : {{$item->trans_detail->first()->shipment->shipment_name}}</li>
                                                 <li><b>&nbsp;&nbsp;-> {{$item->trans_detail->first()->trans_detail_shipment_service}}</b></li>
                                                 <li>Total Transaksi : <button class="btn btn-warning btn-xs">{{$item->count_detail}}</button></li>
+                                                <li>Pembayaran : {{$item->payment->payment_name}}</li>
                                                 <li>
                                                     {!! Form::open(['id' => 'form-transDetail']) !!}
                                                         <input type="hidden" name="trans_status" value="{{isset($_GET['status'])?$_GET['status']:'all'}}"/>

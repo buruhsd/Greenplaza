@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="payment_hide payment_Saldo collapse">
                                     <hr/>
-                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
+                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.saldo.payment")}} value="Pesan" class="btn btn-success" />
                                 </div>
                                 <div class="payment_hide payment_Pw collapse">
                                     <hr/>

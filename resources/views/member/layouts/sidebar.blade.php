@@ -180,7 +180,7 @@
                                     </ul>
                                 </li>
                                 {{-- need actived --}}
-                                <li class="@yield('pasang iklan') hidden">
+                                <li class="@yield('pasang iklan')">
                                     <a href="javascript:void(0)">
                                         <i class="menu-icon icon-layers"></i><span>Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>

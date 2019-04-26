@@ -58,7 +58,7 @@ class ChartController extends Controller
 
     public function checkout()
     {
-        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [3, 6])->get();
+        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [3, 5, 6])->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
         return view('frontend.checkout', $data);
     }
