@@ -203,7 +203,7 @@
                                         <span>
                                             metode pembayaran ini dibayar menggunakan poin + wallet, <br/>
                                             perhitungan : <br/>
-                                            Poin masedi x % + Wallet Masedi x % , berbeda untuk masing-masing penjual.
+                                            Poin masedi x % + Wallet Masedi x % , berbeda untuk masing-masing produk, tergantung settingan penjual.
                                         </span>
                                     <hr/>
                                     @foreach(Session::get('chart') as $item)
@@ -215,10 +215,14 @@
                                             $seller[$seller_produk->user->id]['persen'] = FunctionLib::UserConfig('user_poin', $seller_produk->produk_seller_id);
                                         ?>
                                     @endforeach
-                                    @foreach($seller as $item)
+                                    @foreach(Session::get('chart') as $key => $item)
+                                        <?php
+                                            $harga_grosir = 0;
+                                            $produk_pp = App\Models\Produk::find($item['trans_detail_produk_id']);
+                                        ?> 
                                         <span class="text-danger">
-                                            Persen Poin Toko 
-                                            <b>{{$item['toko']}}</b> = {{$item['persen']}}%</span><br/>
+                                            Persen Poin Produk 
+                                            <b>{{$produk_pp['produk_name']}}</b> = {{$produk_pp['produk_poin']}}%</span><br/>
                                     @endforeach
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment_poin")}} value="Pesan" class="btn btn-success" />
