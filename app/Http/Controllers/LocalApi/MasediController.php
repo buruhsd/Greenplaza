@@ -157,7 +157,7 @@ class MasediController extends Controller
                     // wallet per produk yang harus dibayar menggunakan poin
                     $total_wallet_poin += ($item['trans_detail_amount_total'] / 100 * $persen_produk);
                     // memasukkan wallet per produk ke total untuk pembayaran masedi
-                    $total_wallet += $item['trans_detail_amount_total'] - $transDetail->trans_detail_amount_poin;
+                    $total_wallet += ($item['trans_detail_amount_total'] - ($item['trans_detail_amount_total'] / 100 * $persen_produk));
                 }
                 // update amount trans
                 $trans->trans_amount = FunctionLib::array_sum_key($trans->trans_detail()->get()->toArray(), 'trans_detail_amount');
