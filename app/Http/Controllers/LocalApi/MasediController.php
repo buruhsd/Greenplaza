@@ -128,7 +128,7 @@ class MasediController extends Controller
                         }
                     }
                     // harga persen poin per produk
-                    $persen_produk = $produk['persen_poin'];
+                    $persen_produk = $produk['produk_poin'];
 
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
@@ -143,8 +143,8 @@ class MasediController extends Controller
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
                     $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
-                    $transDetail->trans_detail_persen_poin = $persen_poin;
-                    $transDetail->trans_detail_amount_poin = ($item['trans_detail_amount_total'] / 100 * $persen_poin) / $harga_poin;
+                    $transDetail->trans_detail_persen_poin = $persen_produk;
+                    $transDetail->trans_detail_amount_poin = ($item['trans_detail_amount_total'] / 100 * $persen_produk) / $harga_poin;
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
@@ -155,7 +155,7 @@ class MasediController extends Controller
                     // memasukkan poin per produk ke total untuk pembayaran masedi
                     $total_poin += $transDetail->trans_detail_amount_poin;
                     // wallet per produk yang harus dibayar menggunakan poin
-                    $total_wallet_poin += ($item['trans_detail_amount_total'] / 100 * $persen_poin);
+                    $total_wallet_poin += ($item['trans_detail_amount_total'] / 100 * $persen_produk);
                     // memasukkan wallet per produk ke total untuk pembayaran masedi
                     $total_wallet += $item['trans_detail_amount_total'] - $transDetail->trans_detail_amount_poin;
                 }

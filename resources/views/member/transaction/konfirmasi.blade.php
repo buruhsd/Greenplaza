@@ -142,6 +142,7 @@
         window.location = dataurl;
     });
     $('#pay').click(function(e){
+        $('#pay').hide();
         swal({
             title: 'Ingin lanjut membayar?',
             text: "Klik Bayar untuk lanjut membayar!",
@@ -161,12 +162,13 @@
                         $('#back').removeClass('hide');
                     }
                     swal("notifikasi!", data.message, status).then(() => {
-                            location.reload();
+                        location.reload();
                     });
                 });
             } else {
                 swal("Batal", "Pembayaran dibatalkan", "error");
                 e.preventDefault();
+                $('#pay').show();
             }
         });
     });
