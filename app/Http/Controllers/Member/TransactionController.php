@@ -378,7 +378,7 @@ class TransactionController extends Controller
             if($trans_detail->trans->trans_payment_id !== 4){
                 $update_wallet = [
                     'from_id'=>2,
-                    'to_id'=>$trans_detail->trans->trans_user_id,
+                    'to_id'=>$trans_detail->produk->produk_seller_id,
                     'wallet_type'=>1, //1/3
                     'amount'=>$detail_amount_total,
                     'note'=>'Update wallet CW dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
