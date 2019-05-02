@@ -101,6 +101,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 		Route::get('/resend_email/{id}', 'Admin\\EmailController@resend')->name('.resend_email');
 
 		//MasediController
+		Route::get('/transaksi_lain', 'Admin\\LogController@transaksi_lain')->name('.transaksi_lain');
+		Route::get('/transaksi_lain_admin', 'Admin\\LogController@transaksi_lain_admin')->name('.transaksi_lain_admin');
 		Route::get('/list_transaction_masedi', 'Admin\\MasediController@list')->name('.list_masedi');
 		Route::get('/saldo_transaction_masedi_admin', 'Admin\\MasediController@listsaldo_admin')->name('.list_masedi_admin');
 		Route::get('/saldo_cancel_transaction_masedi_admin', 'Admin\\MasediController@listsaldo_admin_cancel')->name('.list_masedi_admin_cancel');
@@ -414,11 +416,12 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('wallet_sellerlist', 'Admin\\MonitoringController@wallet_sellerlist')->name('.wallet_sellerlist');
 			Route::get('editsaldoseller/{id}', 'Admin\\MonitoringController@editsaldoseller')->name('.editsaldoseller');
 			Route::get('editsaldomember/{id}', 'Admin\\MonitoringController@editsaldomember')->name('.editsaldomember');
-			Route::post('editsaldoseller_cw/{id}', 'Admin\\MonitoringController@editsaldoseller_cw')->name('.editsaldoseller_cw');
-			Route::post('editsaldoseller_rw/{id}', 'Admin\\MonitoringController@editsaldoseller_rw')->name('.editsaldoseller_rw');
-			Route::post('editsaldoseller_transaksi/{id}', 'Admin\\MonitoringController@editsaldoseller_transaksi')->name('.editsaldoseller_transaksi');
-			Route::post('editsaldoseller_iklan/{id}', 'Admin\\MonitoringController@editsaldoseller_iklan')->name('.editsaldoseller_iklan');
-			Route::post('editsaldoseller_pincode/{id}', 'Admin\\MonitoringController@editsaldoseller_pincode')->name('.editsaldoseller_pincode');
+			// Route::post('editsaldoseller_cw/{id}', 'Admin\\MonitoringController@editsaldoseller_cw')->name('.editsaldoseller_cw');
+			// Route::post('editsaldoseller_rw/{id}', 'Admin\\MonitoringController@editsaldoseller_rw')->name('.editsaldoseller_rw');
+			// Route::post('editsaldoseller_transaksi/{id}', 'Admin\\MonitoringController@editsaldoseller_transaksi')->name('.editsaldoseller_transaksi');
+			// Route::post('editsaldoseller_iklan/{id}', 'Admin\\MonitoringController@editsaldoseller_iklan')->name('.editsaldoseller_iklan');
+			// Route::post('editsaldoseller_pincode/{id}', 'Admin\\MonitoringController@editsaldoseller_pincode')->name('.editsaldoseller_pincode');
+			Route::post('updatesaldo/{id}', 'Admin\\MonitoringController@updateSaldo')->name('.updatesaldo');
 			Route::get('wallet_memberlist', 'Admin\\MonitoringController@wallet_memberlist')->name('.wallet_memberlist');
 			//Log_activity
 			Route::get('log_activity', 'Admin\\MonitoringController@log')->name('.activity');

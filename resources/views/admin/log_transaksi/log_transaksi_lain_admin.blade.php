@@ -6,56 +6,49 @@
     <div class="row">
         <div class="col-md-12">
             @include('layouts._flash')
-            
             <div class="col-md-12">
                 <div class="col-md-4">
                     <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                         <div class="panel-body">
                             <p class="stats-info">Total transaksi selesai : <br/>
-                           
-                            <b>Rp. 
-                                {{
-                                    number_format($trans,2,',','.')
-                                                                     
-                                }}
+                            <b>Rp. {{FunctionLib::number_to_text($sum)}}
                             </b>
-                            
-                            
-                            </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="page-title">
-                <h4 class="breadcrumb-header"><center>Laporan Transaksi Masedi Admin</center></h3>
+                <h4 class="breadcrumb-header"><center>Laporan Transaksi Admin</center></h3>
             </div>
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
                     <div class="col-md-12">
-                        <div class="col-md-6">
-                            <form action="#" method="GET" class="form-inline">
-                                <div class="input-group pull-left" style="width: 225px;">
-                                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <a href="javascript:void(0)"><input type="text" name="search" class="form-control search-input" placeholder="Search by Code ..."></a>
+                        <form action="{{route('admin.transaksi_lain_admin')}}" method="GET" class="form-inline">
+                            <div class="col-md-12">
+                                <div class="input-group pull-left">
+                                    <a href="javascript:void(0)"><input type="text" name="code" class="form-control search-input" placeholder="Search by Code ..."></a>
                                 </div>
-                            </form>
-                        </div>
-                        <div class="col-md-6 pull-right">
-                            <label for="status" class="sr-only">Status</label>
-                            <select class="form-control" id="status" name="status" onchange = "location=this.value;">
-                                <option value="">--> Select Transaction Option <--</option>
-                                <option value="{{route('admin.list_masedi_admin')}}">On Process</option>
-                                <option value="{{route('admin.list_masedi_admin_cancel')}}">Cancel</option>
-                                <option value="{{route('admin.list_masedi_admin_dropping')}}">Dropping</option>
-                            </select>
-                        </div>
+                                <label for="payment_type" class="sr-only">Trannsaksi</label>
+                                <select class="form-control" id="payment_type" name="payment_type">
+                                    @foreach($payment_type as $item)
+                                        @if($loop->first)
+                                            <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment_type']) && $_GET['payment_type'] == $item->payment_kode)?"selected":"selected" !!}>{{$item->payment_name}}</option>
+                                        @else
+                                            <option value="{{$item->payment_kode}}" {!! (!empty($_GET['payment_type']) && $_GET['payment_type'] == $item->payment_kode)?"selected":"" !!}>{{$item->payment_name}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                <label for="status" class="sr-only">Trannsaksi</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="process" {!! (!empty($_GET['status']) && $_GET['status'] == 'process')?"selected":"" !!}>On Process</option>
+                                    <option value="cancel" {!! (!empty($_GET['status']) && $_GET['status'] == 'cancel')?"selected":"" !!}>Cancel</option>
+                                    <option value="dropping" {!! (!empty($_GET['status']) && $_GET['status'] == 'dropping')?"selected":"" !!}>Dropping</option>
+                                </select>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                    <!-- <div class="col-md-6">
-                        <div class="input-group pull-right">
-                            <a href="{{route('admin.list_gln_wallet')}}"><button class="btn btn-info btn-xs pull-right" style="margin-bottom: 2%">List Wallet Gln</button></a>
-                        </div>
-                    </div> -->
             </div>
                 <div class="panel-body" style="margin-top: 2%">
                     <div class="table-responsive">
@@ -63,32 +56,42 @@
                             <thead>
                                 <tr>
                                     <th><center>No</center></th>
-                                    <th><center>Transaksi Code</center></th>
+                                    <th><center>Transaksi</center></th>
                                     <th><center>Username</center></th>
                                     <th><center>Seller</center></th>
                                     <th><center>Detail Produk</center></th>
                                     <th><center>Status</center></th>
                                 </tr>
                             </thead>
-                            @if(count($masedi) != 0)
-                                @foreach ($masedi as $key => $g)
+                            @if(count($list) != 0)
+                                @foreach ($list as $key => $g)
                                 <tr>
                                     <td><center>{{$key ++}}</center></td>
-                                    <td><center>{{$g->trans_code}}</center></td>
+                                    <td>
+                                        <ul>
+                                            <li>Kode Transaksi Detail : {{$g->trans_code}}</li>
+                                            <li>Kode Transaksi : {{$g->trans->trans_code}}</li>
+                                            <li>Amount : {{$g->trans_detail_amount}}</li>
+                                            <li>Amount Ship : {{$g->trans_detail_amount_ship}}</li>
+                                            <li>Amount Total : {{$g->trans_detail_amount_total}}</li>
+                                            <li>Date : {{$item->created_at}}</li>
+                                            <li>Jasa Pengiriman : {{$g->shipment->shipment_name}}</li>
+                                            <li><b>&nbsp;&nbsp;-> {{$g->trans_detail_shipment_service}}</b></li>
+                                            <li>Pembayaran : {{$g->trans->payment->payment_name}}</li>
+                                        {{-- <center>{{$g->trans_code}}</center> --}}
+                                        </ul>
+                                    </td>
                                     <td><center>{{$g->trans->pembeli->username}}</center></td>
                                     <td><center>{{$g->produk->user->username}}</center></td>
                                     <td class="text-center"><button type="button" class="btn btn-sm btn-primary btn-xs" data-toggle="modal" data-target="#editModal{{$g->id}}"><i class="fa fa-edit"></i>Detail Produk</button></td>
-                                    @if($g->trans_detail_status == 6)
-                                        <td><center>Dropping</center></td>
-                                    @else
                                     @if($g->trans_detail_is_cancel == 1)
                                         <td><center>Cancel</center></td>
-                                        @else
-
+                                    @elseif($g->trans_detail_status == 6)
+                                        <td><center>Dropping</center></td>
+                                    @else
                                         <td><center>On Process</center></td>
                                     @endif
 
-                                    @endif
                                     <!-- @if ($g->trans_detail_status == 1)
                                         <td><center>in Chart</center></td>
                                     @elseif ($g->trans_detail_status == 2)
@@ -114,8 +117,9 @@
                                 </tr>
                             @endif  
                         </table>
-                        {{$masedi->render()}}
+                        {{-- {{$list->render()}} --}}
                     </div>
+                    <div> {!! $list->appends(['code' => Request::get('code'), 'status' => Request::get('status'), 'payment_type' => Request::get('payment_type')])->render() !!} </div>
                 </div>
             </div>
         </div>

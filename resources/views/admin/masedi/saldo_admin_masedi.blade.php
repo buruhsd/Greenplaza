@@ -11,7 +11,7 @@
                 <div class="col-md-4">
                     <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                         <div class="panel-body">
-                            <p class="stats-info">Saldo Masedi Admin : <br/>
+                            <p class="stats-info">Total transaksi selesai : <br/>
                            
                             <b>Rp. 
                                 {{

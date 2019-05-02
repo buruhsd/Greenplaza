@@ -54,6 +54,8 @@
                                 <ul class="sub-menu">
                                     <li class="{{FunctionLib::setActive('admin/saldo_transaction_masedi_admin')}}"><a href="{{route('admin.list_masedi_admin')}}">Log Transaksi Masedi Admin</a></li>
                                     <li class="{{FunctionLib::setActive('admin/list_transaction_masedi')}}"><a href="{{route('admin.list_masedi')}}">Transaksi Masedi</a></li>
+                                    <li class="{{FunctionLib::setActive('admin/transaksi_lain_admin')}}"><a href="{{route('admin.transaksi_lain_admin')}}">Log Transaksi Admin</a></li>
+                                    <li class="{{FunctionLib::setActive('admin/transaksi_lain')}}"><a href="{{route('admin.transaksi_lain')}}">Transaksi</a></li>
                                     <!-- <li class="{{FunctionLib::setActive('admin/list_transaction_gln')}}"><a href="{{route('admin.list_gln')}}">Transaksi Gln</a></li> -->
                                     
 

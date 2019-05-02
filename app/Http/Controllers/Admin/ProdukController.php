@@ -164,7 +164,7 @@ class ProdukController extends Controller
             'produk_wide' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
-            'produk_weight' => 'required|numeric',
+            'produk_weight' => 'required|numeric|between:1,99999999999',
             'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -325,7 +325,7 @@ class ProdukController extends Controller
             'produk_height' => 'required|numeric',
             'produk_color' => 'required',
             'produk_stock' => 'required|numeric',
-            'produk_weight' => 'required|numeric',
+            'produk_weight' => 'required|numeric|between:1,99999999999',
             'produk_discount' => 'required|numeric|between:0.00,99.99',
         ]);
 

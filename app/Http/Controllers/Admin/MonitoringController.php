@@ -13,6 +13,8 @@ use App\User;
 use App\Role;
 use Session;
 use Carbon\Carbon;
+use FunctionLib;
+use Auth;
 
 class MonitoringController extends Controller
 {
@@ -173,6 +175,24 @@ class MonitoringController extends Controller
 
         return view('admin.monitoring.wallet.editsaldomember', compact('users', 'cw', 'rw', 'transaksi', 'iklan', 'pincode'));
     }
+
+    public function updateSaldo(Request $request, $id){
+        // update wallet admin
+        $wallet = Wallet::where('wallet_user_id', $id)->where('wallet_type', '=', $request->wallet_type)->first();
+        $update_wallet = [
+            'user_id'=>$id,
+            'wallet_type'=>$request->wallet_type, //update wallet masedi
+            'amount'=>($request->wallet_ballance - $wallet->wallet_ballance),
+            'note'=>'Update wallet oleh admin oleh user '.Auth::id().'.',
+        ];
+        $saldo = FunctionLib::update_wallet($update_wallet);
+        Session::flash("flash_notification", [
+            "level"=>"success",
+            "message"=>"Saldo Berhasil di Ubah."
+        ]);
+        return redirect()->back();
+    }
+
     public function editsaldoseller_cw (Request $request, $id)
     {
         $users = User::find($id);
