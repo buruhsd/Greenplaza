@@ -23,8 +23,8 @@
                         <a href="{{ url('admin/produk/create') }}" class="btn btn-primary btn-sm pull-right">Add New Produk</a>
                     </div>
                     <div class="col-md-12 pull-right" style="margin-top: 2%">
-                        <a href="{{url('admin/needapproval/produkadmin')}}"><button class='btn btn-info'>Active<span class="label label-default pull-right">{{$produk1->count()}}</span></button></a>
-                        <a href="{{url('admin/needapproval/produkadmin_block')}}"><button class='btn btn-info'>Block<span class="label label-default pull-right">{{$produk->count()}}</span></button></a>
+                        <a href="{{url('admin/needapproval/produkadmin')}}"><button class='btn btn-info'>Active<span class="label label-default pull-right">{{$count}}</span></button></a>
+                        <a href="{{url('admin/needapproval/produkadmin_block')}}"><button class='btn btn-info'>Block<span class="label label-default pull-right">{{$count_block}}</span></button></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -42,8 +42,8 @@
                                 </tr>
                             </thead>
                             <tbody class="table-responsive table table-striped">
-                            @if($produk->count() > 0)
-                            @foreach ($produk as $key => $h)
+                            @if($produk_block->count() > 0)
+                            @foreach ($produk_block as $key => $h)
                                 <tr>
                                     <td><center>{{++$key}}</center></td>
                                     <td><center><img class="h100" src="{{asset("assets/images/product/".$h->produk_image)}}"></center></td>
@@ -86,7 +86,8 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                    <div> {!! $produk_block->appends(['search' => Request::get('search')])->render() !!} </div>
+                </div>  
             </div>
         </div>
     </div><!-- Row -->

@@ -64,7 +64,7 @@ class LogController extends Controller
             // ->where('trans_detail_status', '!=', 6 )
             // ->where('trans_detail_is_cancel', '!=', 1 )
             ->orderBy('created_at', 'DESC')
-            ->paginate(10);
+            ->paginate(5);
      
         return view('admin.log_transaksi.log_transaksi_lain', $data);
     }
@@ -117,7 +117,7 @@ class LogController extends Controller
             // ->where('trans_detail_status', '!=', 6 )
             // ->where('trans_detail_is_cancel', '!=', 1 )
             ->orderBy('created_at', 'DESC')
-            ->paginate(1);
+            ->paginate(5);
      
         return view('admin.log_transaksi.log_transaksi_lain_admin', $data);
     }

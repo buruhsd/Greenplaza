@@ -643,25 +643,33 @@ class NeedApprovalController extends Controller
     //PRODUK ADMIN
     public function produkadmin ()
     {
+        $perpage = 5;
         $users = User::whereHas('roles', function($query){
                 $query->where('name','=','admin');
                 return $query;
             })
            ->pluck('id')->toArray();
-        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC')->get();
-        $produk1 = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC')->get();
-        return view('admin.need_approval.produk_admin.produkadmin', compact('users', 'produk', 'produk1'));
+        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC');
+        $data['count'] = $produk->count();
+        $data['produk'] = $produk->paginate($perpage);
+        $produk_block = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC');
+        $data['count_block'] = $produk_block->count();
+        return view('admin.need_approval.produk_admin.produkadmin', $data);
     }
     public function produkadmin_block ()
     {
+        $perpage = 5;
         $users = User::whereHas('roles', function($query){
                 $query->where('name','=','admin');
                 return $query;
             })
            ->pluck('id')->toArray();
-        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC')->get();
-        $produk1 = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC')->get();
-        return view('admin.need_approval.produk_admin.produkblock', compact('users', 'produk', 'produk1'));
+        $produk_block = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 2)->orderBy('created_at', 'DESC');
+        $data['count_block'] = $produk_block->count();
+        $data['produk_block'] = $produk_block->paginate($perpage);
+        $produk = Produk::whereIn('produk_seller_id', $users)->where('produk_status', 1)->orderBy('created_at', 'DESC');
+        $data['count'] = $produk->count();
+        return view('admin.need_approval.produk_admin.produkblock', $data);
     }
     public function create_produk ()
     {
