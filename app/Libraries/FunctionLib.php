@@ -1973,7 +1973,7 @@ class FunctionLib
     **/
     public static function get_waybill($id = 0){
         $data = [];
-        $status = 'Receipt Number is not valid';
+        $status = 'No Resi Tidak Valid.';
         if($id != 0){
             $item = App\Models\Trans_detail::whereId($id)->first();
             if($item){
@@ -1988,12 +1988,12 @@ class FunctionLib
                 $shipment = json_decode($shipment, true);
                 if($shipment['rajaongkir']['status']['code'] && $shipment['rajaongkir']['status']['code'] == 200){
                     if($shipment['rajaongkir']['result']['delivered'] == true){
-                        $status = 'Sent';
+                        $status = 'Terkirim';
                     }else{
-                        $status = 'On Process';
+                        $status = 'Process';
                     }
                 }else{
-                    $status = 'Receipt Number is not valid';
+                    $status = 'No Resi Tidak Valid.';
                 }
             }
         }

@@ -102,7 +102,7 @@
 										                    'required'
 										                ])!!}
 								                        <span class="input-group-btn">
-								                            <button type="submit" class="btn btn-success image-preview-clear">
+								                            <button type="button" class="btn btn-success image-preview-clear pay">
 								                                Save
 								                            </button>
 								                        </span>
@@ -123,5 +123,29 @@
 	    </div><!-- Row -->
 	</div>
 <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $('.pay').click(function(e){
+        e.preventDefault();
+        swal({
+            title: 'Lanjut?',
+            text: "Mohon pastikan nomor resi yang anda masukkan benar dan valid, jika terindikasi nomor resi tidak sesuai akan dikenakan penalty sesuai syarat dan ketentuan dalam perjanjian penjual!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Lanjutkan!'
+        }).then((isConfirm) => {
+            if (isConfirm.value){
+            	this.form.submit()
+            } else {
+                swal("Batal", "Batal menyimpan nomor resi", "error");
+                e.preventDefault();
+            }
+        });
+    });
+</script>
 @endsection
         
