@@ -26,7 +26,7 @@
                         <form action="{{route('admin.transaksi_lain_admin')}}" method="GET" class="form-inline">
                             <div class="col-md-12">
                                 <div class="input-group pull-left">
-                                    <a href="javascript:void(0)"><input type="text" name="code" class="form-control search-input" placeholder="Search by Code ..."></a>
+                                    <input type="text" name="code" class="form-control search-input" placeholder="Kode detail" value="{!! (!empty($_GET['code']))?$_GET['code']:"" !!}">
                                 </div>
                                 <label for="payment_type" class="sr-only">Trannsaksi</label>
                                 <select class="form-control" id="payment_type" name="payment_type">
