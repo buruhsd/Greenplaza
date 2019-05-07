@@ -100,7 +100,7 @@ class HomeController extends Controller
                             // t = document.getElementsByTagName('script')[0];
                             // t.parentNode.insertBefore(s, t);
                         }
-                        var tes = loadComponent(<?php route('localapi.masedi.payment');?>, 'a');
+                        var tes = loadComponent("<?php route('localapi.masedi.payment');?>", 'a');
                         console.log(tes);
                     </script>
                 <?php
