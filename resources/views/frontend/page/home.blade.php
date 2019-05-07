@@ -704,7 +704,9 @@
                                 @foreach ($relatedproduk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
-                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
+                                        <a href="{{route('detail', $r->produk_slug)}}">
+                                            <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
+                                        </a>
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
@@ -733,7 +735,9 @@
                                 @foreach ($relatedprodukk as $r)
                                 <div class="product-sidebar-items fix">
                                     <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
-                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
+                                        <a href="{{route('detail', $r->produk_slug)}}">
+                                            <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
+                                        </a>
                                     </div>
                                     <div class="product-sedebar-content fix">
                                         <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
@@ -849,7 +853,7 @@
                             @foreach ($review as $r)
                             <div class="test-items">
                                 <div class="test-img">
-                                    <img src="{{asset('assets/images/profil/'.$r->userdetail->user_detail_image)}}">
+                                    <img src="{{asset('assets/images/profil/'.$r->userdetail->user_detail_image)}}" onerror="this.src='{!!asset("assets/images/profil/nopic.png")!!}'" alt="" />
                                 </div>
                                 <div class="test-content">
                                     <h3>{{$r->user->name}}</h3>
