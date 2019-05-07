@@ -881,7 +881,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -912,7 +912,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -950,7 +950,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}">
+                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -981,7 +981,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}">
+                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1019,7 +1019,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1050,7 +1050,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                     <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px">
+                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1088,7 +1088,7 @@
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
                                                     <a href="{{route('detail', $d->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px">
+                                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" />
                                                     </a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
@@ -1118,7 +1118,7 @@
                                             @foreach ($discountprodukk as $d)
                                             <div class="product-sidebar-items fix">
                                                 <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px"></a>
+                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px" onerror="{{asset('assets/images/product/nopic.png')}}" /></a>
                                                 </div>
                                                 <div class="product-sedebar-content fix">
                                                     <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{ str_limit($d->produk_name, 15)}}</a></h4>
