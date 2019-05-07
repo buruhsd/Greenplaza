@@ -3,7 +3,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-contact">
                             <h2 class="section-title">Contact us</h2>
                             <ul>
@@ -25,7 +25,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Member</h2>
                             <ul>
@@ -36,19 +36,7 @@
                             </ul>
                         </div>
                     </div>
-                    <!-- <div class="col-lg-3 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu">
-                            <h2 class="section-title">Corporation</h2>
-                            <ul>
-                                <li><a href="about.html">About us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Company</a></li>
-                                <li><a href="#">Investor Relations</a></li>
-                                <li><a href="#">Advanced Search</a></li>
-                            </ul>
-                        </div>
-                    </div> -->
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">Greenplaza</h2>
                             <ul>
@@ -58,7 +46,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-menu">
                             <h2 class="section-title">About Us</h2>
                             <ul>

@@ -599,3 +599,46 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
 .show {display:block;}
 
 .hide {display: none;}
+
+.box-b-r{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+}
+.box-b-l{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+.box-t-r{
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999;
+}
+.box-t-l{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+
+@media (max-width: 768px) {
+  .slider-area, .req-all{
+    margin-top :150px;
+  }
+  .cetagory-wrap.home {
+    display: none;
+  }
+  .cetagory-wrap.home2 {
+    display: show;
+  }
+}
+@media (min-width: 768px) {
+  .cetagory-wrap.home2 {
+    display: none;
+  }
+}

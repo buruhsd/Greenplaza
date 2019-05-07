@@ -116,4 +116,14 @@ class Produk extends Model
     public function count_discuss($data){
         return Produk_discuss::where('produk_discuss_produk_id',$data->id)->count();
     }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
+    public function trans_detail()
+    {
+        return $this->hasMany('App\Models\Trans_detail', 'trans_detail_produk_id');
+    }
 }

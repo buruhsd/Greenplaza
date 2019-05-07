@@ -5,8 +5,8 @@
     <div class="slider-area" style="padding-top: 150px;margin-bottom: 180px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-10">
-                    <div class="cetagory-wrap">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="cetagory-wrap home">
                         <span>Semua kategori</span>
                         <ul class="cetagory-items">
                             <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(12)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
@@ -51,7 +51,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 offset-lg-0 col-md-8 offset-md-4">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="slider-active owl-carousel next-prev-btn">
                         {!!Plugin::view('iklan', [
                                 'id'=>1,
@@ -81,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-none d-lg-block">
+                <div class="col-lg-3 col-md-3 col-sm-12 d-none d-lg-block">
                     @if (\Auth::check())
                         <div class="author-wrap">
                             @if (Auth::user()->user_detail->user_detail_image != null)
@@ -112,7 +112,7 @@
     <div class="featured-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 d-none d-lg-block">
+                <div class="col-lg-3 col-md-3 d-none d-lg-block">
                     {!!Plugin::view('iklan', [
                             'id'=>5,
                             'type'=>'1',
@@ -120,7 +120,7 @@
                         ])
                     !!}
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-6 col-md-6">
                     {!!Plugin::view('iklan', [
                             'id'=>6,
                             'type'=>'1',
@@ -128,7 +128,7 @@
                         ])
                     !!}
                 </div>
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-3">
                     {!!Plugin::view('iklan', [
                             'id'=>7,
                             'type'=>'1',
@@ -1277,6 +1277,12 @@
         </div>
     </div>
 
+    <!-- <div class="box-b-l hide" id="a-b-l">
+        <img src="{{asset('assets/images/profil/Peileppe_Orc_chibi.png')}}">
+    </div>
+    <div class="box-b-r hide" id="a-b-r">
+        <img src="http://www.gambaranimasi.org/data/media/492/animasi-bergerak-kembang-api-0008.gif">
+    </div> -->
     <!-- <div class="blog-area mb-30">
         <div class="container">
             <div class="row">
@@ -1335,3 +1341,14 @@
     <!-- brand-area end -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
+<!-- @section('script')
+    <script type="text/javascript">
+        function myTimer() {
+            $("#a-b-l").toggle("slow");
+            $("#a-b-r").toggle("slow");
+        }
+        var myVar = setInterval(myTimer, 2000);
+        // call this line to stop the loop:
+        // clearInterval(myVar);
+    </script>
+@endsection -->

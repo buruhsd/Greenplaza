@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-5 col-sm-12 col-12">
                         <div class="">
-                            <form action="{{route('category')}}">
+                            <form action="{{route('category')}}" method="GET">
                             <div class="input-group mb-3" style="padding: 3px 0;">
                                 <input name="cat" class="form-control" type="hidden" value="{{(isset($_GET['cat']))?$_GET['cat']:''}}">
                                 <input name="src" class="form-control" type="text" placeholder="Produk" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
@@ -149,14 +149,14 @@
                 </div>
             </div>
         </div>
-        <div class="header-bottom-area bg-1">
+        <div class="header-bottom-area bg-1 header-bottom-area-two">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-10">
-                        <div class="cetagory-wrap">
-                            <!-- <span>Semua kategori</span>
+                        <div class="cetagory-wrap home2">
+                            <span>Semua Kategori</span>
                             <ul class="cetagory-items">
-                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->orderBy('updated_at', 'DESC')->get();?>
+                                <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(12)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                                 {{-- {{dd($cat)}} --}}
                                 @foreach($cat as $item)
                                     <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
@@ -194,8 +194,8 @@
                                         @endif
                                     </li>
                                 @endforeach
-                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Lainya... <i class="fa fa-angle-right pull-right"></i></a>
-                            </ul> -->
+                                <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Semua Kategori... <i class="fa fa-angle-right pull-right"></i></a>
+                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
@@ -260,13 +260,53 @@
                     <div class="row">
                         <div class="col-12">
                             <ul class="metismenu">
-                                <li class="sidemenu-items"><a href="{{url('/')}}">Home</a></li>
-                                {{-- <li><a href="about.html">About</a></li> --}}
+                                @guest
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
+                                @else
+                                    <li class="sidemenu-items"><a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
+                                @endguest
+                                @guest
+                                @else
+                                <ul>
+                                    @if(Auth::user()->is_admin())
+                                        <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
+                                        <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                        @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
+                                            <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
+                                        @endif
+                                    @elseif(Auth::user()->is_member() )
+                                        <li><a href="{{route('member.profil')}}">Profil</a></li>
+                                        <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
+                                        @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
+                                            <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
+                                        @endif
+                                    @endif
+                                    <li><a href="javascript(0);" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                                @endguest
+                                <li><a href="{{url('/')}}">Home </a></li>
+                                <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
+                                    <ul>
+                                        <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
+                                        <li><a href="{{route('chart')}}">Shopping cart</a></li>
+                                        @guest
+                                        @else
+                                            <li><a href="{{route('checkout')}}">Checkout</a></li>
+                                            <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                                        @endguest
+                                    </ul>
+                                </li>
+                                <!-- <li><a href="about.html">About</a></li>
                                 <li class="sidemenu-items"><a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Shop</a>
                                     <ul aria-expanded="false">
-                                        {{-- <li><a href="shop.html">Shop Page</a></li>
+                                        <li><a href="shop.html">Shop Page</a></li>
                                         <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                                        <li><a href="Single-product.html">Product Details</a></li> --}}
+                                        <li><a href="Single-product.html">Product Details</a></li>
                                         <li><a href="{{route('chart')}}">Shopping cart</a></li>
                                         <li><a href="{{route('checkout')}}">Checkout</a></li>
                                         <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
@@ -281,13 +321,13 @@
                                         <li><a href="wishlist.html">Wishlist</a></li>
                                     </ul>
                                 </li>
-                                {{-- <li class="sidemenu-items"><a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Blog</a>
+                                <li class="sidemenu-items"><a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Blog</a>
                                     <ul aria-expanded="false">
                                         <li><a href="blog.html">Blog</a></li>
                                         <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
-                                </li> --}}
-                                {{-- <li><a href="contact.html">Contact</a></li> --}}
+                                </li>
+                                <li><a href="contact.html">Contact</a></li> -->
                             </ul>
                         </div>
                     </div>

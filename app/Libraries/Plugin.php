@@ -11,6 +11,103 @@ class Plugin
     }
 
     /**
+    * @param
+    * @return produk by viewer terbanyak
+    */
+    public static function p_populer($param = []){
+        extract($param);
+        $data['p_populer'] = App\Models\Produk::orderBy('produk_viewer', 'DESC')->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return produk green
+    */
+    public static function p_green($param = []){
+        extract($param);
+        $data['p_green'] = App\Models\Produk::where('produk_seller_id', 2)->orderBy('updated_at', 'DESC')->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return produk by updated_at
+    */
+    public static function p_baru_saat_ini($param = []){
+        extract($param);
+        $data['p_baru_saat_ini'] = App\Models\Produk::orderBy('updated_at', 'DESC')->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_baru($param = []){
+        extract($param);
+        $data['p_baru'] = App\Models\Produk::orderBy('created_at', 'DESC')->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_pilihan_saat_ini($param = []){
+        extract($param);
+        $data['p_pilihan_saat_ini'] = App\Models\Produk::withCount('trans_detail')
+            ->orderBy('trans_detail_count', 'desc')
+            ->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_trending($param = []){
+        extract($param);
+        $data['p_trending'] = App\Models\Produk::withCount('trans_detail')
+            ->orderBy('trans_detail_count', 'desc')
+            ->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_top_rate($param = []){
+        extract($param);
+        $data['p_trending'] = App\Models\Produk::withCount('trans_detail')
+            ->orderBy('trans_detail_count', 'desc')
+            ->get();
+        // return view('frontend.plugin.hot-promo', $data);
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_hot($param = []){
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_diskon($param = []){
+    }
+
+    /**
+    * @param
+    * @return
+    */
+    public static function p_populer_konsumen($param = []){
+    }
+
+    /**
     * untuk category terkait dan produk terkait (ada di kiri seperti di detail produk front)
     * @param 
     * optional category_id
@@ -119,100 +216,100 @@ class Plugin
         return view('frontend.plugin.footer');
     }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function slider($param=[]){
-        extract($param);
-        return view('frontend.plugin.slider');
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function slider($param=[]){
+    //     extract($param);
+    //     return view('frontend.plugin.slider');
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function top_header($param=[]){
-        $pid = 0;
-        extract($param);
-        // $where[] = ['category_parent_id', $pid];
-        $data['p_category'] = App\Models\Category::all();
-        return view('frontend.plugin.top-header', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function top_header($param=[]){
+    //     $pid = 0;
+    //     extract($param);
+    //     // $where[] = ['category_parent_id', $pid];
+    //     $data['p_category'] = App\Models\Category::all();
+    //     return view('frontend.plugin.top-header', $data);
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function hot_promo($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['hot_promo'] = App\Models\Produk::where('produk_is_hot', !1)//1)
-            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
-        return view('frontend.plugin.hot-promo', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function hot_promo($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['hot_promo'] = App\Models\Produk::where('produk_is_hot', !1)//1)
+    //         ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+    //     return view('frontend.plugin.hot-promo', $data);
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function populer($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['populer'] = App\Models\Produk::where('produk_is_hot', !1)//1)
-            ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
-        return view('frontend.plugin.popular', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function populer($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['populer'] = App\Models\Produk::where('produk_is_hot', !1)//1)
+    //         ->skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+    //     return view('frontend.plugin.popular', $data);
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function recommended($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['recomend'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
-        return view('frontend.plugin.recommended-items', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function recommended($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['recomend'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('id', 'DESC')->get();
+    //     return view('frontend.plugin.recommended-items', $data);
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function produk_newest($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['produk_newest'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
-        return view('frontend.content.content-1', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function produk_newest($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['produk_newest'] = App\Models\Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+    //     return view('frontend.content.content-1', $data);
+    // }
     
-    /**
-    * @param
-    * @return
-    */
-    public static function content_brand($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['brand'] = App\Models\Brand::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
-        return view('frontend.content.content-brand', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function content_brand($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['brand'] = App\Models\Brand::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
+    //     return view('frontend.content.content-brand', $data);
+    // }
 
-    /**
-    * @param
-    * @return
-    */
-    public static function category($param=[]){
-        $pid = 0;
-        $perPage = 8;
-        extract($param);
-        $data['category'] = App\Models\Category::where('category_parent_id', 0)->get();
-        return view('frontend.plugin.category', $data);
-    }
+    // /**
+    // * @param
+    // * @return
+    // */
+    // public static function category($param=[]){
+    //     $pid = 0;
+    //     $perPage = 8;
+    //     extract($param);
+    //     $data['category'] = App\Models\Category::where('category_parent_id', 0)->get();
+    //     return view('frontend.plugin.category', $data);
+    // }
 
     /**
     * @param $id $type=buyer/seller, $status=trans/detail
