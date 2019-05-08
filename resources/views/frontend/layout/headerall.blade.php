@@ -296,13 +296,13 @@
                                 <li><a href="{{url('/')}}">Home </a></li>
                                 <li class="sidemenu-items"><a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                     <ul>
-                                        <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
-                                        <li><a href="{{route('chart')}}">Shopping cart</a></li>
+                                        <li><a href="{{route('chart')}}">Keranjang</a></li>
                                         @guest
                                         @else
                                             <li><a href="{{route('checkout')}}">Checkout</a></li>
                                             <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
                                         @endguest
+                                         <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
                                     </ul>
                                 </li>
                                 <!-- <li class="sidemenu-items"><a href="{{url('/')}}">Home</a></li>
