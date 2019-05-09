@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('login', function(){
+	return response()->json(['status' => 200, 'message' => 'pesan']);
+});
+Route::post('get_beli/{status}', 'Api\\ApiController@pembelian');
+Route::post('get_jual/{status}', 'Api\\ApiController@penjualan');
+// Route::post('get_beli/{status}', function(){
+// 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
+// });
+// Route::post('get_jual/{status}', function(){
+// 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
+// });
 Route::post('done_order', 'Admin\\TransactionController@done_order');
 Route::post('done_masedi', 'Admin\\TransactionController@done_masedi');
 Route::get('index', 'AdminApi\PermissionsController@index');
