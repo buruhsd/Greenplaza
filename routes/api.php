@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('login', function(){
-	return response()->json(['status' => 200, 'message' => 'pesan']);
-});
+Route::post('login', 'Api\\ApiController@doLogin');
+Route::post('get_trans_detail/{id}', 'Api\\ApiController@detail_transaksi');
+Route::post('get_detail_produk/{id}', 'Api\\ApiController@detail_produk');
 Route::post('get_beli/{status}', 'Api\\ApiController@pembelian');
 Route::post('get_jual/{status}', 'Api\\ApiController@penjualan');
+Route::post('get_produk/{status}', 'Api\\ApiController@produk');
+Route::post('get_produk_grosir/{id}', 'Api\\ApiController@produk_grosir');
 // Route::post('get_beli/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
 // });

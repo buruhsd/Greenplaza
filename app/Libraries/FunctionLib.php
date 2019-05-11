@@ -1,6 +1,21 @@
 <?php
 class FunctionLib
 {
+    public static function check_atempt($param){
+        $userdata = array(
+            'email'     => $param['username'],
+            'password'  => $param['password']
+        );
+        // attempt to do the login
+        $status = 500;
+        $user = App\User::where('username', '=', $param['username'])
+            ->where('password' ,'=', $param['password'])
+            ->where('role','=','user');
+        if ($user) {
+            $status = 200;
+        }
+        return $status;
+    }
 
     public static function generate_reffcode(){
         $code = FunctionLib::str_rand(3).'-'.rand(0, 999999);
