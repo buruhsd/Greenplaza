@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
 use App\Models\Produk;
 use App\Models\Produk_grosir;
+use App\Models\Log_wallet;
+use App\Models\log_transfer;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -14,6 +16,66 @@ use FunctionLib;
 
 class ApiController extends Controller
 {
+
+    public function log_transfer(Request $request){
+        $par_auth = [
+            'username'=>$request->input("username"),
+            'password'=>$request->input("password")
+        ];
+        $uid = 0;
+        if(FunctionLib::check_atempt($par_auth) == 200){
+            $uid = User::whereUsername($request->input("username"))->first()->id;
+        }
+        $where = '1';
+        $order = "rand()";
+        if($uid !== 0){
+            $where .= ' AND (log_transfer.transfer_user_id ='.$uid.' OR log_transfer.transfer_to_user_id ='.$uid.')';
+        }
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $order = explode ("-", $request->input("order"));
+            $order = $order[0].' '.$order[1];
+        }
+        if(!empty($request->input("type")) && $request->input("type") !== ""){
+            $where .= ' AND log_transfer.transfer_type LIKE "%'.$request->input("type").'%"';
+        }
+        $data = log_transfer::whereRaw($where)
+                    ->orderByRaw($order)
+                    ->with('from')
+                    ->with('to')
+                    ->get();
+
+        return response()->json(['status' => 200, 'data'=>$data]);
+    }
+
+    public function log_wallet(Request $request){
+        $par_auth = [
+            'username'=>$request->input("username"),
+            'password'=>$request->input("password")
+        ];
+        $uid = 0;
+        if(FunctionLib::check_atempt($par_auth) == 200){
+            $uid = User::whereUsername($request->input("username"))->first()->id;
+        }
+        $where = '1';
+        $order = "rand()";
+        if($uid !== 0){
+            $where .= ' AND log_wallet.wallet_user_id ='.$uid;
+        }
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $order = explode ("-", $request->input("order"));
+            $order = $order[0].' '.$order[1];
+        }
+        if(!empty($request->input("wallet")) && $request->input("wallet") !== 0){
+            $where .= ' AND log_wallet.wallet_type ='.$request->input("wallet");
+        }
+        $data = Log_wallet::whereRaw($where)
+                    ->orderByRaw($order)
+                    ->with('wallet')
+                    ->with('type')
+                    ->get();
+
+        return response()->json(['status' => 200, 'data'=>$data]);
+    }
 
     /**
     * mendapatkan cek validasi login
