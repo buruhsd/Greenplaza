@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login', 'Api\\ApiController@doLogin');
+Route::post('update_profil', 'Api\\ApiController@update_profil');
 Route::post('get_trans_detail/{id}', 'Api\\ApiController@detail_transaksi');
 Route::post('get_detail_produk/{id}', 'Api\\ApiController@detail_produk');
 Route::post('get_beli/{status}', 'Api\\ApiController@pembelian');
@@ -22,6 +23,8 @@ Route::post('get_produk/{status}', 'Api\\ApiController@produk');
 Route::post('get_produk_grosir/{id}', 'Api\\ApiController@produk_grosir');
 Route::post('get_log_wallet', 'Api\\ApiController@log_wallet');
 Route::post('get_log_transfer', 'Api\\ApiController@log_transfer');
+Route::post('get_courier', 'Api\\ApiController@get_courier');
+Route::post('get_user_address', 'Api\\ApiController@get_user_address');
 // Route::post('get_beli/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
 // });

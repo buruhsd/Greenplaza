@@ -9,6 +9,7 @@ use App\Models\Produk;
 use App\Models\Produk_grosir;
 use App\Models\Log_wallet;
 use App\Models\log_transfer;
+use App\Models\Shipment;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -16,6 +17,48 @@ use FunctionLib;
 
 class ApiController extends Controller
 {
+    public function get_user_address(Request $request){
+        $status = 500;
+        $par_auth = [
+            'username'=>$request->input("username"),
+            'password'=>$request->input("password")
+        ];
+        $uid = 0;
+        $data = $par_auth;
+        // $data = [];
+        if(FunctionLib::check_atempt($par_auth) == 200){
+            $user = User::whereUsername($request->input("username"))->first();
+            if($user){
+                // $data = $user->user_address();
+            }
+            $status = 200;
+        }
+        return response()->json(['status' => $status, 'data'=>$data]);
+    }
+
+    public function get_courier(){
+        $where = 1;
+        $data = Shipment::whereRaw($where)->get();
+        return response()->json(['status' => 200, 'data'=>$data]);
+    }
+
+    public function update_profil(Request $request){
+        $status = 500;
+        $par_auth = [
+            'username'=>$request->input("username"),
+            'password'=>$request->input("password")
+        ];
+        $uid = 0;
+        if(FunctionLib::check_atempt($par_auth) == 200){
+            $user = User::whereUsername($request->input("username"))->first();
+            $user->name = $request->input("name");
+            $user->user_store = $request->input("user_store");
+            $user->user_slogan = $request->input("user_slogan");
+            $user->save();
+            $status = 200;
+        }
+        return response()->json(['status' => $status, 'data'=>$user]);
+    }
 
     public function log_transfer(Request $request){
         $par_auth = [
@@ -88,7 +131,7 @@ class ApiController extends Controller
         // attempt to do the login
         if (Auth::attempt($userdata)) {
             $status = 200;
-            $data = Auth::user();
+            $data = Auth::user()->with('user_detail');
         } else {
             $status = 500;
             $data = [];

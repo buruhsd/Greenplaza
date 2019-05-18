@@ -1,6 +1,12 @@
 <?php
 class FunctionLib
 {
+    public static function get_sponsor($id){
+        $user = App\User::find($id);
+        $sponsor = $user->sponsor->user_tree_sponsor_id;
+
+        return $sponsor;
+    }
     public static function check_atempt($param){
         $userdata = array(
             'email'     => $param['username'],
@@ -8,7 +14,8 @@ class FunctionLib
         );
         // attempt to do the login
         $status = 500;
-        $user = App\User::where('username', '=', $param['username'])
+        $where = "(username= ".$param['username']." OR email= ".$param['username'].")";
+        $user = App\User::whereRaw($where)
             ->where('password' ,'=', $param['password'])
             ->where('role','=','user');
         if ($user) {
