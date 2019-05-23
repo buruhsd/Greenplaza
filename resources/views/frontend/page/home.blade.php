@@ -147,111 +147,11 @@
                 <div class="col-lg-3 col-md-4">
                     <div class="product-sidebar">
                         <h2 class="section-title">Produk populer saat ini</h2>
-                        <div class="propuler-product-active next-prev-style owl-carousel">
-                            <div class="slidebar-product-wrap">
-                                @foreach ($relatedproduk as $r)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        @if ($r->produk_discount != 0)
-                                        <p>
-                                            <del>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($r->produk_discount)}} %</span><br>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price-($r->produk_price * $r->produk_discount / 100))}}</span>
-                                        </p>
-                                        @else
-                                        <p>
-                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
-                                        </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="slidebar-product-wrap">
-                                @foreach ($relatedprodukk as $r)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity">
-                                        <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px"></a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        @if ($r->produk_discount != 0)
-                                        <p>
-                                            <del>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($r->produk_discount)}} %</span><br>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price-($r->produk_price * $r->produk_discount / 100))}}</span>
-                                        </p>
-                                        @else
-                                        <p>
-                                            <span>Rp.{{number_format($r->produk_price, 2)}}</span>
-                                        </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        {!!Plugin::p_populer_saat_ini()!!}
                     </div>
                     <div class="product-sidebar" style="width: 100%">
                         <h2 class="section-title">Harga Diskon</h2>
-                        <div class="propuler-product-active next-prev-style owl-carousel">
-                            @foreach ($discountprice as $d)
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
-                                    <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
-                                        <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" ></a>
-                                    <!-- <div class="discount-wrap">
-                                        <div data-countdown="2017/10/03"></div>
-                                    </div> -->
-                                    <!-- <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div> -->
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>
-                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                        <a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                    </h3>
-                                    @if ($d->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($d->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{number_format($d->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+                        {!!Plugin::p_harga_diskon()!!}
                     </div>
                     <div class="tag-wrap">
                         <h2 class="section-title">Kategori Populer</h2>
@@ -269,66 +169,7 @@
                     </div>
                     <div class="product-sidebar">
                         <h2 class="section-title">Produk populer saat ini</h2>
-                        <div class="propuler-product-active next-prev-style owl-carousel">
-                            <div class="slidebar-product-wrap">
-                                @foreach ($popularproduk as $p)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                        <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    @if ($p->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="slidebar-product-wrap">
-                                @foreach ($popularprodukk as $p)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%">
-                                        <a href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px"></a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                    @if ($p->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{number_format($p->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        {!!Plugin::p_populer_saat_ini2()!!}
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-8">
@@ -338,88 +179,7 @@
                                 <h2 class="section-title">Green Production</h2>
                             </div>
                         </div>
-                        <div class="product-active owl-carousel next-prev-style">
-                            @foreach($product_asdf as $n)
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
-                                    @if ($n->produk_stock == 0)
-                                    <div class="featured-content text-center">
-                                        <ul>
-                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul>
-                                    </div>
-                                    @elseif($n->produk_discount == 0)
-                                    <span ></span>
-                                    @else($n->produk_discount == 1)
-                                    <span class="new">sale</span>
-                                    @endif
-                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
-                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                    <div class="shop-icon">
-                                        <!-- <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                        </ul> -->
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="{{route('detail_asdf', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
-                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                        <a href="{{route('detail_asdf', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                    </h3>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                    @if ($n->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    <div class="tombol-product">
-                                    @if($n->user->seller_active())
-                                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                                    @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-                                    <p><span>{{$n->produk_price}}</span>
-                                        <del>{{$n->product_discount}} %</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div> -->
-                            @endforeach
-                        </div>
+                        {!!Plugin::p_green()!!}
                     </div>
                     <div class="shop-area">
                         <div class="row">
@@ -427,87 +187,7 @@
                                 <h2 class="section-title">Produk baru saat ini</h2>
                             </div>
                         </div>
-                        <div class="product-active owl-carousel next-prev-style">
-                            @foreach($newproduk as $n)
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
-                                   @if ($n->produk_stock == 0)
-                                    <div class="featured-content text-center">
-                                        <ul>
-                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul></div>
-                                    @elseif($n->produk_discount == 0)
-                                        <span ></span>            
-                                    @else($n->produk_discount == 1)
-                                        <span class="new">sale</span>
-                                    @endif
-                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
-                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                    <div class="shop-icon">
-                                        <!-- <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                        </ul> -->
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
-                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                        <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                    </h3>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                    @if ($n->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    <div class="tombol-product">
-                                    @if($n->user->seller_active())
-                                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                                    @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- <div class="product-wrap">
-                                <div class="product-img black-opacity">
-                                    <span class="new sale">Sale</span>
-                                    <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
-                                    <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-                                    <p><span>{{$n->produk_price}}</span>
-                                        <del>{{$n->product_discount}} %</del>
-                                    </p>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                    </ul>
-                                </div>
-                            </div> -->
-                            @endforeach
-                        </div>
+                        {!!Plugin::p_baru_saat_ini()!!}
                     </div>
                     <div class="banner-wrap mb-30">
                         {!!Plugin::view('iklan', [
@@ -527,129 +207,7 @@
                                 </ul>
                             </div> -->
                         </div>
-                        
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="chair">
-                                <div class="product-active owl-carousel next-prev-style">
-                                    @foreach ($category as $n)
-                                    @if ($n->produk_discount == 0)
-                                    <div class="product-items">
-                                        <div class="product-wrap mb-15">
-                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
-                                                @if ($n->produk_stock == 0)
-                                                    <div class="featured-content text-center">
-                                                        <ul>
-                                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    @elseif($n->produk_discount == 0)
-                                                    <span ></span>
-                                                
-                                                @else($n->produk_discount == 1)
-                                                   <span class="new">sale</span>
-                                                @endif
-                                                    <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
-                                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                                <!-- <div class="shop-icon">
-                                                    <ul>
-                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div> -->
-                                            </div>
-                                            <div class="product-content tambahan">
-                                                <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
-                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                                    <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                                </h3>
-                                                <ul class="rating">
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star"></i></li>
-                                                    <li><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                                   @if ($n->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                @if($n->user->seller_active())
-                                                <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                            <div class="tab-pane fade show active" id="chair">
-                                <div class="product-active owl-carousel next-prev-style">
-                                    @foreach ($category as $n)
-                                    @if ($n->produk_discount > 0)
-                                    <div class="product-wrap">
-                                        <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $n->produk_slug)}}'">
-                                            @if ($n->produk_stock == 0)
-                                            <div class="featured-content text-center">
-                                                <ul>
-                                                    <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                                </ul>
-                                            </div>
-                                            @elseif($n->produk_discount == 0)
-                                            <span ></span>
-                                                        
-                                            @else($n->produk_discount == 1)
-                                               <span class="new">sale</span>
-                                            @endif
-                                                <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
-                                                {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                            <!-- <div class="shop-icon">
-                                                <ul>
-                                                    <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                                </ul>
-                                            </div> -->
-                                        </div>
-                                        <div class="product-content">
-                                            <h3><a href="{{route('detail', $n->produk_slug)}}">{{ str_limit($n->produk_name, 15)}}</a>
-                                                <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                                <a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                            </h3>
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                            </ul>
-                                            @if ($n->produk_discount != 0)
-                                                <p>
-                                                    <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
-                                                </p>
-                                                @else
-                                                <p>
-                                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
-                                                </p>
-                                                @endif
-                                            
-                                            @if($n->user->seller_active())
-                                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                                            @endif
-                                            
-                                        </div>
-                                    </div>
-                                    @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
+                        {!!Plugin::p_baru()!!}
                     </div>
                 </div>
             </div>
@@ -699,70 +257,7 @@
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="product-sidebar">
                         <h2 class="section-title">Produk populer saat ini</h2>
-                        <div class="propuler-product-active next-prev-style owl-carousel">
-                            <div class="slidebar-product-wrap">
-                                @foreach ($relatedproduk as $r)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
-                                        <a href="{{route('detail', $r->produk_slug)}}">
-                                            <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                        </a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        @if ($r->produk_discount != 0)
-                                        <p>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price-($r->produk_price * $r->produk_discount / 100))}}</span>
-                                            <del>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</del>
-                                        </p>
-                                        @else
-                                        <p>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</span>
-                                        </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="slidebar-product-wrap">
-                                @foreach ($relatedprodukk as $r)
-                                <div class="product-sidebar-items fix">
-                                    <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
-                                        <a href="{{route('detail', $r->produk_slug)}}">
-                                            <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                        </a>
-                                    </div>
-                                    <div class="product-sedebar-content fix">
-                                        <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
-                                        <ul class="rating">
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star"></i></li>
-                                            <li><i class="fa fa-star-o"></i></li>
-                                        </ul>
-                                        @if ($r->produk_discount != 0)
-                                        <p>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price-($r->produk_price * $r->produk_discount / 100))}}</span>
-                                            <del>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</del>
-                                        </p>
-                                        @else
-                                        <p>
-                                            <span>Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</span>
-                                        </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+                        {!!Plugin::p_populer_saat_ini3()!!}
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
@@ -772,62 +267,7 @@
                                 <h2 class="section-title">Barang barang pilhan saat ini</h2>
                             </div>
                         </div>
-                        <div class="product-active owl-carousel next-prev-style">
-                            @foreach ($featured as $f)
-                            <div class="product-wrap">
-                                <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $f->produk_slug)}}'">
-                                     @if ($f->produk_stock == 0)
-                                    <div class="featured-content text-center">
-                                        <ul>
-                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                        </ul>
-                                    </div>
-                                    @elseif($f->produk_discount == 0)
-                                    <span ></span>
-                                                
-                                    @else($f->produk_discount == 1)
-                                       <span class="new">sale</span>
-                                    @endif
-                                    <img class="first2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
-                                    {{-- <img class="second second2" src="{{asset('assets/images/product/'.$f->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                    <!-- <div class="shop-icon">
-                                        <ul>
-                                            <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                        </ul>
-                                    </div> -->
-                                </div>
-                                <div class="product-content">
-                                    <h3><a href="{{route('detail', $f->produk_slug)}}">{{ str_limit($f->produk_name, 15)}}</a>
-                                        <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
-                                        <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                    </h3>
-                                    <ul class="rating">
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star"></i></li>
-                                        <li><i class="fa fa-star-o"></i></li>
-                                    </ul>
-                                    @if ($f->produk_discount != 0)
-                                    <p>
-                                        <del>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span><br>
-                                        <span>Rp.{{FunctionLib::number_to_text($f->produk_price-($f->produk_price * $f->produk_discount / 100))}}</span>
-                                    </p>
-                                    @else
-                                    <p>
-                                        <span>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</span>
-                                    </p>
-                                    @endif
-                                    <div class="tombol-product">
-                                    @if($f->user->seller_active())
-                                    <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$f->user->user_store}}</button></a></center>
-                                    @endif
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+                        {!!Plugin::p_pilihan_saat_ini()!!}
                     </div>
                 </div>
             </div>
@@ -879,277 +319,25 @@
                             <div class="col-lg-3 col-sm-6 col-12 sm-mb-30">
                                 <div class="product-sidebar">
                                     <h2 class="section-title">Trending</h2>
-                                    <div class="propuler-product-active next-prev-style owl-carousel">
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($popularproduk as $p)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($p->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($popularprodukk as $p)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($p->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    {!!Plugin::p_trending()!!}
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12 sm-mb-30">
                                 <div class="product-sidebar">
                                     <h2 class="section-title">Top Rate</h2>
-                                    <div class="propuler-product-active next-prev-style owl-carousel">
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($toprate as $t)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($t->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($topratee as $t)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $t->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$t->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($t->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    {!!Plugin::p_top_rate()!!}
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="product-sidebar">
                                     <h2 class="section-title">Hot Produk</h2>
-                                    <div class="propuler-product-active next-prev-style owl-carousel">
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($popularproduk as $p)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{ str_limit($p->produk_name, 15)}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($p->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($popularprodukk as $p)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $p->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$p->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{ str_limit($p->produk_name, 15)}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($p->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    {!!Plugin::p_hot()!!}
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="product-sidebar">
                                     <h2 class="section-title">Produk Diskon</h2>
-                                    <div class="propuler-product-active next-prev-style owl-carousel">
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($discountproduk as $d)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
-                                                    <a href="{{route('detail', $d->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{ str_limit($d->produk_name, 15)}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($d->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="slidebar-product-wrap">
-                                            @foreach ($discountprodukk as $d)
-                                            <div class="product-sidebar-items fix">
-                                                <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
-                                                    <a class="readmore" href="{{route('detail', $d->produk_slug)}}">
-                                                        <img src="{{asset('assets/images/product/'.$d->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-sedebar-content fix">
-                                                    <h4><a class="readmore" href="{{route('detail', $d->produk_slug)}}">{{ str_limit($d->produk_name, 15)}}</a></h4>
-                                                    <ul class="rating">
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                    @if ($d->produk_discount != 0)
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
-                                                        <del>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del>
-                                                    </p>
-                                                    @else
-                                                    <p>
-                                                        <span>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</span>
-                                                    </p>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    {!!Plugin::p_diskon()!!}
                                 </div>
                             </div>
                         </div>
@@ -1166,119 +354,6 @@
                 <div class="col-12">
                     <div class="shop-area">
                         <h2 class="section-title">Produk populer konsumen</h2>
-                        <div class="propuler-product-active next-prev-style owl-carousel">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="grid">
-                                <div class="row">
-                                @foreach($latestnews as $item)
-                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
-                                                 @if ($item->produk_stock == 0)
-                                                    <div class="featured-content text-center">
-                                                        <ul>
-                                                            <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                                        </ul>
-                                                    </div>
-                                                    @elseif($item->produk_discount > 0)
-                                                       <span class="new">sale</span>
-                                                    @endif
-                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
-                                                <!-- <div class="shop-icon">
-                                                    <ul>
-                                                        {{-- <li><a href="{{route('detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li> --}}
-                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div> -->
-                                            </div>
-                                            <div class="product-content2">
-                                                <h4>
-                                                    <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
-                                                    <a href="{{route('detail', $item->id)}}"></a>
-                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
-                                                    <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                                </h4>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    <i class="fa fa-user"></i> {{$item->user->name}}
-                                                </ul>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    @if ($item->review)
-                                                    <i class="fa fa-comments"></i> {{$item->review->count()}} Comments
-                                                    @else
-                                                    <i class="fa fa-comments"></i> 0 Comments
-                                                    @endif
-                                                </ul>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    {{str_limit($item->produk_note, 25)}}
-                                                </ul>
-                                                <div style="width: 72%; bottom: 0; padding-bottom: 40px; position: absolute;">
-                                                <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="grid">
-                                <div class="row">
-                                @foreach($latestnewss as $item)
-                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
-                                        <div class="product-wrap">
-                                            <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
-                                                 @if ($item->produk_stock == 0)
-                                                <div class="featured-content text-center">
-                                                    <ul>
-                                                        <li><a style="background-color: red; border: red; color: white;">Sold Out</a></li>
-                                                    </ul>
-                                                </div>
-                                                @elseif($item->produk_discount > 0)
-                                                   <span class="new sale">Sale</span>
-                                                @endif
-                                                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
-                                                {{-- <img class="first" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
-                                                <img class="second" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
-                                                <!-- <div class="shop-icon">
-                                                    <ul>
-                                                        {{-- <li><a href="{{route('detail', $item->produk_category_id)}}"><i class="fa fa-shopping-cart"></i></a></li> --}}
-                                                        <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart"></i></a></li>
-                                                        <li><a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div> -->
-                                            </div>
-                                            <div class="product-content2">
-                                                <h3>
-                                                    <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 10)}}</a>
-                                                    <a href="{{route('detail', $item->id)}}"></a>
-                                                    <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
-                                                    <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
-                                                </h3>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    <i class="fa fa-user"></i> {{$item->user->name}}
-                                                </ul>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    
-                                                    <i class="fa fa-comments"></i> {{ $item->count_discuss($item)}} Comments
-                                                   
-                                                </ul>
-                                                <ul style="color: #999; font-size: 11px">
-                                                    {{str_limit($item->produk_note, 25)}}
-                                                </ul>
-                                                <div style="width: 72%; bottom: 0; padding-bottom: 40px; position: absolute;">
-                                                    <center><a class="readmore" href="{{route('detail', $item->produk_slug)}}"><button class="btn btn-success btn-sm col-12">selengkapnya</button></a></center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -1289,7 +364,7 @@
     <div class="box-b-r hide" id="a-b-r">
         <img src="http://www.gambaranimasi.org/data/media/492/animasi-bergerak-kembang-api-0008.gif">
     </div> -->
-    <!-- <div class="blog-area mb-30">
+    {{-- <div class="blog-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1322,11 +397,11 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> --}}
     <!-- blog-area end -->
     
     <!-- brand-area start -->
-    <!-- <div class="brand-area mb-30">
+    {{-- <div class="brand-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -1343,7 +418,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div> --}}
     <!-- brand-area end -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection

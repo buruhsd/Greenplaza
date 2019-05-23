@@ -106,7 +106,17 @@ class Produk extends Model
     }
     public function review()
     {
-        return $this->hasOne('App\Models\Review', 'review_user_id', 'produk_seller_id');
+        return $this->hasMany('App\Models\Review', 'review_produk_id');
+    }
+    public function avg_star()
+    {
+        return $this->review()->avg('review_stars');
+    }
+    public function avg_star_field()
+    {
+        return $this->hasMany('App\Models\Review', 'review_produk_id')
+                ->selectRaw('review_produk_id,AVG(sys_review.review_stars) AS average_rating')
+                ->groupBy('review_produk_id');
     }
 
     public function count_review($data){

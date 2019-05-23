@@ -16,8 +16,62 @@ class Plugin
     */
     public static function p_populer($param = []){
         extract($param);
-        $data['p_populer'] = App\Models\Produk::orderBy('produk_viewer', 'DESC')->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        $data['p_populer'] = App\Models\Produk::where('produk_status', '!=', 2)->orderBy('produk_viewer', 'DESC')->get();
+        return view('frontend.plugin.home.p_populer', $data);
+    }
+
+    /**
+    * @param
+    * @return produk by viewer terbanyak
+    */
+    public static function p_populer_saat_ini($param = []){
+        extract($param);
+        $data['p_populer_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(7)
+            ->get();
+        $data['p_populer_saat_ini2'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(7)
+            ->skip(7)
+            ->get();
+        return view('frontend.plugin.home.p_populer_saat_ini', $data);
+    }
+
+    /**
+    * @param
+    * @return produk by viewer terbanyak
+    */
+    public static function p_populer_saat_ini2($param = []){
+        extract($param);
+        $data['p_populer_saat_ini2'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(4)
+            ->get();
+        $data['p_populer_saat_ini22'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_populer_saat_ini2', $data);
+    }
+
+    /**
+    * @param
+    * @return produk by viewer terbanyak
+    */
+    public static function p_populer_saat_ini3($param = []){
+        extract($param);
+        $data['p_populer_saat_ini3'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(4)
+            ->get();
+        $data['p_populer_saat_ini32'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_viewer', 'DESC')
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_populer_saat_ini3', $data);
     }
 
     /**
@@ -26,8 +80,8 @@ class Plugin
     */
     public static function p_green($param = []){
         extract($param);
-        $data['p_green'] = App\Models\Produk::where('produk_seller_id', 2)->orderBy('updated_at', 'DESC')->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        $data['p_green'] = App\Models\Produk::where('produk_status', '!=', 2)->where('produk_seller_id', 2)->orderBy('updated_at', 'DESC')->get();
+        return view('frontend.plugin.home.p_green', $data);
     }
 
     /**
@@ -36,54 +90,96 @@ class Plugin
     */
     public static function p_baru_saat_ini($param = []){
         extract($param);
-        $data['p_baru_saat_ini'] = App\Models\Produk::orderBy('updated_at', 'DESC')->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        $data['p_baru_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return view('frontend.plugin.home.p_baru_saat_ini', $data);
     }
 
     /**
     * @param
-    * @return
+    * @return produk dengan harga diskon
+    */
+    public static function p_harga_diskon($param = []){
+        extract($param);
+        $data['p_harga_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->where('produk_discount', '>', 0)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
+        return view('frontend.plugin.home.p_harga_diskon', $data);
+    }
+
+    /**
+    * @param
+    * @return produk by created_at
     */
     public static function p_baru($param = []){
         extract($param);
-        $data['p_baru'] = App\Models\Produk::orderBy('created_at', 'DESC')->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
+        $data['p_baru'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->where('produk_discount', '=', 0)
+            ->orderBy('created_at', 'DESC')->get();
+        $data['p_baru_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->where('produk_discount', '>', 0)
+            ->orderBy('created_at', 'DESC')->get();
+        return view('frontend.plugin.home.p_baru', $data);
     }
 
     /**
     * @param
-    * @return
+    * @return produk by total transaksi detail
     */
     public static function p_pilihan_saat_ini($param = []){
         extract($param);
-        $data['p_pilihan_saat_ini'] = App\Models\Produk::withCount('trans_detail')
+        $data['p_pilihan_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
             ->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        return view('frontend.plugin.home.p_pilihan_saat_ini', $data);
     }
 
     /**
     * @param
-    * @return
+    * @return  produk by total transaksi detail
     */
     public static function p_trending($param = []){
         extract($param);
-        $data['p_trending'] = App\Models\Produk::withCount('trans_detail')
+        $data['p_trending'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
+            ->limit(4)
             ->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        $data['p_trending2'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
+            ->orderBy('trans_detail_count', 'desc')
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_trending', $data);
     }
 
     /**
     * @param
-    * @return
+    * @return produk by bintang terbanyak
     */
     public static function p_top_rate($param = []){
         extract($param);
-        $data['p_trending'] = App\Models\Produk::withCount('trans_detail')
-            ->orderBy('trans_detail_count', 'desc')
+        $order = 'DESC';
+        $data['p_top_rate'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
+            ->whereHas('review')
+            ->with('review')
+            ->with(['avg_star_field' => function ($q) use ($order) {
+                    $q->orderBy('average_rating', $order);
+                }])
+            ->limit(4)
             ->get();
-        // return view('frontend.plugin.hot-promo', $data);
+        $data['p_top_rate2'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
+            ->whereHas('review')
+            ->with('review')
+            ->with(['avg_star_field' => function ($q) use ($order) {
+                    $q->orderBy('average_rating', $order);
+                }])
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_top_rate', $data);
     }
 
     /**
@@ -91,6 +187,19 @@ class Plugin
     * @return
     */
     public static function p_hot($param = []){
+        extract($param);
+        $data['p_hot'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_is_hot', 'DESC')
+            ->orderBy('produk_hotlist', 'DESC')
+            ->limit(4)
+            ->get();
+        $data['p_hot2'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->orderBy('produk_is_hot', 'DESC')
+            ->orderBy('produk_hotlist', 'DESC')
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_hot', $data);
     }
 
     /**
@@ -98,6 +207,20 @@ class Plugin
     * @return
     */
     public static function p_diskon($param = []){
+        extract($param);
+        // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
+        $data['p_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->where('produk_discount', '>', 0)
+            ->orderBy('created_at', 'DESC')
+            ->limit(4)
+            ->get();
+        $data['p_diskon2'] = App\Models\Produk::where('produk_status', '!=', 2)
+            ->where('produk_discount', '>', 0)
+            ->orderBy('created_at', 'DESC')
+            ->limit(4)
+            ->skip(4)
+            ->get();
+        return view('frontend.plugin.home.p_diskon', $data);
     }
 
     /**
@@ -105,6 +228,26 @@ class Plugin
     * @return
     */
     public static function p_populer_konsumen($param = []){
+        extract($param);
+        $order = 'DESC';
+        $data['p_populer_konsumen'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
+            ->whereHas('review')
+            ->with('review')
+            ->with(['avg_star_field' => function ($q) use ($order) {
+                    $q->orderBy('average_rating', $order);
+                }])
+            // ->limit(6)
+            ->get();
+        // $data['p_populer_konsumen2'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
+        //     ->whereHas('review')
+        //     ->with('review')
+        //     ->with(['avg_star_field' => function ($q) use ($order) {
+        //             $q->orderBy('average_rating', $order);
+        //         }])
+        //     ->limit(6)
+        //     ->skip(6)
+        //     ->get();
+        return view('frontend.plugin.home.p_populer_konsumen', $data);
     }
 
     /**

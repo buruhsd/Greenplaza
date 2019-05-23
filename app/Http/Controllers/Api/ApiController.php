@@ -24,12 +24,12 @@ class ApiController extends Controller
             'password'=>$request->input("password")
         ];
         $uid = 0;
-        $data = $par_auth;
-        // $data = [];
+        // $data = $par_auth;
+        $data = [];
         if(FunctionLib::check_atempt($par_auth) == 200){
             $user = User::whereUsername($request->input("username"))->first();
             if($user){
-                // $data = $user->user_address();
+                $data = $user->user_address();
             }
             $status = 200;
         }

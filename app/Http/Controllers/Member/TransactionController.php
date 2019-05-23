@@ -393,15 +393,15 @@ class TransactionController extends Controller
                 // $saldo = FunctionLib::update_wallet($update_wallet);
 
                 // memberikan bonus kepada sponsor
-                // $sponsor = FunctionLib::get_sponsor($trans_detail->produk->produk_seller_id);
-                // $update_wallet = [
-                //     'from_id'=>$trans_detail->produk->produk_seller_id,
-                //     'to_id'=>$sponsor,
-                //     'wallet_type'=>1, //1/3
-                //     'amount'=>($detail_amount*(FunctionLib::get_config('price_percen_refferal'))/100),
-                //     'note'=>'memberikan bonus refferal kepada user sponsor dari transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-                // ];
-                // $saldo = FunctionLib::transfer_wallet($update_wallet);
+                $sponsor = FunctionLib::get_sponsor($trans_detail->produk->produk_seller_id);
+                $update_wallet = [
+                    'from_id'=>$trans_detail->produk->produk_seller_id,
+                    'to_id'=>$sponsor,
+                    'wallet_type'=>1, //1/3
+                    'amount'=>($detail_amount*(FunctionLib::get_config('price_percen_refferal'))/100),
+                    'note'=>'memberikan bonus refferal kepada user sponsor dari transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                ];
+                $saldo = FunctionLib::transfer_wallet($update_wallet);
             }
         }
         if(!$trans_detail){

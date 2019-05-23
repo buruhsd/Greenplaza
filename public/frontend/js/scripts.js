@@ -184,6 +184,37 @@
         }
     });
 
+    // slidebar-product-active
+    $('.propuler-product-active2').owlCarousel({
+        margin: 30,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        nav: true,
+        smartSpeed: 800,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        responsive: {
+            0: {
+                items: 1,
+            },
+            200: {
+                items: 2,
+            },
+            400: {
+                items: 3
+            },
+            600: {
+                items: 4
+            },
+            800: {
+                items: 5
+            },
+            1200: {
+                items: 6
+            }
+        }
+    });
+
     // team-active
     $('.team-active').owlCarousel({
         margin: 15,
