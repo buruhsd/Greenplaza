@@ -1,0 +1,49 @@
+<div class="propuler-product-active next-prev-style owl-carousel">
+    @foreach ($p_harga_diskon as $d)
+    <div class="product-wrap">
+        <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
+            <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
+                <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" ></a>
+            <!-- <div class="discount-wrap">
+                <div data-countdown="2017/10/03"></div>
+            </div> -->
+            <!-- <div class="shop-icon">
+                <ul>
+                    <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
+                </ul>
+            </div> -->
+        </div>
+        <div class="product-content">
+            <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>
+                <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart pull-right"></i></a>
+                <a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
+            </h3>
+            @if ($d->produk_discount != 0)
+            <p>
+                <del>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($d->produk_discount)}} %</span><br>
+                <span>Rp.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
+            </p>
+            @else
+            <p>
+                <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+            </p>
+            @endif
+            <ul class="rating">
+                @if($d->avg_star())
+                    @for($i=1;$i<=5;$i++)
+                        <?php $star = ($i <= $d->avg_star())?'fa fa-star':'fa fa-star-o'; ?>
+                        <li><i class="{{$star}}"></i></li>
+                    @endfor
+                @else
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                @endif
+            </ul>
+        </div>
+    </div>
+    @endforeach
+</div>
