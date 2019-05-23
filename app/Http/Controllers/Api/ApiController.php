@@ -29,7 +29,7 @@ class ApiController extends Controller
         if(FunctionLib::check_atempt($par_auth) == 200){
             $user = User::whereUsername($request->input("username"))->first();
             if($user){
-                $data = $user->user_address();
+                $data = $user->user_address()->get();
             }
             $status = 200;
         }
@@ -131,7 +131,7 @@ class ApiController extends Controller
         // attempt to do the login
         if (Auth::attempt($userdata)) {
             $status = 200;
-            $data = Auth::user()->with('user_detail');
+            $data = User::whereId(Auth::id())->with('user_detail')->first();
         } else {
             $status = 500;
             $data = [];
