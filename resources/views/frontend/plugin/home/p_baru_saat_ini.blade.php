@@ -13,13 +13,7 @@
                 <span class="new">sale</span>
             @endif
             <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
-            {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
             <div class="shop-icon">
-                <!-- <ul>
-                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $n->id)}}"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="{{route('detail', $n->produk_slug)}}"><i class="fa fa-eye"></i></a></li>
-                </ul> -->
             </div>
         </div>
         <div class="product-content">
@@ -58,31 +52,5 @@
             </div>
         </div>
     </div>
-    <!-- <div class="product-wrap">
-        <div class="product-img black-opacity">
-            <span class="new sale">Sale</span>
-            <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
-            <div class="shop-icon">
-                <ul>
-                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="product-content">
-            <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-            <p><span>{{$n->produk_price}}</span>
-                <del>{{$n->product_discount}} %</del>
-            </p>
-            <ul class="rating">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
-        </div>
-    </div> -->
     @endforeach
 </div>

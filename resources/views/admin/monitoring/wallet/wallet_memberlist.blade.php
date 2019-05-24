@@ -39,7 +39,7 @@
                                     <th><center>Detail Member</center></th>
                                     <th><center>Saldo</center></th>
                                     <th><center>Wallet Type</center></th>
-                                    <th><center>Action</center></th>
+                                    {{-- <th><center>Action</center></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,9 +87,9 @@
                                         Masedi <br/>
                                         Greenline
                                     </center></td>
-                                    <td>
+                                    {{-- <td>
                                         <center><a href="{{route('admin.monitoring.editsaldomember', $u->id)}}"><button class="btn btn-success btn-xs">Edit Saldo</button></a></center>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
