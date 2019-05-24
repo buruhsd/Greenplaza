@@ -17,7 +17,7 @@ class Plugin
     public static function p_populer($param = []){
         extract($param);
         $data['p_populer'] = App\Models\Produk::where('produk_status', '!=', 2)->orderBy('produk_viewer', 'DESC')->get();
-        return view('frontend.plugin.home.p_populer', $data);
+        return view('frontend.plugin.home.p_populer', $data)->render();
     }
 
     /**
@@ -35,7 +35,7 @@ class Plugin
             ->limit(7)
             ->skip(7)
             ->get();
-        return view('frontend.plugin.home.p_populer_saat_ini', $data);
+        return view('frontend.plugin.home.p_populer_saat_ini', $data)->render();
     }
 
     /**
@@ -53,7 +53,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_populer_saat_ini2', $data);
+        return view('frontend.plugin.home.p_populer_saat_ini2', $data)->render();
     }
 
     /**
@@ -71,7 +71,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_populer_saat_ini3', $data);
+        return view('frontend.plugin.home.p_populer_saat_ini3', $data)->render();
     }
 
     /**
@@ -93,7 +93,7 @@ class Plugin
         $data['p_baru_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('updated_at', 'DESC')
             ->get();
-        return view('frontend.plugin.home.p_baru_saat_ini', $data);
+        return view('frontend.plugin.home.p_baru_saat_ini', $data)->render();
     }
 
     /**
@@ -106,7 +106,7 @@ class Plugin
             ->where('produk_discount', '>', 0)
             ->orderBy('updated_at', 'DESC')
             ->get();
-        return view('frontend.plugin.home.p_harga_diskon', $data);
+        return view('frontend.plugin.home.p_harga_diskon', $data)->render();
     }
 
     /**
@@ -122,7 +122,7 @@ class Plugin
         $data['p_baru_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '>', 0)
             ->orderBy('created_at', 'DESC')->get();
-        return view('frontend.plugin.home.p_baru', $data);
+        return view('frontend.plugin.home.p_baru', $data)->render();
     }
 
     /**
@@ -134,7 +134,7 @@ class Plugin
         $data['p_pilihan_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
             ->get();
-        return view('frontend.plugin.home.p_pilihan_saat_ini', $data);
+        return view('frontend.plugin.home.p_pilihan_saat_ini', $data)->render();
     }
 
     /**
@@ -152,7 +152,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_trending', $data);
+        return view('frontend.plugin.home.p_trending', $data)->render();
     }
 
     /**
@@ -179,7 +179,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_top_rate', $data);
+        return view('frontend.plugin.home.p_top_rate', $data)->render();
     }
 
     /**
@@ -199,7 +199,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_hot', $data);
+        return view('frontend.plugin.home.p_hot', $data)->render();
     }
 
     /**
@@ -220,7 +220,7 @@ class Plugin
             ->limit(4)
             ->skip(4)
             ->get();
-        return view('frontend.plugin.home.p_diskon', $data);
+        return view('frontend.plugin.home.p_diskon', $data)->render();
     }
 
     /**
@@ -247,7 +247,7 @@ class Plugin
         //     ->limit(6)
         //     ->skip(6)
         //     ->get();
-        return view('frontend.plugin.home.p_populer_konsumen', $data);
+        return view('frontend.plugin.home.p_populer_konsumen', $data)->render();
     }
 
     /**
