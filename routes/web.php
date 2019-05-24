@@ -414,8 +414,8 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['superadmin', 'admi
 			Route::get('profit_detail', 'Admin\\MonitoringController@profit_detail')->name('.profit_detail');
 			//Wallet
 			Route::get('wallet_sellerlist', 'Admin\\MonitoringController@wallet_sellerlist')->name('.wallet_sellerlist');
-			Route::get('editsaldoseller/{id}', 'Admin\\MonitoringController@editsaldoseller')->name('.editsaldoseller');
-			Route::get('editsaldomember/{id}', 'Admin\\MonitoringController@editsaldomember')->name('.editsaldomember');
+			// Route::get('editsaldoseller/{id}', 'Admin\\MonitoringController@editsaldoseller')->name('.editsaldoseller');
+			// Route::get('editsaldomember/{id}', 'Admin\\MonitoringController@editsaldomember')->name('.editsaldomember');
 			// Route::post('editsaldoseller_cw/{id}', 'Admin\\MonitoringController@editsaldoseller_cw')->name('.editsaldoseller_cw');
 			// Route::post('editsaldoseller_rw/{id}', 'Admin\\MonitoringController@editsaldoseller_rw')->name('.editsaldoseller_rw');
 			// Route::post('editsaldoseller_transaksi/{id}', 'Admin\\MonitoringController@editsaldoseller_transaksi')->name('.editsaldoseller_transaksi');

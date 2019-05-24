@@ -39,7 +39,7 @@
                                     <th><center>Detail Seller</center></th>
                                     <th><center>Saldo</center></th>
                                     <th><center>Wallet Type</center></th>
-                                    <th><center>Action</center></th>
+                                    {{-- <th><center>Action</center></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,9 +85,9 @@
                                         Iklan <br/>
                                         Pincode <br/>
                                     </center></td>
-                                    <td>
+                                    {{-- <td>
                                         <center><a href="{{route('admin.monitoring.editsaldoseller', $u->id)}}"><button class="btn btn-success btn-xs">Edit Saldo</button></a></center>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
