@@ -82,7 +82,7 @@ class CronShipping extends Command
             $this->info("Memulai pengecekan. . .");
             foreach ($trans_detail as $item) {
                 $ship_status = FunctionLib::get_waybill($item->id);
-                if($ship_status == "Sent"){
+                if($ship_status == "Terkirim"){
                     $difference = FunctionLib::daysBetween($item->trans_detail_send_date, $date, 'h');
                     $this->info('Transaksi detail '.$item->trans_code.' ordered at '.$item->trans->created_at);
                     $batas = FunctionLib::get_config('transaksi_durasi_shipping');
@@ -128,15 +128,15 @@ class CronShipping extends Command
                             $saldo = FunctionLib::transfer_wallet($update_wallet);
                             
                             // memberikan bonus kepada sponsor
-                            // $sponsor = FunctionLib::get_sponsor($item->produk->produk_seller_id);
-                            // $update_wallet = [
-                            //     'from_id'=>$item->produk->produk_seller_id,
-                            //     'to_id'=>$sponsor,
-                            //     'wallet_type'=>1, //1/3
-                            //     'amount'=>($detail_amount*(FunctionLib::get_config('price_percen_refferal'))/100),
-                            //     'note'=>'memberikan bonus refferal kepada user sponsor dari transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
-                            // ];
-                            // $saldo = FunctionLib::transfer_wallet($update_wallet);
+                            $sponsor = FunctionLib::get_sponsor($item->produk->produk_seller_id);
+                            $update_wallet = [
+                                'from_id'=>$item->produk->produk_seller_id,
+                                'to_id'=>$sponsor,
+                                'wallet_type'=>1, //1/3
+                                'amount'=>($detail_amount*(FunctionLib::get_config('price_percen_refferal'))/100),
+                                'note'=>'memberikan bonus refferal kepada user sponsor dari transaksi detail kode '.$item->trans_code.' dan transaksi kode '.$item->trans->trans_code.'.',
+                            ];
+                            $saldo = FunctionLib::transfer_wallet($update_wallet);
                         }
                         $this->info('Wallet CW '.$item->produk->produk_seller_id.' ditambah sebesar '.$detail_amount_total.'.');
                     }
