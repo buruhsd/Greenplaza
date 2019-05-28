@@ -78,6 +78,16 @@
     })();
     </script>
     <!--End of Tawk.to Script-->
+    {{-- pre loader --}}
+    <script>
+        //paste this code under head tag or in a seperate js file.
+        // Wait for window load
+        $(window).load(function() {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+    </script>
+    {{-- end pre loader --}}
     @guest
     @else
         <script src="{{ asset('js/pusher.js') }}"></script>
