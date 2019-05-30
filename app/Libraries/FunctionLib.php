@@ -10,7 +10,7 @@ class FunctionLib
             if(file_exists($uploadPath . '/' . $imagename)){
                 $image = \File::get($uploadPath.'/'.$imagename);
                 if(!file_exists($uploadPath . '/thumb/' . $imagename)){
-                    $imaget = Image::make($image)->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
+                    $imaget = Image::make(base64_decode($image))->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
                     $imaget->save($uploadPath.'/thumb/'.$imagename);
                     $no++;
                 }
