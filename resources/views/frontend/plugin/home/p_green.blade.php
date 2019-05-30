@@ -13,8 +13,8 @@
             @else($n->produk_discount == 1)
             <span class="new">sale</span>
             @endif
-            <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
-            {{-- <img class="second second2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
+            <img class="first2" src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
+            {{-- <img class="second second2" src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
             <div class="shop-icon">
                 <!-- <ul>
                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
@@ -62,7 +62,7 @@
     <!-- <div class="product-wrap">
         <div class="product-img black-opacity">
             <span class="new sale">Sale</span>
-            <img src="{{asset('assets/images/product/'.$n->produk_image)}}">
+            <img src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}">
             <div class="shop-icon">
                 <ul>
                     <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>

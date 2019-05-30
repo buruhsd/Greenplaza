@@ -196,12 +196,14 @@ class ProdukController extends Controller
                 $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(5).'.'.$image->getClientOriginalExtension();
                 // $imagesize = $image->getClientSize();
                 // $imagetmp = $image->getPathName();
-                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                if(file_exists($uploadPath . '/' . $imagename) || file_exists($uploadPath . '/thumb/' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }
+                $imaget = Image::make($image->getRealPath())->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
                 $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
                 // $image = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
                 $image->save($uploadPath.'/'.$imagename);
+                $imaget->save($uploadPath.'/thumb/'.$imagename);
                 $produk_image_image[] = $imagename;
                 // $imaget->save($uploadPath2.'/'.$imagename,80);
                 if($key == 0){
@@ -370,10 +372,13 @@ class ProdukController extends Controller
                         File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
                     }
                 }
-                if(file_exists($uploadPath . '/' . $imagename)){// || file_exists($uploadPath . '/thumb' . $imagename)){
+                $imaget = Image::make($image->getRealPath())->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
+                $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
+                if(file_exists($uploadPath . '/' . $imagename) || file_exists($uploadPath . '/thumb/' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }
-                $image->move($uploadPath, $imagename);
+                $image->save($uploadPath.'/'.$imagename);
+                $imaget->save($uploadPath.'/thumb/'.$imagename);
                 $produk_image_image[] = $imagename;
                 // $imaget->save($uploadPath2.'/'.$imagename,80);
                 if($produk->images->count() == 0 && $key == 0){

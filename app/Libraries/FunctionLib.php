@@ -1,6 +1,22 @@
 <?php
 class FunctionLib
 {
+    public static function upload_thumb(){
+        $no = 0;
+        $data = App\Models\Produk_image::get()->pluck('produk_image_image');
+        foreach ($data as $key => $item) {
+            $uploadPath = public_path('assets/images/product');
+            $image = \File::get($uploadPath.'/'.$item);
+            $imagename = $item;
+            if(!file_exists($uploadPath . '/thumb/' . $imagename)){
+                $imaget = Image::make($image)->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
+                $imaget->save($uploadPath.'/thumb/'.$imagename);
+                $no++;
+            }
+        }
+        return $no;
+    }
+
     public static function get_sponsor($id){
         $user = App\User::find($id);
         $sponsor = $user->sponsor->user_tree_sponsor_id;

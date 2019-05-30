@@ -12,7 +12,7 @@
             @else($n->produk_discount == 1)
                 <span class="new">sale</span>
             @endif
-            <img class="first2" src="{{asset('assets/images/product/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
+            <img class="first2" src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt=""  >
             <div class="shop-icon">
             </div>
         </div>

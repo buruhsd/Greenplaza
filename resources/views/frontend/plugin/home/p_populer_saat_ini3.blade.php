@@ -4,7 +4,7 @@
         <div class="product-sidebar-items fix">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
-                    <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
+                    <img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
                 </a>
             </div>
             <div class="product-sedebar-content fix">
@@ -42,7 +42,7 @@
         <div class="product-sidebar-items fix">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
-                    <img src="{{asset('assets/images/product/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
+                    <img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
                 </a>
             </div>
             <div class="product-sedebar-content fix">

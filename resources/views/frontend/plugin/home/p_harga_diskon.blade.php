@@ -3,7 +3,7 @@
     <div class="product-wrap">
         <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
             <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
-                <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/'.$d->produk_image)}}" ></a>
+                <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$d->produk_image)}}" ></a>
         </div>
         <div class="product-content">
             <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>

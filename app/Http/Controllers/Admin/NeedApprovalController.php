@@ -643,6 +643,7 @@ class NeedApprovalController extends Controller
     //PRODUK ADMIN
     public function produkadmin ()
     {
+        FunctionLib::upload_thumb();
         $perpage = 5;
         $users = User::whereHas('roles', function($query){
                 $query->where('name','=','admin');

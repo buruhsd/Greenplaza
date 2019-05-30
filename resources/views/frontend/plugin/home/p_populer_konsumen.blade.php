@@ -11,7 +11,7 @@
                     @elseif($item->produk_discount > 0)
                        <span class="new">sale</span>
                     @endif
-                <img class="" src="{{ asset('assets/images/product/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
+                <img class="" src="{{ asset('assets/images/product/thumb/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
             </div>
             <div class="product-content2">
                 <h4>
