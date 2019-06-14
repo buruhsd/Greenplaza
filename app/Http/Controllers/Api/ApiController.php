@@ -266,18 +266,18 @@ class ApiController extends Controller
         }
 
         $asset = asset('assets/images/product/thumb');
-        $data = Produk::whereRaw($where)
+        $model = Produk::whereRaw($where)
             ->orderByRaw($order)
             ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
             ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
             ->leftJoin('conf_produk_unit', 'conf_produk_unit.id', '=', 'sys_produk.produk_unit')
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
             ->groupBy('sys_produk.id')
-            ->where('produk_status', '=', $status)
-            ->skip(($page-1) * $perPage)
-            ->take($perPage);
-        $total = ceil($data->count() / $perpage);
-        $data = $data->get();
+            ->where('produk_status', '=', $status);
+        $data = $model->skip(($page-1) * $perPage)
+            ->take($perPage)
+            ->get();
+        $total = ceil($model->count() / $perpage);
             // ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data, 'total'=>$total]);
     }
