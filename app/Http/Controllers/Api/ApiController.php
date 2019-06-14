@@ -274,7 +274,7 @@ class ApiController extends Controller
             ->groupBy('sys_produk.id')
             ->where('produk_status', '=', $status)
             ->skip(($page-1) * $perPage)
-            ->limit($perPage)
+            ->take($perPage)
             ->get();
             // ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data]);
