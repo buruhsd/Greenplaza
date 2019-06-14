@@ -243,7 +243,7 @@ class ApiController extends Controller
         $page = (!empty($request->input("page")))
             ?(int)$request->page
             :1;
-        
+
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
@@ -278,7 +278,7 @@ class ApiController extends Controller
             ->take($perPage)
             ->get();
             // ->paginate($perPage);
-        return response()->json(['status' => 200, 'data'=>$data]);
+        return response()->json(['status' => 200, 'data'=>$data, 'page'=>$page]);
     }
 
     /**
