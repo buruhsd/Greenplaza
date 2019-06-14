@@ -238,10 +238,10 @@ class ApiController extends Controller
         $where = '1';
         $order = "rand()";
         $perPage = (!empty($request->input("perpage")))
-            ?$request->perpage
+            ?$request->input("perpage")
             :9;
         $page = (!empty($request->input("page")))
-            ?$request->page
+            ?$request->input("page")
             :1;
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
