@@ -278,7 +278,7 @@ class ApiController extends Controller
             ->take($perPage)
             ->get();
             // ->paginate($perPage);
-        return response()->json(['status' => 200, 'data'=>$data, 'page'=>$page]);
+        return response()->json(['status' => 200, 'data'=>$data, 'total'=>$data->total()]);
     }
 
     /**
