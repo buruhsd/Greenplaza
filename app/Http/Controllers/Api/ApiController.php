@@ -240,7 +240,6 @@ class ApiController extends Controller
         $perPage = (!empty($request->input("perpage")))
             ?$request->perpage
             :9;
-        dd($request->all());
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
@@ -261,6 +260,7 @@ class ApiController extends Controller
         if($request->has("user_status") && $request->input("user_status") != ""){
             $where .= " AND produk_user_status = ".$request->input("user_status");
         }
+        print_r($request->all());
 
         $asset = asset('assets/images/product/thumb');
         $data = Produk::whereRaw($where)
