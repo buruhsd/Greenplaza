@@ -144,7 +144,7 @@ class ApiController extends Controller
     **/
     public function detail_transaksi(Request $request, $detail_id){
         $where = 'sys_trans_detail.id ='.$detail_id;
-        $asset = asset('assets/images/product');
+        $asset = asset('assets/images/product/thumb');
         $data = Trans_detail::whereRaw($where)
                 ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
                 ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
@@ -186,7 +186,7 @@ class ApiController extends Controller
         $w_status = ' AND '.$arr_status[$status]; 
         $where .= $w_status;
 
-        $asset = asset('assets/images/product');
+        $asset = asset('assets/images/product/thumb');
         $data = Trans_detail::whereRaw($where)
                 ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
                 ->select('sys_trans_detail.*', DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as produk'))
@@ -221,7 +221,7 @@ class ApiController extends Controller
         $w_status = ' AND '.$arr_status[$status]; 
         $where .= $w_status;
 
-        $asset = asset('assets/images/product');
+        $asset = asset('assets/images/product/thumb');
         $data = Trans_detail::whereRaw($where)
                 ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
                 ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
@@ -237,6 +237,9 @@ class ApiController extends Controller
     {
         $where = '1';
         $order = "rand()";
+        $perPage = (!empty($request->input("perpage")))
+            ?$request->input("perpage")
+            :9;
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
@@ -258,16 +261,17 @@ class ApiController extends Controller
             $where .= " AND produk_user_status = ".$request->input("user_status");
         }
 
-        $asset = asset('assets/images/product');
+        $asset = asset('assets/images/product/thumb');
         $data = Produk::whereRaw($where)
-                    ->orderByRaw($order)
-                    ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
-                    ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
-                    ->leftJoin('conf_produk_unit', 'conf_produk_unit.id', '=', 'sys_produk.produk_unit')
-                    ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
-                    ->groupBy('sys_produk.id')
-                    ->where('produk_status', '=', $status)
-                    ->get();
+            ->orderByRaw($order)
+            ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+            ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+            ->leftJoin('conf_produk_unit', 'conf_produk_unit.id', '=', 'sys_produk.produk_unit')
+            ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
+            ->groupBy('sys_produk.id')
+            ->where('produk_status', '=', $status)
+            // ->get();
+            ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data]);
     }
 
@@ -283,7 +287,7 @@ class ApiController extends Controller
     * mendapatkan detail produk
     **/
     public function detail_produk(Request $request, $pid){
-        $asset = asset('assets/images/product');
+        $asset = asset('assets/images/product/thumb');
         $data = Produk::where('sys_produk.id', $pid)
             ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
             ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
