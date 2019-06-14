@@ -260,7 +260,6 @@ class ApiController extends Controller
         if($request->has("user_status") && $request->input("user_status") != ""){
             $where .= " AND produk_user_status = ".$request->input("user_status");
         }
-        print_r($request->all());
 
         $asset = asset('assets/images/product/thumb');
         $data = Produk::whereRaw($where)
