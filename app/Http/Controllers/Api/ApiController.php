@@ -243,6 +243,9 @@ class ApiController extends Controller
         $page = (!empty($request->input("page")))
             ?$request->page
             :1;
+        Paginator::currentPageResolver(function() use ($page) {
+            return $page;
+        });
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
@@ -273,7 +276,7 @@ class ApiController extends Controller
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
             ->groupBy('sys_produk.id')
             ->where('produk_status', '=', $status)
-            ->paginate($perPage, ['*'], 'page', $page);
+            ->paginate($perPage);
             // ->get();
         return response()->json(['status' => 200, 'data'=>$data]);
     }
