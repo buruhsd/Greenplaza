@@ -273,7 +273,7 @@ class ApiController extends Controller
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
             ->groupBy('sys_produk.id')
             ->where('produk_status', '=', $status)
-            ->skip(($page-1) * $perPage)
+            ->skip((($page-1) * $perPage))
             ->take($perPage)
             ->get();
             // ->paginate($perPage);
