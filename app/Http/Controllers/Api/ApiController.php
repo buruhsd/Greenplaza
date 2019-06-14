@@ -277,7 +277,9 @@ class ApiController extends Controller
         $data = $model->skip(($page-1) * $perPage)
             ->take($perPage)
             ->get();
+        print_r($data);
         $total = ceil($model->count() / $perpage);
+        print_r($total);
             // ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data, 'total'=>$total]);
     }
