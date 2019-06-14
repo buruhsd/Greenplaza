@@ -238,8 +238,9 @@ class ApiController extends Controller
         $where = '1';
         $order = "rand()";
         $perPage = (!empty($request->input("perpage")))
-            ?$request->input("perpage")
+            ?$request->perpage
             :9;
+        dd($request->all())
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
