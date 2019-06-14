@@ -244,9 +244,7 @@ class ApiController extends Controller
         $page = (!empty($request->input("page")))
             ?$request->page
             :1;
-        Paginator::currentPageResolver(function() use ($page) {
-            return $page;
-        });
+        Paginator::setCurrentPage(2);
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
