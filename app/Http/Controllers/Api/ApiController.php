@@ -274,10 +274,10 @@ class ApiController extends Controller
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
             ->groupBy('sys_produk.id')
             ->where('produk_status', '=', $status);
+        $total = ceil($model->count() / $perPage);
         $data = $model->skip(($page-1) * $perPage)
             ->take($perPage)
             ->get();
-        $total = ceil($model->count() / $perPage);
             // ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data, 'total'=>$total]);
     }
