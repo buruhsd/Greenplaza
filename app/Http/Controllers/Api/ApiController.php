@@ -14,7 +14,6 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
-use Paginator;
 
 class ApiController extends Controller
 {
@@ -244,7 +243,6 @@ class ApiController extends Controller
         $page = (!empty($request->input("page")))
             ?$request->page
             :1;
-        Paginator::setCurrentPage(2);
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
@@ -275,8 +273,10 @@ class ApiController extends Controller
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
             ->groupBy('sys_produk.id')
             ->where('produk_status', '=', $status)
-            ->paginate($perPage);
-            // ->get();
+            ->skip(($page-1) * $perPage)
+            ->limit($perPage)
+            ->get();
+            // ->paginate($perPage);
         return response()->json(['status' => 200, 'data'=>$data]);
     }
 
