@@ -240,7 +240,9 @@ class ApiController extends Controller
         $perPage = (!empty($request->input("perpage")))
             ?$request->perpage
             :9;
-        $_GET['page'] = $request['page'];
+        $page = (!empty($request->input("page")))
+            ?$request->page
+            :1;
         // $id_cat = 0;
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $check = ['populer','ulasan']; 
