@@ -26,9 +26,15 @@ class ApiController extends Controller
         $data = User::whereRaw($where)
             ->leftJoin('sys_user_detail', 'sys_user_detail.user_detail_user_id', '=', 'users.id')
             ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
+            ->leftJoin('sys_produk', 'sys_produk.produk_seller_id', '=', 'users.id')
+            ->leftJoin('sys_produk_discuss', 'sys_produk_discuss.produk_discuss_produk_id', '=', 'sys_produk.id')
+            ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
             ->select('users.*', 
                 DB::raw('FLOOR(SUM(sys_review.review_stars)) as sum_star'), 
+                DB::raw('COUNT(sys_produk.id) as count_produk'), 
                 DB::raw('COUNT(sys_review.id) as count_review'), 
+                DB::raw('COUNT(sys_produk_discuss.id) as count_discuss'), 
+                DB::raw('COUNT(sys_trans_detail.id) as count_sale'), 
                 DB::raw('CONCAT("'.$asset_toko.'/", users.user_store_image) as pic_toko'), 
                 DB::raw('CONCAT("'.$asset_user.'/", sys_user_detail.user_detail_image) as pic_user'))
             ->first();
