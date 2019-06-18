@@ -22,7 +22,7 @@ class ApiController extends Controller
         $asset_user = asset('assets/images/profil');
         $status = 200;
         $data = User::whereId(Auth::id())
-            ->with('user_detail')
+            ->leftJoin('sys_user_detail', 'sys_user_detail.user_detail_user_id', '=', 'users.id')
             ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
             ->select('users.*', 
                 DB::raw('SUM(sys_review.review_stars) as sum_star'), 
