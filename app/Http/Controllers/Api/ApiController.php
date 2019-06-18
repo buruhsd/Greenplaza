@@ -18,6 +18,8 @@ use FunctionLib;
 class ApiController extends Controller
 {
     public function toko(Request $request, $user_id){
+        $asset_toko = asset('assets/images/bg_etalase');
+        $asset_user = asset('assets/images/profil');
         $status = 200;
         $data = User::whereId(Auth::id())
             ->with('user_detail')
@@ -25,8 +27,8 @@ class ApiController extends Controller
             ->select('users.*', 
                 DB::raw('SUM(sys_review.review_stars) as sum_star'), 
                 DB::raw('COUNT(sys_review.id) as count_review'), 
-                DB::raw('CONCAT("'.$asset.'/", users.user_store_image) as pic_toko'), 
-                DB::raw('CONCAT("'.$asset.'/", sys_user_detail.user_detail_image) as pic_user'))
+                DB::raw('CONCAT("'.$asset_toko.'/", users.user_store_image) as pic_toko'), 
+                DB::raw('CONCAT("'.$asset_user.'/", sys_user_detail.user_detail_image) as pic_user'))
             ->first();
         return response()->json(['status' => $status, 'data'=>$data]);
     }
