@@ -17,6 +17,73 @@ use FunctionLib;
 
 class ApiController extends Controller
 {
+    public function toko(Request $request, $user_id){
+        $status = 200;
+        $data = User::whereId(Auth::id())
+            ->with('user_detail')
+            ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
+            ->select('users.*', 
+                DB::raw('SUM(sys_review.review_stars) as sum_star'), 
+                DB::raw('COUNT(sys_review.id) as count_review'), 
+                DB::raw('CONCAT("'.$asset.'/", users.user_store_image) as pic_toko'), 
+                DB::raw('CONCAT("'.$asset.'/", sys_user_detail.user_detail_image) as pic_user'))
+            ->first();
+        return response()->json(['status' => $status, 'data'=>$data]);
+    }
+
+    /**
+    * mendapatkan data produk
+    **/
+    public function produk_toko(Request $request, $user_id)
+    {
+        $status = 1;
+        $where = '1';
+        $where .= " AND produk_seller_id = ".$user_id;
+        $order = "rand()";
+        $perPage = (!empty($request->input("perpage")))
+            ?(int)$request->perpage
+            :9;
+        $page = (!empty($request->input("page")))
+            ?(int)$request->page
+            :1;
+
+        // $id_cat = 0;
+        if(!empty($request->input("order")) && $request->input("order") !== ""){
+            $check = ['populer','ulasan']; 
+            $arr = [
+                'populer'=>'COUNT(sys_trans_detail.id) ',
+                'ulasan'=>'COUNT(sys_review.id)',
+            ];
+            $order = explode ("-", $request->input("order"));//$request->input("order").' ASC';
+            // $order = $order[0].' '.$order[1];
+            // $order = (str_contains(strtolower($order_id), 'populer'))
+            $order = (in_array($order[0], $check))
+                ?$arr[$order[0]].' '.$order[1]
+                :$order[0].' '.$order[1];
+        }
+        if($request->input("src") != ""){
+            $where .= " AND produk_name LIKE '%".$request->input("src")."%'";
+        }
+        if($request->has("user_status") && $request->input("user_status") != ""){
+            $where .= " AND produk_user_status = ".$request->input("user_status");
+        }
+
+        $asset = asset('assets/images/product/thumb');
+        $model = Produk::whereRaw($where)
+            ->orderByRaw($order)
+            ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
+            ->leftJoin('sys_trans_detail', 'sys_trans_detail.trans_detail_produk_id', '=', 'sys_produk.id')
+            ->leftJoin('conf_produk_unit', 'conf_produk_unit.id', '=', 'sys_produk.produk_unit')
+            ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')
+            ->groupBy('sys_produk.id')
+            ->where('produk_status', '=', $status);
+        $total = ceil($model->get()->count() / $perPage);
+        $data = $model->skip(($page-1) * $perPage)
+            ->take($perPage)
+            ->get();
+            // ->paginate($perPage);
+        return response()->json(['status' => 200, 'data'=>$data, 'total'=>$total]);
+    }
     public function get_user_address(Request $request){
         $status = 500;
         $par_auth = [
