@@ -22,7 +22,7 @@ class ApiController extends Controller
         $asset_user = asset('assets/images/profil');
         $status = 200;
         $where = 1;
-        $where .= 'users.id='.$user_id;
+        $where .= ' AND users.id='.$user_id;
         $data = User::whereRaw($where)
             ->leftJoin('sys_user_detail', 'sys_user_detail.user_detail_user_id', '=', 'users.id')
             ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
