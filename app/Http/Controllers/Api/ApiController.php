@@ -27,7 +27,7 @@ class ApiController extends Controller
             ->leftJoin('sys_user_detail', 'sys_user_detail.user_detail_user_id', '=', 'users.id')
             ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
             ->select('users.*', 
-                DB::raw('SUM(sys_review.review_stars) as sum_star'), 
+                DB::raw('FLOOR(SUM(sys_review.review_stars)) as sum_star'), 
                 DB::raw('COUNT(sys_review.id) as count_review'), 
                 DB::raw('CONCAT("'.$asset_toko.'/", users.user_store_image) as pic_toko'), 
                 DB::raw('CONCAT("'.$asset_user.'/", sys_user_detail.user_detail_image) as pic_user'))
