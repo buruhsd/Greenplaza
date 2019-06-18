@@ -21,7 +21,9 @@ class ApiController extends Controller
         $asset_toko = asset('assets/images/bg_etalase');
         $asset_user = asset('assets/images/profil');
         $status = 200;
-        $data = User::whereId(Auth::id())
+        $where = 1;
+        $where .= 'users.id='.$user_id;
+        $data = User::whereRaw($where)
             ->leftJoin('sys_user_detail', 'sys_user_detail.user_detail_user_id', '=', 'users.id')
             ->leftJoin('sys_review', 'sys_review.review_user_id', '=', 'users.id')
             ->select('users.*', 
