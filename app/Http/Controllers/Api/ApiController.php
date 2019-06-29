@@ -837,10 +837,9 @@ class ApiController extends Controller
     * mendapatkan data paket kurir
     **/
     public function get_courier_service(Request $request){
-        // return response()->json(['status' => 200, 'data'=>$request->all()]);
+        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $status = 200;
         $produk = Produk::find($request->input("id"));
-        return response()->json(['status' => 200, 'data'=>$produk]);
         $berat = $produk->produk_weight;
         $alamat_from = $produk->user->user_address()->first();
         $originType = ($request->input("courier") == 1)?'city':'subdistrict';
