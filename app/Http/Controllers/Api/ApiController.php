@@ -841,8 +841,7 @@ class ApiController extends Controller
         // return response()->json(['status' => 500, 'data'=>$param]);
         $status = 200;
         $produk = Produk::find($param['id']);
-        return response()->json(['status' => 500, 'data'=>$produk]);
-        $berat = $produk->produk_weight;
+        $berat = $produk['produk_weight'];
         $alamat_from = $produk->user->user_address()->first();
         $originType = ($param['courier'] == 1)?'city':'subdistrict';
         $origin = ($request->input("courier") == 1)
