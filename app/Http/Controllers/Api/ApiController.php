@@ -848,6 +848,7 @@ class ApiController extends Controller
             :$alamat_from->user_address_subdist;
         $alamat_to = User_address::find($request->input("to_id"));
         $weight = $berat * intval($request->input("qty"));
+        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $req = [
             'data' => [
                 'origin' => $origin,//$origin,
@@ -858,7 +859,6 @@ class ApiController extends Controller
                 'courier' => $request->input("courier"),
             ]
         ];
-        return response()->json(['status' => 200, 'data'=>$req]);
         // if(isset($lenght)){
         //     $req['data']['lenght'] = $lenght;
         // }
