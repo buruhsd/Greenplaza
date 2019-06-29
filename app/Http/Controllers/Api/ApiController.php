@@ -806,6 +806,8 @@ class ApiController extends Controller
     * mendapatkan data alamat user
     **/
     public function get_user_address(Request $request){
+        $param = $request->all();
+        return response()->json(['status' => 200, 'data'=>$param]);
         $status = 500;
         $par_auth = [
             'username'=>$request->input("username"),
