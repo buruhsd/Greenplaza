@@ -806,8 +806,6 @@ class ApiController extends Controller
     * mendapatkan data alamat user
     **/
     public function get_user_address(Request $request){
-        $param = $request->all();
-        return response()->json(['status' => 200, 'data'=>$param]);
         $status = 500;
         $par_auth = [
             'username'=>$request->input("username"),
@@ -1142,6 +1140,8 @@ class ApiController extends Controller
     * mendapatkan detail produk
     **/
     public function detail_produk(Request $request, $pid){
+        $param = $request->all();
+        return response()->json(['status' => 200, 'data'=>$param]);
         $asset = asset('assets/images/product/thumb');
         $data = Produk::where('sys_produk.id', $pid)
             ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
