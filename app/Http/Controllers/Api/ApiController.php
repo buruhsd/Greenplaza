@@ -843,12 +843,12 @@ class ApiController extends Controller
         $berat = $produk->produk_weight;
         $alamat_from = $produk->user->user_address()->first();
         $originType = ($request->input("courier") == 1)?'city':'subdistrict';
+        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $origin = ($request->input("courier") == 1)
             ?$alamat_from->user_address_city
             :$alamat_from->user_address_subdist;
         $alamat_to = User_address::find($request->input("to_id"));
         $weight = $berat * intval($request->input("qty"));
-        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $req = [
             'data' => [
                 'origin' => $origin,//$origin,
