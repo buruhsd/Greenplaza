@@ -841,9 +841,9 @@ class ApiController extends Controller
         $status = 200;
         $produk = Produk::find($request->input("id"));
         $berat = $produk->produk_weight;
+        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $alamat_from = $produk->user->user_address()->first();
         $originType = ($request->input("courier") == 1)?'city':'subdistrict';
-        return response()->json(['status' => 200, 'data'=>$request->all()]);
         $origin = ($request->input("courier") == 1)
             ?$alamat_from->user_address_city
             :$alamat_from->user_address_subdist;
