@@ -1141,7 +1141,7 @@ class ApiController extends Controller
     **/
     public function detail_produk(Request $request, $pid){
         $param = $request->all();
-        return response()->json(['status' => 200, 'data'=>$param]);
+        return response()->json(['status' => 500, 'data'=>$param]);
         $asset = asset('assets/images/product/thumb');
         $data = Produk::where('sys_produk.id', $pid)
             ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
