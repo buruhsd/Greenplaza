@@ -24,9 +24,11 @@ Route::post('get_produk_grosir/{id}', 'Api\\ApiController@produk_grosir');
 Route::post('get_log_wallet', 'Api\\ApiController@log_wallet');
 Route::post('get_log_transfer', 'Api\\ApiController@log_transfer');
 Route::post('get_courier', 'Api\\ApiController@get_courier');
+Route::post('get_courier_service', 'Api\\ApiController@get_courier_service');
 Route::post('get_user_address', 'Api\\ApiController@get_user_address');
 Route::post('get_toko/{id}', 'Api\\ApiController@toko');
 Route::post('get_toko_produk/{id}', 'Api\\ApiController@produk_toko');
+Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
 // });

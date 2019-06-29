@@ -1,6 +1,19 @@
 <?php
 class FunctionLib
 {
+    public function check_api_auth($param){
+        extract($param);
+        $status = 500;
+        $par_auth = [
+            'username'=>$username,
+            'password'=>$password
+        ];
+        if(FunctionLib::check_atempt($par_auth) == 200){
+            $status = 200;
+        }
+        return $status;
+    }
+
     public static function upload_thumb(){
         $no = 0;
         $data = App\Models\Produk_image::get()->pluck('produk_image_image');
