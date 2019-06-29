@@ -837,7 +837,7 @@ class ApiController extends Controller
     * mendapatkan data paket kurir
     **/
     public function get_courier_service(Request $request){
-        return response()->json(['status' => 200, 'data'=>$request->all()]);
+        // return response()->json(['status' => 200, 'data'=>$request->all()]);
         $status = 200;
         $produk = Produk::find($request->input("id"));
         $berat = $produk->produk_weight;
@@ -847,7 +847,7 @@ class ApiController extends Controller
             ?$alamat_from->user_address_city
             :$alamat_from->user_address_subdist;
         $alamat_to = User_address::find($request->input("to_id"));
-        $weight = $berat * $request->input("qty");
+        $weight = $berat * intval($request->input("qty"));
         $req = [
             'data' => [
                 'origin' => $origin,//$origin,
@@ -858,6 +858,7 @@ class ApiController extends Controller
                 'courier' => $request->input("courier"),
             ]
         ];
+        return response()->json(['status' => 200, 'data'=>$req]);
         // if(isset($lenght)){
         //     $req['data']['lenght'] = $lenght;
         // }
