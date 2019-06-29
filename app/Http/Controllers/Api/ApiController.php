@@ -1140,7 +1140,7 @@ class ApiController extends Controller
     * mendapatkan detail produk
     **/
     public function detail_produk(Request $request, $pid){
-        $param = $request->all();
+        $param = $request->input("username");
         return response()->json(['status' => 500, 'data'=>$param]);
         $asset = asset('assets/images/product/thumb');
         $data = Produk::where('sys_produk.id', $pid)
