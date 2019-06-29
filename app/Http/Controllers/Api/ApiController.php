@@ -837,8 +837,8 @@ class ApiController extends Controller
     * mendapatkan data paket kurir
     **/
     public function get_courier_service(Request $request){
-        $param = $request->all();
-        return response()->json(['status' => 200, 'data'=>$param]);
+        $param = json_decode($request->getContent(), true);
+        return response()->json(['status' => 500, 'data'=>$param]);
         $status = 200;
         $produk = Produk::find($request->input("id"));
         $berat = $produk->produk_weight;
@@ -1140,8 +1140,6 @@ class ApiController extends Controller
     * mendapatkan detail produk
     **/
     public function detail_produk(Request $request, $pid){
-        $param = json_decode($request->getContent(), true);
-        return response()->json(['status' => 500, 'data'=>$param]);
         $asset = asset('assets/images/product/thumb');
         $data = Produk::where('sys_produk.id', $pid)
             ->leftJoin('sys_review', 'sys_review.review_produk_id', '=', 'sys_produk.id')
