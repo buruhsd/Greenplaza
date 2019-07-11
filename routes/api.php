@@ -30,9 +30,10 @@ Route::post('get_toko/{id}', 'Api\\ApiController@toko');
 Route::post('get_toko_produk/{id}', 'Api\\ApiController@produk_toko');
 // saldo, me, pw, gln, dll
 Route::post('buy/{type}', function($type){
-	return [
-        'uses' => 'Api\\ApiController@payment_'.$type
-    ];
+	// return [
+ //        'uses' => 'Api\\ApiController@payment_'.$type
+ //    ];
+	return Api\\ApiController::'payment_'.$type();
 });
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
