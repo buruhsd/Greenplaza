@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
+use App\Models\Trans_voucher;
 
 class ApiController extends Controller
 {
