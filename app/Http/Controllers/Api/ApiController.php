@@ -414,7 +414,7 @@ class ApiController extends Controller
         ];
         $check = FunctionLib::check_api_auth($auth);
         if($check == 200){            
-            return response()->json($param);
+            // return response()->json($param);
             if($param["cart"] && FunctionLib::array_sum_key($param["cart"], 'trans_detail_amount_total') > 0){
                 $data = $param["cart"];
                 $trans = [];
@@ -422,6 +422,7 @@ class ApiController extends Controller
                     $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
                     $trans[$seller_id][] = $item;
                 });
+            return response()->json($trans);
                 $trans_code = FunctionLib::str_rand(7);
                 $gross_amount = 0;
                 if($param["voucher"]){
