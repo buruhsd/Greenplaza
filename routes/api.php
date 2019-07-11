@@ -33,8 +33,8 @@ Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type
  //    ];
-	$action = 'payment_'.$type;
-	return return App::make('Api\\ApiController')->$action();
+	// $action = 'payment_'.$type;
+	return return App::make(action('Api\\ApiController@payment_'.$type));
 	// return action('Api\\ApiController@payment_'.$type);
 });
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
