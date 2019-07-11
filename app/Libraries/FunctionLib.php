@@ -1,8 +1,68 @@
 <?php
 class FunctionLib
 {
+    /*
+    * api pembayaran menggunakan masedi
+    */
+    public static function api_pay_gln(){
+        $status = 500;
+        $message = "gagal bayar";
+
+        return ['status' => $status, 'message' => $message];
+    }
+
+    /*
+    * api pembayaran menggunakan masedi
+    */
+    public static function api_pay_pw(){
+        $status = 500;
+        $message = "gagal bayar";
+
+        return ['status' => $status, 'message' => $message];
+    }
+
+    /*
+    * api pembayaran menggunakan masedi
+    */
+    public static function api_pay_me(){
+        $status = 500;
+        $message = "gagal bayar";
+
+        return ['status' => $status, 'message' => $message];
+    }
+
+    /*
+    * api pembayaran menggunakan masedi
+    */
+    public static function api_pay_saldo(){
+        $status = 500;
+        $message = "gagal bayar";
+
+        return ['status' => $status, 'message' => $message];
+    }
+
+    /*
+    * fungsi untuk api pembayaran
+    */
+    public static function api_payment($param, $type='saldo'){
+        $data = ['status' => 500];
+        switch ($type) {
+            case 'me':
+                $data = FunctionLib::api_pay_me($param);
+            break;
+            case 'pw':
+                $data = FunctionLib::api_pay_pw($param);
+            break;
+            case 'gln':
+                $data = FunctionLib::api_pay_gln($param);
+            break;
+            default:
+                $data = FunctionLib::api_pay_saldo($param);
+            break;
+        }
+        return $data;
+    }
     public static function check_api_auth($param){
-        return 200;
         extract($param);
         $status = 500;
         $par_auth = [
