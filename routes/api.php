@@ -33,7 +33,9 @@ Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type
  //    ];
-	return action('Api\\ApiController@payment_'.$type);
+	$action = 'payment_'.$type;
+	return return App::make('Api\\ApiController')->$action();
+	// return action('Api\\ApiController@payment_'.$type);
 });
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
