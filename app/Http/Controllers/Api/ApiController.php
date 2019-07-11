@@ -561,7 +561,7 @@ class ApiController extends Controller
                 $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';
                 $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
                 $data['trans_detail'] = $trans_detail;
-                return response()->json(['status' => 200, 'message'=>$message, , 'data'=>$data]);
+                return response()->json(['status' => 200, 'message'=>$message, 'data'=>$data]);
             }else{
                 $status = 500;
                 $message = 'Barang yang anda masukkan ke keranjang kosong.';
