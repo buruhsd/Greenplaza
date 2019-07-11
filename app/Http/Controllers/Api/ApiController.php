@@ -422,7 +422,6 @@ class ApiController extends Controller
                     $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
                     $trans[$seller_id][] = $item;
                 });
-            return response()->json($trans);
                 $trans_code = FunctionLib::str_rand(7);
                 $gross_amount = 0;
                 if($param["voucher"]){
@@ -444,6 +443,7 @@ class ApiController extends Controller
                             return ['status' => $status, 'message' => $message];
                         }
                     }
+            return response()->json($trans);
                     // add to DB sys_trans
                     $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
                     if(!$bank_id || empty($bank_id) || $bank_id == null){
