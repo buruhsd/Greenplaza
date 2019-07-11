@@ -412,7 +412,7 @@ class ApiController extends Controller
         //     'username' => $param["username"],
         //     'password' => $param["password"],
         // ];
-        $check = FunctionLib::check_api_auth($auth);
+        // $check = FunctionLib::check_api_auth($auth);
         return response()->json($param["cart"]);
         // if($check == 200){            
         //     if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
