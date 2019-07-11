@@ -444,7 +444,6 @@ class ApiController extends Controller
                             return ['status' => $status, 'message' => $message];
                         }
                     }
-            return response()->json($trans);
                     // add to DB sys_trans
                     $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
                     if(!$bank_id || empty($bank_id) || $bank_id == null){
@@ -531,7 +530,7 @@ class ApiController extends Controller
                         }
                     }
                 }
-                if($param["voucher"]){
+                if(isset($param["voucher"])){
                     $voucher = $param["voucher"];
                     $new_voucher = new Trans_voucher;
                     $new_voucher->trans_voucher_user = Auth::id();
