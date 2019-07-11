@@ -425,7 +425,7 @@ class ApiController extends Controller
                 });
                 $trans_code = FunctionLib::str_rand(7);
                 $gross_amount = 0;
-                if($param["voucher"]){
+                if(isset($param["voucher"])){
                     $voucher = $param["voucher"];
                     $vcr = Trans_voucher::where('trans_voucher_code', $voucher['code']);
                     $check = $vcr->exists();
