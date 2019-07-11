@@ -406,7 +406,7 @@ class ApiController extends Controller
     * pembayaran dengan saldo
     **/
     public function payment_saldo(Request $request){
-        $status = 500
+        $status = 500;
         $param = [
             'username' => $request->input("username"),
             'password' => $request->input("password"),
