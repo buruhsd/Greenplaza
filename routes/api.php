@@ -29,8 +29,8 @@ Route::post('get_user_address', 'Api\\ApiController@get_user_address');
 Route::post('get_toko/{id}', 'Api\\ApiController@toko');
 Route::post('get_toko_produk/{id}', 'Api\\ApiController@produk_toko');
 // saldo, me, pw, gln, dll
-Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
-// Route::post('buy/{type}', function($type){
+// Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
+Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type
  //    ];
@@ -38,9 +38,9 @@ Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
 	// $action = 'payment_'.$type;
 	// return return App::make(action('Api\\ApiController@payment_'.$type))->$action();
 	// return action('Api\\ApiController@payment_'.$type);
-	// $action = action('Api\\ApiController@payment_'.$type);
-	// return return App::make($action);
-// });
+	$action = action('Api\\ApiController@payment_'.$type);
+	return return App::make($action);
+});
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
