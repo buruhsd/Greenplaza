@@ -1,7 +1,7 @@
 <?php
 class FunctionLib
 {
-    public function check_api_auth($param){
+    public static function check_api_auth($param){
         return 200;
         extract($param);
         $status = 500;
