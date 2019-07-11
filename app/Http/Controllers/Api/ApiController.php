@@ -413,10 +413,10 @@ class ApiController extends Controller
             'password' => $param["password"],
         ];
         $check = FunctionLib::check_api_auth($auth);
-        return response()->json($param["cart"]);
         if($check == 200){            
-            if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
-                $data = Session::get('chart');
+            return response()->json($param);
+            if($param["cart"] && FunctionLib::array_sum_key($param["cart"], 'trans_detail_amount_total') > 0){
+                $data = $param["cart"];
                 $trans = [];
                 array_walk($data, function ($item) use (&$trans) {
                     $seller_id = Produk::where('id', $item['trans_detail_produk_id'])->pluck('produk_seller_id')[0];
@@ -424,8 +424,8 @@ class ApiController extends Controller
                 });
                 $trans_code = FunctionLib::str_rand(7);
                 $gross_amount = 0;
-                if(Session::has('voucher')){
-                    $voucher = Session::get('voucher');
+                if($param["voucher"]){
+                    $voucher = $param["voucher"];
                     $vcr = Trans_voucher::where('trans_voucher_code', $voucher['code']);
                     $check = $vcr->exists();
                     if($check){
@@ -529,8 +529,8 @@ class ApiController extends Controller
                         }
                     }
                 }
-                if(Session::has('voucher')){
-                    $voucher = Session::get('voucher');
+                if($param["voucher"]){
+                    $voucher = $param["voucher"];
                     $new_voucher = new Trans_voucher;
                     $new_voucher->trans_voucher_user = Auth::id();
                     $new_voucher->trans_voucher_trans = $trans_code;
@@ -539,9 +539,9 @@ class ApiController extends Controller
                     // $new_voucher->trans_voucher_status = 0;
                     $new_voucher->save();
                     $gross_amount = FunctionLib::minus_to_zero($gross_amount - $voucher['amount']);
-                    Session::forget('voucher');
+                    // Session::forget('voucher');
                 }
-                Session::forget('chart');
+                // Session::forget('chart');
                 if(isset($trans->pembeli->email)){
                     // send email
                     $send_status = FunctionLib::trans_arr(1);
