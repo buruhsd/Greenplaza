@@ -52,6 +52,16 @@
                 <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
             </p>
             @endif
+            @if ($n->produk_discount != 0)
+            <p>
+                <del>MYR.{{FunctionLib::number_to_text($n->produk_price / $myr, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
+                <span>MYR.{{FunctionLib::number_to_text($n->produk_price/ $myr - ($n->produk_price * $n->produk_discount / 100))}}</span>
+            </p>
+            @else
+            <p>
+                <span>MYR.{{FunctionLib::number_to_text($n->produk_price/ $myr, 2)}}</span>
+            </p>
+            @endif
             <div class="tombol-product">
             @if($n->user->seller_active())
                 <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>

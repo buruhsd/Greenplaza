@@ -10,6 +10,8 @@ use App\Models\Review;
 use App\Models\Iklan;
 use App\Models\Brand;
 use App\User;
+use Ixudra\Curl\CurlService;
+
 
 class HomeController extends Controller
 {
@@ -30,6 +32,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $myr = $kurs['Data']['MYR']['Jual'];
         $perPage = 8;
         $data['produk_newest'] = Produk::skip(0)->take($perPage)->orderBy('created_at', 'DESC')->get();
 

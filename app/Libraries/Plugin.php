@@ -83,6 +83,8 @@ class Plugin
     */
     public static function p_green($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_green'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_seller_id', 2)
             ->orderBy('updated_at', 'DESC')
