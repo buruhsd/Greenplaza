@@ -53,6 +53,7 @@ Route::get('/dashboard-member', 'Member\\FrontController@dashboard');
 //FrontController
 Route::get('/register/seller', 'Member\\FrontController@reg_seller')->name('register.seller');
 Route::get('/login/seller', 'Member\\FrontController@log_seller')->name('login.seller');
+Route::post('/login_gi', 'Auth\\LoginController@login_gi')->name('login_gi');
 
 
 // Auth::routes();

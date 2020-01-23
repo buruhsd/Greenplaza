@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Hash;
+use App\User;
+use App\Models\User_detail;
+use Exception;
+use Redirect;
+use FunctionLib;
+use App\Role;
+use Validator;
 
 class LoginController extends Controller
 {
@@ -58,9 +66,105 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function login(Request $request)
+      public function login_gi(Request $request){
+        $validator = Validator::make($request->all(), [
+        'email' => 'required|string',
+        'password' => 'required|string'
+        ],[
+        'email.required' => 'username dibutuhkan',
+        'password.required' => 'password dibutuhkan',
+        ]);
+        if ($validator->fails()) {    
+            return response()->json([
+            'sucess' => false,
+            'error' => $validator->messages()], 200);
+        }
+        if($request->email === "admin" || $request->email === "superadmin"){
+        if ($this->attemptLogin($request)) {
+            return response()->json(['sucess' => true], 200);
+        }
+        $this->incrementLoginAttempts($request);
+
+        return response()->json([
+            'sucess' => false,
+            'error' => ['data' => "username atau password salah"]], 200);
+        }
+            
+         try {
+        $API_AUTH = "https://gicommunity.org/api/user/check"; 
+        $attr = [
+            'username' => $request->email,
+            'password' => $request->password
+        ];
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $API_AUTH,
+            CURLOPT_POSTFIELDS => json_encode($attr),
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "accept: */*",
+                "accept-language: en-US,en;q=0.8",
+                "content-type: application/json",
+        )
+        ]);
+        $resp = curl_exec($curl);
+        $response = json_decode($resp, true);
+        curl_close($curl);
+        if($response['success']) {
+            $username = $response['data']['username'];
+            $findUser = User::where('username', $username)->get(); 
+            $atr_rdm = $request->password;
+            if(count($findUser) == 0){
+                    $this->createResponse($response['data'], $atr_rdm);
+            }else{
+                    $this->updateResponse($response['data'], $atr_rdm);
+            }
+            if ($this->attemptLogin($request)) {
+                    User::where('username', $request->email)->limit(1)->update(array('password' => null));
+                    return response()->json(['sucess' => true], 200);
+            }      
+        }
+        if(!$response['success']) {
+            if($response['message'] == "error parameter"){
+                $sendError = $response['errors']['password'][0];
+            }else{
+                $sendError = $response['message'];
+            }
+            return response()->json([
+            'sucess' => false,
+            'error' => ['data' => $sendError]], 200);
+        }
+        } catch (Exception $e) {
+           return response()->json([
+            'sucess' => false,
+            'error' => ['data' => "error"]], 200);
+        }
+      }
+    protected function createResponse($response, $data)
     {
-        // $this->validateLogin($request);
+        $user = User::create([
+                'username' => $response['username'],
+                'name' => $response['name'],
+                'email' => $response['email'],
+                'password' => Hash::make($data),
+                'active' => 1
+        ]);
+        if($user){
+              $user_detail = User_detail::create([
+                'user_detail_user_id' => $user->id
+            ]);
+        }
+        $memberRole = Role::where('name', 'member')->pluck('name');
+        $user->assignRole($memberRole);
+    }
+    protected function updateResponse($response, $data)
+    {
+        User::where('username', $response['username'])->limit(1)->update(['password' => Hash::make($data)]);
+        
+    }
+      public function login(Request $request){
+       // $this->validateLogin($request);
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
@@ -90,6 +194,7 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
     protected function validateLogin(Request $request)
     {
         $message = [
@@ -100,7 +205,7 @@ class LoginController extends Controller
             'unique'    =>  ':attribute sudah ada gunakan email yang lain',
             'confirmed'  =>  'isi :attribute dengan benar',
             'string'    =>  ':attribute harus berupa huruf',
-            'failed'   => 'Email atau password salah.',
+            'failed'   => 'Email atau password saldah.',
             'throttle' => 'Terlalu banyak usaha masuk. Silahkan coba lagi dalam :seconds detik.',
         ];
 

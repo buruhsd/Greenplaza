@@ -9,8 +9,8 @@
                         <ul class="d-flex account-info">
                             <li>
                                 @guest
-                                    <li><a href="{{route('login')}}">Login</a></li>
-                                    <li><a href="{{route('register')}}">Register</a></li>
+                                    <li><a href="javascript:void(0)" onClick="showLoginModal()">login</a></li>
+                                <li><a href="https://gicommunity.org/register">Register</a></li>
                                 @else
                                     <a href="javascript:void(0);"><i class="fa fa-user"></i> 
                                         {{Auth::user()->name}}
@@ -201,8 +201,8 @@
                     <div class="col-lg-9 col-md-8 d-none d-md-block">
                         <ul class="mainmenu d-flex">
                             @guest
-                                <li><a href="{{route('login')}}">Login</a></li>
-                                <li><a href="{{route('register')}}">Register</a></li>
+                                <li><a href="javascript:void(0)" onClick="showLoginModal()">login</a></li>
+                                <li><a href="https://gicommunity.org/register">Register</a></li>
                             @else
                                 <li class="sidemenu-items"><a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
                             @endguest
@@ -261,8 +261,8 @@
                         <div class="col-12">
                             <ul class="metismenu">
                                 @guest
-                                    <li><a href="{{route('login')}}">Login</a></li>
-                                    <li><a href="{{route('register')}}">Register</a></li>
+                                    <li><a href="javascript:void(0)" onClick="showLoginModal()">login</a></li>
+                                <li><a href="https://gicommunity.org/register">Register</a></li>
                                 @else
                                     <li class="sidemenu-items"><a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
                                 @endguest
@@ -338,3 +338,76 @@
     </header>
     <!-- header-area end -->
     <!-- slider-area start -->
+    <div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body"><br>
+                    <div class="text-center">
+            <div class="text-center">
+            <a>
+                <img class="dark-logo" src="https://gicommunity.org/images/gi_gw.png" alt="logo">
+            </a>
+            </div>
+            </div>
+                <br> 
+                    <form action="#" id="formData" class="form-horizontal container col-md-11 col-md-offset-2" >
+                         <span id="feedbackdata"></span>
+                           @csrf
+                           <div class="form-group">
+                            <label for="username">Username</label>
+                              <input type="text" class="form-control m-input remove-border-focus" name="email" />
+                              <span id="feedbackusername"></span>
+                           </div>
+                           <div class="form-group">
+                             <label for="password">Password</label>
+                              <input type="text" class="form-control m-input remove-border-focus" type="password" name="password"/>
+                              <span id="feedbackpassword"></span>
+                           </div>
+                           <div style="font-size: 12px">Belum Punya Akun Gicommunity? <a href="https://gicommunity.org/register"> Daftar disini </a></div>
+                          <div class="pull-right" style="padding: 1.5rem 0;">
+                            <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showLoginModal(){
+            $('.remove-border-focus').attr("style", "outline: 0px !important");
+            $('.remove-border-focus').attr("style", "-webkit-appearance: none");
+            $('.remove-border-focus').attr("style", "box-shadow: none !important");
+            $('#myModalLogin').modal('show');
+        }
+        function saveLogin(){
+            $('.btnsave').html("load...");
+            $('.btnsave').addClass("disabled").prop('disabled', true);
+            var dataString = $("#formData").serialize();
+            $.ajax({
+                url : "{{ url('/login_gi') }}",
+                type: "POST",
+                data: dataString,
+                dataType: "JSON",
+                success: function(data){
+                 if(data.sucess){
+                    location.reload();
+                 }
+                 (!data.error.email) ?
+                 $("#feedbackusername").html('') : $("#feedbackusername").html('<span style="font-size: 12px; color: #ed5249">' + data.error.email[0] +'</span>');
+                 (!data.error.password) ?
+                 $("#feedbackpassword").html('') : $("#feedbackpassword").html('<span style="font-size: 12px; color: #ed5249">' + data.error.password[0] +'</span>');
+                 (!data.error.data) ?
+                 $("#feedbackdata").html('') : $("#feedbackdata").html('<div class="alert alert-danger text-center" role="alert">' + data.error.data +'</div>');
+                 $('.btnsave').html("Masuk");
+                 $('.btnsave').removeClass("disabled").prop('disabled', false);
+
+                },
+                error: function (err){
+                    console.log(err.error);
+                    $('.btnsave').html("Masuk");
+                 $('.btnsave').removeClass("disabled").prop('disabled', false);
+                }
+            });
+        }
+    </script>
