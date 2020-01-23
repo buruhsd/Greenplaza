@@ -360,7 +360,7 @@
                            </div>
                            <div class="form-group">
                              <label for="password">Password</label>
-                              <input type="text" class="form-control m-input remove-border-focus" type="password" name="password"/>
+                              <input class="form-control m-input remove-border-focus" type="password" name="password"/>
                               <span id="feedbackpassword"></span>
                            </div>
                            <div style="font-size: 12px">Belum Punya Akun Gicommunity? <a href="https://gicommunity.org/register"> Daftar disini </a></div>
