@@ -12,6 +12,7 @@ use App\Models\User_detail;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Bank;
+use App\Models\Country;
 use App\Models\Shipment;
 use App\Models\User_shipment;
 use App\Models\User_config;
@@ -147,6 +148,7 @@ class UserController extends Controller
     public function profil(Request $request)
     {
         $data['cfg_bank'] = Bank::all();
+        $data['cfg_country'] = Country::all();
         $data['user'] = User::findOrFail(Auth::id());
 
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
@@ -639,7 +641,9 @@ class UserController extends Controller
         $user->user_detail->user_detail_bank_name = Bank::whereId($request->user_detail_bank_id)->pluck('bank_kode')[0];
         $user->user_detail->user_detail_bank_owner = $request->user_detail_bank_owner;
         $user->user_detail->user_detail_bank_no = $request->user_detail_bank_no;
+        $user->user_detail->country_id = $request->country_id;
         $userdetail = $user->user_detail;
+        // dd($userdetail);
         $userdetail->save();
         if(!$userdetail){
             $status = 500;

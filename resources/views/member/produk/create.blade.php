@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Tambah Produk</h3>
+    <h3 class="breadcrumb-header">Add Produk</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -14,16 +14,16 @@
                 <div class="panel-body">
                 <a href="{{ url('/member/produk') }}" title="Back">
                     <button class="btn btn-warning btn-xs">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i> kembali
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
                     </button>
                 </a>
                 <br />
                 <br />
                     <div class="col-md-12 text-center">
                 @if(!Auth::user()->user_shipment()->exists())
-                        <a href="{{route('member.user.set_shipment')}}" class="btn btn-sm btn-success">Update Jasa pengiriman</a>
+                        <a href="{{route('member.user.set_shipment')}}" class="btn btn-sm btn-success">shipping service updates</a>
                 @elseif(!Auth::user()->user_bank()->exists())
-                        <a href="{{route('member.bank.index')}}" class="btn btn-sm btn-success">Tambah Bank</a>
+                        <a href="{{route('member.bank.index')}}" class="btn btn-sm btn-success">Add Bank</a>
                 @else
                     </div>
                     {!! Form::open(['url' => '/member/produk/store', 'class' => 'form-horizontal', 'files' => true]) !!}

@@ -183,6 +183,8 @@ class FrontController extends Controller
         $data['shipment_type'] = Shipment::where('shipment_is_usable', 1)
             ->where('shipment_parent_id', 0)
             ->get();
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->orderBy('updated_at', 'DESC')->get();
         $data['review'] = $data['detail']->review()
@@ -285,6 +287,8 @@ class FrontController extends Controller
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $order = $request->input("order").' ASC';
         }
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $perPage = 8;
         $data['category'] = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $user = User::where('user_slug', $user_store)->first();

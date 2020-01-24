@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1">
                         <div class="breadcumb-content black-opacity" style="background-image: url('/frontend/images/banner/cat.jpg')">
-                            <h2>Halaman Toko</h2>
+                            <h2>Shop Page</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>
@@ -28,8 +28,8 @@
                             <div class="col-12">
                                 <div class="single-product-menu">
                                     <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#informasi">Informasi</a> </li>
-                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
+                                        <li><a class="active" data-toggle="tab" href="#informasi">Information</a> </li>
+                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaction</a></li> --}}
                                     </ul>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@
                                     <div class="tab-pane active" id="informasi">
                                         <div class="card col-md-12 p-0">
                                             <div class="card-header">
-                                                Informasi
+                                                Information
                                             </div>
                                             <div class="card-body">
                                                  <?php $user  ?>
@@ -49,11 +49,14 @@
                                                             <?php 
                                                                 $shipment = App\Models\Shipment::whereIn('id', $user->user_shipment()->pluck('user_shipment_shipment_id')->toArray())->pluck('shipment_name')->toArray();
                                                             ?>
-                                                            <li class="list-group-item">Sejak : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
-                                                            <li class="list-group-item">Total Produk : {{FunctionLib::count_produk("", $user->id)}}</li>
-                                                            <li class="list-group-item">Produk Terjual : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
-                                                            <li class="list-group-item">Transaksi Success : {{FunctionLib::count_sell($user->id)}}</li>
-                                                            <li class="list-group-item">Kurir : {{implode (", ", $shipment)}}</li>
+                                                            <li class="list-group-item">Country :
+                                                             {{ App\Models\Country::find($user->user_detail->country_id)->country_name }}
+                                                            </li>
+                                                            <li class="list-group-item">Since : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
+                                                            <li class="list-group-item">Product Total : {{FunctionLib::count_produk("", $user->id)}}</li>
+                                                            <li class="list-group-item">Products Sold : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
+                                                            <li class="list-group-item">Transaction Success : {{FunctionLib::count_sell($user->id)}}</li>
+                                                            <li class="list-group-item">Courier : {{implode (", ", $shipment)}}</li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-7 offset-md-1">
@@ -64,14 +67,14 @@
                                                                 </div>
                                                                 <div class="review-content">
                                                                     <i>
-                                                                        Alamat : {{FunctionLib::user_address($user->id)}}<br/>
+                                                                        Address : {{FunctionLib::user_address($user->id)}}<br/>
                                                                         Slogan Pemilik Toko : {{$user->user_slogan}}
                                                                     </i>
                                                                 </div>
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <a class="btn btn-success btn-block" href="{{route('member.message.create', $user->username)}}">
-                                                                    Kirim Pesan
+                                                                    Send Message
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -83,10 +86,10 @@
                                     <div class="tab-pane" id="transaksi">
                                         <div class="card col-md-12 p-0">
                                             <div class="card-header">
-                                                Transaksi
+                                                Transaction
                                             </div>
                                             <div class="card-body">
-                                                <h5 class="card-title">Penjualan Toko {{$user->user_store}}</h5>
+                                                <h5 class="card-title">Store Sales {{$user->user_store}}</h5>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <ul class="list-group list-group-flush">
@@ -115,8 +118,8 @@
                                 ]) !!}
                                     <select name="order" class="select-style" id="order">
                                         <option disabled selected>Order by</option>
-                                        <option value="produk_name">Nama</option>
-                                        <option value="produk_price">Harga</option>
+                                        <option value="produk_name">Name</option>
+                                        <option value="produk_price">Price</option>
                                     </select>
                                 {!! Form::close() !!}
                             </div>
@@ -124,7 +127,7 @@
                                 <p class="total-product">
                                     {{($produk->currentPage() - 1) * $produk->perPage() + 1}}-
                                     {{$produk->perPage() * $produk->currentPage()}} 
-                                    dari {{$produk->count()}} Data
+                                    from {{$produk->count()}} Data
                                 </p>
                             </div>
                             <div class="col-lg-4 col-12 col-sm-3">
@@ -173,14 +176,19 @@
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $p->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $p->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
-                                                @if($p->produk_discount > 0)
-                                                    <p>
-                                                        <del>{{FunctionLib::number_to_text($p->produk_price)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
-                                                        <span>Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                    </p>
-                                                @else
-                                                    <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
-                                                @endif
+                                                
+
+                    
+                                                    @if($p->produk_discount > 0)
+                                                        <p>
+                                                            <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
+                                                            <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span>
+                                                        </p>
+                                                    @else
+                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo"  data-popover-content="#a1"><i class="fa fa-bars"></i></span></p>
+                                                    @endif
+                                                
+                                               
                                                 <!-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
                                                     <li><i class="fa fa-star"></i></li>
@@ -189,6 +197,7 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                 </ul> -->
                                             </div>
+                                            <div id="tooltip" role="tooltip">My tooltip</div>
                                         </div>
                                     </div>
                                         @endforeach
@@ -224,15 +233,30 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content">
-                                                        <h3><a href="shop.html">{{$p->produk_name}}</a></h3>
-                                                        @if($p->produk_discount > 0)
-                                                            <p>
-                                                                <span>Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount / 100))}}</span>
-                                                                <del>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</del>
-                                                            </p>
-                                                        @else
-                                                            <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span></p>
-                                                        @endif
+                                                        <h3><a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h3>
+                                                        
+                                                            <!-- @if($p->produk_discount > 0)
+                                                                <p>
+                                                                    <del>MYR.{{FunctionLib::number_to_text($p->produk_price * $myr, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
+                                                                    <span>MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span>
+                                                                </p>
+                                                            @else
+                                                                <p><span>MYR. {{FunctionLib::number_to_text($p->produk_price * $myr)}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span></p>
+                                                            @endif -->
+
+                                                        
+                                                        
+                                                            @if($p->produk_discount > 0)
+                                                                <p>
+                                                                    <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
+                                                                    <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span>
+                                                                </p>
+                                                            @else
+                                                                <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span></p>
+                                                            @endif
+                                                        
+                                                            
+                                                        
                                                         <!-- <ul class="rating">
                                                             <li><i class="fa fa-star"></i></li>
                                                             <li><i class="fa fa-star"></i></li>
@@ -259,9 +283,26 @@
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
 @section('script')
-    <script type="text/javascript">
-        $('#order').change(function(){
-            $('#form-etalase').submit();
-        })
-    </script>
+<script src="https://unpkg.com/@popperjs/core@^2.0.0"></script>
+
+<script>
+      const button = document.querySelector('#button');
+      const tooltip = document.querySelector('#tooltip');
+
+      Popper.createPopper(button, tooltip);
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle="popover"]').popover({
+        
+      });   
+    });
+</script>
+
+<script type="text/javascript">
+    $('#order').change(function(){
+        $('#form-etalase').submit();
+    })
+</script>
 @endsection

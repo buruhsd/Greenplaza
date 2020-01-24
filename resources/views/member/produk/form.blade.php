@@ -32,13 +32,13 @@
         <div class="row">
             @if(str_contains(Request::url(), ['create']))
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">Ukuran : <b>300 pixel</b> x <b>320 pixel</b></span>
+                <span class="text-danger">Size : <b>300 pixel</b> x <b>320 pixel</b></span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'gambar: ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'Image: ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="gambar utama">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="Main Image">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> Clear
@@ -64,14 +64,14 @@
                 $(".clickkurang").click(function() {
                 counter++;
                 if(counter == 4){
-                    alert('max gambar lima');
+                    alert('max 5 image');
                     $("#maxlimaw").html("");
                 }
             });
             }
             </script>
             @elseif(str_contains(Request::url(), ['edit']))
-            {!! Form::label('produk_user_status', 'Pilih Gambar Utama : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'Choose main Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10">
                 <div class="roup">
                 @foreach($produk->images->all() as $item)
@@ -91,9 +91,9 @@
             </div>
             @if($asdfku < 5)
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-            <span class="text-danger">Lebar jangan lebih panjang dari tinggi.</span>
+            <span class="text-danger">Width not too long from height.</span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Gambar : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
@@ -122,7 +122,7 @@
             @endif
             @else
             <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">hapus salah gambar untuk mengunggah foto</span>
+                <span class="text-danger">Please remove one of images to upload picture</span>
             </div>
             @endif
             <script type="text/javascript">
@@ -146,10 +146,10 @@
     <div class="panel-body">
         @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', 'Category : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
-                    <option value=''>-- Pilih Kategori --</option>
+                    <option value=''>-- Choose Category --</option>
                     @foreach($category as $item)
                     @if ($item->category_name != 'Green Productions')
                     <option value='{{$item->id}}'>{{ucfirst(strtolower($item->category_name))}}</option>
@@ -161,7 +161,7 @@
         </div>
         @elseif(str_contains(Request::url(), ['edit']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', 'Kategori : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', 'Category : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <!-- <option selected>{{$produk->category->category_name}} </option> -->
@@ -199,11 +199,11 @@
         </div>
         @endif
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_name') ? 'has-error' : ''}}">
-            {!! Form::label('produk_name', 'Nama : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_name', 'Name : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::text('produk_name', null, [
                     'class' => 'form-control', 
-                    'placeholder' => 'Nama', 
+                    'placeholder' => 'Name', 
                     'required'
                 ])!!}
             {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
@@ -214,7 +214,7 @@
                 $config_poin = Auth::user()->config->where('config_name', 'user_poin')->first()->config_value;
             ?>
             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
-                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('produk_poin', 'Point Product (%) : ', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::text('produk_poin', $config_poin, [
                         'class' => 'form-control', 
@@ -226,7 +226,7 @@
             </div>
         @elseif(str_contains(Request::url(), ['edit']))
             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
-                {!! Form::label('produk_poin', 'Produk poin (%) : ', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('produk_poin', 'Point Product (%) : ', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::text('produk_poin', null, [
                         'class' => 'form-control', 
@@ -303,7 +303,7 @@
         </div> -->
         @endif
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_stock') ? 'has-error' : ''}}">
-            {!! Form::label('produk_stock', 'Stok : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_stock', 'Stock : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                      @if(str_contains(Request::url(), ['create']))
@@ -340,14 +340,33 @@
             {!! $errors->first('produk_stock', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
+            {!! Form::label('produk_location', 'Currency : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                @if(str_contains(Request::url(), ['create']))
+                    <select name='produk_location' class="form-control">
+                        @foreach($produk_location as $item)
+                        <option value='{{$item->id}}'>{{ucfirst(strtolower($item->produk_location_name))}}</option>
+                        @endforeach
+                    </select>
+                @elseif(str_contains(Request::url(), ['edit']))
+                    <select name='produk_location' class="form-control">
+                        @foreach($produk_location as $item)
+                            <option value='{{$item->id}}' <?php if($produk->produk_location == $item->id){echo "selected";}?> >{{$item->produk_location_name}}</option>
+                        @endforeach
+                    </select>
+                @endif
+            {!! $errors->first('produk_location', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_price') ? 'has-error' : ''}}">
-            {!! Form::label('produk_price', 'Harga : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_price', 'Price : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('produk_price', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Harga', 
+                                'placeholder' => 'Price', 
                                 'step' => "any",
                                 'required'
                             ])!!}
@@ -355,7 +374,7 @@
                     {!! Form::number('produk_price', number_format($produk->produk_price, 0, ',', ''), [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Harga', 
+                                'placeholder' => 'Price', 
                                 'step' => "any",
                                 'required'
                             ])!!}
@@ -364,7 +383,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
-            {!! Form::label('produk_size', 'Ukuran : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_size', 'Size : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="btn-group" data-toggle="buttons">
                     @if(str_contains(Request::url(), ['create']))
@@ -451,13 +470,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_length') ? 'has-error' : ''}}">
-            {!! Form::label('produk_length', 'Panjang : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_length', 'Length : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_length', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Panjang', 
+                        'placeholder' => 'Length', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -466,13 +485,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_wide') ? 'has-error' : ''}}">
-            {!! Form::label('produk_wide', 'Lebar : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_wide', 'Width : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_wide', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Lebar', 
+                        'placeholder' => 'Width', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -480,13 +499,13 @@
             {!! $errors->first('produk_wide', '<p class="help-block">:message</p>') !!}
             </div>
         </div><div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_height') ? 'has-error' : ''}}">
-            {!! Form::label('produk_height', 'Tinggi : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_height', 'Height : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_height', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Tinggi', 
+                        'placeholder' => 'Height', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -495,7 +514,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_color') ? 'has-error' : ''}}">
-            {!! Form::label('produk_color', 'Warna : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_color', 'Color : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="" data-toggle="buttons">
                     {{-- <label class="btn btn-primary btn-block">
@@ -572,13 +591,13 @@
 <div class="panel panel-white col-md-6 no-border">
     <div class="panel-body">
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_weight') ? 'has-error' : ''}}">
-            {!! Form::label('produk_weight', 'Berat : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_weight', 'Weight : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::text('produk_weight', (isset($produk->produk_discount))?$produk->produk_weight:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Berat', 
+                        'placeholder' => 'Weight', 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -655,11 +674,11 @@
             </div>
         </div> --}}
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_note') ? 'has-error' : ''}}">
-            {!! Form::label('produk_note', 'Keterangan : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_note', 'Description : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::textarea('produk_note', null, [
                   'class' => 'form-control', 
-                  'placeholder' => 'Keterangan', 
+                  'placeholder' => 'Description', 
                 ])!!}
                 {!! $errors->first('produk_note', '<p class="help-block">:message</p>') !!}
             </div>
@@ -675,13 +694,13 @@
                 <div class="col-md-12 columns">
                     <ul class="list-group">
                         <li class="list-group-item no-border">
-                            <a class="btn btn-info btn-block" data-toggle="collapse" href="#grosir" role="button" aria-expanded="false" aria-controls="grosir"><b>Harga Grosir</b></a>
+                            <a class="btn btn-info btn-block" data-toggle="collapse" href="#grosir" role="button" aria-expanded="false" aria-controls="grosir"><b>Distributor Price</b></a>
                             <div id="grosir" class="collapse">
                                 <table class="table table-bordered table-striped table-highlight m-t-xs">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Total Produk (buah)</th>
-                                            <th width="200">Harga Barang / buah</th>
+                                            <th colspan="2">Product Total (Unit)</th>
+                                            <th width="200">Price / Unit</th>
                                             <th width="50"></th>
                                         </tr>
                                     </thead>
@@ -693,15 +712,15 @@
                                                         <td style="width: 20%">
                                                             <input class="form-control hidden" type="number" name="produk_grosir_id[]" placeholder="id" value="{{$item_grosir->id}}">
                                                             <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" value="{{$item_grosir->produk_grosir_start}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                                         </td>
                                                         <td style="width: 20%">
                                                             <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" value="{{$item_grosir->produk_grosir_end}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                                         </td>
                                                         <td style="width: 50%">
                                                             <input class="form-control" type="number" name="produk_grosir_price[]" value="{{$item_grosir->produk_grosir_price}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                                         </td>
                                                         <td class="text-center">
                                                             <!-- <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
@@ -718,15 +737,15 @@
                                         <tr>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" >
-                                                <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                             </td>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" >
-                                                <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                             </td>
                                             <td style="width: 50%">
                                                 <input class="form-control" type="number" name="produk_grosir_price[]" >
-                                                <i class='btn-block bg-danger m-t-xs'>Harus berupa angka</i>
+                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
                                             </td>
                                             <td class="text-center">
                                                 <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
@@ -741,11 +760,11 @@
                                     <tbody>
                                         <tr>
                                             <td style="font-size: 13px;" colspan="4">
-                                                Jumlah dan Harga tanpa tanda koma dan titik.<br>
-                                                Contoh:<br>
-                                                Kelompok Jumlah: 1 - 10, Harga: 15000<br>
-                                                Kelompok Jumlah: 11 - 20, Harga: 10000<br>
-                                                dst...
+                                                Total and price without commas(,) and dot(.) <br>
+                                                Example:<br>
+                                                Group Total: 1 - 10, Price: 15000<br>
+                                                Group Total: 11 - 20, Price: 10000<br>
+                                                etc...
                                             </td>
                                         </tr>
                                     </tbody>

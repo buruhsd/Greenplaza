@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/GP.png')}}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/gi_plaza.png')}}">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
     <!-- bootstrap v3.3.7 css -->
@@ -30,7 +30,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     {{-- added by fahmi --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/popover-style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.8/font-awesome-animation.min.css">
+
     <!-- modernizr css -->
     <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 
