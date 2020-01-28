@@ -62,38 +62,22 @@
         <div class="header-middle-area bg-1">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="col-md-3 col-12 d-flex justify-content-between align-items-center">
                         <div class="logo">
                             <a href="{{url("/")}}">
-                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" >
-                                <img class="light-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
+                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="" >
+                                <img class="light-logo" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-5 col-sm-8">
-                        <div class="">
-                            <form action="{{route('category')}}" method="GET">
-                            <div class="input-group mb-3" style="padding: 3px 0;">
+                    <form action="{{route('category')}}" method="GET" class="col-md-3 d-flex justify-content-between align-items-center">
                                 <input name="cat" class="form-control" type="hidden" value="{{(isset($_GET['cat']))?$_GET['cat']:''}}">
                                 <input name="src" class="form-control" type="text" placeholder="Produk" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
                               <div class="input-group-append">
                                 <button class="btn"><i class="fa fa-search"></i></button>
                               </div>
-                            </div>
-                                {{-- <div class="select-menu" tabindex="1">
-                                    <span>Categories </span>
-                                    <ul class="dropdown">
-                                        <li><a href="javascript:void(0);">Man</a></li>
-                                        <li><a href="javascript:void(0);">Woman</a></li>
-                                        <li><a href="javascript:void(0);">Kids</a></li>
-                                        <li><a href="javascript:void(0);">Babys</a></li>
-                                    </ul>
-                                </div> --}}
-                                {{-- <input name="src" type="text" placeholder="Search Here...">
-                                <button><i class="fa fa-search"></i></button> --}}
-                            </form>
-                        </div>
-                    </div>
+                        
+                    </form>
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <ul class="cart-wishlist-wrap d-flex">
                             @guest
@@ -342,32 +326,32 @@
         </div>
     </header>
     <!-- header-area end -->
-    <div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
-        <div class="modal-dialog" role="document">
+   <div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-body"><br>
                     <div class="text-center">
             <div class="text-center">
             <a>
-                <img class="dark-logo" src="https://gicommunity.org/images/gi_gw.png" alt="logo">
+                <img class="dark-logo" src="https://gicommunity.org/images/gi_gw.png" alt="logo" width="60px" height="60px">
             </a>
             </div>
             </div>
                 <br> 
-                    <form action="#" id="formData" class="form-horizontal container col-md-11 col-md-offset-2" >
+                    <form action="#" id="formData" class="form-horizontal container col-md-12 col-md-offset-2" >
                          <span id="feedbackdata"></span>
                            @csrf
                            <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">username GI</label>
                               <input type="text" class="form-control m-input remove-border-focus" name="email" />
                               <span id="feedbackusername"></span>
                            </div>
                            <div class="form-group">
-                             <label for="password">Password</label>
+                             <label for="password">password GI</label>
                               <input class="form-control m-input remove-border-focus" type="password" name="password"/>
                               <span id="feedbackpassword"></span>
                            </div>
-                           <div style="font-size: 12px">Belum Punya Akun Gicommunity? <a href="https://gicommunity.org/register"> Daftar disini </a></div>
+                           <div style="font-size: 12px">belum punya akun? <a href="https://gicommunity.org/register"> daftar </a></div>
                           <div class="pull-right" style="padding: 1.5rem 0;">
                             <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
                             <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>

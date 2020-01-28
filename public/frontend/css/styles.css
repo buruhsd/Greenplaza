@@ -335,13 +335,12 @@ a#scrollUp:hover {
 }
 
 .header-middle-area {
-    padding: 0px 0px;
+    padding: 15px 0px;
     /*z-index: 997;
     width: 100%;
     top: 0;
     left: 0;
     position: fixed;*/
-    border-bottom: 1px solid #eee;
     /*transition: height .5s ease-in-out;*/
 }
 
@@ -358,7 +357,7 @@ a#scrollUp:hover {
 }
 
 .logo a img.dark-logo {
-    width: 75%;
+    padding-right: 1rem;
 }
 
 .search-wrap form {
@@ -470,7 +469,7 @@ a#scrollUp:hover {
 .cart-wishlist-wrap li a {
     display: block;
     height: 45px;
-    border: 1px solid #eee;
+  /*  border: 1px solid #eee;*/
     padding: 0px 15px;
     line-height: 45px;
     text-transform: uppercase;
@@ -495,7 +494,7 @@ a#scrollUp:hover {
 }
 
 .mainmenu li a {
-    padding: 15px 20px;
+    padding: 5px 20px;
     font-size: 12px;
     display: block;
     text-transform: capitalize;
@@ -653,7 +652,6 @@ a#scrollUp:hover {
     display: block;
     text-align: center;
     padding: 15px 0px;
-    border: 1px solid #eee;
     border-top: none;
     border-bottom: none;
     color: #121212;

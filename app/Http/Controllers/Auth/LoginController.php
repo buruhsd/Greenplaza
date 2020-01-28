@@ -66,6 +66,34 @@ class LoginController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+      protected function getApi($data)
+    {
+       try {
+        $API_AUTH = "https://gicommunity.org/api/user/check"; 
+        $attr = [
+            'username' => $data->email,
+            'password' => $data->password
+        ];
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $API_AUTH,
+            CURLOPT_POSTFIELDS => json_encode($attr),
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_HTTPHEADER => array(
+                "accept: */*",
+                "accept-language: en-US,en;q=0.8",
+                "content-type: application/json",
+        )
+        ]);
+        $resp = curl_exec($curl);
+        $response = json_decode($resp, true);
+        curl_close($curl);
+                return $response;
+        } catch (Exception $e) {
+           return response()->json(['error' => 'External API call failed.'], 500);
+        }
+    }
       public function login_gi(Request $request){
         $validator = Validator::make($request->all(), [
         'email' => 'required|string',
@@ -90,7 +118,7 @@ class LoginController extends Controller
             'error' => ['data' => "username atau password salah"]], 200);
         }
             
-         try {
+        try {
         $API_AUTH = "https://gicommunity.org/api/user/check"; 
         $attr = [
             'username' => $request->email,
@@ -158,32 +186,45 @@ class LoginController extends Controller
         $memberRole = Role::where('name', 'member')->pluck('name');
         $user->assignRole($memberRole);
     }
+
     protected function updateResponse($response, $data)
     {
         User::where('username', $response['username'])->limit(1)->update(['password' => Hash::make($data)]);
         
     }
-      public function login(Request $request){
-       // $this->validateLogin($request);
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
-
-            return $this->sendLockoutResponse($request);
-        }
-
+    public function login(Request $request){
+        if($request->email === "admin" || $request->email === "superadmin"){
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
         }
-
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
 
-        return $this->sendFailedLoginResponse($request);
+                return $this->sendFailedLoginResponse($request);
+        }
+        $response = $this->getApi($request);
+        if($response['success']) {
+            $username = $response['data']['username'];
+            $findUser = User::where('username', $username)->get(); 
+            $atr_rdm = $request->password;
+            if(count($findUser) == 0){
+                    $this->createResponse($response['data'], $atr_rdm);
+            }else{
+                    $this->updateResponse($response['data'], $atr_rdm);
+            }
+            if ($this->attemptLogin($request)) {
+                    User::where('username', $request->email)->limit(1)->update(array('password' => null));
+                    return $this->sendLoginResponse($request);
+            }      
+        }
+        if(!$response['success']) {
+            if($response['message'] == "error parameter"){
+                $sendError = $response['errors']['password'][0];
+            }else{
+                $sendError = $response['message'];
+            }
+            $errors = ['email' => $sendError];
+            return Redirect::back()->withErrors($errors);
+        }
     }
 
     /**
