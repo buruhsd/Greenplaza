@@ -628,12 +628,12 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
 
 @media (max-width: 578px) {
   .slider-area, .req-all{
-    margin-top :170px;
+    margin-top :90px;
   }
 }
 @media (max-width: 768px) {
   .slider-area, .req-all{
-    margin-top :150px;
+    margin-top :90px;
   }
   .cetagory-wrap.home {
     display: none;
@@ -646,4 +646,5 @@ src:url(fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype
   .cetagory-wrap.home2 {
     display: none;
   }
+  
 }

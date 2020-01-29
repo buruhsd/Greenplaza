@@ -179,7 +179,7 @@
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
                                                 <div class="col-12">
-                                                    <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.login")}} value="Login" class="btn btn-info btn-sm col-12" id="btn-pick-address" />
+                                                    <input type="button" onClick="showLoginModal()" value="Login" class="btn btn-info btn-sm col-12" />
                                                 </div>
                                             </center>
                                         </div>
@@ -794,3 +794,77 @@
       <!-- lightbox -->
     
 @endsection
+
+<div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
+   <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+         <div class="modal-body">
+            <br>
+            <div class="text-center">
+               <div class="text-center">
+                  <img class="dark-logo" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="" width="120px" height="40px">
+               </div>
+               <br>
+            </div>
+            <br> 
+            <form action="#" id="formData" class="form-horizontal container col-md-12 col-md-offset-2" >
+               <span id="feedbackdata"></span>
+               @csrf
+               <div class="form-group">
+                  <label for="username">username GI</label>
+                  <input type="text" class="form-control m-input remove-border-focus" name="email" />
+                  <span id="feedbackusername"></span>
+               </div>
+               <div class="form-group">
+                  <label for="password">password GI</label>
+                  <input class="form-control m-input remove-border-focus" type="password" name="password"/>
+                  <span id="feedbackpassword"></span>
+               </div>
+               <div style="font-size: 12px">belum punya akun? <a href="https://gicommunity.org/register"> daftar </a></div>
+               <div class="pull-right" style="padding: 1.5rem 0;">
+                  <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+    <script>
+        function showLoginModal(){
+            $('.remove-border-focus').attr("style", "outline: 0px !important");
+            $('.remove-border-focus').attr("style", "-webkit-appearance: none");
+            $('.remove-border-focus').attr("style", "box-shadow: none !important");
+            $('#myModalLogin').modal('show');
+        }
+        function saveLogin(){
+            $('.btnsave').html("load...");
+            $('.btnsave').addClass("disabled").prop('disabled', true);
+            var dataString = $("#formData").serialize();
+            $.ajax({
+                url : "{{ url('/login_gi') }}",
+                type: "POST",
+                data: dataString,
+                dataType: "JSON",
+                success: function(data){
+                 if(data.sucess){
+                    location.reload();
+                 }
+                 (!data.error.email) ?
+                 $("#feedbackusername").html('') : $("#feedbackusername").html('<span style="font-size: 12px; color: #ed5249">' + data.error.email[0] +'</span>');
+                 (!data.error.password) ?
+                 $("#feedbackpassword").html('') : $("#feedbackpassword").html('<span style="font-size: 12px; color: #ed5249">' + data.error.password[0] +'</span>');
+                 (!data.error.data) ?
+                 $("#feedbackdata").html('') : $("#feedbackdata").html('<div class="alert alert-danger text-center" role="alert">' + data.error.data +'</div>');
+                 $('.btnsave').html("Masuk");
+                 $('.btnsave').removeClass("disabled").prop('disabled', false);
+
+                },
+                error: function (err){
+                    console.log(err.error);
+                    $('.btnsave').html("Masuk");
+                 $('.btnsave').removeClass("disabled").prop('disabled', false);
+                }
+            });
+        }
+    </script>

@@ -6,7 +6,7 @@
     <title>GreenPlaza</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- <link rel="stylesheet" type="text/css"  href="{{ asset('frontendlama/css/reg_style.css') }}"> --}}
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/gi_plaza.png')}}">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="{{ asset('admin/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">

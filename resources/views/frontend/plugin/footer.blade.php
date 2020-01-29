@@ -10,10 +10,7 @@
                                 <!-- <li><i class="fa fa-map-marker"></i>House No. 09 , Road No.25 Dhaka,Bangladesh </li>
                                 <li><i class="fa fa-phone"></i>+1(888)234-56789 <span>+1(888)234-56789</span> </li>
                                 <li><i class="fa fa-envelope-o"></i>youremail@gmail.com <span>youremail@gmail.com</span></li>--> 
-                                <li>
-                                    <i class="fa fa-map-marker"></i>
-                                    {{FunctionLib::get_config('profil_address')}}
-                                </li>
+                               
                                 <li>
                                     <i class="fa fa-phone"></i>
                                     {{FunctionLib::get_config('profil_phone')}}
@@ -65,7 +62,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p>&copy; 2018 <span>Greenpalza</span> All Right Reserved</p>
+                        <p>&copy; 2020 <span>Greenpalza</span> All Right Reserved</p>
                     </div>
                 </div>
             </div>

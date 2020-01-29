@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------------
+/*/*-----------------------------------------------------------------------------------
     Template Name: Kinun eCommerce HTML Template
     Template URI: https://themekhr.com/tf/kinun-preview/
     Description: This is html5 template
@@ -1303,9 +1303,9 @@ ul.rating li {
     padding-bottom: 10px;
     position: absolute;
 }
-.req-all{
+/*.req-all{
     padding-top: 150px;
-}
+}*/
 
 .product-wrap:hover .product-content {
     border-color: #4caf50;
@@ -3373,7 +3373,86 @@ img.hover-shadow1 {
     font-size: 120px;
 }
 
+
+
 /*--------team-area end--------*/
 .no-list-style{
     list-style: none;
 }
+
+
+/*--------style-area-picnic--------*/
+
+.logo-header-initila-1{
+    margin-right: 3rem
+}
+.search-header-initila-1{
+    width: 32rem;
+}
+.logo-responsive-initila-1{
+    padding: 0.8rem 0;
+    background: #f5f5f5;
+}
+.space-header-and-body{
+    padding-top: 62px;
+    margin-bottom: 180px;
+}
+
+/*--------Extra small devices (portrait phones, less than 576px)--------*/
+@media (max-width: 575.98px) { 
+    .logo-header-initila-1{
+      display: none;
+    }
+    .nav-menu-initila-1{
+        display: none;
+    }
+    .search-header-initila-1{
+    width: 15rem;
+    }
+}
+
+/*--------Extra small devices (portrait phones, less than 576px)--------*/
+@media (min-width: 576px) and (max-width: 767.98px) { 
+    .logo-header-initila-1{
+      display: none;
+    }
+    .nav-menu-initila-1{
+        display: none;
+    }
+    .search-header-initila-1{
+    width: 18rem;
+    }
+
+ }
+
+/*--------Medium devices (tablets, 768px and up)--------*/
+@media (min-width: 768px) and (max-width: 991.98px) { 
+    .logo-header-initila-1{
+      display: none;
+    }
+    .search-header-initila-1{
+    width: 21rem;
+    }
+
+
+ }
+
+/*--------Large devices (desktops, 992px and up)--------*/
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .logo-responsive-initila-1{
+        display: none;
+    }
+    .search-header-initila-1{
+    width: 25rem;
+    }
+
+ }
+
+/*--------Extra large devices (large desktops, 1200px and up)--------*/
+@media (min-width: 1200px) { 
+        .logo-responsive-initila-1{
+        display: none;
+    }
+}
+
+ /*--------end-style-area-picnic--------*/

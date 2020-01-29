@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
 
-    <div class="slider-area" style="padding-top: 62px;margin-bottom: 180px;">
+    <div class="slider-area" class="space-header-and-body" style="padding-top: 62px;margin-bottom: 180px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
