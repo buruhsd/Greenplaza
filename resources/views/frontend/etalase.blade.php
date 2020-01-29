@@ -182,10 +182,17 @@
                                                     @if($p->produk_discount > 0)
                                                         <p>
                                                             <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
-                                                            <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span>
+                                                            <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span>
+                                                            <!-- <p class=" pop-sending pop-target"> -->
+                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-content="{{$p->produk_price}}" ><i class="fa fa-bars"></i></span>
+                                                            <!-- </p> -->
                                                         </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo"  data-popover-content="#a1"><i class="fa fa-bars"></i></span></p>
+                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span>
+                                                            <!-- <p class="pop-sending pop-target"> -->
+                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-content="{{$p->produk_price}}"><i class="fa fa-bars"></i></span>
+                                                            <!-- </p> -->
+                                                        </p>
                                                     @endif
                                                 
                                                
@@ -197,7 +204,7 @@
                                                     <li><i class="fa fa-star"></i></li>
                                                 </ul> -->
                                             </div>
-                                            <div id="tooltip" role="tooltip">My tooltip</div>
+                                            <!-- <div id="tooltip" role="tooltip">My tooltip</div> -->
                                         </div>
                                     </div>
                                         @endforeach
@@ -249,10 +256,17 @@
                                                             @if($p->produk_discount > 0)
                                                                 <p>
                                                                     <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
-                                                                    <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span>
+                                                                    <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span>
+                                                                    <p class=" pop-sending pop-target">
+                                                                        <span class="pull-right popo" id="initialIdSelectorMouseMove{{$p->id}}" href="#" title="Wisdom Quotes" class="btn btn-lg btn-default" data-toggle="popover" data-content="You must be the change you wish to see in the world" ><i class="fa fa-bars"></i></span>
+                                                                    </p>
                                                                 </p>
                                                             @else
-                                                                <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span><span class="pull-right" data-toggle="popover" title="halo" data-popover-content="#a1" ><i class="fa fa-bars"></i></span></p>
+                                                                <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span>
+                                                                    <p class=" pop-sending pop-target">
+                                                                        <span class="pull-right popo" id="initialIdSelectorMouseMove{{$p->id}}" href="#" title="Wisdom Quotes" class="btn btn-lg btn-default" data-toggle="popover" data-content="You must be the change you wish to see in the world" ><i class="fa fa-bars"></i></span>
+                                                                    </p>
+                                                                </p>
                                                             @endif
                                                         
                                                             
@@ -283,21 +297,27 @@
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
 @section('script')
-<script src="https://unpkg.com/@popperjs/core@^2.0.0"></script>
-
 <script>
-      const button = document.querySelector('#button');
-      const tooltip = document.querySelector('#tooltip');
+    $("#initialIdSelectorMouseMove1" ).hover(
+        function() {
+         $(".pop-sending span").popover({
+             placement : 'right'
+         });
+         $(".pop-target span").popover('show');
+         }, 
+        function() {
+         $(".pop-target span").popover('hide');
+        }
+    );
 
-      Popper.createPopper(button, tooltip);
-</script>
+    function showPopover(id){
+        $(".popo").popover('hide');
+        $("#pop"+id).popover('show');
+        setTimeout(function(){ 
+            $(".popo").popover('hide');
+        }, 3000);
+    }
 
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('[data-toggle="popover"]').popover({
-        
-      });   
-    });
 </script>
 
 <script type="text/javascript">
