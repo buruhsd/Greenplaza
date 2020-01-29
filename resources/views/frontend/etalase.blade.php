@@ -182,15 +182,35 @@
                                                     @if($p->produk_discount > 0)
                                                         <p>
                                                             <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
-                                                            <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span>
+                                                            <span class="price-etalase">
+                                                                RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}<br>
+                                                                MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }}<br>
+                                                                MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }} 
+                                                            </span>
+                                                            <span> </span>
                                                             <!-- <p class=" pop-sending pop-target"> -->
-                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-content="{{$p->produk_price}}" ><i class="fa fa-bars"></i></span>
+                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                                                    data-content="
+                                                                    Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}} <br>
+                                                                    MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }} <br>  " >
+                                                                    {{-- <i class="fa fa-bars"></i> --}}
+                                                                </span>
                                                             <!-- </p> -->
                                                         </p>
                                                     @else
-                                                        <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span>
+                                                        <p>
+                                                            <span class="price-etalase">
+                                                                Rp. {{FunctionLib::number_to_text($p->produk_price)}}<br>
+                                                                MYR. {{FunctionLib::number_to_text($p->produk_price * $myr) }}
+                                                            </span>
+                                                            <span> </span>
                                                             <!-- <p class="pop-sending pop-target"> -->
-                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-content="{{$p->produk_price}}"><i class="fa fa-bars"></i></span>
+                                                                <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-html="true"
+                                                                    data-content="
+                                                                    Rp. {{FunctionLib::number_to_text($p->produk_price)}} <br>
+                                                                    MYR. {{FunctionLib::number_to_text($p->produk_price * $myr) }}">
+                                                                    {{-- <i class="fa fa-bars"></i> --}}
+                                                                </span>
                                                             <!-- </p> -->
                                                         </p>
                                                     @endif
@@ -256,16 +276,31 @@
                                                             @if($p->produk_discount > 0)
                                                                 <p>
                                                                     <del>RP.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}}%</span><br>
-                                                                    <span>RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}</span><span> </span>
-                                                                    <p class=" pop-sending pop-target">
-                                                                        <span class="pull-right popo" id="initialIdSelectorMouseMove{{$p->id}}" href="#" title="Wisdom Quotes" class="btn btn-lg btn-default" data-toggle="popover" data-content="You must be the change you wish to see in the world" ><i class="fa fa-bars"></i></span>
-                                                                    </p>
+                                                                    <span class="price-etalase">
+                                                                        RP. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}}<br>
+                                                                        MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }} 
+                                                                    </span>
+                                                                    <span> </span>
+                                                                    <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-html="true" 
+                                                                        data-content="
+                                                                        Rp. {{FunctionLib::number_to_text($p->produk_price - ($p->produk_price * $p->produk_discount/ 100) )}} <br>
+                                                                        MYR. {{FunctionLib::number_to_text($p->produk_price * $myr - ( ($p->produk_price * $myr) * $p->produk_discount/ 100) ) }} <br>  " >
+                                                                        {{-- <i class="fa fa-bars"></i> --}}
+                                                                    </span>
                                                                 </p>
                                                             @else
-                                                                <p><span>Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><span> </span>
-                                                                    <p class=" pop-sending pop-target">
-                                                                        <span class="pull-right popo" id="initialIdSelectorMouseMove{{$p->id}}" href="#" title="Wisdom Quotes" class="btn btn-lg btn-default" data-toggle="popover" data-content="You must be the change you wish to see in the world" ><i class="fa fa-bars"></i></span>
-                                                                    </p>
+                                                                <p>
+                                                                    <span class="price-etalase">
+                                                                        Rp. {{FunctionLib::number_to_text($p->produk_price)}}</span><br>
+                                                                        MYR. {{FunctionLib::number_to_text($p->produk_price * $myr) }}
+                                                                    </span>
+                                                                    <span> </span>
+                                                                    <span onclick="showPopover({{$p->id}});" class="pull-right popo" id="pop{{$p->id}}" title="{{$p->produk_name}}" class="btn btn-lg btn-default" data-toggle="popover" data-html="true" 
+                                                                        data-content="
+                                                                        Rp. {{FunctionLib::number_to_text($p->produk_price)}} <br>
+                                                                        MYR. {{FunctionLib::number_to_text($p->produk_price * $myr) }}" >
+                                                                    {{-- <i class="fa fa-bars"></i> --}}
+                                                                    </span>
                                                                 </p>
                                                             @endif
                                                         
@@ -301,7 +336,8 @@
     $("#initialIdSelectorMouseMove1" ).hover(
         function() {
          $(".pop-sending span").popover({
-             placement : 'right'
+             placement : 'right',
+             html : true,
          });
          $(".pop-target span").popover('show');
          }, 
