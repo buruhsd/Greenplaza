@@ -152,9 +152,16 @@
                                         <!-- <span class="pull-left">$219.56</span> -->
                                         @if($detail->produk_discount > 0)
                                             <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
-                                            <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del>
+                                            <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del><br>
+                                            <span class="pull-left">
+                              
+                                                MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr - ( ($detail->produk_price * $myr) * $p->produk_discount/ 100) ) }}<br>
+                                
+                                            </span>
                                         @else
-                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span>
+                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span><br>
+                                            <span class="pull-left">MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr) }}</span>
+
                                         @endif
                                         <ul class="rating pull-right">
                                             <!-- <li><i class="fa fa-star"></i></li>

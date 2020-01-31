@@ -2,7 +2,7 @@
   <header class="header-area header-req">
    <div class="logo-responsive-initila-1 text-center">
       <a href="{{url("/")}}">
-      <img width="100px" height="10px" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="logo" >
+      <img width="100px" height="10px" src="{{ asset('assets/images/gi_logo.png') }}" alt="logo" >
       </a>
    </div>
    <div class="header-bottom-area bg-1 header-bottom-area-two" style="padding: 0.8rem 0">
@@ -11,7 +11,7 @@
             <div class="d-flex align-items-center">
                <div class="logo-header-initila-1">
                   <a href="{{url("/")}}">
-                  <img width="130px" height="40px" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="" >
+                  <img width="130px" height="40px" src="{{ asset('assets/images/gi_logo.png') }}" alt="" >
                   </a>
                </div>
                <form class="search-header-initila-1" action="{{route('category')}}" method="GET">
