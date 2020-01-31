@@ -39,10 +39,22 @@
             <p>
                 <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
                 <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span>
+                <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop-saat-ini{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                    data-content="
+                    Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
+                    MYR. {{FunctionLib::number_to_text($n->produk_price * $myr - ( ($n->produk_price * $myr) * $n->produk_discount/ 100) ) }} <br>  " >
+                    <i class="fa fa-bars"></i>
+                </span>
             </p>
             @else
             <p>
                 <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span>
+                <span onclick="showPopoverSaatIni({{$n->id}});" class="pull-right popo" id="pop-saat-ini{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                    data-content="
+                    Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
+                    MYR. {{FunctionLib::number_to_text($n->produk_price * $myr) }} <br>  " >
+                    <i class="fa fa-bars"></i>
+                </span>
             </p>
             @endif
             <div class="tombol-product">
@@ -54,3 +66,26 @@
     </div>
     @endforeach
 </div>
+<script>
+    $("#initialIdSelectorMouseMove1" ).hover(
+        function() {
+         $(".pop-sending span").popover({
+             placement : 'right',
+             html : true,
+         });
+         $(".pop-target span").popover('show');
+         }, 
+        function() {
+         $(".pop-target span").popover('hide');
+        }
+    );
+
+    function showPopoverSaatIni(id){
+        $(".popo").popover('hide');
+        $("#pop-saat-ini"+id).popover('show');
+        setTimeout(function(){ 
+            $(".popo").popover('hide');
+        }, 3000);
+    }
+
+</script>

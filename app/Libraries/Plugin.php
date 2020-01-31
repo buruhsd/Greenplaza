@@ -99,6 +99,8 @@ class Plugin
     */
     public static function p_baru_saat_ini($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_baru_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('updated_at', 'DESC')
             ->limit(8)
@@ -112,6 +114,8 @@ class Plugin
     */
     public static function p_harga_diskon($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_harga_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '>', 0)
             ->orderBy('updated_at', 'DESC')
@@ -126,6 +130,8 @@ class Plugin
     */
     public static function p_baru($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
         $data['p_baru'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '=', 0)
@@ -144,6 +150,8 @@ class Plugin
     */
     public static function p_pilihan_saat_ini($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_pilihan_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
             ->limit(8)
@@ -157,6 +165,8 @@ class Plugin
     */
     public static function p_trending($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_trending'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
             ->limit(4)
@@ -175,6 +185,8 @@ class Plugin
     */
     public static function p_top_rate($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $order = 'DESC';
         $data['p_top_rate'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->whereHas('review')
@@ -202,6 +214,8 @@ class Plugin
     */
     public static function p_hot($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_hot'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('produk_is_hot', 'DESC')
             ->orderBy('produk_hotlist', 'DESC')
@@ -222,6 +236,8 @@ class Plugin
     */
     public static function p_diskon($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
         $data['p_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '>', 0)
@@ -243,6 +259,8 @@ class Plugin
     */
     public static function p_populer_konsumen($param = []){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $order = 'DESC';
         $data['p_populer_konsumen'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->whereHas('review')
@@ -272,6 +290,8 @@ class Plugin
     */
     public static function side_left($param=[]){
         extract($param);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $id = (isset($id))?$id:0;
         $data['side_cat'] = FunctionLib::category_by_parent($id)->limit(6)->get();
         $data['side_related'] = FunctionLib::produk_by('category', $id)->orderBy('created_at', 'DESC')->limit(5)->get();
