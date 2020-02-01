@@ -146,23 +146,66 @@
                                     <h3>{{ucfirst(strtolower($detail->produk_name))}}</h3>
                                     @if($detail->user->seller_active())
                                     <h5><a href="{{route('etalase', $detail->user->user_slug)}}">
-                                    <center>Toko {{$detail->user->user_store}}</center></a></h5>
+                                    <center>{{$detail->user->user_store}} Shop</center></a></h5>
                                     @endif
                                     <div class="rating-wrap fix">
                                         <!-- <span class="pull-left">$219.56</span> -->
-                                        @if($detail->produk_discount > 0)
-                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount / 100))}}&nbsp;/&nbsp;</span>
-                                            <del class="text-danger">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</del><br>
-                                            <span class="pull-left">
-                              
-                                                MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr - ( ($detail->produk_price * $myr) * $p->produk_discount/ 100) ) }}<br>
-                                
-                                            </span>
-                                        @else
-                                            <span class="pull-left">Rp. {{FunctionLib::number_to_text($detail->produk_price)}}</span><br>
-                                            <span class="pull-left">MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr) }}</span>
+                                        @if ($detail->user->user_detail->country_id == 4)
+                                          @if ($detail->produk_discount != 0)
+                                                <p>
+                                                    <del>MYR.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>
+                                                    <span class="pull-right" style="color:red">{{number_format($detail->produk_discount)}} %</span><br>
+                                                    <span>MYR.{{FunctionLib::number_to_text($detail->produk_price-($detail->produk_price * $detail->produk_discount / 100))}}</span><br>
+                                                    <span>Rp.{{FunctionLib::number_to_text($detail->produk_price * $myr - ( ($detail->produk_price * $myr) * $detail->produk_discount/ 100) ) }} <br> </span>
+                                                    {{-- <span onclick="showPopover({{$detail->id}});" class="pull-right popo" id="pop{{$detail->id}}" title="{{$detail->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                                        data-content="
+                                                        Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount/ 100) )}} <br>
+                                                        MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr - ( ($detail->produk_price * $myr) * $detail->produk_discount/ 100) ) }} <br>  " >
+                                                        <i class="fa fa-bars"></i>
+                                                    </span> --}}
+                                                </p>
+                                            @else
+                                                <p>
+                                                    <span>MYR.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</span><br>
+                                                    <span>Rp.{{FunctionLib::number_to_text($detail->produk_price * $myr)}}</span>
+                                                    {{-- <span onclick="showPopover({{$detail->id}});" class="pull-right popo" id="pop{{$detail->id}}" title="{{$detail->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                                        data-content="
+                                                        Rp. {{FunctionLib::number_to_text($detail->produk_price)}} <br>
+                                                        MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr)}} <br>  " >
+                                                        <i class="fa fa-bars"></i>
+                                                    </span> --}}
+                                                </p>
+                                            @endif
 
-                                        @endif
+                                        @elseif($detail->user->user_detail->country_id == 3)
+                                          @if ($detail->produk_discount != 0)                
+                                              <p>
+                                                  <del>Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>
+                                                  <span class="pull-right" style="color:red">{{number_format($detail->produk_discount)}} %</span><br>
+                                                  <span>Rp.{{FunctionLib::number_to_text($detail->produk_price-($detail->produk_price * $detail->produk_discount / 100))}}</span><br>
+                                                  <span>MYR.{{FunctionLib::number_to_text($detail->produk_price / $myr - ( ($detail->produk_price / $myr) * $detail->produk_discount/ 100) ) }} <br> </span>
+                                                  {{-- <span onclick="showPopover({{$detail->id}});" class="pull-right popo" id="pop{{$detail->id}}" title="{{$detail->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                                      data-content="
+                                                      Rp. {{FunctionLib::number_to_text($detail->produk_price - ($detail->produk_price * $detail->produk_discount/ 100) )}} <br>
+                                                      MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr - ( ($detail->produk_price * $myr) * $detail->produk_discount/ 100) ) }} <br>  " >
+                                                      <i class="fa fa-bars"></i>
+                                                  </span> --}}
+                                              </p>
+                                          @else
+                                              <p>
+                                                  <span>Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</span><br>
+                                                  <span>MYR.{{FunctionLib::number_to_text($detail->produk_price / $myr)}}</span>
+                                                  {{-- <span onclick="showPopover({{$detail->id}});" class="pull-right popo" id="pop{{$detail->id}}" title="{{$detail->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                                      data-content="
+                                                      Rp. {{FunctionLib::number_to_text($detail->produk_price)}} <br>
+                                                      MYR. {{FunctionLib::number_to_text($detail->produk_price * $myr)}} <br>  " >
+                                                      <i class="fa fa-bars"></i>
+                                                  </span> --}}
+                                              </p>
+                                          @endif
+                                        @else
+                                            <p> - </p>
+                                        @endif  
                                         <ul class="rating pull-right">
                                             <!-- <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -206,18 +249,18 @@
                                             <input type="text" name="qty" value="1" id="qty" />
                                         </li>
                                         <li>
-                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Tambah ke Wishlist" class="btn btn-info btn-sm btn-block" />
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-info btn-sm btn-block" />
                                         </li>
                                     </ul>
                                     <div class="col-md-12 " style="margin-bottom: 2%">
                                         <center>
-                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Alamat tujuan" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
                                         </center>
                                     </div>
                                     <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
                                         <ul style='width: 100%; margin-bottom: 2%'>
                                             <div class='col-lg-6 col-sm-12 col-md-12'>
-                                                <b>Alamat tujuan : {{Auth::user()->user_address()->first()['user_address_label']}}</b>
+                                                <b>Destination Address : {{Auth::user()->user_address()->first()['user_address_label']}}</b>
                                             </div>
                                         </ul>
                                     </div>
@@ -237,13 +280,13 @@
                                         </div>
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
-                                                <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Jasa pengiriman" id="btn-choose-shipment" />
+                                                <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Service Courier" id="btn-choose-shipment" />
                                             </center>
                                         </div>
                                     @else
                                         <div class="col-md-12" style="margin-bottom: 2%">
                                             <center>
-                                                <input type="button" href="#" class="btn btn-danger btn-sm col-12" id="btn-choose-shipment" value="Jasa Pengiriman belum tersedia" />
+                                                <input type="button" href="#" class="btn btn-danger btn-sm col-12" id="btn-choose-shipment" value="Service Courier not avalaible" />
                                             </center>
                                         </div>
                                     @endif
@@ -307,7 +350,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-bottom: 2%">
-                                        <input type="button" onclick="$('#form-shipment').submit();" value="Tambah ke Keranjang" class="btn btn-danger btn-sm btn-block" />
+                                        <input type="button" onclick="$('#form-shipment').submit();" value="Add to cart" class="btn btn-danger btn-sm btn-block" />
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
@@ -329,7 +372,7 @@
                                         <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
                                         <!-- <li><a data-toggle="tab" href="#tag">Faq</a></li> -->
                                         <li><a data-toggle="tab" href="#review">Review</a></li>
-                                        <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
+                                        <li><a data-toggle="tab" href="#diskusi">Produt Discution</a></li>
                                     </ul>
                                 </div>
                             </div>

@@ -209,7 +209,7 @@ div {
 a#scrollUp {
     position: absolute;
     right: 20px;
-    bottom: 20px;
+    bottom: 100px;
     height: 40px;
     width: 40px;
     background: #4caf50;
@@ -1271,7 +1271,7 @@ ul.rating li {
 }
 
 .product-content {
-    padding: 20px 10px 10px;
+    padding: 20px 10px 200px;
     border: 1px solid #e1e1e1;
     border-top: none;
     height: 175px;
