@@ -48,6 +48,11 @@ Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_jual/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
 // });
+
+//auth mobile
+Route::post('mobile_login', 'Api\\AuthController@login');
+
+
 Route::post('done_order', 'Admin\\TransactionController@done_order');
 Route::post('done_masedi', 'Admin\\TransactionController@done_masedi');
 Route::get('index', 'AdminApi\PermissionsController@index');
