@@ -202,7 +202,7 @@
                                 <div class="col-md-9">
                                     <select name='country_id' class="form-control">
                                         @foreach($cfg_country as $item)
-                                            <option value='{{$item->id}}' <?php if($user->user_detail->country_id == $item->id){echo "selected";}?>>{{$item->country_name}}</option>
+                                            <option value='{{$item->country_id}}' <?php if($user->user_detail->country_id == $item->id){echo "selected";}?>>{{$item->country_name}}</option>
                                         @endforeach
                                     </select>
                                 {!! $errors->first('country_id', '<p class="help-block">:message</p>') !!}

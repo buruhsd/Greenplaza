@@ -150,7 +150,7 @@
                                     @endif
                                     <div class="rating-wrap fix">
                                         <!-- <span class="pull-left">$219.56</span> -->
-                                        @if ($detail->user->user_detail->country_id == 4)
+                                        @if ($detail->user->user_detail->country_id == 108)
                                           @if ($detail->produk_discount != 0)
                                                 <p>
                                                     <del>MYR.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>
@@ -177,7 +177,7 @@
                                                 </p>
                                             @endif
 
-                                        @elseif($detail->user->user_detail->country_id == 3)
+                                        @elseif($detail->user->user_detail->country_id == 222)
                                           @if ($detail->produk_discount != 0)                
                                               <p>
                                                   <del>Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>

@@ -49,10 +49,22 @@
                                                             <?php 
                                                                 $shipment = App\Models\Shipment::whereIn('id', $user->user_shipment()->pluck('user_shipment_shipment_id')->toArray())->pluck('shipment_name')->toArray();
                                                             ?>
-                                                            {{-- {{dd(App\Models\Country::find($user->user_detail->country_id)->country_name)}} --}}
-                                                            <li class="list-group-item">Country :
-                                                             {{ App\Models\Country::find($user->user_detail->country_id)->country_name }}
-                                                            </li>
+                                                            {{-- {{dd ($user->user_detail->country_id == 0) }} --}}
+                                                            @if($user->user_detail->country_id == 0)
+                                                                <li class="list-group-item">Country :
+                                                                 -
+                                                                </li>
+                                                            @elseif($user->user_detail->country_id == 222)
+                                                                <li class="list-group-item">Country :
+                                                                 Indonesia
+                                                                </li>
+                                                            @elseif($user->user_detail->country_id == 108)
+                                                                <li class="list-group-item">Country :
+                                                                 Malaysia
+                                                                </li>
+                                                            @else
+                                                                <li class="list-group-item">Country : - </li>
+                                                            @endif
                                                             <li class="list-group-item">Since : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
                                                             <li class="list-group-item">Product Total : {{FunctionLib::count_produk("", $user->id)}}</li>
                                                             <li class="list-group-item">Products Sold : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
@@ -180,7 +192,7 @@
                                                 
 
                     
-                                                    @if ($p->user->user_detail->country_id == 4)
+                                                    @if ($p->user->user_detail->country_id == 108)
                                                         @if ($p->produk_discount != 0)
                                                             <p>
                                                                 <del>MYR.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span>
@@ -207,7 +219,7 @@
                                                             </p>
                                                         @endif
 
-                                                    @elseif($p->user->user_detail->country_id == 3)
+                                                    @elseif($p->user->user_detail->country_id == 222)
                                                         @if ($p->produk_discount != 0)                
                                                             <p>
                                                                 <del>Rp.{{FunctionLib::number_to_text($p->produk_price, 2)}}</del><span> </span>

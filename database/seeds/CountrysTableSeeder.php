@@ -13,14 +13,14 @@ class CountrysTableSeeder extends Seeder
    public function run()
     {
         $country = new Country();
-  		$country->country_id = 0;
-  		$country->country_name = "Indonesia";
-  		$country->save();
+      $country->country_id = 222;
+      $country->country_name = "Indonesia";
+      $country->save();
 
-  		$country = new Country();
-  		$country->country_id = 108;
-  		$country->country_name = "Malaysia";
-  		$country->save();
+      $country = new Country();
+      $country->country_id = 108;
+      $country->country_name = "Malaysia";
+      $country->save();
 
 
     }
