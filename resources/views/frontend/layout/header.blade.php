@@ -67,10 +67,16 @@
                   </li>
                   @endguest
                   <li>
+
                      <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
-                     @if(Session::has('chart') && count(Session::get('chart')) > 0)
-                     <span>
-                     Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                        @if(Session::has('chart') && count(Session::get('chart')) > 0)
+                        <span>
+                           @if(Auth::user()->user_detail->country_id == 222)
+                              Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                           @elseif(Auth::user()->user_detail->country_id == 108)
+                              MYR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                           @else
+                        @endif
                      {{-- {{count(Session::get('chart'))}} --}}
                      </span>
                      @else

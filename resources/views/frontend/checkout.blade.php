@@ -235,15 +235,15 @@
                                     <hr/>
                                     Cooming Soon.
                                 </div>
-                                <!-- <div class="payment_hide payment_Gln collapse">
+                                {{-- <div class="payment_hide payment_Gln collapse">
                                     <hr/>
                                     Cooming Soon.
-                                </div> -->
-                                <!-- <div class="payment_hide payment_Gln collapse">
+                                </div> --}}
+                               <div class="payment_hide payment_Gln collapse">
                                     <hr/>
                                     <ul class="nav">
                                         <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
-                                        {{-- <li><a data-toggle="tab" href="#transaksi">Transaksi</a></li> --}}
+                                        <li><a onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" >Transaksi</a></li> 
                                     </ul>
                                     <hr/>
                                     @foreach(Session::get('chart') as $item)
@@ -268,7 +268,7 @@
                                                     </a>
                                         @endif
                                     @endif
-                                </div> -->
+                                </div>
                             @endif
                         </form>
                     </div>

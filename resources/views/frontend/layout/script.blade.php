@@ -93,6 +93,7 @@
         <script src="{{ asset('js/pusher.js') }}"></script>
         <script src="{{ asset('js/echo.js') }}"></script>
         <script type="text/javascript">
+            console.log('{!!env("PUSHER_APP_AUTHPOINT")!!}');
             // var pusher = new Pusher('{!!env("PUSHER_APP_KEY")!!}', {
             //     cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
             //     forceTLS: true
@@ -104,24 +105,25 @@
             //     var url = '{!!url('member/notification/is_read')!!}/' + data.id;
             //     showNotifications(data.data, '#member', url);
             // });
-            Pusher.logToConsole = true;
-            window.Echo = new Echo({
-                "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
-                host: '{!!env("APP_URL")!!}',
-                broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
-                key: '{!!env("PUSHER_APP_KEY")!!}',
-                cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
-                forceTLS: true,
-                // encrypted: true,
-                logToConsole: true
-            });
-            console.log(window.Echo);
-            // showNotifications({}, '#admin');
-            window.Echo.private('App.User.{{Auth::id()}}')
-                .notification((notification) => {
-                    var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
-                    showNotifications(notification.data, '#member', url);
-            });
+            // Pusher.logToConsole = true;
+            // window.Echo = new Echo({
+
+            //     "authEndpoint": '{!!env("PUSHER_APP_AUTHPOINT")!!}',
+            //     host: '{!!env("APP_URL")!!}',
+            //     broadcaster: '{!!env("BROADCAST_DRIVER")!!}',
+            //     key: '{!!env("PUSHER_APP_KEY")!!}',
+            //     cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
+            //     forceTLS: true,
+            //     // encrypted: true,
+            //     logToConsole: true
+            // });
+            // console.log(window.Echo);
+            // // showNotifications({}, '#admin');
+            // window.Echo.private('App.User.{{Auth::id()}}')
+            //     .notification((notification) => {
+            //         var url = '{!!url('member/notification/is_read')!!}/' + notification.id;
+            //         showNotifications(notification.data, '#member', url);
+            // });
         </script>
     @endguest
     {!! (isset($footer_script))? $footer_script:'' !!}

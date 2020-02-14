@@ -174,6 +174,7 @@ class ProdukController extends Controller
         $data['brand'] = Brand::all();
         $id_product = Auth::id();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        // dd($data);
         return view('member.produk.create', $data);
     }
 
@@ -194,10 +195,11 @@ class ProdukController extends Controller
         
         $this->validate($request, [
             'produk_name' => 'required',
-            'produk_poin' => 'required|numeric|between:0,100',
+            // 'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_category_id' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
+            'price_idr' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_height' => 'required|numeric',
             'produk_length' => 'required|numeric',
@@ -208,16 +210,18 @@ class ProdukController extends Controller
             'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        // dd($request);
         // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
         $res->produk_category_id = $request->produk_category_id;         
         $res->produk_brand_id = $request->produk_brand_id;
-        $res->produk_poin = $request->produk_poin;
+        // $res->produk_poin = $request->produk_poin;
         $res->produk_name = $request->produk_name;
         $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name.' '.FunctionLib::str_rand(5));
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->produk_price;
+        $res->price_idr = $request->price_idr;
         $res->produk_size = implode (",", $request->produk_size);
         $res->produk_length = $request->produk_length;
         $res->produk_wide = $request->produk_wide;
@@ -252,6 +256,7 @@ class ProdukController extends Controller
             }
         }
         $res->produk_note = $request->produk_note;
+        // dd($res);
         $res->save();
         if(!$res){
             $status = 500;
@@ -363,6 +368,7 @@ class ProdukController extends Controller
             'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
+            'produk_price_idr' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
@@ -388,6 +394,7 @@ class ProdukController extends Controller
         $produk->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $produk->produk_unit = $request->produk_unit;
         $produk->produk_price = $request->produk_price;
+        $res->produk_price_idr = $request->price_idr;
         $produk->produk_size = implode (",", $request->produk_size);
         $produk->produk_length = $request->produk_length;
         $produk->produk_wide = $request->produk_wide;

@@ -114,8 +114,8 @@ class Plugin
     */
     public static function p_harga_diskon($param = []){
         extract($param);
-        $kurs = json_decode(FunctionLib::cekKurs(), true);
-        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        // $kurs = json_decode(FunctionLib::cekKurs(), true);
+        // $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_harga_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '>', 0)
             ->orderBy('updated_at', 'DESC')

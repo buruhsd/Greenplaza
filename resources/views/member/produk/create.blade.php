@@ -9,6 +9,7 @@
     <div class="row">
         <div class="col-md-12">
         <section id="main-content">
+            {{-- <p>{!! $errors !!}</p> --}}
             <section class="wrapper">
             <div class="panel panel-white">
                 <div class="panel-body">

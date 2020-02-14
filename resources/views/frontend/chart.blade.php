@@ -51,6 +51,7 @@
 
                                     @if(Session::has('chart'))
                                         @foreach(Session::get('chart') as $key => $item)
+                                        {{-- {{ dd($item)}}; --}}
                                             <?php
                                                 $harga_grosir = 0;
                                                 $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 

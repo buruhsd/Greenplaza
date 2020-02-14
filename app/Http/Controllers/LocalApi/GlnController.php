@@ -127,21 +127,21 @@ class GlnController extends Controller
                 $gross_amount += $trans->trans_amount_total;
                 $trans->save();
                 // send email seller
-                if($trans->trans_detail->first()->exists()){
-                    $send_status = FunctionLib::trans_arr(1);
-                    $config = [
-                        'to' => $trans->trans_detail->first()->produk->user->email,
-                        'data' => [
-                            'trans_code' => $trans->trans_code,
-                            'trans_amount_total' => $trans->trans_amount_total,
-                            'status' => $send_status,
-                        ]
-                    ];
-                    $send_notif = FunctionLib::transaction_notif($config);
-                    if(isset($send_notif['status']) && $send_notif['status'] == 200){
-                        $message .= ' ,'.$send_notif['message'];
-                    }
-                }
+                // if($trans->trans_detail->first()->exists()){
+                //     $send_status = FunctionLib::trans_arr(1);
+                //     $config = [
+                //         'to' => $trans->trans_detail->first()->produk->user->email,
+                //         'data' => [
+                //             'trans_code' => $trans->trans_code,
+                //             'trans_amount_total' => $trans->trans_amount_total,
+                //             'status' => $send_status,
+                //         ]
+                //     ];
+                //     $send_notif = FunctionLib::transaction_notif($config);
+                //     if(isset($send_notif['status']) && $send_notif['status'] == 200){
+                //         $message .= ' ,'.$send_notif['message'];
+                //     }
+                // }
             }
             if(Session::has('voucher')){
                 $voucher = Session::get('voucher');
@@ -155,22 +155,22 @@ class GlnController extends Controller
                 Session::forget('voucher');
             }
             Session::forget('chart');
-            if(isset($trans->pembeli->email)){
-                // send email
-                $send_status = FunctionLib::trans_arr(1);
-                $config = [
-                    'to' => $trans->pembeli->email,
-                    'data' => [
-                        'trans_code' => $trans_code,
-                        'trans_amount_total' => $gross_amount,
-                        'status' => $send_status,
-                    ]
-                ];
-                $send_notif = FunctionLib::transaction_notif($config);
-                if(isset($send_notif['status']) && $send_notif['status'] == 200){
-                    $message .= ' ,'.$send_notif['message'];
-                }
-            }
+            // if(isset($trans->pembeli->email)){
+            //     // send email
+            //     $send_status = FunctionLib::trans_arr(1);
+            //     $config = [
+            //         'to' => $trans->pembeli->email,
+            //         'data' => [
+            //             'trans_code' => $trans_code,
+            //             'trans_amount_total' => $gross_amount,
+            //             'status' => $send_status,
+            //         ]
+            //     ];
+            //     $send_notif = FunctionLib::transaction_notif($config);
+            //     if(isset($send_notif['status']) && $send_notif['status'] == 200){
+            //         $message .= ' ,'.$send_notif['message'];
+            //     }
+            // }
 
             $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';
             $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();

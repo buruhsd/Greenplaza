@@ -397,9 +397,9 @@
                                                                     <div class="card card-body">
                                                                         <table>
                                                                             <tr>
-                                                                                <th><b>Dari</b></th>
-                                                                                <th><b>sampai</b></th>
-                                                                                <th><b>harga</b></th>
+                                                                                <th><b>From</b></th>
+                                                                                <th><b>To</b></th>
+                                                                                <th><b>Price</b></th>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>{{$grosir->produk_grosir_start}}</td>

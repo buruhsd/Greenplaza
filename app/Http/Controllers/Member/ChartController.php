@@ -58,7 +58,7 @@ class ChartController extends Controller
 
     public function checkout()
     {
-        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [3, 5, 6])->get();
+        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [3, 5, 6, 4])->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
         return view('frontend.checkout', $data);
     }
@@ -68,6 +68,8 @@ class ChartController extends Controller
     *
     **/
     public function addChart(Request $request, $id){
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+
         $produk = Produk::where('id', $id)->first();
         if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Stock barang tidak mencukupi.']);
@@ -104,7 +106,8 @@ class ChartController extends Controller
 			'trans_detail_amount_ship' => $request->ship_cost,
 			'trans_detail_amount_total' => ($price + $request->ship_cost),
 			'trans_detail_status' => 0,
-			'trans_detail_note' => $request->note
+			'trans_detail_note' => $request->note,
+            'myr' => $kurs['Data']['MYR']['Beli']
 		];
 		if(!Session::has('chart')){
         	Session::put('chart', []);

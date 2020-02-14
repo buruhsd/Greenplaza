@@ -209,34 +209,7 @@
             {!! $errors->first('produk_name', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
-        @if(str_contains(Request::url(), ['create']))
-            <?php 
-                $config_poin = Auth::user()->config->where('config_name', 'user_poin')->first()->config_value;
-            ?>
-            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
-                {!! Form::label('produk_poin', 'Point Product (%) : ', ['class' => 'col-md-3 control-label']) !!}
-                <div class="col-md-9">
-                    {!! Form::text('produk_poin', $config_poin, [
-                        'class' => 'form-control', 
-                        'placeholder' => 'Persen poin', 
-                        'required'
-                    ])!!}
-                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-        @elseif(str_contains(Request::url(), ['edit']))
-            <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_poin') ? 'has-error' : ''}}">
-                {!! Form::label('produk_poin', 'Point Product (%) : ', ['class' => 'col-md-3 control-label']) !!}
-                <div class="col-md-9">
-                    {!! Form::text('produk_poin', null, [
-                        'class' => 'form-control', 
-                        'placeholder' => 'Persen poin', 
-                        'required'
-                    ])!!}
-                {!! $errors->first('produk_poin', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
-        @endif
+        
         <!-- <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_status') ? 'has-error' : ''}}">
             {!! Form::label('produk_status', 'Status : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
@@ -360,7 +333,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_price') ? 'has-error' : ''}}">
-            {!! Form::label('produk_price', 'Price : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_price', 'Price (MYR) : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('produk_price', null, [
@@ -368,6 +341,8 @@
                                 'class' => 'form-control', 
                                 'placeholder' => 'Price', 
                                 'step' => "any",
+                                'id'    => "price_myr",
+                                'onkeyup' => "price_()",
                                 'required'
                             ])!!}
                     @elseif(str_contains(Request::url(), ['edit']))
@@ -376,12 +351,40 @@
                                 'class' => 'form-control', 
                                 'placeholder' => 'Price', 
                                 'step' => "any",
+                                'id'    => "price_myr",
                                 'required'
                             ])!!}
                  @endif
             {!! $errors->first('produk_price', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
+        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('price_idr') ? 'has-error' : ''}}">
+            {!! Form::label('price_idr', 'Price (IDR) : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                 @if(str_contains(Request::url(), ['create']))
+                   {!! Form::number('price_idr', null, [
+                                'min' => '0',
+                                'class' => 'form-control', 
+                                'placeholder' => 'Price (IDR)', 
+                                'step' => "any",
+                                'id' => "price_idr",
+                                'disabled' => 'disabled',
+                                'required'
+                            ])!!}
+                    @elseif(str_contains(Request::url(), ['edit']))
+                    {!! Form::number('price_idr', number_format($produk->produk_price, 0, ',', ''), [
+                                'min' => '0',
+                                'class' => 'form-control', 
+                                'placeholder' => 'Price (IDR)', 
+                                'step' => "any",
+                                'id' => "price_idr",
+                                'disabled' => 'disabled',
+                                'required'
+                            ])!!}
+                 @endif
+            {!! $errors->first('price_idr', '<p class="help-block">:message</p>') !!}
+            </div>
+        </div>        
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
             {!! Form::label('produk_size', 'Size : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
@@ -804,8 +807,15 @@
 
 
 <script type="text/javascript">
+function price_(){
+    var kurs_myr = {!! FunctionLib::cekKurs() !!};
+    var myr = kurs_myr.Data.MYR.Beli;
+   var price_myr = document.getElementById('price_myr').value;
+   var price_idr = parseFloat((price_myr * myr)).toFixed(2);
+   document.getElementById('price_idr').value=price_idr;
+}
 
-   function removeasdf(id){
+function removeasdf(id){
      $('.bs-example-modal-sm').modal('show');
      $('.getimage').html('');
      $('.uloader').html('<br><br><br><br><div id="myloading"></div>');
@@ -852,6 +862,7 @@ function save(){
         }
     });
 }
+
 </script>
 
 @elseif(str_contains(Request::url(), ['admin']))
@@ -905,7 +916,11 @@ function save(){
         }
     });
 }
+
 </script>
+    
+
+
 
 @endif
 
