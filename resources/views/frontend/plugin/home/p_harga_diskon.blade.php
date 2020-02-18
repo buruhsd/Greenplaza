@@ -12,12 +12,12 @@
             </h3>
             @if ($d->produk_discount != 0)
             <p>
-                <del>Rp.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($d->produk_discount)}} %</span><br>
-                <span>Rp.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
+                <del>MYR.{{FunctionLib::number_to_text($d->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($d->produk_discount)}} %</span><br>
+                <span>MYR.{{FunctionLib::number_to_text($d->produk_price-($d->produk_price * $d->produk_discount / 100))}}</span>
             </p>
             @else
             <p>
-                <span>Rp.{{number_format($d->produk_price, 2)}}</span>
+                <span>MYR.{{number_format($d->produk_price, 2)}}</span>
             </p>
             @endif
             <ul class="rating">

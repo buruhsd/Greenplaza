@@ -71,12 +71,12 @@
                      @if(Session::has('chart') && count(Session::get('chart')) > 0)
                         @if(Auth::user()->user_detail->country_id == 222)
                         <span>
-                           Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                           Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') * json_decode(FunctionLib::cekKurs(), true)['Data']['MYR']['Beli'])}}
                         {{-- {{count(Session::get('chart'))}} --}}
                         </span>
                         @elseif(Auth::user()->user_detail->country_id == 108)
                         <span>
-                           MYR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')/json_decode(FunctionLib::cekKurs(), true)['Data']['MYR']['Beli'])}}
+                           MYR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
                         </span>
                         @else
                         @endif

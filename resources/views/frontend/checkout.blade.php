@@ -35,10 +35,12 @@
                                     </div>
                                     <?php 
                                         $show_harga = 0;
+                                        $show_harga_idr = 0;
                                         $show_shipment = 0;
                                         $show_harga_grosir_total = 0; 
                                         $show_harga_diskon_total = 0; 
                                         $show_harga_total = 0; 
+                                        $show_harga_total_idr = 0; 
                                         $show_grosir = 0;
                                     ?>
                                     @if(Session::has('chart'))
@@ -52,58 +54,99 @@
                                                     $harga_grosir = 0;
                                                      $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 
                                                     $harga = $produk->produk_price;
+                                                    $harga_idr = $produk->price_idr;
                                                     $is_grosir = false;
                                                     if($produk->is_grosir()){
                                                         $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];
                                                         $grosir = $produk->grosir()->whereRaw($where);
                                                         if($grosir->count()){
                                                             $harga = (float)$grosir->first()->produk_grosir_price;
+                                                            $harga_idr = (float)$grosir->first()->produk_grosir_price;
                                                             $is_grosir = true;
                                                             $harga_grosir = $produk->produk_price - $harga;
+                                                            $harga_grosir_idr = $produk->price_idr - $harga_idr;
                                                         }
                                                     }
                                                     $diskon = ($produk['produk_discount'] > 0)?true:false;
                                                     $harga = $harga * (int)$item['trans_detail_qty'];
+                                                    $harga_idr = $harga_idr * (int)$item['trans_detail_qty'];
                                                     $harga_grosir = (int)$harga_grosir * (int)$item['trans_detail_qty'];
+                                                    $harga_grosir_idr = (int)$harga_grosir * (int)$item['trans_detail_qty'];
                                                     $harga_total = $harga+(float)$item['trans_detail_amount_ship'];
+                                                    $harga_total_idr = $harga_idr+(float)$item['trans_detail_amount_ship'];
                                                     if($diskon){
                                                         $harga = $harga-($harga*$produk['produk_discount']/100);
+                                                        $harga_idr = $harga_idr-($harga_idr*$produk['produk_discount']/100);
                                                         $harga_total = $harga+$item['trans_detail_amount_ship'];
+                                                        $harga_total_idr = $harga_idr+$item['trans_detail_amount_ship'];
                                                     }
                                                     $show_grosir += (float)$harga_grosir;
                                                     $show_harga += (float)$harga;
+                                                    $show_harga_idr += (float)$harga_idr;
                                                     $show_shipment += (float)$item['trans_detail_amount_ship'];
-                                                    $show_harga_total += (float)$harga_total; 
+                                                    $show_harga_total += (float)$harga_total;
+                                                    $show_harga_total_idr += (float)$harga_total_idr;
                                                 ?>
                                             @endforeach
-                                            <?php 
-                                            $diskon = "";
-                                            $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
-                                            if(Session::has('chart')){
-                                                $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
-                                                $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
-                                                $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
-                                                $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
-                                            }
-                                            echo '
-                                            Tagihan : Rp '.FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total).' 
-                                            <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
-                                            <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir).'</span><br>
-                                            Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>';
-                                            if(Session::has('voucher')){
-                                                $voucher = Session::get('voucher');
-                                                echo '<span class="text-danger">Voucher : Rp.'.FunctionLib::number_to_text($voucher['amount']).'</span>'.' <br>';
-                                                echo '
-                                                <label>Jumlah yang harus ditransfer</label>
-                                                <h2 style="">Rp. '.FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount'])).'</h2>
-                                                ';
-                                            }else{
-                                                echo '
-                                                <label>Jumlah yang harus ditransfer</label>
-                                                <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
-                                                ';
-                                            }
-                                            ?>
+                                            @if($type == 'idr')
+                                                <?php 
+                                                    $diskon = "";
+                                                    $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                                    if(Session::has('chart')){
+                                                        $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                                        $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+                                                        $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
+                                                        $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
+                                                    }
+                                                    echo '
+                                                    Tagihan : Rp '.FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr).' 
+                                                    <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
+                                                    <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr-$show_grosir).'</span><br>
+                                                    Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>';
+                                                    if(Session::has('voucher')){
+                                                        $voucher = Session::get('voucher');
+                                                        echo '<span class="text-danger">Voucher : Rp.'.FunctionLib::number_to_text($voucher['amount']).'</span>'.' <br>';
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">Rp. '.FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total_idr-$voucher['amount'])).'</h2>
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total_idr).'</h2>
+                                                        ';
+                                                    }
+                                                ?>
+                                            @else
+                                                <?php 
+                                                    $diskon = "";
+                                                    $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                                    if(Session::has('chart')){
+                                                        $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                                        $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
+                                                        $total = ($diskon > 0)?'Rp '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>Rp '.FunctionLib::number_to_text($total).'</del></span>':'Rp '.FunctionLib::number_to_text($total);
+                                                        $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
+                                                    }
+                                                    echo '
+                                                    Tagihan : Rp '.FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total).' 
+                                                    <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
+                                                    <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir).'</span><br>
+                                                    Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>';
+                                                    if(Session::has('voucher')){
+                                                        $voucher = Session::get('voucher');
+                                                        echo '<span class="text-danger">Voucher : Rp.'.FunctionLib::number_to_text($voucher['amount']).'</span>'.' <br>';
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">Rp. '.FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount'])).'</h2>
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">Rp. '.FunctionLib::number_to_text($show_harga_total).'</h2>
+                                                        ';
+                                                    }
+                                                ?>
+                                            @endif
                                         </div>
                                     @endif
                                 </div>

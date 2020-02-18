@@ -24,6 +24,27 @@
     <div class="cart-area mb-30">
         <div class="container">
             <div class="row">
+                <div class="col-3">
+                    <div class="cart-wrapper bg-5 p-10">
+                        <div class="col-12">
+                            <div class="form-group">
+                              <label for="sel1">Select your payment:</label>
+                              <select class="form-control" id="sel1" onchange="location = this.value;">
+                                <option value="{{ url('/chart?type=myr') }}">MYR</option>
+                                <option value="{{ url('/chart?type=idr') }}">IDR</option>
+                                {{-- <option name="{{ url('/chart/{}') }}">Greenline</option> --}}
+                              </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-area mb-30">
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
                     <div class="cart-wrapper bg-5 p-10">
                         <div class="col-12">
@@ -42,10 +63,12 @@
                                 <tbody>
                                     <?php 
                                         $show_harga = 0;
+                                        $show_harga_idr = 0;
                                         $show_shipment = 0;
                                         $show_harga_grosir_total = 0; 
                                         $show_harga_diskon_total = 0; 
                                         $show_harga_total = 0; 
+                                        $show_harga_total_idr = 0; 
                                         $show_grosir = 0;
                                     ?>
 
@@ -56,6 +79,7 @@
                                                 $harga_grosir = 0;
                                                 $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 
                                                 $harga = $produk->produk_price;
+                                                $harga_idr = $produk->price_idr;
                                                 $is_grosir = false;
                                                 if($produk->is_grosir()){
                                                     $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];
@@ -68,31 +92,55 @@
                                                 }
                                                 $diskon = ($produk['produk_discount'] > 0)?true:false;
                                                 $harga = $harga * (int)$item['trans_detail_qty'];
+                                                $harga_idr = $harga_idr * (int)$item['trans_detail_qty'];
                                                 $harga_grosir = (int)$harga_grosir * (int)$item['trans_detail_qty'];
+                                                $harga_total_idr = $harga_idr+(float)$item['trans_detail_amount_ship'];
                                                 $harga_total = $harga+(float)$item['trans_detail_amount_ship'];
                                             ?>
                                             <tr>
                                                 <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
                                                 <td class="product"><a href="#">{{$produk['produk_name']}}</a></td>
                                                 <td class="ptice">
-                                                    <?php if($diskon){ ?>
+                                                    @if($type == 'idr')
+                                                            <?php if($diskon){ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                                </del>
+                                                            @endif
+                                                            <del class="text-danger">
+                                                               Rp.{{FunctionLib::number_to_text($harga_idr)}}
+                                                            </del>
+                                                            Rp.{{FunctionLib::number_to_text($harga_idr-($harga_idr*$produk['produk_discount']/100))}}
+                                                        <?php }else{ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                                </del>
+                                                            @endif
+                                                            Rp.{{FunctionLib::number_to_text($harga_idr)}}
+                                                        <?php } ?>
+                                                    @else
+                                                        <?php if($diskon){ ?>
                                                         @if($is_grosir)
                                                             <del class="text-danger">
-                                                                Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                                MYR. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
                                                             </del>
                                                         @endif
                                                         <del class="text-danger">
-                                                           Rp.{{FunctionLib::number_to_text($harga)}}
+                                                           MYR.{{FunctionLib::number_to_text($harga)}}
                                                         </del>
-                                                        Rp.{{FunctionLib::number_to_text($harga-($harga*$produk['produk_discount']/100))}}
+                                                        MYR.{{FunctionLib::number_to_text($harga_idr-($harga*$produk['produk_discount']/100))}}
                                                     <?php }else{ ?>
                                                         @if($is_grosir)
                                                             <del class="text-danger">
-                                                                Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
+                                                                MYR. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}
                                                             </del>
                                                         @endif
-                                                        Rp.{{FunctionLib::number_to_text($harga)}}
+                                                        MYR.{{FunctionLib::number_to_text($harga)}}
                                                     <?php } ?>
+                                                    @endif
+                                                    
                                                 </td>
                                                 <td class="ptice">Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                                 <td class="quantity ">{{$item['trans_detail_qty']}}</td>
@@ -102,24 +150,45 @@
                                                     </div>
                                                 </td> -->
                                                 <td class="total">
-                                                    <?php if($diskon){ ?>
-                                                        @if($is_grosir)
+                                                    @if($type == 'idr')
+                                                        <?php if($diskon){ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                </del>
+                                                            @endif
                                                             <del class="text-danger">
-                                                                Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                Rp.{{FunctionLib::number_to_text($harga_idr+$item['trans_detail_amount_ship'])}}
                                                             </del>
-                                                        @endif
-                                                        <del class="text-danger">
-                                                            Rp.{{FunctionLib::number_to_text($harga+$item['trans_detail_amount_ship'])}}
-                                                        </del>
-                                                        Rp.{{FunctionLib::number_to_text($harga-($harga*$produk['produk_discount']/100)+$item['trans_detail_amount_ship'])}}
-                                                    <?php }else{ ?>
-                                                        @if($is_grosir)
+                                                            Rp.{{FunctionLib::number_to_text($harga_idr-($harga_idr*$produk['produk_discount']/100)+$item['trans_detail_amount_ship'])}}
+                                                        <?php }else{ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                </del>
+                                                            @endif
+                                                            Rp.{{FunctionLib::number_to_text($harga_total_idr)}}
+                                                        <?php } ?>
+                                                    @else
+                                                        <?php if($diskon){ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    MYR.{{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                </del>
+                                                            @endif
                                                             <del class="text-danger">
-                                                                Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                MYR.{{FunctionLib::number_to_text($harga+$item['trans_detail_amount_ship'])}}
                                                             </del>
-                                                        @endif
-                                                        Rp.{{FunctionLib::number_to_text($harga_total)}}
-                                                    <?php } ?>
+                                                            MYR.{{FunctionLib::number_to_text($harga-($harga*$produk['produk_discount']/100)+$item['trans_detail_amount_ship'])}}
+                                                        <?php }else{ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    MYR. {{FunctionLib::number_to_text($item['trans_detail_amount_total'])}}
+                                                                </del>
+                                                            @endif
+                                                            MYR.{{FunctionLib::number_to_text($harga_total)}}
+                                                        <?php } ?>
+                                                    @endif
                                                 </td>
                                                 <td class="remove">
                                                     {!! Form::open([
@@ -168,12 +237,16 @@
                                             <?php
                                                 if($diskon){
                                                     $harga = $harga-($harga*$produk['produk_discount']/100);
+                                                    $harga_idr = $harga_idr-($harga_idr*$produk['produk_discount']/100);
                                                     $harga_total = $harga+$item['trans_detail_amount_ship'];
+                                                    $harga_total_idr = $harga_idr+$item['trans_detail_amount_ship'];
                                                 }
                                                 $show_grosir += (float)$harga_grosir;
                                                 $show_harga += (float)$harga;
+                                                $show_harga_idr += (float)$harga_idr;
                                                 $show_shipment += (float)$item['trans_detail_amount_ship'];
-                                                $show_harga_total += (float)$harga_total; 
+                                                $show_harga_total += (float)$harga_total;
+                                                $show_harga_total_idr += (float)$harga_total_idr;
                                             ?>
                                         @endforeach
                                     @endif
@@ -189,14 +262,14 @@
                                         </li> -->
                                         <li><a href="{{route('category')}}">Lanjutkan Belanja</a></li>
                                     </ul>
-                                    @if(!Session::has('voucher'))
+                                    {{-- @if(!Session::has('voucher'))
                                         <h3 class="form-voucher">Voucher Masedi</h3>
                                         <p class="form-voucher">Masukkan kode Voucher jika punya</p>
                                         <div class="cupon-wrap form-voucher">
                                             <input type="text" id="code_voucher" placeholder="Kode Voucher">
                                             <button id="voucher" data-href="{{route('localapi.masedi.cek_voucher')}}">Gunakan Voucher</button>
                                         </div>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                             <?php 
@@ -217,49 +290,93 @@
                                 <div class="cart-total text-right">
                                     <h3>Total Belanjaan</h3>
                                     <ul>
-                                        <li>
-                                            <span class="pull-left">Subtotal </span>
-                                            Rp. {{FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total)}}
-                                        </li>
-                                        <li>
-                                            <span class="pull-left">Pengiriman </span>
-                                            Rp. {{FunctionLib::number_to_text($show_shipment)}}
-                                        </li>
-                                        <li>
-                                            <span class="pull-left text-danger">Grosir </span>
-                                            <span class='text-danger'>
-                                                Rp. {{FunctionLib::number_to_text($show_grosir)}}
-                                            </span>
-                                        </li>
-                                        <li>
-                                            <span class="pull-left text-danger">Diskon </span>
-                                            <span class='text-danger'>
-                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
-                                            </span>
-                                        </li>
-                                        <li id="voucher-info">
-                                        @if(Session::has('voucher'))
-                                            <?php 
-                                                $voucher = Session::get('voucher');
-                                            ?>
-                                                <span class="pull-left text-danger">Voucher </span>
+                                        @if($type == 'idr')
+                                            <li>
+                                                <span class="pull-left">Subtotal </span>
+                                                Rp. {{FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr)}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left">Pengiriman </span>
+                                                Rp. {{FunctionLib::number_to_text($show_shipment)}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left text-danger">Grosir </span>
                                                 <span class='text-danger'>
-                                                    Rp. {{FunctionLib::number_to_text($voucher['amount'])}}
-                                                    <button id="del_voucher"><i class="fa fa-times"></i></button>
+                                                    Rp. {{FunctionLib::number_to_text($show_grosir)}}
                                                 </span>
-                                        @endif
-                                        </li>
-                                        <h3></h3>
-                                        <li>
-                                            <span class="pull-left"> Total </span> 
+                                            </li>
+                                            <li>
+                                                <span class="pull-left text-danger">Diskon </span>
+                                                <span class='text-danger'>
+                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr-$show_grosir)}}
+                                                </span>
+                                            </li>
+                                            <li id="voucher-info">
                                             @if(Session::has('voucher'))
-                                                Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount']))}}
-                                            @else
-                                                Rp. {{FunctionLib::number_to_text($show_harga_total)}}
+                                                <?php 
+                                                    $voucher = Session::get('voucher');
+                                                ?>
+                                                    <span class="pull-left text-danger">Voucher </span>
+                                                    <span class='text-danger'>
+                                                        Rp. {{FunctionLib::number_to_text($voucher['amount'])}}
+                                                        <button id="del_voucher"><i class="fa fa-times"></i></button>
+                                                    </span>
                                             @endif
-                                        </li>
+                                            </li>
+                                            <h3></h3>
+                                            <li>
+                                                <span class="pull-left"> Total </span> 
+                                                @if(Session::has('voucher'))
+                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total_idr-$voucher['amount']))}}
+                                                @else
+                                                    Rp. {{FunctionLib::number_to_text($show_harga_total_idr)}}
+                                                @endif
+                                            </li>
+                                        @else
+                                            <li>
+                                                <span class="pull-left">Subtotal </span>
+                                                MYR. {{FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total)}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left">Pengiriman </span>
+                                                MYR. {{FunctionLib::number_to_text($show_shipment)}}
+                                            </li>
+                                            <li>
+                                                <span class="pull-left text-danger">Grosir </span>
+                                                <span class='text-danger'>
+                                                    MYR. {{FunctionLib::number_to_text($show_grosir)}}
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span class="pull-left text-danger">Diskon </span>
+                                                <span class='text-danger'>
+                                                    MYR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
+                                                </span>
+                                            </li>
+                                            <li id="voucher-info">
+                                            @if(Session::has('voucher'))
+                                                <?php 
+                                                    $voucher = Session::get('voucher');
+                                                ?>
+                                                    <span class="pull-left text-danger">Voucher </span>
+                                                    <span class='text-danger'>
+                                                        MYR. {{FunctionLib::number_to_text($voucher['amount'])}}
+                                                        <button id="del_voucher"><i class="fa fa-times"></i></button>
+                                                    </span>
+                                            @endif
+                                            </li>
+                                            <h3></h3>
+                                            <li>
+                                                <span class="pull-left"> Total </span> 
+                                                @if(Session::has('voucher'))
+                                                    MYR. {{FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total-$voucher['amount']))}}
+                                                @else
+                                                    MYR. {{FunctionLib::number_to_text($show_harga_total)}}
+                                                @endif
+                                            </li>
+                                        @endif
                                     </ul>
-                                    <a href="{{route('checkout')}}">Memproses ke Checkout</a>
+                                    <a href="{{route('checkout')}}?type={{$type}}">Memproses ke Checkout</a>
                                 </div>
                             </div>
                         </div>

@@ -25,12 +25,12 @@
                 </ul>
                 @if ($t->produk_discount != 0)
                 <p>
-                    <span>Rp.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
-                    <del>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
+                    <span>MYR.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
+                    <del>MYR.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
                 </p>
                 @else
                 <p>
-                    <span>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
+                    <span>MYR.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
                 </p>
                 @endif
             </div>
@@ -63,12 +63,12 @@
                 </ul>
                 @if ($t->produk_discount != 0)
                 <p>
-                    <span>Rp.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
-                    <del>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
+                    <span>MYR.{{FunctionLib::number_to_text($t->produk_price-($t->produk_price * $t->produk_discount / 100))}}</span>
+                    <del>MYR.{{FunctionLib::number_to_text($t->produk_price, 2)}}</del>
                 </p>
                 @else
                 <p>
-                    <span>Rp.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
+                    <span>MYR.{{FunctionLib::number_to_text($t->produk_price, 2)}}</span>
                 </p>
                 @endif
             </div>

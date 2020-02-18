@@ -15,9 +15,10 @@ use App\Models\Trans_voucher;
 
 class ChartController extends Controller
 {
-    public function chart()
+    public function chart(Request $request)
     {
-        return view('frontend.chart');
+        $type = $request->type;
+        return view('frontend.chart', compact('type'));
     }
 
     public function delVoucher()
@@ -56,8 +57,9 @@ class ChartController extends Controller
         // return redirect()->back();
     }
 
-    public function checkout()
+    public function checkout(Request $request)
     {
+        $data['type'] = $request->type;
         $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [3, 5, 6, 4])->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
         return view('frontend.checkout', $data);
