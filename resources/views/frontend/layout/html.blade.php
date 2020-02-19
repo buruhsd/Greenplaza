@@ -53,21 +53,70 @@
         background: url("{{asset('loader/loader-64x/Preloader_2.gif')}}") center no-repeat #fff;
     }
     a#scrollUp {
-    position: absolute;
-    right: 20px;
-    bottom: 100px;
-    height: 40px;
-    width: 40px;
-    background: #4caf50;
-    text-align: center;
-    line-height: 40px;
-    color: #fff;
-    border: 2px solid #4caf50;
-}
+        position: absolute;
+        right: 20px;
+        bottom: 100px;
+        height: 40px;
+        width: 40px;
+        background: #4caf50;
+        text-align: center;
+        line-height: 40px;
+        color: #fff;
+        border: 2px solid #4caf50;
+    }
 
-a#scrollUp:hover {
-    background: #f5f5f5;
-}
+    a#scrollUp:hover {
+        background: #f5f5f5;
+    }
+
+    .product-content {
+    padding: 20px 10px 200px;
+    border: 1px solid #e1e1e1;
+    border-top: none;
+    height: 175px;
+    }
+
+    .product-content2 {
+        padding: 20px 10px 10px;
+        border: 1px solid #e1e1e1;
+        border-top: none;
+        height: 200px;
+    }
+
+    .product-content2 h3 {
+        font-size: 15px;
+    }
+
+    .product-content2 h4 {
+        font-size: 12px;
+    }
+    .product-content2 p del {
+        font-size: 13px;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+
+    .tombol-product {
+        width: 90%;
+        bottom: 0;
+        padding-bottom: 10px;
+        position: absolute;
+    }
+
+    .logo-header-initila-1{
+    margin-right: 4rem
+    }
+    .search-header-initila-1{
+        width: 32rem;
+    }
+    .logo-responsive-initila-1{
+        padding: 0.8rem 0;
+        background: #f5f5f5;
+    }
+    .space-header-and-body{
+        padding-top: 62px;
+        margin-bottom: 180px;
+    }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

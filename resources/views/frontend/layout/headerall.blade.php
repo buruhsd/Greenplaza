@@ -1,5 +1,5 @@
     
-  <header class="header-area header-req">
+<header class="header-area header-req">
    {{-- <div class="logo-responsive-initila-1 text-center">
       <a href="{{url("/")}}">
       <img width="100px" height="10px" src="{{ asset('assets/images/gi_logo.png') }}" alt="logo" >
