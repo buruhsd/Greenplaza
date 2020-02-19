@@ -52,6 +52,22 @@
         z-index: 9999;
         background: url("{{asset('loader/loader-64x/Preloader_2.gif')}}") center no-repeat #fff;
     }
+    a#scrollUp {
+    position: absolute;
+    right: 20px;
+    bottom: 100px;
+    height: 40px;
+    width: 40px;
+    background: #4caf50;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    border: 2px solid #4caf50;
+}
+
+a#scrollUp:hover {
+    background: #f5f5f5;
+}
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
