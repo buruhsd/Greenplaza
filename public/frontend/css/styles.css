@@ -1303,6 +1303,13 @@ ul.rating li {
     padding-bottom: 10px;
     position: absolute;
 }
+
+.tombol-product2 {
+    width: 90%;
+    bottom: 0;
+    padding-bottom: 25px;
+    position: absolute;
+}
 /*.req-all{
     padding-top: 150px;
 }*/
