@@ -72,9 +72,11 @@
                                     </span> --}}
                                 </p>
                             @endif
-                        @if($n->user->seller_active())
-                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                        @endif
+                        <div class="tombol-product">
+                            @if($n->user->seller_active())
+                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,10 +156,11 @@
                                 </span> --}}
                             </p>
                         @endif
-
-                    @if($n->user->seller_active())
-                    <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
-                    @endif
+                    <div class="tombol-product">
+                        @if($n->user->seller_active())
+                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                        @endif
+                    </div>
                     
                 </div>
             </div>

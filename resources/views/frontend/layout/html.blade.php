@@ -121,7 +121,7 @@
     p {
     margin: 0px;
     font-weight: 400;
-    padding-bottom: 50px;
+    
     }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
