@@ -118,10 +118,11 @@
         margin-bottom: 180px;
     }
 
-    p {
-    margin: 0px;
-    font-weight: 400;
-    
+    .tombol-product2 {
+        width: 90%;
+        bottom: 0;
+        padding-bottom: 25px;
+        position: absolute;
     }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
