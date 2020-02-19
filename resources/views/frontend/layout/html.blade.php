@@ -117,6 +117,12 @@
         padding-top: 62px;
         margin-bottom: 180px;
     }
+
+    p {
+    margin: 0px;
+    font-weight: 400;
+    padding-bottom: 50px;
+    }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
