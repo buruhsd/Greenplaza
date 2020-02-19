@@ -94,6 +94,7 @@ class ChartController extends Controller
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
         }
         $price = $produk['produk_price'] * $request->qty;
+        $price_idr = $produk['price_idr'] * $request->qty;
     	$transaction = [
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],
@@ -106,7 +107,8 @@ class ChartController extends Controller
 			'trans_detail_color' => $request->color,
 			'trans_detail_amount' => $price,
 			'trans_detail_amount_ship' => $request->ship_cost,
-			'trans_detail_amount_total' => ($price + $request->ship_cost),
+            'trans_detail_amount_total' => ($price + $request->ship_cost),
+			'trans_detail_amount_total_idr' => ($price_idr + $request->ship_cost),
 			'trans_detail_status' => 0,
 			'trans_detail_note' => $request->note,
             'myr' => $kurs['Data']['MYR']['Beli']

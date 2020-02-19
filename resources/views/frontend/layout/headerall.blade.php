@@ -1,10 +1,10 @@
     
   <header class="header-area header-req">
-   <div class="logo-responsive-initila-1 text-center">
+   {{-- <div class="logo-responsive-initila-1 text-center">
       <a href="{{url("/")}}">
       <img width="100px" height="10px" src="{{ asset('assets/images/gi_logo.png') }}" alt="logo" >
       </a>
-   </div>
+   </div> --}}
    <div class="header-bottom-area bg-1 header-bottom-area-two" style="padding: 0.8rem 0">
       <div class="container">
          <div class="d-flex justify-content-between align-items-center">
@@ -70,8 +70,11 @@
                      <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
                      @if(Session::has('chart') && count(Session::get('chart')) > 0)
                         
-                        <span>
+                        {{-- <span>
                            MYR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'))}}
+                        </span> --}}
+                        <span>
+                           IDR. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr'))}}
                         </span>
                         
                      @else
