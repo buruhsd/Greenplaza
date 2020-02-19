@@ -91,7 +91,7 @@
                                             @if($type == 'idr')
                                                 <?php 
                                                     $diskon = "";
-                                                    $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                                    $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr'));
                                                     if(Session::has('chart')){
                                                         $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
                                                         $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');
@@ -99,9 +99,9 @@
                                                         $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>Rp.".$diskon."</span>":"";
                                                     }
                                                     echo '
-                                                    Tagihan : Rp '.FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr).' 
+                                                    Tagihan : Rp '.FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr')-$show_harga_total_idr).' 
                                                     <br/><span class="text-danger">Grosir : Rp.'.FunctionLib::number_to_text($show_grosir).'</span><br>
-                                                    <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr-$show_grosir).'</span><br>
+                                                    <span class="text-danger">Diskon : Rp.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr')-$show_harga_total_idr-$show_grosir).'</span><br>
                                                     Ongkos Kirim : Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')).' <br>';
                                                     if(Session::has('voucher')){
                                                         $voucher = Session::get('voucher');

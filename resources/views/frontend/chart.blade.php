@@ -51,13 +51,13 @@
                             <table class="table-responsive cart-wrap">
                                 <thead>
                                     <tr>
-                                        <th class="images">Gambar</th>
-                                        <th class="product">Barang</th>
-                                        <th class="ptice">Harga</th>
-                                        <th class="ptice">Pengiriman</th>
-                                        <th class="quantity">Jumlah</th>
+                                        <th class="images">Image</th>
+                                        <th class="product">Item</th>
+                                        <th class="ptice">Price</th>
+                                        <th class="ptice">Shipping</th>
+                                        <th class="quantity">Quantity</th>
                                         <th class="total">Total</th>
-                                        <th class="remove">Hapus</th>
+                                        <th class="remove">Remove</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -292,8 +292,10 @@
                                     <ul>
                                         @if($type == 'idr')
                                             <li>
+                                                {{-- <span class="pull-left">Subtotal </span>
+                                                Rp. {{FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr)}} --}}
                                                 <span class="pull-left">Subtotal </span>
-                                                Rp. {{FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr)}}
+                                                Rp. {{FunctionLib::number_to_text($show_harga_idr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr')-$show_harga_total_idr)}}
                                             </li>
                                             <li>
                                                 <span class="pull-left">Pengiriman </span>
@@ -308,7 +310,7 @@
                                             <li>
                                                 <span class="pull-left text-danger">Diskon </span>
                                                 <span class='text-danger'>
-                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total_idr-$show_grosir)}}
+                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr')-$show_harga_total_idr-$show_grosir)}}
                                                 </span>
                                             </li>
                                             <li id="voucher-info">
