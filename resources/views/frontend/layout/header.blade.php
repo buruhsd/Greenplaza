@@ -243,7 +243,7 @@
             <br>
             <div class="text-center">
                <div class="text-center">
-                  <img class="dark-logo" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="" width="120px" height="40px">
+                  <img class="dark-logo" src="{{ asset('assets/images/logo_fix_2.png') }}" alt="" width="120px" height="40px">
                </div>
                <br>
             </div>
@@ -283,7 +283,7 @@
             $('.btnsave').addClass("disabled").prop('disabled', true);
             var dataString = $("#formData").serialize();
             $.ajax({
-                url : "{{ url('/login_gi') }}",
+                url : "{{ url('/api/login_gi_v2') }}",
                 type: "POST",
                 data: dataString,
                 dataType: "JSON",

@@ -24,7 +24,7 @@
         <br/>
         <div class="text-center">
             <a href="{{url('/')}}"><br/>
-                 <img class="dark-logo" src="{{ asset('frontend/images/logo-fix-2.png') }}" alt="" width="120px" height="40px">
+                 <img class="dark-logo" src="{{ asset('assets/images/logo_fix_2.png') }}" alt="" width="120px" height="40px">
             </a>
         </div>
         <br/>

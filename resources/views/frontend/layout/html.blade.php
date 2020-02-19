@@ -106,9 +106,6 @@
     .logo-header-initila-1{
     margin-right: 4rem
     }
-    .search-header-initila-1{
-        width: 32rem;
-    }
     .logo-responsive-initila-1{
         padding: 0.8rem 0;
         background: #f5f5f5;

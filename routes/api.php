@@ -49,6 +49,8 @@ Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);
 // });
 
+Route::post('/login_gi_v2', 'Auth\\LoginController@login_gi');
+
 //auth mobile
 Route::post('mobile_login', 'Api\\AuthController@login');
 
