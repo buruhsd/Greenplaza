@@ -935,7 +935,7 @@ class FunctionLib
             'view' => 'email.transaction',
             'data' => $data
         ];
-        SendEmail::html($config);
+        // SendEmail::html($config);
         return $data;
     }
 
