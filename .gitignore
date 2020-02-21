@@ -1,6 +1,6 @@
 /node_modules
 /public/hot
-/public/*
+/public/assets
 /public/img_category_icon
 /public/storage
 /resources/views/tmp
