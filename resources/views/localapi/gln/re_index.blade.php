@@ -28,7 +28,7 @@
                                         <tr>
                                             <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_idr'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">

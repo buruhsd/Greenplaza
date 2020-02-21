@@ -368,17 +368,17 @@
                                 'placeholder' => 'Price (IDR)', 
                                 'step' => "any",
                                 'id' => "price_idr",
-                                'disabled' => 'disabled',
+                                'readonly',
                                 'required'
                             ])!!}
                     @elseif(str_contains(Request::url(), ['edit']))
-                    {!! Form::number('price_idr', number_format($produk->produk_price, 0, ',', ''), [
+                    {!! Form::number('price_idr', number_format($produk->price_idr, 0, ',', ''), [
                                 'min' => '0',
                                 'class' => 'form-control', 
                                 'placeholder' => 'Price (IDR)', 
                                 'step' => "any",
                                 'id' => "price_idr",
-                                'disabled' => 'disabled',
+                                'readonly',
                                 'required'
                             ])!!}
                  @endif

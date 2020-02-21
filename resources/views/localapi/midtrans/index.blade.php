@@ -27,7 +27,7 @@
                                         <tr>
                                             <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_idr'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">
@@ -35,7 +35,7 @@
                                                     <input type="text" value="1" />
                                                 </div>
                                             </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                            <td class="total">{{$item['trans_detail_amount_total_idr']}}</td>
                                             <td class="remove">
                                                 {!! Form::open([
                                                     'method'=>'GET',
@@ -58,7 +58,7 @@
                                         <tr>
                                             <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_idr'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">
@@ -66,7 +66,7 @@
                                                     <input type="text" value="1" />
                                                 </div>
                                             </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
+                                            <td class="total">{{$item['trans_detail_amount_total_idr']}}</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -98,7 +98,7 @@
                                             </li>
                                             <li>
                                                 <span class="pull-left"> Total </span> 
-                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total'))}}
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total_idr'))}}
                                             </li>
                                         @endif
                                     </ul>

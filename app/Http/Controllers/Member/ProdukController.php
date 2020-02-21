@@ -193,6 +193,7 @@ class ProdukController extends Controller
         $requestData = $request->all();
         // dd($requestData);
         
+        // dd($request->all());
         $this->validate($request, [
             'produk_name' => 'required',
             // 'produk_poin' => 'required|numeric|between:0,100',
@@ -210,7 +211,6 @@ class ProdukController extends Controller
             'produk_discount' => 'required|numeric|between:0.00,99.99',
             'produk_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        // dd($request);
         // add produk
         $res = new Produk;
         $res->produk_seller_id = Auth::user()->id;
@@ -368,7 +368,7 @@ class ProdukController extends Controller
             'produk_poin' => 'required|numeric|between:0,100',
             'produk_unit' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
-            'produk_price_idr' => 'required|numeric|between:0.00,9999999999999.99',
+            'price_idr' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_length' => 'required|numeric',
             'produk_wide' => 'required|numeric',
@@ -394,7 +394,7 @@ class ProdukController extends Controller
         $produk->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name);
         $produk->produk_unit = $request->produk_unit;
         $produk->produk_price = $request->produk_price;
-        $res->produk_price_idr = $request->price_idr;
+        $produk->produk_price_idr = $request->price_idr;
         $produk->produk_size = implode (",", $request->produk_size);
         $produk->produk_length = $request->produk_length;
         $produk->produk_wide = $request->produk_wide;

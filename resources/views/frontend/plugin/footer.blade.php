@@ -17,7 +17,8 @@
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope-o"></i>
-                                    {{FunctionLib::get_config('profil_email')}}
+                                    {{-- {{FunctionLib::get_config('profil_email')}} --}}
+                                    GiPlaza.co.id
                                 </li>
                             </ul>
                         </div>
@@ -35,7 +36,7 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-menu">
-                            <h2 class="section-title">Greenplaza</h2>
+                            <h2 class="section-title">Giplaza</h2>
                             <ul>
                                 @foreach(FunctionLib::page('greenplaza')->get() as $item)
                                     <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
@@ -62,7 +63,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p>&copy; 2020 <span>Greenpalza</span> All Right Reserved</p>
+                        <p>&copy; 2020 <span>GiPlaza</span> All Right Reserved</p>
                     </div>
                 </div>
             </div>

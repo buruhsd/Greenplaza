@@ -119,7 +119,7 @@ class MidtransController extends Controller
     * @return
     */
     public function payment($param=[]){
-        if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
+        if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr') > 0){
             $data = Session::get('chart');
             $trans = [];
             array_walk($data, function ($item) use (&$trans) {
