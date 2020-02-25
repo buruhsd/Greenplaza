@@ -384,6 +384,33 @@
                  @endif
             {!! $errors->first('price_idr', '<p class="help-block">:message</p>') !!}
             </div>
+        </div>
+        <div class="form-group mx-sm-3 mb-2 {{ $errors->has('price_idr') ? 'has-error' : ''}}">
+            {!! Form::label('price_gln', 'GLN : ', ['class' => 'col-md-3 control-label']) !!}
+            <div class="col-md-9">
+                 @if(str_contains(Request::url(), ['create']))
+                   {!! Form::number('price_gln', null, [
+                                'min' => '0',
+                                'class' => 'form-control', 
+                                'placeholder' => 'GLN', 
+                                'step' => "any",
+                                'id' => "price_gln",
+                                'readonly',
+                                'required'
+                            ])!!}
+                    @elseif(str_contains(Request::url(), ['edit']))
+                    {!! Form::number('price_gln', number_format($produk->price_idr, 0, ',', ''), [
+                                'min' => '0',
+                                'class' => 'form-control', 
+                                'placeholder' => 'GLN', 
+                                'step' => "any",
+                                'id' => "price_gln",
+                                'readonly',
+                                'required'
+                            ])!!}
+                 @endif
+            {!! $errors->first('price_gln', '<p class="help-block">:message</p>') !!}
+            </div>
         </div>        
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
             {!! Form::label('produk_size', 'Size : ', ['class' => 'col-md-3 control-label']) !!}
@@ -809,10 +836,14 @@
 <script type="text/javascript">
 function price_(){
     var kurs_myr = {!! FunctionLib::cekKurs() !!};
+    var gln_kurs = {!! FunctionLib::priceGln() !!};
     var myr = kurs_myr.Data.MYR.Beli;
+    var gln = gln_kurs.price;
     var price_myr = document.getElementById('price_myr').value;
     var price_idr = parseFloat((price_myr * myr)).toFixed(2);
+    var gln_coin = parseFloat((price_idr/gln)).toFixed(2);
     document.getElementById('price_idr').value=Math.round(price_idr);
+    document.getElementById('price_gln').value=gln_coin;
 }
 
 function removeasdf(id){

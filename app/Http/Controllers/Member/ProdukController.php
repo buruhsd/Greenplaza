@@ -201,6 +201,7 @@ class ProdukController extends Controller
             'produk_category_id' => 'required',
             'produk_price' => 'required|numeric|between:0.00,9999999999999.99',
             'price_myr' => 'required|numeric|between:0.00,9999999999999.99',
+            'price_gln' => 'required|numeric|between:0.00,9999999999999.99',
             'produk_size' => 'required',
             'produk_height' => 'required|numeric',
             'produk_length' => 'required|numeric',
@@ -221,6 +222,7 @@ class ProdukController extends Controller
         $res->produk_slug = str_slug(Auth::user()->user_store.' '.$request->produk_name.' '.FunctionLib::str_rand(5));
         $res->produk_unit = $request->produk_unit;
         $res->produk_price = $request->price_myr;
+        $res->gln_coin = $request->price_gln;
         $res->price_myr = number_format($request->produk_price, 0);
         $res->produk_size = implode (",", $request->produk_size);
         $res->produk_length = $request->produk_length;
@@ -256,7 +258,7 @@ class ProdukController extends Controller
             }
         }
         $res->produk_note = $request->produk_note;
-    // dd($res);
+        // dd($res);
         $res->save();
         if(!$res){
             $status = 500;
