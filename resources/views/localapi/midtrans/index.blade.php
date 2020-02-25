@@ -26,8 +26,8 @@
                                         <?php $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); ?>
                                         <tr>
                                             <td class="images"><img class="h100" src="{{asset('assets/images/product/'.$produk['produk_image'])}}" alt=""></td>
-                                            <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_idr'])}}</td>
+                                            <td class="product"><a href="">{{$produk['produk_name']}}</a></td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">
@@ -35,7 +35,7 @@
                                                     <input type="text" value="1" />
                                                 </div>
                                             </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total_idr']}}</td>
+                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
                                             <td class="remove">
                                                 {!! Form::open([
                                                     'method'=>'GET',
@@ -58,7 +58,7 @@
                                         <tr>
                                             <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
                                             <td class="product"><a href="single-product.html">{{$produk['produk_name']}}</a></td>
-                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_idr'])}}</td>
+                                            <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount'])}}</td>
                                             <td class="ptice">Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
                                             <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                             {{-- <td class="quantity ">
@@ -66,7 +66,7 @@
                                                     <input type="text" value="1" />
                                                 </div>
                                             </td> --}}
-                                            <td class="total">{{$item['trans_detail_amount_total_idr']}}</td>
+                                            <td class="total">{{$item['trans_detail_amount_total']}}</td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -98,7 +98,7 @@
                                             </li>
                                             <li>
                                                 <span class="pull-left"> Total </span> 
-                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total_idr'))}}
+                                                Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key($trans_detail->toArray(), 'trans_detail_amount_total'))}}
                                             </li>
                                         @endif
                                     </ul>
@@ -122,8 +122,10 @@
         {{-- {!! Form::close() !!} --}}
     </div>
 </div>
-<script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-VW0M7fvdvfNeIrYt"></script>
-<!-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-sz_BX2RyDwvXRpix"></script> -->
+{{-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-VW0M7fvdvfNeIrYt"></script> --}}
+{{-- <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-85pt78QsnOMMTenD-TwvkL1J"></script> --}}
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-aaMVb8y2R4KlaKh9"></script>
+
 <script type="text/javascript">
     // <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
     document.getElementById('pay-button').onclick = function(){

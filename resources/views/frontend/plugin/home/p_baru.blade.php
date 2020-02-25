@@ -49,10 +49,10 @@
                        
                             @if ($n->produk_discount != 0)
                                 <p>
-                                    <del>MYR.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span>
+                                    <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span>
                                     <span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                    <span>MYR.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
-                                    <span>Rp.{{FunctionLib::number_to_text($n->price_idr - ( $n->price_idr * $n->produk_discount/ 100) ) }} <br> </span>
+                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
+                                    <span>MYR.{{FunctionLib::number_to_text($n->price_myr - ( $n->price_myr * $n->produk_discount/ 100) ) }} <br> </span>
                                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                         data-content="
                                         Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
@@ -62,8 +62,8 @@
                                 </p>
                             @else
                                 <p>
-                                    <span>MYR.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span><br>
-                                    <span>Rp.{{FunctionLib::number_to_text($n->price_idr, 2)}}</span>
+                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span><br>
+                                    <span>MYR.{{FunctionLib::number_to_text($n->price_myr, 2)}}</span>
                                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                         data-content="
                                         Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
@@ -132,30 +132,30 @@
                     </ul>
                     
                         @if ($n->produk_discount != 0)
-                            <p>
-                                <del>MYR.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span>
-                                <span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                <span>MYR.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
-                                <span>Rp.{{FunctionLib::number_to_text($n->price_idr - ( $n->price_idr * $n->produk_discount/ 100) ) }} <br> </span>
-                                {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
-                                    data-content="
-                                    Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
-                                    MYR. {{FunctionLib::number_to_text($n->produk_price * $myr - ( ($n->produk_price * $myr) * $n->produk_discount/ 100) ) }} <br>  " >
-                                    <i class="fa fa-bars"></i>
-                                </span> --}}
-                            </p>
-                        @else
-                            <p>
-                                <span>MYR.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span><br>
-                                <span>Rp.{{FunctionLib::number_to_text($n->price_idr, 2)}}</span>
-                                {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
-                                    data-content="
-                                    Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
-                                    MYR. {{FunctionLib::number_to_text($n->produk_price * $myr)}} <br>  " >
-                                    <i class="fa fa-bars"></i>
-                                </span> --}}
-                            </p>
-                        @endif
+                                <p>
+                                    <del>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</del><span> </span>
+                                    <span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
+                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
+                                    <span>MYR.{{FunctionLib::number_to_text($n->price_myr - ( $n->price_myr * $n->produk_discount/ 100) ) }} <br> </span>
+                                    {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                        data-content="
+                                        Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
+                                        MYR. {{FunctionLib::number_to_text($n->produk_price * $myr - ( ($n->produk_price * $myr) * $n->produk_discount/ 100) ) }} <br>  " >
+                                        <i class="fa fa-bars"></i>
+                                    </span> --}}
+                                </p>
+                            @else
+                                <p>
+                                    <span>Rp.{{FunctionLib::number_to_text($n->produk_price, 2)}}</span><br>
+                                    <span>MYR.{{FunctionLib::number_to_text($n->price_myr, 2)}}</span>
+                                    {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
+                                        data-content="
+                                        Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
+                                        MYR. {{FunctionLib::number_to_text($n->produk_price * $myr)}} <br>  " >
+                                        <i class="fa fa-bars"></i>
+                                    </span> --}}
+                                </p>
+                            @endif
                     <div class="tombol-product">
                         @if($n->user->seller_active())
                         <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>

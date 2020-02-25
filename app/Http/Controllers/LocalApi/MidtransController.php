@@ -32,11 +32,12 @@ class MidtransController extends Controller
     {
         // $this->middleware('auth');
         //Set Your server key
-        // Veritrans_Config::$serverKey = 'SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J;
-        Veritrans_Config::$serverKey = 'Mid-server-7Y-NEaLe8gTOb4xVRDip6WyC';
-        // Veritrans_Config::$serverKey = "SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J";
+        // Veritrans_Config::$serverKey = 'SB-Mid-server-85pt78QsnOMMTenD-TwvkL1J';
+        // Veritrans_Config::$serverKey = 'Mid-server-7Y-NEaLe8gTOb4xVRDip6WyC';
+        // Veritrans_Config::$serverKey = "SSB-Mid-client-sz_BX2RyDwvXRpix";
+        Veritrans_Config::$serverKey =  'SB-Mid-server-XEkmgn9EVJfx65Hif_Z5Ecs3';
         // Uncomment for production environment
-        Veritrans_Config::$isProduction = true;
+        Veritrans_Config::$isProduction = false;
         // Enable sanitization
         // Veritrans_Config::$isSanitized = env('VERYTRANS_SANITIZED');
         Veritrans_Config::$isSanitized = true;
@@ -118,8 +119,9 @@ class MidtransController extends Controller
     * @param
     * @return
     */
-    public function payment($param=[]){
-        if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_idr') > 0){
+    public function payment($param=[], Request $request){
+        $type = $request->type;
+        if(Session::has('chart') && FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total') > 0){
             $data = Session::get('chart');
             $trans = [];
             array_walk($data, function ($item) use (&$trans) {
@@ -203,8 +205,10 @@ class MidtransController extends Controller
                     $transDetail->trans_detail_size = $item['trans_detail_size'];//'s,m,l,xl';
                     $transDetail->trans_detail_color = $item['trans_detail_color'];//'blue,orange,red,green,white';
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
+                    $transDetail->trans_detail_amount_idr = $item['trans_detail_amount_idr'];
                     $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
+                    $transDetail->trans_detail_amount_total_idr = $item['trans_detail_amount_total_idr'];
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();

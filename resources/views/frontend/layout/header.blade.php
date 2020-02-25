@@ -26,7 +26,7 @@
                   <li>
                      <?php 
                         $notif = FunctionLib::user_notif(Auth::id(), 10);
-                        ?>
+                     ?>
                      <a href="#" id="member" onclick="drop()" class="dropbtn">
                      <i class="fa fa-bell animated"></i>
                      <small class="text-danger {!!($notif->count())?'':'hide'!!}">
@@ -123,6 +123,13 @@
                         <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
                      </ul>
                   </li>
+                  {{-- <li class="sidemenu-items">
+                     <a href="javascript:void(0);">MYR <i class="fa fa-angle-down"></i></a>
+                     <ul>
+                        <li><a href="{{route('chart')}}">IDR</a></li>
+                        <li><a href="{{route('checkout')}}">Greenline</a></li>
+                     </ul>
+                  </li> --}}
                </ul>
             </div>
             <div class="responsive-menu-tigger d-block d-md-none">

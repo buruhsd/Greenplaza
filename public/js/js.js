@@ -75,6 +75,7 @@ function modal_get(e){
             }
         },
         success: function(data) {
+            console.log(data);
             if (data) {
                 if(typeof data.status !== 'undefined' && data.status == 500){
                     swal({   

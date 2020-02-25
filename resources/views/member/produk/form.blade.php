@@ -359,10 +359,10 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('price_idr') ? 'has-error' : ''}}">
-            {!! Form::label('price_idr', 'Price (IDR) : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('price_myr', 'Price (IDR) : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
-                   {!! Form::number('price_idr', null, [
+                   {!! Form::number('price_myr', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
                                 'placeholder' => 'Price (IDR)', 
@@ -810,9 +810,9 @@
 function price_(){
     var kurs_myr = {!! FunctionLib::cekKurs() !!};
     var myr = kurs_myr.Data.MYR.Beli;
-   var price_myr = document.getElementById('price_myr').value;
-   var price_idr = parseFloat((price_myr * myr)).toFixed(2);
-   document.getElementById('price_idr').value=price_idr;
+    var price_myr = document.getElementById('price_myr').value;
+    var price_idr = parseFloat((price_myr * myr)).toFixed(2);
+    document.getElementById('price_idr').value=Math.round(price_idr);
 }
 
 function removeasdf(id){
