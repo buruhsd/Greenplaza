@@ -286,7 +286,7 @@
             $('.btnsave').addClass("disabled").prop('disabled', true);
             var dataString = $("#formData").serialize();
             $.ajax({
-                url : "{{ url('/api/login_gi_v2') }}",
+                url : "{{ url('/login_gi') }}",
                 type: "POST",
                 data: dataString,
                 dataType: "JSON",
