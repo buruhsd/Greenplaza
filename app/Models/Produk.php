@@ -32,6 +32,16 @@ class Produk extends Model
     * @return
     * 
     */
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'produk_seller_id')->with('user_address');
+    }
+
+    /**
+    * @param
+    * @return
+    * 
+    */
     public function category()
     {
         return $this->belongsTo('App\Models\Category', 'produk_category_id');
