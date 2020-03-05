@@ -102,6 +102,8 @@ class Plugin
     */
     public static function p_baru_saat_ini($param = []){
         extract($param);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $kurs = json_decode(FunctionLib::cekKurs(), true);
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_baru_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
@@ -133,6 +135,8 @@ class Plugin
     */
     public static function p_baru($param = []){
         extract($param);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $kurs = json_decode(FunctionLib::cekKurs(), true);
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
@@ -153,6 +157,8 @@ class Plugin
     */
     public static function p_pilihan_saat_ini($param = []){
         extract($param);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $kurs = json_decode(FunctionLib::cekKurs(), true);
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_pilihan_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')

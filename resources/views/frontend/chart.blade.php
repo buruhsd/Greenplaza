@@ -31,7 +31,8 @@
                               <label for="sel1">Select your payment:</label>
                               <select class="form-control" id="sel1" onchange="location = this.value;">
                                 <option value="{{ url('/chart?type=myr') }}">MYR</option>
-                                <option value="{{ url('/chart?type=idr') }}">IDR</option>
+                                <option value="{{ url('/chart?type=gln') }}">GLN</option>
+                                <option value="{{ url('/chart?type=') }}">IDR</option>
                                 {{-- <option name="{{ url('/chart/{}') }}">Greenline</option> --}}
                               </select>
                             </div>
@@ -80,6 +81,7 @@
                                                 $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 
                                                 $harga = $produk->produk_price;
                                                 $harga_myr = $produk->price_myr;
+                                                $harga_gln = $produk->gln_coin;
                                                 $is_grosir = false;
                                                 if($produk->is_grosir()){
                                                     $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];
@@ -91,11 +93,15 @@
                                                     }
                                                 }
                                                 $diskon = ($produk['produk_discount'] > 0)?true:false;
+                                                $ship_gln = (int)$item['trans_detail_amount_ship']/75100;
+                    
                                                 $harga = $harga * (int)$item['trans_detail_qty'];
                                                 $harga_myr = $harga_myr * (int)$item['trans_detail_qty'];
+                                                $harga_gln = $harga_gln * (int)$item['trans_detail_qty'];
                                                 $harga_grosir = (int)$harga_grosir * (int)$item['trans_detail_qty'];
                                                 $harga_total_myr = $harga_myr+(float)$item['trans_detail_amount_ship'];
                                                 $harga_total = $harga+(float)$item['trans_detail_amount_ship'];
+                                                $harga_total_gln = $harga_gln+$ship_gln;
                                             ?>
                                             <tr>
                                                 <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
@@ -120,6 +126,25 @@
                                                             @endif
                                                             MYR.{{FunctionLib::number_to_text($harga)}}
                                                         <?php } ?>
+                                                    @elseif($type == 'gln')
+                                                        <?php if($diskon){ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    GLN. {{FunctionLib::number_to_text($item['trans_detail_amount_gln'])}}
+                                                                </del>
+                                                            @endif
+                                                            <del class="text-danger">
+                                                               GLN.{{FunctionLib::number_to_text($harga_gln)}}
+                                                            </del>
+                                                            GLN.{{FunctionLib::number_to_text($harga_gln-($harga_gln*$produk['produk_discount']/100))}}
+                                                        <?php }else{ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    GLN. {{FunctionLib::number_to_text($item['trans_detail_amount_gln'])}}
+                                                                </del>
+                                                            @endif
+                                                            GLN.{{FunctionLib::number_to_text($harga_gln)}}
+                                                        <?php } ?>
                                                     @else
                                                         <?php if($diskon){ ?>
                                                             @if($is_grosir)
@@ -142,7 +167,11 @@
                                                     @endif
                                                     
                                                 </td>
+                                                @if($type == 'gln')
+                                                <td class="ptice">Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_ship']/75100)}}</td>
+                                                @else
                                                 <td class="ptice">Rp.{{FunctionLib::number_to_text($item['trans_detail_amount_ship'])}}</td>
+                                                @endif
                                                 <td class="quantity ">{{$item['trans_detail_qty']}}</td>
                                                 <!-- <td class="quantity ">
                                                     <div class="cart-plus-minus">
@@ -168,6 +197,25 @@
                                                                 </del>
                                                             @endif
                                                             MYR.{{FunctionLib::number_to_text($harga_total)}}
+                                                        <?php } ?>
+                                                    @elseif($type == 'gln')
+                                                        <?php if($diskon){ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    GLN.{{FunctionLib::number_to_text($item['trans_detail_amount_total_gln'])}}
+                                                                </del>
+                                                            @endif
+                                                            <del class="text-danger">
+                                                                GLN.{{FunctionLib::number_to_text($harga_gln+$item['trans_detail_amount_ship'])}}
+                                                            </del>
+                                                            GLN.{{FunctionLib::number_to_text($harga_gln-($harga_gln*$produk['produk_discount']/100)+$item['trans_detail_amount_ship'])}}
+                                                        <?php }else{ ?>
+                                                            @if($is_grosir)
+                                                                <del class="text-danger">
+                                                                    Rp. {{FunctionLib::number_to_text($item['trans_detail_amount_total_gln'])}}
+                                                                </del>
+                                                            @endif
+                                                            GLN.{{FunctionLib::number_to_text($harga_total_gln)}}
                                                         <?php } ?>
                                                     @else
                                                         <?php if($diskon){ ?>
@@ -275,6 +323,7 @@
                             <?php 
                                 $diskon = "";
                                 $total = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total'));
+                                $total_gln = 'Rp '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln'));
                                 if(Session::has('chart')){
                                     $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
                                     $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total');

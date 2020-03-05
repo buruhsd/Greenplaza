@@ -18,7 +18,8 @@ class ChartController extends Controller
     public function chart(Request $request)
     {
         $type = $request->type;
-        return view('frontend.chart', compact('type'));
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        return view('frontend.chart', compact('type', 'gln_price'));
     }
 
     public function delVoucher()
@@ -71,6 +72,8 @@ class ChartController extends Controller
     **/
     public function addChart(Request $request, $id){
         $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $gln = json_decode(FunctionLib::priceGln(), true);
+        $gln2 = $gln['price'];
 
         $produk = Produk::where('id', $id)->first();
         if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
@@ -94,7 +97,8 @@ class ChartController extends Controller
             return redirect()->back()->with(['flash_status' => 500,'flash_message' => 'Silahkan isi jasa pengiriman']);
         }
         $price = $produk['produk_price'] * $request->qty;
-        $price_idr = $produk['price_idr'] * $request->qty;
+        $price_myr = $produk['price_myr'] * $request->qty;
+        $price_gln = $produk['gln_coin'] * $request->qty;
     	$transaction = [
 			'trans_code' => $trans_code,
 			'trans_detail_produk_id' => $produk['id'],
@@ -106,10 +110,12 @@ class ChartController extends Controller
 			'trans_detail_size' => $request->size,
 			'trans_detail_color' => $request->color,
             'trans_detail_amount' => $price,
-			'trans_detail_amount_idr' => $price_idr,
+            'trans_detail_amount_myr' => $price_myr,
+			'trans_detail_amount_gln' => $price_gln,
 			'trans_detail_amount_ship' => $request->ship_cost,
             'trans_detail_amount_total' => ($price + $request->ship_cost),
-			'trans_detail_amount_total_idr' => ($price_idr + $request->ship_cost),
+            'trans_detail_amount_total_myr' => ($price_myr + $request->ship_cost),
+			'trans_detail_amount_total_gln' => $price_gln + ($request->ship_cost/$gln2),
 			'trans_detail_status' => 0,
 			'trans_detail_note' => $request->note,
             'myr' => $kurs['Data']['MYR']['Beli']

@@ -287,6 +287,8 @@ class FrontController extends Controller
         if(!empty($request->input("order")) && $request->input("order") !== ""){
             $order = $request->input("order").' ASC';
         }
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $kurs = json_decode(FunctionLib::cekKurs(), true);
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $perPage = 8;
