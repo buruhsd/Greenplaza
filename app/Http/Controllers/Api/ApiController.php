@@ -866,7 +866,7 @@ class ApiController extends Controller
                 'destination' => $alamat_to->user_address_subdist,
                 'destinationType' => "subdistrict",
                 'weight' => $weight,
-                'courier' => Shipment::find($request->courier)->shipment_name,//$request->courier,
+                'courier' => strtolower(Shipment::find($request->courier)->shipment_name),//$request->courier,
             ]
         ];
         // if(isset($lenght)){
@@ -885,9 +885,14 @@ class ApiController extends Controller
             $status = 500;
             $message = $shipment['rajaongkir']['status']['code'];
         }
-        return [$req, $shipment];
-        $data['shipment'] = $shipment['rajaongkir']['results'];
-        return response()->json(['status' => $status, 'data'=>$data]);
+        // return [$req, $shipment];
+        try{
+            $data['shipment'] = $shipment['rajaongkir']['results'];
+            return response()->json(['status' => $status, 'data'=>$data]);
+        }catch(\Exception $err){
+            $data['shipment'] = null;
+            return response()->json(['status' => 500, 'data'=>$data]);
+        }
     }
 
     /**
