@@ -845,19 +845,19 @@ class ApiController extends Controller
     * mendapatkan data paket kurir
     **/
     public function get_courier_service(Request $request){
-        $param = json_decode($request->getContent(), true);
-        return $request->all();//response()->json(['status' => 500, 'data'=>$param]);
+        // $param = json_decode($request->getContent(), true);
+        // return response()->json(['status' => 500, 'data'=>$param]);
         $status = 200;
-        $produk = Produk::find($param['id']);
+        $produk = Produk::find($request->id);
         $berat = $produk['produk_weight'];
         return $produk->user;
         $alamat_from = $produk->user->user_address()->first();
-        $originType = ($param['courier'] == 1)?'city':'subdistrict';
+        $originType = ($request->courier == 1)?'city':'subdistrict';
         $origin = ($request->input("courier") == 1)
             ?$alamat_from->user_address_city
             :$alamat_from->user_address_subdist;
-        $alamat_to = User_address::find($param['to_id']);
-        $weight = $berat * intval($param['qty']);
+        $alamat_to = User_address::find($request->to_id);
+        $weight = $berat * intval($request->qty);
         $req = [
             'data' => [
                 'origin' => $origin,//$origin,
@@ -865,7 +865,7 @@ class ApiController extends Controller
                 'destination' => $alamat_to->user_address_subdist,
                 'destinationType' => "subdistrict",
                 'weight' => $weight,
-                'courier' => $param['courier'],
+                'courier' => $request->courier,
             ]
         ];
         // if(isset($lenght)){
