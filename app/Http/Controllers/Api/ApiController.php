@@ -12,7 +12,6 @@ use App\Models\log_transfer;
 use App\Models\Shipment;
 use App\User;
 use App\Models\User_address;
-use App\Models\Shipment;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
