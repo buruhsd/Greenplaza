@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
 use App\Models\Trans_voucher;
+use RajaOngkir;
 
 class ApiController extends Controller
 {
