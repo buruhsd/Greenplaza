@@ -34,7 +34,7 @@ class Produk extends Model
     */
     public function userWithAddress()
     {
-        return $this->belongsTo('App\User', 'produk_seller_id')->with('user_address');
+        return $this->belongsTo('App\User', 'produk_seller_id')->user_address;
     }
 
     /**
