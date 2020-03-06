@@ -12,6 +12,7 @@ use App\Models\log_transfer;
 use App\Models\Shipment;
 use App\User;
 use App\Models\User_address;
+use App\Models\Shipment;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use FunctionLib;
@@ -866,7 +867,7 @@ class ApiController extends Controller
                 'destination' => $alamat_to->user_address_subdist,
                 'destinationType' => "subdistrict",
                 'weight' => $weight,
-                'courier' => $request->courier,
+                'courier' => Shipment::find($request->courier)->shipment_name,//$request->courier,
             ]
         ];
         // if(isset($lenght)){
