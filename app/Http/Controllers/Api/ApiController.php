@@ -850,7 +850,7 @@ class ApiController extends Controller
         $status = 200;
         $produk = Produk::find($request->id);
         $berat = $produk['produk_weight'];
-        return $produk->user;
+        return $produk->user->user_address();
         $alamat_from = $produk->user->user_address()->first();
         $originType = ($request->courier == 1)?'city':'subdistrict';
         $origin = ($request->input("courier") == 1)
