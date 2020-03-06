@@ -885,7 +885,7 @@ class ApiController extends Controller
             $status = 500;
             $message = $shipment['rajaongkir']['status']['code'];
         }
-        return echo $req."".$shipment;
+        return [$req, $shipment];
         $data['shipment'] = $shipment['rajaongkir']['results'];
         return response()->json(['status' => $status, 'data'=>$data]);
     }
