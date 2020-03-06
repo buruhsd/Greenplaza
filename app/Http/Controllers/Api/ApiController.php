@@ -887,10 +887,10 @@ class ApiController extends Controller
         }
         // return [$req, $shipment];
         try{
-            $data['shipment'] = $shipment['rajaongkir']['results'];
+            $data = $shipment['rajaongkir']['results'];
             return response()->json(['status' => $status, 'data'=>$data]);
         }catch(\Exception $err){
-            $data['shipment'] = null;
+            $data = null;
             return response()->json(['status' => 500, 'data'=>$data]);
         }
     }
