@@ -1,6 +1,6 @@
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests: 1">
     <meta http-equiv="Content-Security-Policy" content="default-src https://giplaza.co.id; child-src 'none'; object-src 'none'">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Greenplaza</title>
