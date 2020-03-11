@@ -21,6 +21,26 @@ use RajaOngkir;
 
 class ApiController extends Controller
 {
+
+    /**
+    * mendapatkan data konfirmasi pembayaran
+    **/
+    public function konfirmasi(Request $request, $id)
+    {
+        $where .= 'sys_trans.id ='.$id;
+        // status transaksi
+        $w_status = ' AND trans_detail_status = 1 AND trans_detail_is_cancel != 1'; 
+        $where .= $w_status;
+
+        $asset = asset('assets/images/product/thumb');
+        $data = Trans_detail::whereRaw($where)
+                ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
+                ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
+                ->select('sys_trans_detail.*', DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as produk'))
+                ->get();
+        return response()->json(['status' => 200, 'data'=>$data]);
+    }
+
     public function saveCheckout(Request $request){
         $status = 200;
         if($request->has('chart') && FunctionLib::array_sum_key($request->get('chart'), 'price') > 0){
@@ -149,8 +169,9 @@ class ApiController extends Controller
 
             $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';
             $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
-            $data['trans_detail'] = $trans_detail;
-            return response()->json(['status' => $status, 'data'=>$data]);
+            $response['trans_detail'] = $trans_detail;
+            $response['trans_id'] = $trans->id;
+            return response()->json(['status' => $status, 'data'=>$response]);
         }else{
             $status = 500;
             $message = 'Barang yang anda masukkan ke keranjang kosong.';
