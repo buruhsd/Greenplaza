@@ -59,7 +59,7 @@ class ApiController extends Controller
                 // $trans->save();
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['id']);
-                    $price = (floatval($produk['produk_price'])*intval($item['qty'])); //harga produk
+                    $price = ($produk['produk_price']*$item['qty']); //harga produk
                     return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty']]; 
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
