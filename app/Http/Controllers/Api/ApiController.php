@@ -56,10 +56,11 @@ class ApiController extends Controller
                 $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 4;
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
-                $trans->save();
+                // $trans->save();
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['id']);
                     $price = ($produk['price']*$item['qty']); //harga produk
+                    return($price); 
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
                         foreach ($produk->grosir()->get() as $grosir) {
