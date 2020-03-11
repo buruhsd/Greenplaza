@@ -21,6 +21,166 @@ use RajaOngkir;
 
 class ApiController extends Controller
 {
+    public function done_gln($id){
+        $status = 200;
+        $message = 'Transaksi berhasil dibayar.';
+        $trx = Trans::find($id);
+        $order_id = $trx->trans_code;
+        $data = [
+            'order_id' => $order_id,
+            'transaction_status' => 'done'
+        ];
+        $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+        $address_gln = $trx->pembeli->wallet()->where('wallet_type', 7)->first()->wallet_address;
+        $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
+        if($response['status'] == 500){
+            $status = 500;
+            $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+            return redirect('member/transaction/purchase')
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        $to_address = FunctionLib::get_config('profil_gln_address');
+        $seller_address = ($trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists())
+            ?$trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists()
+            :false;
+
+        if(!$seller_address || $seller_address == null || $seller_address == ""){
+            $status = 500;
+            $message = 'Seller tidak melayani pembayaran menggunakan GLN.';
+            return redirect('member/transaction/purchase')
+               ->with(['flash_status' => $status,'flash_message' => $message]);
+        }
+        
+        $amount_total = 0;
+        $amount = 0;
+        $fee = 0;
+        if(!$trans->first()->trans_gln()->exists()){
+            if($trans->first()->voucher()){
+                $transaksi = $trans->first();
+                // rupiah
+                $trans_amount = $transaksi->trans_amount;
+                $trans_amount_ship = $transaksi->trans_amount_ship;
+                $trans_amount_total = FunctionLib::minus_to_zero($transaksi->trans_amount_total - $trans->first()->voucher()->trans_voucher_amount);
+                if($trans_amount_total > 0){
+                    $trans_fee = (FunctionLib::minus_to_zero($trans_amount - $trans->first()->voucher()->trans_voucher_amount)*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                }else{
+                    $trans_fee = 0;
+                }
+                // gln
+                $trans_amount = $trans_amount_total / FunctionLib::gln('compare',[])['data'];
+                $trans_amount = round($trans_amount,8, PHP_ROUND_HALF_DOWN);
+                $trans_fee = $trans_fee / FunctionLib::gln('compare',[])['data'];
+                $trans_fee = round($trans_fee,8, PHP_ROUND_HALF_UP);
+                $trans_amount_total = $trans_amount+$trans_fee;
+                // untuk insert
+                $wallet_to = ($transaksi->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists())
+                    ?$transaksi->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->first()->wallet_address
+                    :$transaksi->trans_detail->first()->produk->user->id;
+
+                // simpan trans gln 
+                $gln = new Trans_gln;
+                $gln->trans_gln_form=$address_gln;
+                $gln->trans_gln_admin=$to_address;
+                $gln->trans_gln_to=$wallet_to;
+                $gln->trans_gln_trans_id=$transaksi->id;
+                $gln->trans_gln_trans_code=$transaksi->trans_code;
+                $gln->trans_gln_detail_id=0;
+                $gln->trans_gln_detail_code=0;
+                $gln->trans_gln_amount=$trans_amount;
+                $gln->trans_gln_amount_fee=$trans_fee;
+                $gln->trans_gln_amount_total=$trans_amount_total;
+                $gln->trans_gln_compare=FunctionLib::gln('compare',[])['data'];
+                $gln->trans_gln_note='transfer gln untuk transaksi produk (voucher+gln) sebesar '.$trans_amount_total.' GLN dari member ke admin termasuk fee.';
+                $gln->save();
+
+                $amount_total = $amount_total + $trans_amount_total;
+            }else{
+                foreach ($trans->get() as $item) {
+                    foreach ($item->trans_detail as $item2) {
+                        // rupiah
+                        $detail_amount = $item2->trans_detail_amount;
+                        $detail_amount_ship = $item2->trans_detail_amount_ship;
+                        $detail_fee = ($detail_amount*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                        // gln
+                        $detail_amount = ($detail_amount + $detail_amount_ship) / FunctionLib::gln('compare',[])['data'];
+                        $detail_amount = round($detail_amount,8, PHP_ROUND_HALF_DOWN);
+                        // $detail_amount_ship = $detail_amount_ship / FunctionLib::gln('compare',[])['data'];
+                        // $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
+                        $detail_fee = $detail_fee / FunctionLib::gln('compare',[])['data'];
+                        $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
+                        // $detail_amount_total = $detail_amount+$detail_fee+$detail_amount_ship;
+                        $detail_amount_total = $detail_amount+$detail_fee;
+                        // untuk insert
+                        $wallet_to = ($item2->produk->user->wallet()->where('wallet_type', 7)->exists())
+                            ?$item2->produk->user->wallet()->where('wallet_type', 7)->first()->wallet_address
+                            :$item2->produk->user->id;
+
+                        // simpan trans gln 
+                        $gln = new Trans_gln;
+                        $gln->trans_gln_form=$address_gln;
+                        $gln->trans_gln_admin=$to_address;
+                        $gln->trans_gln_to=$wallet_to;
+                        $gln->trans_gln_trans_id=$item2->trans->id;
+                        $gln->trans_gln_trans_code=$item2->trans->trans_code;
+                        $gln->trans_gln_detail_id=$item2->id;
+                        $gln->trans_gln_detail_code=$item2->trans_code;
+                        // $gln->trans_gln_amount=$detail_amount+$detail_amount_ship;
+                        $gln->trans_gln_amount=$detail_amount;
+                        $gln->trans_gln_amount_fee=$detail_fee;
+                        $gln->trans_gln_amount_total=$detail_amount_total;
+                        $gln->trans_gln_compare=FunctionLib::gln('compare',[])['data'];
+                        $gln->trans_gln_note='transfer gln untuk transaksi produk sebesar '.$detail_amount_total.' GLN dari member ke admin termasuk fee.';
+                        $gln->save();
+
+                        $amount_total = $amount_total + $detail_amount_total;
+                    }
+                }
+            }
+        }else{
+            foreach ($trans->get() as $item) {
+                $amount_total = $amount_total + FunctionLib::array_sum_key($item->trans_gln()->get()->toArray(), 'trans_gln_amount_total');
+            }
+        }
+        if($trans->first()->voucher()){
+            if($amount_total > 0){
+                $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+            }else{
+                $transfer['status'] = 200;
+            }
+            if($transfer['status'] == 200){
+                // update wallet admin
+                $update_wallet = [
+                    'user_id'=>2,
+                    'wallet_type'=>1, //update wallet cw
+                    'amount'=>$trans->first()->voucher()->trans_voucher_amount,
+                    'note'=>'Transaksi transfer '.$trx->pembeli->id.'. Update wallet cw dengan kode transaksi '.$trans->first()->trans_code.'.',
+                ];
+                $saldo = FunctionLib::update_wallet($update_wallet);
+            }
+        }else{
+            $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
+        }
+        if($transfer['status'] == 200){
+            foreach ($trans->get() as $item) {
+                $gln = $item->trans_gln()->get();
+                foreach ($gln as $item) {
+                    $item->trans_gln_status=1;
+                    $item->save();
+                }
+            }
+
+            $response = FunctionLib::done_gln($data);
+            if($response['status'] == 500){
+                $status = $response['status'];
+                $message = $response['message'];
+            }
+        }else{
+            $status = 500;
+            $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+        }
+        return response()->json(['status' => $status,'message' => $message]);
+    }
+
     public function gln(){
         return response()->json(FunctionLib::gln('compare', []));
     }
