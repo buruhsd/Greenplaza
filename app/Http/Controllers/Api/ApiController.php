@@ -22,6 +22,7 @@ use RajaOngkir;
 class ApiController extends Controller
 {
     public function saveCheckout(Request $request){
+        $status = 200;
         if($request->has('chart') && FunctionLib::array_sum_key($request->get('chart'), 'price') > 0){
             $data = $request->get('chart');
             $trans = [];
