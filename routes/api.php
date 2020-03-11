@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('done_gln', 'Api\\ApiController@done_gln');
+Route::post('done_gln/{id}', 'Api\\ApiController@done_gln');
 Route::post('gln', 'Api\\ApiController@gln');
 Route::post('konfirmasi/{id}', 'Api\\ApiController@konfirmasi');
 Route::post('save_checkout', 'Api\\ApiController@saveCheckout');
