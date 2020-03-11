@@ -41,7 +41,7 @@ class ApiController extends Controller
                         return response()->json(['status' => $status, 'message' => $message]);
                     }
                 }
-                return ['request'=>$request->all(), 'user' => User::find($request->get('id'))];
+                // return ['request'=>$request->all(), 'user' => User::find($request->get('id'))];
                 // add to DB sys_trans
                 $bank_id = User::find($request->get('id'))->user_bank()->where('user_bank_status', 1)->first()['id'];
                 if(!$bank_id || empty($bank_id) || $bank_id == null){
