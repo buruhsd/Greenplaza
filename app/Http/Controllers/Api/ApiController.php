@@ -28,24 +28,24 @@ class ApiController extends Controller
                 $seller_id = Produk::where('id', $item['id'])->pluck('produk_seller_id')[0];
                 $trans[$seller_id][] = $item;
             });
-            return $trans;
             $trans_code = FunctionLib::str_rand(7);
+            $tc_detail = FunctionLib::str_rand(8);
             $gross_amount = 0;
             foreach ($trans as $value) {
                 foreach ($value as $key => $item) {
-                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
-                    if($item['trans_detail_qty'] > $produk->produk_stock){
+                    $produk = Produk::findOrFail($item['id']);
+                    if($item['qty'] > $produk->produk_stock){
                         $status = 500;
                         $message = 'Mohon maaf, Stok tidak mencukupi untuk pemesanan produk '.$produk->produk_name;
-                        return ['status' => $status, 'message' => $message];
+                        return response()->json(['status' => $status, 'message' => $message]);
                     }
                 }
                 // add to DB sys_trans
-                $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
+                $bank_id = User::find($request->get('id'))->user_bank()->where('user_bank_status', 1)->first()['id'];
                 if(!$bank_id || empty($bank_id) || $bank_id == null){
                     $status = 500;
                     $message = 'Silahkan isikan data bank anda.';
-                    return ['status' => $status, 'message' => $message];
+                    return response()->json(['status' => $status, 'message' => $message]);
                 }
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
@@ -55,49 +55,49 @@ class ApiController extends Controller
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
                 $trans->save();
                 foreach ($value as $key => $item) {
-                    $produk = Produk::findOrFail($item['trans_detail_produk_id']);
-                    $price = ($produk['produk_price']*$item['trans_detail_qty']); //harga produk
+                    $produk = Produk::findOrFail($item['id']);
+                    $price = ($produk['price']*$item['qty']); //harga produk
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
                         foreach ($produk->grosir()->get() as $grosir) {
-                            if($item['trans_detail_qty'] >= $grosir->produk_grosir_start && $item['trans_detail_qty'] <= $grosir->produk_grosir_end){
+                            if($item['qty'] >= $grosir->produk_grosir_start && $item['qty'] <= $grosir->produk_grosir_end){
                                 // update grosir
-                                $price = ($grosir->produk_grosir_price * $item['trans_detail_qty']);
+                                $price = ($grosir->produk_grosir_price * $item['qty']);
                                 // update diskon
                                 $item['trans_detail_amount'] = ($produk['produk_discount'] > 0)
                                     ?$price-($price*$produk['produk_discount']/100)
                                     :$price;
-                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
+                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                             }else{
                                 // update diskon
                                 $item['trans_detail_amount'] = ($produk['produk_discount'] > 0)
                                     ?$price-($price*$produk['produk_discount']/100)
                                     :$price;
-                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
+                                $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                             }
                         }
                     }else{
                         // check diskon
                         if($produk['produk_discount'] > 0){
                             $item['trans_detail_amount'] = $price-($price*$produk['produk_discount']/100);
-                            $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['trans_detail_amount_ship'];
+                            $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                         }
                     }
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
-                    $transDetail->trans_code = $item['trans_code'];
+                    $transDetail->trans_code = $tc_detail;
                     $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
                     $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
                     $transDetail->trans_detail_shipment_service = $item['trans_detail_shipment_service'];
                     $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
-                    $transDetail->trans_detail_qty = $item['trans_detail_qty'];
-                    $transDetail->trans_detail_size = $item['trans_detail_size'];//'s,m,l,xl';
-                    $transDetail->trans_detail_color = $item['trans_detail_color'];//'blue,orange,red,green,white';
+                    $transDetail->trans_detail_qty = $item['qty'];
+                    $transDetail->trans_detail_size = $item['size'];//'s,m,l,xl';
+                    $transDetail->trans_detail_color = $item['color'];//'blue,orange,red,green,white';
                     $transDetail->trans_detail_amount = $item['trans_detail_amount'];
-                    $transDetail->trans_detail_amount_ship = $item['trans_detail_amount_ship'];
+                    $transDetail->trans_detail_amount_ship = $item['paket']['cost'][0]['value'];
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
                     $transDetail->trans_detail_status = 1;
-                    $transDetail->trans_detail_note = "Transaction ".$item['trans_code']." at ".date("d-M-Y_H-i-s")."";
+                    $transDetail->trans_detail_note = "Transaction ".$tc_detail." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
                     // update stock
                     $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
@@ -126,18 +126,6 @@ class ApiController extends Controller
                 //     }
                 // }
             }
-            if(Session::has('voucher')){
-                $voucher = Session::get('voucher');
-                $new_voucher = new Trans_voucher;
-                $new_voucher->trans_voucher_user = Auth::id();
-                $new_voucher->trans_voucher_trans = $trans_code;
-                $new_voucher->trans_voucher_code = $voucher['code'];
-                $new_voucher->trans_voucher_amount = $voucher['amount'];
-                // $new_voucher->trans_voucher_status = 0;
-                $new_voucher->save();
-                Session::forget('voucher');
-            }
-            Session::forget('chart');
             // if(isset($trans->pembeli->email)){
             //     // send email
             //     $send_status = FunctionLib::trans_arr(1);
@@ -158,7 +146,7 @@ class ApiController extends Controller
             $in = 'select id from sys_trans where trans_code = "'.$trans_code.'"';
             $trans_detail = Trans_detail::whereRaw('trans_detail_trans_id IN ('.$in.')')->get();
             $data['trans_detail'] = $trans_detail;
-            return view('localapi.gln.index', $data);
+            return response()->json(['status' => $status, 'data'=>$data]);
         }else{
             $status = 500;
             $message = 'Barang yang anda masukkan ke keranjang kosong.';
