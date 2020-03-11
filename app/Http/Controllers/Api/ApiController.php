@@ -21,6 +21,9 @@ use RajaOngkir;
 
 class ApiController extends Controller
 {
+    public function gln(){
+        return response()->json(['data'=>FunctionLib::gln('compare', [])]);
+    }
 
     /**
     * mendapatkan data konfirmasi pembayaran
