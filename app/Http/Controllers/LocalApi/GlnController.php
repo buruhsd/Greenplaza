@@ -58,16 +58,16 @@ class GlnController extends Controller
                     }
                 }
                 // add to DB sys_trans
-                // $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
-                // if(!$bank_id || empty($bank_id) || $bank_id == null){
-                //     $status = 500;
-                //     $message = 'Silahkan isikan data bank anda.';
-                //     return ['status' => $status, 'message' => $message];
-                // }
+                $bank_id = Auth::user()->user_bank()->where('user_bank_status', 1)->first()['id'];
+                if(!$bank_id || empty($bank_id) || $bank_id == null){
+                    $status = 500;
+                    $message = 'Silahkan isikan data bank anda.';
+                    return ['status' => $status, 'message' => $message];
+                }
                 $trans = new Trans;
                 $trans->trans_code = $trans_code;
                 $trans->trans_user_id = Auth::id();
-                // $trans->trans_user_bank_id = $bank_id;
+                $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 4;
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
                 $trans->save();

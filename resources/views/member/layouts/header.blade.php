@@ -1,7 +1,7 @@
 <head>
         <meta charset="utf-8">
-        <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
-        <meta http-equiv="Content-Security-Policy" content="default-src https://giplaza.co.id; child-src 'none'; object-src 'none'">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        {{-- <meta http-equiv="Content-Security-Policy" content="default-src https://giplaza.co.id; child-src 'none'; object-src 'none'"> --}}
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Responsive Admin Dashboard Template">

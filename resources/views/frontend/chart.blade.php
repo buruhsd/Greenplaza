@@ -30,9 +30,9 @@
                             <div class="form-group">
                               <label for="sel1">Select your payment:</label>
                               <select class="form-control" id="sel1" onchange="location = this.value;">
-                                <option value="{{ url('/chart?type=myr') }}">MYR</option>
-                                <option value="{{ url('/chart?type=gln') }}">GLN</option>
                                 <option value="{{ url('/chart?type=') }}">IDR</option>
+                                {{-- <option value="{{ url('/chart?type=myr') }}">MYR</option> --}}
+                                <option value="{{ url('/chart?type=gln') }}">GLN</option>
                                 {{-- <option name="{{ url('/chart/{}') }}">Greenline</option> --}}
                               </select>
                             </div>
@@ -65,6 +65,7 @@
                                     <?php 
                                         $show_harga = 0;
                                         $show_harga_myr = 0;
+                                        $show_harga_gln = 0;
                                         $show_shipment = 0;
                                         $show_harga_grosir_total = 0; 
                                         $show_harga_diskon_total = 0; 
@@ -83,6 +84,7 @@
                                                 $harga = $produk->produk_price;
                                                 $harga_myr = $produk->price_myr;
                                                 $harga_gln = $produk->gln_coin;
+                                                var_dump($produk->gln_coin);
                                                 $is_grosir = false;
                                                 if($produk->is_grosir()){
                                                     $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];
@@ -103,6 +105,7 @@
                                                 $harga_total_myr = $harga_myr+(float)$item['trans_detail_amount_ship'];
                                                 $harga_total = $harga+(float)$item['trans_detail_amount_ship'];
                                                 $harga_total_gln = $harga_gln+$ship_gln;
+
                                             ?>
                                             <tr>
                                                 <td class="images"><img src="assets/images/product/{{$produk['produk_image']}}" alt=""></td>
@@ -287,15 +290,19 @@
                                                 if($diskon){
                                                     $harga = $harga-($harga*$produk['produk_discount']/100);
                                                     $harga_myr = $harga_myr-($harga_myr*$produk['produk_discount']/100);
+                                                    $harga_gln = $harga_gln-($harga_gln*$produk['produk_discount']/100);
                                                     $harga_total = $harga+$item['trans_detail_amount_ship'];
                                                     $harga_total_myr = $harga_myr+$item['trans_detail_amount_ship'];
+                                                    $harga_total_gln = $harga_gln+$item['trans_detail_amount_ship'];
                                                 }
                                                 $show_grosir += (float)$harga_grosir;
                                                 $show_harga += (float)$harga;
                                                 $show_harga_myr += (float)$harga_myr;
+                                                $show_harga_gln += (float)$harga_gln;
                                                 $show_shipment += (float)$item['trans_detail_amount_ship'];
                                                 $show_harga_total += (float)$harga_total;
                                                 $show_harga_total_myr += (float)$harga_total_myr;
+                                                $show_harga_total_gln += (float)$harga_total_gln;
                                             ?>
                                         @endforeach
                                     @endif
@@ -385,7 +392,7 @@
                                         @elseif($type == 'gln')
                                             <li>
                                                 <span class="pull-left">Subtotal </span>
-                                                GLN. {{FunctionLib::number_to_text($show_harga_myr+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total_gln)}}
+                                                GLN. {{FunctionLib::number_to_text($show_harga_gln+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total_gln)}}
                                             </li>
                                             <li>
                                                 <span class="pull-left">Pengiriman </span>
@@ -424,7 +431,7 @@
                                                     GLN. {{FunctionLib::number_to_text($show_harga_total_gln)}}
                                                 @endif
                                             </li>
-                                        @elseif($type == "idr")
+                                        @else
                                             <li>
                                                 <span class="pull-left">Subtotal </span>
                                                 Rp. {{FunctionLib::number_to_text($show_harga+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total)}}
@@ -442,7 +449,7 @@
                                             <li>
                                                 <span class="pull-left text-danger">Diskon </span>
                                                 <span class='text-danger'>
-                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
+                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total-$show_grosir)}}
                                                 </span>
                                             </li>
                                             <li id="voucher-info">
@@ -466,7 +473,6 @@
                                                     Rp. {{FunctionLib::number_to_text($show_harga_total)}}
                                                 @endif
                                             </li>
-                                        @else
                                         @endif
                                     </ul>
                                     <a href="{{route('checkout')}}?type={{$type}}">Memproses ke Checkout</a>

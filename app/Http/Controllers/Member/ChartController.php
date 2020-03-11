@@ -61,7 +61,7 @@ class ChartController extends Controller
     public function checkout(Request $request)
     {
         $data['type'] = $request->type;
-        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [2])->get();
+        $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [2,4])->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
         return view('frontend.checkout', $data);
     }
@@ -120,6 +120,7 @@ class ChartController extends Controller
 			'trans_detail_note' => $request->note,
             'myr' => $kurs['Data']['MYR']['Beli']
 		];
+        // dd($transaction);
 		if(!Session::has('chart')){
         	Session::put('chart', []);
 		}

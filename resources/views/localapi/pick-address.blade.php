@@ -1,4 +1,6 @@
-<div class="modal-dialog modal-lg" role="document">
+
+
+<div class="modal-dialog modal-lg" id="modal-madil{{Auth::user()->id}}" role="document">
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title" id="modal-title">Pilih Alamat</h4>
@@ -17,7 +19,7 @@
                         <th>Alamat</th>
                         <th>Aksi</th>
                     </thead>
-                    @foreach($user_address as $item)
+                    @foreach(Auth::user()->user_address as $item)
                         <tbody>
                             <td></td>
                             <td>

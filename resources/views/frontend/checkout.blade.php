@@ -36,11 +36,13 @@
                                     <?php 
                                         $show_harga = 0;
                                         $show_harga_myr = 0;
+                                        $show_harga_gln = 0;
                                         $show_shipment = 0;
                                         $show_harga_grosir_total = 0; 
                                         $show_harga_diskon_total = 0; 
                                         $show_harga_total = 0; 
                                         $show_harga_total_myr= 0; 
+                                        $show_harga_total_gln= 0; 
                                         $show_grosir = 0;
                                     ?>
                                     @if(Session::has('chart'))
@@ -55,6 +57,7 @@
                                                      $produk = App\Models\Produk::where('id', $item['trans_detail_produk_id'])->first(); 
                                                     $harga = $produk->produk_price;
                                                     $harga_myr = $produk->price_myr;
+                                                    $harga_gln = $produk->gln_coin;
                                                     $is_grosir = false;
                                                     if($produk->is_grosir()){
                                                         $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];
@@ -62,30 +65,40 @@
                                                         if($grosir->count()){
                                                             $harga = (float)$grosir->first()->produk_grosir_price;
                                                             $harga_myr = (float)$grosir->first()->produk_grosir_price;
+                                                            $harga_gln = (float)$grosir->first()->produk_grosir_price;
                                                             $is_grosir = true;
                                                             $harga_grosir = $produk->produk_price - $harga;
                                                             $harga_grosir_myr = $produk->price_myr - $harga_myr;
+                                                            $harga_grosir_gln = $produk->gln_coin - $harga_gln;
                                                         }
                                                     }
                                                     $diskon = ($produk['produk_discount'] > 0)?true:false;
                                                     $harga = $harga * (int)$item['trans_detail_qty'];
                                                     $harga_myr = $harga_myr * (int)$item['trans_detail_qty'];
+                                                    $harga_gln = $harga_gln * (int)$item['trans_detail_qty'];
                                                     $harga_grosir = (int)$harga_grosir * (int)$item['trans_detail_qty'];
                                                     $harga_grosir_myr = (int)$harga_grosir * (int)$item['trans_detail_qty'];
+                                                    $harga_grosir_gln = (int)$harga_grosir * (int)$item['trans_detail_qty'];
                                                     $harga_total = $harga+(float)$item['trans_detail_amount_ship'];
                                                     $harga_total_myr = $harga_myr+(float)$item['trans_detail_amount_ship'];
+                                                    $harga_total_gln = $harga_gln+(float)$item['trans_detail_amount_ship']/75100;
                                                     if($diskon){
                                                         $harga = $harga-($harga*$produk['produk_discount']/100);
                                                         $harga_myr = $harga_myr-($harga_myr*$produk['produk_discount']/100);
+                                                        $harga_gln = $harga_gln-($harga_gln*$produk['produk_discount']/100);
                                                         $harga_total = $harga+$item['trans_detail_amount_ship'];
                                                         $harga_total_myr = $harga_myr+$item['trans_detail_amount_ship'];
+                                                        $harga_total_gln = $harga_gln+$item['trans_detail_amount_ship']/75100;
                                                     }
                                                     $show_grosir += (float)$harga_grosir;
                                                     $show_harga += (float)$harga;
                                                     $show_harga_myr += (float)$harga_myr;
+                                                    $show_harga_gln += (float)$harga_gln;
                                                     $show_shipment += (float)$item['trans_detail_amount_ship'];
                                                     $show_harga_total += (float)$harga_total;
                                                     $show_harga_total_myr += (float)$harga_total_myr;
+                                                    $show_harga_total_gln += (float)$harga_total_gln;
+                                                    
                                                 ?>
                                             @endforeach
                                             @if($type == 'myr')
@@ -114,6 +127,36 @@
                                                         echo '
                                                         <label>Jumlah yang harus ditransfer</label>
                                                         <h2 style="">MYR. '.FunctionLib::number_to_text($show_harga_total_myr).'</h2>
+                                                        ';
+                                                    }
+                                                ?>
+                                            @elseif($type == 'gln')
+                                                <?php 
+                                                    $diskon = "";
+                                                    $total = 'GLN '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln'));
+                                                    if(Session::has('chart')){
+                                                        $diskon = FunctionLib::sum_cart_diskon(Session::get('chart'));
+                                                        $total = FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln');
+                                                        $total = ($diskon > 0)?'GLN '.FunctionLib::number_to_text($total-$diskon).' / <span class="text-danger"><del>GLN '.FunctionLib::number_to_text($total).'</del></span>':'GLN '.FunctionLib::number_to_text($total);
+                                                        $diskon = ($diskon > 0)? "<br/>Total diskon : <span class='text-danger'>GLN.".$diskon."</span>":"";
+                                                    }
+
+                                                    echo '
+                                                    Tagihan : GLN '.FunctionLib::number_to_text($show_harga_gln+FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total_gln).' 
+                                                    <br/><span class="text-danger">Grosir : GLN.'.FunctionLib::number_to_text($show_grosir).'</span><br>
+                                                    <span class="text-danger">Diskon : GLN.'.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total_gln-$show_grosir).'</span><br>
+                                                    Ongkos Kirim : GLN '.FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_ship')/75100).' <br>';
+                                                    if(Session::has('voucher')){
+                                                        $voucher = Session::get('voucher');
+                                                        echo '<span class="text-danger">Voucher : gln.'.FunctionLib::number_to_text($voucher['amount']).'</span>'.' <br>';
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">MYR. '.FunctionLib::number_to_text(FunctionLib::minus_to_zero($show_harga_total_gln-$voucher['amount'])).'</h2>
+                                                        ';
+                                                    }else{
+                                                        echo '
+                                                        <label>Jumlah yang harus ditransfer</label>
+                                                        <h2 style="">GLN. '.FunctionLib::number_to_text($show_harga_total_gln).'</h2>
                                                         ';
                                                     }
                                                 ?>
