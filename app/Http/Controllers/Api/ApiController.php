@@ -17,6 +17,7 @@ use Auth;
 use FunctionLib;
 use App\Models\Trans_voucher;
 use App\Models\Trans;
+use App\Models\Trans_gln;
 use RajaOngkir;
 
 class ApiController extends Controller
