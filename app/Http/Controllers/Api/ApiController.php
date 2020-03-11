@@ -42,6 +42,7 @@ class ApiController extends Controller
                     }
                 }
                 // add to DB sys_trans
+                return User::where('username', $request->get('id'))->first();
                 $bank_id = User::where('username', $request->get('id'))->first()->user_bank()->where('user_bank_status', 1)->first()['id'];
                 if(!$bank_id || empty($bank_id) || $bank_id == null){
                     $status = 500;
