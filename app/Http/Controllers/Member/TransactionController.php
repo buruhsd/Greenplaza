@@ -423,7 +423,7 @@ class TransactionController extends Controller
                 ];
                 $address_gln = FunctionLib::get_config('profil_gln_address');
                 $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
-                $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+                // $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
                 $to_address = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->trans_gln_to;
                 $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_fee,'address'=>$address_gln]);
                 $status = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->id;
