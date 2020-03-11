@@ -445,7 +445,7 @@ class FunctionLib
         $note = "transfer wallet";
         $date = date('Y-m-d H:i:s');
         extract($param);
-        
+        try{
             // update saldo from
             $where = 'wallet_user_id='.$from_id;
             $where .= ' AND wallet_type='.$wallet_type;
@@ -453,7 +453,6 @@ class FunctionLib
             $saldo->wallet_ballance_before = $saldo->wallet_ballance;
             $saldo->wallet_ballance = $saldo->wallet_ballance - $amount;
             $saldo->wallet_note = $note;
-            dd($saldo);
             $saldo->save();
 
             // update saldo to
@@ -463,12 +462,14 @@ class FunctionLib
             $saldo->wallet_ballance_before = $saldo->wallet_ballance;
             $saldo->wallet_ballance = $saldo->wallet_ballance + $amount;
             $saldo->wallet_note = $note;
-            dd($saldo);
             $saldo->save();
 
             $status = 200;
             $message = 'Transfer wallet berhasil.';
-        
+        }catch(Exception $e){
+            $status = 500;
+            $message = 'Transfer wallet gagal.';
+        }
 
         $return = ['status'=>$status, 'message'=>$message];
         return $return;

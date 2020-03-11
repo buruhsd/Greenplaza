@@ -357,6 +357,7 @@ class TransactionController extends Controller
         $status = 200;
         $message = 'Barang Sudah sampai dan diterima!';
         $trans = Trans::findOrFail($id);
+        $order_id = $trans->trans_code;
         foreach ($trans->trans_detail as $item) {
             $trans_detail = Trans_detail::findOrFail($item->id);
             // to dropping
@@ -375,6 +376,8 @@ class TransactionController extends Controller
             $detail_amount_ship = round($detail_amount_ship,8, PHP_ROUND_HALF_DOWN);
             $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
             $detail_amount_total = $detail_amount-$detail_fee+$detail_amount_ship;
+            // dd($detail_amount_total);
+
             if($trans_detail->trans->trans_payment_id !== 4){
                 $update_wallet = [
                     'from_id'=>2,
@@ -384,6 +387,11 @@ class TransactionController extends Controller
                     'note'=>'Update wallet CW dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
                 ];
                 $saldo = FunctionLib::transfer_wallet($update_wallet);
+
+                // 
+                
+
+
                 // $update_wallet = [
                 //     'user_id'=>$trans_detail->produk->produk_seller_id,
                 //     'wallet_type'=>1,
@@ -403,6 +411,35 @@ class TransactionController extends Controller
                 ];
                 $saldo = FunctionLib::transfer_wallet($update_wallet);
             }
+
+                $amount_total = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->trans_gln_amount_total;
+                $url = FunctionLib::gln('compare',[])['data'];
+                $compare = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->trans_gln_compare;
+                $amount_fee = (($trans_detail->trans_detail_amount_total)-($trans_detail->trans_detail_amount_total * 1/100)) / $compare;
+                // dd($fee);
+                $data = [
+                    'order_id' => $order_id,
+                    'transaction_status' => 'done'
+                ];
+                $address_gln = FunctionLib::get_config('profil_gln_address');
+                $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
+                $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
+                $to_address = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->trans_gln_to;
+                $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_fee,'address'=>$address_gln]);
+                $status = Trans_gln::where('trans_gln_detail_id', $trans_detail->id)->first()->id;
+
+                // var_dump($transfer); die();
+                if($transfer['status'] == 200){
+                    $item = Trans_gln::find($status);
+                    $item->trans_gln_status= 2;
+                    $item->save();
+                    $status = 200;
+                    $message = 'Coin Berhasil di Transfer ke Seller.';
+                }else{
+                    $status = 500;
+                    $message = 'transfer gagal atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+                }
+
         }
         if(!$trans_detail){
             $status = 500;
