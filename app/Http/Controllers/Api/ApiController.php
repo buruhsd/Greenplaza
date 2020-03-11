@@ -36,7 +36,7 @@ class ApiController extends Controller
         $data = Trans_detail::whereRaw($where)
                 ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
                 ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
-                ->select('sys_trans_detail.*', DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as produk'))
+                ->select('sys_trans_detail.*', DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as produk', 'produk.produk_name'))
                 ->get();
         return response()->json(['status' => 200, 'data'=>$data]);
     }
