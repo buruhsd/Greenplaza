@@ -22,7 +22,7 @@ use RajaOngkir;
 class ApiController extends Controller
 {
     public function gln(){
-        return response()->json(['data'=>FunctionLib::gln('compare', [])]);
+        return response()->json(FunctionLib::gln('compare', []));
     }
 
     /**
