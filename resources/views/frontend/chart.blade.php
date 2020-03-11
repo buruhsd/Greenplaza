@@ -84,7 +84,6 @@
                                                 $harga = $produk->produk_price;
                                                 $harga_myr = $produk->price_myr;
                                                 $harga_gln = $produk->gln_coin;
-                                                var_dump($produk->gln_coin);
                                                 $is_grosir = false;
                                                 if($produk->is_grosir()){
                                                     $where = 'produk_grosir_start <= '.(int)$item['trans_detail_qty'].' AND produk_grosir_end >= '.(int)$item['trans_detail_qty'];

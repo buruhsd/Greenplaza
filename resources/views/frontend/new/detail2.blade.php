@@ -226,8 +226,7 @@
                                     </ul>
                                     <div class="col-md-12 " style="margin-bottom: 2%">
                                         <center>
-                                          <button type="button" id="detail" class="btn btn-sm btn-primary btn-xs btn-confirmation" data-toggle="modal" data-target="#modal-madil{{Auth::user()->id}}"><i class="fa fa-edit"></i>Destination Address</button>
-                                            {{-- <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" /> --}}
+                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
                                         </center>
                                     </div>
                                     <div class="col-md-12" id="address-info" style="margin-bottom: 2%">
@@ -685,7 +684,6 @@
         </div>
     </div>
     </div>
-    @include('localapi.pick-address')
     <div class="modal fade11" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -1,11 +1,15 @@
-
-
-<div class="modal fade11" id="modal-madil{{Auth::user()->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="slideshow-container11">
-          <div class="table-responsive">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Pilih Alamat</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row m-t-20">
+                <div class="col-12">
+                    <input onclick='modal_get($(this));' data-dismiss="modal" data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addaddress")}} type="button" class="btn btn-success btn-sm" name="addAdress" value="Add Address" />
+                </div>
+            </div>
+            <div class="table-responsive">
                 <table class="table m-t-20 respon">
                     <thead>
                         <th></th>
@@ -13,7 +17,7 @@
                         <th>Alamat</th>
                         <th>Aksi</th>
                     </thead>
-                    @foreach(Auth::user()->user_address as $item)
+                    @foreach($user_address as $item)
                         <tbody>
                             <td></td>
                             <td>
@@ -41,7 +45,8 @@
                 </table>
             </div>
         </div>
-      </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-danger" value="Close" onclick="$(this).closest('.modal').modal('hide')">
+        </div>
     </div>
-  </div>
 </div>

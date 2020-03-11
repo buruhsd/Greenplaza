@@ -723,10 +723,10 @@ class TransactionController extends Controller
                     'status' => $send_status,
                 ]
             ];
-            $send_notif = FunctionLib::transaction_notif($config);
-            if(isset($send_notif['status']) && $send_notif['status'] == 200){
-                $message .= ' ,'.$send_notif['message'];
-            }
+            // $send_notif = FunctionLib::transaction_notif($config);
+            // if(isset($send_notif['status']) && $send_notif['status'] == 200){
+            //     $message .= ' ,'.$send_notif['message'];
+            // }
         }
         return redirect()->back()
             ->with(['flash_status' => $status,'flash_message' => $message]);
