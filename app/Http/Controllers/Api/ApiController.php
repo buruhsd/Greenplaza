@@ -27,6 +27,7 @@ class ApiController extends Controller
     **/
     public function konfirmasi(Request $request, $id)
     {
+        return $id;
         $where .= 'sys_trans.id ='.$id;
         // status transaksi
         $w_status = ' AND trans_detail_status = 1 AND trans_detail_is_cancel != 1'; 
