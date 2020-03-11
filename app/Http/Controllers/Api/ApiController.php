@@ -88,10 +88,10 @@ class ApiController extends Controller
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
                     $transDetail->trans_code = $tc_detail;
-                    $transDetail->trans_detail_produk_id = $item['trans_detail_produk_id'];
-                    $transDetail->trans_detail_shipment_id = $item['trans_detail_shipment_id'];
-                    $transDetail->trans_detail_shipment_service = $item['trans_detail_shipment_service'];
-                    $transDetail->trans_detail_user_address_id = $item['trans_detail_user_address_id'];
+                    $transDetail->trans_detail_produk_id = $item['id'];
+                    $transDetail->trans_detail_shipment_id = $item['courier'];
+                    $transDetail->trans_detail_shipment_service = $item['paket']['service'];
+                    $transDetail->trans_detail_user_address_id = $item['alamat'];
                     $transDetail->trans_detail_qty = $item['qty'];
                     $transDetail->trans_detail_size = $item['size'];//'s,m,l,xl';
                     $transDetail->trans_detail_color = $item['color'];//'blue,orange,red,green,white';
@@ -102,7 +102,7 @@ class ApiController extends Controller
                     $transDetail->trans_detail_note = "Transaction ".$tc_detail." at ".date("d-M-Y_H-i-s")."";
                     $transDetail->save();
                     // update stock
-                    $produk->produk_stock = $produk->produk_stock - $item['trans_detail_qty'];
+                    $produk->produk_stock = $produk->produk_stock - $item['qty'];
                     $produk->save();
                 }
                 // update amount trans
