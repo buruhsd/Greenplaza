@@ -244,7 +244,7 @@ class ApiController extends Controller
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['id']);
                     $price = ($produk['produk_price']*$item['qty']); //harga produk
-                    // return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty']]; 
+                    return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty']]; 
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
                         foreach ($produk->grosir()->get() as $grosir) {
@@ -286,7 +286,6 @@ class ApiController extends Controller
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$tc_detail." at ".date("d-M-Y_H-i-s")."";
-                    return $transDetail;
                     $transDetail->save();
                     // update stock
                     $produk->produk_stock = $produk->produk_stock - $item['qty'];
