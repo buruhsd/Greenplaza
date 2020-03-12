@@ -161,7 +161,6 @@ class ApiController extends Controller
         }else{
             $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
         }
-        return [$transfer, 'to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln];
         if($transfer['status'] == 200){
             foreach ($trans->get() as $item) {
                 $gln = $item->trans_gln()->get();
@@ -241,7 +240,8 @@ class ApiController extends Controller
                 $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 4;
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
-                $trans->save();
+                return 'process';
+                // $trans->save();
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['id']);
                     $price = ($produk['produk_price']*$item['qty']); //harga produk
