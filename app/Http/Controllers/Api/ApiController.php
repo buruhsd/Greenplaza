@@ -34,7 +34,6 @@ class ApiController extends Controller
         $trans = Trans::whereRaw('trans_code="'.$order_id.'"');
         $address_gln = $trx->pembeli->wallet()->where('wallet_type', 7)->first()->wallet_address;
         $response = FunctionLib::gln('ballance', ['address'=>$address_gln]);
-        return $response;
         if($response['status'] == 500){
             $status = 500;
             $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
@@ -42,6 +41,7 @@ class ApiController extends Controller
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $to_address = FunctionLib::get_config('profil_gln_address');
+        return $to_address;
         $seller_address = ($trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists())
             ?$trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists()
             :false;
