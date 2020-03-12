@@ -314,7 +314,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
-            {!! Form::label('produk_location', 'Currency : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_location', 'Location : ', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 @if(str_contains(Request::url(), ['create']))
                     <select name='produk_location' class="form-control">
