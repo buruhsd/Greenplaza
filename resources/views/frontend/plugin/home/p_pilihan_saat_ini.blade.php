@@ -46,8 +46,8 @@
                     <del>Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span>
                     <span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span><br>
                     <span>Rp.{{FunctionLib::number_to_text($f->produk_price-($f->produk_price * $f->produk_discount / 100))}}</span><br>
-                    <span>MYR.{{FunctionLib::number_to_text($f->price_myr - ( $f->price_myr * $f->produk_discount/ 100) ) }} <br> </span><br>
-                    <span>GLN.{{FunctionLib::number_to_text( ($f->produk_price - ( $f->produk_price * $f->produk_discount/ 100) )/$price_gln ) }} <br> </span>
+                    <span>MYR.{{FunctionLib::number_to_text($f->price_myr - ( $f->price_myr * $f->produk_discount/ 100) ) }} </span><br>
+                    <span>GLN.{{FunctionLib::number_to_text( ($f->produk_price - ( $f->produk_price * $f->produk_discount/ 100) )/$price_gln ) }} </span>
                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                         data-content="
                         Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
