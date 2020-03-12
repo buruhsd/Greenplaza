@@ -271,7 +271,7 @@ class ApiController extends Controller
                             $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                         }
                     }
-                    return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty'], $item]; 
+                    return [$item['trans_detail_amount'], $item['trans_detail_amount_total']]; 
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
                     $transDetail->trans_code = $tc_detail;
