@@ -51,7 +51,6 @@ class ApiController extends Controller
             return redirect('member/transaction/purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
-        return [$response, $to_address, $seller_address];
         
         $amount_total = 0;
         $amount = 0;
@@ -162,6 +161,7 @@ class ApiController extends Controller
         }else{
             $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
         }
+        return [$transfer];
         if($transfer['status'] == 200){
             foreach ($trans->get() as $item) {
                 $gln = $item->trans_gln()->get();
