@@ -41,7 +41,6 @@ class ApiController extends Controller
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
         $to_address = FunctionLib::get_config('profil_gln_address');
-        return $to_address;
         $seller_address = ($trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists())
             ?$trans->first()->trans_detail->first()->produk->user->wallet()->where('wallet_type', 7)->exists()
             :false;
@@ -52,6 +51,7 @@ class ApiController extends Controller
             return redirect('member/transaction/purchase')
                ->with(['flash_status' => $status,'flash_message' => $message]);
         }
+        return [$response, $to_address, $seller_address];
         
         $amount_total = 0;
         $amount = 0;
