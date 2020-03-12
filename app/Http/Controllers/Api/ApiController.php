@@ -161,7 +161,7 @@ class ApiController extends Controller
         }else{
             $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln]);
         }
-        return [$transfer];
+        return [$transfer, 'to_address' =>$to_address,'amount'=>$amount_total,'address'=>$address_gln];
         if($transfer['status'] == 200){
             foreach ($trans->get() as $item) {
                 $gln = $item->trans_gln()->get();
