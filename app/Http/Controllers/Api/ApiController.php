@@ -247,7 +247,6 @@ class ApiController extends Controller
                     // return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty']]; 
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
-                    return ['grosir']; 
                         foreach ($produk->grosir()->get() as $grosir) {
                             if($item['qty'] >= $grosir->produk_grosir_start && $item['qty'] <= $grosir->produk_grosir_end){
                                 // update grosir
@@ -266,12 +265,13 @@ class ApiController extends Controller
                             }
                         }
                     }else{
-                    return ['bukan grosir']; 
                         // check diskon
                         if($produk['produk_discount'] > 0){
+                    return ['diskon' => $produk['produk_discount']]; 
                             $item['trans_detail_amount'] = $price-($price*$produk['produk_discount']/100);
                             $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                         }
+                    return ['bukan diskon']; 
                     }
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
