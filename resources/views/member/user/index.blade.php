@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                             <hr/>
-                            {!! Form::label('user_detail_bank_id', 'Country', ['class' => 'col-md-12']) !!}
+                            {{-- {!! Form::label('user_detail_bank_id', 'Country', ['class' => 'col-md-12']) !!}
                             <div class="form-group mx-sm-3 mb-2">
                                 <div class="col-md-9">
                                     <select name='country_id' class="form-control">
@@ -208,7 +208,7 @@
                                 {!! $errors->first('country_id', '<p class="help-block">:message</p>') !!}
                                 </div>
                             </div>
-                            <hr/>
+                            <hr/> --}}
                             <div class="row">
                                 <div class="col-md-3">
                                     {!! Form::label('user_detail_province', 'Provice', ['class' => 'col-md-12']) !!}
