@@ -246,7 +246,7 @@ class ApiController extends Controller
                     $price = ($produk['produk_price']*$item['qty']); //harga produk
                     $item['trans_detail_amount'] = $price;
                     $item['trans_detail_amount_total'] = $price + $item['paket']['cost'][0]['value'];
-                    // return ['produk'=>$produk, 'price'=>$price, 'produk_price' => $produk['produk_price'], 'qty' => $item['qty']]; 
+                    return $item; 
                     // check grosir dan diskon
                     if($produk->grosir()->exists()){
                         foreach ($produk->grosir()->get() as $grosir) {
