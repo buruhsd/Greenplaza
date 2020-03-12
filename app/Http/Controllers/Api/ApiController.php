@@ -240,7 +240,6 @@ class ApiController extends Controller
                 $trans->trans_user_bank_id = $bank_id;
                 $trans->trans_payment_id = 4;
                 $trans->trans_note = "Transaction ".$trans->trans_code." at ".date("d-M-Y_H-i-s")."";
-                return 'process';
                 // $trans->save();
                 foreach ($value as $key => $item) {
                     $produk = Produk::findOrFail($item['id']);
@@ -287,6 +286,7 @@ class ApiController extends Controller
                     $transDetail->trans_detail_amount_total = $item['trans_detail_amount_total'];
                     $transDetail->trans_detail_status = 1;
                     $transDetail->trans_detail_note = "Transaction ".$tc_detail." at ".date("d-M-Y_H-i-s")."";
+                    return $transDetail;
                     $transDetail->save();
                     // update stock
                     $produk->produk_stock = $produk->produk_stock - $item['qty'];
