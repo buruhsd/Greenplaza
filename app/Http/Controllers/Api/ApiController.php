@@ -264,6 +264,7 @@ class ApiController extends Controller
                                 $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                             }
                         }
+                    return [$item['trans_detail_amount'], $item['trans_detail_amount_total']]; 
                     }else{
                         // check diskon
                         if($produk['produk_discount'] > 0){
@@ -271,7 +272,6 @@ class ApiController extends Controller
                             $item['trans_detail_amount_total'] = $item['trans_detail_amount'] + $item['paket']['cost'][0]['value'];
                         }
                     }
-                    return [$item['trans_detail_amount'], $item['trans_detail_amount_total']]; 
                     $transDetail = new Trans_detail;
                     $transDetail->trans_detail_trans_id = $trans->id;
                     $transDetail->trans_code = $tc_detail;
