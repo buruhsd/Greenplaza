@@ -54,6 +54,18 @@
         background: url("{{asset('loader/loader-128x/gi120.png')}}") center no-repeat #fff;
     }
 
+    .cetagory-wrap span {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 500;
+    display: block;
+    text-align: center;
+    padding: 26px 0px;
+    border-top: none;
+    border-bottom: none;
+    color: #121212;
+}
+
     .featured-wrap {
     padding: 10px;
     background: #fff;
@@ -65,7 +77,7 @@
     padding: 10px;
     background: #fff;
     margin-bottom: 0px;
-    margin-top: -150px;
+    margin-top: -170px;
     }
 
     .featured-wrap1 {

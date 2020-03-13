@@ -9,7 +9,7 @@
                     <div class="cetagory-wrap home">
                         <span>Semua kategori</span>
                         <ul class="cetagory-items">
-                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
+                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(4)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                             {{-- {{dd($cat)}} --}}
                             @foreach($cat as $item)
                                 <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
