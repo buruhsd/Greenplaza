@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 d-none d-lg-block">
-                    @if (\Auth::check())
+                    {{-- @if (\Auth::check())
                         <div class="author-wrap">
                             @if (Auth::user()->user_detail->user_detail_image != null)
                             <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px" onerror="this.src='{{ asset('assets/images/profil/nopic.png') }}'">
@@ -96,7 +96,7 @@
                             <img src="{{ asset('assets/images/profil/nopic.png') }}" style="height: 
                                 130px">
                         </div>
-                    @endif
+                    @endif --}}
                     {!!Plugin::view('iklan', [
                             'id'=>4,
                             'type'=>'1',

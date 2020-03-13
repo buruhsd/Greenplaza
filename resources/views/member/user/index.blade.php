@@ -197,18 +197,6 @@
                                 </div>
                             </div>
                             <hr/>
-                            {{-- {!! Form::label('user_detail_bank_id', 'Country', ['class' => 'col-md-12']) !!}
-                            <div class="form-group mx-sm-3 mb-2">
-                                <div class="col-md-9">
-                                    <select name='country_id' class="form-control">
-                                        @foreach($cfg_country as $item)
-                                            <option value='{{$item->country_id}}' <?php if($user->user_detail->country_id == $item->id){echo "selected";}?>>{{$item->country_name}}</option>
-                                        @endforeach
-                                    </select>
-                                {!! $errors->first('country_id', '<p class="help-block">:message</p>') !!}
-                                </div>
-                            </div>
-                            <hr/> --}}
                             <div class="row">
                                 <div class="col-md-3">
                                     {!! Form::label('user_detail_province', 'Provice', ['class' => 'col-md-12']) !!}
