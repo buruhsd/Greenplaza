@@ -54,6 +54,13 @@
         background: url("{{asset('loader/loader-128x/gi120.png')}}") center no-repeat #fff;
     }
 
+    .featured-wrap {
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 0px;
+    margin-top: -30px;
+    }
+
     .featured2-wrap {
     padding: 10px;
     background: #fff;
