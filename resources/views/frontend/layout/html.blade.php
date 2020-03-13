@@ -53,6 +53,19 @@
         z-index: 9999;
         background: url("{{asset('loader/loader-128x/gi120.png')}}") center no-repeat #fff;
     }
+
+    .featured2-wrap {
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 0px;
+    margin-top: -150px;
+    }
+
+    .featured-wrap1 {
+        padding: 10px;
+        background: #fff;
+        margin-bottom: 30px;
+    }
     a#scrollUp {
         position: absolute;
         right: 20px;
