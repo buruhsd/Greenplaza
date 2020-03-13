@@ -28,7 +28,7 @@
                         $notif = FunctionLib::user_notif(Auth::id(), 10);
                      ?>
                      <a href="#" id="member" onclick="drop()" class="dropbtn">
-                     <i class="fa fa-bell animated"></i>
+                     <img src="{{asset('/frontend/images/gi/lonceng.png')}}" style="width: 12px;" alt="alt text" />
                      <small class="text-danger {!!($notif->count())?'':'hide'!!}">
                      <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
                      </small>
@@ -63,7 +63,7 @@
                   @endguest
                   <li>
 
-                     <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
+                     <a href="{{route('chart')}}"><img src="{{asset('/frontend/images/gi/troli.png')}}" style="width: 12px;" alt="alt text" />
                         @if(Session::has('chart') && count(Session::get('chart')) > 0)
                         <span>
                            @if(Auth::user()->user_detail->country_id == 222)
@@ -78,7 +78,7 @@
                      @endif
                      </a>
                   </li>
-                  <li><a href="{{route('member.wishlist')}}"><i class="fa fa-heart"></i></a></li>
+                  <li><a href="{{route('member.wishlist')}}"><img src="{{asset('/frontend/images/gi/like.png')}}" style="width: 12px;" alt="alt text" /></a></li>
                   @guest
                   <li><a href="javascript:void(0)" onClick="showLoginModal()">login</a></li>
                   <li><a href="https://gicommunity.org/register">Register</a></li>

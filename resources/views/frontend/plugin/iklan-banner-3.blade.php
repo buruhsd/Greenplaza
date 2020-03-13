@@ -6,7 +6,7 @@
             <a href="{{$iklan->iklan_link}}">
         @endif
         <!-- <span class="discount">%20 Off</span> -->
-	        <img src="{{asset('assets/images/iklan/'.$iklan->iklan_image)}}" style="height: 270px">
+	        <img src="{{asset('assets/images/iklan/'.$iklan->iklan_image)}}" style="height: 305px">
 	    </a>
     </div>
 </div>

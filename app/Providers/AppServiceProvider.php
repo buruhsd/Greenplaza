@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
         Komplain::observe(NotifKomplainObserver::class);
         // ketika solusi member seller
         Solusi::observe(NotifSolusiObserver::class);
-        URL::forceScheme('https');
+        // URL::forceScheme('https');
 
     }
 

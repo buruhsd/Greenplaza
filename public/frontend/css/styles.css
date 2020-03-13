@@ -976,6 +976,20 @@ span.discount {
 .featured-wrap {
     padding: 10px;
     background: #fff;
+    margin-bottom: 0px;
+    margin-top: -30px;
+}
+
+.featured2-wrap {
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 0px;
+    margin-top: -150px;
+}
+
+.featured-wrap1 {
+    padding: 10px;
+    background: #fff;
     margin-bottom: 30px;
 }
 

@@ -40,7 +40,7 @@
             {{-- <h2>Minilam Chair</h2>
             <p>consectetur adipisicing elit to Tempora, similique!</p> --}}
             <ul>
-                <li><a href="{{url("/comming-soon")}}">Comming Sooooon</a></li>
+                <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
             </ul>
         </div>
     </div>

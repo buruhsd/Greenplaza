@@ -12,7 +12,7 @@
                         <ul class="accordion-menu">
                             <li class="{{FunctionLib::setActive('member/dashboard')}}">
                                 <a href="{{route('member.dashboard')}}">
-                                    <i class="menu-icon icon-home4"></i><span>Dashboard</span>
+                                    <img src="{{asset('/frontend/images/gi/dashboard.png')}}" style="width: 20px;" alt="alt text" /><span> Dashboard</span>
                                 </a>
                             </li>
                             {{-- @if(Auth::user()->is_verify()) --}}
@@ -20,8 +20,8 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="@yield('sales')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-bar-chart-o"></i>
-                                            <span>Penjualan</span>
+                                        <img src="{{asset('/frontend/images/gi/penjualan.png')}}" style="width: 20px;" alt="alt text" />
+                                            <span> Penjualan</span>
                                         <i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
@@ -57,7 +57,7 @@
                                 {{-- need actived --}}
                                 <li class="@yield('purchase')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-shopping-bag"></i><span>Pembelian</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/pembelian.png')}}" style="width: 20px;" alt="alt text" /><span> Pembelian</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/transaction/purchase')}}">
@@ -97,7 +97,7 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="@yield('get penjual')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon icon-layers"></i><span>Get Penjual</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/getpenjual.png')}}" style="width: 20px;" alt="alt text" /><span> Get Penjual</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/user/sponsor')}} hidden"><a href="{{route('member.user.sponsor')}}">Sponsor</a></li>
@@ -111,7 +111,7 @@
                                 @endif
                                 <li class="@yield('pengaturan profil')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon icon-layers"></i><span>Pengaturan Profil</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/profile.png')}}" style="width: 20px;" alt="alt text" /><span> Pengaturan Profil</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <h4 class="m-l-sm text-danger">Seller</h4>
@@ -137,7 +137,7 @@
                                 {{-- need actived --}}
                                 <li class="@yield('pesan & diskusi')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon icon-layers"></i><span>Pesan & Diskusi</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/chat.png')}}" style="width: 20px;" alt="alt text" /><span> Pesan & Diskusi</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/message')}}"><a href="{{route('member.message.index')}}">Pesan</a></li>
@@ -148,7 +148,7 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="@yield('produk & brand')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon icon-layers"></i><span>Produk</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/produk.png')}}" style="width: 20px;" alt="alt text" /><span> Produk</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/produk/create')}}"><a href="{{route('member.produk.create')}}">Tambah Produk</a></li>
@@ -182,7 +182,7 @@
                                 {{-- need actived --}}
                                 <li class="@yield('pasang iklan')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon icon-layers"></i><span>Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/iklan.png')}}" style="width: 20px;" alt="alt text" /><span> Pasang Iklan</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="{{FunctionLib::setActive('member/iklan/beli_saldo')}}"><a href="{{route('member.iklan.beli_saldo')}}">Beli Saldo Iklan</a></li>
@@ -196,7 +196,7 @@
                                 @if(Auth::user()->seller_active())
                                 <li class="{{FunctionLib::setActive('member/user/set_shipment')}}">
                                     <a href="{{route('member.user.set_shipment')}}">
-                                        <i class="menu-icon icon-layers"></i><span>Atur Kurir</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/kurir.png')}}" style="width: 20px;" alt="alt text" /><span> Atur Kurir</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                 </li>
                                 @endif
@@ -204,7 +204,7 @@
                                 {{-- pembeli --}}
                                 <li class="@yield('log')">
                                     <a href="javascript:void(0)">
-                                        <i class="menu-icon fa fa-shopping-bag"></i><span>Log</span><i class="ion-android-arrow-dropdown-circle right"></i>
+                                        <img src="{{asset('/frontend/images/gi/log.png')}}" style="width: 20px;" alt="alt text" /><span> Log</span><i class="ion-android-arrow-dropdown-circle right"></i>
                                     </a>
                                     <ul class="sub-menu">
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/transaksi')}}"><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li> -->

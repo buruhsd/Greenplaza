@@ -9,7 +9,7 @@
                     <div class="cetagory-wrap home">
                         <span>Semua kategori</span>
                         <ul class="cetagory-items">
-                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(12)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
+                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                             {{-- {{dd($cat)}} --}}
                             @foreach($cat as $item)
                                 <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
@@ -60,26 +60,21 @@
                             ])
                         !!}
                     </div>
-                    <div class="info-wrap">
-                        <div class="row">
-                            <div class="col-sm-6 col-xs-15">
-                                {!!Plugin::view('iklan', [
-                                        'id'=>2,
-                                        'type'=>'1',
-                                        'name'=>'banner1',
-                                    ])
-                                !!}
+
+                    {{-- <div class="featured-area">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-15">
+                                    {!!Plugin::view('iklan', [
+                                            'id'=>2,
+                                            'type'=>'1',
+                                            'name'=>'banner1',
+                                        ])
+                                    !!}
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                {!!Plugin::view('iklan', [
-                                        'id'=>3,
-                                        'type'=>'1',
-                                        'name'=>'banner2',
-                                    ])
-                                !!}
-                            </div>
-                        </div>
-                    </div>
+                        </div>                        
+                    </div> --}}
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 d-none d-lg-block">
                     {{-- @if (\Auth::check())
@@ -109,6 +104,47 @@
     </div>
     <!-- slider-area end -->
     <!-- featured-area start -->
+    <div class="featured-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 d-none d-lg-block">
+                    <div class="featured2-wrap">
+                        <div class="featured-img ">
+                            <table class="table table-bordered">
+                              <tbody>
+                                <tr>
+                                  
+                                  <td><img src="{{asset('/frontend/images/icon/hotel.png')}}" style="width: 30px;" alt="alt text"> Hotel</td>
+                                  <td><img src="{{asset('/frontend/images/icon/game.png')}}" style="width: 30px;" alt="alt text"> Game</td>
+                                  <td><img src="{{asset('/frontend/images/icon/kartukredit.png')}}" style="width: 30px;" alt="alt text"> Payment</td>
+                                </tr>
+                                <tr>
+                                  
+                                  <td><img src="{{asset('/frontend/images/icon/pesawat.png')}}" style="width: 20px;" alt="alt text"> Tiket Pesawat</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pay.png')}}" style="width: 20px;" alt="alt text"> Pembayaran</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pdam.png')}}" style="width: 20px;" alt="alt text"> Air PDAM</td>
+                                </tr>
+                                <tr>
+                                  
+                                  <td><img src="{{asset('/frontend/images/icon/plnprabayar.png')}}" style="width: 20px;" alt="alt text"> Listrik PLN</td>
+                                  <td><img src="{{asset('/frontend/images/icon/tv.png')}}" style="width: 20px;" alt="alt text"> TV Berbayar</td>
+                                  <td><img src="{{asset('/frontend/images/icon/ticket.png')}}" style="width: 20px;" alt="alt text"> Ticket Online</td>
+                                </tr>
+
+                                <tr>
+                                  
+                                  <td><img src="{{asset('/frontend/images/icon/topupsaldo.png')}}" style="width: 20px;" alt="alt text"> TopUp Saldo</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucherfisik.png')}}" style="width: 20px;" alt="alt text"> Voucher</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucheronline.png')}}" style="width: 20px;" alt="alt text"> Voucher Online</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="featured-area">
         <div class="container">
             <div class="row">
