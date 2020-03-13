@@ -110,7 +110,7 @@
                 <div class="col-lg-12 col-md-12 d-none d-lg-block">
                     <div class="featured2-wrap">
                         <div class="featured-img ">
-                            <table class="table table-bordered">
+                            <table class="table table-borderless">
                               <tbody>
                                 <tr>
                                   

@@ -54,6 +54,10 @@
         background: url("{{asset('loader/loader-128x/gi120.png')}}") center no-repeat #fff;
     }
 
+    .borderless td, .borderless th {
+    border-top: #fff;
+}
+
     .cetagory-wrap span {
     text-transform: uppercase;
     font-size: 12px;
