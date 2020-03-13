@@ -58,6 +58,8 @@
     border-top: #fff;
 }
 
+.table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #fff}
+
     .cetagory-wrap span {
     text-transform: uppercase;
     font-size: 12px;
