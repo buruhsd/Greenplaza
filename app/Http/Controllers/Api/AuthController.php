@@ -44,7 +44,7 @@ class AuthController extends Controller
         $response = json_decode($resp, true);
         curl_close($curl);
         if($response['success']) {
-            $user = User::where('username', $request->username)->limit(1)->get();
+            $user = User::where('username', $request->username)->with('user_detail')->limit(1)->get();
             if(json_decode($user)){
             $data = json_decode($user[0]);
                 return response()->json([
