@@ -876,6 +876,7 @@
         font-size: 11px;
         padding: 10px 8px;
     }
+
     .header-tor-area p {
         font-size: 13px;
     }
@@ -1016,5 +1017,11 @@
 
 
 
+}
+
+@media only screen and (min-width: 768px) {
+    .featured-area3 {
+        margin-top: -70px;
+    } 
 }
 

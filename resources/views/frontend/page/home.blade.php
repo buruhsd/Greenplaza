@@ -145,7 +145,7 @@
             </div>
         </div>
     </div>
-    <div class="featured-area">
+    <div class="featured-area3">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 d-none d-lg-block">

@@ -1,0 +1,11 @@
+@media only screen and (max-width: 690px) {
+    .featured-area3 {
+        margin-top: -170px;
+    } 
+}
+
+@media only screen and (min-width: 700px) {
+    .featured-area3 {
+        margin-top: 0px;
+    } 
+}

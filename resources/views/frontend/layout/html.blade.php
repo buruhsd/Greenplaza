@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <!-- style css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style-responsive.css') }}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     {{-- added by fahmi --}}
@@ -72,17 +73,18 @@
     color: #121212;
 }
 
+
     .featured-wrap {
     padding: 10px;
     background: #fff;
     margin-bottom: 0px;
-    margin-top: -30px;
+    margin-top: 0px;
     }
 
     .featured2-wrap {
     padding: 10px;
     background: #fff;
-    margin-bottom: 0px;
+    margin-bottom: 60px;
     margin-top: -170px;
     }
 
