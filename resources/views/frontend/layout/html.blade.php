@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     {{-- added by fahmi --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style-new.css') }}">
     <link rel="stylesheet" href="{{ asset('css/popover-style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.8/font-awesome-animation.min.css">
 

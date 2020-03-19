@@ -1,0 +1,21 @@
+.button-style {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.line-detail {
+  border-top: 1px solid #E5E7E9; 
+  padding: 15px 0;
+}
+
+.rating-wrap-detail {
+    margin-bottom: 0px;
+}

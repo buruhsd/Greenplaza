@@ -307,6 +307,18 @@ class Plugin
         return view('frontend.plugin.side-left', $data);
     }
 
+    public static function p_terkait($param=[]){
+        extract($param);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $id = (isset($id))?$id:0;
+        $data['side_cat'] = FunctionLib::category_by_parent($id)->limit(6)->get();
+        $data['side_related'] = FunctionLib::produk_by('category', $id)->orderBy('created_at', 'DESC')->limit(5)->get();
+        return view('frontend.plugin.home.p_terkait', $data);
+    }
+
 
     /**
     * untuk menampilkan iklan front
