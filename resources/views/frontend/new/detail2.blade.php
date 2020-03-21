@@ -857,7 +857,7 @@
             <br>
             <div class="text-center">
                <div class="text-center">
-                  <img class="dark-logo" src="{{ asset('assets/images/logo_fix_2.png') }}" alt="" width="120px" height="40px">
+                  <img class="dark-logo" src="{{ asset('assets/images/gi_logo.png') }}" alt="" width="120px" height="40px">
                </div>
                <br>
             </div>

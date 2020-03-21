@@ -696,7 +696,7 @@ Route::get('/detail_asdf/{slug}', 'Member\\FrontController@detail_asdf')->name('
 Route::get('/etalase/{user_store}', 'Member\\FrontController@etalase')->name('etalase');
 Route::get('/category', 'Member\\FrontController@category')->name('category');
 Route::get('/brand', 'Member\\FrontController@brand')->name('brand');
-Route::get('/product_admin_asdf', 'Member\\FrontController@product_admin_asdf')->name('product_admin_asdf');
+Route::get('/giplaza_product', 'Member\\FrontController@product_admin_asdf')->name('product_admin_asdf');
 
 // semua auth
 Route::group(['middleware' => ['auth']], function () {

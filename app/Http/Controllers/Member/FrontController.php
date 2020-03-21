@@ -257,7 +257,7 @@ class FrontController extends Controller
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
-        return view('frontend.asdf_adminProduct', $data, compact('asdf_adminProduct'));
+        return view('frontend.asdf_adminProduct', $data, compact('category'));
     }
 
     /**
