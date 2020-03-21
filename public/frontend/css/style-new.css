@@ -81,10 +81,28 @@
 
 }
 
+.style-cost-item-front {
+
+  margin: 0;
+  color: #3dcfe4;
+  line-height: 30px;
+  font-size: 20px;
+  font-weight: 700;
+
+}
+
 .style-cost-discount-item {
   color: #999;
   line-height: 1.4;
   font-size: 16px;
+  font-weight: 700;
+
+}
+
+.style-cost-discount-item-front {
+  color: #999;
+  line-height: 1.4;
+  font-size: 13px;
   font-weight: 700;
 
 }
