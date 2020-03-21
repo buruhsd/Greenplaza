@@ -163,6 +163,23 @@
         padding-bottom: 25px;
         position: absolute;
     }
+
+    .style-cost-item-front {
+
+      margin: 0;
+      color: #3dcfe4;
+      line-height: 30px;
+      font-size: 20px;
+      font-weight: 700;
+
+    }
+    .style-cost-discount-item-front {
+      color: #999;
+      line-height: 1.4;
+      font-size: 13px;
+      font-weight: 700;
+
+    }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
