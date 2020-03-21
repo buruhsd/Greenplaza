@@ -199,6 +199,7 @@ class FrontController extends Controller
             ->where('shipment_parent_id', 0)
             ->get();
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->get();
         $data['review'] = $data['detail']->review()
             ->orderBy('updated_at', 'DESC')

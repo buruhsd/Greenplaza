@@ -76,7 +76,7 @@
                             @endif
                         <div class="tombol-product2">
                             @if($n->user->seller_active())
-                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                            <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">{{$n->user->user_store}}</button></a></center>
                             @endif
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                             @endif
                     <div class="tombol-product">
                         @if($n->user->seller_active())
-                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">Toko {{$n->user->user_store}}</button></a></center>
+                        <center><a class="readmore" href="{{route('etalase', $n->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">{{$n->user->user_store}}</button></a></center>
                         @endif
                     </div>
                     
