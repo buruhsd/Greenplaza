@@ -33,7 +33,7 @@
                         $notif = FunctionLib::user_notif(Auth::id(), 10);
                         ?>
                      <a href="#" id="member" onclick="drop()" class="dropbtn">
-                     <i class="fa fa-bell animated"></i>
+                     <img src="{{asset('/frontend/images/gi/lonceng.png')}}" style="width: 25px;" alt="alt text" />
                      <small class="text-danger {!!($notif->count())?'':'hide'!!}">
                      <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
                      </small>
@@ -67,7 +67,7 @@
                   </li>
                   @endguest
                   <li>
-                     <a href="{{route('chart')}}"><i class="fa fa-shopping-cart"></i>
+                     <a href="{{route('chart')}}"><img src="{{asset('/frontend/images/gi/cartgi.png')}}" style="width: 25px;" alt="alt text" />
                      @if(Session::has('chart') && count(Session::get('chart')) > 0)
                         
                         {{-- <span>
@@ -81,10 +81,22 @@
                      @endif
                      </a>
                   </li>
-                  <li><a href="{{route('member.wishlist')}}"><i class="fa fa-heart"></i></a></li>
+                  {{-- <li><a href="{{route('member.wishlist')}}"><i class="fa fa-heart"></i></a></li> --}}
+                  <li class="sidemenu-items">
+                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
+                     <ul>
+                        <li><a href="{{route('chart')}}">Keranjang</a></li>
+                        @guest
+                        @else
+                        <li><a href="{{route('checkout')}}">Checkout</a></li>
+                        <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
+                        @endguest
+                        <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
+                     </ul>
+                  </li>
                   @guest
-                  <li><a href="javascript:void(0)" onClick="showLoginModal()">login</a></li>
-                  <li><a href="https://gicommunity.org/register">Register</a></li>
+                  <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">login</a></li>
+                  <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">Register</a></li>
                   @else
                   <li class="sidemenu-items">
                      <a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
@@ -113,19 +125,6 @@
                         </li>
                      </ul>
                      @endguest
-                  <li></li>
-                  <li class="sidemenu-items">
-                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
-                     <ul>
-                        <li><a href="{{route('chart')}}">Keranjang</a></li>
-                        @guest
-                        @else
-                        <li><a href="{{route('checkout')}}">Checkout</a></li>
-                        <li><a href="{{route('member.wishlist')}}">Wishlist</a></li>
-                        @endguest
-                        <li><a href="{{route('product_admin_asdf')}}">Green Production</a></li>
-                     </ul>
-                  </li>
                </ul>
             </div>
             <div class="responsive-menu-tigger d-block d-md-none">

@@ -145,7 +145,7 @@
                             
                                 <div class="product-single-content">
                                   <div class="line-detail">
-                                    <h3>{{ucfirst(strtolower($detail->produk_name))}}</h3>
+                                    <h3 class="name-detail">{{ucfirst(strtolower($detail->produk_name))}}</h3>
                                     <ul>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
@@ -162,11 +162,11 @@
                                           
                                       @if ($detail->produk_discount != 0)
                                               <p>
-                                                  <del>Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>
+                                                  <del class="style-cost-discount-item">Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</del><span> </span>
                                                   <span class="pull-right" style="color:red">{{number_format($detail->produk_discount)}} %</span><br>
-                                                  <span>Rp.{{FunctionLib::number_to_text($detail->produk_price-($detail->produk_price * $detail->produk_discount / 100))}}</span><br>
-                                                  <span>MYR.{{FunctionLib::number_to_text($detail->price_myr - ( $detail->price_myr * $detail->produk_discount/ 100) ) }} <br> </span><br>
-                                                  <span>GLN.{{FunctionLib::number_to_text( ($detail->produk_price - ( $detail->produk_price * $detail->produk_discount/ 100) )/$price_gln ) }} <br> </span>
+                                                  <span class="style-cost-item">Rp.{{FunctionLib::number_to_text($detail->produk_price-($detail->produk_price * $detail->produk_discount / 100))}}</span><br>
+                                                  <span class="style-cost-discount-item">MYR.{{FunctionLib::number_to_text($detail->price_myr - ( $detail->price_myr * $detail->produk_discount/ 100) ) }} <br> </span><br>
+                                                  <span class="style-cost-discount-item">GLN.{{FunctionLib::number_to_text( ($detail->produk_price - ( $detail->produk_price * $detail->produk_discount/ 100) )/$price_gln ) }} <br> </span>
                                                   {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                                       data-content="
                                                       Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
@@ -176,9 +176,9 @@
                                               </p>
                                       @else
                                               <p>
-                                                  <span>Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</span><br>
-                                                  <span>MYR.{{FunctionLib::number_to_text($detail->price_myr, 2)}}</span><br>
-                                                  <span>GLN.{{FunctionLib::number_to_text($detail->gln_coin, 2)}}</span><br>
+                                                  <span class="style-cost-item">Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</span><br>
+                                                  <span class="style-cost-discount-item">MYR.{{FunctionLib::number_to_text($detail->price_myr, 2)}}</span><br>
+                                                  <span class="style-cost-discount-item">GLN.{{FunctionLib::number_to_text($detail->gln_coin, 2)}}</span><br>
                                                   {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                                       data-content="
                                                       Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
@@ -190,8 +190,8 @@
                                       </div>
                                       <div class="col-lg-6  col-md-6 col-12">
                                         <ul class="stock">
-                                          <li>Shop : </li>
-                                          <li>
+                                          <li><img src="{{asset('/frontend/images/gi/shop.png')}}" style="width: 18px;" alt="alt text" /> </li>
+                                          <li class="p-style">
                                                   @if($detail->user->seller_active())
                                                     
                                                       <a href="{{route('etalase', $detail->user->user_slug)}}">
@@ -201,11 +201,12 @@
                                                   @endif
                                           </li>
                                         </ul>
-                                        <ul class="stock">
+                                        <ul class="stock p-style">
                                           <li>Stok : </li>
                                           <li>{{$detail->produk_stock}} {{$detail->unit->produk_unit_name}}</li>
-                                        </ul>                                        
-                                        <ul class="cetagory">
+                                        </ul>
+                                        <br>
+                                        <ul class="cetagory p-style">
                                             <li>Categories:</li>
                                             <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
                                         </ul>
@@ -216,10 +217,10 @@
                                     {!! Form::open(['url' => route('addchart', $detail->id), 'method' => 'POST', 'id' => 'form-shipment']) !!}
                                     @csrf
                                     @guest
-                                        <div class="col-md-12">
+                                        <div>
                                             <center>
-                                                <div class="col-12">
-                                                    <input type="button" onClick="showLoginModal()" value="Login" class="btn btn-info btn-sm col-12" />
+                                                <div>
+                                                    <input type="button" onClick="showLoginModal()" value="Login" class="btn btn-sm col-12 button-style" />
                                                 </div>
                                             </center>
                                         </div>
@@ -239,9 +240,11 @@
                                             <input type="text" name="qty" value="1" id="qty" />
                                         </li>
                                     </ul>
-                                    <div class="input-style">
-                                        <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} value="Add to Wishlist" class="btn btn-info btn-sm btn-block button-style" />
-                                    </div>
+                                        
+                                          <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} class="p-wishlist" ><img src="{{asset('/frontend/images/gi/maildetail.png')}}" style="width: 18px;" alt="alt text" /><b> Add To Wishlist</b> </a>
+                                        
+                                    
+                                    
                                   
                                     <!-- color and size -->
                                     <?php $size = explode(',', $detail->produk_size);?>
@@ -262,8 +265,8 @@
                                             ];
                                         $color = explode(',', $detail->produk_color);
                                     ?>
-                                    <div class="color-plate {{ $errors->has('color') ? 'has-error' : ''}} line-detail">
-                                        {!! Form::label('color', 'Color : ', ['class' => ' control-label']) !!}
+                                    <div class=" {{ $errors->has('color') ? 'has-error' : ''}} line-detail">
+                                        {!! Form::label('color', 'Color : ', ['class' => ' control-label p-item-detail']) !!}
                                         <div {{-- class="col-md-12" --}}>
                                             <div class="" data-toggle="buttons">
                                                 @foreach($color as $item)
@@ -282,8 +285,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="product-size {{ $errors->has('size') ? 'has-error' : ''}} line-detail">
-                                        {!! Form::label('size', 'Size : ', ['class' => ' control-label']) !!}
+                                    <div class="{{ $errors->has('size') ? 'has-error' : ''}} line-detail">
+                                        {!! Form::label('size', 'Size : ', ['class' => ' control-label p-item-detail']) !!}
                                         <div {{-- class="col-md-12" --}}>
                                             <div class="" data-toggle="buttons">
                                                 @foreach($size as $item)
@@ -315,7 +318,7 @@
                                           </div>
                                           <div style="margin-bottom: 2%">
                                               <center>
-                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn btn-success btn-sm col-12" id="btn-pick-address" />
+                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn button-detail-style btn-sm col-12" id="btn-pick-address" />
                                               </center>
                                           </div>
                                         </div>
@@ -337,13 +340,13 @@
                                               </div>
                                               <div style="margin-bottom: 2%">
                                                   <center>
-                                                      <input type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn btn-success btn-sm col-12" value="Service Courier" id="btn-choose-shipment" />
+                                                      <button type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn button-detail-style btn-sm col-12" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Service Courier </button>
                                                   </center>
                                               </div>
                                           @else
                                               <div style="margin-bottom: 2%">
                                                   <center>
-                                                      <input type="button" href="#" class="btn btn-danger" id="btn-choose-shipment" value="Service Courier not avalaible" />
+                                                      <button type="button" href="#" class="btn btn-danger" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Service Courier Not Avalaible </button>
                                                   </center>
                                               </div>
                                           @endif
@@ -351,7 +354,7 @@
                                     </div>
 
                                     <div style="margin-bottom: 2%;" class="line-detail">
-                                        <input type="button" onclick="$('#form-shipment').submit();" value="Add to cart" class="btn btn-danger btn-sm btn-block button-style" />
+                                        <button type="button" onclick="$('#form-shipment').submit();" class="btn btn-sm btn-block button-style"><b> Add To Chart </b></button>
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
