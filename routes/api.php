@@ -12,12 +12,15 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+// untuk mobile
+Route::post('cancel', 'Api\\ApiController@cancel');
+Route::post('sending', 'Api\\ApiController@sending');
 Route::post('done_gln/{id}', 'Api\\ApiController@done_gln');
 Route::post('gln', 'Api\\ApiController@gln');
 Route::post('konfirmasi/{id}', 'Api\\ApiController@konfirmasi');
 Route::post('save_checkout', 'Api\\ApiController@saveCheckout');
 Route::post('login', 'Api\\ApiController@doLogin');
+
 Route::post('update_profil', 'Api\\ApiController@update_profil');
 Route::post('get_trans_detail/{id}', 'Api\\ApiController@detail_transaksi');
 Route::post('get_detail_produk/{id}', 'Api\\ApiController@detail_produk');

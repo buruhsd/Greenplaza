@@ -25,11 +25,11 @@ class ApiController extends Controller
 
     /**
      * #seller status 4
-     * process sudah dikirim oleh seller wait dropping
+     * process di cancell oleh seller
      * @param
      * @return
      */
-    public function sending(Request $request){
+    public function cancel(Request $request){
         $requestData = $request->all();
         $status = 200;
         $message = 'barang siap dikirim!';
@@ -37,75 +37,89 @@ class ApiController extends Controller
         if(!empty($request->detail_id)){            
             foreach ($requestData['detail_id'] as $item) {
                 $trans_detail = Trans_detail::findOrFail($item);
-                // to shipping true
-                if($trans_detail->trans_detail_status == 4){
-                    $trans_detail->trans_detail_packing_date = $date;
-                    if($request->has('note')){
-                        $trans_detail->trans_detail_is_cancel = 1;
-                        $trans_detail->trans_detail_status = 4;
-                        $trans_detail->trans_detail_packing = 2;
-                        $trans_detail->trans_detail_packing_note = "Transaction be Cancel by seller";
-                        $trans_detail->trans_detail_note = $request->note;
-                        $message = 'Shipment cancelled!';
-
-                        // update saldo transaksi
-                        if($trans_detail->trans->trans_payment_id !== 4){
-                            $update_wallet = [
-                                'user_id'=>$trans_detail->trans->trans_user_id,
-                                'wallet_type'=>3,
-                                'amount'=>$trans_detail->trans_detail_amount_total,
-                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-                            ];
-                            $saldo = FunctionLib::update_wallet($update_wallet);
-                            $update_wallet = [
-                                'user_id'=>2,
-                                'wallet_type'=>1,
-                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
-                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-                            ];
-                            $saldo = FunctionLib::update_wallet($update_wallet);
-                        }
-                    }else{
-                        $trans_detail->trans_detail_status = 5;
-                        $trans_detail->trans_detail_packing = 1;
-                        $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
-                        $trans_detail->trans_detail_send = 0;
-                        $trans_detail->trans_detail_send_date = $date;
-                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
-                    }
-                }elseif($trans_detail->trans_detail_status == 5){
-                    $trans_detail->trans_detail_status = 5;
-                    $trans_detail->trans_detail_send_date = $date;
-                    if($request->has('note')){
-                        $trans_detail->trans_detail_is_cancel = 1;
-                        $trans_detail->trans_detail_send = 2;
-                        $trans_detail->trans_detail_send_note = "Transaction be Cancel by seller";
-                        $trans_detail->trans_detail_note = $request->note;
-                        $message = 'Shipment cancelled!';
-
-                        // update saldo transaksi
-                        if($trans_detail->trans->trans_payment_id !== 4){
-                            $update_wallet = [
-                                'user_id'=>$trans_detail->trans->trans_user_id,
-                                'wallet_type'=>3,
-                                'amount'=>$trans_detail->trans_detail_amount_total,
-                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-                            ];
-                            $saldo = FunctionLib::update_wallet($update_wallet);
-                            $update_wallet = [
-                                'user_id'=>2,
-                                'wallet_type'=>1,
-                                'amount'=>($trans_detail->trans_detail_amount_total * -1),
-                                'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
-                            ];
-                            $saldo = FunctionLib::update_wallet($update_wallet);
-                        }
-                    }else{
-                        $trans_detail->trans_detail_send = 0;
-                        $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
-                    }
+                // cancel awal
+                $trans_detail->trans_detail_is_cancel = 1;
+                $trans_detail->trans_detail_status = 3;
+                $trans_detail->trans_detail_able = 2;
+                $trans_detail->trans_detail_able_date = $date;
+                $trans_detail->trans_detail_able_note = 'Transaksi dibatalkan oleh seller.';
+                $trans_detail->trans_detail_note = 'Transaksi Dibatalkan oleh seller.';
+                // update saldo transaksi
+                if($trans_detail->trans->trans_payment_id !== 4){
+                    $update_wallet = [
+                        'user_id'=>$trans_detail->trans->trans_user_id,
+                        'wallet_type'=>3,
+                        'amount'=>$trans_detail->trans_detail_amount_total,
+                        'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                    ];
+                    $saldo = FunctionLib::update_wallet($update_wallet);
+                    $update_wallet = [
+                        'user_id'=>2,
+                        'wallet_type'=>1,
+                        'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                        'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                    ];
+                    $saldo = FunctionLib::update_wallet($update_wallet);
                 }
                 $trans_detail->save();
+                $trans_detail->produk->produk_stock = $item->produk->produk_stock + $item->trans_detail_qty;
+                $trans_detail->produk->save();
+
+                // to shipping true
+                // if($trans_detail->trans_detail_status == 4){
+                //     $trans_detail->trans_detail_packing_date = $date;
+                //     $trans_detail->trans_detail_is_cancel = 1;
+                //     $trans_detail->trans_detail_status = 4;
+                //     $trans_detail->trans_detail_packing = 2;
+                //     $trans_detail->trans_detail_packing_note = "Transaction be Cancel by seller";
+                //     $trans_detail->trans_detail_note = $request->note;
+                //     $message = 'Shipment cancelled!';
+
+                //     // update saldo transaksi
+                //     if($trans_detail->trans->trans_payment_id !== 4){
+                //         $update_wallet = [
+                //             'user_id'=>$trans_detail->trans->trans_user_id,
+                //             'wallet_type'=>3,
+                //             'amount'=>$trans_detail->trans_detail_amount_total,
+                //             'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                //         ];
+                //         $saldo = FunctionLib::update_wallet($update_wallet);
+                //         $update_wallet = [
+                //             'user_id'=>2,
+                //             'wallet_type'=>1,
+                //             'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                //             'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                //         ];
+                //         $saldo = FunctionLib::update_wallet($update_wallet);
+                //     }
+                // }elseif($trans_detail->trans_detail_status == 5){
+                //     $trans_detail->trans_detail_status = 5;
+                //     $trans_detail->trans_detail_send_date = $date;
+                //     $trans_detail->trans_detail_is_cancel = 1;
+                //     $trans_detail->trans_detail_send = 2;
+                //     $trans_detail->trans_detail_send_note = "Transaction be Cancel by seller";
+                //     $trans_detail->trans_detail_note = $request->note;
+                //     $message = 'Shipment cancelled!';
+
+                //     // update saldo transaksi
+                //     if($trans_detail->trans->trans_payment_id !== 4){
+                //         $update_wallet = [
+                //             'user_id'=>$trans_detail->trans->trans_user_id,
+                //             'wallet_type'=>3,
+                //             'amount'=>$trans_detail->trans_detail_amount_total,
+                //             'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                //         ];
+                //         $saldo = FunctionLib::update_wallet($update_wallet);
+                //         $update_wallet = [
+                //             'user_id'=>2,
+                //             'wallet_type'=>1,
+                //             'amount'=>($trans_detail->trans_detail_amount_total * -1),
+                //             'note'=>'Transaksi cancel by seller '.Auth::id().'. Update wallet transaksi dengan transaksi detail kode '.$trans_detail->trans_code.' dan transaksi kode '.$trans_detail->trans->trans_code.'.',
+                //         ];
+                //         $saldo = FunctionLib::update_wallet($update_wallet);
+                //     }
+                // }
+                // $trans_detail->save();
             }
         }
         if(!isset($trans_detail) || !$trans_detail){
@@ -125,53 +139,47 @@ class ApiController extends Controller
 
     /**
      * #seller status 4
-     * process sudah packing oleh seller pindah ke wait shipping
+     * process sudah dikirim oleh seller wait dropping
      * @param
      * @return
      */
-    public function packing($id){
+    public function sending(Request $request){
+        $requestData = $request->all();
         $status = 200;
-        $message = 'Packing Selesai!';
-        $trans = Trans::findOrFail($id);
-        foreach ($trans->trans_detail as $item) {
-            $trans_detail = Trans_detail::findOrFail($item->id);
-            // to shipping false
-            $trans_detail->trans_detail_packing = 1;
-            $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
-            $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
-            $trans_detail->trans_detail_send_date = date('y-m-d h:i:s');
-            $trans_detail->save();
+        $message = 'barang siap dikirim!';
+        $date = date('y-m-d h:i:s');
+        if(!empty($request->detail_id)){            
+            foreach ($requestData['detail_id'] as $item) {
+                $trans_detail = Trans_detail::findOrFail($item);
+                // to shipping true
+                $trans_detail->trans_detail_status = 5;
+                // kirim
+                $trans_detail->trans_detail_send = 0;//menunggu nomor resi
+                $trans_detail->trans_detail_send_date = $date;
+                $trans_detail->trans_detail_send_note = "Transaction be sending by seller";
+                // packing
+                $trans_detail->trans_detail_packing_date = $date;
+                $trans_detail->trans_detail_packing = 1;
+                $trans_detail->trans_detail_packing_note = "Transaction be packing by seller";
+                // kesanggupan seller
+                $trans_detail->trans_detail_able = 1;
+                $trans_detail->trans_detail_able_date = date('y-m-d h:i:s');
+                $trans_detail->trans_detail_able_note = "Transaction be able by seller";
+                $trans_detail->trans_detail_packing_date = date('y-m-d h:i:s');
+                $trans_detail->save();
+            }
         }
-        if(!$trans_detail){
+        if(!isset($trans_detail) || !$trans_detail){
             $status = 500;
-            $message = 'Gagal merubah data!';
-        }else{
-            // send email
-            $send_status = FunctionLib::trans_arr($trans_detail->trans_detail_status);
-            $config = [
-                'to' => $trans->pembeli->email,
-                'data' => [
-                    'trans_code' => $trans->trans_code,
-                    'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $send_status,
-                ]
-            ];
-            $send_notif = FunctionLib::transaction_notif($config);
-            if(isset($send_notif['status']) && $send_notif['status'] == 200){
-                $message .= ' ,'.$send_notif['message'];
-            }
-            $config = [
-                'to' => $trans->trans_detail->first()->produk->user->email,
-                'data' => [
-                    'trans_code' => $trans->trans_code,
-                    'trans_amount_total' => $trans->trans_amount_total,
-                    'status' => $send_status,
-                ]
-            ];
-            $send_notif = FunctionLib::transaction_notif($config);
-            if(isset($send_notif['status']) && $send_notif['status'] == 200){
-                $message .= ' ,'.$send_notif['message'];
-            }
+            $message = 'Shipment unapproved!';
+        }
+        if(empty($request->detail_id)){
+            $status = 500;
+            $message = 'Shipment unapproved!';
+            return response()->json(['status' => $status,'message' => $message]);
+        }
+        if(!$request->has('note')){
+            return response()->json(['status' => $status,'message' => $message]);
         }
         return response()->json(['status' => $status,'message' => $message]);
     }
