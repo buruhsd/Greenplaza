@@ -119,6 +119,10 @@ class FrontController extends Controller
     */
     public function category(Request $request)
     {
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $perPage = 12;
         $order = "rand()";
         $id_cat = 0;
@@ -208,6 +212,10 @@ class FrontController extends Controller
     }
      public function product_admin_asdf(Request $request)
     {
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $users = User::with('roles')->where('name','=','admin')->pluck('id')->first();
         $perPage = 12;
         $order = "rand()";

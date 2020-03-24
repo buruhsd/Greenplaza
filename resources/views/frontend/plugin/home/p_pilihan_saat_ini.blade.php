@@ -43,7 +43,7 @@
                 @endif
             </ul>
             @if ($f->produk_discount != 0)
-                    <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</del><span> </span>
+                    <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($f->produk_price, 0)}}</del><span> </span>
                     <span class="pull-right" style="color:red">{{number_format($f->produk_discount)}} %</span><br>
                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($f->produk_price-($f->produk_price * $f->produk_discount / 100))}}</span><br>
                     <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($f->price_myr - ( $f->price_myr * $f->produk_discount/ 100) ) }} </span><br>
@@ -57,7 +57,7 @@
                 </p>
             @else
                 <p>
-                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($f->produk_price, 2)}}</span><br>
+                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($f->produk_price, 0)}}</span><br>
                     <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($f->price_myr, 2)}}</span><br>
                     <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($f->gln_coin, 2)}}</span><br>
                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
@@ -71,7 +71,7 @@
 
             <div class="tombol-product">
             @if($f->user->seller_active())
-            <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">{{$f->user->user_store}}</button></a></center>
+            <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12"0{{$f->user->user_store}}</button></a></center>
             @endif
             </div>
         </div>

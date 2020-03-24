@@ -18,7 +18,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="shop-area">
-                      
+                        <hr/>
+                        <ul class="tab-menu nav jabar">
+                            <div class="col-12">
+                                <h4 style="padding: 10px">Giplaza Production</h4>
+                            </div> 
+                        </ul>                                                   
+                        <hr/>  
                         <div class="row mb-30">
                             <div class="col-lg-3 col-sm-4 col-12">
                             {!! Form::open([
@@ -62,7 +68,7 @@
                                     </div>
                                 @else
                                 @foreach($produk as $item)
-                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
+                                    <div class="col-lg-3 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 @if ($item->produk_stock == 0)
@@ -88,18 +94,25 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content tambahan">
+                                            <div class="product-content">
                                                 <h3><a href="{{route('detail', $item->produk_slug)}}">{{str_limit($item->produk_name, 10)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
                                                 </h3>
                                                 @if($item->produk_discount > 0)
                                                     <p>
-                                                        <del>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</del><span class="pull-right" style="color:red">{{number_format($item->produk_discount)}}%</span><br>
-                                                        <span> Rp.{{FunctionLib::number_to_text($item->produk_price - ($item->produk_price * $item->produk_discount / 100))}}</span>
+                                                        <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($item->produk_price, 0)}}</del><span> </span>
+                                                        <span class="pull-right" style="color:red">{{number_format($item->produk_discount)}} %</span><br>
+                                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($item->produk_price-($item->produk_price * $item->produk_discount / 100))}}</span><br>
+                                                        <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($item->price_myr - ( $item->price_myr * $item->produk_discount/ 100) ) }} </span><br>
+                                                        <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text( ($item->produk_price - ( $item->produk_price * $item->produk_discount/ 100) )/$price_gln ) }} </span>
                                                     </p>
                                                 @else
-                                                    <p><span>Rp. {{FunctionLib::number_to_text($item->produk_price)}}</span></p>
+                                                    <p>
+                                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($item->produk_price, 0)}}</span><br>
+                                                        <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($item->price_MYR, 2)}}</span><br>
+                                                        <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($item->gln_coin ) }} <br> </span>
+                                                    </p>
                                                 @endif
                                                 {{-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>

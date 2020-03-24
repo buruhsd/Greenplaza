@@ -169,7 +169,7 @@
       margin: 0;
       color: #3dcfe4;
       line-height: 30px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 700;
 
     }
@@ -178,6 +178,12 @@
       line-height: 1.4;
       font-size: 13px;
       font-weight: 700;
+
+    }
+
+    .add-btn {
+      padding-bottom: 40px;
+      width: 80%;
 
     }
     </style>
