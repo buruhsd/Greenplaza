@@ -176,8 +176,8 @@
                                               </p>
                                       @else
                                               <p>
-                                                  <span class="style-cost-item">Rp.{{FunctionLib::number_to_text($detail->produk_price, 2)}}</span><br>
-                                                  <span class="style-cost-discount-item">MYR.{{FunctionLib::number_to_text($detail->price_myr, 2)}}</span><br>
+                                                  <span class="style-cost-item">Rp.{{FunctionLib::number_to_text($detail->produk_price, 0)}}</span><br>
+                                                  <span class="style-cost-discount-item">MYR.{{FunctionLib::number_to_text($detail->price_myr, 0)}}</span><br>
                                                   <span class="style-cost-discount-item">GLN.{{FunctionLib::number_to_text($detail->gln_coin, 2)}}</span><br>
                                                   {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                                       data-content="

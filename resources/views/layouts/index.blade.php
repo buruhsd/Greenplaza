@@ -26,6 +26,8 @@
     @include('layouts.script')
     {!! (isset($footer_script))? $footer_script:'' !!}
     <!-- script -->
+    @yield('script')
+    
 </body>
 
 </html>

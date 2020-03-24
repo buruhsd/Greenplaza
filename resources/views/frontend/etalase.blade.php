@@ -158,7 +158,7 @@
                             <div class="tab-pane active" id="grid">
                                 <div class="row">
                                         @foreach ($produk as $p)
-                                    <div class="col-lg-3 col-md-4 col-sm-6  col-12">
+                                    <div class="col-lg-2 col-md-4 col-sm-6  col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                 @if ($p->produk_stock == 0)
@@ -209,7 +209,7 @@
                                             @else
                                                 <p>
                                                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</span><br>
-                                                    <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($p->price_MYR, 2)}}</span><br>
+                                                    <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($p->price_MYR, 0)}}</span><br>
                                                     <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($p->gln_coin ) }} <br> </span>
 
                                                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
@@ -296,7 +296,7 @@
                                                             @else
                                                                 <p>
                                                                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</span><br>
-                                                                    <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($p->price_MYR, 2)}}</span><br>
+                                                                    <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($p->price_MYR, 0)}}</span><br>
                                                                     <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($p->gln_coin ) }} <br> </span>
                                                                     {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                                                         data-content="
@@ -335,7 +335,7 @@
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
 @section('script')
-<script>
+<script type="text/javascript">
     $("#initialIdSelectorMouseMove1" ).hover(
         function() {
          $(".pop-sending span").popover({

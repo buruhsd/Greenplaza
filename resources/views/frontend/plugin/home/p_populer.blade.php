@@ -59,12 +59,12 @@
                 </ul>
                 @if ($r->produk_discount != 0)
                 <p>
-                    <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($r->produk_price, 2)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($r->produk_discount)}} %</span><br>
+                    <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($r->produk_price, 0)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($r->produk_discount)}} %</span><br>
                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($r->produk_price-($r->produk_price * $r->produk_discount / 100))}}</span>
                 </p>
                 @else
                 <p>
-                    <span class="style-cost-item-front">Rp.{{number_format($r->produk_price, 2)}}</span>
+                    <span class="style-cost-item-front">Rp.{{number_format($r->produk_price, 0)}}</span>
                 </p>
                 @endif
             </div>

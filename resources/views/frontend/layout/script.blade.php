@@ -38,6 +38,26 @@
     @endif
 
     <script type="text/javascript">
+        $("#initialIdSelectorMouseMove1" ).hover(
+            function() {
+             $(".pop-sending span").popover({
+                 placement : 'right',
+                 html : true,
+             });
+             $(".pop-target span").popover('show');
+             }, 
+            function() {
+             $(".pop-target span").popover('hide');
+            }
+        );
+
+        function showPopover(id){
+            $(".popo").popover('hide');
+            $("#pop"+id).popover('show');
+            setTimeout(function(){ 
+                $(".popo").popover('hide');
+            }, 3000);
+        }
         // var slideIndex = 1;
         // showDivs(slideIndex);
 

@@ -68,7 +68,7 @@
     font-weight: 500;
     display: block;
     text-align: center;
-    padding: 26px 0px;
+    padding: 15px 0px;
     border-top: none;
     border-bottom: none;
     color: #121212;
@@ -169,7 +169,7 @@
       margin: 0;
       color: #3dcfe4;
       line-height: 30px;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 700;
 
     }
@@ -177,7 +177,7 @@
       color: #999;
       line-height: 1.4;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 500;
 
     }
 

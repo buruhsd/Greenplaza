@@ -78,7 +78,7 @@
                         @else
                             <p>
                                 <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price, 0)}}</span><br>
-                                <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_MYR, 2)}}</span><br>
+                                <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_MYR, 0)}}</span><br>
                                 <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($n->gln_coin ) }} <br> </span>
                                 {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
                                     data-content="
@@ -127,26 +127,3 @@
         </div>
     </div>
 </div>
-<script>
-    $("#initialIdSelectorMouseMove1" ).hover(
-        function() {
-         $(".pop-sending span").popover({
-             placement : 'right',
-             html : true,
-         });
-         $(".pop-target span").popover('show');
-         }, 
-        function() {
-         $(".pop-target span").popover('hide');
-        }
-    );
-
-    function showPopover(id){
-        $(".popo").popover('hide');
-        $("#pop"+id).popover('show');
-        setTimeout(function(){ 
-            $(".popo").popover('hide');
-        }, 3000);
-    }
-
-</script>
