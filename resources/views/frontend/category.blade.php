@@ -85,7 +85,7 @@
                                     </div>
                                 @else
                                 @foreach($produk as $item)
-                                    <div class="col-lg-3 col-md-4 col-sm-6  col-12">
+                                    <div class="col-lg-2 col-md-4 col-sm-6 col-12">
                                         <div class="product-wrap">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 @if($item->produk_discount > 0)      
@@ -102,7 +102,7 @@
                                                     </ul>
                                                 </div> -->
                                             </div>
-                                            <div class="product-content">
+                                            <div class="product-content tambahan">
                                                 <h3><a href="{{route('detail', $item->produk_slug)}}">{{str_limit($item->produk_name, 10)}}</a>
                                                     <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $item->id)}}><i class="fa fa-heart pull-right"></i></a>
                                                     <a href="{{route("detail", $item->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>
@@ -116,9 +116,11 @@
                                                         <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text( ($item->produk_price - ( $item->produk_price * $item->produk_discount/ 100) )/$price_gln ) }} </span>
                                                     </p>
                                                 @else
-                                                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($item->produk_price, 0)}}</span><br>
-                                                    <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($item->price_MYR, 2)}}</span><br>
-                                                    <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($item->gln_coin ) }} <br> </span>
+                                                    <p>
+                                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($item->produk_price, 0)}}</span><br>
+                                                        <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($item->price_MYR, 2)}}</span><br>
+                                                        <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($item->gln_coin ) }} <br> </span>
+                                                    </p>
                                                 @endif
                                                 {{-- <ul class="rating">
                                                     <li><i class="fa fa-star"></i></li>
@@ -129,7 +131,7 @@
                                                 </ul> --}}
                                                 <div class="tombol-product add-btn">
                                                 @if($item->user->seller_active())
-                                                    <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">{{$item->user->user_store}}</button></a></center>
+                                                    <center><a class="readmore" href="{{route('etalase', $item->user->user_slug)}}"><button class="btn btn-success btn-sm col-12" style="font-size: 12px">{{ str_limit($item->user->user_store, 15) }}</button></a></center>
                                                 @endif
                                                 </div>
                                             </div>

@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1 ">
-                        <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/cart.jpg')">
+                        {{-- <div class="breadcumb-content black-opacity" style="background-image: url('frontend/images/cart.jpg')">
                             <h2>Cart</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

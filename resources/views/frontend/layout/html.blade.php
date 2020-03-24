@@ -183,8 +183,16 @@
 
     .add-btn {
       padding-bottom: 40px;
-      width: 80%;
+      width: 70%;
 
+    }
+
+    @media only screen and (max-width: 670px) {
+        .add-btn {
+      padding-bottom: 40px;
+      width: 85%;
+
+        }
     }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
