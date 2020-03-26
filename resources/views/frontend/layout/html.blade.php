@@ -74,6 +74,10 @@
     color: #121212;
 }
 
+.non-margin {
+    margin-bottom: 0px;
+}
+
 
     .featured-wrap {
     padding: 10px;
@@ -85,8 +89,8 @@
     .featured2-wrap {
     padding: 10px;
     background: #fff;
-    margin-bottom: 60px;
-    margin-top: -170px;
+    margin-bottom: 40px;
+    margin-top: -175px;
     }
 
     .featured-wrap1 {

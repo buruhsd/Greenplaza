@@ -13,7 +13,7 @@
                     @endif
                 <img class="" src="{{ asset('assets/images/product/thumb/'.$item->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" >
             </div>
-            <div class="product-content2">
+            <div class="product-content2" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                 <h4>
                     <a href="{{route('detail', $item->produk_slug)}}">{{ str_limit($item->produk_name, 15)}}</a>
                     <a href="{{route('detail', $item->id)}}"></a>

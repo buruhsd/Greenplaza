@@ -45,7 +45,7 @@
                     <img src="{{asset('assets/images/product/thumb/'.$t->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
                 </a>
             </div>
-            <div class="product-sedebar-content fix">
+            <div class="product-sedebar-content fix" onclick="javascript:window.location.href='{{route('detail', $t->produk_slug)}}'">
                 <h4><a class="readmore" href="{{route('detail', $t->produk_slug)}}">{{$t->produk_name}}</a></h4>
                 <ul class="rating">
                     @if($t->avg_star())

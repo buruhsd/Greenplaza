@@ -207,7 +207,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-8">
-                    <div class="shop-area">
+                    <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-12">
                                 <h2 class="section-title">Green Production</h2>
@@ -215,7 +215,7 @@
                         </div>
                         {!!Plugin::p_green()!!}
                     </div>
-                    <div class="shop-area">
+                    <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-12">
                                 <h2 class="section-title">Produk baru saat ini</h2>
@@ -231,7 +231,7 @@
                             ])
                         !!}
                     </div>
-                    <div class="shop-area">
+                    <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
                                 <h2 class="section-title">Produk Baru</h2>

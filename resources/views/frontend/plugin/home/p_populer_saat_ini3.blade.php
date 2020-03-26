@@ -1,7 +1,7 @@
 <div class="propuler-product-active next-prev-style owl-carousel">
     <div class="slidebar-product-wrap">
         @foreach ($p_populer_saat_ini3 as $r)
-        <div class="product-sidebar-items fix">
+        <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
                     <img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />
@@ -39,7 +39,7 @@
     </div>
     <div class="slidebar-product-wrap">
         @foreach ($p_populer_saat_ini32 as $r)
-        <div class="product-sidebar-items fix">
+        <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
                     <img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" />

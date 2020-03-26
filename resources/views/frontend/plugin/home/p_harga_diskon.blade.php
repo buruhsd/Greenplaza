@@ -5,7 +5,7 @@
             <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
                 <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$d->produk_image)}}" ></a>
         </div>
-        <div class="product-content">
+        <div class="product-content" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
             <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>
                 <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $d->id)}}"><i class="fa fa-heart pull-right"></i></a>
                 <a href="{{route('detail', $d->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>

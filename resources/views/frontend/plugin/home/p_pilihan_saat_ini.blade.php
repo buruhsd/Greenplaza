@@ -23,7 +23,7 @@
                 </ul>
             </div> -->
         </div>
-        <div class="product-content">
+        <div class="product-content" onclick="javascript:window.location.href='{{route('detail', $f->produk_slug)}}'">
             <h3><a href="{{route('detail', $f->produk_slug)}}">{{ str_limit($f->produk_name, 15)}}</a>
                 <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href="{{route('localapi.modal.addwishlist', $f->id)}}"><i class="fa fa-heart pull-right"></i></a>
                 <a href="{{route('detail', $f->produk_slug)}}"><i class="fa fa-eye pull-right"></i></a>

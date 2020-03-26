@@ -159,7 +159,7 @@
                                 <div class="row">
                                         @foreach ($produk as $p)
                                     <div class="col-lg-2 col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
+                                        <div class="product-wrap" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                 @if ($p->produk_stock == 0)
                                                     <div class="featured-content text-center">
@@ -265,7 +265,7 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="product-content">
+                                                    <div class="product-content" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
                                                         <h3><a href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h3>
                                                         
                                                             <!-- @if($p->produk_discount > 0)

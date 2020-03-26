@@ -69,7 +69,7 @@
                                 @else
                                 @foreach($produk as $item)
                                     <div class="col-lg-2 col-md-4 col-sm-6  col-12">
-                                        <div class="product-wrap">
+                                        <div class="product-wrap" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                             <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $item->produk_slug)}}'">
                                                 @if ($item->produk_stock == 0)
                                                     <div class="featured-content text-center">
