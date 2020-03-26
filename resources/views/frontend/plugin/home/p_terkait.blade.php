@@ -1,7 +1,7 @@
 <div class="shop-page-area">
     <div class="container">
         <div class="row">
-            
+            <div class="col-12">
                 <div class="shop-area non-margin">
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-12">
@@ -75,7 +75,6 @@
                 </div>
                 </div>
             
-                </div>
             </div>
         </div>
     </div>            
