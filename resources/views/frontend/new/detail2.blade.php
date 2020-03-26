@@ -119,7 +119,7 @@
             <div class="row revarce-wrap">
                 {{-- {!!Plugin::view('side_left', ['id'=>$detail->category->id])!!} --}}
                 <div class="col-12 col-lg-12 col-12">
-                    <div class="shop-area">
+                    <div class="shop-area non-margin">
                         <div class="row mb-30">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <div class="product-single-img">

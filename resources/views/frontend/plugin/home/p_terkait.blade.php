@@ -1,8 +1,8 @@
 <div class="shop-page-area">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <div class="shop-area">
+            
+                <div class="shop-area non-margin">
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-12">
                             <h2 class="section-title">Related product</h2>
@@ -16,8 +16,7 @@
                             </ul>
                         </div> --}}
                     </div>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="grid">
+                    
                             <div class="row">
                     @foreach($side_related as $n)
                     <div class="col-lg-2 col-md-4 col-sm-6 col-12">
@@ -75,7 +74,7 @@
                     @endforeach
                 </div>
                 </div>
-            </div>
+            
                 </div>
             </div>
         </div>
