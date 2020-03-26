@@ -241,7 +241,7 @@
                                         </li>
                                     </ul>
                                         
-                                          <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} class="p-wishlist" ><img src="{{asset('/frontend/images/gi/maildetail.png')}}" style="width: 18px;" alt="alt text" /><b> Add To Wishlist</b> </a>
+                                          <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} class="p-wishlist" ><img src="{{asset('/frontend/images/gi/maildetail.png')}}" style="width: 18px;" alt="alt text" /><b> Pesan Ke Penjual</b> </a>
                                         
                                     
                                     
@@ -311,14 +311,14 @@
                                           <div id="address-info" style="margin-bottom: 2%">
                                               <ul style='width: 100%; margin-bottom: 2%'>
                                                   <div>
-                                                    <input type="button" value="Destination Address : {{Auth::user()->user_address()->first()['user_address_label']}}" class=" form-control" id="btn-pick-address" />
+                                                    <input type="button" value="Alamat Tujuan : {{Auth::user()->user_address()->first()['user_address_label']}}" class=" form-control" id="btn-pick-address" />
                                                       
                                                   </div>
                                               </ul>
                                           </div>
                                           <div style="margin-bottom: 2%">
                                               <center>
-                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Destination Address" class="btn button-detail-style btn-sm col-12" id="btn-pick-address" />
+                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Alamat Tujuan" class="btn button-detail-style btn-sm col-12" id="btn-pick-address" />
                                               </center>
                                           </div>
                                         </div>
@@ -340,13 +340,13 @@
                                               </div>
                                               <div style="margin-bottom: 2%">
                                                   <center>
-                                                      <button type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn button-detail-style btn-sm col-12" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Service Courier </button>
+                                                      <button type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn button-detail-style btn-sm col-12" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Servis Kurir </button>
                                                   </center>
                                               </div>
                                           @else
                                               <div style="margin-bottom: 2%">
                                                   <center>
-                                                      <button type="button" href="#" class="btn btn-danger" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Service Courier Not Avalaible </button>
+                                                      <button type="button" href="#" class="btn btn-danger" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Servis Kurir Tidak Tersedia </button>
                                                   </center>
                                               </div>
                                           @endif
@@ -354,7 +354,7 @@
                                     </div>
 
                                     <div style="margin-bottom: 2%;" class="line-detail">
-                                        <button type="button" onclick="$('#form-shipment').submit();" class="btn btn-sm btn-block button-style"><b> Add To Chart </b></button>
+                                        <button type="button" onclick="$('#form-shipment').submit();" class="btn btn-sm btn-block button-style"><b> Masukkan Ke Keranjang </b></button>
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
@@ -373,10 +373,10 @@
                             <div class="col-12">
                                 <div class="single-product-menu">
                                     <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#description">Description</a> </li>
+                                        <li><a class="active" data-toggle="tab" href="#description">Deskripsi</a> </li>
                                         <!-- <li><a data-toggle="tab" href="#tag">Faq</a></li> -->
-                                        <li><a data-toggle="tab" href="#review">Review</a></li>
-                                        <li><a data-toggle="tab" href="#diskusi">Produt Discution</a></li>
+                                        <li><a data-toggle="tab" href="#review">Ulasan</a></li>
+                                        <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -439,7 +439,7 @@
                                                     </td> -->
                                                 </tr>
                                                 <tr>
-                                                    <td class="text-left">
+                                                    <td class="text-left" style="font-size: 14px">
                                                         {{$detail->produk_note}}
                                                     </td>
                                                 </tr>

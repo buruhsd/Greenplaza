@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcumb-wrap bg-1">
                         <div class="breadcumb-content black-opacity" style="background-image: url('/frontend/images/banner/cat.jpg')">
-                            <h2>Shop Page</h2>
+                            <h2>Hlaman Toko</h2>
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
                                 <li>Shop</li>
@@ -28,7 +28,7 @@
                             <div class="col-12">
                                 <div class="single-product-menu">
                                     <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#informasi">Information</a> </li>
+                                        <li><a class="active" data-toggle="tab" href="#informasi">Informasi</a> </li>
                                         {{-- <li><a data-toggle="tab" href="#transaksi">Transaction</a></li> --}}
                                     </ul>
                                 </div>
@@ -38,7 +38,7 @@
                                     <div class="tab-pane active" id="informasi">
                                         <div class="card col-md-12 p-0">
                                             <div class="card-header">
-                                                Information
+                                                Informasi
                                             </div>
                                             <div class="card-body">
                                                  <?php $user  ?>
@@ -51,25 +51,25 @@
                                                             ?>
                                                             {{-- {{dd ($user->user_detail->country_id == 0) }} --}}
                                                             @if($user->user_detail->country_id == 0)
-                                                                <li class="list-group-item">Country :
+                                                                <li class="list-group-item">Negara :
                                                                  -
                                                                 </li>
                                                             @elseif($user->user_detail->country_id == 222)
-                                                                <li class="list-group-item">Country :
+                                                                <li class="list-group-item">Negara :
                                                                  Indonesia
                                                                 </li>
                                                             @elseif($user->user_detail->country_id == 108)
-                                                                <li class="list-group-item">Country :
+                                                                <li class="list-group-item">Negara :
                                                                  Malaysia
                                                                 </li>
                                                             @else
-                                                                <li class="list-group-item">Country : - </li>
+                                                                <li class="list-group-item">Negara : - </li>
                                                             @endif
-                                                            <li class="list-group-item">Since : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
-                                                            <li class="list-group-item">Product Total : {{FunctionLib::count_produk("", $user->id)}}</li>
-                                                            <li class="list-group-item">Products Sold : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
-                                                            <li class="list-group-item">Transaction Success : {{FunctionLib::count_sell($user->id)}}</li>
-                                                            <li class="list-group-item">Courier : {{implode (", ", $shipment)}}</li>
+                                                            <li class="list-group-item">Sejak : {{FunctionLib::date_indo($user->created_at, true, 'full')}}</li>
+                                                            <li class="list-group-item">Total Product : {{FunctionLib::count_produk("", $user->id)}}</li>
+                                                            <li class="list-group-item">Product Terjual : {{FunctionLib::count_sell($user->id, 'sell')}}</li>
+                                                            <li class="list-group-item">Transaksi Success : {{FunctionLib::count_sell($user->id)}}</li>
+                                                            <li class="list-group-item">Kurir : {{implode (", ", $shipment)}}</li>
                                                         </ul>
                                                     </div>
                                                     <div class="col-md-7 offset-md-1">
@@ -87,7 +87,7 @@
                                                             </li>
                                                             <li class="list-group-item">
                                                                 <a class="btn btn-success btn-block" href="{{route('member.message.create', $user->username)}}">
-                                                                    Send Message
+                                                                    Kirim Pesan
                                                                 </a>
                                                             </li>
                                                         </ul>
@@ -99,7 +99,7 @@
                                     <div class="tab-pane" id="transaksi">
                                         <div class="card col-md-12 p-0">
                                             <div class="card-header">
-                                                Transaction
+                                                Transaksi
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">Store Sales {{$user->user_store}}</h5>
@@ -130,9 +130,9 @@
                                     'files' => true
                                 ]) !!}
                                     <select name="order" class="select-style" id="order">
-                                        <option disabled selected>Order by</option>
-                                        <option value="produk_name">Name</option>
-                                        <option value="produk_price">Price</option>
+                                        <option disabled selected>Berdasarkan</option>
+                                        <option value="produk_name">Nama</option>
+                                        <option value="produk_price">Harga</option>
                                     </select>
                                 {!! Form::close() !!}
                             </div>
@@ -140,7 +140,7 @@
                                 <p class="total-product">
                                     {{($produk->currentPage() - 1) * $produk->perPage() + 1}}-
                                     {{$produk->perPage() * $produk->currentPage()}} 
-                                    from {{$produk->count()}} Data
+                                    Dari {{$produk->count()}} Data
                                 </p>
                             </div>
                             <div class="col-lg-4 col-12 col-sm-3">
