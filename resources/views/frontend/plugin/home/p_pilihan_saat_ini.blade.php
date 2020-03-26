@@ -71,7 +71,7 @@
 
             <div class="tombol-product">
             @if($f->user->seller_active())
-            <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12"0{{$f->user->user_store}}</button></a></center>
+            <center><a class="readmore" href="{{route('etalase', $f->user->user_slug)}}"><button class="btn btn-success btn-sm col-12">{{$f->user->user_store}}</button></a></center>
             @endif
             </div>
         </div>
