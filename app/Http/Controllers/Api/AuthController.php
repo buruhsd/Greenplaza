@@ -47,7 +47,7 @@ class AuthController extends Controller
             $user = User::where('username', $request->username)->with('user_detail')->first();
             if($user){
                 // $user->push(['api_token' => $response['data']['api_token']]);
-                return $data = array_merge($user, ['api_token' => $response['data']['api_token']]);
+                return $data = $user;
                 return response()->json([
                     'sucess' => true,
                     'data' => $data
