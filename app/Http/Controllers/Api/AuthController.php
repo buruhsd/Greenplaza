@@ -44,12 +44,13 @@ class AuthController extends Controller
         $response = json_decode($resp, true);
         curl_close($curl);
         if($response['success']) {
-            $user = User::where('username', $request->username)->with('user_detail')->first()->toArray();
-            if(json_decode($user)){
+            $user = User::where('username', $request->username)->with('user_detail')->first();
+            if($user){
                 // $user->push(['api_token' => $response['data']['api_token']]);
+                return $data = array_merge($user, ['api_token' => $response['data']['api_token']]);
                 return response()->json([
                     'sucess' => true,
-                    'data' => array_merge($user, ['api_token' => $response['data']['api_token']])
+                    'data' => $data
                 ], 200); 
             // return response()->json([
             //     'sucess' => true,
