@@ -44,9 +44,9 @@ class AuthController extends Controller
         $response = json_decode($resp, true);
         curl_close($curl);
         if($response['success']) {
-            $user = User::where('username', $request->username)->with('user_detail')->first()->toArray();
+            $user = User::where('username', $request->username)->with('user_detail')->first();
+            return response()->json($user);
             if(json_decode($user)){
-                $data = $user;
                 $data = array_push($user, ['api_token' => $response['data']['api_token']]);
                 return response()->json([
                     'sucess' => true,
