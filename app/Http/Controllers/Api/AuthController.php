@@ -49,7 +49,7 @@ class AuthController extends Controller
                 // $user->push(['api_token' => $response['data']['api_token']]);
                 return response()->json([
                     'sucess' => true,
-                    'data' => $user->push(['api_token' => $response['data']['api_token']]);
+                    'data' => $user;
                 ], 200); 
             // return response()->json([
             //     'sucess' => true,
