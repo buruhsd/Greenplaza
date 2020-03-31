@@ -60,38 +60,8 @@
                             ])
                         !!}
                     </div>
-
-                    {{-- <div class="featured-area">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-15">
-                                    {!!Plugin::view('iklan', [
-                                            'id'=>2,
-                                            'type'=>'1',
-                                            'name'=>'banner1',
-                                        ])
-                                    !!}
-                                </div>
-                            </div>
-                        </div>                        
-                    </div> --}}
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 d-none d-lg-block">
-                    {{-- @if (\Auth::check())
-                        <div class="author-wrap">
-                            @if (Auth::user()->user_detail->user_detail_image != null)
-                            <img src="{{asset('assets/images/profil/'.Auth::user()->user_detail->user_detail_image)}}" style="width: 110px" onerror="this.src='{{ asset('assets/images/profil/nopic.png') }}'">
-                            @else
-                            <img src="{{ asset('assets/images/profil/nopic.png') }}" alt="">
-                            @endif
-                            <h4>{{Auth::user()->name}}</h4>
-                        </div>
-                    @else
-                        <div class="author-wrap">
-                            <img src="{{ asset('assets/images/profil/nopic.png') }}" style="height: 
-                                130px">
-                        </div>
-                    @endif --}}
                     {!!Plugin::view('iklan', [
                             'id'=>4,
                             'type'=>'1',
@@ -114,26 +84,26 @@
                               <tbody>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/hotel.png')}}" style="width: 30px;" alt="alt text"> Hotel</td>
-                                  <td><img src="{{asset('/frontend/images/icon/game.png')}}" style="width: 30px;" alt="alt text"> Game</td>
-                                  <td><img src="{{asset('/frontend/images/icon/kartukredit.png')}}" style="width: 30px;" alt="alt text"> Payment</td>
-                                  <td><img src="{{asset('/frontend/images/icon/voucheronline.png')}}" style="width: 20px;" alt="alt text"> Voucher Online</td>
+                                  <td><img src="{{asset('/frontend/images/icon/hotel.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background four"></div> --}} Hotel</td>
+                                  <td><img src="{{asset('/frontend/images/icon/game.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background five"></div> --}} Game</td>
+                                  <td><img src="{{asset('/frontend/images/icon/kartukredit.png')}}" style="width: 30px;" alt="alt text"> {{-- <div class="lazy-background six"></div> --}}Payment</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucheronline.png')}}" style="width: 20px;" alt="alt text"> {{-- <div class="lazy-background seven"></div> --}}Voucher Online</td>
 
                                 </tr>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/pesawat.png')}}" style="width: 20px;" alt="alt text"> Tiket Pesawat</td>
-                                  <td><img src="{{asset('/frontend/images/icon/pay.png')}}" style="width: 20px;" alt="alt text"> Pembayaran</td>
-                                  <td><img src="{{asset('/frontend/images/icon/pdam.png')}}" style="width: 20px;" alt="alt text"> Air PDAM</td>
-                                  <td><img src="{{asset('/frontend/images/icon/voucherfisik.png')}}" style="width: 20px;" alt="alt text"> Voucher</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pesawat.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eight"></div> --}} Tiket Pesawat</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pay.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background nine"></div> --}} Pembayaran</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pdam.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background ten"></div> --}} Air PDAM</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucherfisik.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eleven"></div> --}} Voucher</td>
 
                                 </tr>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/plnprabayar.png')}}" style="width: 20px;" alt="alt text"> Listrik PLN</td>
-                                  <td><img src="{{asset('/frontend/images/icon/tv.png')}}" style="width: 20px;" alt="alt text"> TV Berbayar</td>
-                                  <td><img src="{{asset('/frontend/images/icon/ticket.png')}}" style="width: 20px;" alt="alt text"> Ticket Online</td>
-                                  <td><img src="{{asset('/frontend/images/icon/topupsaldo.png')}}" style="width: 20px;" alt="alt text"> TopUp Saldo</td>
+                                  <td><img src="{{asset('/frontend/images/icon/plnprabayar.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background twelve"></div> --}}Listrik PLN</td>
+                                  <td><img src="{{asset('/frontend/images/icon/tv.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background thirteen"></div> --}} TV Berbayar</td>
+                                  <td><img src="{{asset('/frontend/images/icon/ticket.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fourteen"></div> --}} Ticket Online</td>
+                                  <td><img src="{{asset('/frontend/images/icon/topupsaldo.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fiveteen"></div> --}} TopUp Saldo</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -235,11 +205,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
                                 <h2 class="section-title">Produk Baru</h2>
-                            </div><!-- 
-                            <div class="col-lg-8 text-right col-sm-9 col-12">
-                                <ul class="tab-menu nav">
-                                </ul>
-                            </div> -->
+                            </div>
                         </div>
                         {!!Plugin::p_baru()!!}
                     </div>
@@ -381,79 +347,6 @@
         </div>
     </div>
     <!-- spacial-product-area end-->
-    <!-- blog-area start -->
-    <div class="shop-page-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="shop-area">
-                        <h2 class="section-title">Produk populer konsumen</h2>
-            </div>
-        </div>
-    </div>
-
-    <!-- <div class="box-b-l hide" id="a-b-l">
-        <img src="{{asset('assets/images/profil/Peileppe_Orc_chibi.png')}}">
-    </div>
-    <div class="box-b-r hide" id="a-b-r">
-        <img src="http://www.gambaranimasi.org/data/media/492/animasi-bergerak-kembang-api-0008.gif">
-    </div> -->
-    {{-- <div class="blog-area mb-30">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="blog-wrap">
-                        <h2 class="section-title">latest News</h2>
-                        <div class="blog-active owl-carousel next-prev-style">
-                            @foreach ($latestnews as $l)
-                            <div class="blog-item">
-                                <div class="blog-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $l->produk_slug)}}'">
-                                    <img src="{{asset('assets/images/product/'.$l->produk_image)}}" style="width: 400px">
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="{{route('detail', $l->produk_slug)}}">{{$l->produk_name}}</a></h3>
-                                    <ul class="blog-meta">
-                                        <li><a href="#"><i class="fa fa-user"></i>{{$l->user->name}}</a></li>
-                                        @if ($l->review)
-                                        <li><a href="#"><i class="fa fa-comments"></i>{{$l->review->count()}} Comments</a></li>
-                                        @else
-                                        <li><a href="#"><i class="fa fa-comments"></i>0 Comments</a></li>
-                                        @endif
-                                        <li><a href="#"><i class="fa fa-clock-o"></i>{{$l->updated_at}}</a></li>
-                                    </ul>
-                                    <p>{{$l->produk_note}}</p>
-                                    <a class="readmore" href="{{route('detail', $l->produk_slug)}}">read more</a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- blog-area end -->
-    
-    <!-- brand-area start -->
-    {{-- <div class="brand-area mb-30">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="brand-active owl-carousel">
-                        @foreach ($brandall as $b)
-                        <div class="brand-items">
-                            <a href="{{route('brand', ['brand' => $b->brand_slug])}}">
-                                <img src="{{asset('assets/images/brand/'.$b->brand_image)}}" style="height: 
-                            50px" alt="{{asset('assets/images/brand/'.$b->brand_image)}}">
-                            </a>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- brand-area end -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
 <!-- @section('script')

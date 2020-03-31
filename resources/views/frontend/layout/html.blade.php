@@ -191,6 +191,144 @@
 
     }
 
+    .lazy-background{
+    }
+
+    .one{
+      height: 310px;
+      background-image: url("gi_image/iklan/poster1.png");
+    }
+
+    .one.visible{
+      background-image: url("gi_image/iklan/poster1.png");
+    }
+
+    .two{
+      height: 310px;
+      background-image: url("gi_image/iklan/poster2.png");
+    }
+
+    .two.visible{
+      background-image: url("gi_image/iklan/poster2.png");
+    }
+
+    .three{
+      height: 310px;
+      background-image: url("gi_image/iklan/poster3.png");
+    }
+
+    .three.visible{
+      background-image: url("gi_image/iklan/poster3.png");
+    }
+
+    .four{
+        width: 30px;
+      background-image: url("frontend/images/icon/hotel.png");
+    }
+
+    .four.visible{
+      background-image: url("frontend/images/icon/hotel.png");
+    }
+
+    .five{
+        width: 30px;
+      background-image: url("frontend/images/icon/game.png");
+    }
+
+    .five.visible{
+      background-image: url("frontend/images/icon/game.png");
+    }
+
+    .six{
+        width: 30px;
+      background-image: url("frontend/images/icon/kartukredit.png");
+    }
+
+    .six.visible{
+      background-image: url("frontend/images/icon/kartukredit.png");
+    }
+
+    .seven{
+        width: 30px;
+      background-image: url("frontend/images/icon/voucheronline.png");
+    }
+
+    .seven.visible{
+      background-image: url("frontend/images/icon/voucheronline.png");
+    }
+
+    .eight{
+        width: 30px;
+      background-image: url("frontend/images/icon/pesawat.png");
+    }
+
+    .eight.visible{
+      background-image: url("frontend/images/icon/pesawat.png");
+    }
+
+    .nine{
+        width: 30px;
+      background-image: url("frontend/images/icon/pay.png");
+    }
+
+    .nine.visible{
+      background-image: url("frontend/images/icon/pay.png");
+    }
+
+    .ten{
+        width: 30px;
+      background-image: url("frontend/images/icon/pdam.png");
+    }
+
+    .ten.visible{
+      background-image: url("frontend/images/icon/pdam.png");
+    }
+
+    .eleven{
+        width: 30px;
+      background-image: url("frontend/images/icon/voucherfisik.png");
+    }
+
+    .eleven.visible{
+      background-image: url("frontend/images/icon/voucherfisik.png");
+    }
+
+    .twelve{
+        width: 30px;
+      background-image: url("frontend/images/icon/plnprabayar.png");
+    }
+
+    .twelve.visible{
+      background-image: url("frontend/images/icon/plnprabayar.png");
+    }
+
+    .thirteen{
+        width: 30px;
+      background-image: url("frontend/images/icon/tv.png");
+    }
+
+    .thirteen.visible{
+      background-image: url("frontend/images/icon/tv.png");
+    }
+
+    .fourteen{
+        width: 30px;
+      background-image: url("frontend/images/icon/ticket.png");
+    }
+
+    .fourteen.visible{
+      background-image: url("frontend/images/icon/ticket.png");
+    }
+
+    .fiveteen{
+        width: 30px;
+      background-image: url("frontend/images/icon/topupsaldo.png");
+    }
+
+    .fiveteen.visible{
+      background-image: url("frontend/images/icon/topupsaldo.png");
+    }
+
     @media only screen and (max-width: 670px) {
         .add-btn {
       padding-bottom: 40px;

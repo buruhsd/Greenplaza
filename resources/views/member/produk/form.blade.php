@@ -151,9 +151,9 @@
                 <select name='produk_category_id' class="form-control">
                     <option value=''>-- Choose Category --</option>
                     @foreach($category as $item)
-                    @if ($item->category_name != 'Green Productions')
+                    {{-- @if ($item->category_name != 'Green Productions') --}}
                     <option value='{{$item->id}}'>{{ucfirst(strtolower($item->category_name))}}</option>
-                    @endif
+                    {{-- @endif --}}
                     @endforeach
                 </select>
                 {!! $errors->first('produk_category_id', '<p class="help-block">:message</p>') !!}

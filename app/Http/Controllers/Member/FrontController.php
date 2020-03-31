@@ -188,6 +188,8 @@ class FrontController extends Controller
             ->where('shipment_parent_id', 0)
             ->get();
         $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $data['price_gln'] = $gln_price['price'];
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['detail'] = Produk::where('produk_slug', $slug)->first();
         $data['discuss'] = Produk_discuss::where('produk_discuss_produk_id', $data['detail']['id'])->orderBy('updated_at', 'DESC')->get();

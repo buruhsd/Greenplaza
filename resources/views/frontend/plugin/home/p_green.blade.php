@@ -42,9 +42,6 @@
                     <li><i class="fa fa-star"></i></li>
                 @endif
             </ul>
-            {{-- {{ dd( FunctionLib::number_to_text( ($n->produk_price - ( $n->produk_price * $n->produk_discount/ 100) )/$price_gln ) ) }} --}}
-            {{-- {{dd($n->user->user_detail)}} --}}
-            {{-- {{ dd($price_gln) }} --}}
             <p>
             @if ($n->produk_discount != 0)
                     <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price, 0)}}</del><span> </span>
@@ -52,24 +49,12 @@
                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
                     <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_myr - ( $n->price_myr * $n->produk_discount/ 100) ) }} </span><br>
                     <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text( ($n->produk_price - ( $n->produk_price * $n->produk_discount/ 100) )/$price_gln ) }} </span>
-                    {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
-                        data-content="
-                        Rp. {{FunctionLib::number_to_text($n->produk_price - ($n->produk_price * $n->produk_discount/ 100) )}} <br>
-                        MYR. {{FunctionLib::number_to_text($n->produk_price * $myr - ( ($n->produk_price * $myr) * $n->produk_discount/ 100) ) }} <br>  " >
-                        <i class="fa fa-bars"></i>
-                    </span> --}}
                 </p>
             @else
                 <p>
                     <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price, 0)}}</span><br>
                     <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_MYR, 0)}}</span><br>
                     <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($n->gln_coin ) }} <br> </span>
-                    {{-- <span onclick="showPopover({{$n->id}});" class="pull-right popo" id="pop{{$n->id}}" title="{{$n->produk_name}}" class="btn btn-lg btn-default"data-toggle="popover" data-html="true" 
-                        data-content="
-                        Rp. {{FunctionLib::number_to_text($n->produk_price)}} <br>
-                        MYR. {{FunctionLib::number_to_text($n->produk_price * $myr)}} <br>  " >
-                        <i class="fa fa-bars"></i>
-                    </span> --}}
                 </p>
             @endif
 
@@ -80,31 +65,5 @@
             </div>
         </div>
     </div>
-    <!-- <div class="product-wrap">
-        <div class="product-img black-opacity">
-            <span class="new sale">Sale</span>
-            <img src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}">
-            <div class="shop-icon">
-                <ul>
-                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i></a></li>
-                    <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                    <li><a href="shop-single.html"><i class="fa fa-eye"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="product-content">
-            <h3><a href="shop.html">{{$n->produk_name}}</a></h3>
-            <p><span>{{$n->produk_price}}</span>
-                <del>{{$n->product_discount}} %</del>
-            </p>
-            <ul class="rating">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
-        </div>
-    </div> -->
     @endforeach
 </div>
