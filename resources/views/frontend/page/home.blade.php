@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <div class="cetagory-wrap home">
-                        <span>Semua kategori</span>
+                        <span>{{__('front.all-cat') }}</span>
                         <ul class="cetagory-items">
                             <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                             {{-- {{dd($cat)}} --}}
@@ -47,7 +47,7 @@
                                     @endif
                                 </li>
                             @endforeach
-                            <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Semua Kategori... <i class="fa fa-angle-right pull-right"></i></a>
+                            <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> {{__('front.all-cat') }}... <i class="fa fa-angle-right pull-right"></i></a>
                         </ul>
                     </div>
                 </div>
@@ -84,26 +84,26 @@
                               <tbody>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/hotel.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background four"></div> --}} Hotel</td>
-                                  <td><img src="{{asset('/frontend/images/icon/game.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background five"></div> --}} Game</td>
-                                  <td><img src="{{asset('/frontend/images/icon/kartukredit.png')}}" style="width: 30px;" alt="alt text"> {{-- <div class="lazy-background six"></div> --}}Payment</td>
-                                  <td><img src="{{asset('/frontend/images/icon/voucheronline.png')}}" style="width: 20px;" alt="alt text"> {{-- <div class="lazy-background seven"></div> --}}Voucher Online</td>
+                                  <td><img src="{{asset('/frontend/images/icon/hotel.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background four"></div> --}} {{__('front.hotel') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/game.png')}}" style="width: 30px;" alt="alt text">{{-- <div class="lazy-background five"></div> --}} {{__('front.game') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/kartukredit.png')}}" style="width: 30px;" alt="alt text"> {{-- <div class="lazy-background six"></div> --}}{{__('front.pay') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucheronline.png')}}" style="width: 20px;" alt="alt text"> {{-- <div class="lazy-background seven"></div> --}}{{__('front.vou') }}</td>
 
                                 </tr>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/pesawat.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eight"></div> --}} Tiket Pesawat</td>
-                                  <td><img src="{{asset('/frontend/images/icon/pay.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background nine"></div> --}} Pembayaran</td>
-                                  <td><img src="{{asset('/frontend/images/icon/pdam.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background ten"></div> --}} Air PDAM</td>
-                                  <td><img src="{{asset('/frontend/images/icon/voucherfisik.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eleven"></div> --}} Voucher</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pesawat.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eight"></div> --}} {{__('front.tiket_pesawat') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pay.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background nine"></div> --}} {{__('front.pembayaran') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/pdam.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background ten"></div> --}} {{__('front.pdam') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/voucherfisik.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background eleven"></div> --}} {{__('front.voucher') }}</td>
 
                                 </tr>
                                 <tr>
                                   
-                                  <td><img src="{{asset('/frontend/images/icon/plnprabayar.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background twelve"></div> --}}Listrik PLN</td>
-                                  <td><img src="{{asset('/frontend/images/icon/tv.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background thirteen"></div> --}} TV Berbayar</td>
-                                  <td><img src="{{asset('/frontend/images/icon/ticket.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fourteen"></div> --}} Ticket Online</td>
-                                  <td><img src="{{asset('/frontend/images/icon/topupsaldo.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fiveteen"></div> --}} TopUp Saldo</td>
+                                  <td><img src="{{asset('/frontend/images/icon/plnprabayar.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background twelve"></div> --}}{{__('front.pln') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/tv.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background thirteen"></div> --}} {{__('front.tv') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/ticket.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fourteen"></div> --}} {{__('front.ticket_ol') }}</td>
+                                  <td><img src="{{asset('/frontend/images/icon/topupsaldo.png')}}" style="width: 20px;" alt="alt text">{{-- <div class="lazy-background fiveteen"></div> --}} {{__('front.topup') }}</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -150,15 +150,15 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Produk populer saat ini</h2>
+                        <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini()!!}
                     </div>
                     <div class="product-sidebar" style="width: 100%">
-                        <h2 class="section-title">Harga Diskon</h2>
+                        <h2 class="section-title">{{__('front.harga_diskon') }}</h2>
                         {!!Plugin::p_harga_diskon()!!}
                     </div>
                     <div class="tag-wrap">
-                        <h2 class="section-title">Kategori Populer</h2>
+                        <h2 class="section-title">{{__('front.k_populer') }}</h2>
                         <ul>
                         <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
                                 {{-- {{dd($cat)}} --}}
@@ -172,7 +172,7 @@
                         </ul>
                     </div>
                     <div class="product-sidebar">
-                        <h2 class="section-title">Produk populer saat ini</h2>
+                        <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini2()!!}
                     </div>
                 </div>
@@ -188,7 +188,7 @@
                     <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="section-title">Produk baru saat ini</h2>
+                                <h2 class="section-title">{{__('front.baru_saat') }}</h2>
                             </div>
                         </div>
                         {!!Plugin::p_baru_saat_ini()!!}
@@ -204,7 +204,7 @@
                     <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
-                                <h2 class="section-title">Produk Baru</h2>
+                                <h2 class="section-title">{{__('front.p_baru') }}</h2>
                             </div>
                         </div>
                         {!!Plugin::p_baru()!!}
@@ -256,7 +256,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
                     <div class="product-sidebar">
-                        <h2 class="section-title">Produk populer saat ini</h2>
+                        <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini3()!!}
                     </div>
                 </div>
@@ -264,7 +264,7 @@
                     <div class="shop-area">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="section-title">Barang barang pilhan saat ini</h2>
+                                <h2 class="section-title">{{__('front.pilihan_saat') }}</h2>
                             </div>
                         </div>
                         {!!Plugin::p_pilihan_saat_ini()!!}
@@ -288,7 +288,7 @@
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="testmonial-wrap">
-                        <h2 class="section-title">Kata Konsumen</h2>
+                        <h2 class="section-title">{{__('front.kata_konsumen') }}</h2>
                         <div class="test-active owl-carousel next-prev-style">
                             @foreach ($review as $r)
                             <div class="test-items">
@@ -336,7 +336,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="product-sidebar">
-                                    <h2 class="section-title">Produk Diskon</h2>
+                                    <h2 class="section-title">{{__('front.harga_diskon') }}</h2>
                                     {!!Plugin::p_diskon()!!}
                                 </div>
                             </div>

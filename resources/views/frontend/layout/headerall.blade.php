@@ -5,7 +5,7 @@
       <img width="100px" height="10px" src="{{ asset('assets/images/gi_logo.png') }}" alt="logo" >
       </a>
    </div> --}}
-   <div class="header-bottom-area bg-1 header-bottom-area-two" style="padding: 0.8rem 0">
+   <div class="header-bottom-area bg-1 header-bottom-area-two" style="padding: 0.8rem 0; margin-right: 50px; margin-left: 30px">
       <div class="container">
          <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
@@ -17,7 +17,7 @@
                <form class="search-header-initila-1" action="{{route('category')}}" method="GET">
                   <div class="d-flex justify-content-between align-items-center">
                      <input name="cat" class="form-control" type="hidden" value="{{(isset($_GET['cat']))?$_GET['cat']:''}}">
-                     <input name="src" class="form-control" type="text" placeholder="Produk" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
+                     <input name="src" class="form-control" type="text" placeholder="{{__('front.p') }}" aria-label="produk" aria-describedby="basic-addon2" value="{{(isset($_GET['src']))?$_GET['src']:''}}">
                      <div class="input-group-append">
                         <button class="btn"><i class="fa fa-search"></i></button>
                      </div>
@@ -83,9 +83,9 @@
                   </li>
                   {{-- <li><a href="{{route('member.wishlist')}}"><i class="fa fa-heart"></i></a></li> --}}
                   <li class="sidemenu-items">
-                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
+                     <a href="javascript:void(0);">{{__('front.shop') }} <i class="fa fa-angle-down"></i></a>
                      <ul>
-                        <li><a href="{{route('chart')}}">Keranjang</a></li>
+                        <li><a href="{{route('chart')}}">{{__('front.keranjang') }}</a></li>
                         @guest
                         @else
                         <li><a href="{{route('checkout')}}">Checkout</a></li>
@@ -94,9 +94,10 @@
                         <li><a href="{{route('product_admin_asdf')}}">Giplaza Production</a></li>
                      </ul>
                   </li>
+                  
                   @guest
-                  <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">login</a></li>
-                  <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">Register</a></li>
+                  <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">{{__('front.login') }}</a></li>
+                  <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">{{__('front.daftar') }}</a></li>
                   @else
                   <li class="sidemenu-items">
                      <a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
@@ -105,13 +106,13 @@
                      @else
                      <ul>
                         @if(Auth::user()->is_admin())
-                        <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
+                        <li><a href="{{route('admin.config.profil')}}">{{__('front.profil') }}</a></li>
                         <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                         @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
                         <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
                         @endif
                         @elseif(Auth::user()->is_member() )
-                        <li><a href="{{route('member.profil')}}">Profil</a></li>
+                        <li><a href="{{route('member.profil')}}">{{__('front.profil') }}</a></li>
                         <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
                         @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
                         <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
@@ -125,6 +126,14 @@
                         </li>
                      </ul>
                      @endguest
+                  </li>
+                  <li class="sidemenu-items" style="margin-right: -50px">
+                     <a href="javascript:void(0);" class="btn button-style-login log-head" >{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
+                     <ul>
+                        <li><a href="{{URL('/change/language/id')}}">ID</a></li>
+                        <li><a href="{{URL('/change/language/en')}}">Eng</a></li>
+                     </ul>
+                  </li>
                </ul>
             </div>
             <div class="responsive-menu-tigger d-block d-md-none">
@@ -141,7 +150,7 @@
                <div class="row">
                   <ul class="metismenu">
                      <li class="sidemenu-items">
-                        <a href="javascript:void(0);">Kategori <i class="fa fa-angle-down"></i></a>
+                        <a href="javascript:void(0);">{{__('front.all-cat') }} <i class="fa fa-angle-down"></i></a>
                         <ul class="cetagory-items">
                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(12)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                            @foreach($cat as $item)
@@ -182,13 +191,13 @@
                               @endif
                            </li>
                            @endforeach
-                           <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> Semua Kategori... <i class="fa fa-angle-right pull-right"></i></a>
+                           <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> {{__('front.all-cat') }}... <i class="fa fa-angle-right pull-right"></i></a>
                         </ul>
                      </li>
                      <li class="sidemenu-items">
-                        <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
+                        <a href="javascript:void(0);">{{__('front.shop') }} <i class="fa fa-angle-down"></i></a>
                         <ul>
-                           <li><a href="{{route('chart')}}">Keranjang</a></li>
+                           <li><a href="{{route('chart')}}">{{__('front.keranjang') }}</a></li>
                            @guest
                            @else
                            <li><a href="{{route('checkout')}}">Checkout</a></li>
@@ -208,13 +217,13 @@
                         @else
                         <ul>
                            @if(Auth::user()->is_admin())
-                           <li><a href="{{route('admin.config.profil')}}">Profil</a></li>
+                           <li><a href="{{route('admin.config.profil')}}">{{__('front.profil') }}</a></li>
                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                            @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
                            <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
                            @endif
                            @elseif(Auth::user()->is_member() )
-                           <li><a href="{{route('member.profil')}}">Profil</a></li>
+                           <li><a href="{{route('member.profil')}}">{{__('front.profil') }}</a></li>
                            <li><a href="{{route('member.dashboard')}}">Dashboard</a></li>
                            @if(Auth::user()->seller_active() && Auth::user()->user_slug != null)
                            <li><a href="{{route('etalase', Auth::user()->user_slug)}}">Etalase</a></li>
@@ -263,10 +272,10 @@
                   <input class="form-control m-input remove-border-focus" type="password" name="password"/>
                   <span id="feedbackpassword"></span>
                </div>
-               <div style="font-size: 12px">belum punya akun? <a href="https://gicommunity.org/register"> daftar </a></div>
+               <div style="font-size: 12px">{{__('front.akun') }}? <a href="https://gicommunity.org/register">{{__('front.daftar') }} </a></div>
                <div class="pull-right" style="padding: 1.5rem 0;">
-                  <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>
+                  <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">{{__('front.login') }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">{{__('front.tutup') }}</a>
                </div>
             </form>
          </div>

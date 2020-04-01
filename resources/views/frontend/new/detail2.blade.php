@@ -152,7 +152,7 @@
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
                                             <li><i class="fa fa-star"></i></li>
-                                        <li class="text-info">({{$review->count()}} Customar Review)</li>
+                                        <li class="text-info">({{$review->count()}} {{__('detail.review') }})</li>
                                     </ul>
                                   </div>
                                 <div class="fix line-detail">
@@ -195,19 +195,19 @@
                                                   @if($detail->user->seller_active())
                                                     
                                                       <a href="{{route('etalase', $detail->user->user_slug)}}">
-                                                        <center>{{$detail->user->user_store}} Shop</center>
+                                                        <center>{{$detail->user->user_store}} {{__('front.shop') }}</center>
                                                       </a>
                                                     
                                                   @endif
                                           </li>
                                         </ul>
                                         <ul class="stock p-style">
-                                          <li>Stok : </li>
+                                          <li>{{__('detail.stok') }} : </li>
                                           <li>{{$detail->produk_stock}} {{$detail->unit->produk_unit_name}}</li>
                                         </ul>
                                         <br>
                                         <ul class="cetagory p-style">
-                                            <li>Categories:</li>
+                                            <li>{{__('detail.kategori') }}:</li>
                                             <li><a href="{{url('category?cat='.$detail->category->category_slug)}}">{{ucfirst(strtolower($detail->category->category_name))}}</a></li>
                                         </ul>
                                       </div>
@@ -220,7 +220,7 @@
                                         <div>
                                             <center>
                                                 <div>
-                                                    <input type="button" onClick="showLoginModal()" value="Login" class="btn btn-sm col-12 button-style" />
+                                                    <input type="button" onClick="showLoginModal()" value="{{__('front.login') }}" class="btn btn-sm col-12 button-style" />
                                                 </div>
                                             </center>
                                         </div>
@@ -241,7 +241,7 @@
                                         </li>
                                     </ul>
                                         
-                                          <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} class="p-wishlist" ><img src="{{asset('/frontend/images/gi/maildetail.png')}}" style="width: 18px;" alt="alt text" /><b> Pesan Ke Penjual</b> </a>
+                                          <a href="#" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.addwishlist", $detail->id)}} class="p-wishlist" ><img src="{{asset('/frontend/images/gi/maildetail.png')}}" style="width: 18px;" alt="alt text" /><b> {{__('detail.pesan_penjual') }}</b> </a>
                                         
                                     
                                     
@@ -266,7 +266,7 @@
                                         $color = explode(',', $detail->produk_color);
                                     ?>
                                     <div class=" {{ $errors->has('color') ? 'has-error' : ''}} line-detail">
-                                        {!! Form::label('color', 'Color : ', ['class' => ' control-label p-item-detail']) !!}
+                                        {!! Form::label('color', Lang::get('detail.color') , ['class' => ' control-label p-item-detail']) !!}
                                         <div {{-- class="col-md-12" --}}>
                                             <div class="" data-toggle="buttons">
                                                 @foreach($color as $item)
@@ -286,7 +286,7 @@
                                         </div>
                                     </div>
                                     <div class="{{ $errors->has('size') ? 'has-error' : ''}} line-detail">
-                                        {!! Form::label('size', 'Size : ', ['class' => ' control-label p-item-detail']) !!}
+                                        {!! Form::label('size', Lang::get('detail.size') , ['class' => ' control-label p-item-detail']) !!}
                                         <div {{-- class="col-md-12" --}}>
                                             <div class="" data-toggle="buttons">
                                                 @foreach($size as $item)
@@ -318,7 +318,7 @@
                                           </div>
                                           <div style="margin-bottom: 2%">
                                               <center>
-                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="Alamat Tujuan" class="btn button-detail-style btn-sm col-12" id="btn-pick-address" />
+                                                  <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.modal.pickaddress", ['id' => Auth::id()])}} value="{{__('detail.alamat_tujuan') }}" class="btn button-detail-style btn-sm col-12" id="btn-pick-address" />
                                               </center>
                                           </div>
                                         </div>
@@ -340,7 +340,7 @@
                                               </div>
                                               <div style="margin-bottom: 2%">
                                                   <center>
-                                                      <button type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn button-detail-style btn-sm col-12" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> Servis Kurir </button>
+                                                      <button type="button" href="#" onclick='get_ongkir("{{$detail->id}}")' class="btn button-detail-style btn-sm col-12" id="btn-choose-shipment"><img src="{{asset('/frontend/images/gi/bok.png')}}" style="width: 24px;" alt="alt text" /> {{__('detail.servis_kurir') }} </button>
                                                   </center>
                                               </div>
                                           @else
@@ -354,7 +354,7 @@
                                     </div>
 
                                     <div style="margin-bottom: 2%;" class="line-detail">
-                                        <button type="button" onclick="$('#form-shipment').submit();" class="btn btn-sm btn-block button-style"><b> Masukkan Ke Keranjang </b></button>
+                                        <button type="button" onclick="$('#form-shipment').submit();" class="btn btn-sm btn-block button-style"><b> {{__('detail.masuk_keranjang') }} </b></button>
                                     </div>
                                     @endguest
                                     {!! Form::close() !!}
@@ -373,10 +373,10 @@
                             <div class="col-12">
                                 <div class="single-product-menu">
                                     <ul class="nav">
-                                        <li><a class="active" data-toggle="tab" href="#description">Deskripsi</a> </li>
+                                        <li><a class="active" data-toggle="tab" href="#description">{{__('detail.deskripsi') }}</a> </li>
                                         <!-- <li><a data-toggle="tab" href="#tag">Faq</a></li> -->
-                                        <li><a data-toggle="tab" href="#review">Ulasan</a></li>
-                                        <li><a data-toggle="tab" href="#diskusi">Diskusi Produk</a></li>
+                                        <li><a data-toggle="tab" href="#review">{{__('detail.ulasan') }}</a></li>
+                                        <li><a data-toggle="tab" href="#diskusi">{{__('detail.diskusi_produk') }}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -639,7 +639,7 @@
                                                         </li>
                                                         <li>
                                                             <div class="col-md-12 mt-2">
-                                                                <input type="submit" class="btn btn-success" name="" value="kirim">
+                                                                <input type="submit" class="btn btn-success" name="" value="{{__('detail.kirim') }}">
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -734,7 +734,49 @@
     </div>
     <!-- .shop-page-area enc -->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
-      <script type="text/javascript">
+      
+      <!-- lightbox -->
+    
+@endsection
+
+<div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
+   <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+         <div class="modal-body">
+            <br>
+            <div class="text-center">
+               <div class="text-center">
+                  <img class="dark-logo" src="{{ asset('assets/images/gi_logo.png') }}" alt="" width="120px" height="40px">
+               </div>
+               <br>
+            </div>
+            <br> 
+            <form action="#" id="formData" class="form-horizontal container col-md-12 col-md-offset-2" >
+               <span id="feedbackdata"></span>
+               @csrf
+               <div class="form-group">
+                  <label for="username">username GI</label>
+                  <input type="text" class="form-control m-input remove-border-focus" name="email" />
+                  <span id="feedbackusername"></span>
+               </div>
+               <div class="form-group">
+                  <label for="password">password GI</label>
+                  <input class="form-control m-input remove-border-focus" type="password" name="password"/>
+                  <span id="feedbackpassword"></span>
+               </div>
+               <div style="font-size: 12px">belum punya akun? <a href="https://gicommunity.org/register"> daftar </a></div>
+               <div class="pull-right" style="padding: 1.5rem 0;">
+                  <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+  @section('script')
+  <script type="text/javascript">
           function get_ongkir(){
               var text = $("#btn-choose-shipment").val();
               $("#btn-choose-shipment").val("Loading");
@@ -845,47 +887,7 @@
             slides[slideIndex-1].style.display = "block";  
             dots[slideIndex-1].className += " active";
           }
-              </script>
-      <!-- lightbox -->
-    
-@endsection
 
-<div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
-   <div class="modal-dialog modal-sm" role="document">
-      <div class="modal-content">
-         <div class="modal-body">
-            <br>
-            <div class="text-center">
-               <div class="text-center">
-                  <img class="dark-logo" src="{{ asset('assets/images/gi_logo.png') }}" alt="" width="120px" height="40px">
-               </div>
-               <br>
-            </div>
-            <br> 
-            <form action="#" id="formData" class="form-horizontal container col-md-12 col-md-offset-2" >
-               <span id="feedbackdata"></span>
-               @csrf
-               <div class="form-group">
-                  <label for="username">username GI</label>
-                  <input type="text" class="form-control m-input remove-border-focus" name="email" />
-                  <span id="feedbackusername"></span>
-               </div>
-               <div class="form-group">
-                  <label for="password">password GI</label>
-                  <input class="form-control m-input remove-border-focus" type="password" name="password"/>
-                  <span id="feedbackpassword"></span>
-               </div>
-               <div style="font-size: 12px">belum punya akun? <a href="https://gicommunity.org/register"> daftar </a></div>
-               <div class="pull-right" style="padding: 1.5rem 0;">
-                  <a style="cursor: pointer; font-size: 14px; color: #fff" onclick="saveLogin()" class="btn btn-success btnsave">Masuk</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a style="cursor: pointer; font-size: 14px;" class="btn btn-metal" data-dismiss="modal">Tutup</a>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
-</div>
-    <script>
         function showLoginModal(){
             $('.remove-border-focus').attr("style", "outline: 0px !important");
             $('.remove-border-focus').attr("style", "-webkit-appearance: none");
@@ -923,3 +925,5 @@
             });
         }
     </script>
+
+  @endsection

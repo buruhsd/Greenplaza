@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-contact">
-                            <h2 class="section-title">Contact us</h2>
+                            <h2 class="section-title">{{__('front.kontak') }}</h2>
                             <ul>
                                 <!-- <li><i class="fa fa-map-marker"></i>House No. 09 , Road No.25 Dhaka,Bangladesh </li>
                                 <li><i class="fa fa-phone"></i>+1(888)234-56789 <span>+1(888)234-56789</span> </li>
@@ -46,13 +46,13 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="footer-widget footer-menu">
-                            <h2 class="section-title">About Us</h2>
+                            <h2 class="section-title">{{__('front.about') }}</h2>
                             <ul>
                                 @foreach(FunctionLib::page('aboutus')->get() as $item)
                                     <li><a href="{{url('page/'.$item->page_slug)}}">{{$item->page_judul}}</a></li>
                                 @endforeach
                                 <li><a href="{{ url('greenplaza_faq') }}">FAQ</a></li>
-                                <li><a href="{{ url('about') }}">About US</a></li>
+                                <li><a href="{{ url('about') }}">{{__('front.about') }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,8 +62,12 @@
         <div class="footer-bottom">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 text-center">
+                    <div class="col-8 text-center">
                         <p>&copy; 2020 <span>GiPlaza</span> All Right Reserved</p>
+                    </div>
+                    <div class="col-4 text-center">
+                        <a href="{{URL('/change/language/id')}}" class="btn button-style-login log-head" style="padding-top: 2px; padding-bottom: 2px; margin-top: -5px;">Indonesia</a>
+                        <a href="{{URL('/change/language/en')}}" class="btn button-style-register log-head-register" style="padding-top: 2px; padding-bottom: 2px; margin-top: -5px;">English</a>
                     </div>
                 </div>
             </div>

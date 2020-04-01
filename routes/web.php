@@ -14,7 +14,7 @@
 Route::get('/detail_image_image', 'Member\\FrontController@detail_image_image');
 
 Route::get('/change/language/{id}',function($lang){
-    Session::put('my_locale','id');
+    Session::put('my_locale', $lang);
     return redirect()->back();
 });
 

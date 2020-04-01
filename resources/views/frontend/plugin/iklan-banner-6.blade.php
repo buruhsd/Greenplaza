@@ -11,7 +11,7 @@
             <!-- <h2>Minilam Chair</h2>
             <p>consectetur adipisicing elit to Tempora, similique!</p> -->
             <ul>
-                <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
+                <li><a href="{{url("/comming-soon")}}">{{__('front.coming_soon') }}</a></li>
             </ul>
         </div>
     </div>

@@ -11,7 +11,7 @@
             <!-- <h2>Dual Handle Cardio Ball</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore,<span> sunt animi quas architecto repellendus</span></p> -->
             <ul>
-                <li><a href="{{url("/comming-soon")}}">Comming Soon</a></li>
+                <li><a href="{{url("/comming-soon")}}">{{__('front.coming_soon') }}</a></li>
             </ul>
         </div>
     </div>

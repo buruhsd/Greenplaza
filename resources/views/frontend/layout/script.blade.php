@@ -132,7 +132,7 @@
         <script src="{{ asset('js/pusher.js') }}"></script>
         <script src="{{ asset('js/echo.js') }}"></script>
         <script type="text/javascript">
-            console.log('{!!env("PUSHER_APP_AUTHPOINT")!!}');
+            // console.log('{!!env("PUSHER_APP_AUTHPOINT")!!}');
             // var pusher = new Pusher('{!!env("PUSHER_APP_KEY")!!}', {
             //     cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
             //     forceTLS: true
@@ -153,11 +153,11 @@
             //     key: '{!!env("PUSHER_APP_KEY")!!}',
             //     cluster: '{!!env("PUSHER_APP_CLUSTER")!!}',
             //     forceTLS: true,
-            //     // encrypted: true,
+            //     encrypted: true,
             //     logToConsole: true
             // });
             // console.log(window.Echo);
-            // // showNotifications({}, '#admin');
+            // showNotifications({}, '#admin');
             // window.Echo.private('App.User.{{Auth::id()}}')
             //     .notification((notification) => {
             //         var url = '{!!url('member/notification/is_read')!!}/' + notification.id;

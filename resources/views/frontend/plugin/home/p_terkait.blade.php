@@ -5,7 +5,7 @@
                 <div class="shop-area non-margin">
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-12">
-                            <h2 class="section-title">Produk Terkait</h2>
+                            <h2 class="section-title">{{__('detail.p_terkait') }}</h2>
                         </div>
                         {{-- <div class="col-lg-8 text-right col-sm-9 col-12">
                             <ul class="tab-menu nav">
