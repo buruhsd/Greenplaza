@@ -37,6 +37,6 @@ class User_detail extends Model
     public function getProfilImgAttribute()
     {
         // $asset_toko = asset('assets/images/bg_etalase');
-        return asset('assets/images/profil/'.$this->attributes['user_detail_image']);
+        return asset('assets/images/profil/'.$this->user_detail_image);
     }
 }
