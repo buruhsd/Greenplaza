@@ -62,7 +62,7 @@ class ApiController extends Controller
                     $saldo = FunctionLib::update_wallet($update_wallet);
                 }
                 $trans_detail->save();
-                $trans_detail->produk->produk_stock = $item->produk->produk_stock + $item->trans_detail_qty;
+                $trans_detail->produk->produk_stock = $trans_detail->produk->produk_stock + $trans_detail->trans_detail_qty;
                 $trans_detail->produk->save();
 
                 // to shipping true
