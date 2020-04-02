@@ -32,7 +32,7 @@ class ApiController extends Controller
     public function cancel(Request $request){
         $requestData = $request->all();
         $status = 200;
-        $message = 'barang siap dikirim!';
+        $message = 'barang telah di cancel!';
         $date = date('y-m-d h:i:s');
         if(!empty($request->detail_id)){            
             foreach ($requestData['detail_id'] as $item) {
@@ -146,7 +146,7 @@ class ApiController extends Controller
     public function sending(Request $request){
         $requestData = $request->all();
         $status = 200;
-        $message = 'barang telah di cancel!';
+        $message = 'barang siap dikirim!';
         $date = date('y-m-d h:i:s');
         if(!empty($request->detail_id)){            
             foreach ($requestData['detail_id'] as $item) {
