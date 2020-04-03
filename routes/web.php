@@ -442,6 +442,7 @@ Route::group(['middleware' => ['auth', 'roles'], 'roles' => ['admin', 'member']]
 	Route::group(['prefix' => 'member', 'as' => 'member', 'namespace' => 'Member'], function () {
 		Route::group(['prefix' => 'notification', 'as' => '.notification'], function () {
 			Route::get('/is_read/{id}', 'NotificationController@is_read')->name('.is_read');
+			Route::get('/all', 'NotificationController@index')->name('.index_notif');
 		});
 	});
 });

@@ -31,4 +31,15 @@ class NotificationController extends Controller
         $data = json_decode($res->data, true);
         return Redirect::to($data['data']['route']);
     }
+
+    public function index()
+    {
+        // $date = date('Y-m-d H:i:s');
+        // $res = Notification::findOrfail($id);
+        // $res->read_at = $date;
+        // $res->save();
+        // $data = json_decode($res->data, true);
+        $notification = Notification::where('data', 'like', '%user_id":3%')->get();
+        return view('member.notif.notif', compact('notification'));
+    }
 }

@@ -50,6 +50,15 @@
                            </a>
                         </li>
                         @endforeach
+                        <li>
+                           <center>
+                           <a href="{{route('member.notification.index_notif')}}">
+                              <small class="text-sm text-success">
+                                 All Notifications
+                              </small>
+                           </a>
+                           </center>
+                        </li>
                         @else
                         <li class="dropdown-header" id="no-notif">
                            <small class="text-sm text-success">

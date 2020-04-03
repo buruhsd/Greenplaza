@@ -108,6 +108,11 @@
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/transfer_rw')}}"><a href="{{route('member.wallet.transfer_rw')}}">Transfer RW</a></li> -->
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="{{route('member.notification.index_notif')}}">
+                                        <img src="{{asset('/frontend/images/gi/lonceng.png')}}" style="width: 20px;" alt="alt text" /> Notification
+                                    </a>
+                                </li>
                                 @endif
                                 <li class="@yield('pengaturan profil')">
                                     <a href="javascript:void(0)">

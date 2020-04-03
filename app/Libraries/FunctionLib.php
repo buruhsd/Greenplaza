@@ -561,7 +561,7 @@ class FunctionLib
         return $data;
     }
 
-    public static function user_notif($id, $limit=10, $type=""){
+    public static function user_notif($id,  $type=""){
         $where = '1';
         $where .= ($type == "")
             ?' AND read_at IS NULL'
@@ -570,7 +570,20 @@ class FunctionLib
             ?'ASC'
             :'DESC';
         $orderBy = 'read_at '.$read_order.', updated_at DESC';
-        $data = App\User::findOrFail($id)->notifikasi()->whereRaw($where)->limit($limit)->orderByRaw($orderBy);
+        $data = App\User::findOrFail($id)->notifikasi()->whereRaw($where)->limit(5)->orderByRaw($orderBy);
+        return $data;
+    }
+
+    public static function user_notif_all($id, $type=""){
+        $where = '1';
+        $where .= ($type == "")
+            ?' AND read_at IS NULL'
+            :' AND read_at IS NOT NULL';
+        $read_order = ($type == "")
+            ?'ASC'
+            :'DESC';
+        $orderBy = 'read_at '.$read_order.', updated_at DESC';
+        $data = App\User::findOrFail($id)->notifikasi()->whereRaw($where)->orderByRaw($orderBy);
         return $data;
     }
 
