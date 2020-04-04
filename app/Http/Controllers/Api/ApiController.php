@@ -23,6 +23,26 @@ use RajaOngkir;
 class ApiController extends Controller
 {
 
+
+    /**
+    * mendapatkan data tambah nomor resi
+    **/
+    public function trans_done(Request $request, $id)
+    {
+        $where = 'trans_detail_trans_id ='.$id;
+        // status transaksi
+        $w_status = ' AND trans_detail_status = 5 AND trans_detail_is_cancel != 1'; 
+        $where .= $w_status;
+
+        $asset = asset('assets/images/product/thumb');
+        $data = Trans_detail::whereRaw($where)
+                ->leftJoin('sys_trans', 'sys_trans.id', '=', 'sys_trans_detail.trans_detail_trans_id')
+                ->leftJoin('sys_produk', 'sys_produk.id', '=', 'sys_trans_detail.trans_detail_produk_id')
+                ->select('sys_trans_detail.*', DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as produk'), 'sys_produk.produk_name')
+                ->get();
+        return response()->json(['status' => 200, 'data'=>$data]);
+    }
+
     /**
      * #seller status 4
      * process di cancell oleh seller

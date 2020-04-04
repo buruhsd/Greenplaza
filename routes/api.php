@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 // untuk mobile
+Route::post('trans_done/{id}', 'Api\\ApiController@trans_done');
 Route::post('cancel', 'Api\\ApiController@cancel');
 Route::post('sending', 'Api\\ApiController@sending');
 Route::post('done_gln/{id}', 'Api\\ApiController@done_gln');
