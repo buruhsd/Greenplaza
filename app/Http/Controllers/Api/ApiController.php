@@ -23,6 +23,20 @@ use RajaOngkir;
 class ApiController extends Controller
 {
 
+    /**
+    * mendapatkan data tambah nomor resi
+    **/
+    public function simpan_resi(Request $request, $id)
+    {
+        $where = 'trans_detail_trans_id ='.$id;
+        // status transaksi
+        $w_status = ' AND trans_detail_status = 5 AND trans_detail_is_cancel != 1'; 
+        $where .= $w_status;
+
+        $data = Trans_detail::whereRaw($where)
+            ->update(array('trans_detail_no_resi' => $request->resi));
+        return response()->json(['status' => 200, 'message'=>'No resi berhasil disimpan.']);
+    }
 
     /**
     * mendapatkan data tambah nomor resi
