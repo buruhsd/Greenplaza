@@ -25,12 +25,12 @@
                 </ul>
                 @if ($p->produk_discount != 0)
                 <p>
-                    <span class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                    <del class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</del>
+                    <span class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
+                    <del class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</del>
                 </p>
                 @else
                 <p>
-                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</span>
+                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</span>
                 </p>
                 @endif
             </div>
@@ -63,12 +63,12 @@
                 </ul>
                 @if ($p->produk_discount != 0)
                 <p>
-                    <span class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
-                    <del class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</del>
+                    <span class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
+                    <del class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</del>
                 </p>
                 @else
                 <p>
-                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</span>
+                    <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</span>
                 </p>
                 @endif
             </div>

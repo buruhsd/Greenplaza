@@ -842,7 +842,7 @@ function price_(){
     var price_myr = document.getElementById('price_myr').value;
     var price_idr = parseFloat((price_myr * myr)).toFixed(2);
     var gln_coin = parseFloat((price_idr/gln)).toFixed(2);
-    document.getElementById('price_idr').value=Math.round(price_idr);
+    document.getElementById('price_idr').value=Math.floor(price_idr);
     document.getElementById('price_gln').value=gln_coin;
 }
 

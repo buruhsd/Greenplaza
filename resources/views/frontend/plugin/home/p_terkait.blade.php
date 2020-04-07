@@ -45,13 +45,13 @@
                                     <p>
                                         <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price, 0)}}</del><span> </span>
                                         <span class="pull-right" style="color:red">{{number_format($n->produk_discount)}} %</span><br>
-                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
+                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($n->produk_price-($n->produk_price * $n->produk_discount / 100))}}</span><br>
                                         <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_myr - ( $n->price_myr * $n->produk_discount/ 100) ) }} </span><br>
                                         <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text( ($n->produk_price - ( $n->produk_price * $n->produk_discount/ 100) )/$price_gln ) }} </span>
                                     </p>
                                 @else
                                     <p>
-                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($n->produk_price, 0)}}</span><br>
+                                        <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($n->produk_price, 0)}}</span><br>
                                         <span class="style-cost-discount-item-front">MYR.{{FunctionLib::number_to_text($n->price_MYR, 0)}}</span><br>
                                         <span class="style-cost-discount-item-front">GLN.{{FunctionLib::number_to_text($n->gln_coin ) }} <br> </span>
                                     </p>

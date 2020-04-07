@@ -23,8 +23,8 @@
                 </ul>
             @if ($p->produk_discount != 0)
             <p>
-                <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
-                <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
+                <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
+                <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
             </p>
             @else
             <p>
@@ -59,8 +59,8 @@
                 </ul>
             @if ($p->produk_discount != 0)
             <p>
-                <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price, 0)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
-                <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
+                <del class="style-cost-discount-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price, 0)}}</del><span> </span><span class="pull-right" style="color:red">{{number_format($p->produk_discount)}} %</span><br>
+                <span class="style-cost-item-front">Rp.{{FunctionLib::number_to_text_idr($p->produk_price-($p->produk_price * $p->produk_discount / 100))}}</span>
             </p>
             @else
             <p>

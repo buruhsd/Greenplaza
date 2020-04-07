@@ -1922,10 +1922,22 @@ class FunctionLib
         return number_format($numb,$decimal,",",".");
     }
 
+
     /**
     * @param
     * @return
     **/
+
+    public static function number_to_text_idr($numb, $decimal=0){
+        return number_format($numb,$decimal,",",".");
+    }
+
+    
+    /**
+    * @param
+    * @return
+    **/
+
     public static function category_by_parent($parent_cat= 0, $limit= 8, $where= 1){
         $cat = Illuminate\Support\Facades\DB::select("SELECT GROUP_CONCAT(lv SEPARATOR ',') as lv FROM (
             SELECT @pv:=(SELECT GROUP_CONCAT(id SEPARATOR ',') FROM sys_category WHERE
