@@ -34,7 +34,7 @@ class ApiController extends Controller
         $where .= $w_status;
 
         $data = Trans_detail::whereRaw($where)
-            ->update(array('trans_detail_no_resi' => $request->resi));
+            ->update(['trans_detail_no_resi' => $request->resi]);
         return response()->json(['status' => 200, 'message'=>'No resi berhasil disimpan.']);
     }
 
