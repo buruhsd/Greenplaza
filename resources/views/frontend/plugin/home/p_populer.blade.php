@@ -39,7 +39,7 @@
         @foreach ($p_populer as $r)
         <div class="product-sidebar-items fix">
             <div class="product-sidebar-img black-opacity">
-                <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px"></a>
+                <a class="lazy" href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$r->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$r->produk_image)}} 1x"></a>
             </div>
             <div class="product-sedebar-content fix">
                 <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>

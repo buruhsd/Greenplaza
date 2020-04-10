@@ -3,7 +3,7 @@
     <div class="product-wrap">
         <div class="product-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
             <span class="discount">{{number_format($d->produk_discount)}}% Off</span>
-                <a href="{{route('detail', $d->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$d->produk_image)}}" ></a>
+                <a href="{{route('detail', $d->produk_slug)}}"><img class="lazy" src="{{asset('assets/images/product/thumb/'.$d->produk_image)}}" data-src="{{asset('assets/images/product/thumb/'.$d->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$d->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$d->produk_image)}} 1x"></a>
         </div>
         <div class="product-content" onclick="javascript:window.location.href='{{route('detail', $d->produk_slug)}}'">
             <h3><a href="{{route('detail', $d->produk_slug)}}">{{$d->produk_name}}</a>

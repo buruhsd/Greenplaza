@@ -21,6 +21,8 @@ Route::get('/change/language/{id}',function($lang){
 Route::get('/comming-soon', 'Member\\FrontController@comming');
 Route::get('/cs', 'Member\\FrontController@cs');
 Route::get('/maintenance', 'Member\\FrontController@maintenance');
+Route::get('p_green', 'LocalApi\\ContentController@get_p_green')->name('.get_p_green');
+
 
 
 // ganti password transaksi

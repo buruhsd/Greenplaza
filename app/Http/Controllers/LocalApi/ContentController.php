@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LocalApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Conf_solusi;
+use App\Models\Produk;
 use Plugin;
 use RajaOngkir;
 use FunctionLib;
@@ -50,6 +51,22 @@ class ContentController extends Controller
     * @param id komplain type
     * @return
     */
+
+    public static function get_p_green($param = []){
+        extract($param);
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $data['price_gln'] = $gln_price['price'];
+        // dd($gln_price);
+        $data['p_green'] = Produk::where('produk_status', '!=', 2)
+            ->where('produk_seller_id', 2)
+            ->orderBy('updated_at', 'DESC')
+            ->limit(8)
+            ->get();
+        return $data;
+    }
+
     public static function get_solusi($id = 0){
         $data = Conf_solusi::first(null, new Conf_solusi)->get();
         if($id != 0){

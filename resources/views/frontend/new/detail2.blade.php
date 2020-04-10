@@ -127,7 +127,7 @@
                                     <div class="product-single-active owl-carousel">
                                         @foreach($detail->images as $image)
                                             <a onclick="modalasdf()"> <div class="item black-opacity zoom">
-                                                 <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt=""  class="hover-shadow cursor">
+                                                 <img class="h400" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt=""  class="hover-shadow cursor" data-src="{{asset('assets/images/product/'.$image->produk_image_image)}}" data-srcset="{{asset('assets/images/product/'.$image->produk_image_image)}} 2x, {{asset('assets/images/product/'.$image->produk_image_image)}} 1x">
                                             </div>
                                             </a>                                        
                                         @endforeach
@@ -135,7 +135,7 @@
                                     <div class="product-thumbnil-active  owl-carousel">
                                         @foreach($detail->images as $image)
                                             <div class="item black-opacity">
-                                                <img class="h100" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="">
+                                                <img class="h100" src="{{ asset('assets/images/product/'.$image->produk_image_image) }}" alt="" data-src="{{asset('assets/images/product/'.$image->produk_image_image)}}" data-srcset="{{asset('assets/images/product/'.$image->produk_image_image)}} 2x, {{asset('assets/images/product/'.$image->produk_image_image)}} 1x">
                                             </div>
                                         @endforeach
                                     </div>

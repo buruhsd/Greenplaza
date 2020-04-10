@@ -349,8 +349,8 @@
     <!-- spacial-product-area end-->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
-<!-- @section('script')
-    <script type="text/javascript">
+@section('script')
+    {{-- <script type="text/javascript">
         function myTimer() {
             $("#a-b-l").toggle("slow");
             $("#a-b-r").toggle("slow");
@@ -358,5 +358,7 @@
         var myVar = setInterval(myTimer, 2000);
         // call this line to stop the loop:
         // clearInterval(myVar);
-    </script>
-@endsection -->
+    </script> --}}
+
+    
+@endsection

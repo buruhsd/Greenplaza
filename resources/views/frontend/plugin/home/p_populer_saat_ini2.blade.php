@@ -3,7 +3,7 @@
         @foreach ($p_populer_saat_ini2 as $p)
         <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity" style="margin-bottom: 1%" onclick="javascript:window.location.href='{{route('detail', $p->produk_slug)}}'">
-                <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$p->produk_image)}}" style="width: 70px"></a>
+                <a class="readmore" href="{{route('detail', $p->produk_slug)}}"><img class="lazy" src="{{asset('assets/images/product/thumb/'.$p->produk_image)}}" style="width: 70px" data-src="{{asset('assets/images/product/thumb/'.$p->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$p->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$p->produk_image)}} 1x"></a>
             </div>
             <div class="product-sedebar-content fix">
                 <h4><a class="readmore" href="{{route('detail', $p->produk_slug)}}">{{$p->produk_name}}</a></h4>
