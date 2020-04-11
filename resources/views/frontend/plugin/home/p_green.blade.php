@@ -13,7 +13,7 @@
             @else($n->produk_discount == 1)
             <span class="new">sale</span>
             @endif
-            <img class="lazy first2" src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$n->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$n->produk_image)}} 1x">
+            <img class="lazy first2" src="{{asset('assets/images/load.gif')}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" >
             {{-- <img class="second second2" src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" > --}}
             <div class="shop-icon">
                 <!-- <ul>

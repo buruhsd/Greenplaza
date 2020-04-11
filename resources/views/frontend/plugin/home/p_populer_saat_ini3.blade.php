@@ -4,7 +4,7 @@
         <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
-                    <img class="lazy" src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$r->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$r->produk_image)}} 1x" />
+                    <img class="lazy" src="{{asset('assets/images/load.gif')}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" />
                 </a>
             </div>
             <div class="product-sedebar-content fix">
@@ -42,7 +42,7 @@
         <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
                 <a href="{{route('detail', $r->produk_slug)}}">
-                    <img class="lazy" src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$r->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$r->produk_image)}} 1x" />
+                    <img class="lazy" src="{{asset('assets/images/load.gif')}}" style="width: 70px" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" />
                 </a>
             </div>
             <div class="product-sedebar-content fix">

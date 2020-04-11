@@ -25,7 +25,7 @@
                                 @if($n->produk_discount > 0)      
                                 <span class="new sale">Sale</span>
                                 @endif
-                                <img class="lazy" src="{{ asset('assets/images/product/'.$n->produk_image) }}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$n->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$n->produk_image)}} 1x">
+                                <img class="lazy" src="{{asset('assets/images/load.gif')}}" onerror="this.src='{!!asset("assets/images/product/nopic.png")!!}'" alt="" data-src="{{asset('assets/images/product/thumb/'.$n->produk_image)}}">
                                 {{-- <img class="first" src="{{ asset('assets/images/product/'.$n->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt="">
                                 <img class="second" src="{{ asset('assets/images/product/'.$n->produk_image) }}" onerror="{{asset('assets/images/product/nopic.png')}}"alt=""> --}}
                                 <!-- <div class="shop-icon">

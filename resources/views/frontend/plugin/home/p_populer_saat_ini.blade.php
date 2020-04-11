@@ -3,7 +3,7 @@
         @foreach ($p_populer_saat_ini as $r)
         <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity">
-                <a class="lazy" href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" data-srcset="{{asset('assets/images/product/thumb/'.$r->produk_image)}} 2x, {{asset('assets/images/product/thumb/'.$r->produk_image)}} 1x"></a>
+                <a class="lazy" href="{{route('detail', $r->produk_slug)}}"><img class="lazy" src="{{asset('assets/images/load.gif')}}" style="width: 70px" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}"></a>
             </div>
             <div class="product-sedebar-content fix">
                 <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
@@ -39,7 +39,7 @@
         @foreach ($p_populer_saat_ini2 as $r)
         <div class="product-sidebar-items fix" onclick="javascript:window.location.href='{{route('detail', $r->produk_slug)}}'">
             <div class="product-sidebar-img black-opacity">
-                <a href="{{route('detail', $r->produk_slug)}}"><img src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}" style="width: 70px"></a>
+                <a href="{{route('detail', $r->produk_slug)}}"><img class="lazy" src="{{asset('assets/images/load.gif')}}" style="width: 70px" data-src="{{asset('assets/images/product/thumb/'.$r->produk_image)}}"></a>
             </div>
             <div class="product-sedebar-content fix">
                 <h4><a href="{{route('detail', $r->produk_slug)}}">{{$r->produk_name}}</a></h4>
