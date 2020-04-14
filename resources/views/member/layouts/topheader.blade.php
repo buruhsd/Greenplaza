@@ -31,7 +31,7 @@
                             <div class="panel-heading clearfix" style="margin-bottom: 10px;">
                                 <div class="input-group pull-left" style="width: 500px;">
                                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                                    <input type="text" class="form-control" placeholder="Cari Nama Produk" name="src" value=""  id="search_table_currency">
+                                    <input type="text" class="form-control" placeholder="{{__('dashboard.produk') }}" name="src" value=""  id="search_table_currency">
                                 </div>
                               </div> 
                         </form>
@@ -120,6 +120,7 @@
                             </li>
                         </ul>
                     </li> -->
+
                     <li class="dropdown user-dropdown">
                         <?php 
                             $notif = FunctionLib::user_notif(Auth::id(), 10);
@@ -157,6 +158,13 @@
                             @endif
                         </ul>
                     </li>
+                    <li class="dropdown user-dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="{{URL('/change/language/id')}}">Indonesia</a></li>
+                        <li><a href="{{URL('/change/language/en')}}">English</a></li>
+                     </ul>
+                    </li>
                     <li style="margin-right: -30px"><a href="">{{Auth::user()->name}}</a></li>
                     <li class="dropdown user-dropdown">
                         @if (\Auth::check())
@@ -177,7 +185,7 @@
                             <li style="cursor:pointer;">
                                 <a onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('front.logout') }}
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
@@ -185,6 +193,7 @@
                             </li>
                         </ul>
                     </li>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

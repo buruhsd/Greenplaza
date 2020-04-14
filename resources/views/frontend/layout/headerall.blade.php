@@ -139,8 +139,8 @@
                   <li class="sidemenu-items" style="margin-right: -50px">
                      <a href="javascript:void(0);" class="btn button-style-login log-head" >{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
                      <ul>
-                        <li><a href="{{URL('/change/language/id')}}">ID</a></li>
-                        <li><a href="{{URL('/change/language/en')}}">Eng</a></li>
+                        <li><a href="{{URL('/change/language/id')}}">Indosnesia</a></li>
+                        <li><a href="{{URL('/change/language/en')}}">English</a></li>
                      </ul>
                   </li>
                </ul>

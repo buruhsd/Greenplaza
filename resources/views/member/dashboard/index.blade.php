@@ -6,7 +6,7 @@
 </div>
 <div class="panel-body">
     <div class="pull-right">
-        <p class="stats-info hidden">Total Transaksi :
+        <p class="stats-info hidden">Total {{__('dashboard.transaksi') }} :
             <span class="stats-number">
                 Rp. {{FunctionLib::number_to_text(
                     FunctionLib::sum_trans("", Auth::id())
@@ -21,7 +21,7 @@
 <div id="main-wrapper">
 @if(Auth::user()->seller_active())
     <div class="panel panel-white stats-widget bg-info">
-        <h3 class="breadcrumb-header">Penjualan</h3>
+        <h3 class="breadcrumb-header">{{__('dashboard.penjualan') }}</h3>
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -36,7 +36,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pesanan</p>
+                                    <p class="stats-info">{{__('dashboard.pesanan') }}</p>
                                 </div>
                                 
                             </div>
@@ -74,7 +74,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pengepakan</p>
+                                    <p class="stats-info">{{__('dashboard.pengepakan') }}</p>
                                 </div>
                                 
                             </div>
@@ -93,7 +93,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pengiriman</p>
+                                    <p class="stats-info">{{__('dashboard.pengiriman') }}</p>
                                 </div>
                                 
                             </div>
@@ -112,7 +112,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Barang Sampai</p>
+                                    <p class="stats-info">{{__('dashboard.barang_sampai') }}</p>
                                 </div>
                                 
                             </div>
@@ -139,7 +139,7 @@
                                         )
                                     }}
                                 </span> -->
-                                <p class="stats-info">Penarikan CW</p>
+                                <p class="stats-info">{{__('dashboard.penarikan_cw') }}</p>
                             </div>
                             
                         </div>
@@ -158,7 +158,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Total Transaksi</p>
+                                    <p class="stats-info">Total {{__('dashboard.transaksi') }}</p>
                                 </div>
                                 
                             </div>
@@ -170,7 +170,7 @@
     </div>
 @endif
     <div class="panel panel-white stats-widget bg-info">
-        <h3 class="breadcrumb-header">Pembelian</h3>
+        <h3 class="breadcrumb-header">{{__('dashboard.pembelian') }}</h3>
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -186,7 +186,7 @@
                                             :FunctionLib::number_to_text(0);?>
                                         Rp. {{$chart}}
                                     </span>
-                                    <p class="stats-info">Keranjang</p>
+                                    <p class="stats-info">{{__('front.kerancang') }}</p>
                                 </div>
                                 
                             </div>
@@ -205,7 +205,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pesanan</p>
+                                    <p class="stats-info">{{__('dashboard.pesanan') }}</p>
                                 </div>
                                 
                             </div>
@@ -243,7 +243,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pengepakan</p>
+                                    <p class="stats-info">{{__('dashboard.pengepakan') }}</p>
                                 </div>
                                 
                             </div>
@@ -262,7 +262,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Pengiriman</p>
+                                    <p class="stats-info">{{__('dashboard.pengiriman') }}</p>
                                 </div>
                                 
                             </div>
@@ -281,7 +281,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Barang Sampai</p>
+                                    <p class="stats-info">{{__('dashboard.barang_sampai') }}</p>
                                 </div>
                                 
                             </div>
@@ -320,7 +320,7 @@
                                             )
                                         }}
                                     </span>
-                                    <p class="stats-info">Total Transaksi</p>
+                                    <p class="stats-info">Total {{__('dashboard.transaksi') }}</p>
                                 </div>
                                 
                             </div>
