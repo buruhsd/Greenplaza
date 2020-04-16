@@ -3,11 +3,11 @@
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">
-    <h3 class="breadcrumb-header">History Saldo</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.history') }} Saldo</h3>
 </div>
 <div class="panel-body">
 <div class="pull-right">
-    <p class="stats-info">Grade Toko :
+    <p class="stats-info">{{__('dashboard.grade_toko') }} :
     {{-- <span class="stats-number">$781,876</span></p> --}}
     </div>
 </div>
@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="panel-heading clearfix">
-                        <h4 class="panel-title">history Saldo {{strtoupper($item->type->wallet_type_name)}}</h4>
+                        <h4 class="panel-title">{{__('dashboard.history') }} Saldo {{strtoupper($item->type->wallet_type_name)}}</h4>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive invoice-table">
@@ -31,9 +31,9 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">No</th>
-                                        <td>Tanggal</td>
-                                        <td>Cash In</td>
-                                        <td>Cash Out</td>
+                                        <td>{{__('dashboard.date') }}</td>
+                                        <td>{{__('dashboard.cash_in') }}</td>
+                                        <td>{{__('dashboard.cash_out') }}</td>
                                         <td>Detail</td>
                                     </tr>
                                     <?php $no=1; ?>
@@ -47,7 +47,7 @@
                                         </tr>
                                     @endforeach
                                     <tr>
-                                        <td colspan="5"><a href="{{route('member.wallet.type', [$item->type->wallet_type_name])}}" type="button" class="btn btn-info">Lihat Semua</a></td>
+                                        <td colspan="5"><a href="{{route('member.wallet.type', [$item->type->wallet_type_name])}}" type="button" class="btn btn-info">{{__('dashboard.all') }}</a></td>
                                     </tr>
                                 </tbody>
                             </table>

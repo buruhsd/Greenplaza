@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Pesan</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.pesan') }}</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -34,13 +34,13 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Pesan</h4>
+                    <h4 class="panel-title">{{__('dashboard.pesan') }}</h4>
                     <button type="button" onclick="search('from');" class="btn btn-danger">
-                        <i class="fa fa-arrow-down"></i> Inbox
+                        <i class="fa fa-arrow-down"></i> {{__('dashboard.inbox') }}
                         <span class="label label-default pull-right"></span>
                     </button>
                     <button type="button" onclick="search('to');" class="btn btn-info">
-                        <i class="fa fa-arrow-up"></i> Outbox
+                        <i class="fa fa-arrow-up"></i> {{__('dashboard.outbox') }}
                         <span class="label label-default pull-right"></span>
                     </button>
                     <button type="button" onclick="search('arsip');" class="btn btn-warning">
@@ -76,11 +76,11 @@
                                                     @endif
                                                 @elseif(isset($_GET['status']) && $_GET['status'] !== 'arsip')
                                                     @if($item->from->username)
-                                                        <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
+                                                        <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>{{__('dashboard.send_message_to') }} {{$item->from->name}}</a>
                                                     @endif
                                                 @elseif($item->message_from_id !== Auth::id())
                                                     @if($item->to->username)
-                                                        <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>Send Message to {{$item->from->name}}</a>
+                                                        <a href="{{route('member.message.create', $item->from->username)}}" class='btn btn-warning btn-xs'>{{__('dashboard.send_message_to') }} {{$item->from->name}}</a>
                                                     @endif
                                                 @endif
                                                 <a href="{{route('member.message.arsip', $item->id)}}" class='btn btn-warning btn-xs'>Arsip</a>

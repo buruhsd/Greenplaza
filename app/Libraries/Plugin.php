@@ -31,12 +31,12 @@ class Plugin
         extract($param);
         $data['p_populer_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('produk_viewer', 'DESC')
-            ->limit(7)
+            ->limit(5)
             ->get();
         $data['p_populer_saat_ini2'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('produk_viewer', 'DESC')
-            ->limit(7)
-            ->skip(7)
+            ->limit(5)
+            ->skip(5)
             ->get();
         return view('frontend.plugin.home.p_populer_saat_ini', $data)->render();
     }
@@ -67,12 +67,12 @@ class Plugin
         extract($param);
         $data['p_populer_saat_ini3'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('produk_viewer', 'DESC')
-            ->limit(4)
+            ->limit(3)
             ->get();
         $data['p_populer_saat_ini32'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('produk_viewer', 'DESC')
-            ->limit(4)
-            ->skip(4)
+            ->limit(3)
+            ->skip(3)
             ->get();
         return view('frontend.plugin.home.p_populer_saat_ini3', $data)->render();
     }

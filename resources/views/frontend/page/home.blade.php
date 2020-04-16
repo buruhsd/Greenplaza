@@ -275,7 +275,7 @@
     </div>
     <!-- .product-area end -->
     <!-- testmonial-area start -->
-    <div class="testmonial-area mb-30">
+    {{-- <div class="testmonial-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12 sm-mb-30">
@@ -307,7 +307,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- testmonial-area end -->
     <!-- spacial-product-area start-->
     <div class="spacial-product-area mb-30">

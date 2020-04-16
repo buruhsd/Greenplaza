@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="page-title">
-    <h3 class="breadcrumb-header">Diskusi Produk</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.diskusi_produk') }}</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
@@ -34,13 +34,13 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Diskusi Produk</h4>
+                    <h4 class="panel-title">{{__('dashboard.diskusi_produk') }}</h4>
                     <button type="button" onclick="search('from');" class="btn btn-danger">
-                        <i class="fa fa-arrow-down"></i> Inbox
+                        <i class="fa fa-arrow-down"></i> {{__('dashboard.inbox') }}
                         <span class="label label-default pull-right"></span>
                     </button>
                     <button type="button" onclick="search('to');" class="btn btn-info">
-                        <i class="fa fa-arrow-up"></i> Outbox
+                        <i class="fa fa-arrow-up"></i> {{__('dashboard.outbox') }}
                         <span class="label label-default pull-right"></span>
                     </button>
                     <button type="button" onclick="search('arsip');" class="btn btn-warning">
@@ -87,7 +87,7 @@
                                                                             <img class="media-object img-rounded h100" src="{{asset('assets/images/profil/'.$reply->user->user_detail->user_detail_image)}}" onerror="">
                                                                         </a>
                                                                         <div class="media-body">
-                                                                            <h4 class="media-heading">By {{$reply->user->name}}</h4>
+                                                                            <h4 class="media-heading">{{__('dashboard.by') }} {{$reply->user->name}}</h4>
                                                                             <p>{{$reply->produk_discuss_reply_text}}</p>
                                                                             <ul class="list-inline list-unstyled">
                                                                                 <li><span><i class="glyphicon glyphicon-calendar"></i> {{FunctionLib::datetime_indo($item->created_at, true, 'full')}} </span></li>

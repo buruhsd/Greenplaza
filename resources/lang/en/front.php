@@ -43,6 +43,8 @@ return[
 	'keranjang' => 'Cart',
 	'profil' => 'Profile',
 	'logout' => 'Logout',
+	'tambah_ke_keranjang' => 'Add To Cart',
+
 ];
 
 ?>

@@ -39,6 +39,7 @@ return[
 	'baru_saat' => 'Produk Baru Saat Ini',
 	'logout' => 'Keluar',
 	'p' => 'Produk',
+	'tambah_ke_keranjang' => 'Tambah Ke Keranjang',
 
 
 ];

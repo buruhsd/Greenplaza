@@ -9,7 +9,7 @@
     <div class="banner-content">
         <div class="banner-info">
             <!-- <h2>Sale <span>50%</span> off</h2> -->
-            <h3><a href="{{url("/comming-soon")}}">{{__('front.coming') }}</a></h3>
+            <h3><a href="{{url("/comming-soon")}}">{{__('front.coming_soon') }}</a></h3>
         </div>
     </div>
 </div>

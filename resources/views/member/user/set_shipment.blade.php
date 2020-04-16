@@ -2,14 +2,14 @@
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">
-    <h3 class="breadcrumb-header">Atur Kurir</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.kurir') }}</h3>
 </div>
 <div id="main-wrapper">                      
     <div class="row">
         <div class="col-lg-12 col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Pilih Kurir</h4>
+                    <h4 class="panel-title">{{__('dashboard.pilih_kurir') }}</h4>
                 </div>
                 {!! Form::open([
                     'method' => 'POST',
@@ -35,7 +35,7 @@
                             {!! $errors->first('user_shipment_shipment_id', '<p class="help-block">Pengiriman dibutuhkan</p>') !!}
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">{{__('dashboard.simpan') }}</button>
                 {!! Form::close() !!}
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <?php 
                     $shipment = App\Models\Shipment::whereIn('id', $user->user_shipment()->pluck('user_shipment_shipment_id')->toArray())->pluck('shipment_name')->toArray();
                 ?>
-                Layanan Kurir Anda : {{implode (", ", $shipment)}}
+                {{__('dashboard.layanan_kurir_anda') }} : {{implode (", ", $shipment)}}
             </label>
         </div>
     </div>

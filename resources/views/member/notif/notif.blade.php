@@ -3,7 +3,7 @@
                <!-- Page Inner -->
                 <div class="page-inner">
                     <div class="page-title">
-                        <h3 class="breadcrumb-header">Notification</h3>
+                        <h3 class="breadcrumb-header">{{__('front.notif') }}</h3>
                     </div>
                     <div class="panel-body">
                     </div>
@@ -21,7 +21,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="panel panel-white">
                                     <div class="panel-heading clearfix">
-                                        <h4 class="panel-title">Notification</h4>
+                                        <h4 class="panel-title">{{__('dashboard.notif') }}</h4>
                                     </div>
                                     <div class="panel-body">
                                         <div class="table-responsive invoice-table">
@@ -32,8 +32,8 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>Notification</th>
-                                                        <th>Date</th>
+                                                        <th>{{__('front.notif') }}</th>
+                                                        <th>{{__('dashboard.date') }}</th>
                                                         
                                                         
                                                     </tr>
@@ -63,7 +63,7 @@
                                                     </tr>
                                                         @endforeach
                                                 @else
-                                                <td>No Notification</td>
+                                                <td>{{__('dashboard.kosong') }}</td>
                                                 @endif
                                                 </tbody>
                                             </table>
