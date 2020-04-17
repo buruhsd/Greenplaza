@@ -12,7 +12,7 @@
                             <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                             {{-- {{dd($cat)}} --}}
                             @foreach($cat as $item)
-                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><i class="fa fa-chain-broken"></i> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
+                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><img src="{{asset('gi_image/ikon/'.$item->category_image)}}" alt="" style="width: 15px" /> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
                                     <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
                                     @if($sub_cat->count() > 0)
                                         <ul class="sub-cetagory col-md-12 col-sm-12">
@@ -74,7 +74,7 @@
     </div>
     <!-- slider-area end -->
     <!-- featured-area start -->
-    <div class="featured-area">
+    <div class="featured-area" style="margin-bottom: -55px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 d-none d-lg-block">
@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-    <div class="featured-area3">
+    {{-- <div class="featured-area3">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 d-none d-lg-block">
@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- featured-area end -->
     <!-- .product-area start -->
     <div class="product-area">
@@ -158,23 +158,22 @@
                         {!!Plugin::p_harga_diskon()!!}
                     </div>
                     <div class="tag-wrap">
-                        <h2 class="section-title">{{__('front.k_populer') }}</h2>
+                        {{-- <h2 class="section-title">{{__('front.k_populer') }}</h2> --}}
                         <ul>
                         <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(8)->get();?>
-                                {{-- {{dd($cat)}} --}}
-                                @foreach($cat as $item)
+                                {{-- @foreach($cat as $item)
                                     <li>
                                         <a href="{{route('category', ['cat'=>$item->category_slug])}}">
                                             {{ucfirst(strtolower($item->category_name))}}
                                         </a>
                                     </li>
-                                @endforeach
+                                @endforeach --}}
                         </ul>
                     </div>
-                    <div class="product-sidebar">
+                    {{-- <div class="product-sidebar">
                         <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini2()!!}
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-9 col-md-8">
                     <div class="shop-area non-margin">
@@ -215,7 +214,7 @@
     </div>
     <!-- .product-area end -->
     <!-- banner-area start -->
-    <div class="banner-area mb-30">
+    {{-- <div class="banner-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 d-none d-lg-block">
@@ -248,17 +247,17 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- banner-area end -->
     <!-- .product-area start -->
     <div class="product-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4 col-12">
-                    <div class="product-sidebar">
+                    {{-- <div class="product-sidebar">
                         <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini3()!!}
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="shop-area">
@@ -310,7 +309,7 @@
     </div> --}}
     <!-- testmonial-area end -->
     <!-- spacial-product-area start-->
-    <div class="spacial-product-area mb-30">
+    {{-- <div class="spacial-product-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -345,7 +344,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- spacial-product-area end-->
     <div id="ajax-modal" class="modal" tabindex="-1" style="display: none;"></div>
 @endsection
