@@ -12,7 +12,7 @@
                             <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
                             {{-- {{dd($cat)}} --}}
                             @foreach($cat as $item)
-                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><img src="{{asset('gi_image/ikon/'.$item->category_image)}}" alt="" style="width: 15px" /> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
+                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><img src="{{asset('gi_image/ikon/'.$item->category_image)}}" alt="" style="width: 20px" /> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
                                     <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
                                     @if($sub_cat->count() > 0)
                                         <ul class="sub-cetagory col-md-12 col-sm-12">
