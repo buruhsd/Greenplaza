@@ -2,54 +2,55 @@
 @section('title', 'Home')
 @section('content')
 
-    <div class="slider-area" class="space-header-and-body" style="padding-top: 62px;margin-bottom: 180px;">
+    <div class="slider-area" class="space-header-and-body" style="padding-top: 62px;margin-bottom: 0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="cetagory-wrap home">
-                        <span>{{__('front.all-cat') }}</span>
-                        <ul class="cetagory-items">
-                            <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(5)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
-                            {{-- {{dd($cat)}} --}}
-                            @foreach($cat as $item)
-                                <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><img src="{{asset('gi_image/ikon/'.$item->category_image)}}" alt="" style="width: 20px" /> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
-                                    <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
-                                    @if($sub_cat->count() > 0)
-                                        <ul class="sub-cetagory col-md-12 col-sm-12">
-                                            <li>
-                                                <p>{{ucfirst(strtolower($item->category_name))}}</p>
-                                                <ul>
-                                                    @foreach($sub_cat as $item2)
-                                                        <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">
-                                                            {{ucfirst(strtolower($item2->category_name))}}</a>
-                                                            <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item2->id)->limit(10)->get();?>
-                                                            @if($sub_cat->count() > 0)
-                                                                <ul class="sub-cetagory col-md-12 col-sm-12">
-                                                                    <li>
-                                                                        <p>{{ucfirst(strtolower($item2->category_name))}}</p>
-                                                                        <ul>
-                                                                            @foreach($sub_cat as $item3)
-                                                                                <li><a href="{{route('category', ['cat'=>$item3->category_slug])}}">
-                                                                                    {{ucfirst(strtolower($item3->category_name))}}</a>
-                                                                                </li>
-                                                                            @endforeach
-                                                                            <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">Lainya...</a>
+                            <div class="cetagory-wrap home">
+                                <span>{{__('front.all-cat') }}</span>
+                                <ul class="cetagory-items">
+                                    <?php $cat = App\Models\Category::whereRaw('category_parent_id = 0')->limit(10)->orderBy('position', 'ASC')->orderBy('updated_at', 'DESC')->get();?>
+                                    {{-- {{dd($cat)}} --}}
+                                    @foreach($cat as $item)
+                                        <li><a href="{{route('category', ['cat'=>$item->category_slug])}}"><img src="{{asset('gi_image/ikon/'.$item->category_image)}}" alt="" style="width: 20px" /> {{ucfirst(strtolower($item->category_name))}} <i class="fa fa-angle-right pull-right"></i></a>
+                                            <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item->id)->limit(10)->get();?>
+                                            @if($sub_cat->count() > 0)
+                                                <ul class="sub-cetagory col-md-12 col-sm-12">
+                                                    <li>
+                                                        <p>{{ucfirst(strtolower($item->category_name))}}</p>
+                                                        <ul>
+                                                            @foreach($sub_cat as $item2)
+                                                                <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">
+                                                                    {{ucfirst(strtolower($item2->category_name))}}</a>
+                                                                    <?php $sub_cat = App\Models\Category::whereRaw('category_parent_id = '.$item2->id)->limit(10)->get();?>
+                                                                    @if($sub_cat->count() > 0)
+                                                                        <ul class="sub-cetagory col-md-12 col-sm-12">
+                                                                            <li>
+                                                                                <p>{{ucfirst(strtolower($item2->category_name))}}</p>
+                                                                                <ul>
+                                                                                    @foreach($sub_cat as $item3)
+                                                                                        <li><a href="{{route('category', ['cat'=>$item3->category_slug])}}">
+                                                                                            {{ucfirst(strtolower($item3->category_name))}}</a>
+                                                                                        </li>
+                                                                                    @endforeach
+                                                                                    <li><a href="{{route('category', ['cat'=>$item2->category_slug])}}">Lainya...</a>
+                                                                                </ul>
+                                                                            </li>
                                                                         </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            @endif
-                                                        </li>
-                                                    @endforeach
-                                                    <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">Lainya...</a>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                            <li><a href="{{route('category', ['cat'=>$item->category_slug])}}">Lainya...</a>
+                                                        </ul>
+                                                    </li>
                                                 </ul>
-                                            </li>
-                                        </ul>
-                                    @endif
-                                </li>
-                            @endforeach
-                            <li><a href="{{route('category')}}"><i class="fa fa-chain-broken"></i> {{__('front.all-cat') }}... <i class="fa fa-angle-right pull-right"></i></a>
-                        </ul>
-                    </div>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                    <li><a href="{{route('category')}}"> {{__('front.all-cat') }}... <i class="fa fa-angle-right pull-right"></i></a></li>
+                                </ul>
+                            </div>
+                        
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="slider-active owl-carousel next-prev-btn">
@@ -74,12 +75,15 @@
     </div>
     <!-- slider-area end -->
     <!-- featured-area start -->
-    <div class="featured-area" style="margin-bottom: -55px">
+    <div class="featured-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-12 d-none d-lg-block">
-                    <div class="featured2-wrap">
-                        <div class="featured-img ">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    
+                </div>
+                <div class="col-lg-9 col-md-9 d-none d-lg-block">
+                    <div class="card" style="box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;">
+                        <div class="card-body">
                             <table class="table table-borderless" >
                               <tbody>
                                 <tr>
@@ -109,6 +113,7 @@
                             </table>
                         </div>
                     </div>
+                        
                 </div>
             </div>
         </div>
@@ -145,18 +150,18 @@
     </div> --}}
     <!-- featured-area end -->
     <!-- .product-area start -->
-    <div class="product-area">
+    <div class="product-area" style="margin-top: 10px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-4">
-                    <div class="product-sidebar">
+                    {{-- <div class="product-sidebar">
                         <h2 class="section-title">{{__('front.populer_saat') }}</h2>
                         {!!Plugin::p_populer_saat_ini()!!}
                     </div>
                     <div class="product-sidebar" style="width: 100%">
                         <h2 class="section-title">{{__('front.harga_diskon') }}</h2>
                         {!!Plugin::p_harga_diskon()!!}
-                    </div>
+                    </div> --}}
                     <div class="tag-wrap">
                         {{-- <h2 class="section-title">{{__('front.k_populer') }}</h2> --}}
                         <ul>
