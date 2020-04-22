@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 // untuk mobile
-Route::post('category', 'Api\\ApiController@category');
+Route::post('main_cat', 'Api\\ApiController@category');
 Route::post('simpan_resi/{id}', 'Api\\ApiController@simpan_resi');
 Route::post('trans_done/{id}', 'Api\\ApiController@trans_done');
 Route::post('cancel', 'Api\\ApiController@cancel');
