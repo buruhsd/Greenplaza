@@ -19,9 +19,20 @@ use App\Models\Trans_voucher;
 use App\Models\Trans;
 use App\Models\Trans_gln;
 use RajaOngkir;
+use App\Models\Category;
 
 class ApiController extends Controller
 {
+    /**/
+    public function category(Request $request){
+        if($request->type == 1){
+            $cat = Category::where('category_parent_id', 0)->take(6)->get();
+            return response()->json(['status' => 200, 'data'=>$cat]);
+        }else{
+            $cat = Category::get();
+            return response()->json(['status' => 200, 'data'=>$cat]);
+        }
+    }
 
     /**
     * mendapatkan data tambah nomor resi
