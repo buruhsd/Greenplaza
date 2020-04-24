@@ -180,7 +180,7 @@
                         {!!Plugin::p_populer_saat_ini2()!!}
                     </div> --}}
                 </div>
-                <div class="col-lg-9 col-md-8">
+                <div class="col-lg-9 col-md-12">
                     <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-12">
@@ -188,6 +188,7 @@
                             </div>
                         </div>
                         {!!Plugin::p_green()!!}
+                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_green') }}">{{__('front.lihat_semua') }}</a></p>
                     </div>
                     <div class="shop-area non-margin">
                         <div class="row">
@@ -196,15 +197,16 @@
                             </div>
                         </div>
                         {!!Plugin::p_baru_saat_ini()!!}
+                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
                     </div>
-                    <div class="banner-wrap mb-30">
+                    {{-- <div class="banner-wrap mb-30">
                         {!!Plugin::view('iklan', [
                                 'id'=>8,
                                 'type'=>'1',
                                 'name'=>'banner7',
                             ])
                         !!}
-                    </div>
+                    </div> --}}
                     <div class="shop-area non-margin">
                         <div class="row">
                             <div class="col-lg-4 col-sm-3 col-12">
@@ -212,6 +214,7 @@
                             </div>
                         </div>
                         {!!Plugin::p_baru()!!}
+                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru') }}">{{__('front.lihat_semua') }}</a></p>
                     </div>
                 </div>
             </div>
@@ -272,6 +275,7 @@
                             </div>
                         </div>
                         {!!Plugin::p_pilihan_saat_ini()!!}
+                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_pilihan_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
                     </div>
                 </div>
             </div>

@@ -44,6 +44,8 @@ return[
 	'profil' => 'Profile',
 	'logout' => 'Logout',
 	'tambah_ke_keranjang' => 'Add To Cart',
+	'lihat_semua' => 'See All',
+
 
 ];
 

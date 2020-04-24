@@ -91,7 +91,7 @@ class Plugin
         $data['p_green'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_seller_id', 2)
             ->orderBy('updated_at', 'DESC')
-            ->limit(8)
+            ->limit(4)
             ->get();
         return view('frontend.plugin.home.p_green', $data);
     }
@@ -108,7 +108,7 @@ class Plugin
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_baru_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->orderBy('updated_at', 'DESC')
-            ->limit(8)
+            ->limit(4)
             ->get();
         return view('frontend.plugin.home.p_baru_saat_ini', $data)->render();
     }
@@ -142,11 +142,11 @@ class Plugin
         // $data['users'] = User::with('roles')->where('name','=','member')->pluck('id')->get();
         $data['p_baru'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '=', 0)
-            ->limit(8)
+            ->limit(4)
             ->orderBy('created_at', 'DESC')->get();
         $data['p_baru_diskon'] = App\Models\Produk::where('produk_status', '!=', 2)
             ->where('produk_discount', '>', 0)
-            ->limit(8)
+            ->limit(4)
             ->orderBy('created_at', 'DESC')->get();
         return view('frontend.plugin.home.p_baru', $data)->render();
     }
@@ -163,7 +163,7 @@ class Plugin
         $data['myr'] = $kurs['Data']['MYR']['Beli'];
         $data['p_pilihan_saat_ini'] = App\Models\Produk::where('produk_status', '!=', 2)->withCount('trans_detail')
             ->orderBy('trans_detail_count', 'desc')
-            ->limit(8)
+            ->limit(4)
             ->get();
         return view('frontend.plugin.home.p_pilihan_saat_ini', $data)->render();
     }

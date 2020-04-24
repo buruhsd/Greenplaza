@@ -162,8 +162,8 @@
     // product-active
     $('.product-active').owlCarousel({
         margin: 15,
-        loop: true,
-        autoplay: true,
+        loop: false,
+        autoplay: false,
         autoplayTimeout: 4000,
         nav: true,
         smartSpeed: 800,

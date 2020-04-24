@@ -1074,4 +1074,62 @@ class ProdukController extends Controller
         ob_end_clean();
         return $script;
     }
+
+    public function p_green(){
+        $perPage = 12;
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $data['price_gln'] = $gln_price['price'];
+        // dd($gln_price);
+        $data['p_green'] = Produk::where('produk_status', '!=', 2)
+            ->where('produk_seller_id', 2)
+            ->orderBy('updated_at', 'DESC')
+            ->limit(4)
+            ->paginate($perPage);
+        return view('frontend.p_green', $data);
+    }
+
+    public function p_baru_saat_ini(){
+        $perPage = 12;
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $data['price_gln'] = $gln_price['price'];
+        // dd($gln_price);
+        $data['p_baru_saat_ini'] = Produk::where('produk_status', '!=', 2)
+            ->orderBy('updated_at', 'DESC')
+            ->limit(4)
+            ->paginate($perPage);
+        return view('frontend.p_baru_saat_ini', $data);
+    }
+
+    public function p_baru(){
+        $perPage = 12;
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $data['price_gln'] = $gln_price['price'];
+        // dd($gln_price);
+        $data['p_baru'] = Produk::where('produk_status', '!=', 2)
+            ->orderBy('created_at', 'DESC')
+            ->limit(4)
+            ->paginate($perPage);
+        return view('frontend.p_baru', $data);
+    }
+
+    public function p_pilihan_saat_ini(){
+        $perPage = 12;
+        $gln_price = json_decode(FunctionLib::priceGln(), true);
+        $kurs = json_decode(FunctionLib::cekKurs(), true);
+        $data['myr'] = $kurs['Data']['MYR']['Beli'];
+        $data['price_gln'] = $gln_price['price'];
+        // dd($gln_price);
+        $data['p_pilihan_saat_ini'] = Produk::where('produk_status', '!=', 2)
+            ->withCount('trans_detail')
+            ->orderBy('trans_detail_count', 'desc')
+            ->limit(4)
+            ->paginate($perPage);
+        return view('frontend.p_pilihan_saat_ini', $data);
+    }
 }

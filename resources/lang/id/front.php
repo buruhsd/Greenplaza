@@ -40,6 +40,7 @@ return[
 	'logout' => 'Keluar',
 	'p' => 'Produk',
 	'tambah_ke_keranjang' => 'Tambah Ke Keranjang',
+	'lihat_semua' => 'Lihat Semua',
 
 
 ];

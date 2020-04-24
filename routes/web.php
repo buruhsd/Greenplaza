@@ -698,6 +698,10 @@ Route::get('/detail/{slug}', 'Member\\FrontController@detail')->name('detail');
 Route::get('/detail_asdf/{slug}', 'Member\\FrontController@detail_asdf')->name('detail_asdf');
 Route::get('/etalase/{user_store}', 'Member\\FrontController@etalase')->name('etalase');
 Route::get('/category', 'Member\\FrontController@category')->name('category');
+Route::get('/green_production', 'Member\\ProdukController@p_green')->name('p_green');
+Route::get('/produk_baru_saat_ini', 'Member\\ProdukController@p_baru_saat_ini')->name('p_baru_saat_ini');
+Route::get('/produk_baru', 'Member\\ProdukController@p_baru')->name('p_baru');
+Route::get('/produk_pilihan_saat_ini', 'Member\\ProdukController@p_pilihan_saat_ini')->name('p_pilihan_saat_ini');
 Route::get('/brand', 'Member\\FrontController@brand')->name('brand');
 Route::get('/giplaza_product', 'Member\\FrontController@product_admin_asdf')->name('product_admin_asdf');
 
