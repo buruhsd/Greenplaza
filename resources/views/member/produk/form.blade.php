@@ -493,7 +493,7 @@
                 </div>
                 <!-- {!! Form::text('produk_size', null, [
                     'class' => 'form-control', 
-                    'placeholder' => {{__('dashboard.ukuran')}}, 
+                    'placeholder' => "{{__('dashboard.ukuran')}}", 
                     'required'
                 ])!!} -->
             {!! $errors->first('produk_size', '<p class="help-block">:message</p>') !!}
@@ -506,7 +506,7 @@
                     {!! Form::number('produk_length', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => {{__('dashboard.length') }}, 
+                        'placeholder' => "{{__('dashboard.length') }}", 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -521,7 +521,7 @@
                     {!! Form::number('produk_wide', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => {{__('dashboard.width') }}, 
+                        'placeholder' => "{{__('dashboard.width') }}", 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -535,7 +535,7 @@
                     {!! Form::number('produk_height', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => {{__('dashboard.height') }}, 
+                        'placeholder' => "{{__('dashboard.height') }}", 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -627,7 +627,7 @@
                     {!! Form::text('produk_weight', (isset($produk->produk_discount))?$produk->produk_weight:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => {{__('dashboard.weight') }}, 
+                        'placeholder' => "{{__('dashboard.weight') }}", 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -643,7 +643,7 @@
                     {!! Form::text('produk_discount', (isset($produk->produk_discount))?$produk->produk_discount:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => {{__('dashboard.diskon') }}, 
+                        'placeholder' => "{{__('dashboard.diskon') }}", 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -708,7 +708,7 @@
             <div class="col-md-9">
                 {!! Form::textarea('produk_note', null, [
                   'class' => 'form-control', 
-                  'placeholder' => {{__('detail.color')}}, 
+                  'placeholder' => "{{__('detail.color')}}", 
                 ])!!}
                 {!! $errors->first('produk_note', '<p class="help-block">:message</p>') !!}
             </div>
