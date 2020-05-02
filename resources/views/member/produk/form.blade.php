@@ -146,7 +146,7 @@
     <div class="panel-body">
         @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', __('detail.kategori')':', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', 'Category', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <option value=''>-- Choose Category --</option>
@@ -161,7 +161,7 @@
         </div>
         @elseif(str_contains(Request::url(), ['edit']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', __('detail.kategori')':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', 'Category:', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <!-- <option selected>{{$produk->category->category_name}} </option> -->
@@ -199,7 +199,7 @@
         </div>
         @endif
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_name') ? 'has-error' : ''}}">
-            {!! Form::label('produk_name', __('dashboard.nama')':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_name', 'Name:', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::text('produk_name', null, [
                     'class' => 'form-control', 
@@ -314,7 +314,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
-            {!! Form::label('produk_location', __('dashboard.location'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_location', 'Location:', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 @if(str_contains(Request::url(), ['create']))
                     <select name='produk_location' class="form-control">
@@ -333,13 +333,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_price') ? 'has-error' : ''}}">
-            {!! Form::label('produk_price', __('dashboard.price') ,'(MYR)', ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_price', 'Price (MYR)', ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('produk_price', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => "{{__('dashboard.price') }}", 
+                                'placeholder' => "Price", 
                                 'step' => "any",
                                 'id'    => "price_myr",
                                 'onkeyup' => "price_()",
@@ -359,13 +359,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('price_idr') ? 'has-error' : ''}}">
-            {!! Form::label('price_myr', __('dashboard.price') ,'(IDR)',':', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('price_myr', 'Price (IDR)', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('price_myr', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => "{{__('dashboard.price') }}(IDR)", 
+                                'placeholder' => 'Price (IDR)', 
                                 'step' => "any",
                                 'id' => "price_idr",
                                 'readonly',
@@ -413,7 +413,7 @@
             </div>
         </div>        
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
-            {!! Form::label('produk_size', __('dashboard.ukuran'),':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_size', 'Size', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="btn-group" data-toggle="buttons">
                     @if(str_contains(Request::url(), ['create']))
@@ -493,20 +493,20 @@
                 </div>
                 <!-- {!! Form::text('produk_size', null, [
                     'class' => 'form-control', 
-                    'placeholder' => "{{__('dashboard.ukuran')}}", 
+                    'placeholder' => 'Size', 
                     'required'
                 ])!!} -->
             {!! $errors->first('produk_size', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_length') ? 'has-error' : ''}}">
-            {!! Form::label('produk_length', __('dashboard.length'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_length', 'Length', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_length', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => "{{__('dashboard.length') }}", 
+                        'placeholder' => 'Length', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -515,13 +515,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_wide') ? 'has-error' : ''}}">
-            {!! Form::label('produk_wide', __('dashboard.width'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_wide', 'Width', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_wide', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => "{{__('dashboard.width') }}", 
+                        'placeholder' => 'Width', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -529,13 +529,13 @@
             {!! $errors->first('produk_wide', '<p class="help-block">:message</p>') !!}
             </div>
         </div><div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_height') ? 'has-error' : ''}}">
-            {!! Form::label('produk_height', __('dashboard.height'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_height','Height', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_height', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => "{{__('dashboard.height') }}", 
+                        'placeholder' => 'Height', 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -544,7 +544,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_color') ? 'has-error' : ''}}">
-            {!! Form::label('produk_color', __('detail.color'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_color', 'Color', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="" data-toggle="buttons">
                     {{-- <label class="btn btn-primary btn-block">
@@ -621,13 +621,13 @@
 <div class="panel panel-white col-md-6 no-border">
     <div class="panel-body">
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_weight') ? 'has-error' : ''}}">
-            {!! Form::label('produk_weight', __('dashboard.weight'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_weight', 'Weight', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::text('produk_weight', (isset($produk->produk_discount))?$produk->produk_weight:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => "{{__('dashboard.weight') }}", 
+                        'placeholder' => 'Weight', 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -637,13 +637,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_discount') ? 'has-error' : ''}}">
-            {!! Form::label('produk_wide', __('dashboard.diskon'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_wide', 'Discount', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::text('produk_discount', (isset($produk->produk_discount))?$produk->produk_discount:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => "{{__('dashboard.diskon') }}", 
+                        'placeholder' => 'Discount', 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -653,7 +653,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
-            {!! Form::label('produk_location', __('dashboard.location'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_location', 'Location', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 @if(str_contains(Request::url(), ['create']))
                     <select name='produk_location' class="form-control">
@@ -704,11 +704,11 @@
             </div>
         </div> --}}
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_note') ? 'has-error' : ''}}">
-            {!! Form::label('produk_note', __('detail.deskripsi'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_note', 'Description', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::textarea('produk_note', null, [
                   'class' => 'form-control', 
-                  'placeholder' => "{{__('detail.color')}}", 
+                  'placeholder' => 'Description', 
                 ])!!}
                 {!! $errors->first('produk_note', '<p class="help-block">:message</p>') !!}
             </div>
