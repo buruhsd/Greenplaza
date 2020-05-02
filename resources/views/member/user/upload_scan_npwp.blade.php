@@ -42,7 +42,7 @@
                                         </span>
                                     </div>
                                     {!! $errors->first('user_detail_npwp_image', '<p class="help-block">:message</p>') !!}
-                                    <p class="help-block">Max Size = 1000 kb, Max. Dimension = 1000 kb x 1000 kb.</p>
+                                    <p class="help-block">Max {{__('dashboard.ukuran') }} = 1000 kb, Max. {{__('dashboard.dimension') }} = 1000 kb x 1000 kb.</p>
                                 </div>
                             </div>
                         </div>

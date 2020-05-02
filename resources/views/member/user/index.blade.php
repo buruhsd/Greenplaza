@@ -2,20 +2,20 @@
 @section('pengaturan profil', 'active-page')
 @section('content')
 <div class="page-title">
-    <h3 class="breadcrumb-header">Configuration Profil</h3>
+    <h3 class="breadcrumb-header"> {{__('dashboard.konfigurasi_profil') }}</h3>
 </div>
 <div id="main-wrapper">
     <div class="row">
         <div class="col-md-3">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Profil User</h4>
+                    <h4 class="panel-title">Profil</h4>
                 </div>
                 <div class="panel-body user-profile-panel">
                     <img src="{{asset('assets/images/profil/'.$user->user_detail->user_detail_image) }}" onerror="this.src='{{asset('assets/images/profil/nopic.png')}}'" class="user-profile-image img-circle" alt="">
                     <h4 class="text-center m-t-lg">{{$user->name}}</h4>
                     <hr>
-                    <a href="{{route('member.user.upload_foto_profil')}}" class="btn btn-info" class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}" role="button">Ganti Foto Profil</a>
+                    <a href="{{route('member.user.upload_foto_profil')}}" class="btn btn-info" class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}" role="button"> {{__('dashboard.ganti_foto') }}</a>
                         {{-- <div class="col-md-12">
                             {!! Form::file('user_detail_image', null, [
                                 'class' => 'form-control', 
@@ -33,7 +33,7 @@
             <section class="wrapper">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">Pengaturan Profil</h4>
+                    <h4 class="panel-title">{{__('dashboard.pengaturan_profil') }}</h4>
                 </div>
                 <div class="panel-body">
                 {!! Form::model($user, [
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('link_reff') ? 'has-error' : ''}}">
-                                {!! Form::label('link_reff', 'Link refferal', ['class' => 'col-md-2 control-label']) !!}
+                                {!! Form::label('link_reff', __('dashboard.link_refferal') , ['class' => 'col-md-2 control-label']) !!}
                                 <div class="col-md-10 input-group">
                                     {!! Form::text('link_reff', url('register?reff='.FunctionLib::ref_to_url($user->reff_code)), [
                                         'class' => 'form-control', 
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('name') ? 'has-error' : ''}}">
-                                {!! Form::label('name', 'Nama', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('name', __('dashboard.name'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('name', null, [
                                         'class' => 'form-control', 
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_phone') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_phone', 'Phone', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_phone', __('dashboard.phone'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_phone', $user->user_detail->user_detail_phone, [
                                         'class' => 'form-control', 
@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_tlp') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_tlp', 'Telp Kantor', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_tlp',  __('dashboard.telp_kantor'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_tlp', $user->user_detail->user_detail_tlp, [
                                         'class' => 'form-control', 
@@ -107,16 +107,16 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_jk') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_jk', 'Gender', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_jk', __('dashboard.gender'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9 text-left">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-default <?php echo ($user->user_detail->user_detail_jk == 'laki-laki')?"active":"";?>">
                                             <input type="radio" name="user_detail_jk" value="laki-laki" autocomplete="off" <?php echo ($user->user_detail->user_detail_jk == 'laki-laki')?"checked":"";?>>
-                                            Laki-Laki <span class="check glyphicon glyphicon-ok"></span>
+                                            {{__('dashboard.laki-laki')}} <span class="check glyphicon glyphicon-ok"></span>
                                         </label>
                                         <label class="btn btn-default <?php echo ($user->user_detail->user_detail_jk == 'perempuan')?"active":"";?>">
                                             <input type="radio" name="user_detail_jk" value="perempuan" autocomplete="off"<?php echo ($user->user_detail->user_detail_jk == 'perempuan')?"checked":"";?>>
-                                            Perempuan <span class="check glyphicon glyphicon-ok"></span>
+                                            {{__('dashboard.perempuan')}} <span class="check glyphicon glyphicon-ok"></span>
                                         </label>
                                     </div>
                                 {!! $errors->first('user_detail_jk', '<p class="help-block">:message</p>') !!}
@@ -125,7 +125,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('reff_code') ? 'has-error' : ''}}">
-                                {!! Form::label('reff_code', 'refferal', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('reff_code', __('dashboard.referral'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9 input-group">
                                     {!! Form::text('reff_code', null, [
                                         'class' => 'form-control', 
@@ -155,7 +155,7 @@
                             </div> --}}
                             <?php $store_status = ($user->user_store !== null && $user->user_store !== "")?'disabled':'';?>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_store') ? 'has-error' : ''}}">
-                                {!! Form::label('user_store', 'Toko', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_store', __('dashboard.toko'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_store', null, [
                                         'class' => 'form-control', 
@@ -199,7 +199,7 @@
                             <hr/>
                             <div class="row">
                                 <div class="col-md-3">
-                                    {!! Form::label('user_detail_province', 'Provice', ['class' => 'col-md-12']) !!}
+                                    {!! Form::label('user_detail_province', 'Province', ['class' => 'col-md-12']) !!}
                                     <div class="form-group {{ $errors->has('user_detail_province') ? 'has-error' : ''}}">
                                         <div class="col-md-12">
                                             <select name='user_detail_province' id='user_detail_province' class="form-control" onchange="get_city(this.value);">
@@ -209,7 +209,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    {!! Form::label('user_detail_city', 'City', ['class' => 'col-md-12']) !!}
+                                    {!! Form::label('user_detail_city', __('dashboard.city'), ['class' => 'col-md-12']) !!}
                                     <div class="form-group {{ $errors->has('user_detail_city') ? 'has-error' : ''}}">
                                         <div class="col-md-12">
                                             <select name='user_detail_city' id='user_detail_city' class="form-control" onchange="get_subdistrict(this.value);">
@@ -248,7 +248,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {!! Form::label('user_detail_address', 'Address', ['class' => 'col-md-12']) !!}
+                            {!! Form::label('user_detail_address', __('dashboard.address'), ['class' => 'col-md-12']) !!}
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_address') ? 'has-error' : ''}}">
                                 <div class="col-md-12">
                                     {!! Form::textarea('user_detail_address', $user->user_detail->user_detail_address, [
@@ -264,7 +264,7 @@
                         <div class="col-md-12">
                             <hr/>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_name') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_bank_id', 'Bank Name', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_bank_id', 'Bank', ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     <select name='user_detail_bank_id' class="form-control">
                                         @foreach($cfg_bank as $item)
@@ -275,7 +275,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_owner') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_bank_owner', 'Owner', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_bank_owner', __('dashboard.owner'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::text('user_detail_bank_owner', $user->user_detail->user_detail_bank_owner, [
                                         'class' => 'form-control', 
@@ -286,7 +286,7 @@
                                 </div>
                             </div>
                             <div class="form-group mx-sm-3 mb-2 {{ $errors->has('user_detail_bank_no') ? 'has-error' : ''}}">
-                                {!! Form::label('user_detail_bank_no', 'Account number', ['class' => 'col-md-3 control-label']) !!}
+                                {!! Form::label('user_detail_bank_no', __('dashboard.account_number'), ['class' => 'col-md-3 control-label']) !!}
                                 <div class="col-md-9">
                                     {!! Form::number('user_detail_bank_no', $user->user_detail->user_detail_bank_no, [
                                         'class' => 'form-control', 
@@ -300,7 +300,7 @@
                     </div>
                     <div class="panel panel-white col-md-12 no-border">
                         <div class="panel-body">
-                            <button type="submit" class="btn btn-primary mb-2">Save</button>
+                            <button type="submit" class="btn btn-primary mb-2">{{__('dashboard.simpan')}}</button>
                         </div>
                     </div>
                 {!! Form::close() !!}

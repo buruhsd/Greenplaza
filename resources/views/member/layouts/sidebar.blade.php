@@ -120,15 +120,15 @@
                                     </a>
                                     <ul class="sub-menu">
                                         <h4 class="m-l-sm text-danger">Seller</h4>
-                                        @if(Auth::user()->seller_active())
+                                        {{-- @if(Auth::user()->seller_active())
                                             <li class="{{FunctionLib::setActive('member/user/set_payment')}}"><a href="{{route('member.user.set_payment')}}">{{__('dashboard.aturan_pembayaran') }}</a></li>
-                                        @endif
+                                        @endif --}}
                                         <li class="{{FunctionLib::setActive('member/profil')}}"><a href="{{route('member.profil')}}">{{__('dashboard.profil_anda') }}</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/change_password')}}"><a href="{{route('member.user.change_password')}}">{{__('dashboard.ubah_password_login') }}</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/pass_trx')}}"><a href="{{route('member.user.pass_trx')}}">{{__('dashboard.ubah_password_transaksi') }}</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/seller_address')}}"><a href="{{route('member.user.seller_address')}}">{{__('dashboard.alamat_seller') }}</a></li>
                                         <!-- <li class="{{FunctionLib::setActive('member/user/upload_foto_profil')}}"><a href="{{route('member.user.upload_foto_profil')}}">Upload Foto Profil</a></li> -->
-                                        <li class="{{FunctionLib::setActive('member/user/upload_scan_npwp')}}"><a href="{{route('member.user.upload_scan_npwp')}}">{{__('dashboard.upload_scan_npwp') }}</a></li>
+                                        <li class="{{FunctionLib::setActive('member/user/upload_scan_npwp')}}"><a href="{{route('member.user.upload_scan_npwp')}}">{{__('dashboard.upload_npwp') }}</a></li>
                                         <li class="{{FunctionLib::setActive('member/user/upload_siup')}}"><a href="{{route('member.user.upload_siup')}}">{{__('dashboard.upload_siup') }}</a></li>
 
                                         <h4 class="m-l-sm text-danger">Buyer</h4>

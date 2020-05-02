@@ -3,7 +3,7 @@
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">
-    <h3 class="breadcrumb-header">Ubah Password Transaksi</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.ubah_password') }} Transaksi</h3>
 </div>
 <div class="panel panel-white">
             <div class="panel-body">
@@ -16,20 +16,20 @@
                             'files' => true
                         ]) !!}
                             <div class="form-group">
-                                <label for="input-Default" class="col-sm-3 control-label">Password Lama</label>
+                                <label for="input-Default" class="col-sm-3 control-label">{{__('dashboard.password_lama') }}</label>
                                 <div class="col-sm-9">
                                     <input type="password" name="old_password" class="form-control" id="input-Default">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-help-block" class="col-sm-3 control-label">Password Baru</label>
+                                <label for="input-help-block" class="col-sm-3 control-label">{{__('dashboard.password_baru') }}</label>
                                 <div class="col-sm-9">
                                     <input type="password" name="new_password" class="form-control" id="input-default">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="input-help-block" class="col-sm-3 control-label">Ulangi Password</label>
+                                <label for="input-help-block" class="col-sm-3 control-label">{{__('dashboard.ulangi_password') }}</label>
                                 <div class="col-sm-9">
                                     <input type="password" name="re_new_password" class="form-control" id="input-default">
                                 </div>
@@ -40,8 +40,8 @@
                     </div>
                     <div class="col-sm-6">
                         <h3>Info</h3>
-                        <p>Password default menggunakan password login anda.<br/></p>
-                        <p>Reset Password <a class="btn btn-xs btn-info" href="{{route('password.request_trx')}}">disini</a>.</p>
+                        <p>{{__('dashboard.pass_default') }}.<br/></p>
+                        <p>Reset Password <a class="btn btn-xs btn-info" href="{{route('password.request_trx')}}">{{__('dashboard.disini') }}</a>.</p>
                     </div>
                 </div>
         </div>

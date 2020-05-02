@@ -3,11 +3,11 @@
 @section('content')
 <!-- Page Inner -->
 <div class="page-title">
-    <h3 class="breadcrumb-header">Ubah Password</h3>
+    <h3 class="breadcrumb-header">{{__('dashboard.ubah_password') }}</h3>
 </div>
 <div class="panel panel-white">
             <div class="panel-heading clearfix">
-                <h4 class="panel-title">Ubah Password Login</h4>
+                <h4 class="panel-title">{{__('dashboard.ubah_password') }} Login</h4>
             </div>
             <div class="panel-body">
                 {!! Form::open([
@@ -17,20 +17,20 @@
                     'files' => true
                 ]) !!}
                     <div class="form-group">
-                        <label for="input-Default" class="col-sm-2 control-label">Password Lama</label>
+                        <label for="input-Default" class="col-sm-2 control-label">{{__('dashboard.password_lama') }}</label>
                         <div class="col-sm-10">
                             <input type="password" name="old_password" class="form-control" id="input-Default">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="input-help-block" class="col-sm-2 control-label">Password Baru</label>
+                        <label for="input-help-block" class="col-sm-2 control-label">{{__('dashboard.password_baru') }}</label>
                         <div class="col-sm-10">
                             <input type="password" name="new_password" class="form-control" id="input-default">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="input-help-block" class="col-sm-2 control-label">Ulangi Password</label>
+                        <label for="input-help-block" class="col-sm-2 control-label">{{__('dashboard.ulangi_password') }}</label>
                         <div class="col-sm-10">
                             <input type="password" name="re_new_password" class="form-control" id="input-default">
                         </div>

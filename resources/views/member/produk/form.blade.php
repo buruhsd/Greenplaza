@@ -32,16 +32,16 @@
         <div class="row">
             @if(str_contains(Request::url(), ['create']))
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">Size : <b>300 pixel</b> x <b>320 pixel</b></span>
+                <span class="text-danger">{{__('dashboard.ukuran') }} : <b>300 pixel</b> x <b>320 pixel</b></span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Image: ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', __('dashboard.gambar') ,':' , ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="Main Image">
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="{{__('dashboard.gambar') }}">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                <span class="glyphicon glyphicon-remove"></span> Clear
+                                <span class="glyphicon glyphicon-remove"></span> {{__('dashboard.clear') }}
                             </button>
                             <div class="btn btn-default image-preview-input" >
                                 <span class="glyphicon glyphicon-folder-open"></span>
@@ -64,14 +64,14 @@
                 $(".clickkurang").click(function() {
                 counter++;
                 if(counter == 4){
-                    alert('max 5 image');
+                    alert('{{__('dashboard.max_5') }}');
                     $("#maxlimaw").html("");
                 }
             });
             }
             </script>
             @elseif(str_contains(Request::url(), ['edit']))
-            {!! Form::label('produk_user_status', 'Choose main Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', __('dashboard.choose_main_image') ,':' , ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10">
                 <div class="roup">
                 @foreach($produk->images->all() as $item)
@@ -91,16 +91,16 @@
             </div>
             @if($asdfku < 5)
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-            <span class="text-danger">Width not too long from height.</span>
+            <span class="text-danger">{{__('dashboard.width_not_too') }}.</span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status', 'Image : ', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status',  __('dashboard.gambar'),':' , ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
                         <input type="text" class="form-control image-preview-filename" disabled="disabled">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                <span class="glyphicon glyphicon-remove"></span> Clear
+                                <span class="glyphicon glyphicon-remove"></span>{{__('dashboard.clear') }}
                             </button>
                             <div class="btn btn-default image-preview-input">
                                 <span class="glyphicon glyphicon-folder-open"></span>
@@ -122,7 +122,7 @@
             @endif
             @else
             <br/><br/><div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
-                <span class="text-danger">Please remove one of images to upload picture</span>
+                <span class="text-danger">{{__('dashboard.please_remove') }}</span>
             </div>
             @endif
             <script type="text/javascript">
@@ -132,7 +132,7 @@
                 $(".clickkurang").click(function() {
                 counter++;
                 if(counter == eee){
-                    alert('max gambar lima');
+                    alert(' {{__('dashboard.max_5')}}');
                     $("#maxlima").html("");
                 }
             });
@@ -146,7 +146,7 @@
     <div class="panel-body">
         @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', 'Category : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', __('detail.kategori'),':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <option value=''>-- Choose Category --</option>
@@ -161,7 +161,7 @@
         </div>
         @elseif(str_contains(Request::url(), ['edit']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', 'Category : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', __('detail.kategori'),':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <!-- <option selected>{{$produk->category->category_name}} </option> -->
@@ -199,7 +199,7 @@
         </div>
         @endif
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_name') ? 'has-error' : ''}}">
-            {!! Form::label('produk_name', 'Name : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_name', __('dashboard.nama'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::text('produk_name', null, [
                     'class' => 'form-control', 
@@ -314,7 +314,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
-            {!! Form::label('produk_location', 'Location : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_location', __('dashboard.location'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 @if(str_contains(Request::url(), ['create']))
                     <select name='produk_location' class="form-control">
@@ -333,13 +333,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_price') ? 'has-error' : ''}}">
-            {!! Form::label('produk_price', 'Price (MYR) : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_price', __('dashboard.price') ,'(MYR)', ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('produk_price', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Price', 
+                                'placeholder' => "{{__('dashboard.price') }}", 
                                 'step' => "any",
                                 'id'    => "price_myr",
                                 'onkeyup' => "price_()",
@@ -349,7 +349,7 @@
                     {!! Form::number('produk_price', number_format($produk->produk_price, 0, ',', ''), [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Price', 
+                                'placeholder' => "{{__('dashboard.price') }}", 
                                 'step' => "any",
                                 'id'    => "price_myr",
                                 'required'
@@ -359,13 +359,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('price_idr') ? 'has-error' : ''}}">
-            {!! Form::label('price_myr', 'Price (IDR) : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('price_myr', __('dashboard.price') ,'(IDR)',':', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                  @if(str_contains(Request::url(), ['create']))
                    {!! Form::number('price_myr', null, [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Price (IDR)', 
+                                'placeholder' => "{{__('dashboard.price') }}(IDR)", 
                                 'step' => "any",
                                 'id' => "price_idr",
                                 'readonly',
@@ -375,7 +375,7 @@
                     {!! Form::number('price_idr', number_format($produk->price_idr, 0, ',', ''), [
                                 'min' => '0',
                                 'class' => 'form-control', 
-                                'placeholder' => 'Price (IDR)', 
+                                'placeholder' => "{{__('dashboard.price') }}(IDR)", 
                                 'step' => "any",
                                 'id' => "price_idr",
                                 'readonly',
@@ -413,7 +413,7 @@
             </div>
         </div>        
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_size') ? 'has-error' : ''}}">
-            {!! Form::label('produk_size', 'Size : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_size', __('dashboard.ukuran'),':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="btn-group" data-toggle="buttons">
                     @if(str_contains(Request::url(), ['create']))
@@ -493,20 +493,20 @@
                 </div>
                 <!-- {!! Form::text('produk_size', null, [
                     'class' => 'form-control', 
-                    'placeholder' => 'Size', 
+                    'placeholder' => {{__('dashboard.ukuran')}}, 
                     'required'
                 ])!!} -->
             {!! $errors->first('produk_size', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_length') ? 'has-error' : ''}}">
-            {!! Form::label('produk_length', 'Length : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_length', __('dashboard.length'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_length', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Length', 
+                        'placeholder' => {{__('dashboard.length') }}, 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -515,13 +515,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_wide') ? 'has-error' : ''}}">
-            {!! Form::label('produk_wide', 'Width : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_wide', __('dashboard.width'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_wide', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Width', 
+                        'placeholder' => {{__('dashboard.width') }}, 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -529,13 +529,13 @@
             {!! $errors->first('produk_wide', '<p class="help-block">:message</p>') !!}
             </div>
         </div><div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_height') ? 'has-error' : ''}}">
-            {!! Form::label('produk_height', 'Height : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_height', __('dashboard.height'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::number('produk_height', null, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Height', 
+                        'placeholder' => {{__('dashboard.height') }}, 
                         'required'
                     ])!!}
                     <span class="input-group-addon">mm</span>
@@ -544,7 +544,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_color') ? 'has-error' : ''}}">
-            {!! Form::label('produk_color', 'Color : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_color', __('detail.color'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="" data-toggle="buttons">
                     {{-- <label class="btn btn-primary btn-block">
@@ -621,13 +621,13 @@
 <div class="panel panel-white col-md-6 no-border">
     <div class="panel-body">
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_weight') ? 'has-error' : ''}}">
-            {!! Form::label('produk_weight', 'Weight : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_weight', __('dashboard.weight'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::text('produk_weight', (isset($produk->produk_discount))?$produk->produk_weight:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Weight', 
+                        'placeholder' => {{__('dashboard.weight') }}, 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -637,13 +637,13 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_discount') ? 'has-error' : ''}}">
-            {!! Form::label('produk_wide', 'Discount : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_wide', __('dashboard.diskon'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <div class="input-group">
                     {!! Form::text('produk_discount', (isset($produk->produk_discount))?$produk->produk_discount:0.00, [
                         'min' => '0',
                         'class' => 'form-control', 
-                        'placeholder' => 'Discount', 
+                        'placeholder' => {{__('dashboard.diskon') }}, 
                         'onkeyup' => 'checkDecimal(this);',
                         'required'
                     ])!!}
@@ -653,7 +653,7 @@
             </div>
         </div>
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_location') ? 'has-error' : ''}}">
-            {!! Form::label('produk_location', 'Location : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_location', __('dashboard.location'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 @if(str_contains(Request::url(), ['create']))
                     <select name='produk_location' class="form-control">
@@ -704,11 +704,11 @@
             </div>
         </div> --}}
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_note') ? 'has-error' : ''}}">
-            {!! Form::label('produk_note', 'Description : ', ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_note', __('detail.deskripsi'), ':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::textarea('produk_note', null, [
                   'class' => 'form-control', 
-                  'placeholder' => 'Description', 
+                  'placeholder' => {{__('detail.color')}}, 
                 ])!!}
                 {!! $errors->first('produk_note', '<p class="help-block">:message</p>') !!}
             </div>
@@ -724,13 +724,13 @@
                 <div class="col-md-12 columns">
                     <ul class="list-group">
                         <li class="list-group-item no-border">
-                            <a class="btn btn-info btn-block" data-toggle="collapse" href="#grosir" role="button" aria-expanded="false" aria-controls="grosir"><b>Distributor Price</b></a>
+                            <a class="btn btn-info btn-block" data-toggle="collapse" href="#grosir" role="button" aria-expanded="false" aria-controls="grosir"><b>{{__('dashboard.distributor_price')}}</b></a>
                             <div id="grosir" class="collapse">
                                 <table class="table table-bordered table-striped table-highlight m-t-xs">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Product Total (Unit)</th>
-                                            <th width="200">Price / Unit</th>
+                                            <th colspan="2">{{__('dashboard.produk_total')}} (Unit)</th>
+                                            <th width="200">{{__('dashboard.price')}} / Unit</th>
                                             <th width="50"></th>
                                         </tr>
                                     </thead>
@@ -742,15 +742,15 @@
                                                         <td style="width: 20%">
                                                             <input class="form-control hidden" type="number" name="produk_grosir_id[]" placeholder="id" value="{{$item_grosir->id}}">
                                                             <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" value="{{$item_grosir->produk_grosir_start}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                                         </td>
                                                         <td style="width: 20%">
                                                             <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" value="{{$item_grosir->produk_grosir_end}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                                         </td>
                                                         <td style="width: 50%">
                                                             <input class="form-control" type="number" name="produk_grosir_price[]" value="{{$item_grosir->produk_grosir_price}}">
-                                                            <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                            <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                                         </td>
                                                         <td class="text-center">
                                                             <!-- <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
@@ -767,15 +767,15 @@
                                         <tr>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_start[]" placeholder="start" >
-                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                             </td>
                                             <td style="width: 20%">
                                                 <input class="form-control" type="number" name="produk_grosir_end[]" placeholder="end" >
-                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                             </td>
                                             <td style="width: 50%">
                                                 <input class="form-control" type="number" name="produk_grosir_price[]" >
-                                                <i class='btn-block bg-danger m-t-xs'>Must be numeric</i>
+                                                <i class='btn-block bg-danger m-t-xs'>{{__('dashboard.must_numeric')}}</i>
                                             </td>
                                             <td class="text-center">
                                                 <a class="btn btn-xs btn-success" onclick="add_grosir_row();">
@@ -790,10 +790,10 @@
                                     <tbody>
                                         <tr>
                                             <td style="font-size: 13px;" colspan="4">
-                                                Total and price without commas(,) and dot(.) <br>
-                                                Example:<br>
-                                                Group Total: 1 - 10, Price: 15000<br>
-                                                Group Total: 11 - 20, Price: 10000<br>
+                                                {{__('dashboard.total_price_comma')}} <br>
+                                                {{__('dashboard.example')}}:<br>
+                                                {{__('dashboard.group_total')}}: 1 - 10, {{__('dashboard.price')}}: 15000<br>
+                                                {{__('dashboard.group_total')}}: 11 - 20, {{__('dashboard.price')}}: 10000<br>
                                                 etc...
                                             </td>
                                         </tr>
@@ -810,7 +810,7 @@
 
 <div class="panel panel-white col-md-12 no-border">
     <div class="panel-body">
-        <button type="submit" class="btn btn-primary mb-2">Save</button>
+        <button type="submit" class="btn btn-primary mb-2">{{__('dashboard.simpan')}}</button>
     </div>
 </div>
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -825,8 +825,8 @@
               <input value="" type="hidden" name="id_image"/>
             </form>
 <div class="modal-footer">
-      <button type="button" id="btnSave" onclick="save()" class="btn m-btn--pill m-btn--air btn-danger uloader2">delete</button>
-<button type="button" class="btn btn-metal btn-sm" data-dismiss="modal">batal</button>
+      <button type="button" id="btnSave" onclick="save()" class="btn m-btn--pill m-btn--air btn-danger uloader2">{{__('dashboard.hapus')}}</button>
+<button type="button" class="btn btn-metal btn-sm" data-dismiss="modal">{{__('dashboard.batal')}}</button>
 </div>
 </div>
 </div>
