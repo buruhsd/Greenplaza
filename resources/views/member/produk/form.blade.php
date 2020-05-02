@@ -93,7 +93,7 @@
             <div class="col-xs-10 col-md-8 col-sm-10 col-sm-offset-3">
             <span class="text-danger">{{__('dashboard.width_not_too') }}.</span>
             </div><br/><br/>
-            {!! Form::label('produk_user_status',  __('dashboard.gambar'),':' , ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
+            {!! Form::label('produk_user_status', 'Image:', ['class' => 'col-md-3 col-md-12 col-md-12 control-label']) !!}
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
@@ -146,7 +146,7 @@
     <div class="panel-body">
         @if(str_contains(Request::url(), ['create']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', __('detail.kategori'),':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', __('detail.kategori')':', ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <option value=''>-- Choose Category --</option>
@@ -161,7 +161,7 @@
         </div>
         @elseif(str_contains(Request::url(), ['edit']))
         <div class="form-group {{ $errors->has('produk_category_id') ? 'has-error' : ''}}">
-            {!! Form::label('produk_category_id', __('detail.kategori'),':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_category_id', __('detail.kategori')':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 <select name='produk_category_id' class="form-control">
                     <!-- <option selected>{{$produk->category->category_name}} </option> -->
@@ -199,7 +199,7 @@
         </div>
         @endif
         <div class="form-group mx-sm-3 mb-2 {{ $errors->has('produk_name') ? 'has-error' : ''}}">
-            {!! Form::label('produk_name', __('dashboard.nama'), ':' , ['class' => 'col-md-3 control-label']) !!}
+            {!! Form::label('produk_name', __('dashboard.nama')':' , ['class' => 'col-md-3 control-label']) !!}
             <div class="col-md-9">
                 {!! Form::text('produk_name', null, [
                     'class' => 'form-control', 
