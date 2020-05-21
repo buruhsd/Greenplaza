@@ -329,7 +329,7 @@
                                     <hr/>
                                     <ul class="nav">
                                         <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
-                                        <li><a onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" >Transaksi</a></li> 
+                                        <li><a onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" style="background-color: #73ff7d;" >Lanjut Transaksi</a></li> 
                                     </ul>
                                     <hr/>
                                     @foreach(Session::get('chart') as $item)

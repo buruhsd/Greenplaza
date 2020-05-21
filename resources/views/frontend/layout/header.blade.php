@@ -260,6 +260,7 @@
       <!-- responsive-menu area start -->
    </div>
 </header>
+
     <!-- header-area end -->
     <!-- slider-area start -->
         <div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">

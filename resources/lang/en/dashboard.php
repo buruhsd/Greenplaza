@@ -168,6 +168,7 @@ return[
 			'dst' => 'dst',
 			'batal' => 'Cancel',
 			'hapus' => 'Delete',
+			'order' => 'Order'
 
 
 

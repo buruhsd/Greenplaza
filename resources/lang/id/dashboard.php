@@ -168,6 +168,7 @@ return[
 			'dst' => 'dst',
 			'batal' => 'Batal',
 			'hapus' => 'Hapus',
+			'order' => 'Pesanan',
 
 
 

@@ -50,17 +50,17 @@
             <div class="col-md-12">
             <div class="panel panel-white">
                 <div class="panel-heading clearfix">
-                    <h4 class="panel-title">{{__('dashboard.transaction') }}</h4>
+                    <h4 class="panel-title">{{__('dashboard.transaksi') }}</h4>
                     {{-- <button type="button" onclick="search('chart');" class="btn btn-info">Chart<span class="label label-default pull-right">{{FunctionLib::count_trans(0, Auth::id())}}</span></button> --}}
-                    <button type="button" onclick="search('order');" class="btn btn-info">{{__('dashboard.konfirmasi_pembayaran') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('transfer');" class="btn btn-info">{{__('dashboard.menunggu_validasi') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('seller');" class="btn btn-info">{{__('dashboard.tunggu_seller') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('packing');" class="btn btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('shipping');" class="btn btn-info">{{__('dashboard.pengiriman') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('order');" class="btn btn-sm btn-info">{{__('dashboard.konfirmasi_pembayaran') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(1, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('transfer');" class="btn btn-sm btn-info">{{__('dashboard.menunggu_validasi') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(2, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('seller');" class="btn btn-sm btn-info">{{__('dashboard.tunggu_seller') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(3, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('packing');" class="btn btn-sm btn-info">Packing<span class="label label-default pull-right">{{FunctionLib::count_trans(4, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('shipping');" class="btn btn-sm btn-info">{{__('dashboard.pengiriman') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button>
                     {{-- <button type="button" onclick="search('Sent');" class="btn btn-info">Sent<span class="label label-default pull-right">{{FunctionLib::count_trans(5, Auth::id())}}</span></button> --}}
-                    <button type="button" onclick="search('dropping');" class="btn btn-info">{{__('dashboard.dropping') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('cancel');" class="btn btn-info">{{__('dashboard.cancel') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(7, Auth::id())}}</span></button>
-                    <button type="button" onclick="search('komplain');" class="btn btn-info">{{__('dashboard.komplain') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(8, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('dropping');" class="btn btn-sm btn-info">{{__('dashboard.dropping') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(6, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('cancel');" class="btn btn-sm btn-info">{{__('dashboard.cancel') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(7, Auth::id())}}</span></button>
+                    <button type="button" onclick="search('komplain');" class="btn btn-sm btn-info">{{__('dashboard.komplain') }}<span class="label label-default pull-right">{{FunctionLib::count_trans(8, Auth::id())}}</span></button>
                     {{-- <a href="{{ url('admin/transaction/create') }}" class="btn btn-success btn-sm pull-right">Add New</a> --}}
                 </div>
                 <div class="panel-body">
@@ -69,6 +69,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>{{__('dashboard.gambar') }}</th>
                                     <th>{{__('dashboard.code') }}</th>
                                     <th>{{__('dashboard.detail_transaction') }}</th>
                                     <th>{{__('dashboard.detail_penjual') }}</th>
@@ -81,7 +82,7 @@
                                 @foreach($transaction as $item)
                                     <tr>
                                         <th scope="row">{{$no++}}</th>
-
+                                        <td><img scr="{{ asset('assets/images/product/'.$item->trans_detail->first()->produk->produk_image) }}" style="width: 50px; height: 50px"></td>
                                         <td>{{$item->trans_code}}</td>
                                         <td scope="row">
                                             <ul>

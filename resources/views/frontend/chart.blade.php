@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-3">
-                    <div class="cart-wrapper bg-5 p-10">
+                    <div class="cart-wrapper bg-1 p-10">
                         <div class="col-12">
                             <div class="form-group">
                               <label for="sel1">Select your payment:</label>
@@ -47,7 +47,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="cart-wrapper bg-5 p-10">
+                    <div class="cart-wrapper bg-1 p-10 " style="border: 1px solid; border-color: #eee;">
                         <div class="col-12">
                             <table class="table-responsive cart-wrap">
                                 <thead>
@@ -448,7 +448,7 @@
                                             <li>
                                                 <span class="pull-left text-danger">Diskon </span>
                                                 <span class='text-danger'>
-                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total_gln')-$show_harga_total-$show_grosir)}}
+                                                    Rp. {{FunctionLib::number_to_text(FunctionLib::array_sum_key(Session::get('chart'), 'trans_detail_amount_total')-$show_harga_total-$show_grosir)}}
                                                 </span>
                                             </li>
                                             <li id="voucher-info">

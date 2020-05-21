@@ -183,21 +183,29 @@
                 <div class="col-lg-9 col-md-12">
                     <div class="shop-area non-margin">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-sm-6">
                                 <h2 class="section-title">Green Production</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_green') }}">{{__('front.lihat_semua') }}</a></p>
                             </div>
                         </div>
                         {!!Plugin::p_green()!!}
-                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_green') }}">{{__('front.lihat_semua') }}</a></p>
+                        
                     </div>
                     <div class="shop-area non-margin">
-                        <div class="row">
-                            <div class="col-12">
-                                <h2 class="section-title">{{__('front.baru_saat') }}</h2>
+                        
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2 class="section-title">{{__('front.baru_saat') }}</h2>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
+                                </div>
                             </div>
-                        </div>
+                        
                         {!!Plugin::p_baru_saat_ini()!!}
-                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
+                        
                     </div>
                     {{-- <div class="banner-wrap mb-30">
                         {!!Plugin::view('iklan', [
@@ -209,12 +217,15 @@
                     </div> --}}
                     <div class="shop-area non-margin">
                         <div class="row">
-                            <div class="col-lg-4 col-sm-3 col-12">
+                            <div class="col-lg-6 col-sm-6 col-12">
                                 <h2 class="section-title">{{__('front.p_baru') }}</h2>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru') }}">{{__('front.lihat_semua') }}</a></p>
                             </div>
                         </div>
                         {!!Plugin::p_baru()!!}
-                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_baru') }}">{{__('front.lihat_semua') }}</a></p>
+                        
                     </div>
                 </div>
             </div>
@@ -270,12 +281,15 @@
                 <div class="col-lg-9 col-md-8 col-12">
                     <div class="shop-area">
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-sm-6">
                                 <h2 class="section-title">{{__('front.pilihan_saat') }}</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_pilihan_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
                             </div>
                         </div>
                         {!!Plugin::p_pilihan_saat_ini()!!}
-                        <p class="pull-right" style="padding-top: 10px"><a href="{{ route('p_pilihan_saat_ini') }}">{{__('front.lihat_semua') }}</a></p>
+                        
                     </div>
                 </div>
             </div>
