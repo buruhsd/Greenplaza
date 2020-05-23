@@ -70,6 +70,7 @@ class HomeController extends Controller
         // $data['slider7'] = Iklan::where('iklan_iklan_id', 12)->first();
         // $data['brandall'] = Brand::orderBy('created_at', 'ASC')->get();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         return view('frontend.page.home', $data);
     }
 
