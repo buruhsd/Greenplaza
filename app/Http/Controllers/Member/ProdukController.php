@@ -187,6 +187,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $status = 200;
         $message = 'Produk added!';
         
@@ -245,8 +246,9 @@ class ProdukController extends Controller
                 if(file_exists($uploadPath . '/' . $imagename) || file_exists($uploadPath . '/thumb/' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }
-                $imaget = Image::make($image->getRealPath())->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
-                $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
+                $imaget = Image::make(file_get_contents($request->input_file_64[$key]))->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
+                $image = Image::make(file_get_contents($request->input_file_64[$key]));
+                // $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
                 // $image = Image::make($image->getRealPath())->resize(NULL, 200, function ($constraint) {$constraint->aspectRatio();})->fit(400, 200);
                 $image->save($uploadPath.'/'.$imagename);
                 $imaget->save($uploadPath.'/thumb/'.$imagename);
@@ -360,6 +362,7 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $status = 200;
         $message = 'Produk berhasil diubah!';
         
@@ -424,8 +427,8 @@ class ProdukController extends Controller
                 //         File::delete($uploadPath . '/' . Produk::where('id', '=', "$id")->pluck('produk_image')[0]);   
                 //     }
                 // }
-                $imaget = Image::make($image->getRealPath())->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
-                $image = Image::make($image->getRealPath())->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
+                $imaget = Image::make(file_get_contents($request->input_file_64[$key]))->resize(NULL, 100, function ($constraint) {$constraint->aspectRatio();});
+                $image = Image::make(file_get_contents($request->input_file_64[$key]))->resize(NULL, 400, function ($constraint) {$constraint->aspectRatio();});
                 if(file_exists($uploadPath . '/' . $imagename) || file_exists($uploadPath . '/thumb/' . $imagename)){
                     $imagename = date("d-M-Y_H-i-s").'_'.FunctionLib::str_rand(6).'.'.$image->getClientOriginalExtension();
                 }
@@ -635,17 +638,18 @@ class ProdukController extends Controller
                         });
                     </script>
                     <script type="text/javascript">
+                        var counter = 2;
                         $(document).on('click', '#close-preview', function(){ 
-                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // $(this).parents(".parent-img").find('.image-preview').popover('hide');
                             // Hover befor close the preview
-                            $('.image-preview').hover(
-                                function () {
-                                   $(this).popover('show');
-                                }, 
-                                 function () {
-                                   $(this).popover('hide');
-                                }
-                            );    
+                            // $('.image-preview').hover(
+                            //     function () {
+                            //        $(this).popover('show');
+                            //     }, 
+                            //      function () {
+                            //        $(this).popover('hide');
+                            //     }
+                            // );    
                         });
 
                         $(function() {
@@ -658,16 +662,17 @@ class ProdukController extends Controller
                             });
                             closebtn.attr("class","close pull-right");
                             // Set the popover default content
-                            $('.image-preview').popover({
-                                trigger:'manual',
-                                html:true,
-                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-                                content: "There's no image",
-                                placement:'bottom'
-                            });
+                            // $('.image-preview').popover({
+                            //     trigger:'manual',
+                            //     html:true,
+                            //     title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                            //     content: "There's no image",
+                            //     placement:'bottom'
+                            // });
                             // Clear event
                             $('.image-preview-clear').click(function(){
-                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                // $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.input_file_64').val("");
                                 $(this).parents(".parent-img").find('.image-preview-filename').val("");
                                 $(this).parents(".parent-img").find('.image-preview-clear').hide();
                                 $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
@@ -689,7 +694,7 @@ class ProdukController extends Controller
                                     $(x).parents(".parent-img").find(".image-preview-clear").show();
                                     $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
                                     img.attr('src', e.target.result);
-                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                    // $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
                                 }        
                                 reader.readAsDataURL(file);
                             });  
@@ -699,16 +704,18 @@ class ProdukController extends Controller
                             '<div class="input-group image-preview">'+
                                 '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
                                 '<span class="input-group-btn">'+
-                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                    '<button type="button" class="btn btn-danger image-preview-clear" style="display:none;">'+
                                         '<span class="glyphicon glyphicon-remove"></span> Clear'+
                                     '</button>'+
-                                    '<div class="btn btn-default image-preview-input">'+
+                                    '<div class="btn btn-info image-preview-input">'+
                                         '<span class="glyphicon glyphicon-folder-open"></span>'+
                                         '<span class="image-preview-input-title">Browse</span>'+
-                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                        '<input id="img-input'+ counter +'" onchange="changemage(this)" type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                        '<input type="hidden" name="input_file_64[]" class="input_file_64" id="'+counter+'">'+
+                                        // '<img id="img-view'+ counter +'" src="https://avatars0.githubusercontent.com/u/3456749" alt="img" class="image-preview">'+
                                     '</div>'+
                                     '<button type="button" class="btn btn-danger remove-btn">'+
-                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                        '<span class="glyphicon glyphicon-remove">Delete</span>'+
                                     '</button>'+
                                 '</span>'+
                             '</div>'+
@@ -722,14 +729,14 @@ class ProdukController extends Controller
                             //     console.log($(this).parents('.parent-img'));
                             //     $(this).parents('.popover').hide();
                                 // Hover befor close the preview
-                                $('.image-preview').hover(
-                                    function () {
-                                       $(this).popover('show');
-                                    }, 
-                                     function () {
-                                       $(this).popover('hide');
-                                    }
-                                );    
+                                // $('.image-preview').hover(
+                                //     function () {
+                                //        $(this).popover('show');
+                                //     }, 
+                                //      function () {
+                                //        $(this).popover('hide');
+                                //     }
+                                // );    
                             // });
 
                             $(function() {
@@ -742,16 +749,17 @@ class ProdukController extends Controller
                                 });
                                 closebtn.attr("class","close pull-right");
                                 // Set the popover default content
-                                $('.image-preview').popover({
-                                    trigger:'manual',
-                                    html:true,
-                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-                                    content: "There's no image",
-                                    placement:'bottom'
-                                });
+                                // $('.image-preview').popover({
+                                //     trigger:'manual',
+                                //     html:true,
+                                //     title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                //     content: "There's no image",
+                                //     placement:'bottom'
+                                // });
                                 // Clear event
                                 $('.image-preview-clear').click(function(){
-                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    // $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.input_file_64').val("");
                                     $(this).parents(".parent-img").find('.image-preview-filename').val("");
                                     $(this).parents(".parent-img").find('.image-preview-clear').hide();
                                     $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
@@ -773,7 +781,7 @@ class ProdukController extends Controller
                                         $(x).parents(".parent-img").find(".image-preview-clear").show();
                                         $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
                                         img.attr('src', e.target.result);
-                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                        // $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
                                     }        
                                     reader.readAsDataURL(file);
                                 });  
@@ -875,17 +883,18 @@ class ProdukController extends Controller
                         });
                     </script>
                     <script type="text/javascript">
+                        var counter2 = 2;
                         $(document).on('click', '#close-preview', function(){ 
-                            $(this).parents(".parent-img").find('.image-preview').popover('hide');
-                            // Hover befor close the preview
-                            $('.image-preview').hover(
-                                function () {
-                                   $(this).popover('show');
-                                }, 
-                                 function () {
-                                   $(this).popover('hide');
-                                }
-                            );    
+                            // $(this).parents(".parent-img").find('.image-preview').popover('hide');
+                            // // Hover befor close the preview
+                            // $('.image-preview').hover(
+                            //     function () {
+                            //        $(this).popover('show');
+                            //     }, 
+                            //      function () {
+                            //        $(this).popover('hide');
+                            //     }
+                            // );    
                         });
 
                         $(function() {
@@ -898,16 +907,17 @@ class ProdukController extends Controller
                             });
                             closebtn.attr("class","close pull-right");
                             // Set the popover default content
-                            $('.image-preview').popover({
-                                trigger:'manual',
-                                html:true,
-                                title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-                                content: "There's no image",
-                                placement:'bottom'
-                            });
+                            // $('.image-preview').popover({
+                            //     trigger:'manual',
+                            //     html:true,
+                            //     title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                            //     content: "There's no image",
+                            //     placement:'bottom'
+                            // });
                             // Clear event
                             $('.image-preview-clear').click(function(){
-                                $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                // $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                $(this).parents(".parent-img").find('.input_file_64').val("");
                                 $(this).parents(".parent-img").find('.image-preview-filename').val("");
                                 $(this).parents(".parent-img").find('.image-preview-clear').hide();
                                 $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
@@ -929,7 +939,7 @@ class ProdukController extends Controller
                                     $(x).parents(".parent-img").find(".image-preview-clear").show();
                                     $(x).parents(".parent-img").find(".image-preview-filename").val(file.name);
                                     img.attr('src', e.target.result);
-                                    $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
+                                    // $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
                                 }        
                                 reader.readAsDataURL(file);
                             });  
@@ -939,16 +949,18 @@ class ProdukController extends Controller
                             '<div class="input-group image-preview">'+
                                 '<input type="text" class="form-control image-preview-filename" disabled="disabled">'+
                                 '<span class="input-group-btn">'+
-                                    '<button type="button" class="btn btn-default image-preview-clear" style="display:none;">'+
+                                    '<button type="button" class="btn btn-danger image-preview-clear" style="display:none;">'+
                                         '<span class="glyphicon glyphicon-remove"></span> Clear'+
                                     '</button>'+
-                                    '<div class="btn btn-default image-preview-input">'+
+                                    '<div class="btn btn-info image-preview-input">'+
                                         '<span class="glyphicon glyphicon-folder-open"></span>'+
                                         '<span class="image-preview-input-title">Browse</span>'+
-                                        '<input type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                        '<input id="img-input'+ counter2 +'" onchange="changemage(this)" type="file" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>'+
+                                        '<input type="hidden" name="input_file_64[]" class="input_file_64" id="'+counter2+'">'+
+                                        // '<img id="img-view'+ counter +'" src="https://avatars0.githubusercontent.com/u/3456749" alt="img" class="image-preview">'+
                                     '</div>'+
                                     '<button type="button" class="btn btn-danger remove-btn">'+
-                                        '<span class="glyphicon glyphicon-remove"></span>'+
+                                        '<span class="glyphicon glyphicon-remove">Delete</span>'+
                                     '</button>'+
                                 '</span>'+
                             '</div>'+
@@ -962,14 +974,14 @@ class ProdukController extends Controller
                             //     console.log($(this).parents('.parent-img'));
                             //     $(this).parents('.popover').hide();
                                 // Hover befor close the preview
-                                $('.image-preview').hover(
-                                    function () {
-                                       $(this).popover('show');
-                                    }, 
-                                     function () {
-                                       $(this).popover('hide');
-                                    }
-                                );    
+                                // $('.image-preview').hover(
+                                //     function () {
+                                //        $(this).popover('show');
+                                //     }, 
+                                //      function () {
+                                //        $(this).popover('hide');
+                                //     }
+                                // );    
                             // });
 
                             $(function() {
@@ -982,16 +994,17 @@ class ProdukController extends Controller
                                 });
                                 closebtn.attr("class","close pull-right");
                                 // Set the popover default content
-                                $('.image-preview').popover({
-                                    trigger:'manual',
-                                    html:true,
-                                    title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-                                    content: "There's no image",
-                                    placement:'bottom'
-                                });
+                                // $('.image-preview').popover({
+                                //     trigger:'manual',
+                                //     html:true,
+                                //     title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
+                                //     content: "There's no image",
+                                //     placement:'bottom'
+                                // });
                                 // Clear event
                                 $('.image-preview-clear').click(function(){
-                                    $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    // $(this).parents(".parent-img").find('.image-preview').attr("data-content","").popover('hide');
+                                    $(this).parents(".parent-img").find('.input_file_64').val("");
                                     $(this).parents(".parent-img").find('.image-preview-filename').val("");
                                     $(this).parents(".parent-img").find('.image-preview-clear').hide();
                                     $(this).parents(".parent-img").find('.image-preview-input input:file').val("");
@@ -1013,7 +1026,7 @@ class ProdukController extends Controller
                                         $(x).parents(".parent-img").find(".image-preview-clear").show();
                                         $(x).parents(".parent-img").find('.image-preview-filename').val(file.name);            
                                         img.attr('src', e.target.result);
-                                        $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
+                                        // $(x).parents(".parent-img").find(".image-preview").attr("data-content",$(img)[0].outerHTML);
                                     }        
                                     reader.readAsDataURL(file);
                                 });  

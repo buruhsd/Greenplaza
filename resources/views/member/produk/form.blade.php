@@ -38,7 +38,7 @@
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="{{__('dashboard.gambar') }}">
+                        {{-- <input type="text" class="form-control image-preview-filename" disabled="disabled" placeholder="{{__('dashboard.gambar') }}">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span> {{__('dashboard.clear') }}
@@ -46,7 +46,21 @@
                             <div class="btn btn-default image-preview-input" >
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
-                                <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/ placeholder="asdadas">
+                                <input onchange="changemage(this)" type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]" placeholder="asdadas">
+                                <input type="hidden" name="input_file_64[]" class="input_file_64" id="1">
+                            </div>
+                        </span> --}}
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> {{__('dashboard.clear') }}
+                            </button>
+                            <div class="btn btn-info image-preview-input" >
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input id="img-input1" onchange="changemage(this)" type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]" placeholder="asdadas">
+                                <input type="hidden" name="input_file_64[]" class="input_file_64" id="1">
+                                {{-- <img id="img-view1" src="https://avatars0.githubusercontent.com/u/3456749" alt="img"> --}}
                             </div>
                         </span>
                     </div>
@@ -97,7 +111,7 @@
             <div class="col-xs-10 col-md-8 col-sm-10 append-img">
                 <div class="parent-img">
                     <div class="input-group image-preview">
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        {{-- <input type="text" class="form-control image-preview-filename" disabled="disabled">
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default image-preview-clear" style="display:none;">
                                 <span class="glyphicon glyphicon-remove"></span>{{__('dashboard.clear') }}
@@ -106,6 +120,19 @@
                                 <span class="glyphicon glyphicon-folder-open"></span>
                                 <span class="image-preview-input-title">Browse</span>
                                 <input type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]"/>
+                            </div>
+                        </span> --}}
+                        <input type="text" class="form-control image-preview-filename" disabled="disabled">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger image-preview-clear" style="display:none;">
+                                <span class="glyphicon glyphicon-remove"></span> {{__('dashboard.clear') }}
+                            </button>
+                            <div class="btn btn-info image-preview-input" >
+                                <span class="glyphicon glyphicon-folder-open"></span>
+                                <span class="image-preview-input-title">Browse</span>
+                                <input id="img-input1" onchange="changemage(this)" type="file" class="input_file_preview" accept="image/png, image/jpeg, image/gif" name="input_file_preview[]" placeholder="asdadas">
+                                <input type="hidden" name="input_file_64[]" class="input_file_64" id="1">
+                                {{-- <img id="img-view1" src="https://avatars0.githubusercontent.com/u/3456749" alt="img"> --}}
                             </div>
                         </span>
                     </div>
