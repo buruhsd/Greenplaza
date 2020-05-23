@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Wishlist;
 use App\Models\Produk;
+use App\Models\Category;
 use App\Models\Shipment;
 use App\Models\Payment;
 use Session;
@@ -19,7 +20,8 @@ class ChartController extends Controller
     {
         $type = $request->type;
         $gln_price = json_decode(FunctionLib::priceGln(), true);
-        return view('frontend.chart', compact('type', 'gln_price'));
+        $categoryheader = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
+        return view('frontend.chart', compact('type', 'gln_price', 'categoryheader'));
     }
 
     public function delVoucher()
@@ -63,6 +65,7 @@ class ChartController extends Controller
         $data['type'] = $request->type;
         $data['payment'] = Payment::where('payment_status', 1)->whereIn('id', [2,4])->get();
         $data['gln'] = FunctionLib::gln('compare',[])['data'];
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         return view('frontend.checkout', $data);
     }
 

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 use App\Models\Produk;
+use App\Models\Category;
 use FunctionLib;
 use Auth;
 
@@ -36,6 +37,7 @@ class WishlistController extends Controller
         }
         $data['produk'] = Produk::orderBy('id', 'DESC')->first();
         $data['footer_script'] = $this->footer_script(__FUNCTION__);
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
 
         return view('frontend.wishlist', $data);
     }

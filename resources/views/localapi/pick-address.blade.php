@@ -38,7 +38,7 @@
                                 </ul>
                             </td>
                             <td>
-                                <input type="button" class="btn btn-success btn-sm" onclick="$(this).closest('.modal').modal('hide');use_address({{$item->id}}, '{{$item->user_address_label}}', {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="Use {{$item->user_address_label}}">
+                                <input type="button" class="btn btn-success btn-sm" onclick="$(this).closest('.modal').modal('hide');use_address({{$item->id}}, '{{$item->user_address_label}}', {{$item->user_address_city}}, {{$item->user_address_subdist}});" value="{{$item->user_address_label}}">
                             </td>
                         </tbody>
                     @endforeach

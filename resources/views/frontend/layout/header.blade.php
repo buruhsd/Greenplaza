@@ -1,5 +1,5 @@
     
-  <header class="header-area header-req">
+<header class="header-area header-req">
    <div class="header-bottom-area bg-1 header-bottom-area-two" style="padding: 0.8rem 0">
       <div class="container" style="padding-left: 0px; padding-right: 0px">
          <div class="d-flex justify-content-between align-items-center">
@@ -259,11 +259,49 @@
       </div>
       <!-- responsive-menu area start -->
    </div>
-</header>
 
+   <div class="header-middle-area bg-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-12">
+                        <div class="logo">
+                            {{-- <a href="{{url("/")}}">
+                                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" >
+                                <img class="light-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="">
+                            </a> --}}
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-7 col-12">                    
+                     <ul class="d-flex shadow-header ">
+                     @foreach($categoryheader as $p)
+                       <li style="padding-right: 15px;"><a href="{{route('category', ['cat'=>$p->category_slug])}}">{{ $p->category_name }}</a></li>
+                     @endforeach                    
+                     </ul>
+                        {{-- <div class="search-wrap">
+                            <form action="search">
+                                <div class="select-menu" tabindex="1">
+                                    <span>Categories </span>
+                                    <ul class="dropdown">
+                                        <li><a href="javascript:void(0);">Man</a></li>
+                                        <li><a href="javascript:void(0);">Woman</a></li>
+                                        <li><a href="javascript:void(0);">Kids</a></li>
+                                        <li><a href="javascript:void(0);">Babys</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" placeholder="Search Here...">
+                                <button><i class="fa fa-search"></i></button>
+                            </form>
+                        </div> --}}
+                    </div>
+                    <div class="col-md-3 col-sm-5">
+                    </div>
+                </div>
+            </div>
+   </div>
+</header>
     <!-- header-area end -->
     <!-- slider-area start -->
-        <div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
+<div style="padding: 0px" id="myModalLogin" class="modal fade" role="dialog">
    <div class="modal-dialog modal-sm" role="document">
       <div class="modal-content">
          <div class="modal-body">

@@ -81,7 +81,7 @@
                                 @foreach($transaction as $item)
                                     <tr>
                                         <th scope="row">{{$no++}}</th>
-                                        <td><img scr="{{ asset('assets/images/product/'.$item->trans_detail->first()->produk->produk_image) }}" style="width: 50px; height: 50px"></td>
+                                        <td><img scr="{{ asset('assets/images/product/'.$item->trans_detail->produk->produk_image) }}" style="width: 50px; height: 50px"></td>
                                         <td>{{$item->trans_code}}</td>
                                         <td scope="row">
                                             <ul>

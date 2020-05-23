@@ -174,8 +174,9 @@ class FrontController extends Controller
                 ->paginate($perPage);
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_category_id', '!=', null)->get();
+        $categoryheader = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
-        return view('frontend.category', $data, compact('category'));
+        return view('frontend.category', $data, compact('category','categoryheader'));
     }
 
     /**
@@ -196,6 +197,7 @@ class FrontController extends Controller
         $data['review'] = $data['detail']->review()
             ->orderBy('updated_at', 'DESC')
             ->get();
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
 
             
         return view('frontend.new.detail2', $data);
@@ -267,6 +269,7 @@ class FrontController extends Controller
                 ->paginate($perPage);
         }
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_category_id', '!=', null)->get();
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         $data['sub_cat'] = FunctionLib::category_by_parent($id_cat)->orderByRaw('CASE WHEN id='.$id_cat.' THEN category_parent_id END')->limit(25)->get();
         return view('frontend.asdf_adminProduct', $data, compact('category'));
     }
@@ -308,6 +311,7 @@ class FrontController extends Controller
         // dd($user);
         $data['produk'] = Produk::where('produk_seller_id', $user['id'])->orderByRaw($order)->paginate($perPage);
         $data['user'] = $user;
+        $data['categoryheader'] = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         // dd($produk);
         return view('frontend.etalase', $data);
     }
@@ -350,9 +354,11 @@ class FrontController extends Controller
         $relatedprodukk = Produk::where('produk_seller_id', $users)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->limit(4)->skip(4)->get();
         $product_asdf = Produk::where('produk_seller_id', $users)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->limit(12)->get();
         $category = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_category_id', '!=', null)->where('produk_seller_id', '!=', $users)->get();
+        $categoryheader = Category::orderBy('created_at', 'DESC')->where('category_status', '=', 1)->limit(7)->get();
         $newproduk = Produk::orderBy('created_at', 'DESC')->where('produk_status', '!=', 2)->where('produk_seller_id', '!=', $users)->limit(12)->get();
         $discountprice = Produk::where('produk_discount', '!=', 0)->where('produk_status', '!=', 2)->orderBy('created_at', 'DESC')->inRandomOrder()->get();
         $popularproduk = Produk::orderBy('produk_viewer', 'DESC')->where('produk_status', '!=', 2)->limit(4)->get();
+        $produkheader = Produk::orderBy('produk_viewer', 'DESC')->where('produk_status', '!=', 2)->limit(4)->get();
         $popularprodukk = Produk::orderBy('produk_viewer', 'DESC')->where('produk_status', '!=', 2)->limit(4)->skip(4)->get();
         $review = Review::orderBy('created_at', 'DESC')->limit(3)->get();
         $toprate = Produk::orderBy('produk_hotlist', 'DESC')->where('produk_status', '!=', 2)->limit(4)->get();
@@ -383,6 +389,8 @@ class FrontController extends Controller
                 'newproduk', 
                 'discountprice', 
                 'popularproduk', 
+                'produkheader', 
+                'categoryheader', 
                 'review',
                 'popularprodukk',
                 'toprate',
