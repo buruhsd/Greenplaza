@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use FunctionLib;
 use App\Models\Produk;
+use App\Models\Category;
 use App\Models\Review;
 use App\Models\Iklan;
 use App\Models\Brand;
