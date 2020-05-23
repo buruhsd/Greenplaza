@@ -82,7 +82,8 @@
                                 @foreach($transaction as $item)
                                     <tr>
                                         <th scope="row">{{$no++}}</th>
-                                        <td><img class="h100" scr="{{ asset("assets/images/product/".$item->trans_detail->first()->produk->produk_image) }}" style="width: 50px; height: 50px"></td>
+                                        <td><img class="h100" src="{{ asset("assets/images/product/".$item->trans_detail->first()->produk->produk_image) }}" style="width: 50px; height: 50px"></td>
+                                        {{-- {{dd($item->trans_detail->first()->produk->produk_image)}} --}}
                                         <td>{{$item->trans_detail->first()->produk->produk_name}}</td>
                                         <td>{{$item->trans_code}}</td>
                                         <td scope="row">
