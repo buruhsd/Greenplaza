@@ -44,11 +44,11 @@
                             </div>
                         </div>
                         <div class="col-6 col-md-6">
-                            {!! Form::label('address_tlp', 'Telpon') !!}
+                            {!! Form::label('address_tlp', 'Telepon') !!}
                             <div class="form-group {{ $errors->has('address_tlp') ? 'has-error' : ''}}">
                                 {!! Form::text('address_tlp', null, [
                                     'class' => 'form-control', 
-                                    'placeholder' => 'Telpon', 
+                                    'placeholder' => 'Telepon', 
                                     'required'
                                 ])!!}
                                 {!! $errors->first('address_owner', '<p class="help-block">:message</p>') !!}

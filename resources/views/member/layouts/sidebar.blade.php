@@ -38,6 +38,7 @@
                                                     </table>
                                                 </small>"
                                                  data-placement="bottom" data-trigger="hover">{{FunctionLib::count_trans('3,4,5,6', Auth::id(), 'seller')}}</span>
+                                                 <span>      </span>
                                                 <span class="label label-info pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
                                                 data-content="<small>
                                                     <table>
@@ -75,6 +76,7 @@
                                                  data-placement="bottom" data-trigger="hover">
                                                     {{FunctionLib::count_trans('3,4,6', Auth::id()) + FunctionLib::count_trans('7', Auth::id())}}
                                                 </span>
+                                                <span> </span>
                                                 <span class="label label-danger pull-right badge" data-toggle="popover" title="Informasi : " data-html="true" 
                                                 data-content="<small>
                                                     <table>
