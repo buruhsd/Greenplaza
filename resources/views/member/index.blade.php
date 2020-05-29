@@ -46,7 +46,7 @@
                         </div>
                     @endif
                     <div class="col-md-12">
-                        <div class="col-md-2">
+                        <div class="col-md-2 hidden">
                             <div style="padding: 10px" class="panel panel-white stats-widget panel-{{FunctionLib::class_arr()[array_rand(FunctionLib::class_arr())]}}">
                                 <div class="panel-body">
                                     <p class="stats-info">Saldo CW : <br/>

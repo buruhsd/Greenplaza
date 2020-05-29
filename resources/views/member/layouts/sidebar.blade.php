@@ -216,7 +216,7 @@
                                     <ul class="sub-menu">
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/transaksi')}}"><a href="{{route('member.wallet.type', 'transaksi')}}">Log Cw Transaksi</a></li> -->
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/cw')}}"><a href="{{route('member.wallet.type', 'cw')}}">Log Cw Bonus</a></li> -->
-                                        <li class="{{FunctionLib::setActive('member/wallet/log_masedi')}}"><a href="{{route('member.wallet.log_masedi')}}">{{__('dashboard.log_masedi_transaction') }}</a></li>
+                                        {{-- <li class="{{FunctionLib::setActive('member/wallet/log_masedi')}}"><a href="{{route('member.wallet.log_masedi')}}">{{__('dashboard.log_masedi_transaction') }}</a></li> --}}
                                         <li><a href="{{route('member.wallet.type', 'transaksi')}}">{{__('dashboard.log_saldo_transaction') }}</a></li>
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/log_gln')}}"><a href="{{route('member.wallet.log_gln')}}">Log Gln Transaction</a></li> -->
                                         <!-- <li class="{{FunctionLib::setActive('member/wallet/type/rw')}}"><a href="{{route('member.wallet.type', 'rw')}}">Log Rw</a></li> -->

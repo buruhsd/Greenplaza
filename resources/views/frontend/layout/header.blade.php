@@ -33,7 +33,7 @@
                      <i class="fa fa-exclamation-triangle {!!($notif->count())?'faa-vertical':''!!} animated"></i>
                      </small>
                      </a>
-                     <ul class="dropdown-content" id="member-notif">
+                     <ul style="background-color: #fff" class="dropdown-content" id="member-notif">
                         @if($notif->count())
                         @foreach($notif->get() as $item)
                         <?php
@@ -89,7 +89,7 @@
                   </li>
                   <li class="sidemenu-items cart-head">
                      <a href="javascript:void(0);">{{__('front.shop') }} <i class="fa fa-angle-down"></i></a>
-                     <ul>
+                     <ul style="background-color: #fff">
                         <li><a href="{{route('chart')}}">{{__('front.keranjang') }}</a></li>
                         @guest
                         @else
@@ -111,7 +111,7 @@
                      @endguest
                      @guest
                      @else
-                     <ul>
+                     <ul style="background-color: #fff">
                         @if(Auth::user()->is_admin())
                         <li><a href="{{route('admin.config.profil')}}">{{__('front.profil') }}</a></li>
                         <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
@@ -136,7 +136,7 @@
                   </li>
                   <li class="sidemenu-items" style="margin-right: -50px">
                      <a href="javascript:void(0);" class="btn button-style-login log-head" >{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
-                     <ul>
+                     <ul class="bg-1">
                         <li><a href="{{URL('/change/language/id')}}">Indonesia</a></li>
                         <li><a href="{{URL('/change/language/en')}}">English</a></li>
                      </ul>
@@ -211,7 +211,7 @@
                      </li>
                      <li class="sidemenu-items">
                         <a href="javascript:void(0);">{{__('front.shop') }} <i class="fa fa-angle-down"></i></a>
-                        <ul>
+                        <ul class="bg-1">
                            <li><a href="{{route('chart')}}">{{__('front.keranjang') }}</a></li>
                            @guest
                            @else
@@ -230,7 +230,7 @@
                         @endguest
                         @guest
                         @else
-                        <ul>
+                        <ul class="bg-1">
                            @if(Auth::user()->is_admin())
                            <li><a href="{{route('admin.config.profil')}}">{{__('front.profil') }}</a></li>
                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
