@@ -21,7 +21,7 @@
         <br/>
         <div class="text-center">
             <a href="{{url('/')}}">
-                <img class="dark-logo" src="{{ asset('frontend/images/logo-fix.png') }}" alt="" width="300px" height="100px">
+                <img class="dark-logo" src="{{ asset('assets/images/gi_logo.png') }}" alt="" width="300px" height="100px">
             </a>
         </div>
         <hr/>

@@ -103,8 +103,10 @@
                   
                   {{-- <li><a href="{{route('member.wishlist')}}"><img src="{{asset('/frontend/images/gi/like.png')}}" style="width: 12px;" alt="alt text" /></a></li> --}}
                   @guest
-                  <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">login</a></li>
-                  <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">Register</a></li>
+                  {{-- <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">login</a></li> --}}
+                  <li><a href="{{ route('login') }}"  class="btn button-style-login log-head">{{__('front.login') }}</a></li>
+                  <li><a href="{{ route('register') }}" class="btn button-style-register log-head-register">{{__('front.daftar') }}</a></li>
+                  {{-- <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">Register</a></li> --}}
                   @else
                   <li class="sidemenu-items">
                      <a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
@@ -136,9 +138,9 @@
                   </li>
                   <li class="sidemenu-items" style="margin-right: -50px">
                      <a href="javascript:void(0);" class="btn button-style-login log-head" >{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
-                     <ul class="bg-1">
-                        <li><a href="{{URL('/change/language/id')}}">Indonesia</a></li>
-                        <li><a href="{{URL('/change/language/en')}}">English</a></li>
+                     <ul style="background-color: #fff">
+                        <li><a href="{{URL('/change/language/id')}}"><img  src="{{ asset('frontend/indonesia.png') }}" alt="" ><span> </span>Indonesia</a></li>
+                        <li><a href="{{URL('/change/language/en')}}"><img  src="{{ asset('frontend/uk.png') }}" alt="" ><span> </span>English</a></li>
                      </ul>
                   </li>
                   

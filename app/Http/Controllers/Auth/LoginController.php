@@ -192,7 +192,7 @@ class LoginController extends Controller
         User::where('username', $response['username'])->limit(1)->update(['password' => Hash::make($data)]);
         
     }
-    public function login(Request $request){
+    public function login_gicomm(Request $request){
         if($request->email === "admin" || $request->email === "superadmin"){
         if ($this->attemptLogin($request)) {
             return $this->sendLoginResponse($request);
@@ -225,6 +225,29 @@ class LoginController extends Controller
             $errors = ['email' => $sendError];
             return Redirect::back()->withErrors($errors);
         }
+    }
+
+    public function login(Request $request){
+        // $this->validateLogin($request);
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**

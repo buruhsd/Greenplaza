@@ -105,8 +105,10 @@
                   </li>
                   
                   @guest
-                  <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">{{__('front.login') }}</a></li>
-                  <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">{{__('front.daftar') }}</a></li>
+                  {{-- <li><a href="javascript:void(0)" onClick="showLoginModal()" class="btn button-style-login log-head">{{__('front.login') }}</a></li> --}}
+                  <li><a href="{{ route('login') }}"  class="btn button-style-login log-head">{{__('front.login') }}</a></li>
+                  <li><a href="{{ route('register') }}" class="btn button-style-register log-head-register">{{__('front.daftar') }}</a></li>
+                  {{-- <li><a href="https://gicommunity.org/register" class="btn button-style-register log-head-register">{{__('front.daftar') }}</a></li> --}}
                   @else
                   <li class="sidemenu-items">
                      <a href="javascript:void(0);">{{Auth::user()->name}} <i class="fa fa-angle-down"></i></a>
@@ -139,8 +141,8 @@
                   <li class="sidemenu-items" style="margin-right: -50px">
                      <a href="javascript:void(0);" class="btn button-style-login log-head" >{{__('front.bahasa') }}  <i class="fa fa-angle-down"></i></a>
                      <ul style="background-color: #fff">
-                        <li><a href="{{URL('/change/language/id')}}">Indonesia</a></li>
-                        <li><a href="{{URL('/change/language/en')}}">English</a></li>
+                        <li><a href="{{URL('/change/language/id')}}"><img  src="{{ asset('frontend/indonesia.png') }}" alt="" >Indonesia</a></li>
+                        <li><a href="{{URL('/change/language/en')}}"><img  src="{{ asset('frontend/uk.png') }}" alt="" >English</a></li>
                      </ul>
                   </li>
                </ul>
