@@ -1621,7 +1621,9 @@ class ApiController extends Controller
             'email'     => $request->username,
             'password'  => $request->password
         );
+
         // attempt to do the login
+        // var_dump(Auth::attempt($userdata)); die();
         if (Auth::attempt($userdata)) {
             $status = 200;
             $data = User::whereId(Auth::id())->with('user_detail')->first();
@@ -1631,6 +1633,25 @@ class ApiController extends Controller
         }
         return response()->json(['status' => $status, 'data'=>$data]);
     }
+
+    public function webLogin(Request $request){
+        $userdata = array(
+            'username'     => $request->username,
+            'password'  => $request->password
+        );
+
+        // attempt to do the login
+        // var_dump(Auth::attempt($userdata)); die();
+        if (Auth::attempt($userdata)) {
+            $status = 200;
+            $data = User::whereId(Auth::id())->with('user_detail')->first();
+        } else {
+            $status = 500;
+            $data = [];
+        }
+        return response()->json(['status' => $status, 'data'=>$data]);
+    }
+
 
     /**
     * mendapatkan detail transaksi
