@@ -23,7 +23,9 @@ Route::post('gln', 'Api\\ApiController@gln');
 Route::post('konfirmasi/{id}', 'Api\\ApiController@konfirmasi');
 Route::post('save_checkout', 'Api\\ApiController@saveCheckout');
 Route::post('login', 'Api\\ApiController@doLogin');
+
 Route::post('login_web', 'Api\\ApiController@webLogin');
+Route::post('register_web', 'Api\\ApiController@webRegister');
 
 Route::post('update_profil', 'Api\\ApiController@update_profil');
 Route::post('get_trans_detail/{id}', 'Api\\ApiController@detail_transaksi');

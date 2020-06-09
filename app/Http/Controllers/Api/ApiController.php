@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Trans_detail;
+use App\Models\User_detail;
+use App\Models\Sponsor;
+use App\Role;
 use App\Models\Produk;
 use App\Models\Produk_grosir;
 use App\Models\Log_wallet;
@@ -1650,6 +1654,74 @@ class ApiController extends Controller
             $data = [];
         }
         return response()->json(['status' => $status, 'data'=>$data]);
+    }
+
+    public function webRegister(Request $data){
+        $user = User::create([
+            'username' => $data['username'],
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'reff_code' => FunctionLib::str_rand(3).'-'.rand(0, 999999),
+            'token_register'=>str_random(190)
+        ]);
+
+        $sponsor = 2;
+        if($data['code_reveral'] !== null && $data['code_reveral'] !== ''){
+            $code = User::whereRaw('reff_code LIKE "%'.$data['code_reveral'].'%"');
+            $sponsor = ($code->exists())?$code->first()->id:$sponsor;
+        }
+
+        // update detail user
+        if($user){
+            $user_detail = User_detail::create([
+                'user_detail_user_id' => $user->id,
+                'user_detail_pass_trx' => $user->password,
+                'user_detail_jk' => $data['user_detail_jk'],
+                // 'user_detail_address' => $data['user_detail_address'],
+                'user_detail_phone' => $data['user_detail_phone'],
+                'user_detail_province' => $data['user_detail_province'],
+                'user_detail_city' => $data['user_detail_city'],
+                'user_detail_subdist' => $data['user_detail_subdist'],
+                'user_detail_pos' => $data['user_detail_pos'],
+                'user_detail_token' => "",//$data['user_detail_status'],
+                'user_detail_status' => 0//$data['user_detail_status'],
+            ]);
+            $user_sponsor = Sponsor::create([
+                'user_tree_user_id' => $user->id,
+                'user_tree_sponsor_id' => $sponsor,
+            ]);
+            $user_address = User_address::create([
+                'user_address_user_id' => $user->id,
+                'user_address_label' => 'Saya',
+                'user_address_owner' => $data['name'],
+                'user_address_address' => " ",
+                'user_address_phone' => $data['user_detail_phone'],
+                'user_address_province' => $data['user_detail_province'],
+                'user_address_city' => $data['user_detail_city'],
+                'user_address_subdist' => $data['user_detail_subdist'],
+                'user_address_pos' => $data['user_detail_pos'],
+            ]);
+            // insert config user
+            $arr = FunctionLib::UserConfigArr();
+            foreach ($arr as $item) {
+                $param = [
+                    'id' => $user->id,
+                    'name' => $item['name'],
+                    'value' => $item['value'],
+                    'note' => $item['note'],
+                ];
+                $create = FunctionLib::CreateUserConfig($param);
+                $status = ($create['status'] == 200)?'berhasil':'gagal';
+            }
+        }
+
+        // get role member
+        $memberRole = Role::where('name', 'member')->pluck('name');
+        $insert_role = $user->assignRole($memberRole);
+        return response()->json(['status' => '200', 'data'=>$user]);
+
+        
     }
 
 
