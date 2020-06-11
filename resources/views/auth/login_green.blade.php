@@ -89,7 +89,8 @@
         <button type="submit" class="btn btn-block btn-lg" style="background-color: #33ff67;"><b>Masuk</b></button>
         <div class="separator"> Atau Masuk Dengan
         </div>
-        <a href="javascript:void(0)" onClick="showLoginModal()" class="btn btn-lg btn-google btn-block text-uppercase" style="background-color: #bac8bd; color: #fff;" type="submit"><img class="dark-logo" src="{{ asset('assets/images/gi_plaza.png')}}" alt="" width="40px" height="40px"><b> Sign in with GI Community </b></a>
+        <a href="javascript:void(0)" onClick="showLoginModal()" class="btn btn-lg btn-google btn-block text-uppercase" style="background-color: #bac8bd; color: #fff;" type="submit"><img class="dark-logo" src="{{ asset('assets/images/gi-ori.png')}}" alt="" width="40px" height="40px"><b> Sign in with GI Community </b></a>
+        <a href="#"  class="btn btn-lg btn-google btn-block text-uppercase" style="background-color: #bac8bd; color: #fff;" type="submit"><img class="dark-logo" src="{{ asset('assets/images/google-plus.png')}}" alt="" width="40px" height="40px"><b> Sign in with Gmail </b></a>
         {{-- <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button> --}}
         <br/>
     </div>

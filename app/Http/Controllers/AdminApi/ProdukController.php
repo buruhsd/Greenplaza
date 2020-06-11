@@ -47,7 +47,7 @@ class ProdukController extends Controller
         $res = new Produk;
         $res->produk_seller_id = $request->produk_seller_id;
         $res->produk_category_id = $request->produk_category_id;
-        $res->produk_brand_id = $request->produk_brand_id;
+        $res->produk_brand_id = '1';
         $res->produk_name = $request->produk_name;
         $res->produk_slug = $request->produk_slug;
         $res->produk_unit = $request->produk_unit;
@@ -59,8 +59,8 @@ class ProdukController extends Controller
         $res->produk_stock = $request->produk_stock;
         $res->produk_weight = $request->produk_weight;
         $res->produk_discount = $request->produk_discount;
-        $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
+        // $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
+        // $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
         $res->produk_note = $request->produk_note;
         $res->save();
         if(!$res){
