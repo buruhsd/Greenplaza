@@ -44,6 +44,16 @@ class ProdukController extends Controller
             'produk_discount' => 'required',
             'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $image = $request->produk_image;
+        $imageInfo = explode(";base64,", $image);
+        $imgExt = str_replace('data:image/', '', $imageInfo[0]);      
+        $image = str_replace(' ', '+', $imageInfo[1]);
+        $imageName = time().".".$imgExt;
+        \File::put(public_path(). '/assets/images/' . $imageName, base64_decode($image));
+
+        // var_dump($imageName); die();
+
         $res = new Produk;
         $res->produk_seller_id = $request->produk_seller_id;
         $res->produk_category_id = $request->produk_category_id;
@@ -61,7 +71,9 @@ class ProdukController extends Controller
         $res->produk_discount = $request->produk_discount;
         // $res->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
         // $request->produk_image->move(public_path('assets/images/product'),$res->produk_image);
+        $res->produk_image = $imageName;
         $res->produk_note = $request->produk_note;
+        // var_dump($res); die();
         $res->save();
         if(!$res){
             $status = 500;
@@ -95,6 +107,13 @@ class ProdukController extends Controller
             'produk_discount' => 'required',
             'brand_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $image = $request->produk_image;
+        $imageInfo = explode(";base64,", $image);
+        $imgExt = str_replace('data:image/', '', $imageInfo[0]);      
+        $image = str_replace(' ', '+', $imageInfo[1]);
+        $imageName = time().".".$imgExt;
+        \File::put(public_path(). '/assets/images/' . $imageName, base64_decode($image));
         $produk = Produk::findOrFail($id);
         $produk->produk_seller_id = $request->produk_seller_id;
         $produk->produk_category_id = $request->produk_category_id;
@@ -110,8 +129,9 @@ class ProdukController extends Controller
         $produk->produk_stock = $request->produk_stock;
         $produk->produk_weight = $request->produk_weight;
         $produk->produk_discount = $request->produk_discount;
-        $produk->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
-        $request->produk_image->move(public_path('assets/images/product'),$produk->produk_image);
+        // $produk->produk_image = date("d-M-Y_H-i-s").'_'.$request->produk_image->getClientOriginalName();
+        // $request->produk_image->move(public_path('assets/images/product'),$produk->produk_image);
+        $res->produk_image = $imageName;
         $produk->produk_note = $request->produk_note;
         $produk->save();
         $res = $produk->update($requestData);
