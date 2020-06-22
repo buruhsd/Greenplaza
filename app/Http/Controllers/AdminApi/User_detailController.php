@@ -59,7 +59,7 @@ class User_detailController extends Controller
     public function update(Request $request, $id)
     {
         $status = 200;
-        $message = 'User_detail added!';
+        $message = 'Detail user berhasil ditambahkan';
         
         $requestData = $request->all();
         
@@ -85,8 +85,10 @@ class User_detailController extends Controller
             $message = 'User_detail Not updated!';
         }
 
-        return redirect('admin/user_detail')
-            ->with(['flash_status' => $status,'flash_message' => $message]);
+        return response()->json(['success' => $status, 'message'=>$message]);
+
+        // return redirect('admin/user_detail')
+        //     ->with(['flash_status' => $status,'flash_message' => $message]);
     }
     public function destroy($id)
     {

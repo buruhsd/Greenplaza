@@ -1536,7 +1536,7 @@ class ApiController extends Controller
     public function update_profil(Request $request){
         $status = 500;
         $par_auth = [
-            'username'=>$request->input("username"),
+            'email'=>$request->input("email"),
             'password'=>$request->input("password")
         ];
         $uid = 0;
@@ -1640,7 +1640,7 @@ class ApiController extends Controller
 
     public function webLogin(Request $request){
         $userdata = array(
-            'username'     => $request->username,
+            'email'     => $request->email,
             'password'  => $request->password
         );
 

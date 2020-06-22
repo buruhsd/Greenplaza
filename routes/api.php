@@ -139,7 +139,7 @@ Route::get('user_bankdestroy/{id}', 'AdminApi\User_bankController@destroy');
 Route::get('user_detail', 'AdminApi\User_detailController@index');
 Route::post('user_detail', 'AdminApi\User_detailController@store');
 Route::get('user_detailshow/{id}', 'AdminApi\User_detailController@show');
-Route::post('user_detailupdate/{id}', 'AdminApi\User_detailController@update');
+Route::post('user_detailshow/{id}', 'AdminApi\User_detailController@update');
 Route::get('user_detaildestroy/{id}', 'AdminApi\User_detailController@destroy');
 
 Route::post('localapi/midtrans/done', 'LocalApi\\MidtransController@done');
