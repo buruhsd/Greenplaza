@@ -1656,6 +1656,33 @@ class ApiController extends Controller
         return response()->json(['status' => $status, 'data'=>$data]);
     }
 
+    public function webLogin_sosial(Request $request){
+        $userdata = array(
+            'email'     => $request->email,
+            // 'password'  => $request->password
+        );
+
+        $user = User::where('email', $request->email)->first();
+        if(!$user){
+            $status = 500;
+            $data = [];
+        }else{
+            $status = 200;
+            return response()->json(['status' => $status, 'data'=>$user]);
+            $data = [];
+        }
+
+        
+        // if (Auth::attempt($userdata)) {
+        //     $status = 200;
+        //     $data = User::whereId(Auth::id())->with('user_detail')->first();
+        // } else {
+        //     $status = 500;
+        //     $data = [];
+        // }
+        // return response()->json(['status' => $status, 'data'=>$data]);
+    }
+
     public function webRegister(Request $data){
         $user = User::create([
             'username' => $data['username'],

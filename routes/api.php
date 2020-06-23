@@ -27,6 +27,8 @@ Route::post('login', 'Api\\ApiController@doLogin');
 Route::post('login_web', 'Api\\ApiController@webLogin');
 Route::post('register_web', 'Api\\ApiController@webRegister');
 
+Route::post('login_social', 'Api\\ApiController@webLogin_sosial');
+
 Route::post('update_profil', 'Api\\ApiController@update_profil');
 Route::post('get_trans_detail/{id}', 'Api\\ApiController@detail_transaksi');
 Route::post('get_detail_produk/{id}', 'Api\\ApiController@detail_produk');
