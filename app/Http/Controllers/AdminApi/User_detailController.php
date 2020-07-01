@@ -115,7 +115,7 @@ class User_detailController extends Controller
         $message = 'Detail user berhasil ditambahkan';
         
         $requestData = $request->all();
-        $user =User::findOrFail($id);
+        $user =User::where('id',$id)->first();
 
         $image = $request->user_store_image;
         $imageInfo = explode(";base64,", $image);
