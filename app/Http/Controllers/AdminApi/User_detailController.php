@@ -130,23 +130,6 @@ class User_detailController extends Controller
         $user->user_slogan = $request->user_slogan;
         $user->user_store_image = $imageName;
         $user->save();
-
-        $user->user_detail->user_detail_jk = $request->user_detail_jk;
-        $user->user_detail->user_detail_token = $request->user_detail_token;
-        $user->user_detail->user_detail_address = $request->user_detail_address;
-        $user->user_detail->user_detail_phone = $request->user_detail_phone;
-        $user->user_detail->user_detail_tlp = $request->user_detail_tlp;
-        $user->user_detail->user_detail_province = $request->user_detail_province;
-        $user->user_detail->user_detail_city = $request->user_detail_city;
-        $user->user_detail->user_detail_subdist = $request->user_detail_subdist;
-        $user->user_detail->user_detail_pos = $request->user_detail_pos;
-        $user->user_detail->user_detail_image = $request->user_detail_image;
-        $user->user_detail->user_detail_bank_name = $request->user_detail_bank_name;
-        $user->user_detail->user_detail_bank_owner = $request->user_detail_bank_owner;
-        $user->user_detail->user_detail_bank_no = $request->user_detail_bank_no;
-        $user->user_detail->user_detail_note = $request->user_detail_note;
-        $user->user_detail->save();
-
         return response()->json(['success' => true, 'data'=>$user]);
     }
 }
