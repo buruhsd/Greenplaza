@@ -22,6 +22,11 @@ class Produk extends Model
     * @return
     * 
     */
+    public function user_detail()
+    {
+        return $this->belongsTo('App\Models\User_detail', 'produk_seller_id');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User', 'produk_seller_id');

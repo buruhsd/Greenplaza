@@ -16,9 +16,9 @@ class ProdukController extends Controller
         $keyword = $request->get('search');
 
         if (!empty($keyword)) {
-            $data['produk'] = Produk::paginate($this->perPage);
+            $data['produk'] = Produk::with(['user_detail'])->paginate($this->perPage);
         } else {
-            $data['produk'] = Produk::paginate($this->perPage);
+            $data['produk'] = Produk::with(['user_detail'])->paginate($this->perPage);
         }
         return response()->json(['success' => true, 'data'=>$data]);
     }
