@@ -145,6 +145,7 @@ Route::post('user_detailshow/{id}', 'AdminApi\User_detailController@update');
 Route::get('user_detaildestroy/{id}', 'AdminApi\User_detailController@destroy');
 Route::get('user_show/{id}', 'AdminApi\User_detailController@show_user');
 Route::post('user_show/{id}', 'AdminApi\User_detailController@show_user_update');
+Route::post('user_profil/{id}', 'AdminApi\User_detailController@user_profil');
 
 Route::post('localapi/midtrans/done', 'LocalApi\\MidtransController@done');
 
