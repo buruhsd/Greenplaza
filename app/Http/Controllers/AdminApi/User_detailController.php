@@ -141,6 +141,13 @@ class User_detailController extends Controller
         $requestData = $request->all();
         $user =User::findOrFail($id);
 
+        $image = $request->user_detail_image;
+        $imageInfo = explode(";base64,", $image);
+        $imgExt = str_replace('data:image/', '', $imageInfo[0]);      
+        $image = str_replace(' ', '+', $imageInfo[1]);
+        $imageName = time().".".$imgExt;
+        \File::put(public_path(). '/assets/images/profil/' . $imageName, base64_decode($image));
+
         $user->username = $request->username;
         $user->name = $request->name;
        
@@ -155,7 +162,7 @@ class User_detailController extends Controller
         $user->user_detail->user_detail_city = $request->user_detail_city;
         $user->user_detail->user_detail_subdist = $request->user_detail_subdist;
         $user->user_detail->user_detail_pos = $request->user_detail_pos;
-        $user->user_detail->user_detail_image = $request->user_detail_image;
+        $user->user_detail->user_detail_image = $imageName;
         $user->user_detail->user_detail_bank_name = $request->user_detail_bank_name;
         $user->user_detail->user_detail_bank_owner = $request->user_detail_bank_owner;
         $user->user_detail->user_detail_bank_no = $request->user_detail_bank_no;
