@@ -1659,7 +1659,7 @@ class ApiController extends Controller
     public function webLogin_sosial(Request $request){
         $userdata = array(
             'email'     => $request->email,
-            // 'password'  => $request->password
+            'password'  => $request->password
         );
 
         $user = User::where('email', $request->email)->first();
