@@ -496,6 +496,15 @@ class ApiController extends Controller
         return response()->json(FunctionLib::gln('compare', []));
     }
 
+    public function gln_ballance(Request $request){
+        $address = $request->address;
+        return response()->json(FunctionLib::gln('ballance', ['address'=> $address]));
+    }
+
+
+    public function gln_create(){
+        return response()->json(FunctionLib::gln('create', []));
+    }
     /**
     * mendapatkan data konfirmasi pembayaran
     **/

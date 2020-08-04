@@ -56,6 +56,8 @@ Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
 	// $action = action('Api\\ApiController@payment_'.$type);
 	// return return App::make($action);
 // });
+Route::post('gln_create', 'Api\\ApiController@gln_create');
+Route::post('gln_ballance', 'Api\\ApiController@gln_ballance');
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
 // 	return response()->json(['status' => 200, 'message' => 'pesan', 'data' => [['nama'=>'tes']]]);

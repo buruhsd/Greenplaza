@@ -821,11 +821,12 @@ class FunctionLib
                 // "{"success":false,"data":{"message":"failed ! please check your password and addres wallet"}}"
             break;
             case 'ballance':
+                
                 $response = Gln::ballance(['address'=>$address]);
                 $response = json_decode($response, true);
                 if(isset($response['success']) && $response['success'] == true){
                     $status = 200;
-                    $message = 'Wallet berhasil dibuat';
+                    $message = 'Ballance Wallet';
                 }
             break;
             case 'list':
