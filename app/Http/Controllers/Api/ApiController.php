@@ -505,6 +505,10 @@ class ApiController extends Controller
     public function gln_create(){
         return response()->json(FunctionLib::gln('create', []));
     }
+
+     public function gln_create(){
+        return response()->json(FunctionLib::gln('list', []));
+    }
     /**
     * mendapatkan data konfirmasi pembayaran
     **/

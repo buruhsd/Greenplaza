@@ -57,6 +57,7 @@ Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
 	// return return App::make($action);
 // });
 Route::post('gln_create', 'Api\\ApiController@gln_create');
+Route::post('gln_list', 'Api\\ApiController@gln_list');
 Route::post('gln_ballance', 'Api\\ApiController@gln_ballance');
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
