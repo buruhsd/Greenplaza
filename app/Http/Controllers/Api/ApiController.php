@@ -506,7 +506,7 @@ class ApiController extends Controller
         return response()->json(FunctionLib::gln('create', []));
     }
 
-     public function gln_create(){
+     public function gln_list(){
         return response()->json(FunctionLib::gln('list', []));
     }
     /**
