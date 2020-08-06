@@ -10,6 +10,7 @@ use App\Models\User_detail;
 use App\Models\Sponsor;
 use App\Role;
 use App\Models\Produk;
+use App\Models\Wallet;
 use App\Models\Produk_grosir;
 use App\Models\Log_wallet;
 use App\Models\log_transfer;
@@ -502,12 +503,17 @@ class ApiController extends Controller
     }
 
 
-    public function gln_create(){
-        return response()->json(FunctionLib::gln('create', []));
-    }
+    // public function gln_create(){
+    //     return response()->json(FunctionLib::gln('create', []));
+    // }
 
      public function gln_list(){
         return response()->json(FunctionLib::gln('list', []));
+    }
+
+    public function gln_list_user(Request $request){
+        $user_id = $request->user_id;
+        return response()->json(FunctionLib::gln('user', []));
     }
     /**
     * mendapatkan data konfirmasi pembayaran
@@ -1927,5 +1933,15 @@ class ApiController extends Controller
             ->leftJoin('conf_produk_unit', 'conf_produk_unit.id', '=', 'sys_produk.produk_unit')
             ->select('sys_produk.*', DB::raw('COUNT(sys_trans_detail.id) as count_detail'), DB::raw('COUNT(sys_review.id) as count_review'), DB::raw('CONCAT("'.$asset.'/", sys_produk.produk_image) as gambar'), 'conf_produk_unit.produk_unit_name')->first();
         return response()->json(['status' => 200, 'data'=>$data]);
+    }
+
+    public function user_wallet(Request $request){
+        $_id = $request->user_id;
+        if($_id){
+
+            $user = Wallet::where('wallet_type', 7)->where('wallet_user_id', $_id)->with(['user', 'type'])->get();
+            return response()->json(['status' => 200, 'data' =>$user]);
+        }
+        // $wallet = $user['wallet_note'];
     }
 }

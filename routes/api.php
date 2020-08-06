@@ -45,6 +45,7 @@ Route::post('get_toko/{id}', 'Api\\ApiController@toko');
 Route::post('get_toko_produk/{id}', 'Api\\ApiController@produk_toko');
 // saldo, me, pw, gln, dll
 Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
+Route::post('wallet_user', 'Api\\ApiController@user_wallet');
 // Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type
@@ -58,6 +59,7 @@ Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
 // });
 Route::post('gln_create', 'Api\\ApiController@gln_create');
 Route::post('gln_list', 'Api\\ApiController@gln_list');
+Route::post('gln_user', 'Api\\ApiController@gln_list_user');
 Route::post('gln_ballance', 'Api\\ApiController@gln_ballance');
 Route::post('payment_saldo', 'Api\\ApiController@payment_saldo');
 // Route::post('get_beli/{status}', function(){
