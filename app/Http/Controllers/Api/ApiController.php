@@ -1944,4 +1944,10 @@ class ApiController extends Controller
         }
         // $wallet = $user['wallet_note'];
     }
+
+    public function list_user_wallet(Request $request){
+       
+            $user = Wallet::where('wallet_type', 7)->with(['user', 'type'])->get();
+            return response()->json(['status' => 200, 'data' =>$user]);
+    }
 }

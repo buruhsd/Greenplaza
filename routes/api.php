@@ -46,6 +46,7 @@ Route::post('get_toko_produk/{id}', 'Api\\ApiController@produk_toko');
 // saldo, me, pw, gln, dll
 Route::post('buy/saldo', 'Api\\ApiController@payment_saldo');
 Route::post('wallet_user', 'Api\\ApiController@user_wallet');
+Route::post('list_wallet_user', 'Api\\ApiController@list_user_wallet');
 // Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type
