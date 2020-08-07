@@ -325,36 +325,7 @@
                                     <hr/>
                                     Cooming Soon.
                                 </div> --}}
-                               {{-- <div class="payment_hide payment_Gln collapse">
-                                    <hr/>
-                                    <ul class="nav">
-                                        <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
-                                        <li><a onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" style="background-color: #73ff7d;" >Lanjut Transaksi</a></li> 
-                                    </ul>
-                                    <hr/>
-                                    @foreach(Session::get('chart') as $item)
-                                        <?php
-                                            $seller_gln = true;
-                                            $where = 'id ='.$item['trans_detail_produk_id'];
-                                            $seller_produk = App\Models\Produk::whereRaw($where)->first();
-                                            $seller_gln = $seller_gln && $seller_produk->user->is_gln();
-                                            if(!$seller_gln){
-                                                $seller[$seller_produk->user->id] = $seller_produk->user->user_store;
-                                            }
-                                        ?>
-                                    @endforeach
-                                    @if(!$seller_gln)
-                                        <span class="text-danger">Toko <b>{{(rtrim(implode(',', $seller), ','))}}</b> tidak menyediakan pembayaran melalui GLN.</span>
-                                    @else
-                                        @if(Auth::user()->wallet()->where('wallet_type', 7)->exists())
-                                            <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.gln.payment")}} value="Pesan" class="btn btn-success" />
-                                        @else
-                                            Anda belum memiliki akun gln. buat akun gln disini : <a id="saldo_gln" class="btn btn-info btn-xs" href="{{route('member.wallet.create_gln')}}">
-                                                        Buat
-                                                    </a>
-                                        @endif
-                                    @endif
-                                </div> --}}
+                                <!--payment gln -->
                             @endif
                         </form>
                     </div>
