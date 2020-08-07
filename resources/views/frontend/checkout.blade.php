@@ -280,10 +280,10 @@
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment")}} value="Pesan" class="btn btn-success" />
                                 </div>
-                                <div class="payment_hide payment_Saldo collapse">
+                                {{-- <div class="payment_hide payment_Saldo collapse">
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.saldo.payment")}} value="Pesan" class="btn btn-success" />
-                                </div>
+                                </div> --}}
                                 <div class="payment_hide payment_Pw collapse">
                                     <hr/>
                                         <span>
@@ -313,10 +313,10 @@
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.masedi.payment_poin")}} value="Pesan" class="btn btn-success" />
                                 </div>
-                                <div class="payment_hide payment_Mt collapse">
+                                {{-- <div class="payment_hide payment_Mt collapse">
                                     <hr/>
                                     <input type="button" onclick='modal_get($(this));' data-toggle='modal' data-method='get' data-href={{route("localapi.midtrans.payment")}} value="Pesan" class="btn btn-success" />
-                                </div>
+                                </div> --}}
                                 <div class="payment_hide payment_Tf collapse">
                                     <hr/>
                                     Cooming Soon.
@@ -325,7 +325,7 @@
                                     <hr/>
                                     Cooming Soon.
                                 </div> --}}
-                               <div class="payment_hide payment_Gln collapse">
+                               {{-- <div class="payment_hide payment_Gln collapse">
                                     <hr/>
                                     <ul class="nav">
                                         <li><a class="active btn-info" data-toggle="tab" href="#informasi">1 GLN = Rp <?php echo $gln ?></a> </li>
@@ -354,7 +354,7 @@
                                                     </a>
                                         @endif
                                     @endif
-                                </div>
+                                </div> --}}
                             @endif
                         </form>
                     </div>
