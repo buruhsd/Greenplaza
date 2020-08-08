@@ -21,7 +21,7 @@
     </div>
     <!-- breadcumb-area end -->
     <!-- cart-area start -->
-    <div class="cart-area mb-30">
+    {{-- <div class="cart-area mb-30">
         <div class="container">
             <div class="row">
                 <div class="col-3">
@@ -31,9 +31,8 @@
                               <label for="sel1">Select your payment:</label>
                               <select class="form-control" id="sel1" onchange="location = this.value;">
                                 <option value="{{ url('/chart?type=') }}">IDR</option>
-                                {{-- <option value="{{ url('/chart?type=myr') }}">MYR</option> --}}
+                                <option value="{{ url('/chart?type=myr') }}">MYR</option>
                                 <option value="{{ url('/chart?type=gln') }}">GLN</option>
-                                {{-- <option name="{{ url('/chart/{}') }}">Greenline</option> --}}
                               </select>
                             </div>
                         </div>
@@ -41,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="cart-area mb-30">
         <div class="container">
