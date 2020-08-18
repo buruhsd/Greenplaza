@@ -2072,6 +2072,7 @@ class ApiController extends Controller
         $keranjang = Trans::where('trans_user_id', $user_id)->with('trans_detail')->whereHas('trans_detail', function($query) use($status){
             $query->where('sys_trans_detail.status_chart', $status);
         })->get();
+        
         return response()->json(['status' => 200, 'data' => $keranjang]);
 
 
