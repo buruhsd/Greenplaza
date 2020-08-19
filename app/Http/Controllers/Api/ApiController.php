@@ -1963,12 +1963,13 @@ class ApiController extends Controller
         // if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
         //     return response()->json(['status' => 500, 'message' => "Jumlah barang tidak mencukupi"]);
         // }
-        if($request->address_id == null || $request->address_id == ""){
-            return response()->json(['status' => 500, 'message' => "Silahkan isi alamat anda"]);
-        }
+    
         if($request->ship_cost == null || $request->ship_cost == "" || $request->ship_cost == 0){
             return response()->json(['status' => 500, 'message' => "Silahkan isi jasa pengiriman"]);
             
+        }
+            if($request->address_id == null || $request->address_id == ""){
+            return response()->json(['status' => 500, 'message' => "Silahkan isi alamat anda"]);
         }
         // random string
         $trans_code = FunctionLib::str_rand(8);
