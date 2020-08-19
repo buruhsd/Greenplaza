@@ -1960,9 +1960,9 @@ class ApiController extends Controller
         $id = $request->id_produk;
         $produk = Produk::where('id', $id)->first();
         // var_dump($produk); die();
-        if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
-            return response()->json(['status' => 500, 'message' => "Jumlah barang tidak mencukupi"]);
-        }
+        // if($request->qty > $produk['produk_stock'] || $request->qty <= 0 || $request->qty == null || $request->qty == ""){
+        //     return response()->json(['status' => 500, 'message' => "Jumlah barang tidak mencukupi"]);
+        // }
         if($request->address_id == null || $request->address_id == ""){
             return response()->json(['status' => 500, 'message' => "Silahkan isi alamat anda"]);
         }
@@ -2050,11 +2050,11 @@ class ApiController extends Controller
         //     'trans_detail_note' => $request->note,
         //     'myr' => $kurs['Data']['MYR']['Beli']
         // ];
-        if(!Session::has('chart')){
-            Session::put('chart', []);
-        }
-        Session::push('chart', $transaction);
-        Session::save();
+        // if(!Session::has('chart')){
+        //     Session::put('chart', []);
+        // }
+        // Session::push('chart', $transaction);
+        // Session::save();
         $status = 200;
         $message = 'Item pembelian berhasil masuk ke chart.';
         return response()->json(['status' => 200, 'message'=> $message, 'data' => $transaction]);
@@ -2077,5 +2077,12 @@ class ApiController extends Controller
 
 
 
+    }
+
+    public function hapus_chart(Request $request){
+        $trans_id = $request->trans_id;
+        $hapus = Trans_detail::where('trans_detail_trans_id', $trans_id)->delete();
+        $hapus_trans = Trans::where('id', $trans_id)->delete();
+        return response()->json(['status' => 200, 'message' => "Barang keranjang telah terhapus"]);
     }
 }
