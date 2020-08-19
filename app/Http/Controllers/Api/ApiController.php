@@ -1965,7 +1965,7 @@ class ApiController extends Controller
         // }
     
         if($request->ship_cost == null || $request->ship_cost == "" || $request->ship_cost == 0){
-            return response()->json(['status' => 500, 'message' => "Silahkan ambil harga pengiriman"]);
+            return response()->json(['status' => 500, 'message' => "Silahkan ambil harga pengiriman", "data" => $request->ship_cost]);
             
         }
             if($request->address_id == null || $request->address_id == ""){
