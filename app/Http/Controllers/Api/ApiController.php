@@ -1957,6 +1957,8 @@ class ApiController extends Controller
         $gln = json_decode(FunctionLib::priceGln(), true);
         $gln2 = $gln['price'];
 
+        
+
         $id = $request->id_produk;
         $produk = Produk::where('id', $id)->first();
         // var_dump($produk); die();
@@ -1965,7 +1967,7 @@ class ApiController extends Controller
         // }
     
         if($request->ship_cost == null || $request->ship_cost == "" || $request->ship_cost == 0){
-            return response()->json(['status' => 500, 'message' => "Silahkan ambil harga pengiriman", "data" => $request->all());
+            return response()->json(['status' => 500, 'message' => "Silahkan ambil harga pengiriman", "data" => $request->all()]);
             
         }
             if($request->address_id == null || $request->address_id == ""){
