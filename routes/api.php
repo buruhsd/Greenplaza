@@ -52,6 +52,9 @@ Route::post('getchart', 'Api\\ApiController@get_chart');
 Route::post('hapus_chart', 'Api\\ApiController@hapus_chart');
 Route::post('saldo_gln', 'Api\\ApiController@getSaldoGln');
 Route::post('beli_ppob', 'Api\\ApiController@potong_saldo');
+Route::post('createWallet', 'Api\\ApiController@create_wallet');
+Route::post('create_gln', 'Api\\ApiController@create_gln');
+
 // Route::post('buy/{type}', function($type){
 	// return [
  //        'uses' => 'Api\\ApiController@payment_'.$type

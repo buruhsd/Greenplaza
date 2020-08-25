@@ -2200,5 +2200,33 @@ class ApiController extends Controller
         }
 
 
+
+
+    }
+
+
+    public function create_gln(Request $request)
+    {
+        $status = 500;
+        $message = 'Gagal membuat wallet gln.';
+        $user_id = $request->user_id;
+        $user = User::where('id', $user_id)->first();
+        $username = $user->username;
+        $response = FunctionLib::gln('create', ['label'=> $username]);
+        if($response['status'] == 200){
+            $wallet = new Wallet;
+            $wallet->wallet_user_id = $user_id;
+            $wallet->wallet_type = 7;
+            $wallet->wallet_ballance_before = 0;
+            $wallet->wallet_ballance = 0;
+            $wallet->wallet_address = $response['data']['address'];
+            $wallet->wallet_public = $response['data']['public'];
+            $wallet->wallet_private = $response['data']['private'];
+            $wallet->wallet_note = json_encode($response['data']);
+            $wallet->save();
+                $status = 200;
+                $message = 'Wallet berhasil dibuat.';
+        }
+        return response()->json(['status' => 200,'data' => $wallet->wallet_address, 'message' => $message]); 
     }
 }
