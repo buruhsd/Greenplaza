@@ -40,7 +40,7 @@ class FunctionLib
         if ($err) {
             $status = 500;
             $message = 'curl error.';
-            $response = ['status'=>$status, 'message'=>'kurs error lo'];
+            $response = ['status'=>$status, 'message'=>$message];
             return $response;
         } else {
             return $response;
@@ -74,7 +74,7 @@ class FunctionLib
         if ($err) {
             $status = 500;
             $message = 'curl error.';
-            $response = ['status'=>$status, 'message'=>"error hahahahha"];
+            $response = ['status'=>$status, 'message'=>$message];
             return $response;
         } else {
             return $response;
