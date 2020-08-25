@@ -26,6 +26,7 @@ use App\Models\Trans_gln;
 use RajaOngkir;
 use App\Models\Category;
 use Session;
+use Ixudra\Curl\Facades\Curl;
 
 class ApiController extends Controller
 {
@@ -2087,5 +2088,117 @@ class ApiController extends Controller
         $hapus = Trans_detail::where('trans_detail_trans_id', $trans_id)->delete();
         $hapus_trans = Trans::where('id', $trans_id)->delete();
         return response()->json(['status' => 200, 'message' => "Barang keranjang telah terhapus"]);
+    }
+
+
+    public function getSaldoGln(Request $request, $param=[]){
+        $gln = json_decode(FunctionLib::priceGln(), true);
+        $gln2 = $gln['price'];
+        $user_id = $request->user_id;
+        $address = Wallet::where('wallet_user_id', $user_id)->where('wallet_type', 7)->first();
+        $wallet = $address['wallet_address'];
+        if(!$wallet){
+            return response()->json(['status' => 500, 'message' => "Maaf anda belum mempunyai alamat wallet"]);
+        }
+        extract($param);
+        $url = 'https://wallet.greenline.ai/api/balance/Ee0JTNU64g2aXTfV9Mxb/'.$wallet;
+        // $url = "http://gatotkaca.harmonyb12.com/edisedis/index.php/sadisbgt/controller_api/cek_voucher";
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            // CURLOPT_POSTFIELDS => http_build_query($data),
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                    "cache-control: no-cache",
+                    "content-type: application/x-www-form-urlencoded",
+                ),
+            ));
+        $response = curl_exec($curl);
+        $obResponse = json_decode($response, true);
+        $saldo = $obResponse['data']['balance'];
+        $idr = floor($saldo * $gln2);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            $status = 500;
+            $message = 'curl error.';
+            $response = ['status'=>$status, 'message'=>$message];
+            return $idr;
+            // return json_decode($response, true);
+        } else {
+            return $idr;
+            // return json_decode($response, true);
+        }
+        
+    }
+
+    public function potong_saldo(Request $request, $param = []){
+
+        $gln = json_decode(FunctionLib::priceGln(), true);
+        $gln2 = $gln['price'];
+        $user_id = $request->user_id;
+        $address = Wallet::where('wallet_user_id', $user_id)->where('wallet_type', 7)->first();
+        $wallet = $address['wallet_address'];
+        // var_dump($wallet); die();
+        if(!$wallet){
+            return response()->json(['status' => 500, 'message' => "Maaf anda belum mempunyai alamat wallet"]);
+        }else{
+            extract($param);
+            $url = 'https://wallet.greenline.ai/api/balance/Ee0JTNU64g2aXTfV9Mxb/'.$wallet;
+            // $url = "http://gatotkaca.harmonyb12.com/edisedis/index.php/sadisbgt/controller_api/cek_voucher";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                // CURLOPT_POSTFIELDS => http_build_query($data),
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                        "cache-control: no-cache",
+                        "content-type: application/x-www-form-urlencoded",
+                    ),
+                ));
+            $response = curl_exec($curl);
+            $obResponse = json_decode($response, true);
+            $saldo = $obResponse['data']['balance'];
+            $idr = floor($saldo * $gln2);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {
+                $status = 500;
+                $message = 'curl error.';
+                $response = ['status'=>$status, 'message'=> "Alamat wallet kosong"];
+                return response;
+                // return json_decode($response, true);
+            } else {
+                // return $idr;
+                // return json_decode($response, true);
+                $amount_beli = $request->amount_beli;
+
+                $log_wallet = New Log_wallet;
+                $log_wallet->wallet_type_log = "Updated";
+                $log_wallet->wallet_type = 7;
+                $log_wallet->wallet_user_id = $user_id;
+                $log_wallet->wallet_ballance_before = $idr;
+                $log_wallet->wallet_ballance_after = $idr - $amount_beli;
+                $log_wallet->wallet_ballance = $log_wallet->wallet_ballance_after;
+                $log_wallet->wallet_note = "Pembayaran PPOB";
+
+                return response()->json(['status' => 200, 'data' => $log_wallet]);
+            }
+
+
+
+        }
+
+
     }
 }
