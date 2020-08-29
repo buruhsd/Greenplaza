@@ -2144,6 +2144,7 @@ class ApiController extends Controller
         $user_id = $request->user_id;
         $address = Wallet::where('wallet_user_id', $user_id)->where('wallet_type', 7)->first();
         $wallet = $address['wallet_address'];
+
         // var_dump($wallet); die();
         if(!$wallet){
             return response()->json(['status' => 500, 'message' => "Maaf anda belum mempunyai alamat wallet"]);
@@ -2172,6 +2173,7 @@ class ApiController extends Controller
             $idr = floor($saldo * $gln2);
             $err = curl_error($curl);
             curl_close($curl);
+
             if ($err) {
                 $status = 500;
                 $message = 'curl error.';
@@ -2181,26 +2183,63 @@ class ApiController extends Controller
             } else {
                 // return $idr;
                 // return json_decode($response, true);
-                $amount_beli = $request->amount_beli;
+                $response = FunctionLib::gln('ballance', ['address'=>$wallet]);
+                if($response['status'] == 500){
+                    $status = 500;
+                    $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+                    return response()->json(['status' => 500, 'data' => $message]);
+                    
+                }
+                
+                $saldo_gln = FunctionLib::gln('ballance', ['address'=>$wallet]);
+                $saldo_gln = (float)$saldo_gln['data']['balance'];
+                // var_dump($saldo_gln); die();
+                $to_address = FunctionLib::get_config('profil_gln_address');
+                $amount_beli = $request->amount_beli / FunctionLib::gln('compare',[])['data'];
+                $fee_admin_idr = ($amount_beli*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                $detail_fee = $fee_admin_idr / FunctionLib::gln('compare',[])['data'];
+                $detail_fee = round($detail_fee,8, PHP_ROUND_HALF_UP);
+                // $detail_amount_total = $detail_amount+$detail_fee+$detail_amount_ship;
+                $detail_amount_total = $amount_beli+$detail_fee;
+                $detail_amount_total_idr = $request->amount_beli + $fee_admin_idr;
 
-                $log_wallet = New Log_wallet;
-                $log_wallet->wallet_type_log = "Updated";
-                $log_wallet->wallet_type = 7;
-                $log_wallet->wallet_user_id = $user_id;
-                $log_wallet->wallet_ballance_before = $idr;
-                $log_wallet->wallet_ballance_after = $idr - $amount_beli;
-                $log_wallet->wallet_ballance = $log_wallet->wallet_ballance_after;
-                $log_wallet->wallet_note = "Pembayaran PPOB";
+                if($detail_amount_total>$saldo_gln){
+                    return response()->json(['status' => 500, 'message' => 'Saldo Anda tidak Cukup']);
+                }else {
 
-                return response()->json(['status' => 200, 'data' => $log_wallet]);
+                    $transfer = FunctionLib::gln('transfer', ['to_address' =>$to_address,'amount'=>$detail_amount_total,'address'=>$wallet]);
+
+                    $gln = new Trans_gln;
+                    $gln->trans_gln_form=$wallet;
+                    $gln->trans_gln_admin=$to_address;
+                    $gln->trans_gln_to=$to_address;
+                    $gln->trans_gln_trans_id="-";
+                    $gln->trans_gln_trans_code="-";
+                    $gln->trans_gln_detail_id="-";
+                    $gln->trans_gln_detail_code="-";
+                            // $gln->trans_gln_amount=$detail_amount+$detail_amount_ship;
+                    $gln->trans_gln_amount=$amount_beli;
+                    $gln->trans_gln_amount_fee=$detail_fee;
+                    $gln->trans_gln_amount_total=$detail_amount_total;
+                    $gln->trans_gln_compare=FunctionLib::gln('compare',[])['data'];
+                    $gln->trans_gln_note='Pembayaran PPOB sebesar'.$detail_amount_total.'.';
+                    $gln->save();
+
+                    $log_wallet = New Log_wallet;
+                    $log_wallet->wallet_type_log = "Updated";
+                    $log_wallet->wallet_type = 7;
+                    $log_wallet->wallet_user_id = $user_id;
+                    $log_wallet->wallet_ballance_before = $idr;
+                    $log_wallet->wallet_ballance_after = $idr - $detail_amount_total_idr;
+                    $log_wallet->wallet_ballance = $log_wallet->wallet_ballance_after;
+                    $log_wallet->wallet_note = "Pembayaran PPOB";
+                    $log_wallet->save();
+
+                    return response()->json(['status' => 200, 'data' => $log_wallet]);
+                }
             }
 
-
-
         }
-
-
-
 
     }
 
