@@ -54,6 +54,7 @@ Route::post('saldo_gln', 'Api\\ApiController@getSaldoGln');
 Route::post('beli_ppob', 'Api\\ApiController@potong_saldo');
 Route::post('createWallet', 'Api\\ApiController@create_wallet');
 Route::post('create_gln', 'Api\\ApiController@create_gln');
+Route::post('keranjang', 'Api\\ApiController@keranjang');
 
 // Route::post('buy/{type}', function($type){
 	// return [

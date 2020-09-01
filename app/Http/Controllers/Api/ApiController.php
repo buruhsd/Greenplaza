@@ -2249,23 +2249,148 @@ class ApiController extends Controller
         $status = 500;
         $message = 'Gagal membuat wallet gln.';
         $user_id = $request->user_id;
-        $user = User::where('id', $user_id)->first();
-        $username = $user->username;
-        $response = FunctionLib::gln('create', ['label'=> $username]);
-        if($response['status'] == 200){
-            $wallet = new Wallet;
-            $wallet->wallet_user_id = $user_id;
-            $wallet->wallet_type = 7;
-            $wallet->wallet_ballance_before = 0;
-            $wallet->wallet_ballance = 0;
-            $wallet->wallet_address = $response['data']['address'];
-            $wallet->wallet_public = $response['data']['public'];
-            $wallet->wallet_private = $response['data']['private'];
-            $wallet->wallet_note = json_encode($response['data']);
-            $wallet->save();
-                $status = 200;
-                $message = 'Wallet berhasil dibuat.';
+        $password_transaksi = $request->password_transaksi;
+
+
+        $pass = User::findOrFail($user_id);
+
+        if($pass->password_transaksi == Null){
+            $pass->password_transaksi = bcrypt($password_transaksi);
+            $pass->save();
+            
+
         }
-        return response()->json(['status' => 200,'data' => $wallet->wallet_address, 'message' => $message]); 
+
+
+            $username = $pass->username;
+            // var_dump(bcrypt($password_transaksi) == $pass->password_transaksi); die();
+            if(Hash::check($password_transaksi , $pass->password_transaksi)){
+                $have_address = Wallet::where('wallet_user_id', $user_id)->where('wallet_type', 7)->first();
+                $alamat_wallet = $have_address->wallet_address;
+                // var_dump($alamat_wallet); die();
+                if($alamat_wallet){
+                    return response()->json(['status' => 500, 'data' => $alamat_wallet, 'message' => 'Anda sudah punya akun wallet']);
+                }else{
+
+                    $response = FunctionLib::gln('create', ['label'=> $username]);
+                    if($response['status'] == 200){
+                        $wallet = new Wallet;
+                        $wallet->wallet_user_id = $user_id;
+                        $wallet->wallet_type = 7;
+                        $wallet->wallet_ballance_before = 0;
+                        $wallet->wallet_ballance = 0;
+                        $wallet->wallet_address = $response['data']['address'];
+                        $wallet->wallet_public = $response['data']['public'];
+                        $wallet->wallet_private = $response['data']['private'];
+                        $wallet->wallet_note = json_encode($response['data']);
+                        $wallet->save();
+                            $status = 200;
+                            $message = 'Wallet berhasil dibuat.';
+                    }
+                    
+                    return response()->json(['status' => 200,'data' => $wallet->wallet_address, 'message' => $message]); 
+                }
+
+            }else{
+                return response()->json(['status' => 500, 'message' => 'Maaf password yang anda masukkan tidak sesuai !!']);
+            }
+    }
+
+    public function trans_antar_member(Request $request, $param = []){
+
+        $wallet = $request->my_address;
+            extract($param);
+            $url = 'https://wallet.greenline.ai/api/balance/Ee0JTNU64g2aXTfV9Mxb/'.$wallet;
+            // $url = "http://gatotkaca.harmonyb12.com/edisedis/index.php/sadisbgt/controller_api/cek_voucher";
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                // CURLOPT_POSTFIELDS => http_build_query($data),
+                CURLOPT_CUSTOMREQUEST => "GET",
+                CURLOPT_HTTPHEADER => array(
+                        "cache-control: no-cache",
+                        "content-type: application/x-www-form-urlencoded",
+                    ),
+                ));
+            $response = curl_exec($curl);
+            $obResponse = json_decode($response, true);
+            $saldo = $obResponse['data']['balance'];
+            $idr = floor($saldo * $gln2);
+            $err = curl_error($curl);
+            curl_close($curl);
+
+            if ($err) {
+                $status = 500;
+                $message = 'curl error.';
+                $response = ['status'=>$status, 'message'=> "Alamat wallet kosong"];
+                return response;
+                // return json_decode($response, true);
+            } else {
+                // return $idr;
+                // return json_decode($response, true);
+                $response = FunctionLib::gln('ballance', ['address'=>$wallet]);
+                if($response['status'] == 500){
+                    $status = 500;
+                    $message = 'Transaksi gagal dibayar atau saldo gln anda tidak mencukupi, silahkan cek saldo.';
+                    return response()->json(['status' => 500, 'data' => $message]);
+                    
+                }
+                
+                $saldo_gln = FunctionLib::gln('ballance', ['address'=>$wallet]);
+                $saldo_gln = (float)$saldo_gln['data']['balance'];
+                // var_dump($saldo_gln); die();
+                $admin_address = FunctionLib::get_config('profil_gln_address');
+                $to_address = $request->wallet_address;
+                $jml_transfer = $request->jml_transfer;
+                $fee_admin = ($jml_transfer*(FunctionLib::get_config('price_pajak_admin_gln'))/100);
+                // $detail_fee = $fee_admin_idr / FunctionLib::gln('compare',[])['data'];
+                $detail_fee = round($fee_admin,8, PHP_ROUND_HALF_UP);
+                // $detail_amount_total = $detail_amount+$detail_fee+$detail_amount_ship;
+                $detail_amount_total = $jml_transfer+$detail_fee;
+
+                if($detail_amount_total>$saldo_gln){
+                    return response()->json(['status' => 500, 'message' => 'Saldo Anda tidak Cukup']);
+                }else {
+
+                    $transfer = FunctionLib::gln('transfer', ['to_address' =>$wallet,'amount'=>$detail_amount_total,'address'=>$to_address]);
+
+                    $transfer_fee_admin = FunctionLib::gln('transfer', ['to_address' =>$admin_address,'amount'=>$fee_admin,'address'=>$to_address]);
+
+                    $gln = new Trans_gln;
+                    $gln->trans_gln_form=$wallet;
+                    $gln->trans_gln_admin=$to_address;
+                    $gln->trans_gln_to=$to_address;
+                    $gln->trans_gln_trans_id="-";
+                    $gln->trans_gln_trans_code="-";
+                    $gln->trans_gln_detail_id="-";
+                    $gln->trans_gln_detail_code="-";
+                            // $gln->trans_gln_amount=$detail_amount+$detail_amount_ship;
+                    $gln->trans_gln_amount=$amount_beli;
+                    $gln->trans_gln_amount_fee=$detail_fee;
+                    $gln->trans_gln_amount_total=$detail_amount_total;
+                    $gln->trans_gln_compare=FunctionLib::gln('compare',[])['data'];
+                    $gln->trans_gln_note='Pembayaran PPOB sebesar'.$detail_amount_total.'.';
+                    $gln->save();
+
+                    $log_wallet = New Log_wallet;
+                    $log_wallet->wallet_type_log = "Updated";
+                    $log_wallet->wallet_type = 7;
+                    $log_wallet->wallet_user_id = $user_id;
+                    $log_wallet->wallet_ballance_before = $idr;
+                    $log_wallet->wallet_ballance_after = $idr - $detail_amount_total_idr;
+                    $log_wallet->wallet_ballance = $log_wallet->wallet_ballance_after;
+                    $log_wallet->wallet_note = "Pembayaran PPOB";
+                    $log_wallet->save();
+
+                    return response()->json(['status' => 200, 'data' => $log_wallet]);
+                }
+            }
+
+        
     }
 }
