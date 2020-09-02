@@ -2073,11 +2073,17 @@ class ApiController extends Controller
     public function get_chart(Request $request){
         $user_id = $request->id_user;
         $status = $request->status;
+        $trans_detail = Trans::where('trans_user_id', $user_id)->with('trans_detail')->whereHas('trans_detail', function($query) use($status){
+            $query->where('sys_trans_detail.status_chart', $status);
+        })->count();
         $keranjang = Trans::where('trans_user_id', $user_id)->with('trans_detail')->whereHas('trans_detail', function($query) use($status){
             $query->where('sys_trans_detail.status_chart', $status);
         })->get();
-        
-        return response()->json(['status' => 200, 'data' => $keranjang]);
+         $total = DB::table('sys_trans_detail')->join('sys_trans','sys_trans_detail.trans_detail_trans_id','=','sys_trans.id')
+                    ->where('sys_trans_detail.status_chart', $status)
+                    ->where('sys_trans.trans_user_id', $user_id)
+                    ->sum('sys_trans_detail.trans_detail_amount_total');
+        return response()->json(['status' => 200, 'Jumlah' => $trans_detail, 'Total' => $total, 'data' => $keranjang]);
 
 
 
